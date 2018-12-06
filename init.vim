@@ -1,4 +1,5 @@
-call plug#begin('~/.vim/plugged')
+"call plug#begin('~/.vim/plugged')
+call plug#begin()
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-jedi'
@@ -6,7 +7,7 @@ Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-go'
 Plug 'filipekiss/ncm2-look.vim'
 Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-tmux'
+" Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -35,6 +36,12 @@ call plug#end()
     set smarttab
     set colorcolumn=81
     set t_co=256
+    set foldenable
+    set foldmethod=syntax
+    set foldcolumn=0
+    setlocal foldlevel=1
+    set foldlevelstart=99
+    nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 " }
 
 
