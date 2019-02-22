@@ -26,6 +26,7 @@ Plug 'junegunn/fzf'
 Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.vim/plugged/gocode/nvim/symlink.sh' }
 Plug 'sebdah/vim-delve'
 Plug 'heavenshell/vim-pydocstring'
+Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 " neovim {
