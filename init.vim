@@ -45,7 +45,6 @@ call plug#end()
     set termguicolors
     syntax enable
     colorscheme monokai-soda
-    let g:molokai_original = 0
     nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 
 
