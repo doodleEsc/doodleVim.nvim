@@ -36,7 +36,7 @@ call plug#end()
     set shiftwidth=4
     set smarttab
     set colorcolumn=81
-    set t_co=256
+    " set t_co=256
     set foldenable
     set foldmethod=syntax
     set foldcolumn=0
