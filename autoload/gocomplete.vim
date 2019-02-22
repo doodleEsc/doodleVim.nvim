@@ -1,1 +1,0 @@
-/Users/fanlizhou/.vim/plugged/gocode/nvim/autoload/gocomplete.vim

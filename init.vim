@@ -41,7 +41,17 @@ call plug#end()
     set foldcolumn=0
     setlocal foldlevel=1
     set foldlevelstart=99
+    set termguicolors
+    syntax enable
+    colorscheme monokai-soda
+    let g:molokai_original = 0
     nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+
+
+    " if has('mac')
+        " let g:python3_host_prog='/usr/local/bin/python3'
+    " endif
+
 " }
 
 
@@ -90,9 +100,9 @@ call plug#end()
     let g:UltiSnipsExpandTrigger            = "<Plug>(ultisnips_expand)"
     let g:UltiSnipsJumpForwardTrigger       = "<C-j>"
     let g:UltiSnipsJumpBackwardTrigger      = "<C-k>"
-"    let g:UltiSnipsRemoveSelectModeMappings = 0
-"    let g:snips_no_mappings = 1
-    let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
+    let g:UltiSnipsRemoveSelectModeMappings = 0
+    " let g:snips_no_mappings = 1
+    " let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
 " }
 
 
