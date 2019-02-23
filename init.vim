@@ -3,7 +3,7 @@ Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-go'
+" Plug 'ncm2/ncm2-go'
 Plug 'filipekiss/ncm2-look.vim'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-ultisnips'
@@ -100,14 +100,18 @@ call plug#end()
 " }
 
 " ncm2-go {
-    let g:ncm2_go#gocode_path = '/usr/local/bin/gocode'
+    " let g:ncm2_go#gocode_path = '/usr/local/bin/gocode'
 " }
 
 " LSP {
     set hidden
+    let g:LanguageClient_rootMarkers = {
+        \ 'go': ['.git', 'go.mod'],
+        \ }
+
     let g:LanguageClient_serverCommands = {
         \ 'python': ['pyls'],
-        \ 'go': ['go-langserver', '-gocodecompletion']
+        \ 'go': ['bingo']
         \ }
 
 
