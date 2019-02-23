@@ -1,4 +1,3 @@
-"call plug#begin('~/.vim/plugged')
 call plug#begin()
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
@@ -7,7 +6,6 @@ Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-go'
 Plug 'filipekiss/ncm2-look.vim'
 Plug 'ncm2/ncm2-path'
-" Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -48,12 +46,6 @@ call plug#end()
     nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
     " hi Pmenu ctermfg=black ctermbg=gray  guibg=#444444
     " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
-
-
-    " if has('mac')
-        " let g:python3_host_prog='/usr/local/bin/python3'
-    " endif
-
 " }
 
 
@@ -107,6 +99,9 @@ call plug#end()
     " let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
 " }
 
+" ncm2-go {
+    let g:ncm2_go#gocode_path = '/usr/local/bin/gocode'
+" }
 
 " LSP {
     set hidden
