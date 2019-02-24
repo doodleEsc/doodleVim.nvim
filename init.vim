@@ -29,12 +29,12 @@ call plug#end()
 
 " neovim {
     set tabstop=4
+    set signcolumn=yes
     set softtabstop=4
     set expandtab
     set shiftwidth=4
     set smarttab
     set colorcolumn=81
-    " set t_co=256
     set foldenable
     set foldmethod=syntax
     set foldcolumn=0
