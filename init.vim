@@ -9,6 +9,7 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next','do': 'bash install.sh' }
 
 Plug 'cinuor/vim-header'
 Plug 'jiangmiao/auto-pairs'                                                      
@@ -19,7 +20,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'junegunn/vim-easy-align'                                                   
 Plug 'iamcco/mathjax-support-for-mkdp'                                           
 Plug 'iamcco/markdown-preview.vim'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next','do': 'bash install.sh' }
 Plug 'junegunn/fzf'
 Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.vim/plugged/gocode/nvim/symlink.sh' }
 Plug 'sebdah/vim-delve'
