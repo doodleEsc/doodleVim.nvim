@@ -143,7 +143,7 @@ call plug#end()
     let g:header_auto_add_header = 0
     let g:header_field_timestamp_format = '%Y-%m-%d'
     let g:header_field_author = 'Fan Lizhou'
-    let g:header_field_author_email = 'lizhoufan@sf-express.com'
+    let g:header_field_author_email = 'cokie@foxmail.com'
     map <F7> :AddHeader<CR>    
 " }
 
