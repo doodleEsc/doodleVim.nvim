@@ -106,7 +106,7 @@ call plug#end()
 " LSP {
     set hidden
     let g:LanguageClient_rootMarkers = {
-        \ 'go': ['go.mod'],
+        \ 'go': ['.git', 'go.mod'],
         \ }
 
     let g:LanguageClient_serverCommands = {
