@@ -21,7 +21,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'iamcco/mathjax-support-for-mkdp'                                           
 Plug 'iamcco/markdown-preview.vim'
 Plug 'junegunn/fzf'
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.vim/plugged/gocode/nvim/symlink.sh' }
+" Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.vim/plugged/gocode/nvim/symlink.sh' }
 Plug 'sebdah/vim-delve'
 Plug 'heavenshell/vim-pydocstring'
 Plug 'terryma/vim-multiple-cursors'
