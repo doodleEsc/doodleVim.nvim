@@ -111,7 +111,7 @@ call plug#end()
 
     let g:LanguageClient_serverCommands = {
         \ 'python': ['pyls'],
-        \ 'go': ['bingo']
+        \ 'go': ['gopls']
         \ }
 
 
