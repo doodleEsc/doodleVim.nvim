@@ -2,6 +2,7 @@
 
 # install go language server
 go get -u golang.org/x/tools/cmd/gopls
+mv $GOPATH/bin/gopls /usr/local/bin
 
 
 # install python language server

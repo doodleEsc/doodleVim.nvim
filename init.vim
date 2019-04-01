@@ -1,14 +1,13 @@
 call plug#begin()
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/ncm2-bufword'
-" Plug 'ncm2/ncm2-go'
+
 Plug 'filipekiss/ncm2-look.vim'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'Shougo/echodoc.vim'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next','do': 'bash install.sh' }
 
 Plug 'cinuor/vim-header'
@@ -21,7 +20,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'iamcco/mathjax-support-for-mkdp'                                           
 Plug 'iamcco/markdown-preview.vim'
 Plug 'junegunn/fzf'
-" Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.vim/plugged/gocode/nvim/symlink.sh' }
 Plug 'sebdah/vim-delve'
 Plug 'heavenshell/vim-pydocstring'
 Plug 'terryma/vim-multiple-cursors'
@@ -59,7 +57,7 @@ call plug#end()
     inoremap <C-c> <ESC>
     au TextChangedI * call ncm2#auto_trigger()
 
-    " inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+    " inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<CR>" : "\<CR>")
 
     " " Use <TAB> to select the popup menu:
     " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -85,16 +83,15 @@ call plug#end()
     nnoremap <leader>lo :call Ncm2_look_trigger()<CR>
 " }
 
-
 " ncm2-ultisnips {  
     " inoremap <silent> <expr> <C-k> ncm2_ultisnips#expand_or("\<CR>", 'n')
     inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 
-    imap <C-k> <Plug>(ultisnips_expand)
-    let g:UltiSnipsExpandTrigger            = "<Plug>(ultisnips_expand)"
-    let g:UltiSnipsJumpForwardTrigger       = "<C-j>"
-    let g:UltiSnipsJumpBackwardTrigger      = "<C-k>"
-    let g:UltiSnipsRemoveSelectModeMappings = 0
+    " imap <C-k> <Plug>(ultisnips_expand)
+    " let g:UltiSnipsExpandTrigger            = "<Plug>(ultisnips_expand)"
+    let g:UltiSnipsJumpForwardTrigger       = "<C-n>"
+    let g:UltiSnipsJumpBackwardTrigger      = "<C-p>"
+    " let g:UltiSnipsRemoveSelectModeMappings = 0
     " let g:snips_no_mappings = 1
     " let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
 " }
@@ -110,7 +107,7 @@ call plug#end()
         \ }
 
     let g:LanguageClient_serverCommands = {
-        \ 'python': ['pyls'],
+        \ 'python': ['pyls', '-v'],
         \ 'go': ['gopls']
         \ }
 
@@ -125,6 +122,11 @@ call plug#end()
     nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>
 " }
 
+" echodoc {
+    set noshowmode
+    let g:echodoc#enable_at_startup = 1
+    let g:echodoc#type = 'signature'
+" }
 
 " vim-airline {
     let g:airline_powerline_fonts = 1
@@ -175,3 +177,4 @@ call plug#end()
 " pydocstring {
         nmap <silent> <C-d> <Plug>(pydocstring)
 " }
+
