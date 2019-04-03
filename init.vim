@@ -8,7 +8,9 @@ Plug 'ncm2/ncm2-ultisnips'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Shougo/echodoc.vim'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next','do': 'bash install.sh' }
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'ncm2/ncm2-vim-lsp'
 
 Plug 'cinuor/vim-header'
 Plug 'jiangmiao/auto-pairs'                                                      
@@ -99,28 +101,36 @@ call plug#end()
 " ncm2-go {
     " let g:ncm2_go#gocode_path = '/usr/local/bin/gocode'
 " }
+if executable('gopls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+endif
+" " LSP {
+    " set hidden
+    " let g:LanguageClient_autoStart = 1
+    " let g:LanguageClient_rootMarkers = {
+        " \ 'go': ['.git', 'go.mod'],
+        " \ }
 
-" LSP {
-    set hidden
-    let g:LanguageClient_rootMarkers = {
-        \ 'go': ['.git', 'go.mod'],
-        \ }
-
-    let g:LanguageClient_serverCommands = {
-        \ 'python': ['pyls'],
-        \ 'go': ['gopls']
-        \ }
+    " let g:LanguageClient_serverCommands = {
+        " \ 'python': ['pyls'],
+        " \ 'go': ['gopls']
+        " \ }
 
 
-    " let g:LanguageClient_completionPreferTextEdit = 0
-    " let g:LanguageClient_loggingFile = '/home/fanlz/lc.log'
-    " let g:LanguageClient_loggingLevel = 'DEBUG'
-    nnoremap <C-m> :call LanguageClient_contextMenu()<CR>
-    " Or map each action separately
-    nnoremap <silent> <leader>ho :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> <leader>gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>
-" }
+    " " let g:LanguageClient_completionPreferTextEdit = 0
+    " " let g:LanguageClient_loggingFile = '/home/fanlz/lc.log'
+    " " let g:LanguageClient_loggingLevel = 'DEBUG'
+    " nnoremap <C-m> :call LanguageClient_contextMenu()<CR>
+    " " Or map each action separately
+    " nnoremap <silent> <leader>ho :call LanguageClient#textDocument_hover()<CR>
+    " nnoremap <silent> <leader>gd :call LanguageClient#textDocument_definition()<CR>
+    " nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>
+" " }
 
 " echodoc {
     set noshowmode
