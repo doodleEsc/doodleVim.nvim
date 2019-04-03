@@ -98,17 +98,25 @@ call plug#end()
     " let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
 " }
 
-" ncm2-go {
-    " let g:ncm2_go#gocode_path = '/usr/local/bin/gocode'
+" vim-lsp {
+    if executable('gopls')
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'gopls',
+            \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+            \ 'whitelist': ['go'],
+            \ })
+        autocmd FileType go setlocal omnifunc=lsp#complete
+    endif
+
+    if executable('pyls')
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'pyls',
+            \ 'cmd': {server_info->['pyls']},
+            \ 'whitelist': ['python'],
+            \ })
+    endif
 " }
-if executable('gopls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-        \ 'whitelist': ['go'],
-        \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
-endif
+
 " " LSP {
     " set hidden
     " let g:LanguageClient_autoStart = 1
