@@ -1,16 +1,16 @@
 call plug#begin()
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/ncm2-bufword'
-" Plug 'ncm2/ncm2-go'
-Plug 'filipekiss/ncm2-look.vim'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-ultisnips'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next','do': 'bash install.sh' }
+" Plug 'ncm2/ncm2'
+" Plug 'roxma/nvim-yarp'
+" Plug 'ncm2/ncm2-jedi'
+" Plug 'ncm2/ncm2-bufword'
+" Plug 'filipekiss/ncm2-look.vim'
+" Plug 'ncm2/ncm2-path'
+" Plug 'ncm2/ncm2-ultisnips'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+" Plug 'autozimu/LanguageClient-neovim', {'branch': 'next','do': 'bash install.sh' }
 
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'cinuor/vim-header'
 Plug 'jiangmiao/auto-pairs'                                                      
 Plug 'vim-airline/vim-airline'                                                   
@@ -49,81 +49,81 @@ call plug#end()
 " }
 
 
-" ncm2 {
-    " enable ncm2 for all buffers
-    autocmd BufEnter * call ncm2#enable_for_buffer()
+" " ncm2 {
+    " " enable ncm2 for all buffers
+    " autocmd BufEnter * call ncm2#enable_for_buffer()
 
-    set completeopt=noinsert,menuone,noselect
-    set shortmess+=c
-    " Ctrl+C 退回到普通模式
-    inoremap <C-c> <ESC>
-    au TextChangedI * call ncm2#auto_trigger()
+    " set completeopt=noinsert,menuone,noselect
+    " set shortmess+=c
+    " " Ctrl+C 退回到普通模式
+    " inoremap <C-c> <ESC>
+    " au TextChangedI * call ncm2#auto_trigger()
 
-    " inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+    " " inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
-    " " Use <TAB> to select the popup menu:
-    " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    " " " Use <TAB> to select the popup menu:
+    " " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    " " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" }
-
-
-" look {
-    let g:ncm2_look_enabled = 0
-
-    function! Ncm2_look_trigger()
-        if !exists("g:ncm2_look_enabled")
-            let g:ncm2_look_enabled = 0
-        endif
-        if g:ncm2_look_enabled==0
-            let g:ncm2_look_enabled = 1
-        else
-            let g:ncm2_look_enabled = 0
-        endif
-    endfunction
-
-    nnoremap <leader>lo :call Ncm2_look_trigger()<CR>
-" }
+" " }
 
 
-" ncm2-ultisnips {  
-    " inoremap <silent> <expr> <C-k> ncm2_ultisnips#expand_or("\<CR>", 'n')
-    inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+" " look {
+    " let g:ncm2_look_enabled = 0
 
-    imap <C-k> <Plug>(ultisnips_expand)
-    let g:UltiSnipsExpandTrigger            = "<Plug>(ultisnips_expand)"
-    let g:UltiSnipsJumpForwardTrigger       = "<C-j>"
-    let g:UltiSnipsJumpBackwardTrigger      = "<C-k>"
-    let g:UltiSnipsRemoveSelectModeMappings = 0
-    " let g:snips_no_mappings = 1
-    " let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
-" }
+    " function! Ncm2_look_trigger()
+        " if !exists("g:ncm2_look_enabled")
+            " let g:ncm2_look_enabled = 0
+        " endif
+        " if g:ncm2_look_enabled==0
+            " let g:ncm2_look_enabled = 1
+        " else
+            " let g:ncm2_look_enabled = 0
+        " endif
+    " endfunction
+
+    " nnoremap <leader>lo :call Ncm2_look_trigger()<CR>
+" " }
+
+
+" " ncm2-ultisnips {  
+    " " inoremap <silent> <expr> <C-k> ncm2_ultisnips#expand_or("\<CR>", 'n')
+    " inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+
+    " imap <C-k> <Plug>(ultisnips_expand)
+    " let g:UltiSnipsExpandTrigger            = "<Plug>(ultisnips_expand)"
+    " let g:UltiSnipsJumpForwardTrigger       = "<C-j>"
+    " let g:UltiSnipsJumpBackwardTrigger      = "<C-k>"
+    " let g:UltiSnipsRemoveSelectModeMappings = 0
+    " " let g:snips_no_mappings = 1
+    " " let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
+" " }
 
 " ncm2-go {
     " let g:ncm2_go#gocode_path = '/usr/local/bin/gocode'
 " }
 
-" LSP {
-    set hidden
-    let g:LanguageClient_rootMarkers = {
-        \ 'go': ['.git', 'go.mod'],
-        \ }
+" " LSP {
+    " set hidden
+    " let g:LanguageClient_rootMarkers = {
+        " \ 'go': ['.git', 'go.mod'],
+        " \ }
 
-    let g:LanguageClient_serverCommands = {
-        \ 'python': ['pyls'],
-        \ 'go': ['gopls']
-        \ }
+    " let g:LanguageClient_serverCommands = {
+        " \ 'python': ['pyls'],
+        " \ 'go': ['gopls']
+        " \ }
 
 
-    " let g:LanguageClient_completionPreferTextEdit = 0
-    " let g:LanguageClient_loggingFile = '/home/fanlz/lc.log'
-    " let g:LanguageClient_loggingLevel = 'DEBUG'
-    nnoremap <C-m> :call LanguageClient_contextMenu()<CR>
-    " Or map each action separately
-    nnoremap <silent> <leader>ho :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> <leader>gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>
-" }
+    " " let g:LanguageClient_completionPreferTextEdit = 0
+    " " let g:LanguageClient_loggingFile = '/home/fanlz/lc.log'
+    " " let g:LanguageClient_loggingLevel = 'DEBUG'
+    " nnoremap <C-m> :call LanguageClient_contextMenu()<CR>
+    " " Or map each action separately
+    " nnoremap <silent> <leader>ho :call LanguageClient#textDocument_hover()<CR>
+    " nnoremap <silent> <leader>gd :call LanguageClient#textDocument_definition()<CR>
+    " nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>
+" " }
 
 
 " vim-airline {
