@@ -45,6 +45,7 @@ call plug#end()
     syntax enable
     colorscheme monokai-soda
     nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+    let g:python3_host_prog='/usr/local/bin/python3'
     " hi Pmenu ctermfg=black ctermbg=gray  guibg=#444444
     " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 " }
