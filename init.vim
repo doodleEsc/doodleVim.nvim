@@ -11,6 +11,7 @@ Plug 'Shougo/echodoc.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'ncm2/ncm2-vim-lsp'
+Plug 'leafgarland/typescript-vim' 
 
 Plug 'cinuor/vim-header'
 Plug 'jiangmiao/auto-pairs'                                                      
@@ -91,8 +92,8 @@ call plug#end()
 
     " imap <C-k> <Plug>(ultisnips_expand)
     " let g:UltiSnipsExpandTrigger            = "<Plug>(ultisnips_expand)"
-    let g:UltiSnipsJumpForwardTrigger       = "<C-n>"
-    let g:UltiSnipsJumpBackwardTrigger      = "<C-p>"
+    let g:UltiSnipsJumpForwardTrigger       = "<C-j>"
+    let g:UltiSnipsJumpBackwardTrigger      = "<C-k>"
     " let g:UltiSnipsRemoveSelectModeMappings = 0
     " let g:snips_no_mappings = 1
     " let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
@@ -113,6 +114,15 @@ call plug#end()
             \ 'name': 'pyls',
             \ 'cmd': {server_info->['pyls']},
             \ 'whitelist': ['python'],
+            \ })
+    endif
+
+    if executable('typescript-language-server')
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'typescript-language-server',
+            \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+            \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+            \ 'whitelist': ['typescript', 'typescript.tsx'],
             \ })
     endif
 " }
