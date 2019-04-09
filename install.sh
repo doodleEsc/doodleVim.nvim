@@ -16,4 +16,4 @@ rm -rf $GOPATH/src/*
 pip3 uninstall python-language-server -y
 pip3 install 'python-language-server[yapf,rope,pyflakes,mccabe,pycodestyle]' --upgrade
 
-mv ./pycodestyle ~/.config/pycodestyle
+cp ./pycodestyle ~/.config/pycodestyle
