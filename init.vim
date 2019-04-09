@@ -86,7 +86,18 @@ call plug#end()
 
     nnoremap <leader>lo :call Ncm2_look_trigger()<CR>
 " }
-
+ 
+"{
+    function! Close_signcolumn()
+        if &signcolumn == "no"
+            set signcolumn=yes
+        else
+            set signcolumn=no
+        endif
+    endfunction
+    nnoremap <silent> <leader>sc :call Close_signcolumn()<CR>
+"}
+ 
 " ncm2-ultisnips {  
     " inoremap <silent> <expr> <C-k> ncm2_ultisnips#expand_or("\<CR>", 'n')
     inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
