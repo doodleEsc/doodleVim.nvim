@@ -1,32 +1,32 @@
-call plug#begin()
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
+packadd minpac
+call minpac#init()
+call minpac#add('ncm2/ncm2')
+call minpac#add('roxma/nvim-yarp')
 
-Plug 'filipekiss/ncm2-look.vim'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-ultisnips'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'Shougo/echodoc.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'ncm2/ncm2-vim-lsp'
-Plug 'leafgarland/typescript-vim' 
+call minpac#add('filipekiss/ncm2-look.vim')
+call minpac#add('ncm2/ncm2-path')
+call minpac#add('ncm2/ncm2-ultisnips')
+call minpac#add('SirVer/ultisnips')
+call minpac#add('honza/vim-snippets')
+call minpac#add('Shougo/echodoc.vim')
+call minpac#add('prabirshrestha/async.vim')
+call minpac#add('prabirshrestha/vim-lsp')
+call minpac#add('ncm2/ncm2-vim-lsp')
+call minpac#add('leafgarland/typescript-vim' )
 
-Plug 'cinuor/vim-header'
-Plug 'jiangmiao/auto-pairs'                                                      
-Plug 'vim-airline/vim-airline'                                                   
-Plug 'vim-airline/vim-airline-themes'
-Plug 'scrooloose/nerdcommenter'                                                  
-Plug 'scrooloose/nerdtree'                                                       
-Plug 'junegunn/vim-easy-align'                                                   
-Plug 'iamcco/mathjax-support-for-mkdp'                                           
-Plug 'iamcco/markdown-preview.vim'
-Plug 'junegunn/fzf'
-Plug 'sebdah/vim-delve'
-Plug 'heavenshell/vim-pydocstring'
-Plug 'terryma/vim-multiple-cursors'
-call plug#end()
+call minpac#add('cinuor/vim-header')
+call minpac#add('jiangmiao/auto-pairs')
+call minpac#add('vim-airline/vim-airline')
+call minpac#add('vim-airline/vim-airline-themes')
+call minpac#add('scrooloose/nerdcommenter')
+call minpac#add('scrooloose/nerdtree')
+call minpac#add('junegunn/vim-easy-align')
+call minpac#add('iamcco/mathjax-support-for-mkdp')
+call minpac#add('iamcco/markdown-preview.vim')
+call minpac#add('junegunn/fzf')
+call minpac#add('sebdah/vim-delve')
+call minpac#add('heavenshell/vim-pydocstring')
+call minpac#add('terryma/vim-multiple-cursors')
 
 " neovim {
     set tabstop=4
