@@ -5,6 +5,7 @@ function! PackInit() abort
     call minpac#add('roxma/nvim-yarp')
 
     call minpac#add('filipekiss/ncm2-look.vim')
+    call minpac#add('ncm2/ncm2-bufword')
     call minpac#add('ncm2/ncm2-path')
     call minpac#add('ncm2/ncm2-ultisnips')
     call minpac#add('SirVer/ultisnips')
@@ -13,7 +14,7 @@ function! PackInit() abort
     call minpac#add('prabirshrestha/async.vim')
     call minpac#add('prabirshrestha/vim-lsp')
     call minpac#add('ncm2/ncm2-vim-lsp')
-    call minpac#add('leafgarland/typescript-vim' )
+    call minpac#add('leafgarland/typescript-vim')
 
     call minpac#add('cinuor/vim-header')
     call minpac#add('jiangmiao/auto-pairs')
@@ -118,13 +119,38 @@ command! PackStatus call PackInit() | call minpac#status()
 " }
 
 " vim-lsp {
+
+    let g:lsp_signs_enabled = 0
+    let g:lsp_diagnostics_enabled = 1
+    let g:lsp_signs_error = {'text': 'x', 'icon': '~/.config/nvim/icon/error.svg'}
+    let g:lsp_signs_warning = {'text': '!', 'icon': '~/.config/nvim/icon/warning.svg'}
+    let g:lsp_signs_information = {'text': '@', 'icon': '~/.config/nvim/icon/info.svg'}
+    let g:lsp_signs_hint = {'text': '$'}
+
+    function! s:configure_lsp() abort
+        setlocal omnifunc=lsp#complete
+        nnoremap <buffer> gd :<C-u>LspDefinition<CR>
+        nnoremap <buffer> gh :<C-u>LspHover<CR>
+        nnoremap <buffer> gt :<C-u>LspTypeDefinition<CR>
+        nnoremap <buffer> gr :<C-u>LspReferences<CR>
+        nnoremap <buffer> grn :<C-u>LspRename<CR>
+
+        nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
+        nnoremap <buffer> gws :<C-u>LspWorkspaceSymbol<CR>
+
+        nnoremap <buffer> gf :<C-u>LspDocumentFormat<CR>
+        vnoremap <buffer> grf :LspDocumentRangeFormat<CR>
+        nnoremap <buffer> gi :<C-u>LspImplementation<CR>
+    endfunction 
+
     if executable('gopls')
         au User lsp_setup call lsp#register_server({
             \ 'name': 'gopls',
             \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
             \ 'whitelist': ['go'],
             \ })
-        autocmd FileType go setlocal omnifunc=lsp#complete
+        " autocmd FileType go setlocal omnifunc=lsp#complete
+        autocmd FileType go call s:configure_lsp()
     endif
 
     if executable('pyls')
@@ -133,6 +159,7 @@ command! PackStatus call PackInit() | call minpac#status()
             \ 'cmd': {server_info->['pyls']},
             \ 'whitelist': ['python'],
             \ })
+        autocmd FileType python call s:configure_lsp()
     endif
 
     if executable('typescript-language-server')
@@ -142,6 +169,7 @@ command! PackStatus call PackInit() | call minpac#status()
             \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
             \ 'whitelist': ['typescript', 'typescript.tsx'],
             \ })
+        autocmd FileType typescript call s:configure_lsp()
     endif
 " }
 
