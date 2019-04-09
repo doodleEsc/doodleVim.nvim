@@ -37,7 +37,7 @@ command! PackStatus call PackInit() | call minpac#status()
 
 " neovim {
     set tabstop=4
-    set signcolumn=yes
+    set signcolumn=no
     set softtabstop=4
     set expandtab
     set shiftwidth=4
