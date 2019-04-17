@@ -36,6 +36,7 @@ command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
 
 " neovim {
+    syntax enable
     set tabstop=4
     set signcolumn=no
     set softtabstop=4
@@ -49,7 +50,6 @@ command! PackStatus call PackInit() | call minpac#status()
     setlocal foldlevel=1
     set foldlevelstart=99
     set termguicolors
-    syntax enable
     colorscheme monokai-soda
     nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
     let g:python3_host_prog='/usr/local/bin/python3'
