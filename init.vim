@@ -122,6 +122,7 @@ command! PackStatus call PackInit() | call minpac#status()
 
     let g:lsp_signs_enabled = 0
     let g:lsp_diagnostics_enabled = 1
+    let g:lsp_diagnostics_echo_cursor = 1
     let g:lsp_signs_error = {'text': 'x', 'icon': '~/.config/nvim/icon/error.svg'}
     let g:lsp_signs_warning = {'text': '!', 'icon': '~/.config/nvim/icon/warning.svg'}
     let g:lsp_signs_information = {'text': '@', 'icon': '~/.config/nvim/icon/info.svg'}
