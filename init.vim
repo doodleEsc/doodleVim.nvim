@@ -162,6 +162,15 @@ command! PackStatus call PackInit() | call minpac#status()
             \ })
         autocmd FileType python call s:configure_lsp()
     endif
+    
+    if executable('rls')
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'rls',
+            \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+            \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
+            \ 'whitelist': ['rust'],
+            \ })
+    endif
 
     if executable('typescript-language-server')
         au User lsp_setup call lsp#register_server({
