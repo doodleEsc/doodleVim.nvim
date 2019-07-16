@@ -29,6 +29,7 @@ function! PackInit() abort
     call minpac#add('sebdah/vim-delve')
     call minpac#add('heavenshell/vim-pydocstring')
     call minpac#add('terryma/vim-multiple-cursors')
+    call minpac#add('itchyny/calendar.vim')
 endfunction
 
 command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
