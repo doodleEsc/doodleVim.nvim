@@ -3,61 +3,61 @@ function! PackInit() abort
     call minpac#init()
     call minpac#add('k-takata/minpac', {'type': 'opt'})
     call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
+
+    call minpac#add('Shougo/echodoc.vim')
+    call minpac#add('SirVer/ultisnips')
+
+
+
+    function! s:coc_plugins(hooktype, name) abort
+        execute 'packadd ' . a:name
+        call coc#util#install()
+        " call coc#util#install_extension(g:coc_global_extensions)
+    endfunction
+
 endfunction
 
 command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
 command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
 
-" File              : init.vim
-" Date              : 17.07.2019
-" Last Modified Date: 17.07.2019
-
-" File              : init.vim
-" Date              : 17.07.2019
-" Last Modified Date: 17.07.2019
 
 " neovim {
-    "set tabstop=4
-    "set signcolumn=yes
-    "set softtabstop=4
-    "set expandtab
-    "set shiftwidth=4
-    "set smarttab
-    "set colorcolumn=81
-    "set foldenable
-    "set foldmethod=syntax
-    "set foldcolumn=0
-    "setlocal foldlevel=1
-    "set foldlevelstart=99
-    "set termguicolors
-    "set autoread
-    "syntax enable
-    "colorscheme monokai-soda
-    "nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+    set tabstop=4
+    set signcolumn=yes
+    set softtabstop=4
+    set expandtab
+    set shiftwidth=4
+    set smarttab
+    set colorcolumn=81
+    set foldenable
+    set foldmethod=syntax
+    set foldcolumn=0
+    setlocal foldlevel=1
+    set foldlevelstart=99
+    set termguicolors
+    syntax enable
+    colorscheme monokai-soda
+    nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
     " hi Pmenu ctermfg=black ctermbg=gray  guibg=#444444
     " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 " }
 
+" echodoc {
+	let g:echodoc#enable_at_startup = 1
+	" let g:echodoc#type = 'signature'
+    let g:echodoc#type = 'virtual'
+" }
 
-" " ncm2 {
-    " " enable ncm2 for all buffers
-    " autocmd BufEnter * call ncm2#enable_for_buffer()
+" coc.nvim {
+    let g:coc_global_extensions = [
+        \ 'coc-json',
+        \ 'coc-ultisnips',
+        \ ]
 
-    " set completeopt=noinsert,menuone,noselect
-    " set shortmess+=c
-    " " Ctrl+C 退回到普通模式
-    " inoremap <C-c> <ESC>
-    " au TextChangedI * call ncm2#auto_trigger()
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-    " " inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-
-    " " " Use <TAB> to select the popup menu:
-    " " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    " " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" " }
-
+" }
 
 " " look {
     " let g:ncm2_look_enabled = 0
@@ -166,8 +166,3 @@ command! PackStatus call PackInit() | call minpac#status()
 " " pydocstring {
         " nmap <silent> <C-d> <Plug>(pydocstring)
 " " }
-
-" File              : init.vim
-" Date              : 17.07.2019
-" Last Modified Date: 17.07.2019
-
