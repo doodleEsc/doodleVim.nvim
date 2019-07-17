@@ -1,31 +1,8 @@
-call plug#begin()
-" Plug 'ncm2/ncm2'
-" Plug 'roxma/nvim-yarp'
-" Plug 'ncm2/ncm2-jedi'
-" Plug 'ncm2/ncm2-bufword'
-" Plug 'filipekiss/ncm2-look.vim'
-" Plug 'ncm2/ncm2-path'
-" Plug 'ncm2/ncm2-ultisnips'
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
-" Plug 'autozimu/LanguageClient-neovim', {'branch': 'next','do': 'bash install.sh' }
-
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'cinuor/vim-header'
-Plug 'jiangmiao/auto-pairs'                                                      
-Plug 'vim-airline/vim-airline'                                                   
-Plug 'vim-airline/vim-airline-themes'
-Plug 'scrooloose/nerdcommenter'                                                  
-Plug 'scrooloose/nerdtree'                                                       
-Plug 'junegunn/vim-easy-align'                                                   
-Plug 'iamcco/mathjax-support-for-mkdp'                                           
-Plug 'iamcco/markdown-preview.vim'
-Plug 'junegunn/fzf'
-" Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.vim/plugged/gocode/nvim/symlink.sh' }
-Plug 'sebdah/vim-delve'
-Plug 'heavenshell/vim-pydocstring'
-Plug 'terryma/vim-multiple-cursors'
-call plug#end()
+function! PackInit() abort
+    packadd minpac
+    call minpac#init()
+    call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
+endfunction
 
 " neovim {
     set tabstop=4
@@ -126,52 +103,52 @@ call plug#end()
 " " }
 
 
-" vim-airline {
-    let g:airline_powerline_fonts = 1
-    let g:airline_left_sep        = '>'
-    let g:airline_right_sep       = '<'
-    let g:airline_theme           = 'luna'
-" }
+" " vim-airline {
+    " let g:airline_powerline_fonts = 1
+    " let g:airline_left_sep        = '>'
+    " let g:airline_right_sep       = '<'
+    " let g:airline_theme           = 'luna'
+" " }
 
 
-" nerdcommenter {
-    let g:NERDSpaceDelims = 1
-" }
+" " nerdcommenter {
+    " let g:NERDSpaceDelims = 1
+" " }
 
 
-" vim-header {
-    let g:header_auto_add_header = 0
-    let g:header_field_timestamp_format = '%Y-%m-%d'
-    let g:header_field_author = 'Fan Lizhou'
-    let g:header_field_author_email = 'cokie@foxmail.com'
-    map <F7> :AddHeader<CR>    
-" }
+" " vim-header {
+    " let g:header_auto_add_header = 0
+    " let g:header_field_timestamp_format = '%Y-%m-%d'
+    " let g:header_field_author = 'Fan Lizhou'
+    " let g:header_field_author_email = 'cokie@foxmail.com'
+    " map <F7> :AddHeader<CR>    
+" " }
 
 
-" NerdTree {
-        nnoremap <silent> <F2> :NERDTree<CR>
-" }
+" " NerdTree {
+        " nnoremap <silent> <F2> :NERDTree<CR>
+" " }
 
 
-" align {
-        xmap ga <Plug>(EasyAlign)
-        nmap ga <Plug>(EasyAlign)
-" }
+" " align {
+        " xmap ga <Plug>(EasyAlign)
+        " nmap ga <Plug>(EasyAlign)
+" " }
 
-" windows {
-        map <C-j> <C-w>j
-        map <C-k> <C-w>k
-        map <C-l> <C-w>l
-        map <C-h> <C-w>h
-" }
+" " windows {
+        " map <C-j> <C-w>j
+        " map <C-k> <C-w>k
+        " map <C-l> <C-w>l
+        " map <C-h> <C-w>h
+" " }
 
-" markdown {
-        nmap <silent> <F5> <Plug>MarkdownPreview
-        imap <silent> <F5> <Plug>MarkdownPreview
-        nmap <silent> <F6> <Plug>StopMarkdownPreview
-        imap <silent> <F6> <Plug>StopMarkdownPreview
-" }
+" " markdown {
+        " nmap <silent> <F5> <Plug>MarkdownPreview
+        " imap <silent> <F5> <Plug>MarkdownPreview
+        " nmap <silent> <F6> <Plug>StopMarkdownPreview
+        " imap <silent> <F6> <Plug>StopMarkdownPreview
+" " }
 
-" pydocstring {
-        nmap <silent> <C-d> <Plug>(pydocstring)
-" }
+" " pydocstring {
+        " nmap <silent> <C-d> <Plug>(pydocstring)
+" " }
