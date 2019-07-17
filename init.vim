@@ -1,6 +1,7 @@
 function! PackInit() abort
     packadd minpac
     call minpac#init()
+    call minpac#add('k-takata/minpac', {'type': 'opt'})
     call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
 endfunction
 
@@ -8,23 +9,32 @@ command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac
 command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
 
+" File              : init.vim
+" Date              : 17.07.2019
+" Last Modified Date: 17.07.2019
+
+" File              : init.vim
+" Date              : 17.07.2019
+" Last Modified Date: 17.07.2019
+
 " neovim {
-    set tabstop=4
-    set signcolumn=yes
-    set softtabstop=4
-    set expandtab
-    set shiftwidth=4
-    set smarttab
-    set colorcolumn=81
-    set foldenable
-    set foldmethod=syntax
-    set foldcolumn=0
-    setlocal foldlevel=1
-    set foldlevelstart=99
-    set termguicolors
-    syntax enable
-    colorscheme monokai-soda
-    nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+    "set tabstop=4
+    "set signcolumn=yes
+    "set softtabstop=4
+    "set expandtab
+    "set shiftwidth=4
+    "set smarttab
+    "set colorcolumn=81
+    "set foldenable
+    "set foldmethod=syntax
+    "set foldcolumn=0
+    "setlocal foldlevel=1
+    "set foldlevelstart=99
+    "set termguicolors
+    "set autoread
+    "syntax enable
+    "colorscheme monokai-soda
+    "nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
     " hi Pmenu ctermfg=black ctermbg=gray  guibg=#444444
     " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 " }
@@ -156,12 +166,6 @@ command! PackStatus call PackInit() | call minpac#status()
 " " pydocstring {
         " nmap <silent> <C-d> <Plug>(pydocstring)
 " " }
-" File              : init.vim
-" Date              : 17.07.2019
-
-" File              : init.vim
-" Date              : 17.07.2019
-" Last Modified Date: 17.07.2019
 
 " File              : init.vim
 " Date              : 17.07.2019
