@@ -4,10 +4,8 @@ function! PackInit() abort
     call minpac#add('k-takata/minpac', {'type': 'opt'})
     call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
 
-    call minpac#add('Shougo/echodoc.vim')
-    call minpac#add('SirVer/ultisnips')
-
-
+    call minpac#add('honza/vim-snippets')
+    call minpac#add('itchyny/lightline.vim')
 
     function! s:coc_plugins(hooktype, name) abort
         execute 'packadd ' . a:name
@@ -25,6 +23,7 @@ command! PackStatus call PackInit() | call minpac#status()
 " neovim {
     set tabstop=4
     set signcolumn=yes
+    set noshowmode
     set softtabstop=4
     set expandtab
     set shiftwidth=4
@@ -43,19 +42,32 @@ command! PackStatus call PackInit() | call minpac#status()
     " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 " }
 
-" echodoc {
-	let g:echodoc#enable_at_startup = 1
-	" let g:echodoc#type = 'signature'
-    let g:echodoc#type = 'virtual'
+" lightline {
+    let g:lightline = {
+        \ 'colorscheme': 'one',
+        \ }
 " }
 
 " coc.nvim {
     let g:coc_global_extensions = [
         \ 'coc-json',
+        \ 'coc-snippets',
         \ 'coc-ultisnips',
         \ ]
 
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    " Snippets
+    " Use <C-j> for jump to next placeholder, it's default of coc.nvim
+    let g:coc_snippet_next = '<c-j>'
+
+    " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+    let g:coc_snippet_prev = '<c-k>'
+
+    " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    " To make <cr> select the first completion item and confirm completion when no item have selected:
+    inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
+    " Close preview window when completion is done.
+    autocmd! InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " }
 

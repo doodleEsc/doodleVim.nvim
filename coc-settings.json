@@ -1,12 +1,11 @@
 {
     "suggest.triggerAfterInsertEnter": true,
     "suggest.timeout": 500,
-    "suggest.noselect": true,
+    "suggest.noselect": false,
     "suggest.detailField":"preview",
     "suggest.minTriggerInputLength": 2,
     "suggest.acceptSuggestionOnCommitCharacter": true,
     "suggest.snippetIndicator": "",
-    "suggest.echodocSupport": true,
     "suggest.completionItemKindLabels": {
         "keyword": "keyword",
         "variable": "variable",
@@ -36,11 +35,16 @@
     },
 
     "languageserver": {
-    "golang": {
-      "command": "gopls",
-      "args": [],
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"]
+      "golang": {
+          "command": "gopls",
+          "args": [],
+          "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+          "filetypes": ["go"]
+      },
+	  "rust": {
+		  "command": "ra_lsp_server",
+		  "filetypes": ["rust"],
+		  "rootPatterns": ["Cargo.toml"]
     }
   }
 }
