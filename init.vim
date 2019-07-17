@@ -4,6 +4,10 @@ function! PackInit() abort
     call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
 endfunction
 
+command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
+command! PackClean  call PackInit() | call minpac#clean()
+command! PackStatus call PackInit() | call minpac#status()
+
 " neovim {
     set tabstop=4
     set signcolumn=yes
@@ -152,3 +156,14 @@ endfunction
 " " pydocstring {
         " nmap <silent> <C-d> <Plug>(pydocstring)
 " " }
+" File              : init.vim
+" Date              : 17.07.2019
+
+" File              : init.vim
+" Date              : 17.07.2019
+" Last Modified Date: 17.07.2019
+
+" File              : init.vim
+" Date              : 17.07.2019
+" Last Modified Date: 17.07.2019
+
