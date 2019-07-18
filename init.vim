@@ -4,14 +4,13 @@ function! PackInit() abort
     call minpac#add('k-takata/minpac', {'type': 'opt'})
     call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
 
-    call minpac#add('honza/vim-snippets')
     call minpac#add('itchyny/lightline.vim')
 
-    function! s:coc_plugins(hooktype, name) abort
-        execute 'packadd ' . a:name
-        call coc#util#install()
-        " call coc#util#install_extension(g:coc_global_extensions)
-    endfunction
+    "function! s:coc_plugins(hooktype, name) abort
+    "    execute 'packadd ' . a:name
+    "    call coc#util#install()
+    "    " call coc#util#install_extension(g:coc_global_extensions)
+    "endfunction
 
 endfunction
 
@@ -52,7 +51,7 @@ command! PackStatus call PackInit() | call minpac#status()
     let g:coc_global_extensions = [
         \ 'coc-json',
         \ 'coc-snippets',
-        \ 'coc-ultisnips',
+        \ 'coc-python',
         \ ]
 
     " Snippets
