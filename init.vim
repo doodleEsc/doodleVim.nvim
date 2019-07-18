@@ -48,6 +48,11 @@ command! PackStatus call PackInit() | call minpac#status()
         \ }
 " }
 
+" NerdTree {
+    nnoremap <silent> <F2> :NERDTree<CR>
+    let NERDTreeWinSize=18
+" }
+
 " coc.nvim {
     let g:coc_global_extensions = [
         \ 'coc-json',
