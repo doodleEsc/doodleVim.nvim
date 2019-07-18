@@ -6,6 +6,7 @@ function! PackInit() abort
 
     call minpac#add('itchyny/lightline.vim')
     call minpac#add('scrooloose/nerdcommenter')
+    call minpac#add('scrooloose/nerdcommenter')
 
     "function! s:coc_plugins(hooktype, name) abort
     "    execute 'packadd ' . a:name
