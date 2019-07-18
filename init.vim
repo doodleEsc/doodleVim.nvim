@@ -14,6 +14,7 @@ function! PackInit() abort
     call minpac#add('prabirshrestha/async.vim')
     call minpac#add('prabirshrestha/vim-lsp')
     call minpac#add('ncm2/ncm2-vim-lsp')
+    call minpac#add('ncm2/float-preview.nvim')
     " call minpac#add('leafgarland/typescript-vim')
 
     call minpac#add('cinuor/vim-header')
@@ -77,6 +78,9 @@ command! PackStatus call PackInit() | call minpac#status()
 
 " }
 
+" ncm2-preview {
+    let g:float_preview#docked = 0
+" }
 
 " look {
     let g:ncm2_look_enabled = 0
@@ -148,7 +152,7 @@ command! PackStatus call PackInit() | call minpac#status()
     if executable('gopls')
         au User lsp_setup call lsp#register_server({
             \ 'name': 'gopls',
-            \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+            \ 'cmd': {server_info->['gopls']},
             \ 'whitelist': ['go'],
             \ })
         " autocmd FileType go setlocal omnifunc=lsp#complete
