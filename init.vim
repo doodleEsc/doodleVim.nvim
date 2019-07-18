@@ -14,7 +14,7 @@ function! PackInit() abort
     call minpac#add('prabirshrestha/async.vim')
     call minpac#add('prabirshrestha/vim-lsp')
     call minpac#add('ncm2/ncm2-vim-lsp')
-    call minpac#add('leafgarland/typescript-vim')
+    " call minpac#add('leafgarland/typescript-vim')
 
     call minpac#add('cinuor/vim-header')
     call minpac#add('jiangmiao/auto-pairs')
@@ -173,15 +173,15 @@ command! PackStatus call PackInit() | call minpac#status()
             \ })
     endif
 
-    if executable('typescript-language-server')
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'typescript-language-server',
-            \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-            \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-            \ 'whitelist': ['typescript', 'typescript.tsx'],
-            \ })
-        autocmd FileType typescript call s:configure_lsp()
-    endif
+    " if executable('typescript-language-server')
+        " au User lsp_setup call lsp#register_server({
+            " \ 'name': 'typescript-language-server',
+            " \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+            " \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+            " \ 'whitelist': ['typescript', 'typescript.tsx'],
+            " \ })
+        " autocmd FileType typescript call s:configure_lsp()
+    " endif
 " }
 
 " " LSP {
