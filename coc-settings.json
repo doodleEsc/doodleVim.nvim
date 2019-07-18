@@ -33,7 +33,8 @@
         "typeParameter": "typeParameter",
         "default": "default"
     },
-    "python.jediEnabled": false,
+
+    "python.jediEnabled": true,
     "languageserver": {
         "golang": {
             "command": "gopls",
@@ -45,19 +46,6 @@
             "command": "rls",
             "filetypes": ["rust"],
             "rootPatterns": ["Cargo.toml"]
-        },
-        "python": {
-            "command": "python",
-            "args": [
-              "-mpyls",
-              "-vv",
-              "--log-file",
-              "/tmp/lsp_python.log"
-            ],
-            "trace.server": "verbose",
-            "filetypes": [
-              "python"
-            ]
         }
     }
 }
