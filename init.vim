@@ -5,6 +5,7 @@ function! PackInit() abort
     call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
 
     call minpac#add('itchyny/lightline.vim')
+    call minpac#add('scrooloose/nerdcommenter')
 
     "function! s:coc_plugins(hooktype, name) abort
     "    execute 'packadd ' . a:name
