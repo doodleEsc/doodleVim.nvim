@@ -52,6 +52,7 @@ command! PackStatus call PackInit() | call minpac#status()
         \ 'coc-json',
         \ 'coc-snippets',
         \ 'coc-python',
+        \ 'coc-pairs'
         \ ]
 
     " Snippets
@@ -67,7 +68,13 @@ command! PackStatus call PackInit() | call minpac#status()
 
     " Close preview window when completion is done.
     autocmd! InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
+    
+    " Remap keys for gotos
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gt <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+    nmap <silent> grn <Plug>(coc-rename)
 " }
 
 " " look {
