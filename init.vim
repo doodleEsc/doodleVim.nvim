@@ -174,12 +174,12 @@ command! PackStatus call PackInit() | call minpac#status()
         " nmap ga <Plug>(EasyAlign)
 " " }
 
-" " windows {
-        " map <C-j> <C-w>j
-        " map <C-k> <C-w>k
-        " map <C-l> <C-w>l
-        " map <C-h> <C-w>h
-" " }
+ " windows {
+         map <C-j> <C-w>j
+         map <C-k> <C-w>k
+         map <C-l> <C-w>l
+         map <C-h> <C-w>h
+ " }
 
 " " markdown {
         " nmap <silent> <F5> <Plug>MarkdownPreview

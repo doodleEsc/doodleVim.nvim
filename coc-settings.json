@@ -33,7 +33,7 @@
         "typeParameter": "typeParameter",
         "default": "default"
     },
-
+    "diagnostic.refreshOnInsertMode": true,
     "python.jediEnabled": true,
     "languageserver": {
         "golang": {
