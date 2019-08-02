@@ -40,7 +40,7 @@ command! PackStatus call PackInit() | call minpac#status()
 " neovim {
     syntax enable
     set tabstop=4
-    set signcolumn=no
+    set signcolumn=yes
     set softtabstop=4
     set expandtab
     set shiftwidth=4
@@ -124,8 +124,10 @@ command! PackStatus call PackInit() | call minpac#status()
 " }
 
 " vim-lsp {
+    let g:lsp_highlights_enabled = 0
+    let g:lsp_textprop_enabled = 0
+    let g:lsp_signs_enabled = 1
 
-    let g:lsp_signs_enabled = 0
     let g:lsp_diagnostics_enabled = 1
     let g:lsp_diagnostics_echo_cursor = 1
     let g:lsp_signs_error = {'text': 'x', 'icon': '~/.config/nvim/icon/error.svg'}
