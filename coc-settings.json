@@ -1,8 +1,8 @@
 {
     "suggest.triggerAfterInsertEnter": true,
     "suggest.timeout": 500,
-    "suggest.noselect": false,
-    "suggest.detailField":"preview",
+    "suggest.noselect": true,
+    "suggest.detailField":"abbr",
     "suggest.minTriggerInputLength": 2,
     "suggest.acceptSuggestionOnCommitCharacter": true,
     "suggest.snippetIndicator": "",
@@ -35,6 +35,8 @@
     },
     "diagnostic.refreshOnInsertMode": true,
     "python.jediEnabled": true,
+    "python.formatting.provider": "autopep8",
+    "python.linting.flake8Enabled": true,
     "languageserver": {
         "golang": {
             "command": "gopls",
