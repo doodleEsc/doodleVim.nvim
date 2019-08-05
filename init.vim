@@ -14,6 +14,12 @@ function! PackInit() abort
     " tools
     call minpac#add('scrooloose/nerdcommenter')
     call minpac#add('scrooloose/nerdtree')
+    call minpac#add('junegunn/vim-easy-align')
+    call minpac#add('iamcco/mathjax-support-for-mkdp')
+    call minpac#add('iamcco/markdown-preview.vim')
+    call minpac#add('terryma/vim-multiple-cursors')
+    call minpac#add('itchyny/calendar.vim')
+    call minpac#add('cinuor/vim-header')
 endfunction
 
 let g:coc_global_extensions = [
@@ -56,16 +62,6 @@ command! ExtensionUpdate call CocBuildUpdate()
     " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 " }
 
-" lightline {
-    let g:lightline = {
-        \ 'colorscheme': 'one',
-        \ }
-" }
-
-" NerdTree {
-    nnoremap <silent> <F2> :NERDTree<CR>
-    let NERDTreeWinSize=18
-" }
 
 " coc.nvim {
     " Snippets
@@ -101,95 +97,24 @@ command! ExtensionUpdate call CocBuildUpdate()
     vmap <silent> fm <Plug>(coc-format-selected)
 " }
 
-" " look {
-    " let g:ncm2_look_enabled = 0
-
-    " function! Ncm2_look_trigger()
-        " if !exists("g:ncm2_look_enabled")
-            " let g:ncm2_look_enabled = 0
-        " endif
-        " if g:ncm2_look_enabled==0
-            " let g:ncm2_look_enabled = 1
-        " else
-            " let g:ncm2_look_enabled = 0
-        " endif
-    " endfunction
-
-    " nnoremap <leader>lo :call Ncm2_look_trigger()<CR>
-" " }
+ " nerdcommenter {
+     let g:NERDSpaceDelims = 1
+ " }
 
 
-" " ncm2-ultisnips {  
-    " " inoremap <silent> <expr> <C-k> ncm2_ultisnips#expand_or("\<CR>", 'n')
-    " inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-
-    " imap <C-k> <Plug>(ultisnips_expand)
-    " let g:UltiSnipsExpandTrigger            = "<Plug>(ultisnips_expand)"
-    " let g:UltiSnipsJumpForwardTrigger       = "<C-j>"
-    " let g:UltiSnipsJumpBackwardTrigger      = "<C-k>"
-    " let g:UltiSnipsRemoveSelectModeMappings = 0
-    " " let g:snips_no_mappings = 1
-    " " let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
-" " }
-
-" ncm2-go {
-    " let g:ncm2_go#gocode_path = '/usr/local/bin/gocode'
-" }
-
-" " LSP {
-    " set hidden
-    " let g:LanguageClient_rootMarkers = {
-        " \ 'go': ['.git', 'go.mod'],
-        " \ }
-
-    " let g:LanguageClient_serverCommands = {
-        " \ 'python': ['pyls'],
-        " \ 'go': ['gopls']
-        " \ }
+ " vim-header {
+     let g:header_auto_add_header = 0
+     let g:header_field_timestamp_format = '%Y-%m-%d'
+     let g:header_field_author = 'Fan Lizhou'
+     let g:header_field_author_email = 'cokie@foxmail.com'
+     map <F7> :AddHeader<CR>    
+ " }
 
 
-    " " let g:LanguageClient_completionPreferTextEdit = 0
-    " " let g:LanguageClient_loggingFile = '/home/fanlz/lc.log'
-    " " let g:LanguageClient_loggingLevel = 'DEBUG'
-    " nnoremap <C-m> :call LanguageClient_contextMenu()<CR>
-    " " Or map each action separately
-    " nnoremap <silent> <leader>ho :call LanguageClient#textDocument_hover()<CR>
-    " nnoremap <silent> <leader>gd :call LanguageClient#textDocument_definition()<CR>
-    " nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>
-" " }
-
-
-" " vim-airline {
-    " let g:airline_powerline_fonts = 1
-    " let g:airline_left_sep        = '>'
-    " let g:airline_right_sep       = '<'
-    " let g:airline_theme           = 'luna'
-" " }
-
-
-" " nerdcommenter {
-    " let g:NERDSpaceDelims = 1
-" " }
-
-
-" " vim-header {
-    " let g:header_auto_add_header = 0
-    " let g:header_field_timestamp_format = '%Y-%m-%d'
-    " let g:header_field_author = 'Fan Lizhou'
-    " let g:header_field_author_email = 'cokie@foxmail.com'
-    " map <F7> :AddHeader<CR>    
-" " }
-
-
-" " NerdTree {
-        " nnoremap <silent> <F2> :NERDTree<CR>
-" " }
-
-
-" " align {
-        " xmap ga <Plug>(EasyAlign)
-        " nmap ga <Plug>(EasyAlign)
-" " }
+ " align {
+         xmap ga <Plug>(EasyAlign)
+         nmap ga <Plug>(EasyAlign)
+ " }
 
  " windows {
          map <C-j> <C-w>j
@@ -198,13 +123,20 @@ command! ExtensionUpdate call CocBuildUpdate()
          map <C-h> <C-w>h
  " }
 
-" " markdown {
-        " nmap <silent> <F5> <Plug>MarkdownPreview
-        " imap <silent> <F5> <Plug>MarkdownPreview
-        " nmap <silent> <F6> <Plug>StopMarkdownPreview
-        " imap <silent> <F6> <Plug>StopMarkdownPreview
-" " }
+ " markdown {
+         nmap <silent> <F5> <Plug>MarkdownPreview
+         imap <silent> <F5> <Plug>MarkdownPreview
+         nmap <silent> <F6> <Plug>StopMarkdownPreview
+         imap <silent> <F6> <Plug>StopMarkdownPreview
+ " }
 
-" " pydocstring {
-        " nmap <silent> <C-d> <Plug>(pydocstring)
-" " }
+" lightline {
+    let g:lightline = {
+        \ 'colorscheme': 'one',
+        \ }
+" }
+
+" NerdTree {
+    nnoremap <silent> <F2> :NERDTree<CR>
+    let NERDTreeWinSize=18
+" }
