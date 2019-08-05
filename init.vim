@@ -139,16 +139,16 @@ command! PackStatus call PackInit() | call minpac#status()
         setlocal omnifunc=lsp#complete
         nnoremap <buffer> gd :<C-u>LspDefinition<CR>
         nnoremap <buffer> gh :<C-u>LspHover<CR>
+        nnoremap <buffer> gi :<C-u>LspImplementation<CR>
         nnoremap <buffer> gt :<C-u>LspTypeDefinition<CR>
         nnoremap <buffer> gr :<C-u>LspReferences<CR>
-        nnoremap <buffer> grn :<C-u>LspRename<CR>
+        nnoremap <buffer> rn :<C-u>LspRename<CR>
 
-        nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
-        nnoremap <buffer> gws :<C-u>LspWorkspaceSymbol<CR>
+        nnoremap <buffer> ds :<C-u>LspDocumentSymbol<CR>
+        nnoremap <buffer> ws :<C-u>LspWorkspaceSymbol<CR>
 
-        nnoremap <buffer> gf :<C-u>LspDocumentFormat<CR>
-        vnoremap <buffer> grf :LspDocumentRangeFormat<CR>
-        nnoremap <buffer> gi :<C-u>LspImplementation<CR>
+        nnoremap <buffer> fm :<C-u>LspDocumentFormat<CR>
+        vnoremap <buffer> fms :LspDocumentRangeFormat<CR>
     endfunction 
 
     if executable('gopls')
