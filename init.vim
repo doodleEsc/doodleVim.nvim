@@ -18,6 +18,7 @@ endfunction
 
 let g:coc_global_extensions = [
     \ 'coc-json',
+    \ 'coc-pairs',
     \ 'coc-ultisnips',
     \ 'coc-python',
     \ ]
@@ -95,7 +96,6 @@ command! ExtensionUpdate call CocBuildUpdate()
     nmap <silent> dnp <Plug>(coc-diagnostic-prev-error) 
 
     " Remap keys for format
-    "nnoremap <silent> fm <Plug>(coc-format)
     nmap <silent> fm <Plug>(coc-format)
     vmap <silent> fm <Plug>(coc-format-selected)
 " }
