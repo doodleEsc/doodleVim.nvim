@@ -87,7 +87,7 @@ command! ExtensionUpdate call CocBuildUpdate()
     nmap <silent> rn <Plug>(coc-rename)
 
     " Remap keys for diagnostic
-    nmap <silent> dn <Plug>(coc-diagnostic-next)\<CR>
+    nmap <silent> dn <Plug>(coc-diagnostic-next)
     nmap <silent> dp <Plug>(coc-diagnostic-prev)
     nmap <silent> dne <Plug>(coc-diagnostic-next-error)
     nmap <silent> dnp <Plug>(coc-diagnostic-prev-error) 
