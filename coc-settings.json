@@ -39,12 +39,6 @@
     "diagnostic.displayByAle": false,
     "diagnostic.refreshOnInsertMode": true,
 
-    //"python.jediEnabled": true,
-    //"python.venvPath": "~/Env",
-    //"python.formatting.provider": "autopep8",
-    //"python.linting.flake8Enabled": true,
-    //"python.jediPath": "/usr/local/lib/python3.7/site-packages/jedi",
-
     "languageserver": {
         "python": {
             "command": "pyls",
@@ -57,10 +51,10 @@
             "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
             "filetypes": ["go"]
         },
-        "rust": {
-            "command": "rls",
-            "filetypes": ["rust"],
-            "rootPatterns": ["Cargo.toml"]
-        }
+        //"rust": {
+            //"command": "rls",
+            //"filetypes": ["rust"],
+            //"rootPatterns": ["Cargo.toml"]
+        //}
     }
 }

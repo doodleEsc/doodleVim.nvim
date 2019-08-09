@@ -27,6 +27,7 @@ let g:coc_global_extensions = [
     \ 'coc-pairs',
     \ 'coc-yaml',
     \ 'coc-ultisnips',
+    \ 'coc-rls',
     \ ]
 
 function! CocBuildUpdate()
