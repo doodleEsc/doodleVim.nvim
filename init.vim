@@ -27,7 +27,6 @@ let g:coc_global_extensions = [
     \ 'coc-pairs',
     \ 'coc-yaml',
     \ 'coc-ultisnips',
-    \ 'coc-python',
     \ ]
 
 function! CocBuildUpdate()
@@ -87,10 +86,10 @@ command! ExtensionUpdate call CocBuildUpdate()
     nmap <silent> rn <Plug>(coc-rename)
 
     " Remap keys for diagnostic
-    nmap <silent> dn <Plug>(coc-diagnostic-next)
-    nmap <silent> dp <Plug>(coc-diagnostic-prev)
-    nmap <silent> dne <Plug>(coc-diagnostic-next-error)
-    nmap <silent> dnp <Plug>(coc-diagnostic-prev-error) 
+    nmap <silent> nw <Plug>(coc-diagnostic-next)
+    nmap <silent> pw <Plug>(coc-diagnostic-prev)
+    nmap <silent> ne <Plug>(coc-diagnostic-next-error)
+    nmap <silent> pe <Plug>(coc-diagnostic-prev-error) 
 
     " Remap keys for format
     nmap <silent> fm <Plug>(coc-format)

@@ -1,7 +1,7 @@
 {
     "suggest.triggerAfterInsertEnter": true,
     "suggest.timeout": 500,
-    "suggest.noselect": true,
+    "suggest.noselect": false,
     "suggest.detailField":"preview",
     "suggest.minTriggerInputLength": 2,
     "suggest.acceptSuggestionOnCommitCharacter": true,
@@ -33,11 +33,24 @@
         "typeParameter": "typeParameter",
         "default": "default"
     },
+    "diagnostic.signOffset": 9999999,
+    "diagnostic.errorSign": "✘",
+    "diagnostic.warningSign": "✎",
+    "diagnostic.displayByAle": false,
     "diagnostic.refreshOnInsertMode": true,
-    "python.jediEnabled": true,
-    "python.formatting.provider": "autopep8",
-    "python.linting.flake8Enabled": true,
+
+    //"python.jediEnabled": true,
+    //"python.venvPath": "~/Env",
+    //"python.formatting.provider": "autopep8",
+    //"python.linting.flake8Enabled": true,
+    //"python.jediPath": "/usr/local/lib/python3.7/site-packages/jedi",
+
     "languageserver": {
+        "python": {
+            "command": "pyls",
+            "args": [],
+            "filetypes": ["python", "py"]
+        },
         "golang": {
             "command": "gopls",
             "args": [],
