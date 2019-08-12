@@ -74,12 +74,17 @@ command! ExtensionUpdate call CocBuildUpdate()
     inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
     autocmd! InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
     
+    
+    " Define some functions that not in coc.nvim
+    nnoremap <Plug>(coc-hover) :<C-u>call CocAction("doHover")<CR>
 
     " Remap keys for gotos
     nmap <silent> gd <Plug>(coc-definition)
     nmap <silent> gt <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
+    nmap <silent> gh <Plug>(coc-hover)
+
 
     " Remap keys for rename
     nmap <silent> rn <Plug>(coc-rename)
