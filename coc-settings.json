@@ -38,6 +38,7 @@
     "diagnostic.warningSign": "✎",
     "diagnostic.displayByAle": false,
     "diagnostic.refreshOnInsertMode": true,
+    "diagnostic.messageTarget": "float",
 
     "languageserver": {
         "python": {
