@@ -26,6 +26,7 @@ let g:coc_global_extensions = [
     \ 'coc-json',
     \ 'coc-pairs',
     \ 'coc-yaml',
+    \ 'coc-highlight',
     \ 'coc-ultisnips',
     \ 'coc-rls',
     \ ]
