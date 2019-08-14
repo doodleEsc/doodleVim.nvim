@@ -41,6 +41,7 @@ command! PackStatus call PackInit() | call minpac#status()
 command! ExtensionUpdate call CocBuildUpdate()
 
 " neovim {
+    set nocompatible
     set tabstop=4
     set signcolumn=yes
     set noshowmode
@@ -57,7 +58,8 @@ command! ExtensionUpdate call CocBuildUpdate()
     set termguicolors
     syntax enable
     colorscheme monokai-soda
-    nnoremap <space> za
+    let mapleader=","
+    " nnoremap <space> za
 " }
 
 
@@ -90,10 +92,10 @@ command! ExtensionUpdate call CocBuildUpdate()
     nmap <silent> rn <Plug>(coc-rename)
 
     " Remap keys for diagnostic
-    nmap <silent> nw <Plug>(coc-diagnostic-next)
-    nmap <silent> pw <Plug>(coc-diagnostic-prev)
-    nmap <silent> ne <Plug>(coc-diagnostic-next-error)
-    nmap <silent> pe <Plug>(coc-diagnostic-prev-error) 
+    nmap <silent> <leader>nw <Plug>(coc-diagnostic-next)
+    nmap <silent> <leader>pw <Plug>(coc-diagnostic-prev)
+    nmap <silent> <leader>ne <Plug>(coc-diagnostic-next-error)
+    nmap <silent> <leader>pe <Plug>(coc-diagnostic-prev-error) 
 
     " Remap keys for format
     nmap <silent> fm <Plug>(coc-format)
