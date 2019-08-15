@@ -137,9 +137,20 @@ command! ExtensionUpdate call CocBuildUpdate()
  " }
 
 " lightline {
+    set laststatus=2
     let g:lightline = {
         \ 'colorscheme': 'one',
+        \ 'active': {
+        \   'left':[    ['mode', 'paste'],
+        \               ['readonly', 'filename', 'modified', 'cocstatus']],
+        \   'right':[   ['lineinfo'],
+        \               ['percent'],
+        \               [ 'fileformat', 'fileencoding', 'filetype']]
+        \ },
+        \ 'component_function': {
+        \   'cocstatus': 'coc#status'
         \ }
+        \}
 " }
 
 " NerdTree {
