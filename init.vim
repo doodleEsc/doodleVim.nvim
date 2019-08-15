@@ -101,6 +101,23 @@ command! ExtensionUpdate call CocBuildUpdate()
     " Remap keys for format
     nmap <silent> fm <Plug>(coc-format)
     vmap <silent> fm <Plug>(coc-format-selected)
+    
+    " Show all diagnostics
+    nnoremap <silent> <leader>la  :<C-u>CocList diagnostics<cr>
+    " Manage extensions
+    nnoremap <silent> <leader>le  :<C-u>CocList extensions<cr>
+    " Show commands
+    nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
+    " Find symbol of current document
+    nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
+    " " Search workspace symbols
+    " nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
+    " " Do default action for next item.
+    " nnoremap <silent> <leader>lj  :<C-u>CocNext<CR>
+    " " Do default action for previous item.
+    " nnoremap <silent> <leader>lk  :<C-u>CocPrev<CR>
+
+
 " }
 
  " nerdcommenter {
