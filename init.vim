@@ -64,20 +64,19 @@ command! ExtensionUpdate call CocBuildUpdate()
 " }
 
 
-" coc.nvim {
+" coc-snippets {
     " Snippets
     let g:coc_snippet_next = '<c-j>'
     let g:coc_snippet_prev = '<c-k>'
 
 
-    "inoremap <expr> <C-n> pumvisible() ? "\<C-n>" : "\<C-n>"
-    "inoremap <expr> <C-p> pumvisible() ? "\<C-p>" : "\<C-p>"
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     " inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
     inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
     autocmd! InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" } 
     
-    
+" coc.nvim {
     " Define some functions that not in coc.nvim
     nnoremap <Plug>(coc-hover) :<C-u>call CocAction("doHover")<CR>
 
@@ -88,9 +87,8 @@ command! ExtensionUpdate call CocBuildUpdate()
     nmap <silent> gr <Plug>(coc-references)
     nmap <silent> gh <Plug>(coc-hover)
 
-
     " Remap keys for rename
-    nmap <silent> rn <Plug>(coc-rename)
+    nmap <silent> <leader>rn <Plug>(coc-rename)
 
     " Remap keys for diagnostic
     nmap <silent> <leader>nw <Plug>(coc-diagnostic-next)
@@ -103,7 +101,7 @@ command! ExtensionUpdate call CocBuildUpdate()
     vmap <silent> fm <Plug>(coc-format-selected)
     
     " Show all diagnostics
-    nnoremap <silent> <leader>la  :<C-u>CocList diagnostics<cr>
+    nnoremap <silent> <leader>ld  :<C-u>CocList diagnostics<cr>
     " Manage extensions
     nnoremap <silent> <leader>le  :<C-u>CocList extensions<cr>
     " Show commands
@@ -116,8 +114,14 @@ command! ExtensionUpdate call CocBuildUpdate()
     " nnoremap <silent> <leader>lj  :<C-u>CocNext<CR>
     " " Do default action for previous item.
     " nnoremap <silent> <leader>lk  :<C-u>CocPrev<CR>
+" }
 
-
+" coc-word {
+    " nnoremap <Plug>(coc-word) :<C-u>call coc#config('coc.source.word.enable', 1)<CR>
+    function! ToggleCocWord():
+        echo "1"
+    endfunction
+    nmap <silent> <leader>wd :<C-u>call ToggleCocWord()<CR>
 " }
 
  " nerdcommenter {

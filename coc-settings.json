@@ -40,6 +40,8 @@
     "diagnostic.refreshOnInsertMode": true,
     "diagnostic.messageTarget": "float",
 
+    "coc.source.word.enable": false,
+
     "languageserver": {
         "python": {
             "command": "pyls",
@@ -51,11 +53,6 @@
             "args": [],
             "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
             "filetypes": ["go"]
-        },
-        //"rust": {
-            //"command": "rls",
-            //"filetypes": ["rust"],
-            //"rootPatterns": ["Cargo.toml"]
-        //}
+        }
     }
 }
