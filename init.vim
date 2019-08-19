@@ -108,12 +108,6 @@ command! ExtensionUpdate call CocBuildUpdate()
     nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
     " Find symbol of current document
     nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
-    " " Search workspace symbols
-    " nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
-    " " Do default action for next item.
-    " nnoremap <silent> <leader>lj  :<C-u>CocNext<CR>
-    " " Do default action for previous item.
-    " nnoremap <silent> <leader>lk  :<C-u>CocPrev<CR>
 " }
 
 " coc-word {
@@ -130,6 +124,10 @@ command! ExtensionUpdate call CocBuildUpdate()
             let g:coc_word_enabled = 0
             call coc#config('coc.source.word.enable', 0)
         endif
+    endfunction
+
+    function! CocWordStatus()
+        return g:coc_word_enabled ? "10K" : ""
     endfunction
 
     nnoremap <silent> <leader>w :<C-u>call CocWordTrigger()<CR>
@@ -174,13 +172,14 @@ command! ExtensionUpdate call CocBuildUpdate()
         \ 'colorscheme': 'one',
         \ 'active': {
         \   'left':[    ['mode', 'paste'],
-        \               ['readonly', 'filename', 'modified', 'cocstatus']],
+        \               ['readonly', 'filename', 'modified', 'cocstatus', 'cocword']],
         \   'right':[   ['lineinfo'],
         \               ['percent'],
         \               [ 'fileformat', 'fileencoding', 'filetype']]
         \ },
         \ 'component_function': {
-        \   'cocstatus': 'coc#status'
+        \   'cocstatus': 'coc#status',
+        \   'cocword': 'CocWordStatus'
         \ }
         \}
 " }
