@@ -117,11 +117,22 @@ command! ExtensionUpdate call CocBuildUpdate()
 " }
 
 " coc-word {
-    " nnoremap <Plug>(coc-word) :<C-u>call coc#config('coc.source.word.enable', 1)<CR>
-    function! ToggleCocWord():
-        echo "1"
+    let g:coc_word_enabled = 0
+
+    function! CocWordTrigger()
+        if !exists("g:coc_word_enabled")
+            let g:coc_word_enabled = 0
+        endif
+        if g:coc_word_enabled==0
+            let g:coc_word_enabled = 1
+            call coc#config('coc.source.word.enable', 1)
+        else
+            let g:coc_word_enabled = 0
+            call coc#config('coc.source.word.enable', 0)
+        endif
     endfunction
-    nmap <silent> <leader>wd :<C-u>call ToggleCocWord()<CR>
+
+    nnoremap <silent> <leader>w :<C-u>call CocWordTrigger()<CR>
 " }
 
  " nerdcommenter {
