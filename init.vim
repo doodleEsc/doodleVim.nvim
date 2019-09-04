@@ -15,8 +15,7 @@ function! PackInit() abort
     call minpac#add('scrooloose/nerdcommenter')
     call minpac#add('scrooloose/nerdtree')
     call minpac#add('junegunn/vim-easy-align')
-    call minpac#add('iamcco/mathjax-support-for-mkdp')
-    call minpac#add('iamcco/markdown-preview.vim')
+    call minpac#add('iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } })
     call minpac#add('terryma/vim-multiple-cursors')
     call minpac#add('itchyny/calendar.vim')
     call minpac#add('cinuor/vim-header')
@@ -165,10 +164,10 @@ command! ExtensionUpdate call CocBuildUpdate()
  " }
 
  " markdown {
-         nmap <silent> <F5> <Plug>MarkdownPreview
-         imap <silent> <F5> <Plug>MarkdownPreview
-         nmap <silent> <F6> <Plug>StopMarkdownPreview
-         imap <silent> <F6> <Plug>StopMarkdownPreview
+    let g:mkdp_echo_preview_url = 1
+    nmap <F5> <Plug>MarkdownPreview
+    nmap <F6> <Plug>MarkdownPreviewStop
+    nmap <C-p> <Plug>MarkdownPreviewToggle
  " }
 
 " lightline {
