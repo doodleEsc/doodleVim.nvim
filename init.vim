@@ -28,6 +28,7 @@ let g:coc_global_extensions = [
     \ 'coc-highlight',
     \ 'coc-ultisnips',
     \ 'coc-rls',
+    \ 'coc-tabnine',
     \ ]
 
 function! CocBuildUpdate()
@@ -101,8 +102,8 @@ command! ExtensionUpdate call CocBuildUpdate()
     nmap <silent> <leader>pe <Plug>(coc-diagnostic-prev-error) 
 
     " Remap keys for format
-    nmap <silent> fm <Plug>(coc-format)
-    vmap <silent> fm <Plug>(coc-format-selected)
+    nmap <silent> gf <Plug>(coc-format)
+    vmap <silent> gf <Plug>(coc-format-selected)
     
     " Show all diagnostics
     nnoremap <silent> <leader>ld  :<C-u>CocList diagnostics<cr>

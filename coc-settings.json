@@ -2,7 +2,7 @@
     "suggest.triggerAfterInsertEnter": true,
     "suggest.timeout": 500,
     "suggest.noselect": false,
-    "suggest.detailField":"preview",
+    "suggest.detailField": "preview",
     "suggest.minTriggerInputLength": 2,
     "suggest.acceptSuggestionOnCommitCharacter": true,
     "suggest.snippetIndicator": "",
@@ -39,20 +39,43 @@
     "diagnostic.displayByAle": false,
     "diagnostic.refreshOnInsertMode": true,
     "diagnostic.messageTarget": "float",
-
     "coc.source.word.enable": false,
-
     "languageserver": {
         "python": {
-            "command": "pyls",
+            "command": "/usr/local/bin/pyls",
             "args": [],
-            "filetypes": ["python", "py"]
+            "filetypes": [
+                "python",
+                "py"
+            ],
+            "settings": {
+                "plugins": {
+                    "jedi_completion": {
+                        "enabled": true
+                    },
+                    "jedi_hover": {
+                        "enabled": true
+                    },
+                    "jedi_references": {
+                        "enabled": true
+                    },
+                    "jedi_signature_help": {
+                        "enabled": true
+                    },
+                    "jedi_symbols": {
+                        "enabled": true,
+                        "all_scopes": true
+                    }
+                }
+            }
         },
         "golang": {
             "command": "gopls",
-            "args": [],
-            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-            "filetypes": ["go"]
+            "rootPatterns": ["go.mod",".vim/",".git/",".hg/"],
+            "filetypes": ["go"],
+            "initializationOptions": {
+                "usePlaceholders": true
+            }
         }
     }
 }
