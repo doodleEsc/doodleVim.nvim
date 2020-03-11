@@ -71,8 +71,8 @@ command! ExtensionUpdate call CocBuildUpdate()
 
 " coc-snippets {
     " Snippets
-    let g:coc_snippet_next = '<c-j>'
-    let g:coc_snippet_prev = '<c-k>'
+    let g:coc_snippet_next = '<C-j>'
+    let g:coc_snippet_prev = '<C-k>'
 
 
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
