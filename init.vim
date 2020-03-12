@@ -19,6 +19,7 @@ function! PackInit() abort
     call minpac#add('terryma/vim-multiple-cursors')
     call minpac#add('itchyny/calendar.vim')
     call minpac#add('cinuor/vim-header')
+    call minpac#add('voldikss/vim-floaterm')
 endfunction
 
 let g:coc_global_extensions = [
@@ -29,6 +30,7 @@ let g:coc_global_extensions = [
     \ 'coc-ultisnips',
     \ 'coc-rls',
     \ 'coc-tabnine',
+    \ 'coc-floaterm',
     \ ]
 
 function! CocBuildUpdate()
