@@ -173,7 +173,7 @@ command! ExtensionUpdate call CocBuildUpdate()
     let g:mkdp_echo_preview_url = 1
     nmap <F5> <Plug>MarkdownPreview
     nmap <F6> <Plug>MarkdownPreviewStop
-    nmap <C-p> <Plug>MarkdownPreviewToggle
+    " nmap <C-p> <Plug>MarkdownPreviewToggle
  " }
 
 " lightline {
@@ -197,4 +197,13 @@ command! ExtensionUpdate call CocBuildUpdate()
 " NerdTree {
     nnoremap <silent> <F2> :NERDTree<CR>
     let NERDTreeWinSize=18
+" }
+
+" vim-floaterm {
+    hi FloatermNF guibg=#333333
+    let g:floaterm_position      = 'center'
+    let g:floaterm_keymap_new    = '<leader>ft'
+    let g:floaterm_keymap_prev   = '<leader>fp'
+    let g:floaterm_keymap_next   = '<leader>fn'
+    let g:floaterm_keymap_toggle = '<leader>ff'
 " }
