@@ -1,6 +1,6 @@
 {
     "suggest.triggerAfterInsertEnter": true,
-    "suggest.timeout": 500,
+    "suggest.timeout": 5000,
     "suggest.noselect": false,
     "suggest.detailField": "preview",
     "suggest.minTriggerInputLength": 2,
