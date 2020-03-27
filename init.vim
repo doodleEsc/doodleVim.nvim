@@ -70,14 +70,17 @@ command! ExtensionUpdate call CocBuildUpdate()
     " nnoremap <space> za
 " }
 
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 
-" coc-snippets {
-    " Snippets
-    let g:coc_snippet_next = '<C-j>'
-    let g:coc_snippet_prev = '<C-k>'
+" If you want :UltiSnipsEdit to split your window.
 
-
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" ultisnips {
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsJumpForwardTrigger="<c-j>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+    let g:UltiSnipsEditSplit="vertical"
+    
+    " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     " inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
     inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
     autocmd! InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
