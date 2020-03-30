@@ -33,46 +33,36 @@
         "typeParameter": "typeParameter",
         "default": "default"
     },
+
     "diagnostic.signOffset": 9999999,
     "diagnostic.errorSign": "✘",
     "diagnostic.warningSign": "✎",
     "diagnostic.displayByAle": false,
     "diagnostic.refreshOnInsertMode": true,
     "diagnostic.messageTarget": "float",
+
     "coc.source.word.enable": false,
+
+    "python.jediEnabled": false,
+    "python.pythonPath": "python3",
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Path": "/usr/local/bin/flake8",
+    "python.venvPath": "/Users/fanlizhou/Env",
+    "python.formatting.provider": "yapf",
+    "python.formatting.yapfPath": "/usr/local/bin/yapf",
+
     "languageserver": {
-        "python": {
-            "command": "/usr/local/bin/pyls",
-            "args": [],
-            "filetypes": [
-                "python",
-                "py"
-            ],
-            "settings": {
-                "plugins": {
-                    "jedi_completion": {
-                        "enabled": true
-                    },
-                    "jedi_hover": {
-                        "enabled": true
-                    },
-                    "jedi_references": {
-                        "enabled": true
-                    },
-                    "jedi_signature_help": {
-                        "enabled": true
-                    },
-                    "jedi_symbols": {
-                        "enabled": true,
-                        "all_scopes": true
-                    }
-                }
-            }
-        },
         "golang": {
             "command": "gopls",
-            "rootPatterns": ["go.mod",".vim/",".git/",".hg/"],
-            "filetypes": ["go"],
+            "rootPatterns": [
+                "go.mod",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "filetypes": [
+                "go"
+            ],
             "initializationOptions": {
                 "usePlaceholders": true
             }
