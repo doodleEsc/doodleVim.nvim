@@ -20,6 +20,7 @@ function! PackInit() abort
 	call minpac#add('itchyny/calendar.vim')
 	call minpac#add('cinuor/vim-header')
 	call minpac#add('voldikss/vim-floaterm')
+	call minpac#add('voldikss/vim-translator')
 endfunction
 
 let g:coc_global_extensions = [
@@ -213,4 +214,18 @@ command! ExtensionUpdate call CocBuildUpdate()
 	let g:floaterm_keymap_prev	 = '<leader>fp'
 	let g:floaterm_keymap_next	 = '<leader>fn'
 	let g:floaterm_keymap_toggle = '<leader>ff'
+" }
+
+" vim-translator {
+	" let g:translator_proxy_url = 'socks5://127.0.0.1:1080'
+	nmap <silent> <Leader>t <Plug>TranslateW
+	vmap <silent> <Leader>t <Plug>TranslateWV
+	" Display translation in a window
+	" nmap <silent> <Leader>w <Plug>TranslateW
+	" vmap <silent> <Leader>w <Plug>TranslateWV
+	" Replace the text with translation
+	nmap <silent> <Leader>rt <Plug>TranslateR
+	vmap <silent> <Leader>rt <Plug>TranslateRV
+	" Translate the text in clipboard
+	nmap <silent> <Leader>xt <Plug>TranslateX
 " }
