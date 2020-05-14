@@ -33,6 +33,7 @@ let g:coc_global_extensions = [
 	\ 'coc-python',
 	\ 'coc-tabnine',
 	\ 'coc-floaterm',
+	\ 'coc-go',
 	\ ]
 
 function! CocBuildUpdate()
