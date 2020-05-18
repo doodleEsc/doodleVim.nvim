@@ -8,12 +8,10 @@ curl -sL install-node.now.sh | sh
 npm install -g typescript typescript-language-server
 
 # install go language server
-go get -u golang.org/x/tools/cmd/gopls
-mv $GOPATH/bin/gopls /usr/local/bin
-rm -rf $GOPATH/src/*
+# go get -u golang.org/x/tools/cmd/gopls
+GO111MODULE=on go get golang.org/x/tools/gopls
+
 
 # install python language server
 pip3 uninstall python-language-server -y
-pip3 install 'python-language-server[yapf,rope,pyflakes,mccabe,pycodestyle]' --upgrade
-
-cp ./pycodestyle ~/.config/pycodestyle
+pip3 install 'python-language-server[all]' --upgrade

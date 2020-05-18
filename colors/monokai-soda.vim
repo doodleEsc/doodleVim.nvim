@@ -158,4 +158,6 @@ call <SID>set_hi("NeomakeWarningSign", s:yellow, s:none, "NONE")
 call <SID>set_hi("ALEErrorSign", s:pink, s:none, "NONE")
 call <SID>set_hi("ALEWarningSign", s:yellow, s:none, "NONE")
 
-call <SID>set_hi("LspInformationText", s:gray, s:none, "NONE")
+" Coc signs
+call <SID>set_hi("CocWarningSign", s:yellow, s:none, "NONE")
+call <SID>set_hi("CocErrorSign", s:pink, s:none, "NONE")
