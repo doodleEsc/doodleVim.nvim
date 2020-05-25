@@ -2,7 +2,7 @@ function! PackInit() abort
 	packadd minpac
 	call minpac#init()
 	call minpac#add('k-takata/minpac', {'type': 'opt'})
-	call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
+	call minpac#add('neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'})
 
 	" snipet
 	call minpac#add('SirVer/ultisnips')
@@ -28,12 +28,12 @@ let g:coc_global_extensions = [
 	\ 'coc-pairs',
 	\ 'coc-yaml',
 	\ 'coc-highlight',
-	\ 'coc-ultisnips',
 	\ 'coc-rls',
 	\ 'coc-python',
 	\ 'coc-tabnine',
 	\ 'coc-floaterm',
 	\ 'coc-go',
+	\ 'coc-snippets',
 	\ ]
 
 function! CocBuildUpdate()
@@ -51,13 +51,8 @@ command! ExtensionUpdate call CocBuildUpdate()
 	set ts=4
 	set sw=4
 	set noexpandtab
-	" set tabstop=4
 	set signcolumn=yes
 	set noshowmode
-	" set softtabstop=4
-	" set expandtab
-	" set shiftwidth=4
-	" set smarttab
 	set colorcolumn=81
 	set foldenable
 	set foldmethod=syntax
@@ -76,20 +71,11 @@ command! ExtensionUpdate call CocBuildUpdate()
 	" nnoremap <space> za
 " }
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-
-" If you want :UltiSnipsEdit to split your window.
-
-" ultisnips {
-	let g:UltiSnipsExpandTrigger="<tab>"
-	let g:UltiSnipsJumpForwardTrigger="<c-j>"
-	let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-	let g:UltiSnipsEditSplit="vertical"
-	
-	" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-	" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+" snippets {
+	" Use <C-l> for trigger snippet expand.
+	imap <C-l> <Plug>(coc-snippets-expand)
 	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-	autocmd! InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
 " } 
 	
 " coc.nvim {
