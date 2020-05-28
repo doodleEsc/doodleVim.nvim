@@ -52,6 +52,15 @@
 	"python.formatting.provider": "yapf",
 	"python.formatting.yapfPath": "/usr/local/bin/yapf",
 
-	"snippets.loadFromExtensions": false
+	"snippets.loadFromExtensions": false,
+
+	"languageserver": {
+		"golang": {
+		  "command": "/usr/local/bin/gopls",
+		  "rootPatterns": ["go.mod"],
+		  "disableWorkspaceFolders": true,
+		  "filetypes": ["go"]
+		}
+	  }
 
 }

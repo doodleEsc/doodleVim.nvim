@@ -5,7 +5,7 @@ function! PackInit() abort
 	call minpac#add('neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'})
 
 	" snipet
-	call minpac#add('SirVer/ultisnips')
+	" call minpac#add('SirVer/ultisnips')
 	call minpac#add('honza/vim-snippets')
 
 	" statusline
@@ -32,7 +32,6 @@ let g:coc_global_extensions = [
 	\ 'coc-python',
 	\ 'coc-tabnine',
 	\ 'coc-floaterm',
-	\ 'coc-go',
 	\ 'coc-snippets',
 	\ ]
 
