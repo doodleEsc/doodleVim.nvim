@@ -215,4 +215,3 @@ command! ExtensionUpdate call CocBuildUpdate()
 	" Translate the text in clipboard
 	nmap <silent> <Leader>xt <Plug>TranslateX
 " }
-
