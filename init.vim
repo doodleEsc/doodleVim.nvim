@@ -165,6 +165,7 @@ command! ExtensionUpdate call CocBuildUpdate()
 	let g:mkdp_open_ip = '0.0.0.0'
 	let g:mkdp_port = '8214'
 	let g:mkdp_echo_preview_url = 1
+	let g:mkdp_browser = "firefox"
 	nmap <F3> <Plug>MarkdownPreview
 	nmap <F4> <Plug>MarkdownPreviewStop
 	" nmap <C-p> <Plug>MarkdownPreviewToggle
