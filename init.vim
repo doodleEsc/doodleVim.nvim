@@ -29,6 +29,7 @@ let g:coc_global_extensions = [
 	\ 'coc-yaml',
 	\ 'coc-highlight',
 	\ 'coc-rls',
+	\ 'coc-go',
 	\ 'coc-python',
 	\ 'coc-tabnine',
 	\ 'coc-floaterm',

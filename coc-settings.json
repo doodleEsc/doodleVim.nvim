@@ -44,6 +44,11 @@
 
 	"coc.source.word.enable": false,
 
+	"go.enable": true,
+	"go.disable": {
+		"workspaceFolders": true
+	},
+
 	"python.jediEnabled": true,
 	"python.jediPath": "/usr/local/lib/python3.8/site-packages",
 	"python.linting.flake8Enabled": true,
@@ -51,15 +56,5 @@
 	"python.formatting.provider": "yapf",
 	"python.formatting.yapfPath": "/usr/local/bin/yapf",
 
-	"snippets.loadFromExtensions": false,
-
-	"languageserver": {
-		"golang": {
-		  "command": "/usr/local/bin/gopls",
-		  "rootPatterns": ["go.mod"],
-		  "disableWorkspaceFolders": true,
-		  "filetypes": ["go"]
-		}
-	  }
-
+	"snippets.loadFromExtensions": false
 }
