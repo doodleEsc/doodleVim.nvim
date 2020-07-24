@@ -25,6 +25,7 @@ endfunction
 
 let g:coc_global_extensions = [
 	\ 'coc-json',
+	\ 'coc-yank',
 	\ 'coc-pairs',
 	\ 'coc-yaml',
 	\ 'coc-highlight',
@@ -135,42 +136,46 @@ command! ExtensionUpdate call CocBuildUpdate()
 	nnoremap <silent> <leader>w :<C-u>call CocWordTrigger()<CR>
 " }
 
- " nerdcommenter {
-	 let g:NERDSpaceDelims = 1
- " }
+" coc-yank {
+	nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+" }
+
+" nerdcommenter {
+    let g:NERDSpaceDelims = 1
+" }
 
 
- " vim-header {
-	 let g:header_auto_add_header = 0
-	 let g:header_field_timestamp_format = '%Y-%m-%d %H:%M:%S'
-	 let g:header_field_author = 'Fan Lizhou'
-	 let g:header_field_author_email = 'cokie@foxmail.com'
-	 nnoremap <silent> <F7> :AddHeader<CR>
- " }
+" vim-header {
+    let g:header_auto_add_header = 0
+    let g:header_field_timestamp_format = '%Y-%m-%d %H:%M:%S'
+    let g:header_field_author = 'Fan Lizhou'
+    let g:header_field_author_email = 'cokie@foxmail.com'
+    nnoremap <silent> <F7> :AddHeader<CR>
+" }
 
 
- " align {
-		 xmap ga <Plug>(EasyAlign)
-		 nmap ga <Plug>(EasyAlign)
- " }
+" align {
+   	 xmap ga <Plug>(EasyAlign)
+   	 nmap ga <Plug>(EasyAlign)
+" }
 
- " windows {
-		 map <C-j> <C-w>j
-		 map <C-k> <C-w>k
-		 map <C-l> <C-w>l
-		 map <C-h> <C-w>h
- " }
+" windows {
+   	 map <C-j> <C-w>j
+   	 map <C-k> <C-w>k
+   	 map <C-l> <C-w>l
+   	 map <C-h> <C-w>h
+" }
 
- " markdown {
-	let g:mkdp_open_to_the_world = 1
-	let g:mkdp_open_ip = '0.0.0.0'
-	let g:mkdp_port = '8214'
-	let g:mkdp_echo_preview_url = 1
-	let g:mkdp_browser = "firefox"
-	nmap <F3> <Plug>MarkdownPreview
-	nmap <F4> <Plug>MarkdownPreviewStop
-	" nmap <C-p> <Plug>MarkdownPreviewToggle
- " }
+" markdown {
+   let g:mkdp_open_to_the_world = 1
+   let g:mkdp_open_ip = '0.0.0.0'
+   let g:mkdp_port = '8214'
+   let g:mkdp_echo_preview_url = 1
+   let g:mkdp_browser = "firefox"
+   nmap <F3> <Plug>MarkdownPreview
+   nmap <F4> <Plug>MarkdownPreviewStop
+   " nmap <C-p> <Plug>MarkdownPreviewToggle
+" }
 
 " lightline {
 	set laststatus=2
