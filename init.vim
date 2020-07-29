@@ -48,6 +48,7 @@ command! PackStatus call PackInit() | call minpac#status()
 command! ExtensionUpdate call CocBuildUpdate()
 
 " neovim {
+	set updatetime=1000
 	set nocompatible
 	set ts=4
 	set sw=4
@@ -72,23 +73,36 @@ command! ExtensionUpdate call CocBuildUpdate()
 	" nnoremap <space> za
 " }
 
+" vim keymap {
+	inoremap <c-d> <esc>ddi	
+	inoremap <c-u> <esc>viwg<S-u>i
+	nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+"}
+
 " snippets {
 	" Use <C-l> for trigger snippet expand.
-	imap <C-l> <Plug>(coc-snippets-expand)
+	imap <c-l> <Plug>(coc-snippets-expand)
 	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " } 
 	
 " coc.nvim {
 	" Define some functions that not in coc.nvim
-	nnoremap <Plug>(coc-hover) :<C-u>call CocAction("doHover")<CR>
+	" nnoremap <Plug>(coc-hover) :<C-u>call CocAction("doHover")<CR>
+	function! s:show_documentation()
+	  if (index(['vim','help'], &filetype) >= 0)
+		execute 'h '.expand('<cword>')
+	  else
+		call CocAction('doHover')
+	  endif
+	endfunction
 
 	" Remap keys for gotos
 	nmap <silent> gd <Plug>(coc-definition)
 	nmap <silent> gt <Plug>(coc-type-definition)
 	nmap <silent> gi <Plug>(coc-implementation)
 	nmap <silent> gr <Plug>(coc-references)
-	nmap <silent> gh <Plug>(coc-hover)
+	nmap <silent> gh :call <SID>show_documentation()<CR>
 
 	" Remap keys for rename
 	nmap <silent> <leader>rn <Plug>(coc-rename)
@@ -111,6 +125,13 @@ command! ExtensionUpdate call CocBuildUpdate()
 	nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
 	" Find symbol of current document
 	nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
+
+	" Highlight the symbol and its references when holding the cursor.
+	autocmd CursorHold * silent call CocActionAsync('highlight')
+
+	" auto format
+	autocmd BufWritePost * silent call CocAction('format')
+
 " }
 
 " coc-word {
