@@ -1,4 +1,6 @@
 {
+	"coc.preferences.snippets.enable": false,
+	"coc.preferences.formatOnInsertLeave": true,
 	"suggest.triggerAfterInsertEnter": true,
 	"suggest.timeout": 5000,
 	"suggest.noselect": false,
@@ -6,7 +8,6 @@
 	"suggest.minTriggerInputLength": 2,
 	"suggest.acceptSuggestionOnCommitCharacter": true,
 	"suggest.snippetIndicator": "",
-	"coc.preferences.snippets.enable":false,
 	"suggest.completionItemKindLabels": {
 		"keyword": "keyword",
 		"variable": "variable",
@@ -34,7 +35,6 @@
 		"typeParameter": "typeParameter",
 		"default": "default"
 	},
-
 	"diagnostic.signOffset": 9999999,
 	"diagnostic.errorSign": "✖",
 	"diagnostic.warningSign": "⚠",
@@ -42,19 +42,16 @@
 	"diagnostic.refreshOnInsertMode": true,
 	"diagnostic.messageTarget": "float",
 	"coc.source.word.enable": false,
-
 	"go.enable": true,
 	"go.disable": {
 		"workspaceFolders": true
 	},
 	"go.goplsPath": "/usr/local/bin/gopls",
-
 	"python.jediEnabled": true,
 	"python.jediPath": "/usr/local/lib/python3.8/site-packages",
 	"python.linting.flake8Enabled": true,
 	"python.linting.flake8Path": "/usr/local/bin/flake8",
 	"python.formatting.provider": "yapf",
 	"python.formatting.yapfPath": "/usr/local/bin/yapf",
-
 	"snippets.loadFromExtensions": false
 }

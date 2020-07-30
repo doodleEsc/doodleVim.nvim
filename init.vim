@@ -12,8 +12,8 @@ function! PackInit() abort
 	call minpac#add('itchyny/lightline.vim')
 
 	" tools
-	call minpac#add('scrooloose/nerdcommenter')
-	call minpac#add('scrooloose/nerdtree')
+	call minpac#add('preservim/nerdcommenter')
+	call minpac#add('preservim/nerdtree')
 	call minpac#add('junegunn/vim-easy-align')
 	call minpac#add('iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } })
 	call minpac#add('terryma/vim-multiple-cursors')
@@ -33,7 +33,6 @@ let g:coc_global_extensions = [
 	\ 'coc-go',
 	\ 'coc-python',
 	\ 'coc-tabnine',
-	\ 'coc-floaterm',
 	\ 'coc-snippets',
 	\ ]
 
@@ -48,7 +47,8 @@ command! PackStatus call PackInit() | call minpac#status()
 command! ExtensionUpdate call CocBuildUpdate()
 
 " neovim {
-	set updatetime=1000
+	set clipboard+=unnamed
+	set updatetime=300
 	set nocompatible
 	set ts=4
 	set sw=4
@@ -103,9 +103,7 @@ command! ExtensionUpdate call CocBuildUpdate()
 	nmap <silent> gi <Plug>(coc-implementation)
 	nmap <silent> gr <Plug>(coc-references)
 	nmap <silent> gh :call <SID>show_documentation()<CR>
-
-	" Remap keys for rename
-	nmap <silent> <leader>rn <Plug>(coc-rename)
+	nmap <silent> gn <Plug>(coc-rename)
 
 	" Remap keys for diagnostic
 	nmap <silent> <leader>nw <Plug>(coc-diagnostic-next)
