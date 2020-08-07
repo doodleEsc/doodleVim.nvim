@@ -21,6 +21,7 @@ function! PackInit() abort
 	call minpac#add('cinuor/vim-header')
 	call minpac#add('voldikss/vim-floaterm')
 	call minpac#add('voldikss/vim-translator')
+	call minpac#add('sheerun/vim-polyglot')
 endfunction
 
 let g:coc_global_extensions = [
@@ -190,7 +191,7 @@ command! ExtensionUpdate call CocBuildUpdate()
    let g:mkdp_open_ip = '0.0.0.0'
    let g:mkdp_port = '8214'
    let g:mkdp_echo_preview_url = 1
-   let g:mkdp_browser = "chrome"
+   " let g:mkdp_browser = "chrome"
    nmap <F3> <Plug>MarkdownPreview
    nmap <F4> <Plug>MarkdownPreviewStop
    " nmap <C-p> <Plug>MarkdownPreviewToggle
