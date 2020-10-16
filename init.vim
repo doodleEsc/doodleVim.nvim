@@ -15,7 +15,7 @@ function! PackInit() abort
 	call minpac#add('preservim/nerdcommenter')
 	call minpac#add('preservim/nerdtree')
 	call minpac#add('junegunn/vim-easy-align')
-	call minpac#add('iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } })
+	call minpac#add('iamcco/markdown-preview.nvim', {'do': 'packloadall! | call mkdp#util#install()'})
 	call minpac#add('terryma/vim-multiple-cursors')
 	call minpac#add('itchyny/calendar.vim')
 	call minpac#add('cinuor/vim-header')
@@ -191,10 +191,20 @@ command! ExtensionUpdate call CocBuildUpdate()
    let g:mkdp_open_ip = '0.0.0.0'
    let g:mkdp_port = '8214'
    let g:mkdp_echo_preview_url = 1
-   " let g:mkdp_browser = "chrome"
+   let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false
+    \ }
    nmap <F3> <Plug>MarkdownPreview
    nmap <F4> <Plug>MarkdownPreviewStop
-   " nmap <C-p> <Plug>MarkdownPreviewToggle
 " }
 
 " lightline {
