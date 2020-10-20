@@ -2,7 +2,7 @@ function! PackInit() abort
 	packadd minpac
 	call minpac#init()
 	call minpac#add('k-takata/minpac', {'type': 'opt'})
-	call minpac#add('neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'})
+	call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
 
 	" snipet
 	" call minpac#add('SirVer/ultisnips')
