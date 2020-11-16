@@ -48,7 +48,7 @@
 	},
 	"go.goplsPath": "/usr/local/bin/gopls",
 	"python.jediEnabled": true,
-	"python.jediPath": "/usr/local/lib/python3.8/site-packages",
+	"python.jediPath": "/usr/local/lib/python3.9/site-packages",
 	"python.linting.flake8Enabled": true,
 	"python.linting.flake8Path": "/usr/local/bin/flake8",
 	"python.formatting.provider": "yapf",
