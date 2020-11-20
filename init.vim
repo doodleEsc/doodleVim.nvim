@@ -22,6 +22,8 @@ function! PackInit() abort
 	call minpac#add('voldikss/vim-floaterm')
 	call minpac#add('voldikss/vim-translator')
 	call minpac#add('sheerun/vim-polyglot')
+
+	" debug
 endfunction
 
 let g:coc_global_extensions = [
@@ -126,10 +128,13 @@ command! ExtensionUpdate call CocBuildUpdate()
 	nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
 
 	" Highlight the symbol and its references when holding the cursor.
-	autocmd CursorHold * silent call CocActionAsync('highlight')
+	autocmd CursorHold * :call CocActionAsync('highlight')
 
 	" auto format
-	autocmd BufWritePost * silent call CocAction('format')
+	autocmd BufWritePost * :call CocAction('format')
+
+	" generate go test unit
+	autocmd FileType go nmap gtf :CocCommand go.test.generate.function<cr>
 
 " }
 
@@ -251,4 +256,8 @@ command! ExtensionUpdate call CocBuildUpdate()
 	vmap <silent> <Leader>rt <Plug>TranslateRV
 	" Translate the text in clipboard
 	nmap <silent> <Leader>xt <Plug>TranslateX
+" }
+
+" vimspector {
+	let g:vimspector_enable_mappings='HUMAN'
 " }

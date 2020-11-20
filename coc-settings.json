@@ -35,7 +35,6 @@
 		"typeParameter": "typeParameter",
 		"default": "default"
 	},
-	"diagnostic.signOffset": 9999999,
 	"diagnostic.errorSign": "✖",
 	"diagnostic.warningSign": "⚠",
 	"diagnostic.displayByAle": false,
@@ -44,9 +43,8 @@
 	"coc.source.word.enable": false,
 	"go.enable": true,
 	"go.disable": {
-		"workspaceFolders": true
+		"workspaceFolders": false
 	},
-	"go.goplsPath": "/usr/local/bin/gopls",
 	"python.jediEnabled": true,
 	"python.jediPath": "/usr/local/lib/python3.9/site-packages",
 	"python.linting.flake8Enabled": true,
