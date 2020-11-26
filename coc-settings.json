@@ -45,11 +45,65 @@
 	"go.disable": {
 		"workspaceFolders": false
 	},
-	"python.jediEnabled": true,
-	"python.jediPath": "/usr/local/lib/python3.9/site-packages",
-	"python.linting.flake8Enabled": true,
-	"python.linting.flake8Path": "/usr/local/bin/flake8",
-	"python.formatting.provider": "yapf",
-	"python.formatting.yapfPath": "/usr/local/bin/yapf",
-	"snippets.loadFromExtensions": false
+	"snippets.loadFromExtensions": false,
+	"languageserver": {
+		"python": {
+			"command": "pyls",
+			"args": [],
+			"filetypes": [
+				"python"
+			],
+			"settings": {
+				"pyls": {
+					"enable": true,
+					"commandPath": "",
+					"configurationSources": [
+						"pycodestyle"
+					],
+					"plugins": {
+						"jedi_completion": {
+							"enabled": true
+						},
+						"jedi_hover": {
+							"enabled": true
+						},
+						"jedi_references": {
+							"enabled": true
+						},
+						"jedi_signature_help": {
+							"enabled": true
+						},
+						"jedi_symbols": {
+							"enabled": true,
+							"all_scopes": true
+						},
+						"mccabe": {
+							"enabled": true,
+							"threshold": 15
+						},
+						"preload": {
+							"enabled": true
+						},
+						"pycodestyle": {
+							"enabled": true
+						},
+						"pydocstyle": {
+							"enabled": false,
+							"match": "(?!test_).*\\.py",
+							"matchDir": "[^\\.].*"
+						},
+						"pyflakes": {
+							"enabled": true
+						},
+						"rope_completion": {
+							"enabled": true
+						},
+						"yapf": {
+							"enabled": true
+						}
+					}
+				}
+			}
+		}
+	}
 }

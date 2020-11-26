@@ -34,7 +34,6 @@ let g:coc_global_extensions = [
 	\ 'coc-highlight',
 	\ 'coc-rls',
 	\ 'coc-go',
-	\ 'coc-python',
 	\ 'coc-tabnine',
 	\ 'coc-snippets',
 	\ ]
@@ -131,7 +130,9 @@ command! ExtensionUpdate call CocBuildUpdate()
 	autocmd CursorHold * :call CocActionAsync('highlight')
 
 	" auto format
-	autocmd BufWritePost * :call CocAction('format')
+	autocmd BufWritePost * if count(['go'],&filetype) 
+			\| :call CocAction('format')
+			\| endif
 
 	" generate go test unit
 	autocmd FileType go nmap gtf :CocCommand go.test.generate.function<cr>
