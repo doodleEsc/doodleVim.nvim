@@ -23,6 +23,7 @@ function! PackInit() abort
 	call minpac#add('voldikss/vim-translator')
 	call minpac#add('sheerun/vim-polyglot')
 	call minpac#add('easymotion/vim-easymotion')
+	call minpac#add('tpope/vim-surround')
 
 	" debug
 endfunction
@@ -280,4 +281,11 @@ command! ExtensionUpdate call CocBuildUpdate()
 	" JK motions: Line motions
 	map <Leader>j <Plug>(easymotion-j)
 	map <Leader>k <Plug>(easymotion-k)
+" }
+
+" vim-surround {
+	xmap mr <Plug>VSurround <font color="red">
+	xmap my <Plug>VSurround <font color="#ffa500">
+	xmap mb <Plug>VSurround <font color="blue">
+	xmap mg <Plug>VSurround <font color="green">
 " }
