@@ -2,10 +2,14 @@ function! PackInit() abort
 	packadd minpac
 	call minpac#init()
 	call minpac#add('k-takata/minpac', {'type': 'opt'})
+
+	" language server protocol
 	call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
 
+	" debug adapter protocol
+	call minpac#add('puremourning/vimspector')
+
 	" snipet
-	" call minpac#add('SirVer/ultisnips')
 	call minpac#add('honza/vim-snippets')
 
 	" statusline
