@@ -137,7 +137,7 @@ command! ExtensionUpdate call CocBuildUpdate()
 			\| endif
 
 	" generate go test unit
-	autocmd FileType go nmap gtf :CocCommand go.test.generate.function<cr>
+	autocmd FileType go nmap tu :CocCommand go.test.generate.function<cr>
 
 " }
 
@@ -165,7 +165,7 @@ command! ExtensionUpdate call CocBuildUpdate()
 " }
 
 " coc-yank {
-	nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+	nnoremap <silent> <leader(★★★)>y  :<C-u>CocList -A --normal yank<CR>
 " }
 
 " nerdcommenter {
@@ -248,16 +248,16 @@ command! ExtensionUpdate call CocBuildUpdate()
 
 " vim-translator {
 	" let g:translator_proxy_url = 'socks5://127.0.0.1:1080'
-	nmap <silent> <Leader>t <Plug>TranslateW
-	vmap <silent> <Leader>t <Plug>TranslateWV
+	nmap <silent> <leader>t <Plug>TranslateW
+	vmap <silent> <leader>t <Plug>TranslateWV
 	" Display translation in a window
-	" nmap <silent> <Leader>w <Plug>TranslateW
-	" vmap <silent> <Leader>w <Plug>TranslateWV
+	" nmap <silent> <leader>w <Plug>TranslateW
+	" vmap <silent> <leader>w <Plug>TranslateWV
 	" Replace the text with translation
-	nmap <silent> <Leader>rt <Plug>TranslateR
-	vmap <silent> <Leader>rt <Plug>TranslateRV
+	nmap <silent> <leader>rt <Plug>TranslateR
+	vmap <silent> <leader>rt <Plug>TranslateRV
 	" Translate the text in clipboard
-	nmap <silent> <Leader>xt <Plug>TranslateX
+	nmap <silent> <leader>xt <Plug>TranslateX
 " }
 
 " vimspector {
@@ -279,13 +279,16 @@ command! ExtensionUpdate call CocBuildUpdate()
 	let g:EasyMotion_smartcase = 1
 
 	" JK motions: Line motions
-	map <Leader>j <Plug>(easymotion-j)
-	map <Leader>k <Plug>(easymotion-k)
+	map <leader>j <Plug>(easymotion-j)
+	map <leader>k <Plug>(easymotion-k)
 " }
 
 " vim-surround {
-	xmap mr <Plug>VSurround <font color="red">
-	xmap my <Plug>VSurround <font color="#ffa500">
-	xmap mb <Plug>VSurround <font color="blue">
-	xmap mg <Plug>VSurround <font color="green">
+	" markdown {
+		" color
+		xmap mr <Plug>VSurround<font color="red">
+		xmap my <Plug>VSurround<font color="#ffa500">
+		xmap mb <Plug>VSurround<font color="blue">
+		xmap mg <Plug>VSurround<font color="green">
+	" }
 " }
