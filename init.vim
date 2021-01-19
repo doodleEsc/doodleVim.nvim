@@ -215,7 +215,7 @@ command! ExtensionUpdate call CocBuildUpdate()
     \ 'flowchart_diagrams': {},
     \ 'content_editable': v:false
     \ }
-   nmap <F3> <Plug>MarkdownPreviewToggle
+   nmap mp <Plug>MarkdownPreviewToggle
 " }
 
 " lightline {
