@@ -1,5 +1,5 @@
 {
-	"coc.preferences.snippets.enable": true,
+	"coc.preferences.snippets.enable": false,
 	"suggest.triggerAfterInsertEnter": true,
 	"suggest.timeout": 5000,
 	"suggest.enablePreview": false,
@@ -40,6 +40,7 @@
 	"diagnostic.displayByAle": false,
 	"diagnostic.refreshOnInsertMode": true,
 	"diagnostic.messageTarget": "float",
+	"diagnostic.messageDelay": 100,
 	"coc.source.word.enable": false,
 	"go.enable": true,
 	"go.disable": {

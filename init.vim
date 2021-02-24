@@ -41,7 +41,7 @@ let g:coc_global_extensions = [
 	\ 'coc-rls',
 	\ 'coc-go',
 	\ 'coc-tabnine',
-	\ 'coc-snippets',
+	\ 'coc-snippets'
 	\ ]
 
 function! CocBuildUpdate()
