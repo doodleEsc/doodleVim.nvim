@@ -1,5 +1,7 @@
 {
 	"coc.preferences.snippets.enable": false,
+	"coc.preferences.formatOnType": true,
+	"coc.preferences.formatOnSaveFiletypes": ["go", "python"],
 	"suggest.triggerAfterInsertEnter": true,
 	"suggest.timeout": 5000,
 	"suggest.enablePreview": false,
