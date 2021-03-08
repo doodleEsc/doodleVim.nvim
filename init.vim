@@ -261,6 +261,8 @@ command! ExtensionUpdate call CocBuildUpdate()
 
 " vimspector {
 	let g:vimspector_enable_mappings='HUMAN'
+	" nmap <silent> tt <Plug>VimspectorReset
+	nnoremap <silent> tt :VimspectorReset<CR>
 " }
 
 " vim-easymotion {
