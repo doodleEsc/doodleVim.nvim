@@ -57,6 +57,9 @@
 	"python.venvPath": "/Users/fanlizhou/Env",
 	"python.analysis.typeCheckingMode": "off",
 	"python.linting.enabled": true,
+	"python.linting.flake8Enabled": true,
+	"python.linting.flake8Path": "/usr/local/bin/flake8",
+	"python.linting.flake8Args": ["--ignore=E501,E402"],
 	"python.formatting.provider": "yapf",
 	"python.formatting.yapfPath": "/usr/local/bin/yapf"
 }
