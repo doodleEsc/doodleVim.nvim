@@ -20,16 +20,14 @@ function! PackInit() abort
 	call minpac#add('preservim/nerdtree')
 	call minpac#add('junegunn/vim-easy-align')
 	call minpac#add('iamcco/markdown-preview.nvim', {'do': 'packloadall! | call mkdp#util#install()'})
-	call minpac#add('terryma/vim-multiple-cursors')
+	" call minpac#add('terryma/vim-multiple-cursors')
 	call minpac#add('itchyny/calendar.vim')
 	call minpac#add('cinuor/vim-header')
 	call minpac#add('voldikss/vim-floaterm')
-	call minpac#add('voldikss/vim-translator')
+	" call minpac#add('voldikss/vim-translator')
 	call minpac#add('sheerun/vim-polyglot')
 	call minpac#add('easymotion/vim-easymotion')
 	call minpac#add('tpope/vim-surround')
-
-	" debug
 endfunction
 
 let g:coc_global_extensions = [
@@ -38,10 +36,12 @@ let g:coc_global_extensions = [
 	\ 'coc-pairs',
 	\ 'coc-yaml',
 	\ 'coc-highlight',
+	\ 'coc-tabnine',
+	\ 'coc-snippets',
+	\ 'coc-pyright',
 	\ 'coc-rls',
 	\ 'coc-go',
-	\ 'coc-tabnine',
-	\ 'coc-snippets'
+	\ 'coc-translator'
 	\ ]
 
 function! CocBuildUpdate()
@@ -78,25 +78,10 @@ command! ExtensionUpdate call CocBuildUpdate()
 	let g:python_host_prog = '/usr/local/bin/python'
 	let g:python3_host_skip_check=1
 	let g:python3_host_prog = '/usr/local/opt/python@3.9/bin/python3'
-	" nnoremap <space> za
 " }
-
-" vim keymap {
-	inoremap <c-d> <esc>ddi	
-	inoremap <c-u> <esc>viwg<S-u>i
-	nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
-"}
-
-" snippets {
-	" Use <C-l> for trigger snippet expand.
-	imap <c-l> <Plug>(coc-snippets-expand)
-	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" } 
 	
 " coc.nvim {
 	" Define some functions that not in coc.nvim
-	" nnoremap <Plug>(coc-hover) :<C-u>call CocAction("doHover")<CR>
 	function! s:show_documentation()
 	  if (index(['vim','help'], &filetype) >= 0)
 		execute 'h '.expand('<cword>')
@@ -114,31 +99,42 @@ command! ExtensionUpdate call CocBuildUpdate()
 	nmap <silent> gn <Plug>(coc-rename)
 
 	" Remap keys for diagnostic
-	nmap <silent> <leader>nw <Plug>(coc-diagnostic-next)
-	nmap <silent> <leader>pw <Plug>(coc-diagnostic-prev)
-	nmap <silent> <leader>ne <Plug>(coc-diagnostic-next-error)
-	nmap <silent> <leader>pe <Plug>(coc-diagnostic-prev-error) 
+	nmap <silent> <Leader>nw <Plug>(coc-diagnostic-next)
+	nmap <silent> <Leader>pw <Plug>(coc-diagnostic-prev)
+	nmap <silent> <Leader>ne <Plug>(coc-diagnostic-next-error)
+	nmap <silent> <Leader>pe <Plug>(coc-diagnostic-prev-error) 
 
 	" Remap keys for format
 	nmap <silent> gf <Plug>(coc-format)
 	vmap <silent> gf <Plug>(coc-format-selected)
 	
 	" Show all diagnostics
-	nnoremap <silent> <leader>ld  :<C-u>CocList diagnostics<cr>
+	nnoremap <silent> <Leader>ld  :<C-u>CocList diagnostics<CR>
 	" Manage extensions
-	nnoremap <silent> <leader>le  :<C-u>CocList extensions<cr>
+	nnoremap <silent> <Leader>le  :<C-u>CocList extensions<CR>
 	" Show commands
-	nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
+	nnoremap <silent> <Leader>lc  :<C-u>CocList commands<CR>
 	" Find symbol of current document
-	nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
+	" nnoremap <silent> <Leader>lo  :<C-u>CocList outline<CR>
 
 	" Highlight the symbol and its references when holding the cursor.
 	autocmd CursorHold * :call CocActionAsync('highlight')
 
 	" generate go test unit
-	autocmd FileType go nmap tu :CocCommand go.test.generate.function<cr>
+	autocmd FileType go nmap tu :<C-u>CocCommand go.test.generate.function<CR>
 
+	" scroll in floatwindow
+	nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+	nnoremap <nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+	inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<CR>" : "\<Right>"
+	inoremap <nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<CR>" : "\<Left>"
 " }
+
+" coc-snippets {
+	imap <C-l> <Plug>(coc-snippets-expand)
+	inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" } 
 
 " coc-word {
 	let g:coc_word_enabled = 0
@@ -160,11 +156,12 @@ command! ExtensionUpdate call CocBuildUpdate()
 		return g:coc_word_enabled ? "10K" : ""
 	endfunction
 
-	nnoremap <silent> <leader>w :<C-u>call CocWordTrigger()<CR>
+	nnoremap <silent> <Leader>w :<C-u>call CocWordTrigger()<CR>
 " }
 
 " coc-yank {
-	nnoremap <silent> <leader(★★★)>y  :<C-u>CocList -A --normal yank<CR>
+	nnoremap <silent> <Leader>yl :<C-u>CocList -A --normal yank<CR>
+	nnoremap <Leader>yc :<C-u>CocCommand yank.clean<CR>
 " }
 
 " nerdcommenter {
@@ -181,7 +178,7 @@ command! ExtensionUpdate call CocBuildUpdate()
 " }
 
 
-" align {
+" vim-easy-align {
    	 xmap ga <Plug>(EasyAlign)
    	 nmap ga <Plug>(EasyAlign)
 " }
@@ -193,7 +190,7 @@ command! ExtensionUpdate call CocBuildUpdate()
    	 map <C-h> <C-w>h
 " }
 
-" markdown {
+" markdown-preview {
    let g:mkdp_open_to_the_world = 1
    let g:mkdp_open_ip = '0.0.0.0'
    let g:mkdp_port = '8214'
@@ -238,30 +235,27 @@ command! ExtensionUpdate call CocBuildUpdate()
 
 " vim-floaterm {
 	hi FloatermNF guibg=#333333
-	let g:floaterm_position		 = 'center'
-	let g:floaterm_keymap_new	 = '<leader>ft'
-	let g:floaterm_keymap_prev	 = '<leader>fp'
-	let g:floaterm_keymap_next	 = '<leader>fn'
-	let g:floaterm_keymap_toggle = '<leader>ff'
+	let g:floaterm_position      = 'center'
+	let g:floaterm_keymap_new    = '<Leader>ft'
+	let g:floaterm_keymap_prev   = '<Leader>fp'
+	let g:floaterm_keymap_next   = '<Leader>fn'
+	let g:floaterm_keymap_toggle = '<Leader>ff'
+	let g:floaterm_keymap_kill   = '<Leader>fd'
 " }
 
-" vim-translator {
-	" let g:translator_proxy_url = 'socks5://127.0.0.1:1080'
-	nmap <silent> <leader>t <Plug>TranslateW
-	vmap <silent> <leader>t <Plug>TranslateWV
-	" Display translation in a window
-	" nmap <silent> <leader>w <Plug>TranslateW
-	" vmap <silent> <leader>w <Plug>TranslateWV
-	" Replace the text with translation
-	nmap <silent> <leader>rt <Plug>TranslateR
-	vmap <silent> <leader>rt <Plug>TranslateRV
-	" Translate the text in clipboard
-	nmap <silent> <leader>xt <Plug>TranslateX
+" coc-translator {
+	nmap <Leader>t <Plug>(coc-translator-p)
+	vmap <Leader>t <Plug>(coc-translator-pv)
+	" echo
+	nmap <Leader>e <Plug>(coc-translator-e)
+	vmap <Leader>e <Plug>(coc-translator-ev)
+	" replace
+	nmap <Leader>r <Plug>(coc-translator-r)
+	vmap <Leader>r <Plug>(coc-translator-rv)
 " }
 
 " vimspector {
 	let g:vimspector_enable_mappings='HUMAN'
-	" nmap <silent> tt <Plug>VimspectorReset
 	nnoremap <silent> tt :VimspectorReset<CR>
 " }
 
@@ -270,18 +264,18 @@ command! ExtensionUpdate call CocBuildUpdate()
 
 	" Jump to anywhere you want with minimal keystrokes, with just one key binding.
 	" `s{char}{label}`
-	nmap s <Plug>(easymotion-overwin-f)
+	nmap <Leader>s <Plug>(easymotion-overwin-f)
 	" or
 	" `s{char}{char}{label}`
 	" Need one more keystroke, but on average, it may be more comfortable.
-	nmap s <Plug>(easymotion-overwin-f2)
+	nmap <Leader>s <Plug>(easymotion-overwin-f2)
 
 	" Turn on case-insensitive feature
 	let g:EasyMotion_smartcase = 1
 
 	" JK motions: Line motions
-	map <leader>j <Plug>(easymotion-j)
-	map <leader>k <Plug>(easymotion-k)
+	map <Leader>j <Plug>(easymotion-j)
+	map <Leader>k <Plug>(easymotion-k)
 " }
 
 " vim-surround {

@@ -1,7 +1,9 @@
 {
 	"coc.preferences.snippets.enable": false,
 	"coc.preferences.formatOnType": true,
-	"coc.preferences.formatOnSaveFiletypes": ["go", "python"],
+	"coc.preferences.formatOnSaveFiletypes": ["go", "python", "rust"],
+	"coc.source.word.enable": false,
+	"snippets.loadFromExtensions": false,
 	"suggest.triggerAfterInsertEnter": true,
 	"suggest.timeout": 5000,
 	"suggest.enablePreview": false,
@@ -37,76 +39,24 @@
 		"typeParameter": "typeParameter",
 		"default": "default"
 	},
+
+	"diagnostic.enable": true,
 	"diagnostic.errorSign": "✖",
 	"diagnostic.warningSign": "⚠",
 	"diagnostic.displayByAle": false,
+	"diagnostic.locationlistUpdate": true,
+	"diagnostic.enableMessage": "always",
+	"diagnostic.showDeprecated": true,
 	"diagnostic.refreshOnInsertMode": true,
-	"diagnostic.messageTarget": "float",
-	"diagnostic.messageDelay": 500,
-	"coc.source.word.enable": false,
+
 	"go.enable": true,
 	"go.disable": {
 		"workspaceFolders": false
 	},
-	"snippets.loadFromExtensions": false,
-	"languageserver": {
-		"python": {
-			"command": "pyls",
-			"args": [],
-			"filetypes": [
-				"python"
-			],
-			"settings": {
-				"pyls": {
-					"enable": true,
-					"commandPath": "",
-					"configurationSources": [
-						"pycodestyle"
-					],
-					"plugins": {
-						"jedi_completion": {
-							"enabled": true
-						},
-						"jedi_hover": {
-							"enabled": true
-						},
-						"jedi_references": {
-							"enabled": true
-						},
-						"jedi_signature_help": {
-							"enabled": true
-						},
-						"jedi_symbols": {
-							"enabled": true,
-							"all_scopes": true
-						},
-						"mccabe": {
-							"enabled": true,
-							"threshold": 15
-						},
-						"preload": {
-							"enabled": true
-						},
-						"pycodestyle": {
-							"enabled": true
-						},
-						"pydocstyle": {
-							"enabled": false,
-							"match": "(?!test_).*\\.py",
-							"matchDir": "[^\\.].*"
-						},
-						"pyflakes": {
-							"enabled": true
-						},
-						"rope_completion": {
-							"enabled": true
-						},
-						"yapf": {
-							"enabled": true
-						}
-					}
-				}
-			}
-		}
-	}
+
+	"python.venvPath": "/Users/fanlizhou/Env",
+	"python.analysis.typeCheckingMode": "off",
+	"python.linting.enabled": true,
+	"python.formatting.provider": "yapf",
+	"python.formatting.yapfPath": "/usr/local/bin/yapf"
 }
