@@ -45,9 +45,11 @@
 	"diagnostic.warningSign": "⚠",
 	"diagnostic.displayByAle": false,
 	"diagnostic.locationlistUpdate": true,
-	"diagnostic.enableMessage": "always",
-	"diagnostic.showDeprecated": true,
+	"diagnostic.enableMessage": "jump",
+	"diagnostic.showDeprecated": false,
 	"diagnostic.refreshOnInsertMode": true,
+	"diagnostic.messageDelay": 200,
+	"diagnostic.enableHighlightLineNumber": true,
 
 	"go.enable": true,
 	"go.disable": {
