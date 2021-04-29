@@ -26,6 +26,7 @@ function! PackInit() abort
 	call minpac#add('sheerun/vim-polyglot')
 	call minpac#add('easymotion/vim-easymotion')
 	call minpac#add('tpope/vim-surround')
+	call minpac#add('tpope/vim-fugitive')
 endfunction
 
 let g:coc_global_extensions = [
