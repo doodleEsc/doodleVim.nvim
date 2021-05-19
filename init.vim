@@ -31,10 +31,10 @@ endfunction
 
 let g:coc_global_extensions = [
 	\ 'coc-json',
+	\ 'coc-yaml',
 	\ 'coc-yank',
 	\ 'coc-pairs',
 	\ 'coc-yaml',
-	\ 'coc-highlight',
 	\ 'coc-tabnine',
 	\ 'coc-snippets',
 	\ 'coc-pyright',
