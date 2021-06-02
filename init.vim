@@ -234,7 +234,9 @@ command! ExtensionUpdate call CocBuildUpdate()
 
 " vim-floaterm {
 	hi FloatermNF guibg=#333333
-	let g:floaterm_position      = 'center'
+	let g:floaterm_position      = 'right'
+	let g:floaterm_width         = 0.4
+	let g:floaterm_height        = 1.0
 	let g:floaterm_keymap_new    = '<Leader>ft'
 	let g:floaterm_keymap_prev   = '<Leader>fp'
 	let g:floaterm_keymap_next   = '<Leader>fn'

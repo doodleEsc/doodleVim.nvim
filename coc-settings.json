@@ -1,5 +1,4 @@
 {
-	"coc.preferences.snippets.enable": false,
 	"coc.preferences.formatOnType": true,
 	"coc.preferences.formatOnSaveFiletypes": ["go", "python", "rust"],
 	"coc.source.word.enable": false,
@@ -54,6 +53,9 @@
 	"go.enable": true,
 	"go.disable": {
 		"workspaceFolders": false
+	},
+	"go.goplsOptions": {
+		"gofumpt": true
 	},
 
 	"python.venvPath": "/Users/fanlizhou/Env",
