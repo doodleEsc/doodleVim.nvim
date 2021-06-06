@@ -54,13 +54,19 @@ command! PackStatus call PackInit() | call minpac#status()
 command! ExtensionUpdate call CocBuildUpdate()
 
 " neovim {
-	set clipboard+=unnamed
+	set encoding=utf-8
+	set hidden
+	set nobackup
+	set nowritebackup
+	set cmdheight=2
 	set updatetime=300
+	set shortmess+=c
+	set signcolumn=yes
+	set clipboard+=unnamed
 	set nocompatible
 	set ts=4
 	set sw=4
 	set noexpandtab
-	set signcolumn=yes
 	set noshowmode
 	set colorcolumn=81
 	set foldenable
@@ -80,53 +86,79 @@ command! ExtensionUpdate call CocBuildUpdate()
 " }
 	
 " coc.nvim {
-	" Define some functions that not in coc.nvim
-	function! s:show_documentation()
-	  if (index(['vim','help'], &filetype) >= 0)
-		execute 'h '.expand('<cword>')
-	  else
-		call CocAction('doHover')
-	  endif
-	endfunction
+	" code navigation {
+		nmap <silent> gd <Plug>(coc-definition)
+		nmap <silent> gt <Plug>(coc-type-definition)
+		nmap <silent> gi <Plug>(coc-implementation)
+		nmap <silent> gr <Plug>(coc-references)
+	" }
 
-	" Remap keys for gotos
-	nmap <silent> gd <Plug>(coc-definition)
-	nmap <silent> gt <Plug>(coc-type-definition)
-	nmap <silent> gi <Plug>(coc-implementation)
-	nmap <silent> gr <Plug>(coc-references)
-	nmap <silent> gh :call <SID>show_documentation()<CR>
-	nmap <silent> gn <Plug>(coc-rename)
+	" code format or rename {
+		function! s:show_documentation()
+		  if (index(['vim','help'], &filetype) >= 0)
+			execute 'h '.expand('<cword>')
+		  elseif (coc#rpc#ready())
+			call CocActionAsync('doHover')
+		  else
+			execute '!' . &keywordprg . " " . expand('<cword>')
+		  endif
+		endfunction
 
-	" Remap keys for diagnostic
-	nmap <silent> <Leader>nw <Plug>(coc-diagnostic-next)
-	nmap <silent> <Leader>pw <Plug>(coc-diagnostic-prev)
-	nmap <silent> <Leader>ne <Plug>(coc-diagnostic-next-error)
-	nmap <silent> <Leader>pe <Plug>(coc-diagnostic-prev-error) 
+		nmap <silent> gh :call <SID>show_documentation()<CR>
+		nmap <silent> gn <Plug>(coc-rename)
+		nmap <silent> gf <Plug>(coc-format)
+		vmap <silent> gf <Plug>(coc-format-selected)
+	" }
 
-	" Remap keys for format
-	nmap <silent> gf <Plug>(coc-format)
-	vmap <silent> gf <Plug>(coc-format-selected)
+	" current code diagnostic {
+		nmap <silent> <Leader>nw <Plug>(coc-diagnostic-next)
+		nmap <silent> <Leader>pw <Plug>(coc-diagnostic-prev)
+		nmap <silent> <Leader>ne <Plug>(coc-diagnostic-next-error)
+		nmap <silent> <Leader>pe <Plug>(coc-diagnostic-prev-error) 
+	" }
 	
-	" Show all diagnostics
-	nnoremap <silent> <Leader>ld  :<C-u>CocList diagnostics<CR>
-	" Manage extensions
-	nnoremap <silent> <Leader>le  :<C-u>CocList extensions<CR>
-	" Show commands
-	nnoremap <silent> <Leader>lc  :<C-u>CocList commands<CR>
-	" Find symbol of current document
-	" nnoremap <silent> <Leader>lo  :<C-u>CocList outline<CR>
+	" CocList Mappings {
+		" Show all diagnostics
+		nnoremap <silent><nowait> <Leader>ld :<C-u>CocList diagnostics<CR>
 
-	" Highlight the symbol and its references when holding the cursor.
-	autocmd CursorHold * :call CocActionAsync('highlight')
+		" Manage extensions
+		nnoremap <silent><nowait> <Leader>le :<C-u>CocList extensions<CR>
 
-	" generate go test unit
-	autocmd FileType go nmap tu :<C-u>CocCommand go.test.generate.function<CR>
+		" Show commands
+		nnoremap <silent><nowait> <Leader>lc  :<C-u>CocList commands<CR>
 
-	" scroll in floatwindow
-	nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-	nnoremap <nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
-	inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<CR>" : "\<Right>"
-	inoremap <nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<CR>" : "\<Left>"
+		" Find symbol of current document
+		nnoremap <silent><nowait> <Leader>lo  :<C-u>CocList outline<CR>
+
+		" Search workspace symbols.
+		nnoremap <silent><nowait> <Leader>ls  :<C-u>CocList -I symbols<CR>
+
+	" }
+	
+	" autocmd {
+		augroup mygroup
+		  " Autoformat json file
+		  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+
+		  " Update signature help on jump placeholder.
+		  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+		  " Highlight the symbol and its references when holding the cursor.
+		  autocmd CursorHold * :call CocActionAsync('highlight')
+
+		  " generate go test unit
+		  autocmd FileType go nmap tu :<C-u>CocCommand go.test.generate.function<CR>
+	    augroup end
+	" }
+	
+	" floatwindow scroll {
+		nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
+		nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+		inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+		inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+		vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
+		vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+	" }
 " }
 
 " coc-snippets {
