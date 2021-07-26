@@ -86,6 +86,12 @@ local plug_map = {
 
     -- Plugin Vista
     ["n|<Leader>v"]      = map_cu('Vista'):with_noremap():with_silent(),
+
+	-- Plugin vim-vsnip
+	["i|<C-j>"] = map_cmd("vsnip#jumpable(1)?'<Plug>(vsnip-jump-next)':'<C-j>'"):with_expr(),
+	["s|<C-j>"] = map_cmd("vsnip#jumpable(1)?'<Plug>(vsnip-jump-next)':'<C-j>'"):with_expr(),
+	["i|<C-k>"] = map_cmd("vsnip#jumpable(1)?'<Plug>(vsnip-jump-prev)':'<C-k>'"):with_expr(),
+	["s|<C-k>"] = map_cmd("vsnip#jumpable(1)?'<Plug>(vsnip-jump-prev)':'<C-k>'"):with_expr(),
 };
 
 bind.nvim_load_mapping(plug_map)
