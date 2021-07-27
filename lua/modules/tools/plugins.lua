@@ -9,9 +9,10 @@ tools['liuchengxu/vista.vim'] = {
 tools['iamcco/markdown-preview.nvim'] = {
   ft = 'markdown',
   config = conf.mkdp
---  config = function ()
---    vim.g.mkdp_auto_start = 0
---  end
+}
+
+tools['voldikss/vim-translator'] = {
+	event = 'VimEnter'
 }
 
 return tools
