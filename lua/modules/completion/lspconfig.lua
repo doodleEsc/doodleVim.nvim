@@ -91,9 +91,10 @@ lspconfig.sumneko_lua.setup {
 --  },
 --}
 
---lspconfig.rust_analyzer.setup {
---  capabilities = capabilities,
---}
+lspconfig.rust_analyzer.setup {
+  on_attach = enhance_attach,
+  capabilities = capabilities
+}
 
 lspconfig.pyright.setup {
   on_attach = enhance_attach,
