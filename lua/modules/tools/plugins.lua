@@ -8,6 +8,9 @@ tools['liuchengxu/vista.vim'] = {
 
 tools['iamcco/markdown-preview.nvim'] = {
   ft = 'markdown',
+  run = function()
+	  vim.cmd [[:call mkdp#util#install()]]
+  end,
   config = conf.mkdp
 }
 
