@@ -96,6 +96,10 @@ local plug_map = {
 	-- Plugin translator
 	["n|<Leader>t"]    = map_cmd("<Plug>TranslateW"):with_silent(),
 	["v|<Leader>t"]    = map_cmd("<Plug>TranslateWV"):with_silent(),
+
+	-- Plugin gotests-vim
+	["n|tu"]           = map_cu('GoTests'):with_silent(),
+	["n|ta"]           = map_cu('GoTestsAll'):with_silent(),
 };
 
 bind.nvim_load_mapping(plug_map)
