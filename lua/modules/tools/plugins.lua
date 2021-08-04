@@ -18,10 +18,4 @@ tools['voldikss/vim-translator'] = {
 	event = 'VimEnter'
 }
 
--- tools['mfussenegger/nvim-dap'] = {
--- 	keys = {"<F5>"},
--- 	opt = true
--- 
--- }
-
 return tools
