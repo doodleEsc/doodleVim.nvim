@@ -1,8 +1,10 @@
 local ui = {}
 local conf = require('modules.ui.config')
 
-ui['tanvirtin/monokai.nvim'] = {
-  config = [[vim.cmd('colorscheme monokai_pro')]]
+ui['cinuor/monokai.nvim'] = {
+	config = function()
+		vim.cmd[[colorscheme monokai_pro]]
+	end
 }
 
 ui['glepnir/galaxyline.nvim'] = {
