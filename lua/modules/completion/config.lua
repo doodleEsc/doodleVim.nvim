@@ -5,27 +5,72 @@ function config.nvim_lsp()
 end
 
 function config.nvim_compe()
-  require'compe'.setup {
-    enabled = true;
-    debug = false;
-    min_length = 1;
-    preselect = 'always';
-    allow_prefix_unmatch = false;
-    source = {
-      path = true;
-      buffer = true;
-      calc = true;
-      vsnip = true;
-      nvim_lsp = true;
-      nvim_lua = true;
-      spell = true;
-      tags = true;
-      snippets_nvim = false;
-	  tabnine = {
-		  priority = 100;
-	  };
-    };
-  }
+	require'compe'.setup {
+		enabled = true;
+		debug = false;
+		min_length = 1;
+		preselect = 'always';
+		allow_prefix_unmatch = false;
+		documentation = {
+			border = { '┌', '─' ,'┐', '│', '┘', '─', '└', '│' }, -- the border option is the same as `|help nvim_open_win|`
+			max_width = 120,
+			min_width = 60,
+			max_height = math.floor(vim.o.lines * 0.4),
+			min_height = 1,
+		};
+		source = {
+			path = true;
+			buffer = true;
+			calc = true;
+			vsnip = true;
+			nvim_lsp = true;
+			nvim_lua = true;
+			spell = true;
+			tags = true;
+			snippets_nvim = false;
+			tabnine = {
+			    priority = 100;
+			};
+		};
+	}
+end
+
+function config.lspsaga()
+	require('lspsaga').init_lsp_saga {
+		debug = false,
+		use_saga_diagnostic_sign = true,
+		-- diagnostic sign
+		error_sign = '',
+		warn_sign = '',
+		hint_sign = '',
+		infor_sign = '',
+		dianostic_header_icon = '   ',
+		-- code action title icon
+		code_action_icon = ' ',
+		code_action_prompt = {
+		  enable = true,
+		  sign = true,
+		  sign_priority = 40,
+		  virtual_text = true,
+		},
+		finder_definition_icon = '  ',
+		finder_reference_icon = '  ',
+		max_preview_lines = 10,
+		finder_action_keys = {
+		  open = 'o', vsplit = 's',split = 'i',quit = 'q',
+		  scroll_down = '<C-f>',scroll_up = '<C-u>'
+		},
+		code_action_keys = {
+		  quit = 'q',exec = '<CR>'
+		},
+		rename_action_keys = {
+		  quit = '<C-c>',exec = '<CR>'
+		},
+		definition_preview_icon = '  ',
+		border_style = "single",
+		rename_prompt_prefix = '➤',
+		server_filetype_map = {}
+	}
 end
 
 function config.vim_vsnip()
