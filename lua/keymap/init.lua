@@ -94,8 +94,8 @@ local plug_map = {
 	["s|<C-k>"]        = map_cmd("vsnip#jumpable(1)?'<Plug>(vsnip-jump-prev)':'<C-k>'"):with_expr(),
 
 	-- Plugin translator
-	["n|<Leader>t"]    = map_cmd("<Plug>TranslateW"):with_silent(),
-	["v|<Leader>t"]    = map_cmd("<Plug>TranslateWV"):with_silent(),
+	["n|<Leader>t"]    = map_cr(":TranslateW"):with_silent(),
+	["v|<Leader>t"]    = map_cr(":TranslateW"):with_silent(),
 
 	-- Plugin gotests-vim
 	["n|tu"]           = map_cu('GoTests'):with_silent(),
