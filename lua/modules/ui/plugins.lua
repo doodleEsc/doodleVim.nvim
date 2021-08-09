@@ -19,9 +19,6 @@ ui['kyazdani42/nvim-tree.lua'] = {
   requires = 'kyazdani42/nvim-web-devicons'
 }
 
-ui['dstein64/vim-startuptime'] = {
-  cmd = {'StartupTime'}
-}
 
 ui['norcalli/nvim-colorizer.lua'] = {
 	config = function()

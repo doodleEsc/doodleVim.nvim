@@ -15,7 +15,11 @@ tools['iamcco/markdown-preview.nvim'] = {
 }
 
 tools['voldikss/vim-translator'] = {
-	event = 'VimEnter'
+	event = 'GUIEnter'
+}
+
+tools['dstein64/vim-startuptime'] = {
+  cmd = {'StartupTime'}
 }
 
 return tools
