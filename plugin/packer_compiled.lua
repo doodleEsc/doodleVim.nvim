@@ -70,8 +70,13 @@ time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["coc.nvim"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/fanlizhou/.local/share/nvim/site/pack/packer/opt/coc.nvim"
+  },
+  ["vim-startuptime"] = {
     loaded = true,
-    path = "/Users/fanlizhou/.local/share/nvim/site/pack/packer/start/coc.nvim"
+    path = "/Users/fanlizhou/.local/share/nvim/site/pack/packer/start/vim-startuptime"
   }
 }
 
