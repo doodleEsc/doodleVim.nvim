@@ -7,8 +7,7 @@ completion['neovim/nvim-lspconfig'] = {
 }
 
 completion['glepnir/lspsaga.nvim'] = {
-  cmd = 'Lspsaga',
-  config = conf.lspsaga
+  cmd = 'Lspsaga'
 }
 
 completion['hrsh7th/nvim-compe'] = {

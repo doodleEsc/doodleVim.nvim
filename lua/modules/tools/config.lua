@@ -24,4 +24,7 @@ function config.mkdp()
   vim.g.mkdp_echo_preview_url = 1
 end
 
+function config.floaterm()
+end
+
 return config

@@ -22,4 +22,9 @@ tools['dstein64/vim-startuptime'] = {
   cmd = {'StartupTime'}
 }
 
+tools['voldikss/vim-floaterm'] = {
+	cmd = {'FloatermToggle', 'FloatermNew'},
+	config = conf.floaterm
+}
+
 return tools
