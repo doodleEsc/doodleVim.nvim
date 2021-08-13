@@ -1,4 +1,4 @@
-#Neovim/Vim configure
+# Neovim/Vim configure
 
 ##how to use
 ### install neovim0.4.0 or vim8
