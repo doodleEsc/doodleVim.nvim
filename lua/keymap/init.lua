@@ -66,7 +66,6 @@ local plug_map = {
     ["n|<Leader>fh"]    = map_cu('Telescope oldfiles'):with_noremap():with_silent(),
     ["n|<Leader>fc"]    = map_cu('Telescope git_commits'):with_noremap():with_silent(),
     ["n|<Leader>fg"]    = map_cu('Telescope git_files'):with_noremap():with_silent(),
-    ["n|<Leader>fl"]    = map_cu('Telescope coc'):with_noremap():with_silent(),
 
     -- Plugin Vista
     ["n|<Leader>v"]     = map_cu('Vista!!'):with_noremap():with_silent(),
@@ -89,6 +88,16 @@ local plug_map = {
 	["n|<C-F11>"] = map_cmd("<cmd>lua require('extend').debug_step_out()<CR>"):with_noremap():with_silent(),
 	["n|<F12>"] = map_cmd("<cmd>lua require('extend').debug_run_to_cursor()<CR>"):with_noremap():with_silent(),
 	["n|<C-F12>"] = map_cmd("<cmd>lua require('extend').debug_run_last()<CR>"):with_noremap():with_silent(),
+
+	-- barbar.nvim
+	["n|<S-h>"] = map_cr(":BufferPrevious"):with_noremap():with_silent(),
+	["n|<S-l>"] = map_cr(":BufferNext"):with_noremap():with_silent(),
+	["n|<S-n>"] = map_cr(":BufferClose"):with_noremap():with_silent(),
+	["n|<S-i>"] = map_cr(":BufferPin"):with_noremap():with_silent(),
+	["n|<S-p>"] = map_cr(":BufferPick"):with_noremap():with_silent(),
+	["n|<S-s>"] = map_cr(":BufferOrderByBufferNumber"):with_noremap():with_silent(),
+
+
 };
 
 bind.nvim_load_mapping(plug_map)
