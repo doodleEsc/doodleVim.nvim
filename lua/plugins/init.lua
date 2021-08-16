@@ -10,7 +10,7 @@ return require('packer').startup(function(use)
 
   -- COMPLETION {
 	-- coc.nvim
-  	use {'neoclide/coc.nvim', branch = 'release', event = 'BufReadPre'}
+  	use {'neoclide/coc.nvim', branch = 'release', event = 'BufEnter'}
 	use {'honza/vim-snippets', after='coc.nvim'}
 
 	-- snoictemplate
