@@ -3,11 +3,9 @@ local extensions = {
 	'coc-yaml',
 	'coc-yank',
 	'coc-pairs',
-	'coc-yaml',
 	'coc-tabnine',
 	'coc-snippets',
 	'coc-pyright',
-	'coc-rls',
 	'coc-go'
 }
 
