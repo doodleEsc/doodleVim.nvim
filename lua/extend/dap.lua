@@ -1,31 +1,6 @@
-local extend = {}
+local debug = {}
 
-extend.TreeToggle = function()
-	if (not packer_plugins['barbar.nvim'].loaded) or (not packer_plugins['nvim-tree.lua'].loaded) then
-      vim.cmd [[packadd barbar.nvim]]
-	  vim.cmd [[packadd nvim-tree.lua]]
-    end
-
-	local tree = require'nvim-tree'
-	local view = require'nvim-tree.view'
-	local lib = require'nvim-tree.lib'
-
-	if view.win_open() then
-		require'bufferline.state'.set_offset(0)
-		view.close()
-	else
-		if vim.g.nvim_tree_follow == 1 then
-			require'bufferline.state'.set_offset(31, 'File Explorer')
-			tree.find_files(true)
-		end
-		if not view.win_open() then
-			require'bufferline.state'.set_offset(31, 'File Explorer')
-			lib.open()
-		end
-	end
-end
-
-extend.debug_toggle = function()
+debug.debug_toggle = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[PackerLoad nvim-dap]]
 		require("plugins.debug.config").dap()
@@ -33,7 +8,7 @@ extend.debug_toggle = function()
 	require'dap'.toggle_breakpoint()
 end
 
-extend.debug_continue = function()
+debug.debug_continue = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[PackerLoad nvim-dap]]
 		require("plugins.debug.config").dap()
@@ -42,7 +17,7 @@ extend.debug_continue = function()
 	require'dap'.continue()
 end
 
-extend.debug_step_over = function()
+debug.debug_step_over = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[echo "'nvim-dap' not loaded"]]
 		return
@@ -50,7 +25,7 @@ extend.debug_step_over = function()
 	require'dap'.step_over()
 end
 
-extend.debug_step_into = function()
+debug.debug_step_into = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[echo "'nvim-dap' not loaded"]]
 		return
@@ -58,7 +33,7 @@ extend.debug_step_into = function()
 	require'dap'.step_into()
 end
 
-extend.debug_step_out = function()
+debug.debug_step_out = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[echo "'nvim-dap' not loaded"]]
 		return
@@ -66,7 +41,7 @@ extend.debug_step_out = function()
 	require'dap'.step_out()
 end
 
-extend.debug_set_cond_breakpoint = function()
+debug.debug_set_cond_breakpoint = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[echo "'nvim-dap' not loaded"]]
 		return
@@ -74,7 +49,7 @@ extend.debug_set_cond_breakpoint = function()
 	require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))
 end
 
-extend.debug_repl_open = function()
+debug.debug_repl_open = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[echo "'nvim-dap' not loaded"]]
 		return
@@ -82,7 +57,7 @@ extend.debug_repl_open = function()
 	require'dap'.repl.open()
 end
 
-extend.debug_run_last = function()
+debug.debug_run_last = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[echo "'nvim-dap' not loaded"]]
 		return
@@ -90,7 +65,7 @@ extend.debug_run_last = function()
 	require'dap'.run_last()
 end
 
-extend.debug_pause = function()
+debug.debug_pause = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[echo "'nvim-dap' not loaded"]]
 		return
@@ -98,7 +73,7 @@ extend.debug_pause = function()
 	require'dap'.pause()
 end
 
-extend.debug_stop = function()
+debug.debug_stop = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[echo "'nvim-dap' not loaded"]]
 		return
@@ -107,7 +82,7 @@ extend.debug_stop = function()
 	require'dap'.close()
 end
 
-extend.debug_run_to_cursor = function()
+debug.debug_run_to_cursor = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[echo "'nvim-dap' not loaded"]]
 		return
@@ -115,7 +90,7 @@ extend.debug_run_to_cursor = function()
 	require'dap'.run_to_cursor()
 end
 
-extend.debug_restart = function()
+debug.debug_restart = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[echo "'nvim-dap' not loaded"]]
 		return
@@ -123,4 +98,4 @@ extend.debug_restart = function()
 	require'dap'.restart()
 end
 
-return extend
+return debug

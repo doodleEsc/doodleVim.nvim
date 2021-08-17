@@ -1,8 +1,8 @@
 local config = {}
 
 function config.caw()
-	vim.api.nvim_set_keymap('n', 'mc', '<Plug>(caw:prefix)', {})
-	vim.api.nvim_set_keymap('x', 'mc', '<Plug>(caw:prefix)', {})
+	vim.api.nvim_set_keymap('n', '<Leader>c', '<Plug>(caw:prefix)', {})
+	vim.api.nvim_set_keymap('x', '<Leader>c', '<Plug>(caw:prefix)', {})
 end
 
 function config.easymotion()
