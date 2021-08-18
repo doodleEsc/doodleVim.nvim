@@ -13,7 +13,8 @@ local plug_map = {
     ["n|<C-k>"]         = map_cmd("<C-w>k"):with_noremap(),
 
     -- CR enhancement
-    ["i|<CR>"] = map_cmd('pumvisible() ? coc#_select_confirm() : "<C-g>u<CR><c-r>=coc#on_enter()<CR>"'):with_noremap():with_expr():with_silent(),
+    -- ["i|<CR>"] = map_cmd('pumvisible() ? coc#_select_confirm() : "<C-g>u<CR><c-r>=coc#on_enter()<CR>"'):with_noremap():with_expr():with_silent(),
+    ["i|<CR>"] = map_cmd('pumvisible() ? coc#_select_confirm() : "<CR>"'):with_noremap():with_expr():with_silent(),
 
     -- Packer
     ["n|<Leader>pu"]    = map_cr("PackerUpdate"):with_silent():with_noremap():with_nowait();
@@ -96,6 +97,12 @@ local plug_map = {
 	["n|<S-i>"] = map_cr(":BufferPin"):with_noremap():with_silent(),
 	["n|<S-p>"] = map_cr(":BufferPick"):with_noremap():with_silent(),
 	["n|<S-s>"] = map_cr(":BufferOrderByBufferNumber"):with_noremap():with_silent(),
+
+	-- ascii draw
+	["v|<Leader>l"] = map_cr("VBox"):with_noremap():with_silent(),
+	["v|<Leader>ld"] = map_cr("VBoxD"):with_noremap():with_silent(),
+	["v|<Leader>lh"] = map_cr("VBoxH"):with_noremap():with_silent(),
+	["v|<Leader>lf"] = map_cr("VFill"):with_noremap():with_silent(),
 
 
 };

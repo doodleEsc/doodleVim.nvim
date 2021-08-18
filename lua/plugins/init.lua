@@ -10,8 +10,8 @@ return require('packer').startup(function(use)
 
   -- COMPLETION {
 	-- coc.nvim
-  	use {'neoclide/coc.nvim', branch = 'release', event = 'BufEnter'}
-	use {'honza/vim-snippets', after='coc.nvim'}
+  	use {'neoclide/coc.nvim', branch = 'release', event = 'BufReadPre'}
+	use {'honza/vim-snippets', event='InsertEnter'}
 
 	-- snoictemplate
 	use {'mattn/vim-sonictemplate',
@@ -23,7 +23,7 @@ return require('packer').startup(function(use)
 
   -- DEBUG {
   	-- nvim-dap
-	use {'mfussenegger/nvim-dap', keys = {"<Leader>d"}, config = debug.dap}
+	use {'mfussenegger/nvim-dap', keys = {{"n","<F5>"}, {"n", "<F9>"}}, config = debug.dap}
 	use {'rcarriga/nvim-dap-ui', after = "nvim-dap", requires = {"mfussenegger/nvim-dap"}, config = debug.dapui}
 	use {'theHamsta/nvim-dap-virtual-text',
 		after = "nvim-dap",
@@ -34,7 +34,14 @@ return require('packer').startup(function(use)
 
   -- UI {
 	-- colorscheme
-	use {'cinuor/monokai.nvim', config = function() vim.cmd[[colorscheme monokai_pro]] end}
+	-- use {'cinuor/monokai.nvim', config = function() vim.cmd[[colorscheme monokai_pro]] end}
+	use {"npxbr/gruvbox.nvim",
+		requires = {"rktjmp/lush.nvim"},
+		config = function()
+			vim.o.background = "dark"
+			vim.cmd([[colorscheme gruvbox]])
+		end
+	}
 	-- treesitter
 	use {'nvim-treesitter/nvim-treesitter', event = 'BufRead', config = ui.treesitter}
 	use {'p00f/nvim-ts-rainbow', after = 'nvim-treesitter'}
@@ -43,7 +50,7 @@ return require('packer').startup(function(use)
 	use {'glepnir/galaxyline.nvim', branch = 'main', config = ui.galaxyline, requires = {'kyazdani42/nvim-web-devicons'}}
 
 	-- colorizer
-	use {'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end}
+	use {'norcalli/nvim-colorizer.lua', ft={"lua", "vim", "markdown"}, config = function() require('colorizer').setup() end}
 
 	-- tabline
 	use {'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'}, event = 'BufNew', config = ui.barbar}
@@ -52,11 +59,11 @@ return require('packer').startup(function(use)
 
   -- EDITOR {
 
-	use {'tyru/caw.vim', event = "BufRead", config = editor.caw}
+	use {'tyru/caw.vim', keys={'n','<Leader>c'},config = editor.caw}
 
-	use {'easymotion/vim-easymotion', keys={"<Leader>s"}, config = editor.easymotion}
+	use {'easymotion/vim-easymotion', keys={"n","<Leader>s"}, config = editor.easymotion}
 
-	use {'junegunn/vim-easy-align', keys={"ma"}, config=editor.easyalign}
+	use {'junegunn/vim-easy-align', keys={{"n","ma"},{"x","ma"}}, config=editor.easyalign}
   -- }
 
   -- TOOLS {
@@ -91,6 +98,9 @@ return require('packer').startup(function(use)
 
 	-- floaterm
 	use {'voldikss/vim-floaterm', cmd = {'FloatermToggle', 'FloatermNew'}, config = tools.floaterm}
+
+	-- vim ascii draw
+	use {'jbyuki/venn.nvim', cmd = {'VBox', 'VFill'}}
 
   -- }
 end)
