@@ -4,17 +4,15 @@
 	"coc.preferences.extensionUpdateCheck": "daily",
 	"coc.preferences.formatOnType": true,
 	"coc.preferences.formatOnSaveFiletypes": ["go", "python", "rust"],
-	"dialog.floatHighlight": "CompeDocumentation",
-	"dialog.floatBorderHighlight": "CompeDocumentationBorder",
-	"snippets.loadFromExtensions": false,
+
 	"suggest.triggerAfterInsertEnter": true,
-	"suggest.timeout": 5000,
+	"suggest.timeout": 750,
 	"suggest.enablePreview": true,
 	"suggest.noselect": false,
 	"suggest.detailField": "preview",
-	"suggest.minTriggerInputLength": 2,
-	"suggest.acceptSuggestionOnCommitCharacter": true,
+	"suggest.minTriggerInputLength": 1,
 	"suggest.snippetIndicator": "",
+	"suggest.acceptSuggestionOnCommitCharacter": true,
 	"suggest.completionItemKindLabels": {
 		"keyword": "keyword",
 		"variable": "variable",
@@ -51,6 +49,9 @@
 	"diagnostic.refreshOnInsertMode": true,
 	"diagnostic.separateRelatedInformationAsDiagnostics": true,
 
+	"snippets.loadFromExtensions": true,
+	"snippets.priority": 80,
+
 	"go.enable": true,
 	"go.disable": {
 		"workspaceFolders": false
@@ -58,6 +59,8 @@
 	"go.goplsOptions": {
 		"gofumpt": true
 	},
+
+	"tabnine.priority": 70,
 
 	"python.analysis.typeCheckingMode": "off",
 	"python.linting.enabled": true,

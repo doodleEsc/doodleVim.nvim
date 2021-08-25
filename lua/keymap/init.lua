@@ -47,6 +47,8 @@ local plug_map = {
     ["n|gh"] = map_cu("call CocActionAsync('doHover')"):with_noremap():with_silent(),
     ["n|gs"] = map_cu("call CocActionAsync('showSignatureHelp')"):with_noremap():with_silent(),
 
+	["i|<C-l>"] = map_cmd("coc#_insert_key('request', 'snippets-expand', 1)"):with_noremap():with_silent():with_expr(),
+
     -- Plugin MarkdownPreview
     ["n|mp"]            = map_cu('MarkdownPreviewToggle'):with_noremap():with_silent(),
 

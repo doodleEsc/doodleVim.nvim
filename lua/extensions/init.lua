@@ -1,7 +1,6 @@
 local extensions = {
 	'coc-json',
 	'coc-yaml',
-	'coc-yank',
 	'coc-pairs',
 	'coc-tabnine',
 	'coc-snippets',
