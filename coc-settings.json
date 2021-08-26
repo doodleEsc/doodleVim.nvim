@@ -57,7 +57,8 @@
 		"workspaceFolders": false
 	},
 	"go.goplsOptions": {
-		"gofumpt": true
+		"gofumpt": true,
+		"experimentalWorkspaceModule": true
 	},
 
 	"tabnine.priority": 70,
