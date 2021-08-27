@@ -1,21 +1,3 @@
--- vim.g.mapleader = " "
--- vim.opt.termguicolors = true
--- local execute = vim.api.nvim_command
--- local fn = vim.fn
--- 
--- local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
--- 
--- if fn.empty(fn.glob(install_path)) > 0 then
---   fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
---   execute 'packadd packer.nvim'
--- end
--- 
--- require('plugins')
--- require('extensions')
--- require('keymap')
--- require('core.commands')
-
---------
 local fn = vim.fn
 local api = vim.api
 local global = require('core.global')
@@ -79,6 +61,10 @@ local set_leader_map = function()
   vim.g.mapleader = " "
 end
 
+local set_colorscheme = function()
+	vim.cmd[[colorscheme gruvbox]]
+end
+
 local function load_nvim_config()
 	check_packer()
 	createdir()
@@ -88,6 +74,7 @@ local function load_nvim_config()
 	require('extensions')
 	require('keymap')
 	require('commands')
+	set_colorscheme()
 end
 
 load_nvim_config()
