@@ -1,5 +1,7 @@
 local dap = require "dap"
 
+vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+
 -- golang
 dap.adapters.go = function(callback, config)
   local stdout = vim.loop.new_pipe(false)

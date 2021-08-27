@@ -1,5 +1,14 @@
-local global = require 'core.global'
-local vim = vim
+local fn = vim.fn
+local api = vim.api
+local global = require('core.global')
+
+local function check_packer()
+	local install_path = global.data_dir .. 'pack/packer/start/packer.nvim'
+	if fn.empty(fn.glob(install_path)) > 0 then
+	  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+	  api.nvim_command 'packadd packer.nvim'
+	end
+end
 
 -- Create cache dir and subs dir
 local createdir = function ()
@@ -43,23 +52,29 @@ local disable_distribution_plugins= function()
   vim.g.loaded_netrwFileHandlers = 1
 end
 
-local leader_map = function()
+local set_leader_map = function()
   vim.api.nvim_set_keymap('n',' ','',{noremap = true})
   vim.api.nvim_set_keymap('x',' ','',{noremap = true})
   vim.api.nvim_set_keymap('i', '<C-c>', '<esc>', {noremap=true})
+  vim.api.nvim_set_keymap('n', '<C-c>', '<esc>', {noremap=true})
+  vim.api.nvim_set_keymap('v', '<C-c>', '<esc>', {noremap=true})
   vim.g.mapleader = " "
 end
 
-local load_core = function()
-  local pack = require('core.pack')
-  createdir()
-  disable_distribution_plugins()
-  leader_map()
-
-  pack.ensure_plugins()
-  require('core.options')
-  require('keymap')
-  pack.load_compile()
+local set_colorscheme = function()
+	vim.cmd[[colorscheme gruvbox]]
 end
 
-load_core()
+local function load_nvim_config()
+	check_packer()
+	createdir()
+	set_leader_map()
+	require('core.options')
+	require('plugins')
+	-- require('extensions')
+	require('keymap')
+	require('commands')
+	set_colorscheme()
+end
+
+load_nvim_config()

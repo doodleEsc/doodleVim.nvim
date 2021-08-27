@@ -1,9 +1,11 @@
-local global = require('core.global')
+local global = require("core.global")
 
 local function bind_option(options)
   for k, v in pairs(options) do
-    if v == true or v == false then
+    if v == true then
       vim.cmd('set ' .. k)
+    elseif v == false then
+      vim.cmd('set ' .. 'no' .. k)
     else
       vim.cmd('set ' .. k .. '=' .. v)
     end
@@ -22,23 +24,17 @@ local function load_options()
     virtualedit    = "block";
     encoding       = "utf-8";
     viewoptions    = "folds,cursor,curdir,slash,unix";
-    --sessionoptions = "curdir,help,tabpages,winsize";
     clipboard      = "unnamedplus";
     wildignorecase = true;
     wildignore     = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**";
-    backup         = false;
-    writebackup    = false;
-    swapfile       = false;
+    backup = false;
+    writebackup = false;
     directory      = global.cache_dir .. "swag/";
     undodir        = global.cache_dir .. "undo/";
-    backupdir      = global.cache_dir .. "backup/";
     viewdir        = global.cache_dir .. "view/";
     spellfile      = global.cache_dir .. "spell/en.uft-8.add";
     history        = 2000;
-    --shada          = "!,'300,<50,@100,s10,h";
-    backupskip     = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim";
     smarttab       = true;
-    --shiftround     = true;
     timeout        = true;
     ttimeout       = true;
     timeoutlen     = 500;
@@ -50,7 +46,6 @@ local function load_options()
     infercase      = true;
     incsearch      = true;
     wrapscan       = true;
-    --complete       = ".,w,b,k";
     inccommand     = "nosplit";
     grepformat     = "%f:%l:%c:%m";
     grepprg        = 'rg --hidden --vimgrep --smart-case --';
@@ -73,7 +68,7 @@ local function load_options()
     list           = true;
     --showtabline    = 2;
     winwidth       = 30;
-    winminwidth    = 10;
+    winminwidth    = 15;
     pumheight      = 15;
     helpheight     = 12;
     previewheight  = 12;
@@ -83,7 +78,7 @@ local function load_options()
     equalalways    = false;
     laststatus     = 2;
     display        = "lastline";
-    showbreak      = "↳  ";
+    showbreak      = "↳";
     listchars      = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←";
     pumblend       = 10;
     winblend       = 10;
@@ -100,7 +95,7 @@ local function load_options()
     shiftwidth     = 4;
     softtabstop    = -1;
     breakindentopt = "shift:2,min:20";
-    wrap           = false;
+    wrap           = true;
     linebreak      = true;
     colorcolumn    = "80";
     foldenable     = true;
@@ -129,10 +124,18 @@ local function load_options()
     vim.g.python3_host_prog = '/usr/local/opt/python@3.9/bin/python3'
   end
 
-  for name, value in pairs(global_local) do
-    vim.o[name] = value
+  if global.is_linux then
+    vim.g.python_host_skip_check=1
+    vim.g.python_host_prog = '/usr/bin/python'
+    vim.g.python3_host_skip_check=1
+    vim.g.python3_host_prog = '/usr/bin/python3'
   end
-  bind_option(bw_local)
+
+    for name, value in pairs(global_local) do
+	    vim.o[name] = value
+    end
+    bind_option(bw_local)
 end
 
 load_options()
+

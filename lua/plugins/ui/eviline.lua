@@ -2,7 +2,7 @@ local gl = require('galaxyline')
 local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
 local gls = gl.section
-gl.short_line_list = {'NvimTree','vista','dbui','packer'}
+gl.short_line_list = {'NvimTree','vista','packer'}
 
 -- extend galaxyline theme
 colors['grey'] = '#8F908A'
@@ -91,40 +91,6 @@ gls.left[7] = {
   }
 }
 
-gls.mid[1] = {
-  ShowLspClient = {
-    provider = 'GetLspClient',
-    condition = function ()
-      local tbl = {['dashboard'] = true,['']=true}
-      if tbl[vim.bo.filetype] then
-        return false
-      end
-      return true
-    end,
-    icon = ' : ',
-    highlight = {colors.yellow,colors.bg,'bold'}
-  }
-}
-
---gls.right[1] = {
---  FileEncode = {
---    provider = 'FileEncode',
---    condition = condition.hide_in_width,
---    separator = ' ',
---    separator_highlight = {'NONE',colors.bg},
---    highlight = {colors.green,colors.bg,'bold'}
---  }
---}
-
---gls.right[2] = {
---  FileFormat = {
---    provider = 'FileFormat',
---    condition = condition.hide_in_width,
---    separator = ' ',
---    separator_highlight = {'NONE',colors.bg},
---    highlight = {colors.green,colors.bg,'bold'}
---  }
---}
 
 gls.right[1] = {
   LineInfo = {
