@@ -35,13 +35,14 @@ return require('packer').startup(function(use)
   -- UI {
 	-- colorscheme
 	-- use {'cinuor/monokai.nvim', config = function() vim.cmd[[colorscheme monokai_pro]] end}
-	use {"npxbr/gruvbox.nvim",
-		requires = {"rktjmp/lush.nvim"},
-		config = function()
-			vim.o.background = "dark"
-			vim.cmd([[colorscheme gruvbox]])
-		end
-	}
+
+	-- use {"npxbr/gruvbox.nvim",
+	-- 	requires = {"rktjmp/lush.nvim"},
+	-- 	config = function()
+	-- 		vim.o.background = "dark"
+	-- 		vim.cmd([[colorscheme gruvbox]])
+	-- 	end
+	-- }
 	-- treesitter
 	use {'nvim-treesitter/nvim-treesitter', event = 'BufRead', config = ui.treesitter}
 	use {'p00f/nvim-ts-rainbow', after = 'nvim-treesitter'}

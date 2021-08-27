@@ -74,6 +74,8 @@ local set_leader_map = function()
   vim.api.nvim_set_keymap('n',' ','',{noremap = true})
   vim.api.nvim_set_keymap('x',' ','',{noremap = true})
   vim.api.nvim_set_keymap('i', '<C-c>', '<esc>', {noremap=true})
+  vim.api.nvim_set_keymap('n', '<C-c>', '<esc>', {noremap=true})
+  vim.api.nvim_set_keymap('v', '<C-c>', '<esc>', {noremap=true})
   vim.g.mapleader = " "
 end
 
