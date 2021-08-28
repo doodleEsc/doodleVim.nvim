@@ -9,9 +9,20 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
 
   -- COMPLETION {
-	-- coc.nvim
-  	-- use {'neoclide/coc.nvim', branch = 'release', event = 'BufReadPre'}
-	-- use {'honza/vim-snippets', after='coc.nvim'}
+	use {'neovim/nvim-lspconfig', event = 'BufReadPost', config = completion.nvim_lsp}
+	use {'kabouzeid/nvim-lspinstall', opt = true}
+	use {'glepnir/lspsaga.nvim', cmd = 'Lspsaga'}
+	use {'ray-x/lsp_signature.nvim', opt = true}
+
+	use {'hrsh7th/nvim-cmp', event = 'InsertEnter', config = completion.nvim_cmp}
+	use {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'}
+	use {'hrsh7th/cmp-buffer', after = 'nvim-cmp'}
+	use {'hrsh7th/cmp-path', after = 'nvim-cmp'}
+	use {'tzachar/cmp-tabnine', after = 'nvim-cmp', run='./install.sh'}
+	use {'hrsh7th/vim-vsnip', after = 'nvim-cmp'}
+	use {'hrsh7th/vim-vsnip-integ', after = 'nvim-cmp'}
+	use {'hrsh7th/cmp-vsnip', after = 'nvim-cmp'}
+	use {'rafamadriz/friendly-snippets',after = 'nvim-cmp'}
 
 	-- snoictemplate
 	use {'mattn/vim-sonictemplate',
