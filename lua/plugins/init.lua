@@ -12,7 +12,6 @@ return require('packer').startup(function(use)
 	use {'neovim/nvim-lspconfig', event = 'BufReadPost', config = completion.nvim_lsp}
 	use {'kabouzeid/nvim-lspinstall', opt = true}
 	use {'glepnir/lspsaga.nvim', cmd = 'Lspsaga'}
-	use {'ray-x/lsp_signature.nvim', opt = true}
 
 	use {'hrsh7th/nvim-cmp', event = 'InsertEnter', config = completion.nvim_cmp}
 	use {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'}

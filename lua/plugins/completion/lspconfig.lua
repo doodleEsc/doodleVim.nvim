@@ -53,11 +53,6 @@ local enhance_attach = function(client,bufnr)
     format.lsp_before_save()
   end
 
-  if not packer_plugins['lsp_signature.nvim'].loaded then
-    vim.cmd [[packadd lsp_signature.nvim]]
-  end
-
-  require "lsp_signature".on_attach()
   api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 
