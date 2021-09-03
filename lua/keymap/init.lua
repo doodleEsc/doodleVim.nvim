@@ -46,6 +46,7 @@ local plug_map = {
     ["n|gm"] = map_cu("call       CocActionAsync('refactor')"):with_noremap():with_silent(),
     ["n|gh"] = map_cu("call CocActionAsync('doHover')"):with_noremap():with_silent(),
     ["n|gs"] = map_cu("call CocActionAsync('showSignatureHelp')"):with_noremap():with_silent(),
+	["n|tu"] = map_cu("CocCommand go.test.generate.function"):with_noremap():with_silent(),
 
 	["i|<C-l>"] = map_cmd("coc#_insert_key('request', 'snippets-expand', 1)"):with_noremap():with_silent():with_expr(),
 
