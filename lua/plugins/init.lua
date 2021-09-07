@@ -8,10 +8,11 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
 
-  -- COMPLETION {
-	use {'neovim/nvim-lspconfig', event = 'BufReadPost', config = completion.nvim_lsp}
+  -- LSP AND COMPLETION {
+	use {'neovim/nvim-lspconfig', event = 'InsertEnter', config = completion.nvim_lsp}
 	use {'kabouzeid/nvim-lspinstall', opt = true}
-	use {'glepnir/lspsaga.nvim', cmd = 'Lspsaga'}
+	use {'glepnir/lspsaga.nvim', opt = true}
+	use {'onsails/lspkind-nvim', opt = true, after = 'nvim-lspconfig', config = completion.lspkind_nvim}
 
 	use {'hrsh7th/nvim-cmp', event = 'InsertEnter', config = completion.nvim_cmp}
 	use {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'}
@@ -21,7 +22,7 @@ return require('packer').startup(function(use)
 	use {'hrsh7th/vim-vsnip', after = 'nvim-cmp'}
 	use {'hrsh7th/vim-vsnip-integ', after = 'nvim-cmp'}
 	use {'hrsh7th/cmp-vsnip', after = 'nvim-cmp'}
-	use {'rafamadriz/friendly-snippets',after = 'nvim-cmp'}
+	use {'rafamadriz/friendly-snippets', after = 'nvim-cmp'}
 
 	-- snoictemplate
 	use {'mattn/vim-sonictemplate',
@@ -34,12 +35,14 @@ return require('packer').startup(function(use)
   -- DEBUG {
   	-- nvim-dap
 	use {'mfussenegger/nvim-dap', keys = {{"n","<F5>"}, {"n", "<F9>"}}, config = debug.dap}
-	use {'rcarriga/nvim-dap-ui', after = "nvim-dap", requires = {"mfussenegger/nvim-dap"}, config = debug.dapui}
+	use {'rcarriga/nvim-dap-ui', 
+		after = "nvim-dap",
+		requires = {"mfussenegger/nvim-dap"},
+		config = debug.dapui}
 	use {'theHamsta/nvim-dap-virtual-text',
 		after = "nvim-dap",
 		requires = {"mfussenegger/nvim-dap"},
-		config = function() vim.g.dap_virtual_text = true end
-	}
+		setup = function() vim.g.dap_virtual_text = true end}
   -- }
 
   -- UI {
@@ -75,6 +78,10 @@ return require('packer').startup(function(use)
 	use {'easymotion/vim-easymotion', keys={"n","<Leader>s"}, config = editor.easymotion}
 
 	use {'junegunn/vim-easy-align', keys={{"n","ma"},{"x","ma"}}, config=editor.easyalign}
+	
+	use {'andymass/vim-matchup', opt = true, setup = function() require("core.utils").packer_defer_load("vim-matchup", 2000) end}
+
+	use {'windwp/nvim-autopairs', after = 'nvim-cmp', config = editor.autopairs}
   -- }
 
   -- TOOLS {
@@ -86,8 +93,7 @@ return require('packer').startup(function(use)
 		requires = {
 		  {'nvim-lua/popup.nvim', opt = true},
 		  {'nvim-lua/plenary.nvim',opt = true},
-		  {'nvim-telescope/telescope-fzy-native.nvim',opt = true},
-		  {'fannheyward/telescope-coc.nvim', opt = true},
+		  {'nvim-telescope/telescope-fzy-native.nvim',opt = true}
 		}
 	}
 	
