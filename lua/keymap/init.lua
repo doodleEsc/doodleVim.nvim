@@ -81,15 +81,15 @@ local plug_map = {
 
 	-- Plugin nvim-dap
 	["n|<F5>"]    = map_cmd("<cmd>lua require('extend.dap').debug_continue()<CR>"):with_noremap(),
-	["n|<F17>"]  = map_cmd("<cmd>lua require('extend.dap').debug_stop()<CR>"):with_noremap(),
+	["n|<F17>"]  = map_cmd("<cmd>lua require('extend.dap').debug_stop()<CR>"):with_noremap(), -- shift + F5
 	["n|<F6>"]    = map_cmd("<cmd>lua require('extend.dap').debug_pause()<CR>"):with_noremap(),
-	["n|<F18>"]  = map_cmd("<cmd>lua require('extend.dap').debug_restart()<CR>"):with_noremap(),
+	["n|<F18>"]  = map_cmd("<cmd>lua require('extend.dap').debug_restart()<CR>"):with_noremap(), -- shift + F6
 	["n|<F9>"]    = map_cmd("<cmd>lua require('extend.dap').debug_toggle()<CR>"):with_noremap():with_silent(),
 	["n|<F10>"]   = map_cmd("<cmd>lua require('extend.dap').debug_step_over()<CR>"):with_noremap():with_silent(),
 	["n|<F11>"]   = map_cmd("<cmd>lua require('extend.dap').debug_step_into()<CR>"):with_noremap():with_silent(),
-	["n|<F23>"] = map_cmd("<cmd>lua require('extend.dap').debug_step_out()<CR>"):with_noremap():with_silent(),
+	["n|<F23>"] = map_cmd("<cmd>lua require('extend.dap').debug_step_out()<CR>"):with_noremap():with_silent(), -- shift + F11
 	["n|<F12>"]   = map_cmd("<cmd>lua require('extend.dap').debug_run_to_cursor()<CR>"):with_noremap():with_silent(),
-	["n|<F24>"] = map_cmd("<cmd>lua require('extend.dap').debug_run_last()<CR>"):with_noremap():with_silent(),
+	["n|<F24>"] = map_cmd("<cmd>lua require('extend.dap').debug_run_last()<CR>"):with_noremap():with_silent(), -- shift + F12
 
 	-- barbar.nvim
 	["n|<S-h>"] = map_cr(":BufferPrevious"):with_noremap():with_silent(),
