@@ -23,11 +23,10 @@ return require('packer').startup(function(use)
 
   -- DEBUG {
   	-- nvim-dap
-	use {'mfussenegger/nvim-dap', keys = {{"n","<F5>"}, {"n", "<F9>"}}, config = debug.dap}
-	use {'rcarriga/nvim-dap-ui', after = "nvim-dap", requires = {"mfussenegger/nvim-dap"}, config = debug.dapui}
+	use {'mfussenegger/nvim-dap', opt = true, config = debug.dap}
+	use {'rcarriga/nvim-dap-ui', after = "nvim-dap", config = debug.dapui}
 	use {'theHamsta/nvim-dap-virtual-text',
 		after = "nvim-dap",
-		requires = {"mfussenegger/nvim-dap"},
 		config = function() vim.g.dap_virtual_text = true end
 	}
   -- }

@@ -12,8 +12,10 @@ debug.debug_continue = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[PackerLoad nvim-dap]]
 		require("plugins.debug.config").dap()
+		vim.cmd [[PackerLoad nvim-dap-ui]]
+		require("plugins.debug.config").dapui()
 	end
-	vim.cmd [[echo "debug continue"]]
+	require'dapui'.open()
 	require'dap'.continue()
 end
 
@@ -80,6 +82,7 @@ debug.debug_stop = function()
 	end
 	require'dap'.disconnect()
 	require'dap'.close()
+	require'dapui'.close()
 end
 
 debug.debug_run_to_cursor = function()

@@ -2,9 +2,9 @@ local tree = {}
 
 tree.TreeToggle = function()
 	if (not packer_plugins['barbar.nvim'].loaded) or (not packer_plugins['nvim-tree.lua'].loaded) then
-      vim.cmd [[packadd barbar.nvim]]
-	  vim.cmd [[packadd nvim-tree.lua]]
-    end
+		vim.cmd [[PackerLoad barbar.nvim]]
+		vim.cmd [[PackerLoad nvim-tree.lua]]
+	end
 
 	local tree = require'nvim-tree'
 	local view = require'nvim-tree.view'
