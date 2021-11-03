@@ -10,8 +10,8 @@ return require('packer').startup(function(use)
 
   -- LSP AND COMPLETION {
 	use {'neovim/nvim-lspconfig', event = 'InsertEnter', config = completion.nvim_lsp}
-	use {'kabouzeid/nvim-lspinstall', opt = true}
-	use {'glepnir/lspsaga.nvim', opt = true}
+	use {'kabouzeid/nvim-lspinstall', after = 'nvim-lspconfig'}
+	use {'jasonrhansen/lspsaga.nvim', branch='finder-preview-fixes', after = 'nvim-lspconfig'}
 	use {'onsails/lspkind-nvim', opt = true, after = 'nvim-lspconfig', config = completion.lspkind_nvim}
 
 	use {'hrsh7th/nvim-cmp', event = 'InsertEnter', config = completion.nvim_cmp}
@@ -46,16 +46,6 @@ return require('packer').startup(function(use)
   -- }
 
   -- UI {
-	-- colorscheme
-	-- use {'cinuor/monokai.nvim', config = function() vim.cmd[[colorscheme monokai_pro]] end}
-
-	-- use {"npxbr/gruvbox.nvim",
-	-- 	requires = {"rktjmp/lush.nvim"},
-	-- 	config = function()
-	-- 		vim.o.background = "dark"
-	-- 		vim.cmd([[colorscheme gruvbox]])
-	-- 	end
-	-- }
 	-- treesitter
 	use {'nvim-treesitter/nvim-treesitter', event = 'BufRead', config = ui.treesitter}
 	use {'p00f/nvim-ts-rainbow', after = 'nvim-treesitter'}
