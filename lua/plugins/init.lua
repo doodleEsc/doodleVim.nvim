@@ -24,13 +24,13 @@ return require('packer').startup(function(use)
 	use {'hrsh7th/cmp-vsnip', after = 'nvim-cmp'}
 	use {'rafamadriz/friendly-snippets', after = 'nvim-cmp'}
 
-	-- snoictemplate
-	use {'mattn/vim-sonictemplate',
-		cmd = 'Template',
-	 	ft = {'go','python','rust','markdown'},
-	 	config = completion.vim_sonictemplate,
-	}
-  -- }
+	-- -- snoictemplate
+	-- use {'mattn/vim-sonictemplate',
+	-- 	cmd = 'Template',
+	--  	ft = {'go','python','rust','markdown'},
+	--  	config = completion.vim_sonictemplate,
+	-- }
+ --  -- }
 
   -- DEBUG {
   	-- nvim-dap
