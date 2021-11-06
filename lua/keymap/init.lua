@@ -76,8 +76,8 @@ local plug_map = {
 	["n|tt"] = map_cmd("<cmd>lua require('extend.tree').TreeToggle()<CR>"):with_noremap():with_silent(),
 
 	-- Plugin translator
-	["n|tl"] = map_cr(":TranslateW"):with_silent(),
-	["v|tl"] = map_cu("TranslateW"):with_silent(),
+	["n|<Leader>t"] = map_cr(":TranslateW"):with_silent(),
+	["v|<Leader>t"] = map_cu("TranslateW"):with_silent(),
 
 	-- Plugin nvim-dap
 	["n|<F5>"]    = map_cmd("<cmd>lua require('extend.dap').debug_continue()<CR>"):with_noremap(),
