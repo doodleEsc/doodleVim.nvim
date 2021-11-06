@@ -116,9 +116,9 @@ function config.mkdp()
 end
 
 function config.floaterm()
-	vim.g.floaterm_position = "right"
-	vim.g.floaterm_width = 0.4
-	vim.g.floaterm_height = 0.99
+	vim.g.floaterm_position = "center"
+	vim.g.floaterm_width = 0.8
+	vim.g.floaterm_height = 0.9
 end
 
 return config
