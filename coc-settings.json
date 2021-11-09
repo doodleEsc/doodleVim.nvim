@@ -6,7 +6,7 @@
 	"coc.preferences.formatOnSaveFiletypes": ["go", "python", "rust"],
 
 	"suggest.triggerAfterInsertEnter": true,
-	"suggest.timeout": 1000,
+	"suggest.timeout": 1500,
 	"suggest.enablePreview": true,
 	"suggest.noselect": true,
 	"suggest.detailField": "preview",
