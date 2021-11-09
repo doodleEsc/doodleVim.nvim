@@ -59,15 +59,17 @@ local plug_map = {
     ["t|<C-n>"] = map_cu([[<C-\><C-n>:FloatermNext]]):with_noremap():with_silent(),
     ["t|<C-p>"] = map_cu([[<C-\><C-n>:FloatermPrev]]):with_noremap():with_silent(),
 
-    -- Plugin Telescope
-    ["n|<Leader>ft"] = map_cu('Telescope buffers'):with_noremap():with_silent(),
-    ["n|<Leader>fb"] = map_cu('Telescope file_browser'):with_noremap():with_silent(),
-    ["n|<Leader>ff"] = map_cu('Telescope find_files'):with_noremap():with_silent(),
-    ["v|<Leader>fs"] = map_cu('Telescope grep_string'):with_noremap():with_silent(),
-    ["n|<Leader>fw"] = map_cu('Telescope live_grep'):with_noremap():with_silent(),
-    ["n|<Leader>fh"] = map_cu('Telescope oldfiles'):with_noremap():with_silent(),
-    ["n|<Leader>fc"] = map_cu('Telescope git_commits'):with_noremap():with_silent(),
-    ["n|<Leader>fg"] = map_cu('Telescope git_files'):with_noremap():with_silent(),
+    -- -- Plugin Telescope
+    -- ["n|<Leader>ft"] = map_cu('Telescope buffers'):with_noremap():with_silent(),
+    -- ["n|<Leader>fb"] = map_cu('Telescope file_browser'):with_noremap():with_silent(),
+    -- ["n|<Leader>ff"] = map_cu('Telescope find_files'):with_noremap():with_silent(),
+    -- ["v|<Leader>fs"] = map_cu('Telescope grep_string'):with_noremap():with_silent(),
+    -- ["n|<Leader>fw"] = map_cu('Telescope live_grep'):with_noremap():with_silent(),
+    -- ["n|<Leader>fh"] = map_cu('Telescope oldfiles'):with_noremap():with_silent(),
+    -- ["n|<Leader>fc"] = map_cu('Telescope git_commits'):with_noremap():with_silent(),
+    -- ["n|<Leader>fg"] = map_cu('Telescope git_files'):with_noremap():with_silent(),
+	
+	["n|<Leader>f"] = map_args('Telescope'):with_noremap(),
 
     -- Plugin Vista
     ["n|<Leader>v"] = map_cu('Vista!!'):with_noremap():with_silent(),
