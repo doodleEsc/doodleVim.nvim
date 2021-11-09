@@ -14,4 +14,8 @@ function config.easyalign()
 	vim.api.nvim_set_keymap('n', 'ma', '<Plug>(EasyAlign)<CR>', {})
 end
 
+function config.todo()
+	require("todo-comments").setup {}
+end
+
 return config

@@ -13,14 +13,6 @@ return require('packer').startup(function(use)
   	use {'neoclide/coc.nvim', branch = 'release', event = 'BufReadPre'}
 	use {'honza/vim-snippets', after='coc.nvim'}
 
-	-- snoictemplate
-	use {'mattn/vim-sonictemplate',
-		cmd = 'Template',
-	 	ft = {'go','python','rust','markdown'},
-	 	config = completion.vim_sonictemplate,
-	}
-  -- }
-
   -- DEBUG {
   	-- nvim-dap
 	use {'mfussenegger/nvim-dap', opt = true, config = debug.dap}
@@ -31,17 +23,6 @@ return require('packer').startup(function(use)
 	}
   -- }
 
-  -- UI {
-	-- colorscheme
-	-- use {'cinuor/monokai.nvim', config = function() vim.cmd[[colorscheme monokai_pro]] end}
-
-	-- use {"npxbr/gruvbox.nvim",
-	-- 	requires = {"rktjmp/lush.nvim"},
-	-- 	config = function()
-	-- 		vim.o.background = "dark"
-	-- 		vim.cmd([[colorscheme gruvbox]])
-	-- 	end
-	-- }
 	-- treesitter
 	use {'nvim-treesitter/nvim-treesitter', event = 'BufRead', config = ui.treesitter}
 	use {'p00f/nvim-ts-rainbow', after = 'nvim-treesitter'}
@@ -53,17 +34,22 @@ return require('packer').startup(function(use)
 	use {'norcalli/nvim-colorizer.lua', ft={"lua", "vim", "markdown"}, config = function() require('colorizer').setup() end}
 
 	-- tabline
-	use {'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'}, event = 'BufNew', config = ui.barbar}
+	use {'romgrk/barbar.nvim',
+		requires = {'kyazdani42/nvim-web-devicons'},
+		config = ui.barbar,
+		setup = function() require("core.utils").packer_defer_load("barbar.nvim", 1000) end
+	}
 
   -- }
 
   -- EDITOR {
 
-	use {'tyru/caw.vim', keys={'n','<Leader>c'},config = editor.caw}
+	use {'tyru/caw.vim', keys={'n','<Leader>c'}, config = editor.caw}
 
 	use {'easymotion/vim-easymotion', keys={"n","<Leader>s"}, config = editor.easymotion}
 
 	use {'junegunn/vim-easy-align', keys={{"n","ma"},{"x","ma"}}, config=editor.easyalign}
+
   -- }
 
   -- TOOLS {
@@ -71,15 +57,18 @@ return require('packer').startup(function(use)
   	use {'dstein64/vim-startuptime', cmd = 'StartupTime'}
 
 	-- telescope
-	use {'nvim-telescope/telescope.nvim', cmd = 'Telescope', config = tools.telescope,
+	use {'nvim-telescope/telescope.nvim', opt = true,
+		setup = function() require("core.utils").packer_defer_load("telescope.nvim", 800) end,
+		config = tools.telescope,
 		requires = {
-		  {'nvim-lua/popup.nvim', opt = true},
-		  {'nvim-lua/plenary.nvim',opt = true},
-		  {'nvim-telescope/telescope-fzy-native.nvim',opt = true},
-		  {'fannheyward/telescope-coc.nvim', opt = true},
-		}
+			{'nvim-lua/popup.nvim', opt = true},
+			{'nvim-lua/plenary.nvim',opt = true},
+			{'nvim-telescope/telescope-fzy-native.nvim', opt = true},
+			{'fannheyward/telescope-coc.nvim',  opt = true},
+			{'folke/todo-comments.nvim', opt = true, config = editor.todo},
+		},
 	}
-	
+
 	-- nvim-tree
 	use {'kyazdani42/nvim-tree.lua',
 	  cmd = {'NvimTreeToggle','NvimTreeOpen'},
