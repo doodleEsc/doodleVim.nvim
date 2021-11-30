@@ -1,19 +1,8 @@
-#Neovim/Vim configure
+# Neovim Configuration
 
-##how to use
-### install neovim0.4.0 or vim8
-* macos
-```
-brew install neovim
-```
-* linux
-```
-TODO
-```
-* windows
-```
-not support
-```
-### clone this repo
-
-asdfasdfsdf
+## requirements
+* Neovim 0.5
+* Nodejs v16+
+* Go
+* Python3.9
+* Tree-sitter

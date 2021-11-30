@@ -2,3 +2,5 @@
 plugged/
 pack/
 backup/
+typeshed/
+packer_compiled.lua
