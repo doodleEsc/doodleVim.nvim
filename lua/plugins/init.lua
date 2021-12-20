@@ -32,6 +32,7 @@ return require('packer').startup(function(use)
 
 	-- colorizer
 	use {'norcalli/nvim-colorizer.lua', ft={"lua", "vim", "markdown"}, config = function() require('colorizer').setup() end}
+	use {"ellisonleao/gruvbox.nvim", opt=true,requires = {"rktjmp/lush.nvim", opt=true}}
 
 	-- tabline
 	use {'romgrk/barbar.nvim',
@@ -58,7 +59,7 @@ return require('packer').startup(function(use)
 
 	-- telescope
 	use {'nvim-telescope/telescope.nvim', opt = true,
-		setup = function() require("core.utils").packer_defer_load("telescope.nvim", 800) end,
+		setup = function() require("core.utils").packer_defer_load("telescope.nvim", 500) end,
 		config = tools.telescope,
 		requires = {
 			{'nvim-lua/popup.nvim', opt = true},
@@ -97,6 +98,9 @@ return require('packer').startup(function(use)
 
 	-- vim-solidity
 	use {'TovarishFin/vim-solidity', ft = 'solidity'}
+
+	-- speed up
+	use {'lewis6991/impatient.nvim'}
 
   -- }
 end)

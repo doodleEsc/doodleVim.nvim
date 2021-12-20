@@ -62,7 +62,7 @@ local set_leader_map = function()
 end
 
 local set_colorscheme = function()
-	vim.cmd[[colorscheme gruvbox]]
+	vim.cmd[[colorscheme cinuor]]
 end
 
 local function load_nvim_config()

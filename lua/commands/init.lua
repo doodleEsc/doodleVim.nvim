@@ -1,4 +1,10 @@
+
 -- show signature in a function
 vim.cmd [[autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')]]
+
+-- enable syntax highlighting in solidity file
 vim.cmd [[au BufRead,BufNewFile *.sol setfiletype solidity]];
--- vim.cmd [[command! -nargs=+ Search ]]
+
+-- load all gruvbox dev tools
+vim.cmd [[command -nargs=0 GruvboxDump lua require('extend.gruvbox').dump()]]
+
