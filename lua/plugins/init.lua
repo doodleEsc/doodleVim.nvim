@@ -32,7 +32,7 @@ return require('packer').startup(function(use)
 
 	-- colorizer
 	use {'norcalli/nvim-colorizer.lua', ft={"lua", "vim", "markdown"}, config = function() require('colorizer').setup() end}
-	use {"ellisonleao/gruvbox.nvim", opt=true,requires = {"rktjmp/lush.nvim", opt=true}}
+	use {"cinuor/gruvbox.nvim", opt=true,requires = {"rktjmp/lush.nvim", opt=true}}
 
 	-- tabline
 	use {'romgrk/barbar.nvim',

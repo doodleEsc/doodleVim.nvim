@@ -52,10 +52,10 @@ local plug_map = {
     ["n|mp"]            = map_cu('MarkdownPreviewToggle'):with_noremap():with_silent(),
 
     -- Plugin Floaterm
-    ["n|fn"]    = map_cu('FloatermNew'):with_noremap():with_silent(),
-    ["n|fg"]    = map_cu('FloatermNew --width=0.9 --height=0.9 --name=git gitui'):with_noremap():with_silent(),
     ["n|ft"]    = map_cu('FloatermToggle'):with_noremap():with_silent(),
     ["t|ft"]    = map_cu([[<C-\><C-n>:FloatermToggle<CR>]]):with_noremap():with_silent(),
+    ["t|fn"]    = map_cu([[<C-\><C-n>:FloatermNew<CR>]]):with_noremap():with_silent(),
+    ["t|fg"]    = map_cu([[<C-\><C-n>:FloatermNew --width=0.9 --height=0.9 --name=git gitui<CR>]]):with_noremap():with_silent(),
     ["t|<C-n>"] = map_cu([[<C-\><C-n>:FloatermNext]]):with_noremap():with_silent(),
     ["t|<C-p>"] = map_cu([[<C-\><C-n>:FloatermPrev]]):with_noremap():with_silent(),
 
