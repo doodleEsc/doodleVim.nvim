@@ -126,4 +126,15 @@ function config.floaterm()
 	vim.g.floaterm_height = 0.9
 end
 
+function config.fterm()
+	require'FTerm'.setup({
+		border = 'double',
+		dimensions  = {
+			height = 0.9,
+			width = 0.9,
+		},
+		hl = FloatermBorder
+	})
+end
+
 return config
