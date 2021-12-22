@@ -120,20 +120,14 @@ function config.mkdp()
   vim.g.mkdp_echo_preview_url = 1
 end
 
-function config.floaterm()
-	vim.g.floaterm_position = "center"
-	vim.g.floaterm_width = 0.9
-	vim.g.floaterm_height = 0.9
-end
-
 function config.fterm()
 	require'FTerm'.setup({
-		border = 'double',
+		border = 'rounded',
 		dimensions  = {
 			height = 0.9,
 			width = 0.9,
 		},
-		hl = FloatermBorder
+		blend = 15,
 	})
 end
 
