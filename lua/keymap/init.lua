@@ -3,7 +3,6 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_args = bind.map_args
--- require('keymap.config')
 
 local plug_map = {
     --window navigation
@@ -66,7 +65,7 @@ local plug_map = {
     ["n|<Leader>v"] = map_cu('Vista!!'):with_noremap():with_silent(),
 
 	-- Plugin NvimTree
-	["n|tt"] = map_cu('NvimTreeToggle'):with_noremap():with_silent(),
+	["n|tt"] = map_cr("lua require('extend.tree').toggle()"):with_noremap():with_silent(),
 
 	-- Plugin translator
 	["n|<Leader>t"] = map_cu("TranslateW"):with_silent(),

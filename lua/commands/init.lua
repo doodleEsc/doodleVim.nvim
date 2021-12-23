@@ -6,5 +6,4 @@ vim.cmd [[autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp
 vim.cmd [[au BufRead,BufNewFile *.sol setfiletype solidity]];
 
 -- load all gruvbox dev tools
-vim.cmd [[command -nargs=0 GruvboxDump lua require('extend.gruvbox').dump()]]
-
+vim.cmd [[command GruvboxDump lua require('extend.gruvbox').dump()]]
