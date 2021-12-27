@@ -1,4 +1,5 @@
 local extensions = {
+	'coc-word',
 	'coc-json',
 	'coc-yaml',
 	'coc-pairs',
