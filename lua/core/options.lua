@@ -131,10 +131,13 @@ local function load_options()
     vim.g.python3_host_prog = '/usr/bin/python3'
   end
 
-    for name, value in pairs(global_local) do
+	for name, value in pairs(global_local) do
 	    vim.o[name] = value
     end
     bind_option(bw_local)
+
+	-- set user define global variables
+	vim.g.enable_coc_word = false
 end
 
 load_options()

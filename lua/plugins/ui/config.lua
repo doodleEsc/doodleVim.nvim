@@ -4,6 +4,10 @@ function config.galaxyline()
   require('plugins.ui.eviline')
 end
 
+function config.lualine()
+	require('plugins.ui.lualine')
+end
+
 function config.nvim_tree()
   -- On Ready Event for Lazy Loading work
   require("nvim-tree.events").on_nvim_tree_ready(

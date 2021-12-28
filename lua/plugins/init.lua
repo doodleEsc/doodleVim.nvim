@@ -28,7 +28,8 @@ return require('packer').startup(function(use)
 	use {'p00f/nvim-ts-rainbow', after = 'nvim-treesitter'}
 
 	-- statusline
-	use {'glepnir/galaxyline.nvim', branch = 'main', config = ui.galaxyline, requires = {'kyazdani42/nvim-web-devicons'}}
+	-- use {'glepnir/galaxyline.nvim', branch = 'main', config = ui.galaxyline, requires = {'kyazdani42/nvim-web-devicons'}}
+	use {'nvim-lualine/lualine.nvim', config = ui.lualine, requires = {'kyazdani42/nvim-web-devicons', opt = true}}
 
 	-- colorizer
 	use {'norcalli/nvim-colorizer.lua', ft={"lua", "vim", "markdown"}, config = function() require('colorizer').setup() end}
