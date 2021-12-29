@@ -11,7 +11,8 @@ return require('packer').startup(function(use)
   -- COMPLETION {
 	-- coc.nvim
   	use {'neoclide/coc.nvim', branch = 'release', event = 'BufReadPre'}
-	use {'honza/vim-snippets', after='coc.nvim'}
+	-- use {'honza/vim-snippets', after='coc.nvim'}
+	use {'rafamadriz/friendly-snippets', after = 'coc.nvim'}
 
   -- DEBUG {
   	-- nvim-dap
