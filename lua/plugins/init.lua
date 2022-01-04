@@ -99,8 +99,9 @@ return require('packer').startup(function(use)
 	use {'RishabhRD/nvim-cheat.sh', cmd = {'Cheat', 'CheatList', 'CheatWithoutComments', 'CheatListWithoutComments'}}
 	use {'RishabhRD/popfix', after = 'nvim-cheat.sh'}
 
-	-- vim-solidity
+	-- syntax
 	use {'TovarishFin/vim-solidity', ft = 'solidity'}
+	use {'towolf/vim-helm', ft='helm'}
 
 	-- speed up
 	use {'lewis6991/impatient.nvim'}
