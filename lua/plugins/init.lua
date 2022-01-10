@@ -88,7 +88,7 @@ return require('packer').startup(function(use)
 	use {'liuchengxu/vista.vim', cmd = 'Vista', config = tools.vista}
 
 	-- markdown-preview
-	use {'iamcco/markdown-preview.nvim', ft = 'markdown', run = function() vim.cmd [[:call mkdp#util#install()]] end, config = tools.mkdp}
+	use {'iamcco/markdown-preview.nvim', ft = 'markdown', run = function() vim.cmd [[:call mkdp#util#install()]] end, setup = tools.mkdp}
 
 	-- translator
 	use {'voldikss/vim-translator', cmd = {'TranslateW'}}
