@@ -25,8 +25,13 @@ return require('packer').startup(function(use)
   -- }
 
 	-- treesitter
-	use {'nvim-treesitter/nvim-treesitter', event = 'BufRead', config = ui.treesitter}
-	use {'p00f/nvim-ts-rainbow', after = 'nvim-treesitter'}
+	use {'nvim-treesitter/nvim-treesitter', event = 'BufRead', config = ui.treesitter,
+		requires = {
+			-- {'p00f/nvim-ts-rainbow', event = 'BufRead'},
+			{'nvim-treesitter/nvim-treesitter-textobjects', event = 'BufRead'}
+		}
+	}
+	-- use {'p00f/nvim-ts-rainbow', after = 'nvim-treesitter'}
 
 	-- statusline
 	-- use {'glepnir/galaxyline.nvim', branch = 'main', config = ui.galaxyline, requires = {'kyazdani42/nvim-web-devicons'}}
