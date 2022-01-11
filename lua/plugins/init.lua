@@ -64,7 +64,14 @@ return require('packer').startup(function(use)
 
   -- EDITOR {
 	-- comment
-	use {'tyru/caw.vim', keys={'n','<Leader>c'}, config = editor.caw}
+	-- use {'tyru/caw.vim', keys={'n','<Leader>c'}, config = editor.caw}
+	use {'numToStr/Comment.nvim', 
+		keys={
+			{'n','<Leader>c'}, {'n','<Leader>b'},
+			{'v','<Leader>c'}, {'v','<Leader>b'},
+		},
+		config =tools.comment
+	}
 
 	-- cursor move
 	use {'easymotion/vim-easymotion', keys={"n","<Leader>s"}, config = editor.easymotion}

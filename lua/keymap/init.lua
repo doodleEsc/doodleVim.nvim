@@ -60,6 +60,12 @@ local plug_map = {
     -- Plugin Telescope
 	["n|<Leader>f"] = map_args('Telescope'):with_noremap(),
 
+	-- Comment
+	["n|<Leader>cc"] = map_cr('lua require("Comment.api").toggle_current_linewise()'):with_noremap():with_silent(),
+	["n|<Leader>bb"] = map_cr('lua require("Comment.api").toggle_current_linewise()'):with_noremap():with_silent(),
+	["x|<Leader>cc"] = map_cu('lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())'),
+	["x|<Leader>bb"] = map_cu('lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())'),
+
     -- Plugin Vista
     ["n|<Leader>v"] = map_cu('Vista!!'):with_noremap():with_silent(),
 
