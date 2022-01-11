@@ -138,6 +138,7 @@ local function load_options()
 
 	-- set user define global variables
 	vim.g.enable_coc_word = false
+	-- vim.g.bufferline = {auto_hide = true}
 end
 
 load_options()

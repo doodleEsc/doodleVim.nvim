@@ -1,13 +1,10 @@
 local config = {}
 
 function config.telescope()
-  if not packer_plugins['plenary.nvim'].loaded then
-    vim.cmd [[packadd plenary.nvim]]
-    vim.cmd [[packadd popup.nvim]]
-
-	vim.cmd [[packadd telescope-fzy-native.nvim]]
-	vim.cmd [[packadd telescope-coc.nvim]]
-	vim.cmd [[packadd todo-comments.nvim]]
+  if not packer_plugins['telescope-coc.nvim'].loaded then
+	-- vim.cmd [[PackerLoad telescope-fzy-native.nvim]]
+	vim.cmd [[PackerLoad telescope-file-browser.nvim]]
+	vim.cmd [[PackerLoad telescope-coc.nvim]]
   end
 
   require('telescope').setup {
@@ -21,13 +18,13 @@ function config.telescope()
     },
     extensions = {
         fzy_native = {
-            override_generic_sorter = false,
+            override_generic_sorter = true,
             override_file_sorter = true,
-        }
+        },
     }
   }
 
-  require('telescope').load_extension('fzy_native')
+  require('telescope').load_extension('file_browser')
   require('telescope').load_extension('coc')
   require('telescope').load_extension('todo-comments')
 end
@@ -132,6 +129,26 @@ function config.fterm()
 		},
 		blend = 15,
 	})
+end
+
+function config.gitsigns()
+	require('gitsigns').setup{
+		keymaps = {},
+		watch_gitdir = {
+			interval = 2000,
+			follow_files = true
+		},
+		current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+		current_line_blame_opts = {
+			virt_text = true,
+			virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+			delay = 1000,
+			ignore_whitespace = false,
+		},
+		current_line_blame_formatter_opts = {
+			relative_time = false
+		},
+	}
 end
 
 return config

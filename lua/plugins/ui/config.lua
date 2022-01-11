@@ -21,6 +21,10 @@ function config.nvim_tree()
 end
 
 function config.treesitter()
+	if not packer_plugins['nvim-treesitter-textobjects'].loaded then
+		vim.cmd [[PackerLoad nvim-treesitter-textobjects]]
+	end
+
   vim.api.nvim_command('set foldmethod=expr')
   vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
 
@@ -122,6 +126,7 @@ function config.barbar()
 	  -- where X is the buffer number. But only a static string is accepted here.
 	  no_name_title = nil,
 	}
+	require("core.utils").packer_defer_load("barbar.nvim", 800)
 end
 
 return config

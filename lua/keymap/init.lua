@@ -56,8 +56,6 @@ local plug_map = {
     ["n|fg"]    = map_cu('FTermRun gitui'):with_noremap():with_silent(),
     ["t|ft"]    = map_cu([[<C-\><C-n>:FTermToggle<CR>]]):with_noremap():with_silent(),
     ["t|fn"]    = map_cu([[<C-\><C-n>:FTermExit<CR>]]):with_noremap():with_silent(),
-    -- ["t|<C-n>"] = map_cu([[<C-\><C-n>:FloatermNext]]):with_noremap():with_silent(),
-    -- ["t|<C-p>"] = map_cu([[<C-\><C-n>:FloatermPrev]]):with_noremap():with_silent(),
 
     -- Plugin Telescope
 	["n|<Leader>f"] = map_args('Telescope'):with_noremap(),
@@ -70,7 +68,7 @@ local plug_map = {
 
 	-- Plugin translator
 	["n|<Leader>t"] = map_cu("TranslateW"):with_silent(),
-	["v|<Leader>t"] = map_cu("TranslateW"):with_silent(),
+	["v|<Leader>t"] = map_cr("TranslateW"):with_silent(),
 
 	-- Plugin nvim-dap
 	["n|<F5>"]  = map_cmd("<cmd>lua require('extend.dap').debug_continue()<CR>"):with_noremap(),
