@@ -64,13 +64,10 @@ return require('packer').startup(function(use)
 
   -- EDITOR {
 	-- comment
-	-- use {'tyru/caw.vim', keys={'n','<Leader>c'}, config = editor.caw}
 	use {'numToStr/Comment.nvim', 
-		keys={
-			{'n','<Leader>c'}, {'n','<Leader>b'},
-			{'v','<Leader>c'}, {'v','<Leader>b'},
-		},
-		config =tools.comment
+		opt = true,
+		setup = function() require("core.utils").packer_defer_load("Comment.nvim", 100) end,
+		config = editor.comment,
 	}
 
 	-- cursor move

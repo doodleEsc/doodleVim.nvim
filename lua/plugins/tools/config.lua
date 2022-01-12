@@ -15,13 +15,19 @@ function config.telescope()
       file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
       grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
       qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+      layout_config = {
+        vertical = { width = 0.8, height = 0.6 },
+      },
     },
     extensions = {
         fzy_native = {
             override_generic_sorter = true,
             override_file_sorter = true,
         },
-    }
+		file_browser = {
+			theme = "ivy",
+		},
+    },
   }
 
   require('telescope').load_extension('file_browser')
@@ -148,14 +154,6 @@ function config.gitsigns()
 		current_line_blame_formatter_opts = {
 			relative_time = false
 		},
-	}
-end
-
-function config.comment()
-	require('Comment').setup{
-		padding = true,
-		sticky = true,
-		ignore = nil,
 	}
 end
 
