@@ -1,9 +1,4 @@
 local config = {}
--- 
--- function config.vim_sonictemplate()
---   vim.g.sonictemplate_postfix_key = '<C-,>'
---   vim.g.sonictemplate_vim_template_dir = os.getenv("HOME").. '/.config/nvim/template'
--- end
 
 function config.nvim_lsp()
 	require('plugins.completion.lspconfig')
@@ -11,25 +6,26 @@ end
 
 function config.nvim_cmp()
 	local cmp = require('cmp')
-	cmp.setup{
-		sources = {
-			{ name = 'buffer' },
-			{ name = 'nvim_lsp' },
-			{ name = 'path' },
-			{ name = 'vsnip' },
-			{ name = 'cmp_tabnine' },
+	cmp.setup({
+		snippet = {
+			expand = function(args)
+				require('luasnip').lsp_expand(args.body)
+			end,
 		},
+		sources =  cmp.config.sources({
+			{ name = 'nvim_lsp' },
+			{ name = 'buffer' },
+			{ name = 'path' },
+			{ name = 'cmp_tabnine' },
+			{ name = 'luasnip' },
+		}),
 		formatting = {
 			format = function(entry, vim_item)
 				vim_item.kind = require('lspkind').presets.default[vim_item.kind] .. " " .. vim_item.kind
 				return vim_item
 			end
 		  }
-	}
-end
-
-function config.lspinstall()
-  require'lspinstall'.setup()
+	})
 end
 
 function config.lspkind_nvim()

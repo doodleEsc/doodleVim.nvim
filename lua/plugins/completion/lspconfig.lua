@@ -2,24 +2,49 @@ local api = vim.api
 local lspconfig = require('lspconfig')
 local format = require('plugins.completion.format')
 
+local enhance_attach = function(client,bufnr)
+  if client.resolved_capabilities.document_formatting then
+    format.lsp_before_save()
+  end
+  api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+end
+
+-- setup lspsaga
 if not packer_plugins['lspsaga.nvim'].loaded then
   vim.cmd [[packadd lspsaga.nvim]]
 end
-
-if not packer_plugins['nvim-lspinstall'].loaded then
-  vim.cmd [[packadd nvim-lspinstall]]
-  require('lspinstall').setup()
-end
-
-local servers = require('lspinstall').installed_servers()
 
 local saga = require 'lspsaga'
 saga.init_lsp_saga({
   code_action_icon = '💡'
 })
 
+-- setup nvim-lsp-installer
+if not packer_plugins['nvim-lsp-installer'].loaded then
+  vim.cmd [[packadd nvim-lsp-installer]]
+end
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+
+local lsp_installer = require("nvim-lsp-installer")
+lsp_installer.on_server_ready(function(server)
+  local opts = {
+	  -- on_attach = enhance_attach,
+	  capabilities = capabilities,
+  }
+
+  -- (optional) Customize the options passed to the server
+  -- if server.name == "tsserver" then
+  --     opts.root_dir = function() ... end
+  -- end
+
+  -- This setup() function is exactly the same as lspconfig's setup function.
+  -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+  server:setup(opts)
+end)
+
 
 function _G.reload_lsp()
   vim.lsp.stop_client(vim.lsp.get_active_clients())
@@ -47,79 +72,3 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     -- Disable a feature
     update_in_insert = false,
 })
-
-local enhance_attach = function(client,bufnr)
-  if client.resolved_capabilities.document_formatting then
-    format.lsp_before_save()
-  end
-
-  api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-end
-
--- load installed servers
-for _, server in pairs(servers) do
-  lspconfig[server].setup{
-    on_attach = enhance_attach
-  }
-end
-
---lspconfig.gopls.setup {
---  cmd = {"gopls"},
---  on_attach = enhance_attach,
---  capabilities = capabilities,
---  init_options = {
---    usePlaceholders=true,
---    completeUnimported=true,
---  }
---}
-
---lspconfig.sumneko_lua.setup {
---  cmd = {
---    global.home.."/workstation/lua-language-server/bin/macOS/lua-language-server",
---    "-E",
---    global.home.."/workstation/lua-language-server/main.lua"
---  };
---  settings = {
---    Lua = {
---      diagnostics = {
---        enable = true,
---        globals = {"vim","packer_plugins"}
---      },
---      runtime = {version = "LuaJIT"},
---      workspace = {
---        library = vim.list_extend({[vim.fn.expand("$VIMRUNTIME/lua")] = true},{}),
---      },
---    },
---  }
---}
-
---lspconfig.tsserver.setup {
---  on_attach = function(client)
---    client.resolved_capabilities.document_formatting = false
---    enhance_attach(client)
---  end
---}
-
---lspconfig.clangd.setup {
---  cmd = {
---    "clangd",
---    "--background-index",
---    "--suggest-missing-includes",
---    "--clang-tidy",
---    "--header-insertion=iwyu",
---  },
---}
-
---lspconfig.rust_analyzer.setup {
---  capabilities = capabilities,
---}
---
---local servers = {
---  'dockerls','bashls','pyright'
---}
---
---for _,server in ipairs(servers) do
---  lspconfig[server].setup {
---    on_attach = enhance_attach
---  }
---end
