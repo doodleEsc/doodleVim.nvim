@@ -8,16 +8,26 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
 
-  -- COMPLETION {
-	-- coc.nvim
-  	use {'neoclide/coc.nvim', branch = 'release', event = 'BufReadPost'}
+  -- LSP AND COMPLETION {
+	use {'neovim/nvim-lspconfig',
+		opt = true,
+		setup = function() require("core.utils").packer_defer_load("nvim-lspconfig", 100) end,
+		config = completion.lspconfig
+	}
+	use {'williamboman/nvim-lsp-installer', after='nvim-lspconfig'}
+	use {'tami5/lspsaga.nvim', after='nvim-lspconfig'}
 
-	-- use {'honza/vim-snippets', after='coc.nvim'}
-	use {'rafamadriz/friendly-snippets', event = "InsertEnter"}
-	-- }
+--	use {'L3MON4D3/LuaSnip', event = 'InsertEnter', after=''}
+--	use {'onsails/lspkind-nvim', event = 'InsertEnter', config = completion.lspkind_nvim}
+--	use {'hrsh7th/cmp-buffer', after = 'nvim-cmp'}
+--	use {'hrsh7th/cmp-path', after = 'nvim-cmp'}
+--	use {'tzachar/cmp-tabnine', after = 'nvim-cmp', run='./install.sh'}
+--	use {'saadparwaiz1/cmp_luasnip', after='nvim-cmp'}
+	use {'hrsh7th/cmp-nvim-lsp'}
+	use {'hrsh7th/nvim-cmp', config = completion.nvim_cmp}
 
   -- DEBUG {
-  	-- nvim-dap
+	-- nvim-dap
 	use {'mfussenegger/nvim-dap', opt = true, config = debug.dap}
 	use {'rcarriga/nvim-dap-ui', after = "nvim-dap", config = debug.dapui}
 	use {'theHamsta/nvim-dap-virtual-text',
@@ -75,6 +85,12 @@ return require('packer').startup(function(use)
 
 	-- align format
 	use {'junegunn/vim-easy-align', keys={{"n","ma"},{"x","ma"}}, config=editor.easyalign}
+
+	use {'andymass/vim-matchup',
+		opt = true,
+		setup = function() require("core.utils").packer_defer_load("Comment.nvim", 100) end
+	}
+
   -- }
 
   -- TOOLS {
@@ -140,5 +156,5 @@ return require('packer').startup(function(use)
 	-- basic dependence
 	use {'nvim-lua/plenary.nvim'}
   -- }
-end)
 
+end)

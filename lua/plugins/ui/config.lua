@@ -27,9 +27,8 @@ function config.treesitter()
 
   vim.api.nvim_command('set foldmethod=expr')
   vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
-
   require('nvim-treesitter.configs').setup {
-	ensure_installed = "maintained",
+	ensure_installed = {"python"},
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,

@@ -72,7 +72,6 @@ local function load_nvim_config()
 	require('core.options')
 	require('plugins')
 	require('commands')
-	require('extensions')
 	require('keymap')
 	set_colorscheme()
 end
