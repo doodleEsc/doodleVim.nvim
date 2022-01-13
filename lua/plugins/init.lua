@@ -49,10 +49,7 @@ return require('packer').startup(function(use)
 	}
 
 	-- colorschema
-	use {"cinuor/gruvbox.nvim",
-		opt=true,
-		requires = {"rktjmp/lush.nvim", opt=true}
-	}
+	use {"cinuor/gruvbox.nvim",opt=true}
 
 	-- tabline
 	use {'romgrk/barbar.nvim',
