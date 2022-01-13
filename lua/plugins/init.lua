@@ -132,7 +132,7 @@ return require('packer').startup(function(use)
 	use {'voldikss/vim-translator', cmd = {'TranslateW'}}
 
 	-- floaterm
-	use {'cinuor/FTerm.nvim', cmd = {'FTermToggle'}, config = tools.fterm}
+	use {'cinuor/FTerm.nvim', cmd = {'FTermToggle', 'FTermRun'}, config = tools.fterm}
 
 	-- vim ascii draw
 	use {'jbyuki/venn.nvim', cmd = {'VBox', 'VFill'}}
