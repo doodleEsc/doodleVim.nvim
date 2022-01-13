@@ -72,6 +72,21 @@ return require('packer').startup(function(use)
 
 	-- align format
 	use {'junegunn/vim-easy-align', keys={{"n","ma"},{"x","ma"}}, config=editor.easyalign}
+
+	-- blankline
+	use {'lukas-reineke/indent-blankline.nvim',
+		opt = true,
+		setup = function() require("core.utils").packer_defer_load("indent-blankline.nvim", 100) end,
+		config = editor.blankline,
+	}
+
+	-- smooth scroll
+	use {'karb94/neoscroll.nvim',
+		opt = true,
+		setup = function() require("core.utils").packer_defer_load("neoscroll.nvim", 100) end,
+		config = editor.neoscroll,
+	}
+	
   -- }
 
   -- TOOLS {
