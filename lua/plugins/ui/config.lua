@@ -4,6 +4,10 @@ function config.galaxyline()
   require('plugins.ui.eviline')
 end
 
+function config.lualine()
+	require('plugins.ui.lualine')
+end
+
 function config.nvim_tree()
   -- On Ready Event for Lazy Loading work
   require("nvim-tree.events").on_nvim_tree_ready(
@@ -17,21 +21,42 @@ function config.nvim_tree()
 end
 
 function config.treesitter()
-  -- vim.api.nvim_command('set foldmethod=expr')
-  -- vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
+	if not packer_plugins['nvim-treesitter-textobjects'].loaded then
+		vim.cmd [[PackerLoad nvim-treesitter-textobjects]]
+	end
+
+  vim.api.nvim_command('set foldmethod=expr')
+  vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
+
   require('nvim-treesitter.configs').setup {
 	ensure_installed = "maintained",
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,
     },
-	rainbow = {
-          enable = true,
-          extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-          max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-          colors = {}, -- table of hex strings
-          termcolors = {} -- table of colour name strings
-        }
+	textobjects = {
+		select = {
+		  enable = true,
+
+		  -- Automatically jump forward to textobj, similar to targets.vim
+		  lookahead = true,
+
+		  keymaps = {
+			-- You can use the capture groups defined in textobjects.scm
+			["af"] = "@function.outer",
+			["if"] = "@function.inner",
+			["ac"] = "@class.outer",
+			["ic"] = "@class.inner",
+			["al"] = "@loop.outer",
+			["il"] = "@loop.inner",
+			["ab"] = "@block.outer",
+			["ib"] = "@block.inner",
+			["as"] = "@statement.outer",
+			["ah"] = "@call.outer",
+			["ih"] = "@call.inner",
+		  },
+		},
+	  }
   }
 end
 
@@ -70,8 +95,8 @@ function config.barbar()
 	  icon_custom_colors = false,
 
 	  -- Configure icons on the bufferline.
-	  icon_separator_active = '▎',
-	  icon_separator_inactive = '▎',
+	  icon_separator_active = '│',
+	  icon_separator_inactive = '│',
 	  icon_close_tab = '',
 	  icon_close_tab_modified = '●',
 	  icon_pinned = '車',
@@ -101,6 +126,7 @@ function config.barbar()
 	  -- where X is the buffer number. But only a static string is accepted here.
 	  no_name_title = nil,
 	}
+	require("core.utils").packer_defer_load("barbar.nvim", 800)
 end
 
 return config

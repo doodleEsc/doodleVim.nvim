@@ -91,26 +91,7 @@ gls.left[7] = {
   }
 }
 
-
 gls.right[1] = {
-  LineInfo = {
-    provider = 'LineColumn',
-    --separator = '｜',
-    --separator_highlight = {colors.grey, colors.bg},
-    highlight = {colors.fg,colors.bg},
-  },
-}
-
-gls.right[2] = {
-  PerCent = {
-    provider = 'LinePercent',
-    separator = '｜',
-    separator_highlight = {colors.grey, colors.bg},
-    highlight = {colors.fg,colors.bg,'bold'},
-  }
-}
-
-gls.right[3] = {
   GitIcon = {
     provider = function() return ' ' end,
     condition = condition.check_git_workspace,
@@ -120,7 +101,7 @@ gls.right[3] = {
   }
 }
 
-gls.right[4] = {
+gls.right[2] = {
   GitBranch = {
     provider = 'GitBranch',
     condition = condition.check_git_workspace,
@@ -128,7 +109,7 @@ gls.right[4] = {
   }
 }
 
-gls.right[5] = {
+gls.right[3] = {
   DiffAdd = {
     provider = 'DiffAdd',
     condition = condition.hide_in_width,
@@ -138,7 +119,8 @@ gls.right[5] = {
     highlight = {colors.green,colors.bg},
   }
 }
-gls.right[6] = {
+
+gls.right[4] = {
   DiffModified = {
     provider = 'DiffModified',
     condition = condition.hide_in_width,
@@ -146,14 +128,35 @@ gls.right[6] = {
     highlight = {colors.orange,colors.bg},
   }
 }
-gls.right[7] = {
+
+gls.right[5] = {
   DiffRemove = {
     provider = 'DiffRemove',
-    condition = condition.hide_in_width,
+    condition = function() return true end,
     icon = '  ',
     highlight = {colors.red,colors.bg},
   }
 }
+
+
+gls.right[6] = {
+  LineInfo = {
+    provider = 'LineColumn',
+    --separator = '｜',
+    --separator_highlight = {colors.grey, colors.bg},
+    highlight = {colors.fg,colors.bg},
+  },
+}
+
+gls.right[7] = {
+  PerCent = {
+    provider = 'LinePercent',
+    separator = '｜',
+    separator_highlight = {colors.grey, colors.bg},
+    highlight = {colors.fg,colors.bg,'bold'},
+  }
+}
+
 
 
 --gls.right[7] = {

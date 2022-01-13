@@ -1,13 +1,10 @@
 local config = {}
 
 function config.telescope()
-  if not packer_plugins['plenary.nvim'].loaded then
-    vim.cmd [[packadd plenary.nvim]]
-    vim.cmd [[packadd popup.nvim]]
-
-	vim.cmd [[packadd telescope-fzy-native.nvim]]
-	vim.cmd [[packadd telescope-coc.nvim]]
-	vim.cmd [[packadd todo-comments.nvim]]
+  if not packer_plugins['telescope-coc.nvim'].loaded then
+	-- vim.cmd [[PackerLoad telescope-fzy-native.nvim]]
+	vim.cmd [[PackerLoad telescope-file-browser.nvim]]
+	vim.cmd [[PackerLoad telescope-coc.nvim]]
   end
 
   require('telescope').setup {
@@ -18,16 +15,22 @@ function config.telescope()
       file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
       grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
       qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+      layout_config = {
+        vertical = { width = 0.8, height = 0.6 },
+      },
     },
     extensions = {
         fzy_native = {
-            override_generic_sorter = false,
+            override_generic_sorter = true,
             override_file_sorter = true,
-        }
-    }
+        },
+		file_browser = {
+			theme = "ivy",
+		},
+    },
   }
 
-  require('telescope').load_extension('fzy_native')
+  require('telescope').load_extension('file_browser')
   require('telescope').load_extension('coc')
   require('telescope').load_extension('todo-comments')
 end
@@ -49,7 +52,7 @@ function config.nvim_tree()
 	  -- hijack the cursor in the tree to put it at the start of the filename
 	  hijack_cursor       = true,
 	  -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually) 
-	  update_cwd          = true,
+	  update_cwd          = false,
 	  -- show lsp diagnostics in the signcolumn
 	  diagnostics = {
 		enable = true,
@@ -63,7 +66,7 @@ function config.nvim_tree()
 	  -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
 	  update_focused_file = {
 		-- enables the feature
-		enable      = false,
+		enable      = true,
 		-- update the root directory of the tree to the one of the folder containing the file if the file is not under the current root directory
 		-- only relevant when `update_focused_file.enable` is true
 		update_cwd  = false,
@@ -117,13 +120,41 @@ function config.mkdp()
   vim.g.mkdp_auto_start = 0
   vim.g.mkdp_open_to_the_world  = 1
   vim.g.mkdp_open_ip = '0.0.0.0'
+  vim.g.mkdp_port = 9096
   vim.g.mkdp_echo_preview_url = 1
+  vim.g.mkdp_command_for_global = 1
+  vim.g.mkdp_auto_close = 0
 end
 
-function config.floaterm()
-	vim.g.floaterm_position = "center"
-	vim.g.floaterm_width = 0.8
-	vim.g.floaterm_height = 0.9
+function config.fterm()
+	require'FTerm'.setup({
+		border = 'rounded',
+		dimensions  = {
+			height = 0.9,
+			width = 0.9,
+		},
+		blend = 10,
+	})
+end
+
+function config.gitsigns()
+	require('gitsigns').setup{
+		keymaps = {},
+		watch_gitdir = {
+			interval = 2000,
+			follow_files = true
+		},
+		current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+		current_line_blame_opts = {
+			virt_text = true,
+			virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+			delay = 1000,
+			ignore_whitespace = false,
+		},
+		current_line_blame_formatter_opts = {
+			relative_time = false
+		},
+	}
 end
 
 return config

@@ -10,8 +10,11 @@ return require('packer').startup(function(use)
 
   -- COMPLETION {
 	-- coc.nvim
-  	use {'neoclide/coc.nvim', branch = 'release', event = 'BufReadPre'}
-	use {'honza/vim-snippets', after='coc.nvim'}
+  	use {'neoclide/coc.nvim', branch = 'release', event = 'BufReadPost'}
+
+	-- use {'honza/vim-snippets', after='coc.nvim'}
+	use {'rafamadriz/friendly-snippets', event = "InsertEnter"}
+	-- }
 
   -- DEBUG {
   	-- nvim-dap
@@ -23,33 +26,67 @@ return require('packer').startup(function(use)
 	}
   -- }
 
+  -- UI {
 	-- treesitter
-	use {'nvim-treesitter/nvim-treesitter', event = 'BufRead', config = ui.treesitter}
-	use {'p00f/nvim-ts-rainbow', after = 'nvim-treesitter'}
+	use {'nvim-treesitter/nvim-treesitter',
+		opt = true,
+		setup = function() require("core.utils").packer_defer_load("nvim-treesitter", 100) end,
+		config = ui.treesitter,
+		requires = {'nvim-treesitter/nvim-treesitter-textobjects', opt = true}
+	}
 
 	-- statusline
-	use {'glepnir/galaxyline.nvim', branch = 'main', config = ui.galaxyline, requires = {'kyazdani42/nvim-web-devicons'}}
+	use {'nvim-lualine/lualine.nvim',
+		config = ui.lualine,
+		event = "UIEnter",
+		requires = {'kyazdani42/nvim-web-devicons'}
+	}
 
 	-- colorizer
-	use {'norcalli/nvim-colorizer.lua', ft={"lua", "vim", "markdown"}, config = function() require('colorizer').setup() end}
+	use {'norcalli/nvim-colorizer.lua',
+		ft={"lua", "vim", "markdown"},
+		config = function() require('colorizer').setup() end
+	}
+
+	-- colorschema
+	use {"cinuor/gruvbox.nvim",opt=true}
 
 	-- tabline
 	use {'romgrk/barbar.nvim',
+		opt = true,
 		requires = {'kyazdani42/nvim-web-devicons'},
-		config = ui.barbar,
-		setup = function() require("core.utils").packer_defer_load("barbar.nvim", 1000) end
+		setup = ui.barbar
 	}
-
   -- }
 
   -- EDITOR {
+	-- comment
+	use {'numToStr/Comment.nvim', 
+		opt = true,
+		setup = function() require("core.utils").packer_defer_load("Comment.nvim", 100) end,
+		config = editor.comment,
+	}
 
-	use {'tyru/caw.vim', keys={'n','<Leader>c'}, config = editor.caw}
-
+	-- cursor move
 	use {'easymotion/vim-easymotion', keys={"n","<Leader>s"}, config = editor.easymotion}
 
+	-- align format
 	use {'junegunn/vim-easy-align', keys={{"n","ma"},{"x","ma"}}, config=editor.easyalign}
 
+	-- blankline
+	use {'lukas-reineke/indent-blankline.nvim',
+		opt = true,
+		setup = function() require("core.utils").packer_defer_load("indent-blankline.nvim", 100) end,
+		config = editor.blankline,
+	}
+
+	-- smooth scroll
+	use {'karb94/neoscroll.nvim',
+		opt = true,
+		setup = function() require("core.utils").packer_defer_load("neoscroll.nvim", 100) end,
+		config = editor.neoscroll,
+	}
+	
   -- }
 
   -- TOOLS {
@@ -57,46 +94,63 @@ return require('packer').startup(function(use)
   	use {'dstein64/vim-startuptime', cmd = 'StartupTime'}
 
 	-- telescope
-	use {'nvim-telescope/telescope.nvim', opt = true,
-		setup = function() require("core.utils").packer_defer_load("telescope.nvim", 800) end,
+	use {'nvim-telescope/telescope.nvim',
+		opt = true,
+		setup = function() require("core.utils").packer_defer_load("telescope.nvim", 1000) end,
 		config = tools.telescope,
 		requires = {
-			{'nvim-lua/popup.nvim', opt = true},
-			{'nvim-lua/plenary.nvim',opt = true},
-			{'nvim-telescope/telescope-fzy-native.nvim', opt = true},
-			{'fannheyward/telescope-coc.nvim',  opt = true},
-			{'folke/todo-comments.nvim', opt = true, config = editor.todo},
+			{'nvim-telescope/telescope-file-browser.nvim', opt = true},
+			{'fannheyward/telescope-coc.nvim',  opt = true}
 		},
+	}
+
+	-- todo-comments
+	use {'folke/todo-comments.nvim', event = 'BufReadPost', config = editor.todo}
+
+	-- git stafff
+	use {'lewis6991/gitsigns.nvim',
+		opt = true,
+		config = tools.gitsigns,
+		requires = {'nvim-lua/plenary.nvim'},
+		setup = function() require("core.utils").packer_defer_load("gitsigns.nvim", 1000) end,
 	}
 
 	-- nvim-tree
 	use {'kyazdani42/nvim-tree.lua',
-	  cmd = {'NvimTreeToggle','NvimTreeOpen'},
-	  config = tools.nvim_tree,
-	  requires = 'kyazdani42/nvim-web-devicons'
+		cmd = "NvimTreeToggle",
+		config = tools.nvim_tree,
+		requires = 'kyazdani42/nvim-web-devicons'
 	}
 
 	-- vista
 	use {'liuchengxu/vista.vim', cmd = 'Vista', config = tools.vista}
 
 	-- markdown-preview
-	use {'iamcco/markdown-preview.nvim', ft = 'markdown', run = function() vim.cmd [[:call mkdp#util#install()]] end, config = tools.mkdp}
+	use {'iamcco/markdown-preview.nvim', ft = 'markdown', run = function() vim.cmd [[:call mkdp#util#install()]] end, setup = tools.mkdp}
 
 	-- translator
 	use {'voldikss/vim-translator', cmd = {'TranslateW'}}
 
 	-- floaterm
-	use {'voldikss/vim-floaterm', cmd = {'FloatermToggle', 'FloatermNew'}, config = tools.floaterm}
+	use {'cinuor/FTerm.nvim', cmd = {'FTermToggle', 'FTermRun'}, config = tools.fterm}
 
 	-- vim ascii draw
 	use {'jbyuki/venn.nvim', cmd = {'VBox', 'VFill'}}
 
-	-- cheat.sh
-	use {'RishabhRD/nvim-cheat.sh', cmd = {'Cheat', 'CheatList', 'CheatWithoutComments', 'CheatListWithoutComments'}}
-	use {'RishabhRD/popfix', after = 'nvim-cheat.sh'}
-
-	-- vim-solidity
+  -- Syntax {
+	-- solidity
 	use {'TovarishFin/vim-solidity', ft = 'solidity'}
 
+	-- helm
+	use {'towolf/vim-helm', ft='helm'}
+	-- }
+
+  -- Basic {
+	-- cache plugins
+	use {'lewis6991/impatient.nvim'}
+
+	-- basic dependence
+	use {'nvim-lua/plenary.nvim'}
   -- }
 end)
+

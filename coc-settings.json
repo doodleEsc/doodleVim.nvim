@@ -4,7 +4,7 @@
 	"coc.preferences.extensionUpdateCheck": "daily",
 	"coc.preferences.formatOnType": true,
 	"coc.preferences.formatOnSaveFiletypes": ["go", "python", "rust"],
-
+	"coc.source.word.enable": false,
 	"suggest.triggerAfterInsertEnter": true,
 	"suggest.timeout": 1500,
 	"suggest.enablePreview": true,
