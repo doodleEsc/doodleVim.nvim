@@ -133,7 +133,7 @@ function config.fterm()
 			height = 0.9,
 			width = 0.9,
 		},
-		blend = 15,
+		blend = 10,
 	})
 end
 
