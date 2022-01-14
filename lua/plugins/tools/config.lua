@@ -2,7 +2,7 @@ local config = {}
 
 function config.telescope()
   if not packer_plugins['telescope-coc.nvim'].loaded then
-	-- vim.cmd [[PackerLoad telescope-fzy-native.nvim]]
+	vim.cmd [[PackerLoad telescope-fzy-native.nvim]]
 	vim.cmd [[PackerLoad telescope-file-browser.nvim]]
 	vim.cmd [[PackerLoad telescope-coc.nvim]]
   end
@@ -16,7 +16,7 @@ function config.telescope()
       grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
       qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
       layout_config = {
-        vertical = { width = 0.8, height = 0.6 },
+        vertical = { width = 0.9, height = 0.8 },
       },
     },
     extensions = {
@@ -30,6 +30,7 @@ function config.telescope()
     },
   }
 
+  require('telescope').load_extension('fzy_native')
   require('telescope').load_extension('file_browser')
   require('telescope').load_extension('coc')
   require('telescope').load_extension('todo-comments')

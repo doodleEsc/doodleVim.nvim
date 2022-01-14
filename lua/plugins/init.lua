@@ -99,6 +99,7 @@ return require('packer').startup(function(use)
 		setup = function() require("core.utils").packer_defer_load("telescope.nvim", 1000) end,
 		config = tools.telescope,
 		requires = {
+			{'nvim-telescope/telescope-fzy-native.nvim', opt = true},
 			{'nvim-telescope/telescope-file-browser.nvim', opt = true},
 			{'fannheyward/telescope-coc.nvim',  opt = true}
 		},
