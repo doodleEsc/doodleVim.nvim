@@ -53,7 +53,6 @@ return require('packer').startup(function(use)
 
 	-- tabline
 	use {'romgrk/barbar.nvim',
-		disable = function() return vim.opt.diff:get() end,
 		opt = true,
 		requires = {'kyazdani42/nvim-web-devicons'},
 		setup = ui.barbar
