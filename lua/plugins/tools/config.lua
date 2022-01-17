@@ -101,7 +101,7 @@ function config.nvim_tree()
 end
 
 function config.vista()
-  vim.g['vista#renderer#enable_icon'] = 1
+  vim.g["vista#renderer#enable_icon"] = 1
   vim.g.vista_close_on_jump = 1
   vim.g.vista_stay_on_open = 0
   vim.g.vista_disable_statusline = 1
@@ -115,6 +115,8 @@ function config.vista()
     typescript = 'coc',
     typescriptreact =  'coc',
   }
+  vim.g.vista_icon_indent = {"╰─▸ ","├─▸ "}
+  vim.g.vista_sidebar_width = 40
 end
 
 function config.mkdp()

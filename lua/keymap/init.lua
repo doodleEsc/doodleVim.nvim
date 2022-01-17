@@ -77,10 +77,10 @@ local plug_map = {
 	["v|<Leader>t"] = map_cr("TranslateW"):with_silent(),
 
 	-- Plugin nvim-dap
-	["n|<F5>"]  = map_cmd("<cmd>lua require('extend.dap').debug_continue()<CR>"):with_noremap(),
-	["n|<F17>"] = map_cmd("<cmd>lua require('extend.dap').debug_stop()<CR>"):with_noremap(), -- shift + F5
-	["n|<F6>"]  = map_cmd("<cmd>lua require('extend.dap').debug_pause()<CR>"):with_noremap(),
-	["n|<F18>"] = map_cmd("<cmd>lua require('extend.dap').debug_restart()<CR>"):with_noremap(), -- shift + F6
+	["n|<F7>"]  = map_cmd("<cmd>lua require('extend.dap').debug_continue()<CR>"):with_noremap(),
+	["n|<F19>"] = map_cmd("<cmd>lua require('extend.dap').debug_stop()<CR>"):with_noremap(), -- shift + F7
+	["n|<F8>"]  = map_cmd("<cmd>lua require('extend.dap').debug_pause()<CR>"):with_noremap(),
+	["n|<F20>"] = map_cmd("<cmd>lua require('extend.dap').debug_restart()<CR>"):with_noremap(), -- shift + F8
 	["n|<F9>"]  = map_cmd("<cmd>lua require('extend.dap').debug_toggle()<CR>"):with_noremap():with_silent(),
 	["n|<F10>"] = map_cmd("<cmd>lua require('extend.dap').debug_step_over()<CR>"):with_noremap():with_silent(),
 	["n|<F11>"] = map_cmd("<cmd>lua require('extend.dap').debug_step_into()<CR>"):with_noremap():with_silent(),

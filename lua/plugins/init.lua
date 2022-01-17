@@ -89,9 +89,9 @@ return require('packer').startup(function(use)
 	
   -- }
 
-  -- TOOLS {
-  	-- startuptime
-  	use {'dstein64/vim-startuptime', cmd = 'StartupTime'}
+-- TOOLS {
+	-- startuptime
+	use {'dstein64/vim-startuptime', cmd = 'StartupTime'}
 
 	-- telescope
 	use {'nvim-telescope/telescope.nvim',
@@ -124,7 +124,7 @@ return require('packer').startup(function(use)
 	}
 
 	-- vista
-	use {'liuchengxu/vista.vim', cmd = 'Vista', config = tools.vista}
+	use {'liuchengxu/vista.vim', cmd = 'Vista', setup = tools.vista}
 
 	-- markdown-preview
 	use {'iamcco/markdown-preview.nvim', ft = 'markdown', run = function() vim.cmd [[:call mkdp#util#install()]] end, setup = tools.mkdp}
@@ -137,6 +137,7 @@ return require('packer').startup(function(use)
 
 	-- vim ascii draw
 	use {'jbyuki/venn.nvim', cmd = {'VBox', 'VFill'}}
+-- }
 
   -- Syntax {
 	-- solidity
