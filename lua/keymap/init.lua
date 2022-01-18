@@ -51,11 +51,14 @@ local plug_map = {
     -- Plugin MarkdownPreview
     ["n|mp"] = map_cu('MarkdownPreviewToggle'):with_noremap():with_silent(),
 
-    -- Plugin FTerm
-    ["n|ft"]    = map_cu('FTermToggle'):with_noremap():with_silent(),
-    ["n|fg"]    = map_cu('FTermRun gitui'):with_noremap():with_silent(),
-    ["t|ft"]    = map_cu([[<C-\><C-n>:FTermToggle<CR>]]):with_noremap():with_silent(),
-    ["t|fn"]    = map_cu([[<C-\><C-n>:FTermExit<CR>]]):with_noremap():with_silent(),
+	-- Plugin vim-floaterm
+    ["n|ft"]    = map_cu('FloatermToggle'):with_noremap():with_silent(),
+    ["t|ft"]    = map_cmd([[<C-\><C-n>:FloatermToggle<CR>]]):with_noremap():with_silent(),	-- floaterm toggle
+    ["t|fg"]    = map_cmd([[<C-\><C-n>:FloatermNew gitui<CR>]]):with_noremap():with_silent(),-- open gitui
+    ["t|<C-h>"]    = map_cmd([[<C-\><C-n>:FloatermPrev<CR>]]):with_noremap():with_silent(),		-- previous terminal
+    ["t|<C-l>"]    = map_cmd([[<C-\><C-n>:FloatermNext<CR>]]):with_noremap():with_silent(),		-- next terminal
+    ["t|fk"]    = map_cmd([[<C-\><C-n>:FloatermKill<CR>]]):with_noremap():with_silent(),		-- just kill the front terminal
+    ["t|fd"]    = map_cmd([[<C-\><C-n>:FloatermKill!<CR>]]):with_noremap():with_silent(),	-- kill them all
 
     -- Plugin Telescope
 	["n|<Leader>f"] = map_args('Telescope'):with_noremap(),
@@ -103,6 +106,13 @@ local plug_map = {
 	["v|<Leader>ld"] = map_cu("VBoxD"):with_noremap():with_silent(),
 	["v|<Leader>lh"] = map_cu("VBoxH"):with_noremap():with_silent(),
 	["v|<Leader>lf"] = map_cu("VFill"):with_noremap():with_silent(),
+
+	-- easymotion
+	["n|<Leader>s"] = map_cmd("<Plug>(easymotion-overwin-f2)"),
+
+	-- easyalign
+	["n|ma"] = map_cmd("<Plug>(EasyAlign)"),
+	["x|ma"] = map_cmd("<Plug>(EasyAlign)"),
 };
 
 bind.nvim_load_mapping(plug_map)

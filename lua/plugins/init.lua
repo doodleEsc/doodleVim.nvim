@@ -12,7 +12,7 @@ return require('packer').startup(function(use)
 	-- coc.nvim
   	use {'neoclide/coc.nvim', branch = 'release', event = 'BufReadPost'}
 
-	-- use {'honza/vim-snippets', after='coc.nvim'}
+	-- snippets
 	use {'rafamadriz/friendly-snippets', event = "InsertEnter"}
 	-- }
 
@@ -37,8 +37,8 @@ return require('packer').startup(function(use)
 
 	-- statusline
 	use {'nvim-lualine/lualine.nvim',
-		config = ui.lualine,
 		event = "UIEnter",
+		config = ui.lualine,
 		requires = {'kyazdani42/nvim-web-devicons'}
 	}
 
@@ -68,10 +68,16 @@ return require('packer').startup(function(use)
 	}
 
 	-- cursor move
-	use {'easymotion/vim-easymotion', keys={"n","<Leader>s"}, config = editor.easymotion}
+	use {'easymotion/vim-easymotion',
+		opt = true,
+		setup = function() require("core.utils").packer_defer_load("vim-easymotion", 1500) end,
+	}
 
 	-- align format
-	use {'junegunn/vim-easy-align', keys={{"n","ma"},{"x","ma"}}, config=editor.easyalign}
+	use {'junegunn/vim-easy-align',
+		opt = true,
+		setup = function() require("core.utils").packer_defer_load("vim-easy-align", 1500) end,
+	}
 
 	-- blankline
 	use {'lukas-reineke/indent-blankline.nvim',
@@ -86,6 +92,10 @@ return require('packer').startup(function(use)
 		setup = function() require("core.utils").packer_defer_load("neoscroll.nvim", 100) end,
 		config = editor.neoscroll,
 	}
+
+	-- todo-comments
+	use {'folke/todo-comments.nvim', event = 'BufReadPost', config = editor.todo}
+
 	
   -- }
 
@@ -105,9 +115,6 @@ return require('packer').startup(function(use)
 		},
 	}
 
-	-- todo-comments
-	use {'folke/todo-comments.nvim', event = 'BufReadPost', config = editor.todo}
-
 	-- git stafff
 	use {'lewis6991/gitsigns.nvim',
 		opt = true,
@@ -118,7 +125,7 @@ return require('packer').startup(function(use)
 
 	-- nvim-tree
 	use {'kyazdani42/nvim-tree.lua',
-		cmd = "NvimTreeToggle",
+		opt = true,
 		config = tools.nvim_tree,
 		requires = 'kyazdani42/nvim-web-devicons'
 	}
@@ -133,11 +140,14 @@ return require('packer').startup(function(use)
 	use {'voldikss/vim-translator', cmd = {'TranslateW'}}
 
 	-- floaterm
-	use {'cinuor/FTerm.nvim', cmd = {'FTermToggle', 'FTermRun'}, config = tools.fterm}
+	use {'voldikss/vim-floaterm',
+		opt = true,
+		setup = tools.floaterm
+	}
 
 	-- vim ascii draw
 	use {'jbyuki/venn.nvim', cmd = {'VBox', 'VFill'}}
--- }
+	-- }
 
   -- Syntax {
 	-- solidity

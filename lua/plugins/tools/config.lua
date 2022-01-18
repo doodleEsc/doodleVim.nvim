@@ -129,17 +129,6 @@ function config.mkdp()
   vim.g.mkdp_auto_close = 0
 end
 
-function config.fterm()
-	require'FTerm'.setup({
-		border = 'rounded',
-		dimensions  = {
-			height = 0.9,
-			width = 0.9,
-		},
-		blend = 10,
-	})
-end
-
 function config.gitsigns()
 	require('gitsigns').setup{
 		keymaps = {},
@@ -158,6 +147,14 @@ function config.gitsigns()
 			relative_time = false
 		},
 	}
+end
+
+function config.floaterm()
+	vim.g.floaterm_width = 0.9
+	vim.g.floaterm_height = 0.9
+	vim.g.floaterm_borderchars = "─│─│╭╮╯╰"
+	vim.g.floaterm_opener = "edit"
+	require("core.utils").packer_defer_load("vim-floaterm", 1000)
 end
 
 return config
