@@ -52,9 +52,10 @@ local plug_map = {
     ["n|mp"] = map_cu('MarkdownPreviewToggle'):with_noremap():with_silent(),
 
 	-- Plugin vim-floaterm
-    ["n|ft"]    = map_cu('FloatermToggle --cwd=<buffer>'):with_noremap():with_silent(),
-    ["n|fr"]    = map_cu('FloatermNew --cwd=<root>'):with_noremap():with_silent(),
+    ["n|ft"]    = map_cu('FloatermToggle'):with_noremap():with_silent(),
     ["t|ft"]    = map_cmd([[<C-\><C-n>:FloatermToggle<CR>]]):with_noremap():with_silent(),	-- floaterm toggle
+    ["n|fr"]    = map_cu('FloatermNew --cwd=<root>'):with_noremap():with_silent(),
+    ["n|fv"]    = map_cu('FloatermNew --cwd=<buffer>'):with_noremap():with_silent(),
     ["t|fg"]    = map_cmd([[<C-\><C-n>:FloatermNew gitui<CR>]]):with_noremap():with_silent(),-- open gitui
     ["t|<C-h>"] = map_cmd([[<C-\><C-n>:FloatermPrev<CR>]]):with_noremap():with_silent(),		-- previous terminal
     ["t|<C-l>"] = map_cmd([[<C-\><C-n>:FloatermNext<CR>]]):with_noremap():with_silent(),		-- next terminal
