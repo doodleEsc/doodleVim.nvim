@@ -1,13 +1,13 @@
 local config = {}
 
-function config.easymotion()
-	vim.api.nvim_set_keymap('n', '<Leader>s', '<Plug>(easymotion-overwin-f2)', {})
-end
+-- function config.easymotion()
+-- 	vim.api.nvim_set_keymap('n', '<Leader>s', '<Plug>(easymotion-overwin-f2)', {})
+-- end
 
-function config.easyalign()
-	vim.api.nvim_set_keymap('x', 'ma', '<Plug>(EasyAlign)', {})
-	vim.api.nvim_set_keymap('n', 'ma', '<Plug>(EasyAlign)<CR>', {})
-end
+-- function config.easyalign()
+-- 	vim.api.nvim_set_keymap('x', 'ma', '<Plug>(EasyAlign)', {})
+-- 	vim.api.nvim_set_keymap('n', 'ma', '<Plug>(EasyAlign)<CR>', {})
+-- end
 
 function config.todo()
 	-- require("todo-comments").setup {}
@@ -82,6 +82,26 @@ function config.autopairs()
 	  map_cr = true, --  map <CR> on insert mode
 	  map_complete = true, -- it will auto insert `(` after select function or method item
 	  auto_select = true -- automatically select the first item
+
+function config.blankline()
+  require("indent_blankline").setup {
+    show_end_of_line = true,
+  }
+end
+
+function config.neoscroll()
+	require('neoscroll').setup({
+		-- All these keys will be mapped to their corresponding default scrolling animation
+		mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
+					'<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
+		hide_cursor = false,          -- Hide cursor while scrolling
+		stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+		use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+		respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+		cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+		easing_function = nil,        -- Default easing function
+		pre_hook = nil,              -- Function to run before the scrolling animation starts
+		post_hook = nil,              -- Function to run after the scrolling animation ends
 	})
 end
 

@@ -2,7 +2,7 @@ local config = {}
 
 function config.telescope()
   if not packer_plugins['telescope-coc.nvim'].loaded then
-	-- vim.cmd [[PackerLoad telescope-fzy-native.nvim]]
+	vim.cmd [[PackerLoad telescope-fzy-native.nvim]]
 	vim.cmd [[PackerLoad telescope-file-browser.nvim]]
 	vim.cmd [[PackerLoad telescope-coc.nvim]]
   end
@@ -16,7 +16,7 @@ function config.telescope()
       grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
       qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
       layout_config = {
-        vertical = { width = 0.8, height = 0.6 },
+        vertical = { width = 0.9, height = 0.8 },
       },
     },
     extensions = {
@@ -30,6 +30,7 @@ function config.telescope()
     },
   }
 
+  require('telescope').load_extension('fzy_native')
   require('telescope').load_extension('file_browser')
   require('telescope').load_extension('coc')
   require('telescope').load_extension('todo-comments')
@@ -100,7 +101,7 @@ function config.nvim_tree()
 end
 
 function config.vista()
-  vim.g['vista#renderer#enable_icon'] = 1
+  vim.g["vista#renderer#enable_icon"] = 1
   vim.g.vista_close_on_jump = 1
   vim.g.vista_stay_on_open = 0
   vim.g.vista_disable_statusline = 1
@@ -114,6 +115,8 @@ function config.vista()
     typescript = 'coc',
     typescriptreact =  'coc',
   }
+  vim.g.vista_icon_indent = {"╰─▸ ","├─▸ "}
+  vim.g.vista_sidebar_width = 40
 end
 
 function config.mkdp()
@@ -124,17 +127,6 @@ function config.mkdp()
   vim.g.mkdp_echo_preview_url = 1
   vim.g.mkdp_command_for_global = 1
   vim.g.mkdp_auto_close = 0
-end
-
-function config.fterm()
-	require'FTerm'.setup({
-		border = 'rounded',
-		dimensions  = {
-			height = 0.9,
-			width = 0.9,
-		},
-		blend = 15,
-	})
 end
 
 function config.gitsigns()
@@ -155,6 +147,14 @@ function config.gitsigns()
 			relative_time = false
 		},
 	}
+end
+
+function config.floaterm()
+	vim.g.floaterm_width = 0.9
+	vim.g.floaterm_height = 0.9
+	vim.g.floaterm_borderchars = "─│─│╭╮╯╰"
+	vim.g.floaterm_opener = "edit"
+	require("core.utils").packer_defer_load("vim-floaterm", 1000)
 end
 
 return config
