@@ -154,7 +154,7 @@ function config.floaterm()
 	vim.g.floaterm_height = 0.9
 	vim.g.floaterm_borderchars = "─│─│╭╮╯╰"
 	vim.g.floaterm_opener = "edit"
-	require("core.utils").packer_defer_load("vim-floaterm", 1000)
+	require("utils").packer_defer_load("vim-floaterm", 1000)
 end
 
 return config

@@ -109,7 +109,7 @@ function config.barbar()
 	  -- where X is the buffer number. But only a static string is accepted here.
 	  no_name_title = nil,
 	}
-	require("core.utils").packer_defer_load("barbar.nvim", 800)
+	require("utils").packer_defer_load("barbar.nvim", 800)
 end
 
 return config

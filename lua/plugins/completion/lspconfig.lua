@@ -9,55 +9,55 @@ local enhance_attach = function(client,bufnr)
   api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 
--- setup lspsaga
-if not packer_plugins['lspsaga.nvim'].loaded then
-  vim.cmd [[PackerLoad lspsaga.nvim]]
-end
+-- -- setup lspsaga
+-- if not packer_plugins['lspsaga.nvim'].loaded then
+--   vim.cmd [[PackerLoad lspsaga.nvim]]
+-- end
+--
+-- local saga = require 'lspsaga'
+-- saga.init_lsp_saga({
+--   code_action_icon = '💡'
+-- })
 
-local saga = require 'lspsaga'
-saga.init_lsp_saga({
-  code_action_icon = '💡'
-})
+-- -- setup nvim-lsp-installer
+-- if not packer_plugins['nvim-lsp-installer'].loaded then
+--   vim.cmd [[PackerLoad nvim-lsp-installer]]
+-- end
 
--- setup nvim-lsp-installer
-if not packer_plugins['nvim-lsp-installer'].loaded then
-  vim.cmd [[PackerLoad nvim-lsp-installer]]
-end
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-   properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
-   },
-}
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- capabilities.textDocument.completion.completionItem.preselectSupport = true
+-- capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+-- capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+-- capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+-- capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+-- capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+-- capabilities.textDocument.completion.completionItem.resolveSupport = {
+--    properties = {
+--       "documentation",
+--       "detail",
+--       "additionalTextEdits",
+--    },
+-- }
 
 
-local lsp_installer = require("nvim-lsp-installer")
-lsp_installer.on_server_ready(function(server)
-  local opts = {
-	  -- on_attach = enhance_attach,
-	  capabilities = capabilities,
-  }
-
-  -- (optional) Customize the options passed to the server
-  -- if server.name == "tsserver" then
-  --     opts.root_dir = function() ... end
-  -- end
-
-  -- This setup() function is exactly the same as lspconfig's setup function.
-  -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  server:setup(opts)
-end)
+-- local lsp_installer = require("nvim-lsp-installer")
+-- lsp_installer.on_server_ready(function(server)
+--   local opts = {
+-- 	  -- on_attach = enhance_attach,
+-- 	  capabilities = capabilities,
+--   }
+--
+--   -- (optional) Customize the options passed to the server
+--   -- if server.name == "tsserver" then
+--   --     opts.root_dir = function() ... end
+--   -- end
+--
+--   -- This setup() function is exactly the same as lspconfig's setup function.
+--   -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+--   server:setup(opts)
+-- end)
 
 
 function _G.reload_lsp()

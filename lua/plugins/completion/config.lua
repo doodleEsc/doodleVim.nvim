@@ -4,6 +4,40 @@ function config.lspconfig()
 	require('plugins.completion.lspconfig')
 end
 
+function config.nvim_lsp_installer()
+
+	if not packer_plugins['cmp-nvim-lsp'].loaded then
+	  vim.cmd [[PackerLoad cmp-nvim-lsp]]
+	end
+
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+	local lsp_installer = require("nvim-lsp-installer")
+	lsp_installer.on_server_ready(function(server)
+	  local opts = {
+		  -- on_attach = enhance_attach,
+		  capabilities = capabilities,
+	  }
+
+	  -- (optional) Customize the options passed to the server
+	  -- if server.name == "tsserver" then
+	  --     opts.root_dir = function() ... end
+	  -- end
+
+	  -- This setup() function is exactly the same as lspconfig's setup function.
+	  -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+	  server:setup(opts)
+	end)
+end
+
+function config.lspsage()
+	local saga = require 'lspsaga'
+	saga.init_lsp_saga({
+	  code_action_icon = '💡'
+	})
+end
+
 function config.nvim_cmp()
 	local cmp = require('cmp')
 	cmp.setup({

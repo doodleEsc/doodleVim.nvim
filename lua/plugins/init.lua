@@ -11,11 +11,20 @@ return require('packer').startup(function(use)
   -- LSP AND COMPLETION {
 	use {'neovim/nvim-lspconfig',
 		opt = true,
-		setup = function() require("core.utils").packer_defer_load("nvim-lspconfig", 100) end,
+		setup = function() require("utils").packer_defer_load("nvim-lspconfig", 100) end,
 		config = completion.lspconfig
 	}
-	use {'williamboman/nvim-lsp-installer', after='nvim-lspconfig'}
-	use {'tami5/lspsaga.nvim', after='nvim-lspconfig'}
+	use {'williamboman/nvim-lsp-installer',
+		after='nvim-lspconfig',
+		config = completion.nvim_lsp_installer
+	}
+	use {'tami5/lspsaga.nvim',
+		after='nvim-lspconfig',
+		config = completion.lspsage
+	}
+
+	use {'hrsh7th/nvim-cmp', config = completion.nvim_cmp}
+	use {'hrsh7th/cmp-nvim-lsp'}
 
 --	use {'L3MON4D3/LuaSnip', event = 'InsertEnter', after=''}
 --	use {'onsails/lspkind-nvim', event = 'InsertEnter', config = completion.lspkind_nvim}
@@ -23,8 +32,6 @@ return require('packer').startup(function(use)
 --	use {'hrsh7th/cmp-path', after = 'nvim-cmp'}
 --	use {'tzachar/cmp-tabnine', after = 'nvim-cmp', run='./install.sh'}
 --	use {'saadparwaiz1/cmp_luasnip', after='nvim-cmp'}
-	use {'hrsh7th/cmp-nvim-lsp'}
-	use {'hrsh7th/nvim-cmp', config = completion.nvim_cmp}
 
   -- DEBUG {
 	-- nvim-dap
@@ -40,7 +47,7 @@ return require('packer').startup(function(use)
 	-- treesitter
 	use {'nvim-treesitter/nvim-treesitter',
 		opt = true,
-		setup = function() require("core.utils").packer_defer_load("nvim-treesitter", 100) end,
+		setup = function() require("utils").packer_defer_load("nvim-treesitter", 100) end,
 		config = ui.treesitter,
 		requires = {'nvim-treesitter/nvim-treesitter-textobjects', opt = true}
 	}
@@ -73,38 +80,38 @@ return require('packer').startup(function(use)
 	-- comment
 	use {'numToStr/Comment.nvim', 
 		opt = true,
-		setup = function() require("core.utils").packer_defer_load("Comment.nvim", 100) end,
+		setup = function() require("utils").packer_defer_load("Comment.nvim", 100) end,
 		config = editor.comment,
 	}
 
 	-- cursor move
 	use {'easymotion/vim-easymotion',
 		opt = true,
-		setup = function() require("core.utils").packer_defer_load("vim-easymotion", 1500) end,
+		setup = function() require("utils").packer_defer_load("vim-easymotion", 1500) end,
 	}
 
 	-- align format
 	use {'andymass/vim-matchup',
 		opt = true,
-		setup = function() require("core.utils").packer_defer_load("Comment.nvim", 100) end
+		setup = function() require("utils").packer_defer_load("Comment.nvim", 100) end
 	}
 
 	use {'junegunn/vim-easy-align',
 		opt = true,
-		setup = function() require("core.utils").packer_defer_load("vim-easy-align", 1500) end,
+		setup = function() require("utils").packer_defer_load("vim-easy-align", 1500) end,
 	}
 
 	-- blankline
 	use {'lukas-reineke/indent-blankline.nvim',
 		opt = true,
-		setup = function() require("core.utils").packer_defer_load("indent-blankline.nvim", 100) end,
+		setup = function() require("utils").packer_defer_load("indent-blankline.nvim", 100) end,
 		config = editor.blankline,
 	}
 
 	-- smooth scroll
 	use {'karb94/neoscroll.nvim',
 		opt = true,
-		setup = function() require("core.utils").packer_defer_load("neoscroll.nvim", 100) end,
+		setup = function() require("utils").packer_defer_load("neoscroll.nvim", 100) end,
 		config = editor.neoscroll,
 	}
 
@@ -120,7 +127,7 @@ return require('packer').startup(function(use)
 	-- telescope
 	use {'nvim-telescope/telescope.nvim',
 		opt = true,
-		setup = function() require("core.utils").packer_defer_load("telescope.nvim", 1000) end,
+		setup = function() require("utils").packer_defer_load("telescope.nvim", 1000) end,
 		config = tools.telescope,
 		requires = {
 			{'nvim-telescope/telescope-fzy-native.nvim', opt = true},
@@ -134,7 +141,7 @@ return require('packer').startup(function(use)
 		opt = true,
 		config = tools.gitsigns,
 		requires = {'nvim-lua/plenary.nvim'},
-		setup = function() require("core.utils").packer_defer_load("gitsigns.nvim", 1000) end,
+		setup = function() require("utils").packer_defer_load("gitsigns.nvim", 1000) end,
 	}
 
 	-- nvim-tree
