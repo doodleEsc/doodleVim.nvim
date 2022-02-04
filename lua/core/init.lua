@@ -1,6 +1,7 @@
 local fn = vim.fn
 local api = vim.api
 local global = require('core.global')
+local defer = require('utils.defer')
 
 local function check_packer()
 	local install_path = global.data_dir .. 'pack/packer/start/packer.nvim'
@@ -74,6 +75,7 @@ local function load_nvim_config()
 	require('commands')
 	require('keymap')
 	set_colorscheme()
+	defer.load(250)
 end
 
 load_nvim_config()

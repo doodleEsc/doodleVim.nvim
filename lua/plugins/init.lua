@@ -1,3 +1,5 @@
+
+local defer = require("utils.defer")
 local ui = require("plugins.ui.config")
 local tools = require("plugins.tools.config")
 local completion = require("plugins.completion.config")
@@ -8,30 +10,35 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
 
+	use { "bfredl/nvim-luadev" }
+
+	-- COMPLETION
+	use {'hrsh7th/nvim-cmp',
+		opt = true,
+		setup = function()
+			require("utils.defer").packer_defer_load("nvim-cmp", 150)
+		end,
+		config = completion.nvim_cmp
+	}
+	use {'hrsh7th/cmp-nvim-lsp', after = "nvim-cmp"}
+	use {'saadparwaiz1/cmp_luasnip', after = "nvim-cmp"}
+	use {'hrsh7th/cmp-buffer', after = 'nvim-cmp'}
+	use {'hrsh7th/cmp-path', after = 'nvim-cmp'}
+	use {'tzachar/cmp-tabnine', after = 'nvim-cmp', run='./install.sh'}
+	use {'L3MON4D3/LuaSnip', after = "nvim-cmp", config = completion.luasnip}
+	use {'rafamadriz/friendly-snippets', opt = true}
+
   -- LSP AND COMPLETION {
 	use {'neovim/nvim-lspconfig',
-		opt = true,
-		setup = function() require("utils").packer_defer_load("nvim-lspconfig", 100) end,
-		config = completion.lspconfig
+		after = "nvim-cmp",
+	}
+	use {"ray-x/lsp_signature.nvim",
+		after = 'nvim-lspconfig',
 	}
 	use {'williamboman/nvim-lsp-installer',
-		after='nvim-lspconfig',
+		after={'nvim-lspconfig', 'lsp_signature.nvim'},
 		config = completion.nvim_lsp_installer
 	}
-	use {'tami5/lspsaga.nvim',
-		after='nvim-lspconfig',
-		config = completion.lspsage
-	}
-
-	use {'hrsh7th/nvim-cmp', config = completion.nvim_cmp}
-	use {'hrsh7th/cmp-nvim-lsp'}
-
---	use {'L3MON4D3/LuaSnip', event = 'InsertEnter', after=''}
---	use {'onsails/lspkind-nvim', event = 'InsertEnter', config = completion.lspkind_nvim}
---	use {'hrsh7th/cmp-buffer', after = 'nvim-cmp'}
---	use {'hrsh7th/cmp-path', after = 'nvim-cmp'}
---	use {'tzachar/cmp-tabnine', after = 'nvim-cmp', run='./install.sh'}
---	use {'saadparwaiz1/cmp_luasnip', after='nvim-cmp'}
 
   -- DEBUG {
 	-- nvim-dap
@@ -47,16 +54,17 @@ return require('packer').startup(function(use)
 	-- treesitter
 	use {'nvim-treesitter/nvim-treesitter',
 		opt = true,
-		setup = function() require("utils").packer_defer_load("nvim-treesitter", 100) end,
+		setup = function() require("utils.defer").packer_defer_load("nvim-treesitter", 100) end,
 		config = ui.treesitter,
 		requires = {'nvim-treesitter/nvim-treesitter-textobjects', opt = true}
 	}
 
 	-- statusline
 	use {'nvim-lualine/lualine.nvim',
-		event = "UIEnter",
+		opt = true,
+		setup = function() require("utils.defer").packer_defer_load("lualine.nvim", 100) end,
+		requires = {'kyazdani42/nvim-web-devicons'},
 		config = ui.lualine,
-		requires = {'kyazdani42/nvim-web-devicons'}
 	}
 
 	-- colorizer
@@ -71,8 +79,19 @@ return require('packer').startup(function(use)
 	-- tabline
 	use {'romgrk/barbar.nvim',
 		opt = true,
+		setup = function()
+			require("plugins.ui.config").barbar()
+			require("utils.defer").add("barbar.nvim", 90)
+		end,
 		requires = {'kyazdani42/nvim-web-devicons'},
-		setup = ui.barbar
+		-- config = ui.barbar
+	}
+
+	-- blankline
+	use {'lukas-reineke/indent-blankline.nvim',
+		opt = true,
+		setup = function() require("utils.defer").add("indent-blankline.nvim", 90) end,
+		config = ui.blankline,
 	}
   -- }
 
@@ -80,43 +99,51 @@ return require('packer').startup(function(use)
 	-- comment
 	use {'numToStr/Comment.nvim', 
 		opt = true,
-		setup = function() require("utils").packer_defer_load("Comment.nvim", 100) end,
+		setup = function() require("utils.defer").packer_defer_load("Comment.nvim", 1000) end,
 		config = editor.comment,
 	}
 
 	-- cursor move
 	use {'easymotion/vim-easymotion',
 		opt = true,
-		setup = function() require("utils").packer_defer_load("vim-easymotion", 1500) end,
+		setup = function() require("utils.defer").packer_defer_load("vim-easymotion", 1000) end,
 	}
 
 	-- align format
 	use {'andymass/vim-matchup',
 		opt = true,
-		setup = function() require("utils").packer_defer_load("Comment.nvim", 100) end
+		setup = function() require("utils.defer").packer_defer_load("vim-matchup", 1000) end,
 	}
 
 	use {'junegunn/vim-easy-align',
 		opt = true,
-		setup = function() require("utils").packer_defer_load("vim-easy-align", 1500) end,
-	}
-
-	-- blankline
-	use {'lukas-reineke/indent-blankline.nvim',
-		opt = true,
-		setup = function() require("utils").packer_defer_load("indent-blankline.nvim", 100) end,
-		config = editor.blankline,
+		setup = function() require("utils.defer").packer_defer_load("vim-easy-align", 1000) end,
 	}
 
 	-- smooth scroll
 	use {'karb94/neoscroll.nvim',
 		opt = true,
-		setup = function() require("utils").packer_defer_load("neoscroll.nvim", 100) end,
+		setup = function() require("utils.defer").packer_defer_load("neoscroll.nvim", 1000) end,
 		config = editor.neoscroll,
 	}
 
 	-- todo-comments
-	use {'folke/todo-comments.nvim', event = 'BufReadPost', config = editor.todo}
+	use {'folke/todo-comments.nvim',
+		opt = true,
+		setup = function() require("utils.defer").packer_defer_load("todo-comments.nvim", 100) end,
+		config = editor.todo
+	}
+
+	use {'windwp/nvim-autopairs',
+		opt = true,
+		setup = function() require("utils.defer").packer_defer_load("nvim-autopairs", 1000) end,
+		config = editor.autopairs
+	}
+
+	use {"cinuor/lsp-action.nvim",
+		after = "nvim-lspconfig",
+		config = editor.lspaction
+	}
 
   -- }
 
@@ -127,12 +154,11 @@ return require('packer').startup(function(use)
 	-- telescope
 	use {'nvim-telescope/telescope.nvim',
 		opt = true,
-		setup = function() require("utils").packer_defer_load("telescope.nvim", 1000) end,
+		setup = function() require("utils.defer").add("telescope.nvim", 90) end,
 		config = tools.telescope,
 		requires = {
 			{'nvim-telescope/telescope-fzy-native.nvim', opt = true},
 			{'nvim-telescope/telescope-file-browser.nvim', opt = true},
-			{'fannheyward/telescope-coc.nvim',  opt = true}
 		},
 	}
 
@@ -141,7 +167,7 @@ return require('packer').startup(function(use)
 		opt = true,
 		config = tools.gitsigns,
 		requires = {'nvim-lua/plenary.nvim'},
-		setup = function() require("utils").packer_defer_load("gitsigns.nvim", 1000) end,
+		setup = function() require("utils.defer").add("gitsigns.nvim", 90) end,
 	}
 
 	-- nvim-tree
@@ -152,10 +178,20 @@ return require('packer').startup(function(use)
 	}
 
 	-- vista
-	use {'liuchengxu/vista.vim', cmd = 'Vista', setup = tools.vista}
+	use {'liuchengxu/vista.vim',
+		opt = true,
+		setup = function()
+			require("plugins.tools.config").vista()
+			require("utils.defer").packer_defer_load("vista.vim", 1000)
+		end
+	}
 
 	-- markdown-preview
-	use {'iamcco/markdown-preview.nvim', ft = 'markdown', run = function() vim.cmd [[:call mkdp#util#install()]] end, setup = tools.mkdp}
+	use {'iamcco/markdown-preview.nvim',
+		ft = 'markdown',
+		setup = tools.mkdp,
+		run = function() vim.cmd [[:call mkdp#util#install()]] end,
+	}
 
 	-- translator
 	use {'voldikss/vim-translator', cmd = {'TranslateW'}}
@@ -163,7 +199,10 @@ return require('packer').startup(function(use)
 	-- floaterm
 	use {'voldikss/vim-floaterm',
 		opt = true,
-		setup = tools.floaterm
+		setup = function()
+			require("plugins.tools.config").floaterm()
+			require("utils.defer").packer_defer_load("vim-floaterm", 1000)
+		end,
 	}
 
 	-- vim ascii draw

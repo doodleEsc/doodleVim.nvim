@@ -1,39 +1,120 @@
 local config = {}
 
 function config.telescope()
-  if not packer_plugins['telescope-coc.nvim'].loaded then
+  if not packer_plugins['telescope-fzy-native.nvim'].loaded then
 	vim.cmd [[PackerLoad telescope-fzy-native.nvim]]
 	vim.cmd [[PackerLoad telescope-file-browser.nvim]]
-	vim.cmd [[PackerLoad telescope-coc.nvim]]
   end
 
-  require('telescope').setup {
-    defaults = {
-      prompt_prefix = '🔭 ',
-      selection_caret = " ",
-      sorting_strategy = 'ascending',
-      file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-      grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-      qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-      layout_config = {
-        vertical = { width = 0.9, height = 0.8 },
-      },
-    },
-    extensions = {
-        fzy_native = {
-            override_generic_sorter = true,
-            override_file_sorter = true,
-        },
-		file_browser = {
-			theme = "ivy",
-		},
-    },
-  }
+  local actions = require "telescope.actions"
+	require('telescope').setup {
+		defaults = {
+			prompt_prefix = '🔭 ',
+			selection_caret = " ",
+			sorting_strategy = 'ascending',
+			scroll_strategy = "limit",
+			set_env = { ['COLORTERM'] = 'truecolor'},
+			path_display = {'truncate'},
+			results_title = true,
+			color_devicons = true,
+			vimgrep_arguments = {
+				"rg",
+				"--color=never",
+				"--no-heading",
+				"--with-filename",
+				"--line-number",
+				"--column",
+				"--smart-case",
+				"--trim" -- add this value
+			},
+			layout_strategy = "flex",
+			layout_config = {
+				horizontal = {
+					width = 0.9,
+					height = 0.9,
+					preview_cutoff = 120,
+					preview_width = 0.6,
+					prompt_position = "top"
+				},
+				vertical = {
+					width = 0.9,
+					height = 0.9,
+				}
+			},
+			default_mappings = {
+				i = {
+					["<C-n>"] = actions.move_selection_next,
+					["<C-p>"] = actions.move_selection_previous,
 
-  require('telescope').load_extension('fzy_native')
-  require('telescope').load_extension('file_browser')
-  require('telescope').load_extension('coc')
-  require('telescope').load_extension('todo-comments')
+					["<C-c>"] = actions.close,
+
+					-- ["<Down>"] = actions.move_selection_next,
+					-- ["<Up>"] = actions.move_selection_previous,
+
+					["<CR>"] = actions.select_default,
+					["<C-s>"] = actions.select_horizontal,
+					["<C-v>"] = actions.select_vertical,
+					["<C-t>"] = actions.select_tab,
+
+					["<C-b>"] = actions.preview_scrolling_up,
+					["<C-f>"] = actions.preview_scrolling_down,
+
+					["<C-u>"] = actions.results_scrolling_up,
+					["<C-d>"] = actions.results_scrolling_down,
+
+					-- ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+					-- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+					-- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+					-- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+					-- ["<C-l>"] = actions.complete_tag,
+					-- ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+					["<C-w>"] = { "<c-s-w>", type = "command" },
+				},
+				n = {
+					 ["<esc>"] = actions.close,
+					 ["<CR>"] = actions.select_default,
+					 ["<C-s>"] = actions.select_horizontal,
+					 ["<C-v>"] = actions.select_vertical,
+					 ["<C-t>"] = actions.select_tab,
+
+					 ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+					 ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+					 ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+					 ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+
+					 -- TODO: This would be weird if we switch the ordering.
+					 ["j"] = actions.move_selection_next,
+					 ["k"] = actions.move_selection_previous,
+					 ["H"] = actions.move_to_top,
+					 ["M"] = actions.move_to_middle,
+					 ["L"] = actions.move_to_bottom,
+
+					 ["<Down>"] = actions.move_selection_next,
+					 ["<Up>"] = actions.move_selection_previous,
+					 ["gg"] = actions.move_to_top,
+					 ["G"] = actions.move_to_bottom,
+
+					 ["<C-u>"] = actions.preview_scrolling_up,
+					 ["<C-d>"] = actions.preview_scrolling_down,
+
+					 ["<PageUp>"] = actions.results_scrolling_up,
+					 ["<PageDown>"] = actions.results_scrolling_down,
+
+					 ["?"] = actions.which_key,
+				},
+			},
+			extensions = {
+				fzy_native = {
+					override_generic_sorter = true,
+					override_file_sorter = true,
+				},
+			},
+		},
+	}
+
+	require('telescope').load_extension('fzy_native')
+	require('telescope').load_extension('file_browser')
+	require('telescope').load_extension('todo-comments')
 end
 
 function config.nvim_tree()
@@ -105,15 +186,13 @@ function config.vista()
   vim.g.vista_close_on_jump = 1
   vim.g.vista_stay_on_open = 0
   vim.g.vista_disable_statusline = 1
-  vim.g.vista_default_executive = 'coc'
+  vim.g.vista_default_executive = 'nvim_lsp'
   vim.g.vista_echo_cursor_strategy = 'floating_win'
   vim.g.vista_vimwiki_executive = 'markdown'
   vim.g.vista_executive_for = {
     vimwiki =  'markdown',
     pandoc = 'markdown',
     markdown = 'toc',
-    typescript = 'coc',
-    typescriptreact =  'coc',
   }
   vim.g.vista_icon_indent = {"╰─▸ ","├─▸ "}
   vim.g.vista_sidebar_width = 40
@@ -154,7 +233,6 @@ function config.floaterm()
 	vim.g.floaterm_height = 0.9
 	vim.g.floaterm_borderchars = "─│─│╭╮╯╰"
 	vim.g.floaterm_opener = "edit"
-	require("utils").packer_defer_load("vim-floaterm", 1000)
 end
 
 return config

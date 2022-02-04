@@ -109,7 +109,12 @@ function config.barbar()
 	  -- where X is the buffer number. But only a static string is accepted here.
 	  no_name_title = nil,
 	}
-	require("utils").packer_defer_load("barbar.nvim", 800)
+end
+
+function config.blankline()
+  require("indent_blankline").setup {
+    show_end_of_line = true,
+  }
 end
 
 return config

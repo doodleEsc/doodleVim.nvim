@@ -5,19 +5,42 @@ local map_cmd = bind.map_cmd
 local map_args = bind.map_args
 
 local plug_map = {
-    --window navigation
-    ["n|<C-h>"]         = map_cmd("<C-w>h"):with_noremap(),
-    ["n|<C-l>"]         = map_cmd("<C-w>l"):with_noremap(),
-    ["n|<C-j>"]         = map_cmd("<C-w>j"):with_noremap(),
-    ["n|<C-k>"]         = map_cmd("<C-w>k"):with_noremap(),
 
-    -- Packer
-    ["n|<Leader>pu"]    = map_cr("PackerUpdate"):with_silent():with_noremap():with_nowait();
-    ["n|<Leader>pi"]    = map_cr("PackerInstall"):with_silent():with_noremap():with_nowait();
-    ["n|<Leader>pc"]    = map_cr("PackerCompile"):with_silent():with_noremap():with_nowait();
+	--window navigation
+	["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap(),
+	["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap(),
+	["n|<C-j>"] = map_cmd("<C-w>j"):with_noremap(),
+	["n|<C-k>"] = map_cmd("<C-w>k"):with_noremap(),
 
-	-- nvim-cmp
-	["i|<CR>"] = map_cmd('v:lua.cmp.mapping.confirm()'):with_silent():with_expr();
+	-- Packer
+	["n|<Leader>pu"] = map_cr("PackerUpdate"):with_silent():with_noremap():with_nowait();
+	["n|<Leader>pi"] = map_cr("PackerInstall"):with_silent():with_noremap():with_nowait();
+	["n|<Leader>pc"] = map_cr("PackerCompile"):with_silent():with_noremap():with_nowait();
+
+	["i|<C-l>"] = map_cmd("<Right>"):with_noremap();
+	["i|<C-h>"] = map_cmd("<Left>"):with_noremap();
+
+	-- LSP
+	["n|gd"] = map_cr("lua require('telescope.builtin').lsp_definitions()"):with_noremap():with_silent();
+	["n|gD"] = map_cr("lua vim.lsp.buf.declaration()"):with_noremap():with_silent();
+	["n|gt"] = map_cr("lua require('telescope.builtin').lsp_type_definitions()"):with_noremap():with_silent();
+	["n|gi"] = map_cr("lua require('telescope.builtin').lsp_implementations()"):with_noremap():with_silent();
+	["n|gr"] = map_cr("lua require('telescope.builtin').lsp_references()"):with_noremap():with_silent();
+	["n|gh"] = map_cr("lua require('lspaction.hover').render_hover_doc()"):with_noremap():with_silent();
+	["n|gf"] = map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent();
+	["v|gf"] = map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent();
+	["n|ga"] = map_cr("lua require('lspaction.codeaction').code_action()"):with_noremap():with_silent();
+	["v|ga"] = map_cu("lua require('lspaction.codeaction').range_code_action()"):with_noremap():with_silent();
+	["n|gs"] = map_cr("lua require('lsp_signature').signature()"):with_noremap():with_silent();
+	["n|gn"] = map_cr("lua require('lspaction.rename').rename()"):with_noremap():with_silent();
+	["n|<C-f>"] = map_cr("lua require('lspaction.action').smart_scroll_with_saga(1)"):with_noremap():with_silent();
+	["n|<C-b>"] = map_cr("lua require('lspaction.action').smart_scroll_with_saga(-1)"):with_noremap():with_silent();
+
+	-- Diagnostics
+	["n|<C-n>"] = map_cr("lua require('lspaction.diagnostic').navigate'next'()"):with_noremap():with_silent();
+	["n|<C-p>"] = map_cr("lua require('lspaction.diagnostic').navigate'prev'()"):with_noremap():with_silent();
+	["n|<Leader>wd"] = map_cr("lua require('Telescope.builtin').diagnostics()"):with_noremap():with_silent();
+	["n|<Leader>ed"] = map_cr("lua require('Telescope.builtin').diagnostics({bufnr=0})"):with_noremap():with_silent();
 
     -- Plugin MarkdownPreview
     ["n|mp"] = map_cu('MarkdownPreviewToggle'):with_noremap():with_silent(),
@@ -34,7 +57,9 @@ local plug_map = {
     ["t|fd"]    = map_cmd([[<C-\><C-n>:FloatermKill!<CR>]]):with_noremap():with_silent(),	-- kill them all
 
     -- Plugin Telescope
-	["n|<Leader>f"] = map_args('Telescope'):with_noremap(),
+	-- ["n|<Leader>f"] = map_args('Telescope'):with_noremap(),
+	["n|<Leader>ff"] = map_cr('Telescope find_files'):with_noremap(),
+	["n|<Leader>fg"] = map_cr('Telescope live_grep'):with_noremap(),
 
 	-- Comment
 	["n|<Leader>cc"] = map_cr('lua require("Comment.api").toggle_current_linewise()'):with_noremap():with_silent(),

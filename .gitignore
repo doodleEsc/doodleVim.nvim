@@ -4,3 +4,4 @@ pack/
 backup/
 typeshed/
 packer_compiled.lua
+plugin/
