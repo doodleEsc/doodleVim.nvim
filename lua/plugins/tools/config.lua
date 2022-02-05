@@ -136,7 +136,7 @@ function config.nvim_tree()
 	  open_on_tab         = false,
 	  -- hijack the cursor in the tree to put it at the start of the filename
 	  hijack_cursor       = true,
-	  -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually) 
+	  -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
 	  update_cwd          = false,
 	  -- show lsp diagnostics in the signcolumn
 	  diagnostics = {

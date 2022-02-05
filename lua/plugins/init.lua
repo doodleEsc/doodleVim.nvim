@@ -1,5 +1,3 @@
-
-local defer = require("utils.defer")
 local ui = require("plugins.ui.config")
 local tools = require("plugins.tools.config")
 local completion = require("plugins.completion.config")
@@ -97,7 +95,7 @@ return require('packer').startup(function(use)
 
   -- EDITOR {
 	-- comment
-	use {'numToStr/Comment.nvim', 
+	use {'numToStr/Comment.nvim',
 		opt = true,
 		setup = function() require("utils.defer").packer_defer_load("Comment.nvim", 1000) end,
 		config = editor.comment,
