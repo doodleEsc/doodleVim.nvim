@@ -7,6 +7,7 @@ function config.telescope()
   end
 
   local actions = require "telescope.actions"
+  local actions_layout = require "telescope.actions.layout"
 	require('telescope').setup {
 		defaults = {
 			prompt_prefix = '🔭 ',
@@ -14,7 +15,10 @@ function config.telescope()
 			sorting_strategy = 'ascending',
 			scroll_strategy = "limit",
 			set_env = { ['COLORTERM'] = 'truecolor'},
-			path_display = {'truncate'},
+			path_display = {
+				'smart',
+				'truncate',
+			},
 			results_title = true,
 			color_devicons = true,
 			vimgrep_arguments = {
@@ -41,6 +45,9 @@ function config.telescope()
 					height = 0.9,
 				}
 			},
+			preview = {
+				hide_on_startup = true
+			},
 			default_mappings = {
 				i = {
 					["<C-n>"] = actions.move_selection_next,
@@ -62,7 +69,7 @@ function config.telescope()
 					["<C-u>"] = actions.results_scrolling_up,
 					["<C-d>"] = actions.results_scrolling_down,
 
-					-- ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+					["<Tab>"] = actions_layout.toggle_preview,
 					-- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
 					-- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
 					-- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
@@ -71,36 +78,32 @@ function config.telescope()
 					["<C-w>"] = { "<c-s-w>", type = "command" },
 				},
 				n = {
-					 ["<esc>"] = actions.close,
-					 ["<CR>"] = actions.select_default,
-					 ["<C-s>"] = actions.select_horizontal,
-					 ["<C-v>"] = actions.select_vertical,
-					 ["<C-t>"] = actions.select_tab,
+					["<C-n>"] = actions.move_selection_next,
+					["<C-p>"] = actions.move_selection_previous,
 
-					 ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-					 ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-					 ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-					 ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+					["<C-c>"] = actions.close,
 
-					 -- TODO: This would be weird if we switch the ordering.
-					 ["j"] = actions.move_selection_next,
-					 ["k"] = actions.move_selection_previous,
-					 ["H"] = actions.move_to_top,
-					 ["M"] = actions.move_to_middle,
-					 ["L"] = actions.move_to_bottom,
+					-- ["<Down>"] = actions.move_selection_next,
+					-- ["<Up>"] = actions.move_selection_previous,
 
-					 ["<Down>"] = actions.move_selection_next,
-					 ["<Up>"] = actions.move_selection_previous,
-					 ["gg"] = actions.move_to_top,
-					 ["G"] = actions.move_to_bottom,
+					["<CR>"] = actions.select_default,
+					["<C-s>"] = actions.select_horizontal,
+					["<C-v>"] = actions.select_vertical,
+					["<C-t>"] = actions.select_tab,
 
-					 ["<C-u>"] = actions.preview_scrolling_up,
-					 ["<C-d>"] = actions.preview_scrolling_down,
+					["<C-b>"] = actions.preview_scrolling_up,
+					["<C-f>"] = actions.preview_scrolling_down,
 
-					 ["<PageUp>"] = actions.results_scrolling_up,
-					 ["<PageDown>"] = actions.results_scrolling_down,
+					["<C-u>"] = actions.results_scrolling_up,
+					["<C-d>"] = actions.results_scrolling_down,
 
-					 ["?"] = actions.which_key,
+					["<Tab>"] = actions_layout.toggle_preview,
+					-- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+					-- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+					-- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+					-- ["<C-l>"] = actions.complete_tag,
+					-- ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+					["<C-w>"] = { "<c-s-w>", type = "command" },
 				},
 			},
 			extensions = {

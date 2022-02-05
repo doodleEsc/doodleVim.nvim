@@ -39,7 +39,7 @@ local plug_map = {
 	-- Diagnostics
 	["n|<C-n>"] = map_cr("lua require('lspaction.diagnostic').navigate'next'()"):with_noremap():with_silent();
 	["n|<C-p>"] = map_cr("lua require('lspaction.diagnostic').navigate'prev'()"):with_noremap():with_silent();
-	["n|<Leader>wd"] = map_cr("lua require('Telescope.builtin').diagnostics()"):with_noremap():with_silent();
+	["n|<Leader>wd"] = map_cr("lua require('Telescope.builtin').diagnostics({ignore_filename=true})"):with_noremap():with_silent();
 	["n|<Leader>ed"] = map_cr("lua require('Telescope.builtin').diagnostics({bufnr=0})"):with_noremap():with_silent();
 
     -- Plugin MarkdownPreview
