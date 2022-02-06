@@ -69,6 +69,7 @@ end
 local function load_nvim_config()
 	check_packer()
 	createdir()
+	disable_distribution_plugins()
 	set_leader_map()
 	require('core.options')
 	require('plugins')
