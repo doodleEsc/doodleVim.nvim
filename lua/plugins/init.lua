@@ -8,8 +8,6 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
 
-	use { "bfredl/nvim-luadev" }
-
 	-- COMPLETION
 	use {'hrsh7th/nvim-cmp',
 		opt = true,
