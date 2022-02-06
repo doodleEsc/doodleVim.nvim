@@ -39,11 +39,11 @@ local plug_map = {
 	-- Diagnostics
 	["n|<C-n>"] = map_cr("lua require('lspaction.diagnostic').navigate'next'()"):with_noremap():with_silent();
 	["n|<C-p>"] = map_cr("lua require('lspaction.diagnostic').navigate'prev'()"):with_noremap():with_silent();
-	["n|<Leader>wd"] = map_cr("lua require('Telescope.builtin').diagnostics({ignore_filename=true})"):with_noremap():with_silent();
-	["n|<Leader>ed"] = map_cr("lua require('Telescope.builtin').diagnostics({bufnr=0})"):with_noremap():with_silent();
+	["n|<Leader>ee"] = map_cr("lua require('Telescope.builtin').diagnostics({ignore_filename=true})"):with_noremap():with_silent();
+	["n|<Leader>dd"] = map_cr("lua require('Telescope.builtin').diagnostics({bufnr=0})"):with_noremap():with_silent();
 
     -- Plugin MarkdownPreview
-    ["n|mp"] = map_cu('MarkdownPreviewToggle'):with_noremap():with_silent(),
+    ["n|mw"] = map_cu('MarkdownPreviewToggle'):with_noremap():with_silent(),
 
 	-- Plugin vim-floaterm
     ["n|ft"]    = map_cu('FloatermToggle'):with_noremap():with_silent(),
@@ -57,15 +57,14 @@ local plug_map = {
     ["t|fd"]    = map_cmd([[<C-\><C-n>:FloatermKill!<CR>]]):with_noremap():with_silent(),	-- kill them all
 
     -- Plugin Telescope
-	-- ["n|<Leader>f"] = map_args('Telescope'):with_noremap(),
 	["n|<Leader>ff"] = map_cr('Telescope find_files'):with_noremap(),
 	["n|<Leader>fg"] = map_cr('Telescope live_grep'):with_noremap(),
 
 	-- Comment
 	["n|<Leader>cc"] = map_cr('lua require("Comment.api").toggle_current_linewise()'):with_noremap():with_silent(),
-	["n|<Leader>bb"] = map_cr('lua require("Comment.api").toggle_current_linewise()'):with_noremap():with_silent(),
-	["x|<Leader>cc"] = map_cu('lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())'),
-	["x|<Leader>bb"] = map_cu('lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())'),
+	["n|<Leader>b"] = map_cr('lua require("Comment.api").toggle_current_linewise()'):with_noremap():with_silent(),
+	["v|<Leader>cc"] = map_cu('lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())'):with_noremap():with_silent(),
+	["v|<Leader>b"] = map_cu('lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())'):with_noremap():with_silent(),
 
     -- Plugin Vista
     ["n|<Leader>v"] = map_cu('Vista!!'):with_noremap():with_silent(),
@@ -74,8 +73,8 @@ local plug_map = {
 	["n|tt"] = map_cr("lua require('extend.tree').toggle()"):with_noremap():with_silent(),
 
 	-- Plugin translator
-	["n|<Leader>t"] = map_cu("TranslateW"):with_silent(),
-	["v|<Leader>t"] = map_cr("TranslateW"):with_silent(),
+	["n|tr"] = map_cu("TranslateW"):with_silent(),
+	["v|tr"] = map_cr("TranslateW"):with_silent(),
 
 	-- Plugin nvim-dap
 	["n|<F7>"]  = map_cmd("<cmd>lua require('extend.dap').debug_continue()<CR>"):with_noremap(),

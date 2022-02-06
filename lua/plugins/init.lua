@@ -190,7 +190,10 @@ return require('packer').startup(function(use)
 	}
 
 	-- translator
-	use {'voldikss/vim-translator', cmd = {'TranslateW'}}
+	use {'voldikss/vim-translator',
+		setup = tools.translator(),
+		cmd = {'TranslateW'}
+	}
 
 	-- floaterm
 	use {'voldikss/vim-floaterm',

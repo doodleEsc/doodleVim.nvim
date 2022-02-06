@@ -238,4 +238,8 @@ function config.floaterm()
 	vim.g.floaterm_opener = "edit"
 end
 
+function config.translator()
+	vim.g.translator_window_borderchars = {"─","│","─","│","╭","╮","╯","╰"}
+end
+
 return config
