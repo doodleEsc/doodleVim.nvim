@@ -148,7 +148,7 @@ ins_c {
 
 ins_c {
   'diagnostics',
-  sources = { 'coc' },
+  sources = {'nvim_lsp'},
   symbols = { error = ' ', warn = ' ', info = ' ' },
   diagnostics_color = {
     color_error = { fg = colors.red },
@@ -157,15 +157,6 @@ ins_c {
   },
   separator = "┃",
 }
-
--- ins_c {
--- 	function()
--- 		return "📖"
--- 	end,
--- 	cond = function()
--- 		return vim.g.enable_coc_word == true
--- 	end
--- }
 
 ins_x {
   'location',
