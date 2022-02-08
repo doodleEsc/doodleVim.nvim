@@ -6,19 +6,19 @@ local map_cmd = bind.map_cmd
 
 local plug_map = {
 
-	--window navigation
-	["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap(),
-	["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap(),
-	["n|<C-j>"] = map_cmd("<C-w>j"):with_noremap(),
-	["n|<C-k>"] = map_cmd("<C-w>k"):with_noremap(),
+	-- --window navigation
+	-- ["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap(),
+	-- ["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap(),
+	-- ["n|<C-j>"] = map_cmd("<C-w>j"):with_noremap(),
+	-- ["n|<C-k>"] = map_cmd("<C-w>k"):with_noremap(),
 
 	-- Packer
 	["n|<Leader>pu"] = map_cr("PackerUpdate"):with_silent():with_noremap():with_nowait();
 	["n|<Leader>pi"] = map_cr("PackerInstall"):with_silent():with_noremap():with_nowait();
 	["n|<Leader>pc"] = map_cr("PackerCompile"):with_silent():with_noremap():with_nowait();
 
-	["i|<C-l>"] = map_cmd("<Right>"):with_noremap();
-	["i|<C-h>"] = map_cmd("<Left>"):with_noremap();
+	-- ["i|<C-l>"] = map_cmd("<Right>"):with_noremap();
+	-- ["i|<C-h>"] = map_cmd("<Left>"):with_noremap();
 
 	-- LSP
 	["n|gd"] = map_cr("lua require('telescope.builtin').lsp_definitions()"):with_noremap():with_silent();

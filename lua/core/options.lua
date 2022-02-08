@@ -135,10 +135,6 @@ local function load_options()
 	    vim.o[name] = value
     end
     bind_option(bw_local)
-
-	-- set user define global variables
-	vim.g.enable_coc_word = false
-	-- vim.g.bufferline = {auto_hide = true}
 end
 
 load_options()

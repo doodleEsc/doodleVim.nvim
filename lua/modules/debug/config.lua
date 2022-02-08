@@ -1,7 +1,7 @@
 local config = {}
 
 function config.dap()
-	require('plugins.debug.dapconfig')
+	require('modules.debug.dapconfig')
 end
 
 function config.dapui()
