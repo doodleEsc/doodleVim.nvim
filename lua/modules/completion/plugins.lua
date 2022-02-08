@@ -5,7 +5,7 @@ local conf = require('modules.completion.config')
 completion['hrsh7th/nvim-cmp'] = {
 	opt = true,
 	setup = function()
-		require("utils.defer").packer_defer_load("nvim-cmp", 150)
+		require("utils.defer").packer_defer_load("nvim-cmp", 175)
 	end,
 	config = conf.nvim_cmp
 }

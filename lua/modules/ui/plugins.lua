@@ -17,7 +17,7 @@ ui['norcalli/nvim-colorizer.lua'] = {
 
 ui['nvim-lualine/lualine.nvim'] = {
 	opt = true,
-	setup = function() require("utils.defer").packer_defer_load("lualine.nvim", 100) end,
+	setup = function() require("utils.defer").packer_defer_load("lualine.nvim", 90) end,
 	requires = {'kyazdani42/nvim-web-devicons'},
 	config = conf.lualine,
 }
@@ -28,7 +28,7 @@ ui['cinuor/gruvbox.nvim'] = {
 
 ui['lukas-reineke/indent-blankline.nvim'] = {
 	opt = true,
-	setup = function() require("utils.defer").add("indent-blankline.nvim", 90) end,
+	setup = function() require("utils.defer").add("indent-blankline.nvim", 80) end,
 	config = conf.blankline,
 }
 
