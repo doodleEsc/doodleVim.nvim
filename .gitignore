@@ -6,3 +6,4 @@ typeshed/
 packer_compiled.lua
 plugin/
 .luarc.json
+compiled.lua
