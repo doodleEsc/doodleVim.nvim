@@ -6,7 +6,8 @@ ui['nvim-treesitter/nvim-treesitter'] = {
 	opt = true,
 	setup = function() require("utils.defer").packer_defer_load("nvim-treesitter", 100) end,
 	config = conf.treesitter,
-	requires = {'nvim-treesitter/nvim-treesitter-textobjects', opt = true}
+	requires = {'nvim-treesitter/nvim-treesitter-textobjects', opt = true},
+	run = ':TSUpdate'
 }
 
 ui['norcalli/nvim-colorizer.lua'] = {
