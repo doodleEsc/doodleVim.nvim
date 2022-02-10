@@ -7,14 +7,15 @@ editor['numToStr/Comment.nvim'] = {
 	config = conf.comment,
 }
 
-editor['easymotion/vim-easymotion'] = {
+editor['phaazon/hop.nvim'] = {
 	opt = true,
-	setup = function() require("utils.defer").packer_defer_load("vim-easymotion", 1000) end,
+	setup = function() require("utils.defer").packer_defer_load("hop.nvim", 1000) end,
+	config = conf.hop
 }
 
 editor['andymass/vim-matchup'] = {
 	opt = true,
-	setup = function() require("utils.defer").packer_defer_load("vim-easymotion", 1000) end,
+	setup = function() require("utils.defer").packer_defer_load("vim-matchup", 1000) end,
 }
 
 editor['junegunn/vim-easy-align'] = {

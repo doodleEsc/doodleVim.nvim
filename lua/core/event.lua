@@ -16,7 +16,7 @@ end
 function autocmd.load_autocmds()
   local definitions = {
     packer = {
-      {"BufWritePost","*.lua","lua require('core.pack').auto_compile()"};
+      -- {"BufWritePost","*.lua","lua require('core.pack').auto_compile()"};
     },
     wins = {
       -- Highlight current line only on focused window

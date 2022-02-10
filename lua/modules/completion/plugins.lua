@@ -10,33 +10,37 @@ completion['hrsh7th/nvim-cmp'] = {
 	config = conf.nvim_cmp
 }
 
- completion['hrsh7th/cmp-nvim-lsp'] = {
+completion['hrsh7th/cmp-nvim-lsp'] = {
 	after = "nvim-cmp"
- }
+}
 
- completion['saadparwaiz1/cmp_luasnip'] = {
+completion['saadparwaiz1/cmp_luasnip'] = {
 	after = "nvim-cmp"
- }
+}
 
- completion['hrsh7th/cmp-buffer'] = {
+completion['hrsh7th/cmp-buffer'] = {
 	after = 'nvim-cmp'
- }
+}
 
- completion['hrsh7th/cmp-path'] = {
+completion['hrsh7th/cmp-path'] = {
 	after = 'nvim-cmp'
- }
+}
 
- completion['tzachar/cmp-tabnine'] = {
+completion['tzachar/cmp-tabnine'] = {
 	after = 'nvim-cmp', run='./install.sh'
- }
+}
 
- completion['L3MON4D3/LuaSnip'] = {
+completion['octaltree/cmp-look'] = {
+	after = 'nvim-cmp'
+}
+
+completion['L3MON4D3/LuaSnip'] = {
 	after = "nvim-cmp", config = conf.luasnip
- }
+}
 
- completion['rafamadriz/friendly-snippets'] = {
+completion['rafamadriz/friendly-snippets'] = {
 	 opt = true
- }
+}
 
 completion['neovim/nvim-lspconfig'] = {
 	after = "nvim-cmp",

@@ -104,8 +104,9 @@ local plug_map = {
 	["v|<Leader>lh"] = map_cu("VBoxH"):with_noremap():with_silent(),
 	["v|<Leader>lf"] = map_cu("VFill"):with_noremap():with_silent(),
 
-	-- easymotion
-	["n|<Leader>s"] = map_cmd("<Plug>(easymotion-overwin-f2)"),
+	-- hop.nvim
+	["n|<Leader>hw"] = map_cr("lua require'hop'.hint_words()"):with_noremap():with_silent(),
+	["n|<Leader>hs"] = map_cu("lua require'hop'.hint_char2()"):with_noremap():with_silent(),
 
 	-- easyalign
 	["n|ma"] = map_cmd("<Plug>(EasyAlign)"),

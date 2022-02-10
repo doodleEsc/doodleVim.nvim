@@ -164,4 +164,8 @@ function config.barbar()
 	}
 end
 
+function config.hop()
+	require'hop'.setup()
+end
+
 return config

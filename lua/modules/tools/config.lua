@@ -167,9 +167,7 @@ function config.nvim_tree()
 		args = {}
 	  },
 	  view = {
-		-- width of the window, can be either a number (columns) or a string in `%`
 		width = 31,
-		-- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
 		side = 'left',
 		-- if true the tree will resize itself after opening a file
 		auto_resize = false,
@@ -179,7 +177,10 @@ function config.nvim_tree()
 		  custom_only = false,
 		  -- list of mappings to set on the tree manually
 		  list = {}
-		}
+		},
+		number = false,
+		relativenumber = false,
+		signcolumn = "yes"
 	  }
 	}
 end

@@ -73,4 +73,6 @@ tools['nvim-lua/plenary.nvim'] = {}
 
 tools['kyazdani42/nvim-web-devicons'] = {}
 
+tools['bfredl/nvim-luadev'] = {}
+
 return tools
