@@ -139,7 +139,9 @@ function config.blankline()
 end
 
 function config.lspaction()
-	require("lspaction").setup()
+	require("lspaction").setup({
+		diagnostic_virtual_text = false
+	})
 end
 
 return config

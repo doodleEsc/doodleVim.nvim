@@ -38,7 +38,7 @@ tools['liuchengxu/vista.vim'] = {
 tools['voldikss/vim-floaterm'] = {
 	opt = true,
 	setup = function()
-		-- require("modules.tools.config").floaterm()
+		require("modules.tools.config").floaterm()
 		require("utils.defer").packer_defer_load("vim-floaterm", 1000)
 	end
 }
@@ -74,5 +74,15 @@ tools['nvim-lua/plenary.nvim'] = {}
 tools['kyazdani42/nvim-web-devicons'] = {}
 
 tools['bfredl/nvim-luadev'] = {}
+
+tools['cinuor/gotests.nvim'] = {
+	opt = true,
+	ft = 'go',
+	setup = function()
+		if vim.bo.filetype == 'go' then
+			require("utils.defer").packer_defer_load("gotests.nvim", 1000)
+		end
+	end
+}
 
 return tools

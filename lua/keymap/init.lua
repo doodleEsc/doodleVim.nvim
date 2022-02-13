@@ -41,6 +41,7 @@ local plug_map = {
 	["n|<C-p>"] = map_cr("lua require('lspaction.diagnostic').navigate'prev'()"):with_noremap():with_silent();
 	["n|<Leader>ee"] = map_cr("lua require('Telescope.builtin').diagnostics({ignore_filename=true})"):with_noremap():with_silent();
 	["n|<Leader>dd"] = map_cr("lua require('Telescope.builtin').diagnostics({bufnr=0})"):with_noremap():with_silent();
+	["n|<Leader>ww"] = map_cr("lua require('lspaction.diagnostic').toggle_virtual_text()"):with_noremap():with_silent();
 
     -- Plugin MarkdownPreview
     ["n|mw"] = map_cu('MarkdownPreviewToggle'):with_noremap():with_silent(),
@@ -111,6 +112,11 @@ local plug_map = {
 	-- easyalign
 	["n|ma"] = map_cmd("<Plug>(EasyAlign)"),
 	["x|ma"] = map_cmd("<Plug>(EasyAlign)"),
+
+	-- gotests
+	["n|tu"] = map_cr("lua require'gotests'.fun_test()"):with_noremap():with_silent(),
+	["n|ta"] = map_cr("lua require'gotests'.all_test()"):with_noremap():with_silent(),
+	["n|te"] = map_cr("lua require'gotests'.exported_test()"):with_noremap():with_silent(),
 };
 
 bind.nvim_load_mapping(plug_map)

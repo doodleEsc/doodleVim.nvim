@@ -121,6 +121,7 @@ function config.telescope()
 end
 
 function config.nvim_tree()
+	-- vim.g.nvim_tree_respect_buf_cwd = 1
 	require'nvim-tree'.setup {
 	  -- disables netrw completely
 	  disable_netrw       = true,
@@ -133,14 +134,19 @@ function config.nvim_tree()
 	  -- closes neovim automatically when the tree is the last **WINDOW** in the view
 	  auto_close          = false,
 	  -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
+	  auto_reload_on_write = true,
 	  open_on_tab         = false,
 	  -- hijack the cursor in the tree to put it at the start of the filename
 	  hijack_cursor       = true,
 	  -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
 	  update_cwd          = false,
 	  -- show lsp diagnostics in the signcolumn
-	  diagnostics = {
+	  update_to_buf_dir   = {
 		enable = true,
+		auto_open = true,
+	  },
+	  diagnostics = {
+		enable = false,
 		icons = {
 		  hint = "",
 		  info = "",
