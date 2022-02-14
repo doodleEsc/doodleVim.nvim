@@ -154,6 +154,11 @@ function config.nvim_tree()
 		  error = "",
 		}
 	  },
+	  git = {
+		enable = true,
+		ignore = false,
+		timeout = 500,
+	  },
 	  -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
 	  update_focused_file = {
 		-- enables the feature
