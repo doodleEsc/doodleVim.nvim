@@ -118,10 +118,11 @@ function config.telescope()
 	require('telescope').load_extension('fzy_native')
 	require('telescope').load_extension('file_browser')
 	require('telescope').load_extension('todo-comments')
+	require('telescope').load_extension('projects')
 end
 
 function config.nvim_tree()
-	-- vim.g.nvim_tree_respect_buf_cwd = 1
+	vim.g.nvim_tree_respect_buf_cwd = 1
 	require'nvim-tree'.setup {
 	  -- disables netrw completely
 	  disable_netrw       = true,
@@ -139,7 +140,7 @@ function config.nvim_tree()
 	  -- hijack the cursor in the tree to put it at the start of the filename
 	  hijack_cursor       = true,
 	  -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
-	  update_cwd          = false,
+	  update_cwd          = true,
 	  -- show lsp diagnostics in the signcolumn
 	  update_to_buf_dir   = {
 		enable = true,
@@ -165,7 +166,7 @@ function config.nvim_tree()
 		enable      = true,
 		-- update the root directory of the tree to the one of the folder containing the file if the file is not under the current root directory
 		-- only relevant when `update_focused_file.enable` is true
-		update_cwd  = false,
+		update_cwd  = true,
 		-- list of buffer names / filetypes that will not update the cwd if the file isn't found under the current root directory
 		-- only relevant when `update_focused_file.update_cwd` is true and `update_focused_file.enable` is true
 		ignore_list = {}
@@ -252,6 +253,43 @@ end
 
 function config.translator()
 	vim.g.translator_window_borderchars = {"─","│","─","│","╭","╮","╯","╰"}
+end
+
+function config.project()
+	require("project_nvim").setup {
+		-- Manual mode doesn't automatically change your root directory, so you have
+		-- the option to manually do so using `:ProjectRoot` command.
+		manual_mode = false,
+
+		-- Methods of detecting the root directory. **"lsp"** uses the native neovim
+		-- lsp, while **"pattern"** uses vim-rooter like glob pattern matching. Here
+		-- order matters: if one is not detected, the other is used as fallback. You
+		-- can also delete or rearangne the detection methods.
+		detection_methods = { "lsp", "pattern" },
+
+		-- All the patterns used to detect root dir, when **"pattern"** is in
+		-- detection_methods
+		patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+
+		-- Table of lsp clients to ignore by name
+		-- eg: { "efm", ... }
+		ignore_lsp = {},
+
+		-- Don't calculate root dir on specific directories
+		-- Ex: { "~/.cargo/*", ... }
+		exclude_dirs = {},
+
+		-- Show hidden files in telescope
+		show_hidden = false,
+
+		-- When set to false, you will get a message when project.nvim changes your
+		-- directory.
+		silent_chdir = false,
+
+		-- Path where project.nvim will store the project history for use in
+		-- telescope
+		datapath = vim.fn.stdpath("data"),
+	}
 end
 
 return config

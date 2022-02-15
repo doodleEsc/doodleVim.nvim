@@ -85,4 +85,10 @@ tools['cinuor/gotests.nvim'] = {
 	end
 }
 
+tools["ahmedkhalf/project.nvim"] = {
+	opt = true,
+	setup = function() require("utils.defer").packer_defer_load("project.nvim", 100) end,
+	config = conf.project
+}
+
 return tools

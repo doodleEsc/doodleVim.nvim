@@ -60,6 +60,7 @@ local plug_map = {
     -- Plugin Telescope
 	["n|<Leader>ff"] = map_cr('Telescope find_files'):with_noremap(),
 	["n|<Leader>fg"] = map_cr('Telescope live_grep'):with_noremap(),
+	["n|<Leader>fp"] = map_cr('Telescope projects'):with_noremap(),
 
 	-- Comment
 	["n|<Leader>cc"] = map_cr('lua require("Comment.api").toggle_current_linewise()'):with_noremap():with_silent(),
