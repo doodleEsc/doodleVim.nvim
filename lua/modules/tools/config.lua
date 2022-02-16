@@ -147,7 +147,7 @@ function config.nvim_tree()
 		auto_open = true,
 	  },
 	  diagnostics = {
-		enable = false,
+		enable = true,
 		icons = {
 		  hint = "",
 		  info = "",
