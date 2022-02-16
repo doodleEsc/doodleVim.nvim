@@ -100,7 +100,7 @@ local function load_options()
     colorcolumn    = "80";
     foldenable     = true;
     signcolumn     = "yes";
-    conceallevel   = 2;
+    conceallevel   = 0;
     concealcursor  = "niv";
   }
 

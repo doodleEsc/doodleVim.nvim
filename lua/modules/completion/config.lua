@@ -1,5 +1,10 @@
 local config = {}
 
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
 function config.nvim_lsp_installer()
 
 	if not packer_plugins['cmp-nvim-lsp'].loaded then
@@ -40,6 +45,7 @@ function config.nvim_cmp()
 	end
 
 	local cmp = require('cmp')
+	local luasnip = require("luasnip")
 	cmp.setup({
 		snippet = {
 			expand = function(args)
@@ -63,8 +69,8 @@ function config.nvim_cmp()
 			},
 		}),
 		mapping = {
-			["<C-p>"] = cmp.mapping.select_prev_item(),
-			["<C-n>"] = cmp.mapping.select_next_item(),
+			-- ["<C-p>"] = cmp.mapping.select_prev_item(),
+			-- ["<C-n>"] = cmp.mapping.select_next_item(),
 			['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-2), { 'i', 'c' }),
 			['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(2), { 'i', 'c' }),
 			['<C-e>'] = cmp.mapping({
@@ -75,20 +81,43 @@ function config.nvim_cmp()
 				behavior = cmp.ConfirmBehavior.Replace,
 				select = true
 			}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-			["<C-k>"] = function(fallback)
-                if require("luasnip").jumpable(-1) then
-					vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
-                else
-                    fallback()
-                end
-            end,
-            ["<C-j>"] = function(fallback)
-                if require("luasnip").expand_or_jumpable() then
-					vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
-                else
-                    fallback()
-                end
-            end,
+
+			["<C-n>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_next_item()
+				elseif luasnip.expand_or_jumpable() then
+					luasnip.expand_or_jump()
+				elseif has_words_before() then
+					cmp.complete()
+				else
+					fallback()
+				end
+			end, { "i", "s" }),
+
+			["<C-p>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_prev_item()
+				elseif luasnip.jumpable(-1) then
+					luasnip.jump(-1)
+				else
+					fallback()
+				end
+			end, { "i", "s" }),
+
+			-- ["<C-k>"] = cmp.mapping(function(fallback)
+			-- 	if luasnip.jumpable(-1) then
+			-- 		luasnip.jump(-1)
+   --              else
+   --                  fallback()
+   --              end
+   --          end, {"i", "s"}),
+   --          ["<C-j>"] = cmp.mapping(function(fallback)
+   --              if luasnip.expand_or_jumpable() then
+			-- 		luasnip.expand_or_jump()
+   --              else
+   --                  fallback()
+   --              end
+   --          end, {"i", "s"}),
 		},
 		formatting = {
 			fields = {

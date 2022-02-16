@@ -38,7 +38,7 @@ completion['L3MON4D3/LuaSnip'] = {
 	after = "nvim-cmp", config = conf.luasnip
 }
 
-completion['rafamadriz/friendly-snippets'] = {
+completion['cinuor/friendly-snippets'] = {
 	 opt = true
 }
 
