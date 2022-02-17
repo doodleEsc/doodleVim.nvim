@@ -6,19 +6,10 @@ local map_cmd = bind.map_cmd
 
 local plug_map = {
 
-	-- --window navigation
-	-- ["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap(),
-	-- ["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap(),
-	-- ["n|<C-j>"] = map_cmd("<C-w>j"):with_noremap(),
-	-- ["n|<C-k>"] = map_cmd("<C-w>k"):with_noremap(),
-
 	-- Packer
 	["n|<Leader>pu"] = map_cr("PackerUpdate"):with_silent():with_noremap():with_nowait();
 	["n|<Leader>pi"] = map_cr("PackerInstall"):with_silent():with_noremap():with_nowait();
 	["n|<Leader>pc"] = map_cr("PackerCompile"):with_silent():with_noremap():with_nowait();
-
-	-- ["i|<C-l>"] = map_cmd("<Right>"):with_noremap();
-	-- ["i|<C-h>"] = map_cmd("<Left>"):with_noremap();
 
 	-- LSP
 	["n|gd"] = map_cr("lua require('telescope.builtin').lsp_definitions()"):with_noremap():with_silent();
@@ -33,8 +24,8 @@ local plug_map = {
 	["v|ga"] = map_cu("lua require('lspaction.codeaction').range_code_action()"):with_noremap():with_silent();
 	["n|gs"] = map_cr("lua require('lsp_signature').signature()"):with_noremap():with_silent();
 	["n|gn"] = map_cr("lua require('lspaction.rename').rename()"):with_noremap():with_silent();
-	["n|<C-f>"] = map_cr("lua require('lspaction.action').smart_scroll_with_saga(1)"):with_noremap():with_silent();
-	["n|<C-b>"] = map_cr("lua require('lspaction.action').smart_scroll_with_saga(-1)"):with_noremap():with_silent();
+	["n|<C-d>"] = map_cr("lua require('extend.scroll').scroll_down()"):with_noremap():with_silent();
+	["n|<C-u>"] = map_cr("lua require('extend.scroll').scroll_up()"):with_noremap():with_silent();
 
 	-- Diagnostics
 	["n|<C-n>"] = map_cr("lua require('lspaction.diagnostic').navigate'next'()"):with_noremap():with_silent();

@@ -84,7 +84,7 @@ end
 function config.neoscroll()
 	require('neoscroll').setup({
 		-- All these keys will be mapped to their corresponding default scrolling animation
-		mappings = {'<C-u>', '<C-d>'},
+		mappings = {'<C-f>', '<C-b>'},
 		hide_cursor = false,          -- Hide cursor while scrolling
 		stop_eof = true,             -- Stop at <EOF> when scrolling downwards
 		use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope

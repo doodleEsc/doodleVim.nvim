@@ -71,9 +71,7 @@ function config.nvim_cmp()
 		mapping = {
 			["<C-p>"] = cmp.mapping.select_prev_item(),
 			["<C-n>"] = cmp.mapping.select_next_item(),
-			['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-2), { 'i', 'c' }),
-			['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(2), { 'i', 'c' }),
-			['<C-e>'] = cmp.mapping({
+			['<C-f>'] = cmp.mapping({
 				i = cmp.mapping.abort(),
 				c = cmp.mapping.close(),
 			}),
@@ -81,8 +79,22 @@ function config.nvim_cmp()
 				behavior = cmp.ConfirmBehavior.Replace,
 				select = true
 			}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+			['<C-d>'] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.scroll_docs(2)
+				else
+					fallback()
+				end
+			end, {"i", "s"}),
 
-			-- ["<C-n>"] = cmp.mapping(function(fallback)
+			['<C-u>'] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.scroll_docs(-2)
+				else
+					fallback()
+				end
+			end, {"i", "s"}),
+
 			-- 	if cmp.visible() then
 			-- 		cmp.select_next_item()
 			-- 	elseif luasnip.expand_or_jumpable() then

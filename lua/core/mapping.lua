@@ -24,26 +24,35 @@ local def_map = {
     -- ["n|<Leader>ss"] = map_cu('SessionSave'):with_noremap(),
     -- ["n|<Leader>sl"] = map_cu('SessionLoad'):with_noremap(),
   -- Insert
-    ["i|<C-w>"]      = map_cmd('<C-[>diwa'):with_noremap(),
-    ["i|<C-h>"]      = map_cmd('<Left>'):with_noremap(),
-    ["i|<C-l>"]      = map_cmd('<Right>'):with_noremap(),
+    -- ["i|<C-w>"]      = map_cmd('<C-[>diwa'):with_noremap(),
+	
+	-- cursor move
+    ["i|<C-b>"]      = map_cmd('<Left>'):with_noremap(),
+    ["i|<C-f>"]      = map_cmd('<Right>'):with_noremap(),
+
+	-- character del
     ["i|<C-d>"]      = map_cmd('<Del>'):with_noremap(),
-    ["i|<C-i>"]      = map_cmd('<BS>'),
-    ["i|<C-u>"]      = map_cmd('<C-G>u<C-U>'):with_noremap(),
-    -- ["i|<C-b>"]      = map_cmd('<Left>'):with_noremap(),
-    -- ["i|<C-f>"]      = map_cmd('<Right>'):with_noremap(),
+    ["i|<C-h>"]      = map_cmd('<BS>'),
+
+	-- cursor to front or end
     ["i|<C-a>"]      = map_cmd('<ESC>^i'):with_noremap(),
-    ["i|<C-b>"]      = map_cmd('<ESC>$i'):with_noremap(),
+    ["i|<C-e>"]      = map_cmd('<ESC>A'):with_noremap(),
+
+	-- add new line
     ["i|<C-o>"]      = map_cmd('<Esc>o'):with_noremap(),
+    ["i|<C-l>"]      = map_cmd('<Esc>o'):with_noremap(),
+
+	-- save and quit
     ["i|<C-s>"]      = map_cmd('<Esc>:w<CR>'):with_noremap(),
     ["i|<C-q>"]      = map_cmd('<Esc>:wq<CR>'):with_noremap(),
-    -- ["i|<C-e>"]      = map_cmd([[pumvisible() ? "\<C-e>" : "\<End>"]]):with_noremap():with_expr(),
+
   -- command line
-    ["c|<C-h>"]      = map_cmd('<Left>'):with_noremap(),
-    ["c|<C-l>"]      = map_cmd('<Right>'):with_noremap(),
+    ["c|<C-b>"]      = map_cmd('<Left>'):with_noremap(),
+	["c|<C-f>"]      = map_cmd('<Right>'):with_noremap(),
     ["c|<C-a>"]      = map_cmd('<Home>'):with_noremap(),
     ["c|<C-e>"]      = map_cmd('<End>'):with_noremap(),
     ["c|<C-d>"]      = map_cmd('<Del>'):with_noremap(),
+    ["c|<C-h>"]      = map_cmd('<BS>'):with_noremap(),
     ["c|<C-t>"]      = map_cmd([[<C-R>=expand("%:p:h") . "/" <CR>]]):with_noremap(),
 }
 
