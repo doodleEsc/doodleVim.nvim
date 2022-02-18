@@ -63,11 +63,11 @@ function config.telescope()
 					["<C-v>"] = actions.select_vertical,
 					["<C-t>"] = actions.select_tab,
 
-					["<C-b>"] = actions.preview_scrolling_up,
-					["<C-f>"] = actions.preview_scrolling_down,
+					["<C-u>"] = actions.preview_scrolling_up,
+					["<C-d>"] = actions.preview_scrolling_down,
 
-					["<C-u>"] = actions.results_scrolling_up,
-					["<C-d>"] = actions.results_scrolling_down,
+					["<C-b>"] = actions.results_scrolling_up,
+					["<C-f>"] = actions.results_scrolling_down,
 
 					["<Tab>"] = actions_layout.toggle_preview,
 					-- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
@@ -91,11 +91,11 @@ function config.telescope()
 					["<C-v>"] = actions.select_vertical,
 					["<C-t>"] = actions.select_tab,
 
-					["<C-b>"] = actions.preview_scrolling_up,
-					["<C-f>"] = actions.preview_scrolling_down,
+					["<C-u>"] = actions.preview_scrolling_up,
+					["<C-d>"] = actions.preview_scrolling_down,
 
-					["<C-u>"] = actions.results_scrolling_up,
-					["<C-d>"] = actions.results_scrolling_down,
+					["<C-b>"] = actions.results_scrolling_up,
+					["<C-f>"] = actions.results_scrolling_down,
 
 					["<Tab>"] = actions_layout.toggle_preview,
 					-- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
