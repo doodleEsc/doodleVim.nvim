@@ -1,5 +1,4 @@
 local config = {}
-
 -- local has_words_before = function()
 --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 --   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -144,7 +143,7 @@ function config.nvim_cmp()
 				end
 
 				local icons = require "utils.icons"
-				vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
+				vim_item.kind = string.format("%s %s", icons.cmp[vim_item.kind], vim_item.kind)
 
 				vim_item.menu = ({
 					nvim_lsp = "[LSP]",

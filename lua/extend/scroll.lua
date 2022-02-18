@@ -1,13 +1,13 @@
 local scroll = {}
 
 scroll.scroll_up = function()
-	if (not packer_plugins['neoscroll.nvim'].loaded) or (not packer_plugins['lsp-action.nvim'].loaded) then
+	if (not packer_plugins['neoscroll.nvim'].loaded) or (not packer_plugins['lspsaga.nvim'].loaded) then
 		vim.cmd [[PackerLoad neoscroll.nvim]]
-		vim.cmd [[PackerLoad lsp-action.nvim]]
+		vim.cmd [[PackerLoad lspsaga.nvim]]
 	end
 
-	local hover = require("lspaction.hover")
-	local action = require("lspaction.action")
+	local hover = require("lspsaga.hover")
+	local action = require("lspsaga.action")
 	local neoscroll = require("neoscroll")
 
 	if hover.has_saga_hover() then 
@@ -18,13 +18,13 @@ scroll.scroll_up = function()
 end
 
 scroll.scroll_down = function()
-	if (not packer_plugins['neoscroll.nvim'].loaded) or (not packer_plugins['lsp-action.nvim'].loaded) then
+	if (not packer_plugins['neoscroll.nvim'].loaded) or (not packer_plugins['lspsaga.nvim'].loaded) then
 		vim.cmd [[PackerLoad neoscroll.nvim]]
-		vim.cmd [[PackerLoad lsp-action.nvim]]
+		vim.cmd [[PackerLoad lspsaga.nvim]]
 	end
 
-	local hover = require("lspaction.hover")
-	local action = require("lspaction.action")
+	local hover = require("lspsaga.hover")
+	local action = require("lspsaga.action")
 	local neoscroll = require("neoscroll")
 
 	if hover.has_saga_hover() then 

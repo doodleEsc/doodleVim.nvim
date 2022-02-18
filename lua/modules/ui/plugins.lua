@@ -32,9 +32,14 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
 	config = conf.blankline,
 }
 
-ui['cinuor/lsp-action.nvim'] = {
+ui['cinuor/lspsaga.nvim'] = {
 	after = "nvim-lspconfig",
-	config = conf.lspaction
+	config = conf.lspsaga
 }
+
+-- ui['cinuor/lsp-action.nvim'] = {
+-- 	after = "nvim-lspconfig",
+-- 	config = conf.lspaction
+-- }
 
 return ui

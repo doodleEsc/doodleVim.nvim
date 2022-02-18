@@ -1,4 +1,4 @@
-local icons = {
+local cmp = {
    Text = "",
    Method = "",
    Function = "",
@@ -26,4 +26,15 @@ local icons = {
    TypeParameter = "",
 }
 
-return icons
+local diagnostics = {
+	error_sign = "",
+	warn_sign = "",
+	hint_sign = "",
+	infor_sign = "",
+	debug_sign = "  ",
+}
+
+return {
+	cmp = cmp,
+	diag = diagnostics
+}
