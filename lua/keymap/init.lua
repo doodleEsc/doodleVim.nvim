@@ -51,7 +51,7 @@ local plug_map = {
     -- Plugin Telescope
 	["n|<Leader>ff"] = map_cr('Telescope find_files'):with_noremap(),
 	["n|<Leader>fg"] = map_cr('Telescope live_grep'):with_noremap(),
-	["n|<Leader>fp"] = map_cr('Telescope projects'):with_noremap(),
+	["n|<Leader>fh"] = map_cr('Telescope projects'):with_noremap(),
 	["n|<Leader>fj"] = map_cr('Telescope todo-comments todo'):with_noremap(),
 
 	-- Comment
