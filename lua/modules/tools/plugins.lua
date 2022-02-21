@@ -27,11 +27,11 @@ tools['iamcco/markdown-preview.nvim'] = {
 	run = function() vim.cmd [[:call mkdp#util#install()]] end,
 }
 
-tools['liuchengxu/vista.vim'] = {
+tools['simrat39/symbols-outline.nvim'] = {
 	opt = true,
 	setup = function()
-		require("modules.tools.config").vista()
-		require("utils.defer").packer_defer_load("vista.vim", 1000)
+		require("modules.tools.config").symbols_outline()
+		require("utils.defer").packer_defer_load("symbols-outline.nvim", 1000)
 	end
 }
 

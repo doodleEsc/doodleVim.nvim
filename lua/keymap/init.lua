@@ -60,8 +60,8 @@ local plug_map = {
 	["v|<Leader>cc"] = map_cu('lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())'):with_noremap():with_silent(),
 	["v|<Leader>b"] = map_cu('lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())'):with_noremap():with_silent(),
 
-    -- Plugin Vista
-    ["n|<Leader>vv"] = map_cu('Vista!!'):with_noremap():with_silent(),
+    -- Plugin symbols-outline
+    ["n|<Leader>vv"] = map_cu('lua require"symbols-outline".toggle_outline()'):with_noremap():with_silent(),
 
 	-- Plugin NvimTree
 	["n|tt"] = map_cr("lua require('extend.tree').toggle()"):with_noremap():with_silent(),

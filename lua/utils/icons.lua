@@ -10,7 +10,7 @@ local cmp = {
    Module = "",
    Property = "ﰠ",
    Unit = "塞",
-   Value = "",
+   Value = "",
    Enum = "",
    Keyword = "",
    Snippet = "",
@@ -23,7 +23,15 @@ local cmp = {
    Struct = "פּ",
    Event = "",
    Operator = "",
-   TypeParameter = "",
+   TypeParameter = "𝙏",
+   Namespace = "",
+   Package = "",
+   String = "",
+   Number = "",
+   Boolean = "﯄",
+   Array = "",
+   Object = "⦿",
+   Null = "ﳠ",
 }
 
 local diagnostics = {

@@ -197,21 +197,60 @@ function config.nvim_tree()
 	}
 end
 
-function config.vista()
-  vim.g["vista#renderer#enable_icon"] = 1
-  vim.g.vista_close_on_jump = 1
-  vim.g.vista_stay_on_open = 0
-  vim.g.vista_disable_statusline = 1
-  vim.g.vista_default_executive = 'nvim_lsp'
-  vim.g.vista_echo_cursor_strategy = 'floating_win'
-  vim.g.vista_vimwiki_executive = 'markdown'
-  vim.g.vista_executive_for = {
-    vimwiki =  'markdown',
-    pandoc = 'markdown',
-    markdown = 'toc',
-  }
-  vim.g.vista_icon_indent = {"╰─▸ ","├─▸ "}
-  vim.g.vista_sidebar_width = 40
+function config.symbols_outline()
+	local icons = require("utils.icons")
+	vim.g.symbols_outline = {
+		highlight_hovered_item = true,
+		show_guides = true,
+		auto_preview = false,
+		position = 'right',
+		relative_width = true,
+		width = 50,
+		auto_close = true,
+		show_numbers = false,
+		show_relative_numbers = false,
+		show_symbol_details = true,
+		preview_bg_highlight = 'LspSagaAutoPreview',
+		keymaps = { -- These keymaps can be a string or a table for multiple keys
+			close = {"<Esc>", "q"},
+			goto_location = "<CR>",
+			focus_location = "o",
+			hover_symbol = "gh",
+			toggle_preview = "K",
+			rename_symbol = "gn",
+			code_actions = "ga",
+		},
+		lsp_blacklist = {},
+		symbol_blacklist = {},
+		symbols = {
+			File = {icon = icons.cmp.File, hl = "TSURI"},
+			Module = {icon = icons.cmp.Module, hl = "TSNamespace"},
+			Namespace = {icon = icons.cmp.Namespace, hl = "TSNamespace"},
+			Package = {icon = icons.cmp.Package, hl = "TSNamespace"},
+			Class = {icon = icons.cmp.Class, hl = "TSType"},
+			Method = {icon = icons.cmp.Method, hl = "TSMethod"},
+			Property = {icon = icons.cmp.Property, hl = "TSMethod"},
+			Field = {icon = icons.cmp.Field, hl = "TSField"},
+			Constructor = {icon = icons.cmp.Constructor, hl = "TSConstructor"},
+			Enum = {icon = icons.cmp.Enum, hl = "TSType"},
+			Interface = {icon = icons.cmp.Interface, hl = "TSType"},
+			Function = {icon = icons.cmp.Function, hl = "TSFunction"},
+			Variable = {icon = icons.cmp.Variable, hl = "TSConstant"},
+			Constant = {icon = icons.cmp.Constant, hl = "TSConstant"},
+			String = {icon = icons.cmp.String, hl = "TSString"},
+			Number = {icon = icons.cmp.Number, hl = "TSNumber"},
+			Boolean = {icon = icons.cmp.Boolean, hl = "TSBoolean"},
+			Array = {icon = icons.cmp.Array, hl = "TSConstant"},
+			Object = {icon = icons.cmp.Object, hl = "TSType"},
+			Key = {icon = icons.cmp.Keyword, hl = "TSType"},
+			Null = {icon = icons.cmp.Null, hl = "TSType"},
+			EnumMember = {icon = icons.cmp.EnumMember, hl = "TSField"},
+			Struct = {icon = icons.cmp.Struct, hl = "TSType"},
+			Event = {icon = icons.cmp.Event, hl = "TSType"},
+			Operator = {icon = icons.cmp.Operator, hl = "TSOperator"},
+			TypeParameter = {icon = icons.cmp.TypeParameter, hl = "TSParameter"}
+		}
+	}
 end
 
 function config.mkdp()
