@@ -75,6 +75,7 @@ function config.lspsaga()
 	lspsaga.setup { -- defaults ...
 	  debug = false,
 	  use_saga_diagnostic_sign = true,
+	  use_diagnostic_virtual_text = false,
 	  -- diagnostic sign
 	  error_sign = "",
 	  warn_sign = "",
