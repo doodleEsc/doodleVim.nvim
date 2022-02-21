@@ -61,7 +61,7 @@ local plug_map = {
 	["v|<Leader>b"] = map_cu('lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())'):with_noremap():with_silent(),
 
     -- Plugin Vista
-    ["n|<Leader>v"] = map_cu('Vista!!'):with_noremap():with_silent(),
+    ["n|<Leader>vv"] = map_cu('Vista!!'):with_noremap():with_silent(),
 
 	-- Plugin NvimTree
 	["n|tt"] = map_cr("lua require('extend.tree').toggle()"):with_noremap():with_silent(),
