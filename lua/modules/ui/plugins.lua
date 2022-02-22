@@ -37,9 +37,11 @@ ui['cinuor/lspsaga.nvim'] = {
 	config = conf.lspsaga
 }
 
--- ui['cinuor/lsp-action.nvim'] = {
--- 	after = "nvim-lspconfig",
--- 	config = conf.lspaction
--- }
+ui['lewis6991/gitsigns.nvim'] = {
+	opt = true,
+	config = conf.gitsigns,
+	requires = {'nvim-lua/plenary.nvim'},
+	setup = function() require("utils.defer").add("gitsigns.nvim", 90) end,
+}
 
 return ui

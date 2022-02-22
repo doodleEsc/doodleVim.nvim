@@ -263,26 +263,6 @@ function config.mkdp()
   vim.g.mkdp_auto_close = 0
 end
 
-function config.gitsigns()
-	require('gitsigns').setup{
-		keymaps = {},
-		watch_gitdir = {
-			interval = 2000,
-			follow_files = true
-		},
-		current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-		current_line_blame_opts = {
-			virt_text = true,
-			virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-			delay = 1000,
-			ignore_whitespace = false,
-		},
-		current_line_blame_formatter_opts = {
-			relative_time = false
-		},
-	}
-end
-
 function config.floaterm()
 	vim.g.floaterm_width = 0.9
 	vim.g.floaterm_height = 0.9

@@ -43,13 +43,6 @@ tools['voldikss/vim-floaterm'] = {
 	end
 }
 
-tools['lewis6991/gitsigns.nvim'] = {
-	opt = true,
-	config = conf.gitsigns,
-	requires = {'nvim-lua/plenary.nvim'},
-	setup = function() require("utils.defer").add("gitsigns.nvim", 90) end,
-}
-
 tools['voldikss/vim-translator'] = {
 	cmd = {'TranslateW'},
 	setup = conf.translator()

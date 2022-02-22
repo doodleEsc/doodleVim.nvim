@@ -39,7 +39,7 @@ local def_map = {
     ["i|<C-e>"]      = map_cmd('<ESC>A'):with_noremap(),
 
 	-- add new line
-    ["i|<C-o>"]      = map_cmd('<Esc>o'):with_noremap(),
+    ["i|<C-o>"]      = map_cmd('<Esc>O'):with_noremap(),
     ["i|<C-l>"]      = map_cmd('<Esc>o'):with_noremap(),
 
 	-- save and quit
