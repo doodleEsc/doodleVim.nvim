@@ -78,7 +78,7 @@ tools['cinuor/gotests.nvim'] = {
 
 tools["ahmedkhalf/project.nvim"] = {
 	opt = true,
-	setup = function() require("utils.defer").add("project.nvim", 70) end,
+	setup = function() require("utils.defer").add("project.nvim", 90) end,
 	config = conf.project
 }
 
