@@ -7,7 +7,7 @@ tools['dstein64/vim-startuptime'] = {
 
 tools['nvim-telescope/telescope.nvim'] = {
 	opt = true,
-	setup = function() require("utils.defer").add("telescope.nvim", 90) end,
+	setup = function() require("utils.defer").add("telescope.nvim", 80) end,
 	config = conf.telescope,
 	requires = {
 		{'nvim-telescope/telescope-fzy-native.nvim', opt = true},
@@ -78,7 +78,7 @@ tools['cinuor/gotests.nvim'] = {
 
 tools["ahmedkhalf/project.nvim"] = {
 	opt = true,
-	setup = function() require("utils.defer").packer_defer_load("project.nvim", 100) end,
+	setup = function() require("utils.defer").add("project.nvim", 70) end,
 	config = conf.project
 }
 

@@ -25,13 +25,13 @@ editor['junegunn/vim-easy-align'] = {
 
 editor['karb94/neoscroll.nvim'] = {
 	opt = true,
-	setup = function() require("utils.defer").packer_defer_load("neoscroll.nvim", 1000) end,
+	setup = function() require("utils.defer").add("neoscroll.nvim", 100) end,
 	config = conf.neoscroll,
 }
 
 editor['folke/todo-comments.nvim'] = {
 	opt = true,
-	setup = function() require("utils.defer").packer_defer_load("todo-comments.nvim", 100) end,
+	setup = function() require("utils.defer").add("todo-comments.nvim", 100) end,
 	config = conf.todo
 }
 
