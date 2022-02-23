@@ -30,8 +30,8 @@ local plug_map = {
 	-- Diagnostics
 	["n|<C-n>"] = map_cr("lua require('lspsaga.diagnostic').navigate'next'()"):with_noremap():with_silent();
 	["n|<C-p>"] = map_cr("lua require('lspsaga.diagnostic').navigate'prev'()"):with_noremap():with_silent();
-	["n|<Leader>ee"] = map_cr("lua require('Telescope.builtin').diagnostics({ignore_filename=true})"):with_noremap():with_silent();
-	["n|<Leader>dd"] = map_cr("lua require('Telescope.builtin').diagnostics({bufnr=0})"):with_noremap():with_silent();
+	["n|<Leader>ee"] = map_cr("lua require('telescope.builtin').diagnostics({ignore_filename=true})"):with_noremap():with_silent();
+	["n|<Leader>dd"] = map_cr("lua require('telescope.builtin').diagnostics({bufnr=0})"):with_noremap():with_silent();
 	["n|<Leader>vt"] = map_cr("lua require('lspsaga.diagnostic').toggle_virtual_text()"):with_noremap():with_silent();
 
     -- Plugin MarkdownPreview
