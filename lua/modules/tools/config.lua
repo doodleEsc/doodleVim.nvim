@@ -10,6 +10,7 @@ function config.telescope()
   local actions_layout = require "telescope.actions.layout"
 	require('telescope').setup {
 		defaults = {
+			initial_mode = "normal",
 			prompt_prefix = '🔭 ',
 			selection_caret = " ",
 			sorting_strategy = 'ascending',
@@ -78,8 +79,8 @@ function config.telescope()
 					["<C-w>"] = { "<c-s-w>", type = "command" },
 				},
 				n = {
-					["<C-n>"] = actions.move_selection_next,
-					["<C-p>"] = actions.move_selection_previous,
+					["j"] = actions.move_selection_next,
+					["k"] = actions.move_selection_previous,
 
 					["<C-c>"] = actions.close,
 
