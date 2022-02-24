@@ -205,7 +205,7 @@ function config.symbols_outline()
 		show_guides = true,
 		auto_preview = false,
 		position = 'right',
-		relative_width = true,
+		relative_width = false,
 		width = 50,
 		auto_close = true,
 		show_numbers = false,
