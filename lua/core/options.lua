@@ -105,15 +105,28 @@ local function load_options()
   }
 
   if global.is_mac then
+    -- vim.g.clipboard = {
+    --   name = "macOS-clipboard",
+    --   copy = {
+    --     ["+"] = "pbcopy",
+    --     ["*"] = "pbcopy",
+    --   },
+    --   paste = {
+    --     ["+"] = "pbpaste",
+    --     ["*"] = "pbpaste",
+    --   },
+    --   cache_enabled = 0
+    -- }
+
     vim.g.clipboard = {
-      name = "macOS-clipboard",
+      name = "myProvider",
       copy = {
-        ["+"] = "pbcopy",
-        ["*"] = "pbcopy",
+        ["+"] = "clipboard-provider copy",
+        ["*"] = "clipboard-provider copy",
       },
       paste = {
-        ["+"] = "pbpaste",
-        ["*"] = "pbpaste",
+        ["+"] = "clipboard-provider paste",
+        ["*"] = "clipboard-provider paste",
       },
       cache_enabled = 0
     }
