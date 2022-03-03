@@ -104,6 +104,19 @@ local function load_options()
     concealcursor  = "niv";
   }
 
+  vim.g.clipboard = {
+    name = "myProvider",
+    copy = {
+      ["+"] = "clipboard-provider copy",
+      ["*"] = "clipboard-provider copy",
+    },
+    paste = {
+      ["+"] = "clipboard-provider paste",
+      ["*"] = "clipboard-provider paste",
+    },
+    cache_enabled = 0
+  }
+
   if global.is_mac then
     -- vim.g.clipboard = {
     --   name = "macOS-clipboard",
@@ -118,18 +131,6 @@ local function load_options()
     --   cache_enabled = 0
     -- }
 
-    vim.g.clipboard = {
-      name = "myProvider",
-      copy = {
-        ["+"] = "clipboard-provider copy",
-        ["*"] = "clipboard-provider copy",
-      },
-      paste = {
-        ["+"] = "clipboard-provider paste",
-        ["*"] = "clipboard-provider paste",
-      },
-      cache_enabled = 0
-    }
 
     vim.g.python_host_skip_check=1
     vim.g.python_host_prog = '/usr/bin/python'
@@ -144,8 +145,8 @@ local function load_options()
     vim.g.python3_host_prog = '/usr/bin/python3'
   end
 
-	for name, value in pairs(global_local) do
-	    vim.o[name] = value
+  for name, value in pairs(global_local) do
+    vim.o[name] = value
     end
     bind_option(bw_local)
 end
