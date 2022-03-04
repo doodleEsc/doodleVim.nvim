@@ -1,7 +1,7 @@
 local config = {}
 
 function config.dap()
-	require('modules.debug.dapconfig')
+	vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
 end
 
 function config.dapui()
@@ -42,6 +42,15 @@ function config.dapui()
 		},
 		windows = { indent = 1 },
 	})
+end
+
+function config.dapinstall()
+	local dap_install = require("dap-install")
+	dap_install.setup({
+		installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
+	})
+
+	dap_install.config("go_delve", {})
 end
 
 return config

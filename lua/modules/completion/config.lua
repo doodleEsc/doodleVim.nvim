@@ -1,4 +1,5 @@
 local config = {}
+local format = require('modules.completion.format')
 
 function config.nvim_lsp_installer()
 
@@ -14,6 +15,11 @@ function config.nvim_lsp_installer()
 	  local opts = {
 		capabilities = capabilities,
 		on_attach = function(client,bufnr)
+			-- NOTE: format before save
+			if client.resolved_capabilities.document_formatting then
+				format.lsp_before_save()
+			end
+
 			local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 			buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 			require "lsp_signature".on_attach({
