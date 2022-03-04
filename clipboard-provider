@@ -1,0 +1,81 @@
+#!/bin/bash
+# Taken and modified from https://github.com/agriffis/skel/blob/master/neovim/bin/clipboard-provider
+#
+# clipboard provider for neovim
+#
+# :help provider-clipboard
+
+#exec 2>> ~/clipboard-provider.out
+#set -x
+
+: ${COPY_PROVIDERS:=osc52 pb xclip tmux local}
+: ${PASTE_PROVIDERS:=pb xclip tmux local}
+: ${TTY:=`(tty || tty </proc/$PPID/fd/0) 2>/dev/null | grep /dev/`}
+
+LOCAL_STORAGE=$HOME/.clipboard-provider.out
+
+main() {
+    declare p status buffer=99
+    case $1 in
+        copy)
+            slurp
+            for p in $COPY_PROVIDERS; do
+                spit | ${p}_provider copy && status=0
+            done ;;
+        paste)
+            for p in $PASTE_PROVIDERS; do
+                ${p}_provider paste && status=0 && break
+            done ;;
+    esac
+
+    exit $status
+}
+
+# N.B. buffer is global for simplicity
+slurp() { buffer=$(base64 | tr -d '\n'); }
+spit() { base64 --decode <<<"$buffer"; }
+
+is_copy() {
+    if [[ "$1" == "copy" ]]; then return 0; else return 1; fi
+}
+
+tmux_provider() {
+	[[ -n $TMUX ]] || return $(is_copy $1)
+    case $1 in
+        copy) spit | tmux load-buffer - ;;
+        paste) tmux save-buffer - ;;
+    esac
+}
+
+pb_provider() {
+    if ! command -v pbcopy &>/dev/null;then return $(is_copy $1); fi
+    case $1 in
+        copy) spit | pbcopy ;;
+        paste) pbpaste ;;
+    esac
+}
+
+osc52_provider() {
+    # HACK: this ignores stdin and looks directly at the base64 buffer
+    case $1 in
+        copy) [[ -n "$TTY" ]] && printf $'\e]52;c;%s\a' "$buffer" > "$TTY" ;;
+        paste) return 1 ;;
+    esac
+}
+
+local_provider() {
+    case $1 in
+        copy) spit > $LOCAL_STORAGE ;;
+        paste) cat $LOCAL_STORAGE && return 0;;
+    esac
+}
+
+xclip_provider() {
+	if ! command -v xclip &>/dev/null || [[ -z $DISPLAY ]]; then return $(is_copy $1); fi
+    case $1 in
+        copy) spit | xclip -i -selection clipboard;;
+        paste) xclip -o -selection clipboard;;
+    esac
+}
+
+main "$@"
