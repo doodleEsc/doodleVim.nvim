@@ -12,13 +12,7 @@ debug['rcarriga/nvim-dap-ui'] = {
 	config = conf.dapui
 }
 
-debug['theHamsta/nvim-dap-virtual-text'] = {
-	after = "nvim-dap",
-	config = function() vim.g.dap_virtual_text = true end
-}
-
 debug['Pocco81/DAPInstall.nvim'] = {
-	opt = true,
 	after = "nvim-dap",
 	config = conf.dapinstall
 }

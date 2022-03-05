@@ -55,4 +55,9 @@ completion['williamboman/nvim-lsp-installer'] = {
 	config = conf.nvim_lsp_installer
 }
 
+completion['jose-elias-alvarez/null-ls.nvim'] = {
+	after='nvim-lspconfig',
+	config = conf.null_ls
+}
+
  return completion

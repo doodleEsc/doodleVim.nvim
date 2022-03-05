@@ -51,6 +51,7 @@ function config.dapinstall()
 	})
 
 	dap_install.config("go_delve", {})
+	dap_install.config("python", {})
 end
 
 return config

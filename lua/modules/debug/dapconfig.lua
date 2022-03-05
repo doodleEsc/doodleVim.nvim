@@ -1,7 +1,7 @@
-local dap = require "dap"
-local go = require "modules.debug.go"
+-- local dap = require "dap"
+-- local go = require "modules.debug.go"
 
-vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+-- vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
 
 -- if not packer_plugins['DAPInstall.nvim'].loaded then
 --   vim.cmd [[PackerLoad DAPInstall.nvim]]
