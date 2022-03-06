@@ -1,9 +1,5 @@
 local config = {}
 
-function config.dap()
-	vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
-end
-
 function config.dapui()
 	require("dapui").setup({
 		icons = { expanded = "▾", collapsed = "▸" },

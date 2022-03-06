@@ -3,8 +3,10 @@ local conf = require("modules.debug.config")
 
 debug['mfussenegger/nvim-dap'] = {
 	opt = true,
-	setup = function() require("utils.defer").packer_defer_load("nvim-dap", 1000) end,
-	config = conf.dap
+	setup = function()
+		vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+		require("utils.defer").packer_defer_load("nvim-dap", 1000)
+	end,
 }
 
 debug['rcarriga/nvim-dap-ui'] = {
