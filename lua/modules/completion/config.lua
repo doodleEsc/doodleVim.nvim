@@ -182,13 +182,13 @@ function config.null_ls()
 		on_attach = nil,
 		on_init = nil,
 		on_exit = nil,
-		root_dir = require("null-ls.utils").root_pattern(
-			".null-ls-root",
-			"Makefile",
-			".git",
-			"poetry.lock",
-			"go.mod"
-		),
+		-- root_dir = require("null-ls.utils").root_pattern(
+		-- 	".null-ls-root",
+		-- 	"Makefile",
+		-- 	".git",
+		-- 	"poetry.lock",
+		-- 	"go.mod"
+		-- ),
 		sources = {
 			null_ls.builtins.formatting.prettier,
 			null_ls.builtins.formatting.black,
