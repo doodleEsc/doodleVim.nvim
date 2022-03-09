@@ -76,10 +76,18 @@ tools['cinuor/gotests.nvim'] = {
 	end
 }
 
-tools["ahmedkhalf/project.nvim"] = {
+tools["cinuor/project.nvim"] = {
 	opt = true,
 	setup = function() require("utils.defer").add("project.nvim", 90) end,
 	config = conf.project
+}
+
+tools['rmagatti/auto-session'] = {
+	opt = true,
+	setup = function()
+		require("utils.defer").add("auto-session", 70)
+	end,
+	config = conf.autosession
 }
 
 return tools
