@@ -3,7 +3,6 @@ local debug = {}
 debug.debug_toggle = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[PackerLoad nvim-dap]]
-		require("plugins.debug.config").dap()
 	end
 	require'dap'.toggle_breakpoint()
 end
@@ -11,9 +10,7 @@ end
 debug.debug_continue = function()
 	if not packer_plugins['nvim-dap'].loaded then
 		vim.cmd [[PackerLoad nvim-dap]]
-		require("plugins.debug.config").dap()
 		vim.cmd [[PackerLoad nvim-dap-ui]]
-		require("plugins.debug.config").dapui()
 	end
 	require'dapui'.open()
 	require'dap'.continue()

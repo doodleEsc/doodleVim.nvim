@@ -1,8 +1,3 @@
-# Neovim Configuration
+# Neovim 0.5+ configuration
 
-## requirements
-* Neovim 0.5
-* Nodejs v16+
-* Go
-* Python3.9
-* Tree-sitter
+copy `clipboard-provider` to $PATH folder

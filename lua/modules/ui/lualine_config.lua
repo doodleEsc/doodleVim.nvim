@@ -40,12 +40,12 @@ local config = {
       -- We are going to use lualine_c an lualine_x as left and
       -- right section. Both are highlighted by c theme .  So we
       -- are just setting default looks o statusline
-      normal = { 
+      normal = {
 		  -- a = { fg = colors.fg, bg = colors.bg },
 		  -- b = { fg = colors.fg, bg = colors.bg },
 		  c = { fg = colors.fg, bg = colors.bg },
 	  },
-      inactive = { 
+      inactive = {
 		  x = { fg = colors.fg, bg = colors.bg },
 		  -- y = { fg = colors.fg, bg = colors.bg },
 		  -- z = { fg = colors.fg, bg = colors.bg },
@@ -148,7 +148,7 @@ ins_c {
 
 ins_c {
   'diagnostics',
-  sources = { 'coc' },
+  sources = {'nvim_lsp'},
   symbols = { error = ' ', warn = ' ', info = ' ' },
   diagnostics_color = {
     color_error = { fg = colors.red },
@@ -156,15 +156,6 @@ ins_c {
     color_info = { fg = colors.cyan },
   },
   separator = "┃",
-}
-
-ins_c {
-	function()
-		return "📖"
-	end,
-	cond = function()
-		return vim.g.enable_coc_word == true
-	end
 }
 
 ins_x {
