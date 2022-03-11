@@ -60,4 +60,9 @@ completion['jose-elias-alvarez/null-ls.nvim'] = {
 	config = conf.null_ls
 }
 
- return completion
+completion['danymat/neogen'] = {
+	after = {"nvim-cmp", "LuaSnip"},
+	config = conf.neogen
+}
+
+return completion

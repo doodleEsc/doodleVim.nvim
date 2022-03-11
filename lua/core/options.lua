@@ -147,8 +147,8 @@ local function load_options()
 
   for name, value in pairs(global_local) do
     vim.o[name] = value
-    end
-    bind_option(bw_local)
+  end
+  bind_option(bw_local)
 end
 
 load_options()

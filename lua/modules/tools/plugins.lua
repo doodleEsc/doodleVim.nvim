@@ -64,7 +64,7 @@ tools['nvim-lua/plenary.nvim'] = {}
 
 tools['kyazdani42/nvim-web-devicons'] = {}
 
--- tools['bfredl/nvim-luadev'] = {}
+tools['bfredl/nvim-luadev'] = {}
 
 tools['cinuor/gotests.nvim'] = {
 	opt = true,
@@ -88,6 +88,12 @@ tools['rmagatti/auto-session'] = {
 		require("utils.defer").add("auto-session", 70)
 	end,
 	config = conf.autosession
+}
+
+tools['cinuor/which-key.nvim'] = {
+	opt = true,
+	setup = function() require("utils.defer").packer_defer_load("which-key.nvim", 200) end,
+	config = conf.which_key
 }
 
 return tools

@@ -39,8 +39,14 @@ function config.nvim_cmp()
 	  vim.cmd [[PackerLoad LuaSnip]]
 	end
 
+	if not packer_plugins['neogen'].loaded then
+	  vim.cmd [[PackerLoad neogen]]
+	end
+
 	local cmp = require('cmp')
 	local luasnip = require("luasnip")
+	local neogen = require('neogen')
+
 	cmp.setup({
 		snippet = {
 			expand = function(args)
@@ -89,31 +95,11 @@ function config.nvim_cmp()
 					fallback()
 				end
 			end, {"i", "s"}),
-
-			-- 	if cmp.visible() then
-			-- 		cmp.select_next_item()
-			-- 	elseif luasnip.expand_or_jumpable() then
-			-- 		luasnip.expand_or_jump()
-			-- 	elseif has_words_before() then
-			-- 		cmp.complete()
-			-- 	else
-			-- 		fallback()
-			-- 	end
-			-- end, { "i", "s" }),
-			--
-			-- ["<C-p>"] = cmp.mapping(function(fallback)
-			-- 	if cmp.visible() then
-			-- 		cmp.select_prev_item()
-			-- 	elseif luasnip.jumpable(-1) then
-			-- 		luasnip.jump(-1)
-			-- 	else
-			-- 		fallback()
-			-- 	end
-			-- end, { "i", "s" }),
-
 			["<C-k>"] = cmp.mapping(function(fallback)
 				if luasnip.jumpable(-1) then
 					luasnip.jump(-1)
+				elseif neogen.jumpable(true) then
+					neogen.jump_prev()
                 else
                     fallback()
                 end
@@ -121,7 +107,9 @@ function config.nvim_cmp()
             ["<C-j>"] = cmp.mapping(function(fallback)
                 if luasnip.expand_or_jumpable() then
 					luasnip.expand_or_jump()
-                else
+				elseif neogen.jumpable() then
+					neogen.jump_next()
+                else 
                     fallback()
                 end
             end, {"i", "s"}),
@@ -195,6 +183,10 @@ function config.null_ls()
 		},
 		update_in_insert = false,
 	})
+end
+
+function config.neogen()
+	require('neogen').setup({ snippet_engine = "luasnip" })
 end
 
 return config

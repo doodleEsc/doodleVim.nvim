@@ -340,4 +340,45 @@ function config.autosession()
 	})
 end
 
+function config.which_key()
+	local wk = require("which-key")
+	wk.setup({
+		key_labels = {
+		["<space>"] = "SPC",
+		["<leader>"] = "SPC",
+		["<cr>"] = "ENT",
+		["<tab>"] = "TAB",
+		["<a>"] = "ALT",
+		["<s>"] = "SHI",
+		["<c>"] = "CTR",
+	  },
+	  operators = {},
+	  window = {
+		border = "single", -- none, single, double, shadow
+		position = "bottom", -- bottom, top
+		margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+		padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+		winblend = 0
+	  },
+	  ignore_missing = false,
+	})
+
+	-- bind common keymap
+	local bind = require('keymap.bind')
+	local def_map = require("keymap.def_map")
+	local plug_map = require("keymap.plug_map")
+
+	-- bind raw keymap
+	bind.nvim_load_mapping(plug_map.raw)
+
+	wk.register(def_map.normal)
+	wk.register(def_map.insert)
+	wk.register(def_map.command)
+	wk.register(def_map.visual)
+
+	wk.register(plug_map.normal)
+	wk.register(plug_map.insert)
+	wk.register(plug_map.visual)
+end
+
 return config
