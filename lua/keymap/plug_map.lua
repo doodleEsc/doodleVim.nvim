@@ -27,11 +27,11 @@ plug_map.normal = {
 
 	["g"] = {
 		name = "Lsp Function",
-		d = bind.convert_wk_format(map_cr("lua require('telescope.builtin').lsp_definitions()"):with_noremap():with_silent():with_label("Go To Definition")),
+		d = bind.convert_wk_format(map_cr("lua require('lspsaga.provider').lsp_finder()"):with_noremap():with_silent():with_label("Go To Definition")),
 		D = bind.convert_wk_format(map_cr("lua vim.lsp.buf.declaration()"):with_noremap():with_silent():with_label("Go To Declaration")),
 		t = bind.convert_wk_format(map_cr("lua require('telescope.builtin').lsp_type_definitions()"):with_noremap():with_silent():with_label("Go To Type Definition")),
-		i = bind.convert_wk_format(map_cr("lua require('telescope.builtin').lsp_implementations()"):with_noremap():with_silent():with_label("Go To Implementation")),
-		r = bind.convert_wk_format(map_cr("lua require('telescope.builtin').lsp_references()"):with_noremap():with_silent():with_label("Go To Reference")),
+		i = bind.convert_wk_format(map_cr("lua require('lspsaga.implement').lspsaga_implementation()"):with_noremap():with_silent():with_label("Go To Implementation")),
+		r = bind.convert_wk_format(map_cr("lua require('lspsaga.provider').lsp_finder()"):with_noremap():with_silent():with_label("Go To Reference")),
 		h = bind.convert_wk_format(map_cr("lua require('lspsaga.hover').render_hover_doc()"):with_noremap():with_silent():with_label("Hover Documentation")),
 		f = bind.convert_wk_format(map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Code Formatting")),
 		a = bind.convert_wk_format(map_cr("lua require('lspsaga.codeaction').code_action()"):with_noremap():with_silent():with_label("Code Action")),

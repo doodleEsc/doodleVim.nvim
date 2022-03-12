@@ -10,7 +10,7 @@ scroll.scroll_up = function()
 	local action = require("lspsaga.action")
 	local neoscroll = require("neoscroll")
 
-	if hover.has_saga_hover() then 
+	if hover.has_saga_hover() then
 		action.smart_scroll_with_saga(-1)
 	else
 		neoscroll.scroll(-vim.wo.scroll, true, 250)
@@ -27,7 +27,7 @@ scroll.scroll_down = function()
 	local action = require("lspsaga.action")
 	local neoscroll = require("neoscroll")
 
-	if hover.has_saga_hover() then 
+	if hover.has_saga_hover() then
 		action.smart_scroll_with_saga(1)
 	else
 		neoscroll.scroll(vim.wo.scroll, true, 250)

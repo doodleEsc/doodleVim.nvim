@@ -100,30 +100,6 @@ function pbind.nvim_load_mapping(mapping)
     end
 end
 
--- function pbind.convert_wk_format(mapping)
--- 	local wkmaps = {}
---     for key,value in pairs(mapping) do
---       local wkitem = {}
---       local mode,keymap = key:match("([^|]*)|?(.*)")
---       if type(value) == 'table' then
---         local rhs = value.cmd
--- 		local label = value.label
---         local options = value.options
--- 		table.insert(wkitem, 1, rhs)
--- 		if label ~= "" then
--- 			table.insert(wkitem, 2, label)
--- 		end
--- 		wkitem["mode"] = mode
--- 		wkitem["silent"] = options.silent
--- 		wkitem["noremap"] = options.noremap
--- 		wkitem["nowait"] = options.nowait
--- 		wkitem["expr"] = options.expr
---       end
--- 	  wkmaps[keymap] = wkitem
---     end
--- 	return wkmaps
--- end
-
 function pbind.convert_wk_format(value)
     local wkitem = {}
     if type(value) == 'table' then
