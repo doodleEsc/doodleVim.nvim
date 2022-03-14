@@ -67,10 +67,8 @@ local function load_nvim_config()
 	require('core.options')
 	require('core.event')
 	require('core.command')
-	-- require('keymap')
-	-- require('core.mapping')
 	set_colorscheme()
-	defer.load(100)
+	defer.load(80)
 end
 
 load_nvim_config()
