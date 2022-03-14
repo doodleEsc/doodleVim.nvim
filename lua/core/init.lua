@@ -42,6 +42,7 @@ local disable_distribution_plugins= function()
   vim.g.loaded_netrwPlugin       = 1
   vim.g.loaded_netrwSettings     = 1
   vim.g.loaded_netrwFileHandlers = 1
+  vim.g.loaded_tutor_mode_plugin = 1
 end
 
 local set_leader_map = function()
