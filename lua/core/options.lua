@@ -80,7 +80,7 @@ local function load_options()
     display        = "lastline";
     showbreak      = "↳";
     listchars      = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←";
-    pumblend       = 10;
+    pumblend       = 0;
     winblend       = 10;
   }
 

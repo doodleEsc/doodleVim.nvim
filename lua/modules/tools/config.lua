@@ -1,13 +1,14 @@
 local config = {}
 
 function config.telescope()
-  if not packer_plugins['telescope-fzy-native.nvim'].loaded then
+  if (not packer_plugins['telescope-fzy-native.nvim'].loaded) or (not packer_plugins['telescope-file-browser.nvim'].loaded) then
 	vim.cmd [[PackerLoad telescope-fzy-native.nvim]]
 	vim.cmd [[PackerLoad telescope-file-browser.nvim]]
   end
 
-  local actions = require "telescope.actions"
-  local actions_layout = require "telescope.actions.layout"
+	local actions = require "telescope.actions"
+	local actions_layout = require "telescope.actions.layout"
+
 	require('telescope').setup {
 		defaults = {
 			initial_mode = "normal",
@@ -17,8 +18,7 @@ function config.telescope()
 			scroll_strategy = "limit",
 			set_env = { ['COLORTERM'] = 'truecolor'},
 			path_display = {
-				'smart',
-				'truncate',
+				shorten = { len = 2, exclude = {-2, -1}}
 			},
 			results_title = true,
 			color_devicons = true,
@@ -38,7 +38,7 @@ function config.telescope()
 					width = 0.9,
 					height = 0.9,
 					preview_cutoff = 120,
-					preview_width = 0.6,
+					preview_width = 0.45,
 					prompt_position = "top"
 				},
 				vertical = {
@@ -47,14 +47,14 @@ function config.telescope()
 				}
 			},
 			preview = {
-				hide_on_startup = true
+				hide_on_startup = false
 			},
 			default_mappings = {
 				i = {
 					["<C-n>"] = actions.move_selection_next,
 					["<C-p>"] = actions.move_selection_previous,
 
-					["<C-c>"] = actions.close,
+					-- ["<C-c>"] = actions.close,
 
 					-- ["<Down>"] = actions.move_selection_next,
 					-- ["<Up>"] = actions.move_selection_previous,
@@ -82,7 +82,7 @@ function config.telescope()
 					["j"] = actions.move_selection_next,
 					["k"] = actions.move_selection_previous,
 
-					["<C-c>"] = actions.close,
+					["q"] = actions.close,
 
 					-- ["<Down>"] = actions.move_selection_next,
 					-- ["<Up>"] = actions.move_selection_previous,
@@ -115,7 +115,6 @@ function config.telescope()
 			},
 		},
 	}
-
 	require('telescope').load_extension('fzy_native')
 	require('telescope').load_extension('file_browser')
 	require('telescope').load_extension('todo-comments')

@@ -27,20 +27,20 @@ plug_map.normal = {
 
 	["g"] = {
 		name = "Lsp Function",
-		d = bind.convert_wk_format(map_cr("lua require('lspsaga.provider').lsp_finder()"):with_noremap():with_silent():with_label("Go To Definition")),
+		d = bind.convert_wk_format(map_cr("lua require('extend.lsp').lsp_definitions()"):with_noremap():with_silent():with_label("Go To Definition")),
 		D = bind.convert_wk_format(map_cr("lua vim.lsp.buf.declaration()"):with_noremap():with_silent():with_label("Go To Declaration")),
-		t = bind.convert_wk_format(map_cr("lua require('telescope.builtin').lsp_type_definitions()"):with_noremap():with_silent():with_label("Go To Type Definition")),
-		i = bind.convert_wk_format(map_cr("lua require('lspsaga.implement').lspsaga_implementation()"):with_noremap():with_silent():with_label("Go To Implementation")),
-		r = bind.convert_wk_format(map_cr("lua require('lspsaga.provider').lsp_finder()"):with_noremap():with_silent():with_label("Go To Reference")),
-		h = bind.convert_wk_format(map_cr("lua require('lspsaga.hover').render_hover_doc()"):with_noremap():with_silent():with_label("Hover Documentation")),
+		t = bind.convert_wk_format(map_cr("lua require('extend.lsp').lsp_type_definition()"):with_noremap():with_silent():with_label("Go To Type Definition")),
+		i = bind.convert_wk_format(map_cr("lua require('extend.lsp').lsp_implementations()"):with_noremap():with_silent():with_label("Go To Implementation")),
+		r = bind.convert_wk_format(map_cr("lua require('extend.lsp').lsp_references()"):with_noremap():with_silent():with_label("Go To Reference")),
+		h = bind.convert_wk_format(map_cr("lua vim.lsp.buf.hover()"):with_noremap():with_silent():with_label("Hover Documentation")),
 		f = bind.convert_wk_format(map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Code Formatting")),
-		a = bind.convert_wk_format(map_cr("lua require('lspsaga.codeaction').code_action()"):with_noremap():with_silent():with_label("Code Action")),
-		s = bind.convert_wk_format(map_cr("lua require('lsp_signature').signature()"):with_noremap():with_silent():with_label("Function Signature")),
-		n = bind.convert_wk_format(map_cr("lua require('lspsaga.rename').rename()"):with_noremap():with_silent():with_label("Rename"))
+		a = bind.convert_wk_format(map_cr("lua require('cosmic-ui').code_actions()"):with_noremap():with_silent():with_label("Code Action")),
+		-- s = bind.convert_wk_format(map_cr("lua require('lsp_signature').signature()"):with_noremap():with_silent():with_label("Function Signature")),
+		n = bind.convert_wk_format(map_cr("lua require('cosmic-ui').rename()"):with_noremap():with_silent():with_label("Rename"))
 	},
 
-	["<C-n>"] = bind.convert_wk_format(map_cr("lua require('lspsaga.diagnostic').navigate'next'()"):with_noremap():with_silent():with_label("Go To Next Diagnostic")),
-	["<C-p>"]= bind.convert_wk_format(map_cr("lua require('lspsaga.diagnostic').navigate'prev'()"):with_noremap():with_silent():with_label("Go To Previous Diagnostic")),
+	["<C-n>"] = bind.convert_wk_format(map_cr("lua vim.diagnostic.goto_next()"):with_noremap():with_silent():with_label("Go To Next Diagnostic")),
+	["<C-p>"]= bind.convert_wk_format(map_cr("lua vim.diagnostic.goto_prev()"):with_noremap():with_silent():with_label("Go To Previous Diagnostic")),
 	
 	["<leader>v"] = {
 		name = "Symbols-Outline",
@@ -56,9 +56,9 @@ plug_map.normal = {
 
 	["<leader>d"] = {
 		name = "Show Diagnostics In Buffer Or WorkSpace",
-		d = bind.convert_wk_format(map_cr("lua require('telescope.builtin').diagnostics({bufnr=0})"):with_noremap():with_silent():with_label("Show Diagnostics In Current Buffer")),
-		e = bind.convert_wk_format(map_cr("lua require('telescope.builtin').diagnostics({ignore_filename=true})"):with_noremap():with_silent():with_label("Show Diagnostics In WorkSpace")),
-		t = bind.convert_wk_format(map_cr("lua require('lspsaga.diagnostic').toggle_virtual_text()"):with_noremap():with_silent():with_label("Toggle Diagnostics Virtual Text"))
+		d = bind.convert_wk_format(map_cr("Telescope diagnostics bufnr=0"):with_noremap():with_silent():with_label("Show Diagnostics In Current Buffer")),
+		e = bind.convert_wk_format(map_cr("Telescope diagnostics"):with_noremap():with_silent():with_label("Show Diagnostics In WorkSpace")),
+		t = bind.convert_wk_format(map_cr("lua require('extend.diagnostics').toggle_virtual_text()"):with_noremap():with_silent():with_label("Toggle Diagnostics Virtual Text"))
 	},
 
 	["m"] = {
@@ -121,8 +121,8 @@ plug_map.normal = {
 plug_map.visual = {
 	["g"] = {
 		name = "Lsp Function",
-		f = bind.convert_wk_format(map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Selected Code Formatting"):with_mode("v")),
-		a = bind.convert_wk_format(map_cr("lua require('lspsaga.codeaction').code_action()"):with_noremap():with_silent():with_label("Range Code Action"):with_mode("v")),
+		f = bind.convert_wk_format(map_cu("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Selected Code Formatting"):with_mode("v")),
+		a = bind.convert_wk_format(map_cu("lua require('cosmic-ui').range_code_actions()"):with_noremap():with_silent():with_label("Range Code Action"):with_mode("v")),
 	},
 
 	["m"] = {
@@ -137,7 +137,7 @@ plug_map.visual = {
 
 	["<leader>c"] = {
 		name = "Comment",
-		c = bind.convert_wk_format(map_cr('lua require("Comment.api").toggle_current_linewise()'):with_noremap():with_silent():with_label("Comment Selected Line"):with_mode("v")),
+		c = bind.convert_wk_format(map_cu('lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())'):with_noremap():with_silent():with_label("Comment Selected Line"):with_mode("v")),
 		b = bind.convert_wk_format(map_cu('lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())'):with_noremap():with_silent():with_label("Comment Selected Code Block"):with_mode("v"))
 	},
 

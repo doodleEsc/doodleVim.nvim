@@ -4,6 +4,7 @@ local conf = require('modules.completion.config')
 -- COMPLETION
 completion['hrsh7th/nvim-cmp'] = {
 	opt = true,
+	branch = "dev",
 	setup = function()
 		require("utils.defer").add("nvim-cmp", 50)
 	end,
@@ -63,6 +64,11 @@ completion['jose-elias-alvarez/null-ls.nvim'] = {
 completion['danymat/neogen'] = {
 	after = {"nvim-cmp", "LuaSnip"},
 	config = conf.neogen
+}
+
+completion['CosmicNvim/cosmic-ui'] = {
+	after = {'nvim-lspconfig', 'nui.nvim'},
+	config = conf.cosmicui
 }
 
 return completion
