@@ -76,21 +76,20 @@ function config.telescope()
 					-- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 					-- ["<C-l>"] = actions.complete_tag,
 					-- ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
-					["<C-w>"] = { "<c-s-w>", type = "command" },
+					-- ["<C-w>"] = { "<c-s-w>", type = "command" },
 				},
 				n = {
 					["j"] = actions.move_selection_next,
 					["k"] = actions.move_selection_previous,
-
 					["q"] = actions.close,
 
 					-- ["<Down>"] = actions.move_selection_next,
 					-- ["<Up>"] = actions.move_selection_previous,
 
 					["<CR>"] = actions.select_default,
-					["<C-s>"] = actions.select_horizontal,
-					["<C-v>"] = actions.select_vertical,
-					["<C-t>"] = actions.select_tab,
+					["s"] = actions.select_horizontal,
+					["v"] = actions.select_vertical,
+					["t"] = actions.select_tab,
 
 					["<C-u>"] = actions.preview_scrolling_up,
 					["<C-d>"] = actions.preview_scrolling_down,
@@ -104,7 +103,7 @@ function config.telescope()
 					-- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 					-- ["<C-l>"] = actions.complete_tag,
 					-- ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
-					["<C-w>"] = { "<c-s-w>", type = "command" },
+					-- ["<C-w>"] = { "<c-s-w>", type = "command" },
 				},
 			},
 			extensions = {
