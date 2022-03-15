@@ -31,7 +31,7 @@ tools['simrat39/symbols-outline.nvim'] = {
 	opt = true,
 	setup = function()
 		require("modules.tools.config").symbols_outline()
-		require("utils.defer").packer_defer_load("symbols-outline.nvim", 1000)
+		require("utils.defer").packer_defer_load("symbols-outline.nvim", 500)
 	end
 }
 
@@ -39,7 +39,7 @@ tools['voldikss/vim-floaterm'] = {
 	opt = true,
 	setup = function()
 		require("modules.tools.config").floaterm()
-		require("utils.defer").packer_defer_load("vim-floaterm", 1000)
+		require("utils.defer").packer_defer_load("vim-floaterm", 500)
 	end
 }
 
@@ -92,7 +92,7 @@ tools['rmagatti/auto-session'] = {
 
 tools['cinuor/which-key.nvim'] = {
 	opt = true,
-	setup = function() require("utils.defer").packer_defer_load("which-key.nvim", 200) end,
+	setup = function() require("utils.defer").packer_defer_load("which-key.nvim", 100) end,
 	config = conf.which_key
 }
 
