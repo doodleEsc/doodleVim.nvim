@@ -19,7 +19,7 @@ function config.nvim_lsp_installer()
 					bind = true, -- This is mandatory, otherwise border config won't get registered.
 					hint_enable = false,
 					floating_window_above_cur_line = true,
-					handler_opts = {border = "none"}
+					handler_opts = {border = "rounded"}
 				}, bufnr)
 			end
 		}
