@@ -121,7 +121,7 @@ local function load_options()
     vim.g.python_host_skip_check=1
     vim.g.python_host_prog = '/usr/bin/python'
     vim.g.python3_host_skip_check=1
-    vim.g.python3_host_prog = '/usr/local/opt/python@3.9/bin/python3'
+    vim.g.python3_host_prog = '/usr/local/opt/python@3.10/bin/python3'
   end
 
   if global.is_linux then
