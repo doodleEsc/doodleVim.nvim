@@ -25,4 +25,9 @@ misc.safe_exit = function()
 	vim.cmd[[confirm xa]]
 end
 
+misc.safe_save = function()
+	vim.cmd[[write]]
+	vim.cmd[[SaveSession]]
+end
+
 return misc

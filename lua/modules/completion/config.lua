@@ -1,7 +1,7 @@
 local config = {}
+local icons = require("utils.icons")
 
 function config.nvim_lsp_installer()
-
 	if not packer_plugins['cmp-nvim-lsp'].loaded then
 	  vim.cmd [[PackerLoad cmp-nvim-lsp]]
 	end
@@ -19,8 +19,8 @@ function config.nvim_lsp_installer()
 					bind = true, -- This is mandatory, otherwise border config won't get registered.
 					hint_enable = false,
 					floating_window_above_cur_line = true,
-					handler_opts = {border = "none"}
-				})
+					handler_opts = {border = "rounded"}
+				}, bufnr)
 			end
 		}
 		-- (optional) Customize the options passed to the server
@@ -32,6 +32,40 @@ function config.nvim_lsp_installer()
 		-- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 		server:setup(opts)
 	end)
+
+	local icons = require("utils.icons")
+
+	vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+	vim.diagnostic.config({
+		underline = true,
+		signs = true,
+		update_in_insert = false,
+		severity_sort = true,
+		float = {
+		  border = "rounded",
+		  focusable = false,
+		  header = { icons.diag.debug_sign .. ' Diagnostics:'},
+		  source = 'always',
+		},
+		virtual_text = {
+		  spacing = 4,
+		  source = 'always',
+		  severity = {
+			min = vim.diagnostic.severity.HINT,
+		  },
+		},
+	})
+
+	local diag_icon = icons.diag
+	require("extend.diagnostics").setup({
+		error_sign = diag_icon.error_sign,
+		warn_sign = diag_icon.warn_sign,
+		hint_sign = diag_icon.hint_sign,
+		infor_sign = diag_icon.infor_sign,
+		debug_sign = diag_icon.debug_sign,
+		use_diagnostic_virtual_text = false,
+	})
+
 end
 
 function config.nvim_cmp()
@@ -39,9 +73,30 @@ function config.nvim_cmp()
 	  vim.cmd [[PackerLoad LuaSnip]]
 	end
 
+	if not packer_plugins['neogen'].loaded then
+	  vim.cmd [[PackerLoad neogen]]
+	end
+
 	local cmp = require('cmp')
 	local luasnip = require("luasnip")
+	local neogen = require('neogen')
+
 	cmp.setup({
+		window = {
+			completion = {
+				border = 'rounded',
+				scrollbar = '║',
+				winhighlight = {
+				  bordered = 'Normal:CmpCompletionWindowBordered,FloatBorder:CmpCompletionWindowBorder,CursorLine:PmenuSel,Search:None',
+				  default = 'Normal:CmpCompletionWindow,FloatBorder:CmpCompletionWindowPadding,CursorLine:PmenuSel,Search:None',
+				},
+			},
+			documentation = { -- no border; native-style scrollbar
+				 border = 'rounded',
+				 scrollbar = '║',
+				 -- other options
+			},
+		},
 		snippet = {
 			expand = function(args)
 				require('luasnip').lsp_expand(args.body)
@@ -89,31 +144,11 @@ function config.nvim_cmp()
 					fallback()
 				end
 			end, {"i", "s"}),
-
-			-- 	if cmp.visible() then
-			-- 		cmp.select_next_item()
-			-- 	elseif luasnip.expand_or_jumpable() then
-			-- 		luasnip.expand_or_jump()
-			-- 	elseif has_words_before() then
-			-- 		cmp.complete()
-			-- 	else
-			-- 		fallback()
-			-- 	end
-			-- end, { "i", "s" }),
-			--
-			-- ["<C-p>"] = cmp.mapping(function(fallback)
-			-- 	if cmp.visible() then
-			-- 		cmp.select_prev_item()
-			-- 	elseif luasnip.jumpable(-1) then
-			-- 		luasnip.jump(-1)
-			-- 	else
-			-- 		fallback()
-			-- 	end
-			-- end, { "i", "s" }),
-
 			["<C-k>"] = cmp.mapping(function(fallback)
 				if luasnip.jumpable(-1) then
 					luasnip.jump(-1)
+				elseif neogen.jumpable(true) then
+					neogen.jump_prev()
                 else
                     fallback()
                 end
@@ -121,7 +156,9 @@ function config.nvim_cmp()
             ["<C-j>"] = cmp.mapping(function(fallback)
                 if luasnip.expand_or_jumpable() then
 					luasnip.expand_or_jump()
-                else
+				elseif neogen.jumpable() then
+					neogen.jump_next()
+                else 
                     fallback()
                 end
             end, {"i", "s"}),
@@ -182,18 +219,48 @@ function config.null_ls()
 		on_attach = nil,
 		on_init = nil,
 		on_exit = nil,
-		-- root_dir = require("null-ls.utils").root_pattern(
-		-- 	".null-ls-root",
-		-- 	"Makefile",
-		-- 	".git",
-		-- 	"poetry.lock",
-		-- 	"go.mod"
-		-- ),
 		sources = {
 			null_ls.builtins.formatting.prettier,
 			null_ls.builtins.formatting.black,
 		},
 		update_in_insert = false,
+	})
+end
+
+function config.neogen()
+	require('neogen').setup({ snippet_engine = "luasnip" })
+end
+
+function config.cosmicui()
+	require('cosmic-ui').setup({
+	  -- default border to use
+	  -- 'single', 'double', 'rounded', 'solid', 'shadow'
+	  border_style = 'rounded',
+
+	  -- rename popup settings
+	  rename = {
+		border = {
+		  highlight = 'FloatBorder',
+		  style = 'single',
+		  title = ' Rename ',
+		  title_align = 'left',
+		  title_hl = 'FloatBorder',
+		},
+		prompt = '➤ ',
+		prompt_hl = 'Comment',
+	  },
+
+	  code_actions = {
+		min_width = nil,
+		border = {
+		  bottom_hl = 'FloatBorder',
+		  highlight = 'FloatBorder',
+		  style = 'single',
+		  title = 'Code Actions',
+		  title_align = 'center',
+		  title_hl = 'FloatBorder',
+		},
+	  }
 	})
 end
 

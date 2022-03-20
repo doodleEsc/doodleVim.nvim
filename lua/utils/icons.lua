@@ -32,6 +32,8 @@ local cmp = {
    Array = "",
    Object = "⦿",
    Null = "ﳠ",
+   Parameter = "",
+   Associated = "",
 }
 
 local diagnostics = {

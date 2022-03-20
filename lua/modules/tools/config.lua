@@ -1,13 +1,14 @@
 local config = {}
 
 function config.telescope()
-  if not packer_plugins['telescope-fzy-native.nvim'].loaded then
+  if (not packer_plugins['telescope-fzy-native.nvim'].loaded) or (not packer_plugins['telescope-file-browser.nvim'].loaded) then
 	vim.cmd [[PackerLoad telescope-fzy-native.nvim]]
 	vim.cmd [[PackerLoad telescope-file-browser.nvim]]
   end
 
-  local actions = require "telescope.actions"
-  local actions_layout = require "telescope.actions.layout"
+	local actions = require "telescope.actions"
+	local actions_layout = require "telescope.actions.layout"
+
 	require('telescope').setup {
 		defaults = {
 			initial_mode = "normal",
@@ -17,8 +18,7 @@ function config.telescope()
 			scroll_strategy = "limit",
 			set_env = { ['COLORTERM'] = 'truecolor'},
 			path_display = {
-				'smart',
-				'truncate',
+				shorten = { len = 2, exclude = {-2, -1}}
 			},
 			results_title = true,
 			color_devicons = true,
@@ -38,7 +38,7 @@ function config.telescope()
 					width = 0.9,
 					height = 0.9,
 					preview_cutoff = 120,
-					preview_width = 0.6,
+					preview_width = 0.45,
 					prompt_position = "top"
 				},
 				vertical = {
@@ -47,14 +47,14 @@ function config.telescope()
 				}
 			},
 			preview = {
-				hide_on_startup = true
+				hide_on_startup = false
 			},
 			default_mappings = {
 				i = {
 					["<C-n>"] = actions.move_selection_next,
 					["<C-p>"] = actions.move_selection_previous,
 
-					["<C-c>"] = actions.close,
+					-- ["<C-c>"] = actions.close,
 
 					-- ["<Down>"] = actions.move_selection_next,
 					-- ["<Up>"] = actions.move_selection_previous,
@@ -76,21 +76,20 @@ function config.telescope()
 					-- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 					-- ["<C-l>"] = actions.complete_tag,
 					-- ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
-					["<C-w>"] = { "<c-s-w>", type = "command" },
+					-- ["<C-w>"] = { "<c-s-w>", type = "command" },
 				},
 				n = {
 					["j"] = actions.move_selection_next,
 					["k"] = actions.move_selection_previous,
-
-					["<C-c>"] = actions.close,
+					["q"] = actions.close,
 
 					-- ["<Down>"] = actions.move_selection_next,
 					-- ["<Up>"] = actions.move_selection_previous,
 
 					["<CR>"] = actions.select_default,
-					["<C-s>"] = actions.select_horizontal,
-					["<C-v>"] = actions.select_vertical,
-					["<C-t>"] = actions.select_tab,
+					["s"] = actions.select_horizontal,
+					["v"] = actions.select_vertical,
+					["t"] = actions.select_tab,
 
 					["<C-u>"] = actions.preview_scrolling_up,
 					["<C-d>"] = actions.preview_scrolling_down,
@@ -104,7 +103,7 @@ function config.telescope()
 					-- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 					-- ["<C-l>"] = actions.complete_tag,
 					-- ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
-					["<C-w>"] = { "<c-s-w>", type = "command" },
+					-- ["<C-w>"] = { "<c-s-w>", type = "command" },
 				},
 			},
 			extensions = {
@@ -115,7 +114,6 @@ function config.telescope()
 			},
 		},
 	}
-
 	require('telescope').load_extension('fzy_native')
 	require('telescope').load_extension('file_browser')
 	require('telescope').load_extension('todo-comments')
@@ -205,8 +203,8 @@ function config.symbols_outline()
 		show_guides = true,
 		auto_preview = false,
 		position = 'right',
-		relative_width = false,
-		width = 50,
+		relative_width = true,
+		width = 30,
 		auto_close = true,
 		show_numbers = false,
 		show_relative_numbers = false,
@@ -289,7 +287,7 @@ function config.project()
 
 		-- All the patterns used to detect root dir, when **"pattern"** is in
 		-- detection_methods
-		patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+		patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "poetry.lock" },
 
 		-- Table of lsp clients to ignore by name
 		-- eg: { "efm", ... }
@@ -338,6 +336,47 @@ function config.autosession()
 		bypass_session_save_file_types = nil,
 		post_restore_cmds = { require('extend.tree').toggle }
 	})
+end
+
+function config.which_key()
+	local wk = require("which-key")
+	wk.setup({
+		key_labels = {
+		["<space>"] = "SPC",
+		["<leader>"] = "SPC",
+		["<cr>"] = "ENT",
+		["<tab>"] = "TAB",
+		["<a>"] = "ALT",
+		["<s>"] = "SHI",
+		["<c>"] = "CTR",
+	  },
+	  operators = {},
+	  window = {
+		border = "single", -- none, single, double, shadow
+		position = "bottom", -- bottom, top
+		margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+		padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+		winblend = 0
+	  },
+	  ignore_missing = false,
+	})
+
+	-- bind common keymap
+	local bind = require('keymap.bind')
+	local def_map = require("keymap.def_map")
+	local plug_map = require("keymap.plug_map")
+
+	-- bind raw keymap
+	bind.nvim_load_mapping(plug_map.raw)
+
+	wk.register(def_map.normal)
+	wk.register(def_map.insert)
+	wk.register(def_map.command)
+	wk.register(def_map.visual)
+
+	wk.register(plug_map.normal)
+	wk.register(plug_map.insert)
+	wk.register(plug_map.visual)
 end
 
 return config

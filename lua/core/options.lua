@@ -80,7 +80,7 @@ local function load_options()
     display        = "lastline";
     showbreak      = "↳";
     listchars      = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←";
-    pumblend       = 10;
+    pumblend       = 0;
     winblend       = 10;
   }
 
@@ -118,24 +118,10 @@ local function load_options()
   }
 
   if global.is_mac then
-    -- vim.g.clipboard = {
-    --   name = "macOS-clipboard",
-    --   copy = {
-    --     ["+"] = "pbcopy",
-    --     ["*"] = "pbcopy",
-    --   },
-    --   paste = {
-    --     ["+"] = "pbpaste",
-    --     ["*"] = "pbpaste",
-    --   },
-    --   cache_enabled = 0
-    -- }
-
-
     vim.g.python_host_skip_check=1
     vim.g.python_host_prog = '/usr/bin/python'
     vim.g.python3_host_skip_check=1
-    vim.g.python3_host_prog = '/usr/local/opt/python@3.9/bin/python3'
+    vim.g.python3_host_prog = '/usr/local/opt/python@3.10/bin/python3'
   end
 
   if global.is_linux then
@@ -147,8 +133,8 @@ local function load_options()
 
   for name, value in pairs(global_local) do
     vim.o[name] = value
-    end
-    bind_option(bw_local)
+  end
+  bind_option(bw_local)
 end
 
 load_options()
