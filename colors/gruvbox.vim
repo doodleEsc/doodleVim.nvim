@@ -360,7 +360,7 @@ hi TSComment guifg=#928374 guibg=NONE guisp=NONE gui=italic
 hi! link TSConditional GruvboxRed
 hi TSConstBuiltin guifg=#fe8019 guibg=NONE guisp=NONE gui=NONE
 hi! link TSConstMacro GruvboxAqua
-hi Pmenu guifg=#ebdbb2 guibg=#282828 guisp=NONE gui=NONE
+hi Pmenu guifg=#ebdbb2 guibg=#3c3836 guisp=NONE gui=NONE
 hi! link TSException GruvboxRed
 hi! link TSFloat GruvboxPurple
 hi TSFuncBuiltin guifg=#fe8019 guibg=NONE guisp=NONE gui=NONE
