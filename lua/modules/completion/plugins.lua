@@ -4,7 +4,6 @@ local conf = require('modules.completion.config')
 -- COMPLETION
 completion['hrsh7th/nvim-cmp'] = {
 	opt = true,
-	branch = "dev",
 	setup = function()
 		require("utils.defer").add("nvim-cmp", 50)
 	end,
