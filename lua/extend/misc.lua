@@ -18,9 +18,6 @@ misc.safe_exit = function()
 		require('extend.tree').toggle()
 	end
 
-	-- save session
-	vim.cmd[[SaveSession]]
-
 	-- quit
 	vim.cmd[[confirm xa]]
 end
