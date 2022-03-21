@@ -19,12 +19,15 @@ misc.safe_exit = function()
 	end
 
 	-- quit
-	vim.cmd[[confirm xa]]
+	vim.cmd[[confirm qa]]
 end
 
 misc.safe_save = function()
+	if not packer_plugins['auto-session'].loaded then
+		vim.cmd [[PackerLoad auto-session]]
+	end
 	vim.cmd[[write]]
-	vim.cmd[[SaveSession]]
+	require("auto-session").SaveSession()
 end
 
 return misc

@@ -331,7 +331,7 @@ function config.autosession()
 		auto_session_enabled = false,
 		auto_save_enabled = false,
 		auto_restore_enabled = false,
-		auto_session_suppress_dirs = {'~/'},
+		auto_session_suppress_dirs = {},
 		-- the configs below are lua only
 		bypass_session_save_file_types = nil,
 		post_restore_cmds = { require('extend.tree').toggle }
