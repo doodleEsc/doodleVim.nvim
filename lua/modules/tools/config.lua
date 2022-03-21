@@ -113,6 +113,11 @@ function config.telescope()
 				},
 			},
 		},
+		pickers = {
+			find_files = {
+			  find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
+			},
+		},
 	}
 	require('telescope').load_extension('fzy_native')
 	require('telescope').load_extension('file_browser')
