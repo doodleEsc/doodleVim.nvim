@@ -69,7 +69,7 @@ local function load_nvim_config()
 	require('core.event')
 	require('core.command')
 	set_colorscheme()
-	defer.load(80)
+	defer.load(50)
 end
 
 load_nvim_config()

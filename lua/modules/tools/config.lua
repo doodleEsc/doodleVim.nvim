@@ -113,6 +113,11 @@ function config.telescope()
 				},
 			},
 		},
+		pickers = {
+			find_files = {
+			  find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
+			},
+		},
 	}
 	require('telescope').load_extension('fzy_native')
 	require('telescope').load_extension('file_browser')
@@ -331,7 +336,7 @@ function config.autosession()
 		auto_session_enabled = false,
 		auto_save_enabled = false,
 		auto_restore_enabled = false,
-		auto_session_suppress_dirs = {'~/'},
+		auto_session_suppress_dirs = {},
 		-- the configs below are lua only
 		bypass_session_save_file_types = nil,
 		post_restore_cmds = { require('extend.tree').toggle }

@@ -13,7 +13,7 @@ def_map.normal = {
 	["<C-j>"] = bind.convert_wk_format(map_cmd('<C-w>j'):with_noremap():with_label("Switch To Down Window")),
 	["<C-k>"] = bind.convert_wk_format(map_cmd('<C-w>k'):with_noremap():with_label("Switch To Up Window")),
 	["<C-q>"] = bind.convert_wk_format(map_cr('lua require("extend.misc").safe_exit()'):with_noremap():with_label("Save Session And Safe Exit")),
-	["<C-s>"] = bind.convert_wk_format(map_cr('lua require("extend.misc").safe_save()'):with_noremap():with_label("Save Session")),
+	["<C-s>"] = bind.convert_wk_format(map_cr('lua require("extend.misc").safe_save()'):with_noremap():with_silent():with_label("Save Session")),
 	["<C-d>"] = bind.convert_wk_format(map_cr("lua require('extend.scroll').scroll_down()"):with_noremap():with_silent():with_label("Smooth Scroll Down")),
 	["<C-u>"] = bind.convert_wk_format(map_cr("lua require('extend.scroll').scroll_up()"):with_noremap():with_silent():with_label("Smooth Scroll Up"))
 }

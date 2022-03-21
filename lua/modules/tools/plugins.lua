@@ -96,4 +96,8 @@ tools['cinuor/which-key.nvim'] = {
 	config = conf.which_key
 }
 
+tools['nathom/filetype.nvim'] = {
+	setup = function() vim.g.did_load_filetypes = 1 end
+}
+
 return tools
