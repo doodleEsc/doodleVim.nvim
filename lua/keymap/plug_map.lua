@@ -19,9 +19,9 @@ plug_map.normal = {
 	["t"] = {
 		name = "Tree,Gotests,Translate",
 		t = bind.convert_wk_format(map_cr("lua require('extend.tree').toggle()"):with_noremap():with_silent():with_label("Enhanced NvimTree Toggle")),
-		u = bind.convert_wk_format(map_cr("lua require'gotests'.fun_test()"):with_noremap():with_silent():with_label("Generate Function Test")),
-		a = bind.convert_wk_format(map_cr("lua require'gotests'.all_test()"):with_noremap():with_silent():with_label("Generate All Function Test")),
-		e = bind.convert_wk_format(map_cr("lua require'gotests'.exported_test()"):with_noremap():with_silent():with_label("Generate Exported Function Test")),
+		u = bind.convert_wk_format(map_cr("lua require('extend.misc').gotests('func')"):with_noremap():with_silent():with_label("Generate Function Test")),
+		a = bind.convert_wk_format(map_cr("lua require('extend.misc').gotests('all')"):with_noremap():with_silent():with_label("Generate All Function Test")),
+		e = bind.convert_wk_format(map_cr("lua require('extend.misc').gotests('exported')"):with_noremap():with_silent():with_label("Generate Exported Function Test")),
 		r = bind.convert_wk_format(map_cu("TranslateW"):with_silent():with_label("Translate Word In Cursor"))
 	},
 

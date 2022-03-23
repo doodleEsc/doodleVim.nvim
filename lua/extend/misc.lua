@@ -25,4 +25,18 @@ misc.safe_save = function()
 	require("auto-session").SaveSession()
 end
 
+misc.gotests = function(type)
+	require('utils.defer').load_immediately({'auto-session', 'nvim-tree.lua'})
+
+	if type == "func" then
+		require'gotests'.fun_test()
+	elseif type == "exported" then
+		require'gotests'.exported_test()
+	elseif type == "all" then
+		require'gotests'.all_test()
+	end
+
+	require'nvim-tree.actions.reloaders'.reload_explorer()
+end
+
 return misc
