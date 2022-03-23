@@ -1,10 +1,7 @@
 local config = {}
-local icons = require("utils.icons")
 
 function config.nvim_lsp_installer()
-	if not packer_plugins['cmp-nvim-lsp'].loaded then
-	  vim.cmd [[PackerLoad cmp-nvim-lsp]]
-	end
+	require('utils.defer').load_immediately('cmp-nvim-lsp')
 
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -69,13 +66,7 @@ function config.nvim_lsp_installer()
 end
 
 function config.nvim_cmp()
-	if not packer_plugins['LuaSnip'].loaded then
-	  vim.cmd [[PackerLoad LuaSnip]]
-	end
-
-	if not packer_plugins['neogen'].loaded then
-	  vim.cmd [[PackerLoad neogen]]
-	end
+	require('utils.defer').load_immediately({'LuaSnip', 'neogen'})
 
 	local cmp = require('cmp')
 	local luasnip = require("luasnip")

@@ -41,7 +41,7 @@ plug_map.normal = {
 
 	["<C-n>"] = bind.convert_wk_format(map_cr("lua vim.diagnostic.goto_next()"):with_noremap():with_silent():with_label("Go To Next Diagnostic")),
 	["<C-p>"]= bind.convert_wk_format(map_cr("lua vim.diagnostic.goto_prev()"):with_noremap():with_silent():with_label("Go To Previous Diagnostic")),
-	
+
 	["<leader>v"] = {
 		name = "Symbols-Outline",
 		v = bind.convert_wk_format(map_cu('lua require"symbols-outline".toggle_outline()'):with_noremap():with_silent():with_label("Symbols And Function Preview"))

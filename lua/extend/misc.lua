@@ -1,10 +1,7 @@
 local misc = {}
 
 misc.safe_exit = function()
-	if (not packer_plugins['vim-floaterm'].loaded) or (not packer_plugins['nvim-tree.lua'].loaded) then
-		vim.cmd [[PackerLoad vim-floaterm]]
-		vim.cmd [[PackerLoad nvim-tree.lua]]
-	end
+	require('utils.defer').load_immediately({'vim-floaterm', 'nvim-tree.lua'})
 
 	-- close floaterm
 	local floatermBufnr = vim.call("floaterm#buflist#gather")
@@ -23,9 +20,7 @@ misc.safe_exit = function()
 end
 
 misc.safe_save = function()
-	if not packer_plugins['auto-session'].loaded then
-		vim.cmd [[PackerLoad auto-session]]
-	end
+	require('utils.defer').load_immediately('auto-session')
 	vim.cmd[[write]]
 	require("auto-session").SaveSession()
 end

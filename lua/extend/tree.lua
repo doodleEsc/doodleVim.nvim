@@ -1,15 +1,11 @@
 local tree = {}
 
 tree.toggle = function()
-	if (not packer_plugins['barbar.nvim'].loaded) or (not packer_plugins['nvim-tree.lua'].loaded) then
-		vim.cmd [[PackerLoad barbar.nvim]]
-		vim.cmd [[PackerLoad nvim-tree.lua]]
-	end
+	require('utils.defer').load_immediately({'nvim-tree.lua', 'barbar.nvim'})
 
 	local view = require'nvim-tree.view'
 
 	if view.is_visible() then
-	  -- require'nvim-tree.view'.close()
 	  require'bufferline.state'.set_offset(0)
 	  view.close()
 	else

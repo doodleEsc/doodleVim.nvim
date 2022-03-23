@@ -42,6 +42,7 @@ local diagnostics = {
 	hint_sign = "",
 	infor_sign = "",
 	debug_sign = "  ",
+	trace_sign = "",
 }
 
 return {
