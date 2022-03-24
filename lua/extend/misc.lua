@@ -39,4 +39,9 @@ misc.gotests = function(type)
 	require'nvim-tree.actions.reloaders'.reload_explorer()
 end
 
+misc.wrapped_notify = function(m, l, o)
+	local wrapped_msg = require("utils.utils").wrap(m, 52)
+	require("notify")(wrapped_msg, l, o)
+end
+
 return misc

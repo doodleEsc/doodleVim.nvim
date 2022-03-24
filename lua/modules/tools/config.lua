@@ -410,7 +410,7 @@ function config.notify()
 		background_colour = "Normal",
 
 		-- Minimum width for notification windows
-		minimum_width = 40,
+		minimum_width = 36,
 
 		-- Icons for the different levels
 		icons = {
@@ -422,7 +422,7 @@ function config.notify()
 		},
 	})
 
-	vim.notify = nvim_notify
+	vim.notify = require("extend.misc").wrapped_notify
 
 end
 
