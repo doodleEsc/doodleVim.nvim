@@ -1,10 +1,7 @@
 local misc = {}
 
 misc.safe_exit = function()
-	if (not packer_plugins['vim-floaterm'].loaded) or (not packer_plugins['nvim-tree.lua'].loaded) then
-		vim.cmd [[PackerLoad vim-floaterm]]
-		vim.cmd [[PackerLoad nvim-tree.lua]]
-	end
+	require('utils.defer').load_immediately({'vim-floaterm', 'nvim-tree.lua'})
 
 	-- close floaterm
 	local floatermBufnr = vim.call("floaterm#buflist#gather")
@@ -18,16 +15,33 @@ misc.safe_exit = function()
 		require('extend.tree').toggle()
 	end
 
-	-- save session
-	vim.cmd[[SaveSession]]
-
 	-- quit
-	vim.cmd[[confirm xa]]
+	vim.cmd[[confirm qa]]
 end
 
 misc.safe_save = function()
+	require('utils.defer').load_immediately('auto-session')
 	vim.cmd[[write]]
-	vim.cmd[[SaveSession]]
+	require("auto-session").SaveSession()
+end
+
+misc.gotests = function(type)
+	require('utils.defer').load_immediately({'auto-session', 'nvim-tree.lua'})
+
+	if type == "func" then
+		require'gotests'.fun_test()
+	elseif type == "exported" then
+		require'gotests'.exported_test()
+	elseif type == "all" then
+		require'gotests'.all_test()
+	end
+
+	require'nvim-tree.actions.reloaders'.reload_explorer()
+end
+
+misc.wrapped_notify = function(m, l, o)
+	local wrapped_msg = require("utils.utils").wrap(m, 52)
+	require("notify")(wrapped_msg, l, o)
 end
 
 return misc

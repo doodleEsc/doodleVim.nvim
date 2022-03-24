@@ -44,33 +44,25 @@ local function file_and_details_entry(opts)
 end
 
 function lsp.lsp_references(opts)
-	if not packer_plugins['telescope.nvim'].loaded then
-		vim.cmd [[PackerLoad telescope.nvim]]
-	end
+	require('utils.defer').load_immediately('telescope.nvim')
 	opts = opts or {}
 	builtin.lsp_references(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
 end
 
 function lsp.lsp_definitions(opts)
-	if not packer_plugins['telescope.nvim'].loaded then
-		vim.cmd [[PackerLoad telescope.nvim]]
-	end
+	require('utils.defer').load_immediately('telescope.nvim')
 	opts = opts or {}
 	builtin.lsp_definitions(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
 end
 
 function lsp.lsp_type_definition(opts)
-	if not packer_plugins['telescope.nvim'].loaded then
-		vim.cmd [[PackerLoad telescope.nvim]]
-	end
+	require('utils.defer').load_immediately('telescope.nvim')
 	opts = opts or {}
 	builtin.lsp_type_definition(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
 end
 
 function lsp.lsp_implementations(opts)
-	if not packer_plugins['telescope.nvim'].loaded then
-		vim.cmd [[PackerLoad telescope.nvim]]
-	end
+	require('utils.defer').load_immediately('telescope.nvim')
 	opts = opts or {}
 	builtin.lsp_implementations(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
 end

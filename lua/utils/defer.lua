@@ -30,4 +30,18 @@ function handler.packer_defer_load(plugin, timer)
 	end
 end
 
+function handler.load_immediately(plugins)
+	if type(plugins) == "string" then
+		if not packer_plugins[plugins].loaded then
+			require("packer").loader(plugins)
+		end
+	elseif type(plugins) == "table" then
+		for _, value in pairs(plugins) do
+			if not packer_plugins[value].loaded then
+				require("packer").loader(value)
+			end
+		end
+	end
+end
+
 return handler

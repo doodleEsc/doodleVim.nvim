@@ -69,11 +69,9 @@ function config.comment()
 end
 
 function config.autopairs()
-	if not packer_plugins['nvim-cmp'].loaded then
-	  vim.cmd [[PackerLoad nvim-cmp]]
-	end
-	local cmp = require("cmp")
+	require('utils.defer').load_immediately('nvim-cmp')
 
+	local cmp = require("cmp")
 	require('nvim-autopairs').setup{}
 	local cmp_autopairs = require("nvim-autopairs.completion.cmp")
     cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())

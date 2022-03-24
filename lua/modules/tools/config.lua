@@ -1,10 +1,7 @@
 local config = {}
 
 function config.telescope()
-  if (not packer_plugins['telescope-fzy-native.nvim'].loaded) or (not packer_plugins['telescope-file-browser.nvim'].loaded) then
-	vim.cmd [[PackerLoad telescope-fzy-native.nvim]]
-	vim.cmd [[PackerLoad telescope-file-browser.nvim]]
-  end
+	require('utils.defer').load_immediately({'telescope-fzy-native.nvim', 'telescope-file-browser.nvim'})
 
 	local actions = require "telescope.actions"
 	local actions_layout = require "telescope.actions.layout"
@@ -111,6 +108,11 @@ function config.telescope()
 					override_generic_sorter = true,
 					override_file_sorter = true,
 				},
+			},
+		},
+		pickers = {
+			find_files = {
+			  find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
 			},
 		},
 	}
@@ -331,7 +333,7 @@ function config.autosession()
 		auto_session_enabled = false,
 		auto_save_enabled = false,
 		auto_restore_enabled = false,
-		auto_session_suppress_dirs = {'~/'},
+		auto_session_suppress_dirs = {},
 		-- the configs below are lua only
 		bypass_session_save_file_types = nil,
 		post_restore_cmds = { require('extend.tree').toggle }
@@ -377,6 +379,57 @@ function config.which_key()
 	wk.register(plug_map.normal)
 	wk.register(plug_map.insert)
 	wk.register(plug_map.visual)
+end
+
+function config.notify()
+	local icons = require("utils.icons")
+	local nvim_notify = require("notify")
+	nvim_notify.setup({
+		-- Animation style (see below for details)
+		stages = "slide",
+
+		-- Function called when a new window is opened, use for changing win settings/config
+		on_open = nil,
+
+		-- Function called when a window is closed
+		on_close = nil,
+
+		-- Render function for notifications. See notify-render()
+		render = "default",
+
+		-- Default timeout for notifications
+		timeout = 2000,
+
+		-- Max number of columns for messages
+		max_width = nil,
+		-- Max number of lines for a message
+		max_height = nil,
+
+		-- For stages that change opacity this is treated as the highlight behind the window
+		-- Set this to either a highlight group, an RGB hex value e.g. "#000000" or a function returning an RGB code for dynamic values
+		background_colour = "Normal",
+
+		-- Minimum width for notification windows
+		minimum_width = 36,
+
+		-- Icons for the different levels
+		icons = {
+			ERROR = icons.diag.error_sign,
+			WARN = icons.diag.warn_sign,
+			INFO = icons.diag.infor_sign,
+			DEBUG = icons.diag.debug_sign,
+			TRACE = icons.diag.trace_sign,
+		},
+	})
+
+	vim.notify = require("extend.misc").wrapped_notify
+
+end
+
+function config.gotests()
+	require('gotests').setup({
+		verbose = false
+	})
 end
 
 return config

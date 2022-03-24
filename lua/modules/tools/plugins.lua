@@ -73,7 +73,8 @@ tools['cinuor/gotests.nvim'] = {
 		if vim.bo.filetype == 'go' then
 			require("utils.defer").packer_defer_load("gotests.nvim", 1000)
 		end
-	end
+	end,
+	config = conf.gotests
 }
 
 tools["cinuor/project.nvim"] = {
@@ -94,6 +95,16 @@ tools['cinuor/which-key.nvim'] = {
 	opt = true,
 	setup = function() require("utils.defer").packer_defer_load("which-key.nvim", 100) end,
 	config = conf.which_key
+}
+
+tools['nathom/filetype.nvim'] = {
+	setup = function() vim.g.did_load_filetypes = 1 end
+}
+
+tools['rcarriga/nvim-notify'] = {
+	opt = true,
+	setup = function() require("utils.defer").packer_defer_load("nvim-notify", 100) end,
+	config = conf.notify
 }
 
 return tools
