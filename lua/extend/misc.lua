@@ -44,4 +44,22 @@ misc.wrapped_notify = function(m, l, o)
 	require("notify")(wrapped_msg, l, o)
 end
 
+misc.toggle_nu = function()
+	vim.cmd[[:set nornu]]
+	if vim.wo.nu then
+		vim.cmd[[:set nonu]]
+	else
+		vim.cmd[[:set nu]]
+	end
+end
+
+misc.toggle_rnu = function()
+	vim.cmd[[:set nonu]]
+	if vim.wo.rnu then
+		vim.cmd[[:set nornu]]
+	else
+		vim.cmd[[:set rnu]]
+	end
+end
+
 return misc

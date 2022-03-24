@@ -96,11 +96,13 @@ plug_map.normal = {
 	},
 
 	["<leader>n"] = {
-		name = "Generate Documentation",
+		name = "Generate Documentation or Line Number Toggle",
 		c = bind.convert_wk_format(map_cr("lua require('neogen').generate({type='class'})"):with_noremap():with_silent():with_label("Generate Class Documentation")),
 		t = bind.convert_wk_format(map_cr("lua require('neogen').generate({type='type'})"):with_noremap():with_silent():with_label("Generate Type Documentation")),
 		f = bind.convert_wk_format(map_cr("lua require('neogen').generate({type='func'})"):with_noremap():with_silent():with_label("Generate Function Documentation")),
 		d = bind.convert_wk_format(map_cr("lua require('neogen').generate({type='file'})"):with_noremap():with_silent():with_label("Generate File Documentation")),
+		u = bind.convert_wk_format(map_cr("lua require('extend.misc').toggle_nu()"):with_noremap():with_silent():with_label("Toggle Absolute Line Number")),
+		r = bind.convert_wk_format(map_cr("lua require('extend.misc').toggle_rnu()"):with_noremap():with_silent():with_label("Toggle Relative Line Number")),
 	},
 
 	["<F7>"] = bind.convert_wk_format(map_cmd("<cmd>lua require('extend.dap').debug_continue()<CR>"):with_noremap():with_label("Start Or Continue Debug")),
