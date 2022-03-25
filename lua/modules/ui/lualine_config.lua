@@ -41,17 +41,17 @@ local config = {
       -- right section. Both are highlighted by c theme .  So we
       -- are just setting default looks o statusline
       normal = {
-		  -- a = { fg = colors.fg, bg = colors.bg },
-		  -- b = { fg = colors.fg, bg = colors.bg },
-		  c = { fg = colors.fg, bg = colors.bg },
-	  },
-      inactive = {
-		  x = { fg = colors.fg, bg = colors.bg },
-		  -- y = { fg = colors.fg, bg = colors.bg },
-		  -- z = { fg = colors.fg, bg = colors.bg },
-	  },
+      -- a = { fg = colors.fg, bg = colors.bg },
+      -- b = { fg = colors.fg, bg = colors.bg },
+      c = { fg = colors.fg, bg = colors.bg },
     },
-	always_divide_middle = true,
+      inactive = {
+      x = { fg = colors.fg, bg = colors.bg },
+      -- y = { fg = colors.fg, bg = colors.bg },
+      -- z = { fg = colors.fg, bg = colors.bg },
+    },
+    },
+  always_divide_middle = true,
   },
   sections = {
     -- these are to remove the defaults
@@ -75,33 +75,33 @@ local config = {
 }
 
 local function ins(section, component)
-	table.insert(section, component)
+  table.insert(section, component)
 end
 
 -- Inserts a component in lualine_c at left section
 local function ins_a(component)
-	ins(config.sections.lualine_a, component)
+  ins(config.sections.lualine_a, component)
 end
 
 local function ins_b(component)
-	ins(config.sections.lualine_b, component)
+  ins(config.sections.lualine_b, component)
 end
 
 local function ins_c(component)
-	ins(config.sections.lualine_c, component)
+  ins(config.sections.lualine_c, component)
 end
 
 -- Inserts a component in lualine_x ot right section
 local function ins_x(component)
-	ins(config.sections.lualine_x, component)
+  ins(config.sections.lualine_x, component)
 end
 
 local function ins_y(component)
-	ins(config.sections.lualine_y, component)
+  ins(config.sections.lualine_y, component)
 end
 
 local function ins_z(component)
-	ins(config.sections.lualine_z, component)
+  ins(config.sections.lualine_z, component)
 end
 
 ins_c {

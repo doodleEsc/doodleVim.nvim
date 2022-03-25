@@ -31,23 +31,21 @@ end
 
 
 diag.setup = function(opts)
-	extend_config(opts)
-	local config = diag.config
-
-    for type, icon in pairs {
-      Error = config.error_sign,
-      Warn = config.warn_sign,
-      Hint = config.hint_sign,
-      Info = config.infor_sign,
-    } do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, {
-        text = icon,
-        texthl = hl,
-        numhl = "",
-      })
-    end
-
+  extend_config(opts)
+  local config = diag.config
+  for type, icon in pairs {
+    Error = config.error_sign,
+    Warn = config.warn_sign,
+    Hint = config.hint_sign,
+    Info = config.infor_sign,
+  } do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, {
+      text = icon,
+      texthl = hl,
+      numhl = "",
+    })
+  end
   vim.diagnostic.config({virtual_text = config.use_diagnostic_virtual_text})
 end
 

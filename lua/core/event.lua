@@ -32,7 +32,7 @@ function autocmd.load_autocmds()
 
     ft = {
       {"BufNewFile,BufRead","*.toml"," setf toml"},
-	  {"BufReadPost,BufNewFile","*.sol"," setf solidity"}
+      {"BufReadPost,BufNewFile","*.sol"," setf solidity"}
     };
 
     yank = {

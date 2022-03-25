@@ -59,17 +59,17 @@ local set_colorscheme = function()
 end
 
 local function load_nvim_config()
-	createdir()
-	disable_distribution_plugins()
-	set_leader_map()
+  createdir()
+  disable_distribution_plugins()
+  set_leader_map()
 
-	pack.ensure_plugins()
-	pack.load_compile()
-	require('core.options')
-	require('core.event')
-	require('core.command')
-	set_colorscheme()
-	defer.load(50)
+  pack.ensure_plugins()
+  pack.load_compile()
+  require('core.options')
+  require('core.event')
+  require('core.command')
+  set_colorscheme()
+  defer.load(50)
 end
 
 load_nvim_config()
