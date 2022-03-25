@@ -11,9 +11,9 @@ tree.toggle = function()
   else
     require'bufferline.state'.set_offset(31, 'File Explorer')
     if vim.bo.filetype == "" then
-    require'nvim-tree'.open()
+      require'nvim-tree'.open()
     else
-    require'nvim-tree'.find_file(true)
+      require'nvim-tree'.find_file(true)
     end
   end
 end
