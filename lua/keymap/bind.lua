@@ -3,8 +3,8 @@ local rhs_options = {}
 function rhs_options:new()
   local instance = {
     cmd = '',
-	label = '',
-	mode = '',
+    label = '',
+    mode = '',
     options = {
       noremap = false,
       silent = false,
@@ -38,8 +38,8 @@ function rhs_options:map_cu(cmd_string)
 end
 
 function rhs_options:with_label(label)
-	self.label = label
-	return self
+  self.label = label
+  return self
 end
 
 function rhs_options:with_silent()
@@ -90,40 +90,37 @@ function pbind.map_args(cmd_string)
 end
 
 function pbind.nvim_load_mapping(mapping)
-    for key,value in pairs(mapping) do
-      local mode,keymap = key:match("([^|]*)|?(.*)")
-      if type(value) == 'table' then
-        local rhs = value.cmd
-        local options = value.options
-        vim.api.nvim_set_keymap(mode,keymap,rhs,options)
-      end
+  for key,value in pairs(mapping) do
+    local mode,keymap = key:match("([^|]*)|?(.*)")
+    if type(value) == 'table' then
+      local rhs = value.cmd
+      local options = value.options
+      vim.api.nvim_set_keymap(mode,keymap,rhs,options)
     end
+  end
 end
 
 function pbind.convert_wk_format(value)
-    local wkitem = {}
-    if type(value) == 'table' then
-      local rhs = value.cmd
-	  local label = value.label
-	  local mode = value.mode
-      local options = value.options
-
-	  table.insert(wkitem, 1, rhs)
-	  if label ~= "" then
-	  	table.insert(wkitem, 2, label)
-	  end
-
-	  if mode == "" then
-	  	mode = "n"
-	  end
-	  wkitem["mode"] = mode
-
-	  wkitem["silent"] = options.silent
-	  wkitem["noremap"] = options.noremap
-	  wkitem["nowait"] = options.nowait
-	  wkitem["expr"] = options.expr
+  local wkitem = {}
+  if type(value) == 'table' then
+    local rhs = value.cmd
+    local label = value.label
+    local mode = value.mode
+    local options = value.options
+    table.insert(wkitem, 1, rhs)
+    if label ~= "" then
+      table.insert(wkitem, 2, label)
     end
-	return wkitem
+    if mode == "" then
+      mode = "n"
+    end
+    wkitem["mode"] = mode
+    wkitem["silent"] = options.silent
+    wkitem["noremap"] = options.noremap
+    wkitem["nowait"] = options.nowait
+    wkitem["expr"] = options.expr
+  end
+  return wkitem
 end
 
 return pbind
