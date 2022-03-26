@@ -1,7 +1,5 @@
 local debugger = {}
 
-vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
-
 debugger.load_debuggers = function(opts)
   require('utils.defer').load_immediately('nvim-dap')
   local dap = require('dap')
