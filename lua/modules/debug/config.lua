@@ -40,14 +40,20 @@ function config.dapui()
   })
 end
 
-function config.dapinstall()
-  local dap_install = require("dap-install")
-  dap_install.setup({
-    installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
-  })
-
-  dap_install.config("go_delve", {})
-  dap_install.config("python", {})
+function config.dap()
+	require("extend.debugger").load_debuggers({
+		"go"
+	})
 end
+
+-- function config.dapinstall()
+--   local dap_install = require("dap-install")
+--   dap_install.setup({
+--     installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
+--   })
+--
+--   dap_install.config("go_delve", {})
+--   dap_install.config("python", {})
+-- end
 
 return config
