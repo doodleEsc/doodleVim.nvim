@@ -14,9 +14,4 @@ debug['rcarriga/nvim-dap-ui'] = {
   config = conf.dapui
 }
 
--- debug['Pocco81/DAPInstall.nvim'] = {
---   after = "nvim-dap",
---   config = conf.dapinstall
--- }
-
 return debug
