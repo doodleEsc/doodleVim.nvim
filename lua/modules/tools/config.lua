@@ -125,76 +125,86 @@ end
 function config.nvim_tree()
   vim.g.nvim_tree_respect_buf_cwd = 1
   require'nvim-tree'.setup {
-    -- disables netrw completely
-    disable_netrw       = true,
-    -- hijack netrw window on startup
-    hijack_netrw        = true,
-    -- open the tree when running this setup function
-    open_on_setup       = false,
-    -- will not open on setup if the filetype is in this list
-    ignore_ft_on_setup  = {},
-    -- closes neovim automatically when the tree is the last **WINDOW** in the view
-    auto_close          = false,
-    -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
+    auto_close = false,
     auto_reload_on_write = true,
-    open_on_tab         = false,
-    -- hijack the cursor in the tree to put it at the start of the filename
-    hijack_cursor       = true,
-    -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
-    update_cwd          = true,
-    -- show lsp diagnostics in the signcolumn
+    disable_netrw = true,
+    hide_root_folder = false,
+    hijack_cursor = true,
+    hijack_netrw = true,
+    hijack_unnamed_buffer_when_opening = false,
+    ignore_buffer_on_setup = false,
+    open_on_setup = false,
+    open_on_tab = false,
+    sort_by = "name",
+    update_cwd = true,
+    view = {
+      width = 31,
+      height = 31,
+      side = 'left',
+      preserve_window_proportions = true,
+      number = false,
+      relativenumber = false,
+      signcolumn = "yes",
+      mappings = {
+        custom_only = false,
+        list = {}
+      },
+    },
+    ignore_ft_on_setup  = {},
+    hijack_directories = {
+      enable = true,
+      auto_open = true,
+    },
+    update_focused_file = {
+      enable = true,
+      update_cwd = true,
+      ignore_list = {},
+    },
     update_to_buf_dir   = {
-    enable = true,
-    auto_open = true,
+      enable = true,
+      auto_open = true,
     },
     diagnostics = {
-    enable = true,
-    icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "",
-    }
+      enable = true,
+      show_on_dirs = true,
+      icons = {
+        hint = "",
+        info = "",
+        warning = "",
+        error = "",
+      }
+    },
+    actions = {
+      change_dir = {
+        enable = true,
+        global = false,
+      },
+      open_file = {
+        quit_on_open = false,
+        resize_window = false,
+        window_picker = {
+          enable = true,
+          chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+          exclude = {
+            filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
+            buftype = { "nofile", "terminal", "help" },
+          },
+        },
+      },
     },
     git = {
-    enable = true,
-    ignore = false,
-    timeout = 500,
+      enable = true,
+      ignore = false,
+      timeout = 400,
     },
-    -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
-    update_focused_file = {
-    -- enables the feature
-    enable      = true,
-    -- update the root directory of the tree to the one of the folder containing the file if the file is not under the current root directory
-    -- only relevant when `update_focused_file.enable` is true
-    update_cwd  = true,
-    -- list of buffer names / filetypes that will not update the cwd if the file isn't found under the current root directory
-    -- only relevant when `update_focused_file.update_cwd` is true and `update_focused_file.enable` is true
-    ignore_list = {}
+    trash = {
+      cmd = "trash",
+      require_confirm = true,
     },
-    -- configuration options for the system open command (`s` in the tree by default)
     system_open = {
-    -- the command to run this, leaving nil should work in most cases
-    cmd  = nil,
-    -- the command arguments as a list
-    args = {}
+      cmd  = nil,
+      args = {}
     },
-    view = {
-    width = 31,
-    side = 'left',
-    -- if true the tree will resize itself after opening a file
-    auto_resize = false,
-    mappings = {
-      -- custom only false will merge the list with the default mappings
-      -- if true, it will only use your list to set the mappings
-      custom_only = false,
-      -- list of mappings to set on the tree manually
-      list = {}
-    },
-    number = false,
-    relativenumber = false,
-    signcolumn = "yes"
-    }
   }
 end
 
