@@ -42,10 +42,11 @@ end
 
 function config.dap()
   require("extend.debugger").load_debuggers({
-    "go"
+    "go",
+	"python"
   })
 
-  vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+  vim.fn.sign_define('DapBreakpoint', {text='🔴', texthl='', linehl='', numhl=''})
 end
 
 return config
