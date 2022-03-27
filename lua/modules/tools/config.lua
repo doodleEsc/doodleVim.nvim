@@ -125,7 +125,6 @@ end
 function config.nvim_tree()
   vim.g.nvim_tree_respect_buf_cwd = 1
   require'nvim-tree'.setup {
-    auto_close = false,
     auto_reload_on_write = true,
     disable_netrw = true,
     hide_root_folder = false,
