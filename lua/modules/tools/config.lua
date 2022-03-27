@@ -9,7 +9,7 @@ function config.telescope()
   require('telescope').setup {
     defaults = {
       initial_mode = "normal",
-      prompt_prefix = '🔭 ',
+      prompt_prefix = '',
       selection_caret = " ",
       sorting_strategy = 'ascending',
       scroll_strategy = "limit",

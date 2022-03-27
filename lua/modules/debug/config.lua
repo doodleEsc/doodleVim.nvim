@@ -40,14 +40,13 @@ function config.dapui()
   })
 end
 
-function config.dapinstall()
-  local dap_install = require("dap-install")
-  dap_install.setup({
-    installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
+function config.dap()
+  require("extend.debugger").load_debuggers({
+    "go",
+	"python"
   })
 
-  dap_install.config("go_delve", {})
-  dap_install.config("python", {})
+  vim.fn.sign_define('DapBreakpoint', {text='🔴', texthl='', linehl='', numhl=''})
 end
 
 return config
