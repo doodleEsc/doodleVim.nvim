@@ -112,6 +112,7 @@ end
 function plugins.magic_compile()
   plugins.compile()
   plugins.convert_compile_file()
+  vim.notify("compiled lua file finished")
 end
 
 function plugins.auto_compile()
