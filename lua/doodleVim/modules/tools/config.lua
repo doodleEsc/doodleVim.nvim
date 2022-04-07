@@ -124,6 +124,7 @@ end
 
 function config.nvim_tree()
   vim.g.nvim_tree_respect_buf_cwd = 1
+  local icons = require("doodleVim.utils.icons")
   require'nvim-tree'.setup {
     auto_reload_on_write = true,
     disable_netrw = true,
@@ -167,10 +168,10 @@ function config.nvim_tree()
       enable = true,
       show_on_dirs = true,
       icons = {
-        hint = "",
-        info = "",
-        warning = "",
-        error = "",
+        hint = icons.diag.hint_sign,
+        info = icons.diag.infor_sign,
+        warning = icons.diag.warn_sign,
+        error = icons.diag.error_sign,
       }
     },
     actions = {
