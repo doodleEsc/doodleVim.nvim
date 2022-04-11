@@ -120,38 +120,37 @@ function config.nvim_cmp()
         select = true
       }),
       ['<C-d>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.scroll_docs(2)
-        else
-          fallback()
-        end
-      end, {"i", "s"}),
-
+          if cmp.visible() then
+            cmp.scroll_docs(2)
+          else
+            fallback()
+          end
+        end, {"i", "s"}),
       ['<C-u>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.scroll_docs(-2)
-        else
-          fallback()
-        end
-      end, {"i", "s"}),
+          if cmp.visible() then
+            cmp.scroll_docs(-2)
+          else
+            fallback()
+          end
+        end, {"i", "s"}),
       ["<C-k>"] = cmp.mapping(function(fallback)
-        if luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        elseif neogen.jumpable(true) then
-          neogen.jump_prev()
-                else
-                    fallback()
-                end
-            end, {"i", "s"}),
-            ["<C-j>"] = cmp.mapping(function(fallback)
-                if luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-        elseif neogen.jumpable() then
-          neogen.jump_next()
-                else
-                    fallback()
-                end
-            end, {"i", "s"}),
+          if luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          elseif neogen.jumpable(true) then
+            neogen.jump_prev()
+          else
+            fallback()
+          end
+        end, {"i", "s"}),
+      ["<C-j>"] = cmp.mapping(function(fallback)
+          if luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif neogen.jumpable() then
+            neogen.jump_next()
+          else
+            fallback()
+          end
+        end, {"i", "s"}),
     },
     formatting = {
       fields = {

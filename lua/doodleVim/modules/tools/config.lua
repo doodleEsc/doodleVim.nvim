@@ -1,7 +1,10 @@
 local config = {}
 
 function config.telescope()
-  require('doodleVim.utils.defer').load_immediately({'telescope-fzy-native.nvim', 'telescope-file-browser.nvim'})
+  require('doodleVim.utils.defer').load_immediately({
+    'telescope-fzy-native.nvim',
+    'telescope-file-browser.nvim',
+  })
 
   local actions = require "telescope.actions"
   local actions_layout = require "telescope.actions.layout"
@@ -17,7 +20,8 @@ function config.telescope()
       path_display = {
         shorten = { len = 2, exclude = {-2, -1}}
       },
-      results_title = true,
+      results_title = "Results",
+      prompt_title = "Prompt",
       color_devicons = true,
       vimgrep_arguments = {
         "rg",
@@ -46,6 +50,8 @@ function config.telescope()
       preview = {
         hide_on_startup = false
       },
+      -- border = true,
+      -- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
       default_mappings = {
         i = {
           ["<C-j>"] = actions.move_selection_next,
@@ -103,11 +109,11 @@ function config.telescope()
           -- ["<C-w>"] = { "<c-s-w>", type = "command" },
         },
       },
-      extensions = {
-        fzy_native = {
-          override_generic_sorter = true,
-          override_file_sorter = true,
-        },
+    },
+    extensions = {
+      fzy_native = {
+        override_generic_sorter = true,
+        override_file_sorter = true,
       },
     },
     pickers = {
