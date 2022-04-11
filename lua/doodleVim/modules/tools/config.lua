@@ -1,7 +1,10 @@
 local config = {}
 
 function config.telescope()
-  require('doodleVim.utils.defer').load_immediately({'telescope-fzy-native.nvim', 'telescope-file-browser.nvim'})
+  require('doodleVim.utils.defer').load_immediately({
+    'telescope-fzy-native.nvim',
+    'telescope-file-browser.nvim',
+  })
 
   local actions = require "telescope.actions"
   local actions_layout = require "telescope.actions.layout"
