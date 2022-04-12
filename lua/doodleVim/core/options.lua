@@ -15,7 +15,7 @@ end
 local function load_options()
   local global_local = {
     termguicolors  = true;
-    mouse          = 'nv';
+    mouse          = 'a';
     errorbells     = true;
     visualbell     = true;
     hidden         = true;
