@@ -20,7 +20,7 @@ main() {
         copy)
             slurp
             for p in $COPY_PROVIDERS; do
-                spit | ${p}_provider copy && status=0
+                ${p}_provider copy && status=0
             done ;;
         paste)
             for p in $PASTE_PROVIDERS; do
