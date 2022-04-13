@@ -151,6 +151,23 @@ function config.nvim_cmp()
             fallback()
           end
         end, {"i", "s"}),
+      ['<Tab>'] = cmp.mapping({
+        c = function()
+          if #cmp.core:get_sources() > 0 and not require('cmp.config').is_native_menu() then
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              cmp.complete()
+            end
+          else
+            if vim.fn.pumvisible() == 0 then
+              vim.api.nvim_feedkeys(require('cmp.utils.keymap').t('<Tab>'), 'in', true)
+            else
+              vim.api.nvim_feedkeys(require('cmp.utils.keymap').t('<C-n>'), 'in', true)
+            end
+          end
+        end,
+      }),
     },
     formatting = {
       fields = {

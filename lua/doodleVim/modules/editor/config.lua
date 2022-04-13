@@ -165,4 +165,60 @@ function config.hop()
   require'hop'.setup()
 end
 
+function config.neoclip()
+  local function is_whitespace(line)
+    return vim.fn.match(line, [[^\s*$]]) ~= -1
+  end
+ 
+  local function all(tbl, check)
+    for _, entry in ipairs(tbl) do
+      if not check(entry) then
+        return false
+      end
+    end
+    return true
+  end
+  require('neoclip').setup({
+    history = 50,
+    enable_persistent_history = true,
+    continuous_sync = true,
+    enable_system_clipboard = true,
+    db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
+    filter = function(data)
+      return not all(data.event.regcontents, is_whitespace)
+    end,
+    preview = true,
+    default_register = { '"', '+', '*' },
+    default_register_macros = 'z',
+    enable_macro_history = false,
+    content_spec_column = false,
+    on_paste = {
+      set_reg = false,
+    },
+    on_replay = {
+      set_reg = false,
+    },
+    keys = {
+      telescope = {
+        i = {
+          select = '<cr>',
+          paste = '<c-p>',
+          paste_behind = '<c-k>',
+          replay = '<c-z>',  -- replay a macro
+          delete = '<c-d>',  -- delete an entry
+          custom = {},
+        },
+        n = {
+          select = '<cr>',
+          paste = 'p',
+          paste_behind = 'P',
+          replay = 'z',
+          delete = 'd',
+          custom = {},
+        },
+      }
+    },
+  })
+end
+
 return config

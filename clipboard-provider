@@ -1,12 +1,9 @@
 #!/bin/bash
-# Taken and modified from https://github.com/agriffis/skel/blob/master/neovim/bin/clipboard-provider
+# https://github.com/cinuor/nvim/blob/master/clipboard-provider
 #
 # clipboard provider for neovim
 #
 # :help provider-clipboard
-
-#exec 2>> ~/clipboard-provider.out
-#set -x
 
 : ${COPY_PROVIDERS:=osc52 pb xclip tmux local}
 : ${PASTE_PROVIDERS:=pb xclip tmux local}
