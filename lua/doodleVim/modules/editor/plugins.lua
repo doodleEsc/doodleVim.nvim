@@ -50,4 +50,10 @@ editor['romgrk/barbar.nvim'] = {
   requires = {'kyazdani42/nvim-web-devicons'},
 }
 
+editor['cinuor/nvim-neoclip.lua'] = {
+  opt = true,
+  setup = function() require("doodleVim.utils.defer").add("nvim-neoclip.lua", 80) end,
+  config = conf.neoclip
+}
+
 return editor

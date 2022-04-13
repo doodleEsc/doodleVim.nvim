@@ -7,7 +7,7 @@ tools['dstein64/vim-startuptime'] = {
 
 tools['nvim-telescope/telescope.nvim'] = {
   opt = true,
-  setup = function() require("doodleVim.utils.defer").add("telescope.nvim", 80) end,
+  setup = function() require("doodleVim.utils.defer").add("telescope.nvim", 70) end,
   config = conf.telescope,
   requires = {
     {'nvim-telescope/telescope-fzy-native.nvim', opt = true},
@@ -105,6 +105,11 @@ tools['rcarriga/nvim-notify'] = {
   opt = true,
   setup = function() require("doodleVim.utils.defer").packer_defer_load("nvim-notify", 100) end,
   config = conf.notify
+}
+
+tools['tami5/sqlite.lua'] = {
+	opt = true,
+	setup = function() require("doodleVim.utils.defer").add("sqlite.lua", 90) end,
 }
 
 return tools

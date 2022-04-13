@@ -80,7 +80,8 @@ plug_map.normal = {
     f = bind.convert_wk_format(map_cr('Telescope find_files'):with_noremap():with_label("Find Files")),
     g = bind.convert_wk_format(map_cr('Telescope live_grep'):with_noremap():with_label("Live Grep")),
     h = bind.convert_wk_format(map_cr('Telescope projects'):with_noremap():with_label("Find Projects")),
-    j = bind.convert_wk_format(map_cr('Telescope todo-comments todo'):with_noremap():with_label("Find Todos"))
+    j = bind.convert_wk_format(map_cr('Telescope todo-comments todo'):with_noremap():with_label("Find Todos")),
+    d = bind.convert_wk_format(map_cr('Telescope neoclip'):with_noremap():with_label("Find Saved Buffer In Clipboard"))
   },
 
   ["<leader>c"] = {
