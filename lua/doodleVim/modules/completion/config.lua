@@ -87,9 +87,11 @@ function config.nvim_cmp()
     },
     window = {
       completion = cmp.config.window.bordered({
-		  winhighlight = 'Normal:Normal,FloatBorder:Normal,CursorLine:Search,Search:None',
+		  winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
 	  }),
-      documentation = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered({
+		  winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+	  }),
     },
     sources =  cmp.config.sources({
       { name = 'nvim_lsp' },
