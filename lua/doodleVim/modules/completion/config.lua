@@ -68,36 +68,36 @@ function config.nvim_cmp()
   require('doodleVim.utils.defer').load_immediately({'LuaSnip', 'neogen'})
 
   local cmp = require('cmp')
-  local luasnip = require("luasnip")
+  local types = require('cmp.types')
+  -- local luasnip = require("luasnip")
   local neogen = require('neogen')
 
   cmp.setup({
-    window = {
-      completion = {
-        border = 'rounded',
-        scrollbar = '║',
-        winhighlight = {
-          bordered = 'Normal:CmpCompletionWindowBordered,FloatBorder:CmpCompletionWindowBorder,CursorLine:PmenuSel,Search:None',
-          default = 'Normal:CmpCompletionWindow,FloatBorder:CmpCompletionWindowPadding,CursorLine:PmenuSel,Search:None',
-        },
-      },
-      documentation = { -- no border; native-style scrollbar
-         border = 'rounded',
-         scrollbar = '║',
-         -- other options
-      },
-    },
+    enabled = function()
+      local disabled = false
+      disabled = disabled or (vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt')
+      disabled = disabled or (vim.fn.reg_recording() ~= '')
+      disabled = disabled or (vim.fn.reg_executing() ~= '')
+      return not disabled
+    end,
     snippet = {
       expand = function(args)
         require('luasnip').lsp_expand(args.body)
       end,
     },
+    window = {
+      completion = cmp.config.window.bordered({
+		  winhighlight = 'Normal:Normal,FloatBorder:Normal,CursorLine:Search,Search:None',
+	  }),
+      documentation = cmp.config.window.bordered(),
+    },
     sources =  cmp.config.sources({
       { name = 'nvim_lsp' },
-      { name = 'buffer' },
-      { name = 'path' },
       { name = 'cmp_tabnine' },
       { name = 'luasnip' },
+    }, {
+      { name = 'buffer' },
+      { name = 'path' },
       {
         name = 'look',
         keyword_length = 2,
@@ -108,71 +108,60 @@ function config.nvim_cmp()
         },
       },
     }),
-    mapping = {
-      ["<C-p>"] = cmp.mapping.select_prev_item(),
-      ["<C-n>"] = cmp.mapping.select_next_item(),
-      ['<C-f>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
-      ['<CR>'] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true
-      }),
-      ['<C-d>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.scroll_docs(2)
-          else
-            fallback()
-          end
-        end, {"i", "s"}),
-      ['<C-u>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.scroll_docs(-2)
-          else
-            fallback()
-          end
-        end, {"i", "s"}),
-      ["<C-k>"] = cmp.mapping(function(fallback)
-          if luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          elseif neogen.jumpable(true) then
-            neogen.jump_prev()
-          else
-            fallback()
-          end
-        end, {"i", "s"}),
-      ["<C-j>"] = cmp.mapping(function(fallback)
-          if luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif neogen.jumpable() then
-            neogen.jump_next()
-          else
-            fallback()
-          end
-        end, {"i", "s"}),
-      ['<Tab>'] = cmp.mapping({
-        c = function()
-          if #cmp.core:get_sources() > 0 and not require('cmp.config').is_native_menu() then
+    mapping = cmp.mapping.preset.insert({
+        ['<Down>'] = {
+          i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
+        },
+        ['<Up>'] = {
+          i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
+        },
+        ['<C-n>'] = {
+          i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
+        },
+        ['<C-p>'] = {
+          i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
+        },
+        ['<CR>'] = {
+          i = cmp.mapping.confirm({ select = true }),
+        },
+        ['<C-e>'] = {
+          i = cmp.mapping.abort(),
+        },
+		["<C-k>"] = cmp.mapping(function(fallback)
+			  if require('luasnip').jumpable(-1) then
+				require('luasnip').jump(-1)
+			  elseif require('neogen').jumpable(true) then
+				require('neogen').jump_prev()
+			  else
+				fallback()
+			  end
+			end, {"i", "s"}),
+		["<C-j>"] = cmp.mapping(function(fallback)
+			  if require('luasnip').expand_or_jumpable() then
+				require('luasnip').expand_or_jump()
+			  elseif require('neogen').jumpable() then
+				require('neogen').jump_next()
+			  else
+				fallback()
+			  end
+			end, {"i", "s"}),
+        ['<C-d>'] = cmp.mapping(function(fallback)
+           if cmp.visible() then
+              cmp.scroll_docs(2)
+            else
+              fallback()
+            end
+          end, {"i", "s"}),
+        ['<C-u>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_next_item()
+              cmp.scroll_docs(-2)
             else
-              cmp.complete()
+              fallback()
             end
-          else
-            if vim.fn.pumvisible() == 0 then
-              local cmd_prefix = vim.fn.getcmdline()
-              if cmd_prefix:match("^%%s/$") then
-                vim.api.nvim_feedkeys(require('cmp.utils.keymap').t('<Tab>'), 'in', true)
-              else
-                vim.api.nvim_feedkeys(require('cmp.utils.keymap').t('<C-z>'), 'in', true)
-              end
-            else
-              vim.api.nvim_feedkeys(require('cmp.utils.keymap').t('<C-n>'), 'in', true)
-            end
-          end
-        end,
-      }),
+          end, {"i", "s"}),
+    }),
+    view = {
+      entries = { name = 'custom', selection_order = 'top_down' },
     },
     formatting = {
       fields = {
@@ -207,12 +196,23 @@ function config.nvim_cmp()
     sources = cmp.config.sources({{ name = 'path' }})
   })
 
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = 'buffer' }
     }
   })
 
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
 end
 
 function config.luasnip()
