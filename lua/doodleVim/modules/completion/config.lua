@@ -161,7 +161,12 @@ function config.nvim_cmp()
             end
           else
             if vim.fn.pumvisible() == 0 then
-              vim.api.nvim_feedkeys(require('cmp.utils.keymap').t('<Tab>'), 'in', true)
+              local cmd_prefix = vim.fn.getcmdline()
+              if cmd_prefix:match("^%%s/$") then
+                vim.api.nvim_feedkeys(require('cmp.utils.keymap').t('<Tab>'), 'in', true)
+              else
+                vim.api.nvim_feedkeys(require('cmp.utils.keymap').t('<C-z>'), 'in', true)
+              end
             else
               vim.api.nvim_feedkeys(require('cmp.utils.keymap').t('<C-n>'), 'in', true)
             end
