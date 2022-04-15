@@ -19,6 +19,7 @@ def_map.normal = {
   ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy")),
   ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Change Without Copy")),
   ["d"] = bind.convert_wk_format(map_cmd('""d'):with_noremap():with_label("Delete Without Copy")),
+  ["P"] = bind.convert_wk_format(map_cmd('""p'):with_noremap():with_label("Paste Content In Register \"")),
 }
 
 def_map.insert = {
@@ -49,8 +50,8 @@ def_map.visual = {
   ["<C-u>"] = bind.convert_wk_format(map_cmd("<cmd>lua require('doodleVim.extend.scroll').scroll_up()<CR>"):with_noremap():with_silent():with_label("Smooth Scroll Up"):with_mode("x")),
   ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"):with_mode("x")),
   ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Cut Without Copy"):with_mode("x")),
-  ["d"] = bind.convert_wk_format(map_cmd('""d'):with_noremap():with_label("Delete Without Copy"):with_mode("x"))
-
+  ["d"] = bind.convert_wk_format(map_cmd('""d'):with_noremap():with_label("Delete Without Copy"):with_mode("x")),
+  ["P"] = bind.convert_wk_format(map_cmd('""p'):with_noremap():with_label("Paste Content In Register \""):with_mode("x")),
 }
 
 return def_map
