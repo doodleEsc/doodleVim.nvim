@@ -17,7 +17,8 @@ def_map.normal = {
   ["<C-d>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.scroll').scroll_down()"):with_noremap():with_silent():with_label("Smooth Scroll Down")),
   ["<C-u>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.scroll').scroll_up()"):with_noremap():with_silent():with_label("Smooth Scroll Up")),
   ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy")),
-  ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Change Without Copy"))
+  ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Change Without Copy")),
+  ["d"] = bind.convert_wk_format(map_cmd('""d'):with_noremap():with_label("Delete Without Copy")),
 }
 
 def_map.insert = {
@@ -46,8 +47,9 @@ def_map.command = {
 def_map.visual = {
   ["<C-d>"] = bind.convert_wk_format(map_cmd("<cmd>lua require('doodleVim.extend.scroll').scroll_down()<CR>"):with_noremap():with_silent():with_label("Smooth Scroll Down"):with_mode("x")),
   ["<C-u>"] = bind.convert_wk_format(map_cmd("<cmd>lua require('doodleVim.extend.scroll').scroll_up()<CR>"):with_noremap():with_silent():with_label("Smooth Scroll Up"):with_mode("x")),
-  ["x"] = bind.convert_wk_format(map_cmd('"_d'):with_noremap():with_label("Delete Without Copy"):with_mode("x")),
-  ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Cut Without Copy"):with_mode("x"))
+  ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"):with_mode("x")),
+  ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Cut Without Copy"):with_mode("x")),
+  ["d"] = bind.convert_wk_format(map_cmd('""d'):with_noremap():with_label("Delete Without Copy"):with_mode("x"))
 
 }
 
