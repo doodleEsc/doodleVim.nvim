@@ -86,7 +86,7 @@ plug_map.normal = {
 
   ["<leader>c"] = {
     name = "Comment",
-    c = bind.convert_wk_format(map_cr('lua require("Comment.api").toggle_current_linewise()'):with_noremap():with_silent():with_label("Comment Current Line")),
+    c = bind.convert_wk_format(map_cmd('<Plug>(comment_toggle_linewise)'):with_noremap():with_silent():with_label("Comment Current Line")),
   },
 
   ["<leader>s"] = {
@@ -131,35 +131,35 @@ plug_map.normal = {
 plug_map.visual = {
   ["g"] = {
     name = "Lsp Function",
-    f = bind.convert_wk_format(map_cu("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Selected Code Formatting"):with_mode("v")),
-    a = bind.convert_wk_format(map_cu("lua require('cosmic-ui').range_code_actions()"):with_noremap():with_silent():with_label("Range Code Action"):with_mode("v")),
+    f = bind.convert_wk_format(map_cu("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Selected Code Formatting"):with_mode("x")),
+    a = bind.convert_wk_format(map_cu("lua require('cosmic-ui').range_code_actions()"):with_noremap():with_silent():with_label("Range Code Action"):with_mode("x")),
   },
 
   ["<leader>m"] = {
     name = "MarkdownPreview, EasyAlign",
-    a = bind.convert_wk_format(map_cmd("<Plug>(EasyAlign)"):with_label("EasyAlign Selected Buffer"):with_mode("v"))
+    a = bind.convert_wk_format(map_cmd("<Plug>(EasyAlign)"):with_label("EasyAlign Selected Buffer"):with_mode("x"))
   },
 
   ["t"] = {
     name = "Tree,Gotests,Translate",
-    r = bind.convert_wk_format(map_cu("TranslateW"):with_silent():with_label("Translate Selected Buffer"):with_mode("v"))
+    r = bind.convert_wk_format(map_cu("TranslateW"):with_silent():with_label("Translate Selected Buffer"):with_mode("x"))
   },
 
   ["<leader>c"] = {
     name = "Comment",
-    c = bind.convert_wk_format(map_cu('lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())'):with_noremap():with_silent():with_label("Comment Selected Line"):with_mode("v")),
-    b = bind.convert_wk_format(map_cu('lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())'):with_noremap():with_silent():with_label("Comment Selected Code Block"):with_mode("v"))
+    c = bind.convert_wk_format(map_cmd('<Plug>(comment_toggle_linewise_visual)'):with_noremap():with_silent():with_label("Comment Selected Line"):with_mode("x")),
+    b = bind.convert_wk_format(map_cmd('<Plug>(comment_toggle_blockwise_visual)'):with_noremap():with_silent():with_label("Comment Selected Code Block"):with_mode("x"))
   },
 
   ["<leader>l"] = {
     name = "Draw Ascii Picture",
-    l = bind.convert_wk_format(map_cu("VBox"):with_noremap():with_silent():with_label("Normal Line"):with_mode("v")),
-    d = bind.convert_wk_format(map_cu("VBoxD"):with_noremap():with_silent():with_label("Double Line"):with_mode("v")),
-    h = bind.convert_wk_format(map_cu("VBoxH"):with_noremap():with_silent():with_label("Hard Line"):with_mode("v")),
-    f = bind.convert_wk_format(map_cu("VFill"):with_noremap():with_silent():with_label("Fill Box"):with_mode("v"))
+    l = bind.convert_wk_format(map_cu("VBox"):with_noremap():with_silent():with_label("Normal Line"):with_mode("x")),
+    d = bind.convert_wk_format(map_cu("VBoxD"):with_noremap():with_silent():with_label("Double Line"):with_mode("x")),
+    h = bind.convert_wk_format(map_cu("VBoxH"):with_noremap():with_silent():with_label("Hard Line"):with_mode("x")),
+    f = bind.convert_wk_format(map_cu("VFill"):with_noremap():with_silent():with_label("Fill Box"):with_mode("x"))
   },
 
-  ["<C-Space>"] = bind.convert_wk_format(map_cu("WhichKey '' v"):with_noremap():with_label("Show Keymaps"):with_mode("v"))
+  ["<C-Space>"] = bind.convert_wk_format(map_cu("WhichKey '' v"):with_noremap():with_label("Show Keymaps"):with_mode("x"))
 
 }
 
