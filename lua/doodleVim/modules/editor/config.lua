@@ -99,7 +99,7 @@ function config.barbar()
     animation = true,
 
     -- Enable/disable auto-hiding the tab bar when there is a single buffer
-    auto_hide = true,
+    auto_hide = false,
 
     -- Enable/disable current/total tabpages indicator (top right corner)
     tabpages = true,
@@ -113,7 +113,9 @@ function config.barbar()
     clickable = true,
 
     -- Excludes buffers from the tabline
-    exclude_ft = {},
+    exclude_ft = {
+        'dap-repl'
+    },
     exclude_name = {},
 
     -- Enable/disable icons
@@ -136,7 +138,8 @@ function config.barbar()
 
     -- If true, new buffers will be inserted at the end of the list.
     -- Default is to insert after current buffer.
-    insert_at_end = false,
+    insert_at_end = true,
+	insert_at_start = false,
 
     -- Sets the maximum padding width with which to surround each tab
     maximum_padding = 1,

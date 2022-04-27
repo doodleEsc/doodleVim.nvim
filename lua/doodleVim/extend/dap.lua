@@ -8,7 +8,7 @@ end
 debug.debug_continue = function()
   require('doodleVim.utils.defer').load_immediately({'nvim-dap', 'nvim-dap-ui'})
 
-  require'dapui'.open()
+  -- require'dapui'.open()
   require'dap'.continue()
 end
 
@@ -73,9 +73,10 @@ debug.debug_stop = function()
     vim.notify("`nvim-dap` not loaded", "warn")
     return
   end
-  require'dap'.disconnect()
-  require'dap'.close()
-  require'dapui'.close()
+
+  -- require'dap'.disconnect()
+  -- require'dap'.close()
+  -- require'dapui'.close()
 end
 
 debug.debug_run_to_cursor = function()

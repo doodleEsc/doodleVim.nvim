@@ -17,6 +17,7 @@ tools['nvim-telescope/telescope.nvim'] = {
 
 tools['kyazdani42/nvim-tree.lua'] = {
   opt = true,
+  setup = conf.nvim_tree_setup,
   config = conf.nvim_tree,
   requires = 'kyazdani42/nvim-web-devicons'
 }
