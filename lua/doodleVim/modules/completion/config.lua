@@ -90,27 +90,25 @@ function config.nvim_cmp()
     },
     window = {
       completion = cmp.config.window.bordered({
-		  winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
-	  }),
+          winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+      }),
       documentation = cmp.config.window.bordered({
-		  winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
-	  }),
+          winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+      }),
     },
     sources =  cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'cmp_tabnine' },
-      { name = 'luasnip' },
-    }, {
-      { name = 'buffer' },
-      { name = 'path' },
+      { name = 'luasnip', priority = 100 },
+      { name = 'nvim_lsp', priority = 99 },
+      { name = 'cmp_tabnine', priority = 98 },
+      { name = "copilot", priority = 97},
+
+      { name = 'buffer', priority = 50 },
+      { name = 'path', priority = 49 },
       {
         name = 'look',
         keyword_length = 2,
-        option = {
-          convert_case = true,
-          loud = true,
-          -- dict = '/usr/share/dict/words'
-        },
+        option = { convert_case = true, loud = true },
+		priority = 48
       },
     }),
     mapping = cmp.mapping.preset.insert({
@@ -132,24 +130,24 @@ function config.nvim_cmp()
         ['<C-e>'] = {
           i = cmp.mapping.abort(),
         },
-		["<C-k>"] = cmp.mapping(function(fallback)
-			  if require('luasnip').jumpable(-1) then
-				require('luasnip').jump(-1)
-			  elseif require('neogen').jumpable(true) then
-				require('neogen').jump_prev()
-			  else
-				fallback()
-			  end
-			end, {"i", "s"}),
-		["<C-j>"] = cmp.mapping(function(fallback)
-			  if require('luasnip').expand_or_jumpable() then
-				require('luasnip').expand_or_jump()
-			  elseif require('neogen').jumpable() then
-				require('neogen').jump_next()
-			  else
-				fallback()
-			  end
-			end, {"i", "s"}),
+        ["<C-k>"] = cmp.mapping(function(fallback)
+              if require('luasnip').jumpable(-1) then
+                require('luasnip').jump(-1)
+              elseif require('neogen').jumpable(true) then
+                require('neogen').jump_prev()
+              else
+                fallback()
+              end
+            end, {"i", "s"}),
+        ["<C-j>"] = cmp.mapping(function(fallback)
+              if require('luasnip').expand_or_jumpable() then
+                require('luasnip').expand_or_jump()
+              elseif require('neogen').jumpable() then
+                require('neogen').jump_next()
+              else
+                fallback()
+              end
+            end, {"i", "s"}),
         ['<C-d>'] = cmp.mapping(function(fallback)
            if cmp.visible() then
               cmp.scroll_docs(2)
@@ -190,6 +188,7 @@ function config.nvim_cmp()
           luasnip = "[SNP]",
           path = "[PATH]",
           look = "[LOOK]",
+          copilot = "[AI]",
         })[entry.source.name]
 
         return vim_item
@@ -289,6 +288,12 @@ function config.cosmicui()
     },
     }
   })
+end
+
+function config.copilot()
+  vim.defer_fn(function()
+    require("copilot").setup()
+  end, 200)
 end
 
 return config
