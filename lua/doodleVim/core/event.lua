@@ -33,7 +33,7 @@ function autocmd.load_autocmds()
     ft = {
       {"BufNewFile,BufRead","*.toml"," setf toml"},
       {"BufReadPost,BufNewFile","*.sol"," setf solidity"},
-      {"FileType", "Outline", " setlocal signcolumn=no"}
+      {"FileType", "Outline", " setlocal signcolumn=no"},
     };
 
     yank = {

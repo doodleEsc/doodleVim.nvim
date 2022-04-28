@@ -138,7 +138,7 @@ function config.barbar()
 
     -- If true, new buffers will be inserted at the end of the list.
     -- Default is to insert after current buffer.
-    insert_at_end = true,
+    insert_at_end = false,
 	insert_at_start = false,
 
     -- Sets the maximum padding width with which to surround each tab

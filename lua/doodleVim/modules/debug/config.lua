@@ -61,14 +61,15 @@ function config.dapui()
 end
 
 function config.dap()
+  vim.fn.sign_define('DapBreakpoint', {text='🔴', texthl='', linehl='', numhl=''})
+  vim.fn.sign_define('DapStopped', {text = '', texthl = '', linehl = '', numhl = ''})
+  vim.fn.sign_define('DapBreakpointRejected', { text = '⭐️', texthl = '',linehl = '',numhl = ''})
+
   require("doodleVim.extend.debugger").load_debuggers({
     "go",
 	"python"
   })
 
-  vim.fn.sign_define('DapBreakpoint', {text='🔴', texthl='', linehl='', numhl=''})
-  vim.fn.sign_define('DapStopped', {text = '', texthl = '', linehl = '', numhl = ''})
-  vim.fn.sign_define('DapBreakpointRejected', { text = '⭐️', texthl = '',linehl = '',numhl = ''})
 end
 
 return config
