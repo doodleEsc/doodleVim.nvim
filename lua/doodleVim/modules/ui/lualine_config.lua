@@ -5,15 +5,15 @@ local lualine = require 'lualine'
 local colors = {
   bg       = '#202328',
   fg       = '#bbc2cf',
-  yellow   = '#ECBE7B',
+  yellow   = '#fabd2f',
   cyan     = '#008080',
   darkblue = '#081633',
-  green    = '#98be65',
-  orange   = '#FF8800',
+  green    = '#b8bb26',
+  orange   = '#FE8019',
   violet   = '#a9a1e1',
-  magenta  = '#c678dd',
-  blue     = '#51afef',
-  red      = '#ec5f67',
+  magenta  = '#d3869b',
+  blue     = '#83a598',
+  red      = '#fb4934',
 }
 
 local conditions = {
@@ -33,6 +33,7 @@ local conditions = {
 -- Config
 local config = {
   options = {
+    disabled_filetypes = {'Outline', 'NvimTree'},
     -- Disable sections and component separators
     component_separators = '',
     section_separators = '',

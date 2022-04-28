@@ -66,8 +66,24 @@ end
 
 misc.reload = function()
     utils.remove_cached_package("^doodleVim")
-	require("doodleVim.core")
-	vim.notify("Configuration Reloaded")
+  require("doodleVim.core")
+  vim.notify("Configuration Reloaded")
+end
+
+misc.enhanced_buffer_close = function()
+  require('doodleVim.utils.defer').load_immediately('barbar.nvim')
+
+  local win_num = vim.api.nvim_win_get_number(0)
+  local filetype = vim.bo.filetype
+  if filetype == 'TelescopePrompt' then
+    return
+  end
+
+  if win_num > 2 then
+    vim.cmd[[bdelete!]]
+  else
+    vim.cmd[[BufferClose]]
+  end
 end
 
 return misc

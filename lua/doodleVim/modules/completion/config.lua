@@ -1,37 +1,13 @@
 local config = {}
 
+
 function config.nvim_lsp_installer()
+
+  local servers = { 'gopls', 'pyright', 'sumneko_lua' }
+  require("nvim-lsp-installer").setup{}
+
   require('doodleVim.utils.defer').load_immediately('cmp-nvim-lsp')
-
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
-  local lsp_installer = require("nvim-lsp-installer")
-  lsp_installer.on_server_ready(function(server)
-    local opts = {
-      capabilities = capabilities,
-      on_attach = function(client,bufnr)
-        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-        require "lsp_signature".on_attach({
-          bind = true, -- This is mandatory, otherwise border config won't get registered.
-          hint_enable = false,
-          floating_window_above_cur_line = true,
-          handler_opts = {border = "rounded"}
-        }, bufnr)
-      end
-    }
-    -- (optional) Customize the options passed to the server
-    -- if server.name == "tsserver" then
-    --     opts.root_dir = function() ... end
-    -- end
-
-    -- This setup() function is exactly the same as lspconfig's setup function.
-    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-    server:setup(opts)
-  end)
-
   local icons = require("doodleVim.utils.icons")
-
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
   vim.diagnostic.config({
     underline = true,
@@ -62,6 +38,33 @@ function config.nvim_lsp_installer()
     debug_sign = diag_icon.debug_sign,
     use_diagnostic_virtual_text = false,
   })
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+  local on_attach = function(_,bufnr)
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    require "lsp_signature".on_attach({
+      bind = true, -- This is mandatory, otherwise border config won't get registered.
+      hint_enable = false,
+      floating_window_above_cur_line = true,
+      handler_opts = {border = "rounded"}
+    }, bufnr)
+  end
+
+  local lspconfig = require 'lspconfig'
+  for _, lsp in ipairs(servers) do
+    local server_available, server = require("nvim-lsp-installer.servers").get_server(lsp)
+    if not server_available then
+      server:install()
+    end
+    local default_opts = server:get_default_options()
+    lspconfig[lsp].setup {
+      cmd_env = default_opts.cmd_env,
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+  end
 end
 
 function config.nvim_cmp()

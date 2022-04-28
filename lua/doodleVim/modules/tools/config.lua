@@ -13,6 +13,7 @@ function config.telescope()
   require('telescope').setup {
     defaults = {
       initial_mode = "normal",
+      wrap_results = false,
       prompt_prefix = '',
       selection_caret = " ",
       sorting_strategy = 'ascending',
@@ -44,8 +45,10 @@ function config.telescope()
           prompt_position = "top"
         },
         vertical = {
-          width = 0.9,
           height = 0.9,
+          width = 0.9,
+          preview_cutoff = 40,
+          prompt_position = "top",
         }
       },
       preview = {
@@ -55,26 +58,26 @@ function config.telescope()
       -- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
       default_mappings = {
         i = {
-          ["<C-j>"] = actions.move_selection_next,
-          ["<C-k>"] = actions.move_selection_previous,
+          ["<C-j>"]     = actions.move_selection_next,
+          ["<C-k>"]     = actions.move_selection_previous,
+          ["<Down>"]    = actions.move_selection_next,
+          ["<Up>"]      = actions.move_selection_previous,
 
-          -- ["<C-c>"] = actions.close,
+          ["<CR>"]      = actions.select_default,
+          ["<C-x>"]     = actions.select_horizontal,
+          ["<C-v>"]     = actions.select_vertical,
+          ["<C-t>"]     = actions.select_tab,
 
-          -- ["<Down>"] = actions.move_selection_next,
-          -- ["<Up>"] = actions.move_selection_previous,
+          ["<C-u>"]     = actions.preview_scrolling_up,
+          ["<C-d>"]      = actions.preview_scrolling_down,
 
-          ["<CR>"] = actions.select_default,
-          ["<C-s>"] = actions.select_horizontal,
-          ["<C-v>"] = actions.select_vertical,
-          ["<C-t>"] = actions.select_tab,
+          ["<C-b>"]     = actions.results_scrolling_up,
+          ["<C-f>"]     = actions.results_scrolling_down,
 
-          ["<Up>"] = actions.preview_scrolling_up,
-          ["<Down>"] = actions.preview_scrolling_down,
-
-          ["<C-u>"] = actions.results_scrolling_up,
-          ["<C-d>"] = actions.results_scrolling_down,
-
-          ["<Tab>"] = actions_layout.toggle_preview,
+          ["<Tab>"]     = actions_layout.toggle_preview,
+		  ["<C-Space>"] = actions.which_key,
+          ["<C-c>"]     = actions.close,
+		  --
           -- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
           -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
           -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
@@ -83,25 +86,26 @@ function config.telescope()
           -- ["<C-w>"] = { "<c-s-w>", type = "command" },
         },
         n = {
-          ["j"] = actions.move_selection_next,
-          ["k"] = actions.move_selection_previous,
-          ["q"] = actions.close,
+          ["j"]     = actions.move_selection_next,
+          ["k"]     = actions.move_selection_previous,
+          ["<Down>"]    = actions.move_selection_next,
+          ["<Up>"]      = actions.move_selection_previous,
 
-          -- ["<Down>"] = actions.move_selection_next,
-          -- ["<Up>"] = actions.move_selection_previous,
+          ["<CR>"]      = actions.select_default,
+          ["<C-x>"]     = actions.select_horizontal,
+          ["<C-v>"]     = actions.select_vertical,
+          ["<C-t>"]     = actions.select_tab,
 
-          ["<CR>"] = actions.select_default,
-          ["s"] = actions.select_horizontal,
-          ["v"] = actions.select_vertical,
-          ["t"] = actions.select_tab,
+          ["<C-u>"]     = actions.preview_scrolling_up,
+          ["<C-d>"]      = actions.preview_scrolling_down,
 
-          ["<Down>"] = actions.preview_scrolling_up,
-          ["<Up>"] = actions.preview_scrolling_down,
+          ["<C-b>"]     = actions.results_scrolling_up,
+          ["<C-f>"]     = actions.results_scrolling_down,
 
-          ["<C-u>"] = actions.results_scrolling_up,
-          ["<C-d>"] = actions.results_scrolling_down,
-
-          ["<Tab>"] = actions_layout.toggle_preview,
+          ["<Tab>"]     = actions_layout.toggle_preview,
+		  ["<C-Space>"] = actions.which_key,
+          ["<C-c>"]     = actions.close,
+		  -- ["<C-Space>"] = actions.which_key,
           -- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
           -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
           -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
@@ -130,13 +134,20 @@ function config.telescope()
   require('telescope').load_extension('neoclip')
 end
 
-function config.nvim_tree()
+function config.nvim_tree_setup()
   vim.g.nvim_tree_respect_buf_cwd = 1
+  vim.g.nvim_tree_git_hl = 0
+  vim.g.nvim_tree_highlight_opened_files = 1
+  vim.g.nvim_tree_add_trailing = 1
+  vim.g.nvim_tree_group_empty = 1
+  vim.g.nvim_tree_create_in_closed_folder = 1
+end
+
+function config.nvim_tree()
   local icons = require("doodleVim.utils.icons")
   require'nvim-tree'.setup {
     auto_reload_on_write = true,
     disable_netrw = true,
-    hide_root_folder = false,
     hijack_cursor = true,
     hijack_netrw = true,
     hijack_unnamed_buffer_when_opening = false,
@@ -168,10 +179,10 @@ function config.nvim_tree()
       update_cwd = true,
       ignore_list = {},
     },
-    update_to_buf_dir   = {
-      enable = true,
-      auto_open = true,
-    },
+    -- update_to_buf_dir   = {
+    --   enable = true,
+    --   auto_open = true,
+    -- },
     diagnostics = {
       enable = true,
       show_on_dirs = true,
@@ -183,6 +194,7 @@ function config.nvim_tree()
       }
     },
     actions = {
+      use_system_clipboard = true,
       change_dir = {
         enable = true,
         global = false,
@@ -343,7 +355,7 @@ function config.project()
 end
 
 function config.autosession()
-  vim.o.sessionoptions="buffers,curdir,folds,help,tabpages,winsize,winpos"
+  vim.o.sessionoptions="buffers,curdir,folds,help,tabpages,winsize,winpos,globals"
   require('auto-session').setup({
     log_level = 'info',
     auto_session_enable_last_session = false,

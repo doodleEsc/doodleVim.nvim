@@ -43,6 +43,7 @@ local function load_options()
     redrawtime     = 1500;
     ignorecase     = true;
     smartcase      = true;
+    smartindent    = true;
     infercase      = true;
     incsearch      = true;
     wrapscan       = true;
@@ -82,6 +83,7 @@ local function load_options()
     listchars      = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←";
     pumblend       = 0;
     winblend       = 0;
+    fillchars      = "eob: "
   }
 
   local bw_local  = {

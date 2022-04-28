@@ -38,15 +38,38 @@ function config.dapui()
     },
     windows = { indent = 1 },
   })
+
+  local dap, dapui = require "dap", require "dapui"
+  dap.listeners.after.event_initialized["dapui_config"] = function()
+    dapui.open()
+    -- vim.api.nvim_command("DapVirtualTextEnable")
+    -- dapui.close("tray")
+  end
+  dap.listeners.before.event_terminated["dapui_config"] = function()
+    -- vim.api.nvim_command("DapVirtualTextDisable")
+    dapui.close()
+  end
+  dap.listeners.before.event_exited["dapui_config"] = function()
+    -- vim.api.nvim_command("DapVirtualTextDisable")
+    dapui.close()
+  end
+  -- for some debug adapter, terminate or exit events will no fire, use disconnect reuest instead
+  dap.listeners.before.disconnect["dapui_config"] = function()
+    -- vim.api.nvim_command("DapVirtualTextDisable")
+    dapui.close()
+ end
 end
 
 function config.dap()
+  vim.fn.sign_define('DapBreakpoint', {text='🔴', texthl='', linehl='', numhl=''})
+  vim.fn.sign_define('DapStopped', {text = '', texthl = '', linehl = '', numhl = ''})
+  vim.fn.sign_define('DapBreakpointRejected', { text = '⭐️', texthl = '',linehl = '',numhl = ''})
+
   require("doodleVim.extend.debugger").load_debuggers({
     "go",
 	"python"
   })
 
-  vim.fn.sign_define('DapBreakpoint', {text='🔴', texthl='', linehl='', numhl=''})
 end
 
 return config
