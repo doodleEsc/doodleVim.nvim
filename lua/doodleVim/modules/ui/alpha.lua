@@ -34,7 +34,7 @@ dashboard.section.buttons.val = {
 	dashboard.button("SPC f b", "  File Browser"),
 	dashboard.button("SPC p u", "  Update Plugins"),
 	dashboard.button("e"      , "  New file", "<cmd>ene <CR>"),
-    dashboard.button("s"      , "  Settings", "<cmd>e $MYVIMRC<CR>"),
+    dashboard.button("s"      , "  Configuration", "<cmd>e $MYVIMRC<CR>"),
 	dashboard.button("q"      , "  Quit", "<cmd>qa<cr>"),
 }
 
@@ -73,6 +73,38 @@ dashboard.section.buttons.val = {
 dashboard.section.footer.val = footer()
 dashboard.section.footer.opts.hl = "Constant"
 
+dashboard.opts = {
+    layout = {
+        { type = "padding", val = 4 },
+        dashboard.section.header,
+        { type = "padding", val = 4 },
+        dashboard.section.buttons,
+        { type = "padding", val = 1 },
+        dashboard.section.footer,
+    },
+    opts = {
+        margin = 5,
+    },
+}
+
 alpha.setup(dashboard.opts)
 
-vim.cmd([[ autocmd FileType alpha setlocal nofoldenable ]])
+vim.api.nvim_create_augroup("alpha_tabline", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = "alpha_tabline",
+  pattern = "alpha",
+  command = "set showtabline=0 laststatus=0 noruler",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = "alpha_tabline",
+  pattern = "alpha",
+  callback = function()
+    vim.api.nvim_create_autocmd("BufUnload", {
+      group = "alpha_tabline",
+      buffer = 0,
+      command = "set showtabline=2 ruler laststatus=3",
+    })
+  end,
+})
