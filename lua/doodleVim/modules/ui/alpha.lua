@@ -30,6 +30,7 @@ dashboard.section.header.val = logo
 
 dashboard.section.buttons.val = {
 	dashboard.button("SPC f h", "  Recent Projects"),
+	dashboard.button("SPC f o", "  Recent File"),
 	dashboard.button("SPC f f", "  Find File"),
 	dashboard.button("SPC f b", "  File Browser"),
 	dashboard.button("SPC p u", "  Update Plugins"),
