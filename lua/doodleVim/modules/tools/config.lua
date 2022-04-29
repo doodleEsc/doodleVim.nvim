@@ -4,7 +4,7 @@ function config.telescope()
   require('doodleVim.utils.defer').load_immediately({
     'telescope-fzy-native.nvim',
     'telescope-file-browser.nvim',
-	'nvim-neoclip.lua',
+    'nvim-neoclip.lua',
   })
 
   local actions = require "telescope.actions"
@@ -75,9 +75,9 @@ function config.telescope()
           ["<C-f>"]     = actions.results_scrolling_down,
 
           ["<Tab>"]     = actions_layout.toggle_preview,
-		  ["<C-Space>"] = actions.which_key,
+          ["<C-Space>"] = actions.which_key,
           ["<C-c>"]     = actions.close,
-		  --
+          --
           -- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
           -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
           -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
@@ -103,9 +103,9 @@ function config.telescope()
           ["<C-f>"]     = actions.results_scrolling_down,
 
           ["<Tab>"]     = actions_layout.toggle_preview,
-		  ["<C-Space>"] = actions.which_key,
+          ["<C-Space>"] = actions.which_key,
           ["<C-c>"]     = actions.close,
-		  -- ["<C-Space>"] = actions.which_key,
+          -- ["<C-Space>"] = actions.which_key,
           -- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
           -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
           -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
@@ -349,7 +349,32 @@ function config.project()
     --    "change_working_directory"  : just change the directory
     -- Note: All will change the directory regardless
     telescope_on_project_selected = function(path, open)
-      require("auto-session").RestoreSession()
+      local Lib = require "auto-session-library"
+      local AutoSession = require "auto-session"
+      local sessions_dir = AutoSession.get_root_dir()
+      local session_name = Lib.escaped_session_name_from_cwd()
+      local branch_name = ""
+      if AutoSession.conf.auto_session_use_git_branch then
+        local out = vim.fn.systemlist('git rev-parse --abbrev-ref HEAD')
+        if vim.v.shell_error ~= 0 then
+            vim.api.nvim_err_writeln(string.format("git failed with: %s", table.concat(out, "\n")))
+        end
+        branch_name = out[1]
+      end
+
+      branch_name = Lib.escape_branch_name(branch_name ~= "" and "_" .. branch_name or "")
+      session_name = string.format("%s%s", session_name, branch_name)
+
+      local session_file = string.format(sessions_dir .. "%s.vim", session_name)
+
+      if Lib.is_readable(session_file) then
+        vim.cmd[[silent! lua require('auto-session').RestoreSession()]]
+        vim.notify("Current Session Loaded")
+      else
+        vim.cmd[[:ene]]
+        require('doodleVim.extend.tree').toggle()
+        vim.notify("No Session Found, Open In Current Dir", "warn")
+      end
     end
   }
 end

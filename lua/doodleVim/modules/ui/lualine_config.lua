@@ -33,7 +33,13 @@ local conditions = {
 -- Config
 local config = {
   options = {
-    disabled_filetypes = {'Outline', 'NvimTree', 'packer'},
+    disabled_filetypes = {
+		'alpha',
+		'Outline',
+		'NvimTree',
+		'packer',
+		'startuptime',
+	},
     -- Disable sections and component separators
     component_separators = '',
     section_separators = '',
