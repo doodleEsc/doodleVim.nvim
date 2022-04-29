@@ -99,7 +99,7 @@ function config.barbar()
     animation = true,
 
     -- Enable/disable auto-hiding the tab bar when there is a single buffer
-    auto_hide = false,
+    auto_hide = true,
 
     -- Enable/disable current/total tabpages indicator (top right corner)
     tabpages = true,
@@ -114,7 +114,8 @@ function config.barbar()
 
     -- Excludes buffers from the tabline
     exclude_ft = {
-        'dap-repl'
+		'alpha',
+        'dap-repl',
     },
     exclude_name = {},
 

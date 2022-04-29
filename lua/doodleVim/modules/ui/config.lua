@@ -88,4 +88,8 @@ function config.gitsigns()
   }
 end
 
+function config.alpha()
+	require("doodleVim.modules.ui.alpha")
+end
+
 return config

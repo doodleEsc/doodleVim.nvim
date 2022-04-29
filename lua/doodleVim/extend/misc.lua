@@ -25,6 +25,7 @@ misc.safe_save = function()
   require('doodleVim.utils.defer').load_immediately('auto-session')
   vim.cmd[[write]]
   require("auto-session").SaveSession()
+  vim.notify("Current Session Saved")
 end
 
 misc.gotests = function(type)

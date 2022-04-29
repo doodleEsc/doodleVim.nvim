@@ -44,4 +44,11 @@ ui['MunifTanjim/nui.nvim'] = {
   after = "nvim-lspconfig",
 }
 
+ui['goolord/alpha-nvim'] = {
+  -- config = function ()
+  --   require'alpha'.setup(require'alpha.themes.dashboard'.config)
+  -- end
+  config = conf.alpha
+}
+
 return ui

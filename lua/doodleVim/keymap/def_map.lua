@@ -1,6 +1,5 @@
 local bind = require('doodleVim.keymap.bind')
 local map_cr = bind.map_cr
--- local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 
 
@@ -12,8 +11,8 @@ def_map.normal = {
   ["<C-l>"] = bind.convert_wk_format(map_cmd('<C-w>l'):with_noremap():with_label("Switch To Right Window")),
   ["<C-j>"] = bind.convert_wk_format(map_cmd('<C-w>j'):with_noremap():with_label("Switch To Down Window")),
   ["<C-k>"] = bind.convert_wk_format(map_cmd('<C-w>k'):with_noremap():with_label("Switch To Up Window")),
-  ["<C-q>"] = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.misc").safe_exit()'):with_noremap():with_label("Save Session And Safe Exit")),
-  ["<C-s>"] = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.misc").safe_save()'):with_noremap():with_silent():with_label("Save Session")),
+  ["<C-q>"] = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.misc").safe_exit()'):with_noremap():with_silent():with_label("Save Session And Safe Exit")),
+  ["<C-s>"] = bind.convert_wk_format(map_cr('silent! lua require("doodleVim.extend.misc").safe_save()'):with_noremap():with_silent():with_label("Save Session")),
   ["<C-d>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.scroll').scroll_down()"):with_noremap():with_silent():with_label("Smooth Scroll Down")),
   ["<C-u>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.scroll').scroll_up()"):with_noremap():with_silent():with_label("Smooth Scroll Up")),
   ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy")),
@@ -48,6 +47,8 @@ def_map.command = {
 def_map.visual = {
   ["<C-d>"] = bind.convert_wk_format(map_cmd("<cmd>lua require('doodleVim.extend.scroll').scroll_down()<CR>"):with_noremap():with_silent():with_label("Smooth Scroll Down"):with_mode("x")),
   ["<C-u>"] = bind.convert_wk_format(map_cmd("<cmd>lua require('doodleVim.extend.scroll').scroll_up()<CR>"):with_noremap():with_silent():with_label("Smooth Scroll Up"):with_mode("x")),
+  [">"] = bind.convert_wk_format(map_cmd(">gv"):with_noremap():with_label("Indent Right"):with_mode("x")),
+  ["<"] = bind.convert_wk_format(map_cmd("<gv"):with_noremap():with_label("Indent Left"):with_mode("x")),
   ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"):with_mode("x")),
   ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Cut Without Copy"):with_mode("x")),
   ["d"] = bind.convert_wk_format(map_cmd('""d'):with_noremap():with_label("Delete Without Copy"):with_mode("x")),
