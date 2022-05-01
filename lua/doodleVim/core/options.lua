@@ -83,7 +83,8 @@ local function load_options()
     listchars      = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←";
     pumblend       = 0;
     winblend       = 0;
-    fillchars      = "eob: "
+    fillchars      = "eob: ";
+    cursorline     = true;
   }
 
   local bw_local  = {
@@ -91,7 +92,7 @@ local function load_options()
     synmaxcol      = 2500;
     formatoptions  = "1jcroql";
     textwidth      = 80;
-    expandtab      = false;
+    expandtab      = true;
     autoindent     = true;
     tabstop        = 4;
     shiftwidth     = 4;
@@ -99,7 +100,7 @@ local function load_options()
     breakindentopt = "shift:2,min:20";
     wrap           = true;
     linebreak      = true;
-    colorcolumn    = "80";
+    -- colorcolumn    = "80";
     foldenable     = true;
     signcolumn     = "yes";
     conceallevel   = 0;

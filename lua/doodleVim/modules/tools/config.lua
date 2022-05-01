@@ -200,10 +200,6 @@ function config.nvim_tree()
       update_cwd = true,
       ignore_list = {},
     },
-    -- update_to_buf_dir   = {
-    --   enable = true,
-    --   auto_open = true,
-    -- },
     diagnostics = {
       enable = true,
       show_on_dirs = true,
@@ -247,6 +243,8 @@ function config.nvim_tree()
       args = {}
     },
   }
+
+  require "nvim-tree.events".on_file_created(function(file) vim.cmd("edit " .. file.fname) end)
 end
 
 function config.symbols_outline()

@@ -20,20 +20,22 @@ function autocmd.load_autocmds()
     },
     wins = {
       -- Highlight current line only on focused window
-      {"WinEnter,BufEnter,InsertLeave", "*", [[if ! &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal cursorline | endif]]};
-      {"WinLeave,BufLeave,InsertEnter", "*", [[if &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal nocursorline | endif]]};
+      -- {"WinEnter,BufEnter,InsertLeave", "*", [[if ! &cursorline && &filetype =~# '^alpha' && ! &pvw | setlocal cursorline | endif]]};
+      -- {"WinLeave,BufLeave,InsertEnter", "*", [[if &cursorline && &filetype !~# '^\(alpha\|clap_\)' && ! &pvw | setlocal nocursorline | endif]]};
       -- Equalize window dimensions when resizing vim window
       {"VimResized", "*", [[tabdo wincmd =]]};
       -- Force write shada on leaving nvim
-      {"VimLeave", "*", [[if has('nvim') | wshada! | else | wviminfo! | endif]]};
+      -- {"VimLeave", "*", [[if has('nvim') | wshada! | else | wviminfo! | endif]]};
       -- Check if file changed when its window is focus, more eager than 'autoread'
-      {"FocusGained", "* checktime"};
+      -- {"FocusGained", "* checktime"};
     },
 
     ft = {
       {"BufNewFile,BufRead","*.toml"," setf toml"},
       {"BufReadPost,BufNewFile","*.sol"," setf solidity"},
       {"FileType", "Outline", " setlocal signcolumn=no"},
+      -- {"FileType", "alpha", " setlocal cursorline"},
+      {"FileType", "python", " setlocal colorcolumn=80"}
     },
 
     yank = {
