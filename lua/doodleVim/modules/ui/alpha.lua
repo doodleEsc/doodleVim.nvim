@@ -13,29 +13,30 @@ local logo = {
 }
 
 local function footer()
-	local author = "שּ " .. "cinuor" .. " - "
-	local total_plugins = " " .. #vim.tbl_keys(packer_plugins) .. " plugins" .. " - "
-	local version = vim.version()
-	local nvim_version_info = " v" .. version.major .. "." .. version.minor .. "." .. version.patch
+    local author = "שּ " .. "cinuor" .. "  -  "
+    local total_plugins = " " .. #vim.tbl_keys(packer_plugins) .. " plugins" .. "  -  "
+    local version = vim.version()
+    local nvim_version_info = " v" .. version.major .. "." .. version.minor .. "." .. version.patch
 
-	return author .. total_plugins  .. nvim_version_info
+    return author .. total_plugins  .. nvim_version_info
 end
 
 dashboard.section.header.val = logo
 
 dashboard.section.buttons.val = {
-	dashboard.button("SPC f h", "  Recent Projects"),
-	dashboard.button("SPC f o", "  Recent File"),
-	dashboard.button("SPC f f", "  Find File"),
-	dashboard.button("SPC f b", "  File Browser"),
-	dashboard.button("SPC p u", "  Update Plugins"),
-	dashboard.button("e"      , "  New file", "<cmd>ene <CR>"),
+    dashboard.button("SPC f h", "  Recent Projects"),
+    dashboard.button("SPC f o", "  Recent File"),
+    dashboard.button("SPC f f", "  Find File"),
+    dashboard.button("SPC f b", "  File Browser"),
+    dashboard.button("SPC p u", "  Update Plugins"),
+    dashboard.button("e"      , "  New file", "<cmd>ene <CR>"),
     dashboard.button("s"      , "  Configuration", "<cmd>e $MYVIMRC<CR>"),
-	dashboard.button("q"      , "  Quit", "<cmd>qa<cr>"),
+    dashboard.button("q"      , "  Quit", "<cmd>qa<cr>"),
 }
 
 dashboard.section.footer.val = footer()
 dashboard.section.footer.opts.hl = "Constant"
+
 
 dashboard.opts = {
     layout = {

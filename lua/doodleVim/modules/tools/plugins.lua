@@ -67,7 +67,9 @@ tools['towolf/vim-helm'] = {
   ft='helm'
 }
 
-tools['nvim-lua/plenary.nvim'] = {}
+tools['nvim-lua/plenary.nvim'] = {
+  opt = true
+}
 
 tools['kyazdani42/nvim-web-devicons'] = {}
 

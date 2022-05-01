@@ -70,7 +70,7 @@ end
 
 function config.gitsigns()
   require('gitsigns').setup{
-    keymaps = {},
+    -- keymaps = {},
     watch_gitdir = {
       interval = 2000,
       follow_files = true
@@ -79,12 +79,21 @@ function config.gitsigns()
     current_line_blame_opts = {
       virt_text = true,
       virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-      delay = 1000,
+      delay = 200,
       ignore_whitespace = false,
     },
-    current_line_blame_formatter_opts = {
-      relative_time = false
-    },
+    preview_config = {
+      -- Options passed to nvim_open_win
+      border = 'single',
+      style = 'minimal',
+      relative = 'cursor',
+      row = 0,
+      col = 1
+  },
+    current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+    -- current_line_blame_formatter_opts = {
+    --   relative_time = false
+    -- },
   }
 end
 
