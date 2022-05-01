@@ -28,17 +28,21 @@ function autocmd.load_autocmds()
       {"VimLeave", "*", [[if has('nvim') | wshada! | else | wviminfo! | endif]]};
       -- Check if file changed when its window is focus, more eager than 'autoread'
       {"FocusGained", "* checktime"};
-    };
+    },
 
     ft = {
       {"BufNewFile,BufRead","*.toml"," setf toml"},
       {"BufReadPost,BufNewFile","*.sol"," setf solidity"},
       {"FileType", "Outline", " setlocal signcolumn=no"},
-    };
+    },
 
     yank = {
       {"TextYankPost", [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]]};
-    };
+    },
+
+    action = {
+      {"CursorHold,CursorHoldI", "*", "lua require'nvim-lightbulb'.update_lightbulb()"};
+	},
   }
 
   autocmd.nvim_create_augroups(definitions)

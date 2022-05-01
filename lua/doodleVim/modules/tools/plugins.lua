@@ -12,7 +12,13 @@ tools['nvim-telescope/telescope.nvim'] = {
   requires = {
     {'nvim-telescope/telescope-fzy-native.nvim', opt = true},
     {'nvim-telescope/telescope-file-browser.nvim', opt = true},
+	{'nvim-telescope/telescope-ui-select.nvim', opt = true}
   }
+}
+
+tools['kosayoda/nvim-lightbulb'] = {
+  after = 'telescope.nvim',
+  config = conf.lightbulb
 }
 
 tools['kyazdani42/nvim-tree.lua'] = {
