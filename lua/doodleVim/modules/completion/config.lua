@@ -210,11 +210,15 @@ function config.nvim_cmp()
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
+    mapping = cmp.mapping.preset.cmdline({
+      ['<Down>'] = {
+        c = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
+      },
+    }),
     sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
       { name = 'cmdline' }
+    }, {
+      { name = 'path' }
     })
   })
 end
