@@ -4,7 +4,9 @@ local config = {}
 function config.nvim_lsp_installer()
 
   local servers = { 'gopls', 'pyright', 'sumneko_lua' }
-  require("nvim-lsp-installer").setup{}
+  require("nvim-lsp-installer").setup{
+    automatic_installation = true,
+  }
 
   require('doodleVim.utils.defer').load_immediately('cmp-nvim-lsp')
   local icons = require("doodleVim.utils.icons")
@@ -99,16 +101,14 @@ function config.nvim_cmp()
     sources =  cmp.config.sources({
       { name = 'luasnip', priority = 100 },
       { name = 'nvim_lsp', priority = 99 },
-      { name = 'cmp_tabnine', priority = 98 },
-      { name = "copilot", priority = 97},
-
-      { name = 'buffer', priority = 50 },
-      { name = 'path', priority = 49 },
+      { name = 'cmp_tabnine'},
+      { name = "copilot"},
+      { name = 'buffer'},
+      { name = 'path'},
       {
         name = 'look',
         keyword_length = 2,
         option = { convert_case = true, loud = true },
-		priority = 48
       },
     }),
     mapping = cmp.mapping.preset.insert({
@@ -210,11 +210,15 @@ function config.nvim_cmp()
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
+    mapping = cmp.mapping.preset.cmdline({
+      ['<Down>'] = {
+        c = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
+      },
+    }),
     sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
       { name = 'cmdline' }
+    }, {
+      { name = 'path' }
     })
   })
 end

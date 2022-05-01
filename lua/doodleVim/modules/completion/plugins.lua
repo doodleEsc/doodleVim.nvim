@@ -69,10 +69,11 @@ completion['danymat/neogen'] = {
   config = conf.neogen
 }
 
-completion['CosmicNvim/cosmic-ui'] = {
-  after = {'nvim-lspconfig', 'nui.nvim'},
-  config = conf.cosmicui
-}
+-- completion['CosmicNvim/cosmic-ui'] = {
+--   after = {'nvim-lspconfig', 'nui.nvim'},
+--   config = conf.cosmicui
+-- }
+
 
 completion['github/copilot.vim'] = {
   opt = true

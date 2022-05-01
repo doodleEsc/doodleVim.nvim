@@ -33,7 +33,7 @@ plug_map.normal = {
     r = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.lsp').lsp_references()"):with_noremap():with_silent():with_label("Go To Reference")),
     h = bind.convert_wk_format(map_cr("lua vim.lsp.buf.hover()"):with_noremap():with_silent():with_label("Hover Documentation")),
     f = bind.convert_wk_format(map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Code Formatting")),
-    a = bind.convert_wk_format(map_cr("lua require('cosmic-ui').code_actions()"):with_noremap():with_silent():with_label("Code Action")),
+    a = bind.convert_wk_format(map_cr("lua vim.lsp.buf.code_action()"):with_noremap():with_silent():with_label("Code Action")),
     -- s = bind.convert_wk_format(map_cr("lua require('lsp_signature').signature()"):with_noremap():with_silent():with_label("Function Signature")),
     n = bind.convert_wk_format(map_cr("lua require('cosmic-ui').rename()"):with_noremap():with_silent():with_label("Rename"))
   },
@@ -136,7 +136,7 @@ plug_map.visual = {
   ["g"] = {
     name = "Lsp Function",
     f = bind.convert_wk_format(map_cu("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Selected Code Formatting"):with_mode("v")),
-    a = bind.convert_wk_format(map_cu("lua require('cosmic-ui').range_code_actions()"):with_noremap():with_silent():with_label("Range Code Action"):with_mode("v")),
+    a = bind.convert_wk_format(map_cu("lua vim.lsp.buf.range_code_action()"):with_noremap():with_silent():with_label("Range Code Action"):with_mode("v")),
   },
 
   ["<leader>m"] = {
