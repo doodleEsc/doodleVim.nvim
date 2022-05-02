@@ -27,8 +27,8 @@ local function load_options()
     clipboard      = "unnamedplus";
     wildignorecase = true;
     wildignore     = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**";
-    backup = false;
-    writebackup = false;
+    backup         = false;
+    writebackup    = false;
     directory      = global.cache_dir .. "swag/";
     undodir        = global.cache_dir .. "undo/";
     viewdir        = global.cache_dir .. "view/";
@@ -65,9 +65,11 @@ local function load_options()
     scrolloff      = 2;
     sidescrolloff  = 5;
     foldlevelstart = 99;
+    foldmethod     = "expr";
+    foldexpr       = "nvim_treesitter#foldexpr()";
     ruler          = false;
     list           = true;
-    --showtabline    = 2;
+    --showtabline  = 2;
     winwidth       = 30;
     winminwidth    = 15;
     pumheight      = 15;
@@ -84,7 +86,8 @@ local function load_options()
     pumblend       = 0;
     winblend       = 0;
     fillchars      = "eob: ";
-    cursorline     = true;
+    lazyredraw     = true;
+    synmaxcol      = 200;
   }
 
   local bw_local  = {

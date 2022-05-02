@@ -6,9 +6,6 @@ end
 
 function config.treesitter()
   require('doodleVim.utils.defer').load_immediately('nvim-treesitter-textobjects')
-
-  vim.api.nvim_command('set foldmethod=expr')
-  vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
   require('nvim-treesitter.configs').setup {
     ensure_installed = {
       "bash",
@@ -91,14 +88,11 @@ function config.gitsigns()
       col = 1
   },
     current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-    -- current_line_blame_formatter_opts = {
-    --   relative_time = false
-    -- },
   }
 end
 
 function config.alpha()
-	require("doodleVim.modules.ui.alpha")
+  require("doodleVim.modules.ui.alpha")
 end
 
 return config

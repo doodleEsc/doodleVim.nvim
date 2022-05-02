@@ -77,11 +77,8 @@ tools['kyazdani42/nvim-web-devicons'] = {}
 
 tools['cinuor/gotests.nvim'] = {
   opt = true,
-  ft = 'go',
   setup = function()
-    if vim.bo.filetype == 'go' then
-      require("doodleVim.utils.defer").packer_defer_load("gotests.nvim", 1000)
-    end
+    require("doodleVim.utils.defer").packer_defer_load("gotests.nvim", 1000)
   end,
   config = conf.gotests
 }
