@@ -34,8 +34,7 @@ plug_map.normal = {
     h = bind.convert_wk_format(map_cr("lua vim.lsp.buf.hover()"):with_noremap():with_silent():with_label("Hover Documentation")),
     f = bind.convert_wk_format(map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Code Formatting")),
     a = bind.convert_wk_format(map_cr("lua vim.lsp.buf.code_action()"):with_noremap():with_silent():with_label("Code Action")),
-    -- s = bind.convert_wk_format(map_cr("lua require('lsp_signature').signature()"):with_noremap():with_silent():with_label("Function Signature")),
-    n = bind.convert_wk_format(map_cr("lua require('cosmic-ui').rename()"):with_noremap():with_silent():with_label("Rename"))
+    n = bind.convert_wk_format(map_cr("lua require('rename').rename()"):with_noremap():with_silent():with_label("Rename"))
   },
 
   ["<C-n>"] = bind.convert_wk_format(map_cr("lua vim.diagnostic.goto_next()"):with_noremap():with_silent():with_label("Go To Next Diagnostic")),
@@ -137,6 +136,7 @@ plug_map.visual = {
     name = "Lsp Function",
     f = bind.convert_wk_format(map_cu("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Selected Code Formatting"):with_mode("v")),
     a = bind.convert_wk_format(map_cu("lua vim.lsp.buf.range_code_action()"):with_noremap():with_silent():with_label("Range Code Action"):with_mode("v")),
+    n = bind.convert_wk_format(map_cr("lua require('rename').rename()"):with_noremap():with_silent():with_label("Rename"):with_mode("v"))
   },
 
   ["<leader>m"] = {
@@ -168,7 +168,7 @@ plug_map.visual = {
 }
 
 plug_map.insert = {
-  ["<C-Space>"] = bind.convert_wk_format(map_cmd("<Esc>:WhichKey '' i<CR>"):with_noremap():with_label("Show Keymaps"):with_mode("i"))
+  ["<C-Space>"] = bind.convert_wk_format(map_cmd("<Esc>:WhichKey '' i<CR>"):with_noremap():with_label("Show Keymaps"):with_mode("i")),
 }
 
 return plug_map
