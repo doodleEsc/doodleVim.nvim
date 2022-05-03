@@ -69,10 +69,10 @@ completion['danymat/neogen'] = {
   config = conf.neogen
 }
 
--- completion['CosmicNvim/cosmic-ui'] = {
---   after = {'nvim-lspconfig', 'nui.nvim'},
---   config = conf.cosmicui
--- }
+completion['cinuor/rename.nvim'] = {
+  after = {'nvim-lspconfig', 'nui.nvim'},
+  config = conf.rename
+}
 
 
 completion['github/copilot.vim'] = {
