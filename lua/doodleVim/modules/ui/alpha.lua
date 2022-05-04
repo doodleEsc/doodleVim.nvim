@@ -24,14 +24,15 @@ end
 dashboard.section.header.val = logo
 
 dashboard.section.buttons.val = {
-    dashboard.button("SPC f h", "  Recent Projects"),
+    dashboard.button("o"      , "ﱮ  Open CWD", "<cmd>ene|OpenTree<CR>"),
+    dashboard.button("e"      , "ﱐ  New file", "<cmd>ene<CR>"),
+    dashboard.button("s"      , "  Configuration", "<cmd>e $MYVIMRC|OpenTree<CR>"),
+    dashboard.button("q"      , "  Quit", "<cmd>qa<cr>"),
+    dashboard.button("SPC f h", "  Recent Projects"),
     dashboard.button("SPC f o", "  Recent File"),
     dashboard.button("SPC f f", "  Find File"),
     dashboard.button("SPC f b", "  File Browser"),
     dashboard.button("SPC p u", "  Update Plugins"),
-    dashboard.button("e"      , "  New file", "<cmd>ene <CR>"),
-    dashboard.button("s"      , "  Configuration", "<cmd>e $MYVIMRC<CR>"),
-    dashboard.button("q"      , "  Quit", "<cmd>qa<cr>"),
 }
 
 dashboard.section.footer.val = footer()

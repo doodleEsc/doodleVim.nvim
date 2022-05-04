@@ -31,10 +31,8 @@ function autocmd.load_autocmds()
     },
 
     ft = {
-      {"BufNewFile,BufRead","*.toml"," setf toml"},
       {"BufReadPost,BufNewFile","*.sol"," setf solidity"},
       {"FileType", "Outline", " setlocal signcolumn=no"},
-      -- {"FileType", "alpha", " setlocal cursorline"},
       {"FileType", "python", " setlocal colorcolumn=80"}
     },
 

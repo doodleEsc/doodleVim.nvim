@@ -62,7 +62,6 @@ local set_colorscheme = function()
 end
 
 local function load_nvim_config()
-  createdir()
   disable_distribution_plugins()
   set_leader_map()
 
@@ -73,6 +72,7 @@ local function load_nvim_config()
   require('doodleVim.core.command')
   set_colorscheme()
   defer.load(50)
+  createdir()
 end
 
 load_nvim_config()
