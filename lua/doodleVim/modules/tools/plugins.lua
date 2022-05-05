@@ -16,9 +16,14 @@ tools['nvim-telescope/telescope.nvim'] = {
   }
 }
 
-tools['kosayoda/nvim-lightbulb'] = {
-  after = 'telescope.nvim',
-  config = conf.lightbulb
+-- tools['kosayoda/nvim-lightbulb'] = {
+--   after = 'telescope.nvim',
+--   config = conf.lightbulb
+-- }
+
+tools['cinuor/lightbulb.nvim'] = {
+    after = 'telescope.nvim',
+    config = conf.lightbulb
 }
 
 tools['kyazdani42/nvim-tree.lua'] = {
@@ -73,7 +78,7 @@ tools['nvim-lua/plenary.nvim'] = {
 
 tools['kyazdani42/nvim-web-devicons'] = {}
 
--- tools['bfredl/nvim-luadev'] = {}
+tools['bfredl/nvim-luadev'] = {}
 
 tools['cinuor/gotests.nvim'] = {
   opt = true,
