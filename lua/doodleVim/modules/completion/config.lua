@@ -5,7 +5,7 @@ function config.nvim_lsp_installer()
 
   local servers = { 'gopls', 'pyright', 'sumneko_lua' }
   require("nvim-lsp-installer").setup{
-    automatic_installation = true,
+    automatic_installation = false,
   }
 
   require('doodleVim.utils.defer').load_immediately('cmp-nvim-lsp')
