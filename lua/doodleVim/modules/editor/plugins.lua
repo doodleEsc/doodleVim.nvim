@@ -9,7 +9,8 @@ editor['numToStr/Comment.nvim'] = {
 
 editor['phaazon/hop.nvim'] = {
   opt = true,
-  setup = function() require("doodleVim.utils.defer").packer_defer_load("hop.nvim", 500) end,
+  -- setup = function() require("doodleVim.utils.defer").packer_defer_load("hop.nvim", 500) end,
+  setup = function() require("doodleVim.utils.defer").register("hop", "hop.nvim") end,
   config = conf.hop
 }
 
@@ -25,7 +26,7 @@ editor['junegunn/vim-easy-align'] = {
 
 editor['karb94/neoscroll.nvim'] = {
   opt = true,
-  setup = function() require("doodleVim.utils.defer").add("neoscroll.nvim", 100) end,
+  setup = function() require("doodleVim.utils.defer").register("neoscroll", "neoscroll.nvim") end,
   config = conf.neoscroll,
 }
 
@@ -45,7 +46,8 @@ editor['romgrk/barbar.nvim'] = {
   opt = true,
   setup = function()
     require("doodleVim.modules.editor.config").barbar()
-    require("doodleVim.utils.defer").add("barbar.nvim", 100)
+    require("doodleVim.utils.defer").register("bufferline", "barbar.nvim")
+    -- require("doodleVim.utils.defer").add("barbar.nvim", 100)
   end,
   requires = {'kyazdani42/nvim-web-devicons'},
 }

@@ -1,12 +1,8 @@
-local utils = require "telescope.utils"
-local entry_display = require "telescope.pickers.entry_display"
-local builtin = require "telescope.builtin"
-
 local lsp = {}
 
 local function file_and_details_entry(opts)
   opts = opts or {}
-  local displayer = entry_display.create {
+  local displayer = ensure_require('telescope.pickers.entry_display').create {
     separator = "│ ",
     items = {
       { width = 8 },
@@ -16,7 +12,7 @@ local function file_and_details_entry(opts)
   }
 
   local make_display = function(entry)
-    local filename = utils.transform_path(opts, entry.filename)
+    local filename = ensure_require('telescope.utils').transform_path(opts, entry.filename)
     local line_info = { table.concat({ entry.lnum, entry.col }, ":"), "TelescopeResultsLineNr" }
     return displayer {
       line_info,
@@ -44,27 +40,23 @@ local function file_and_details_entry(opts)
 end
 
 function lsp.lsp_references(opts)
-  require('doodleVim.utils.defer').load_immediately('telescope.nvim')
   opts = opts or {}
-  builtin.lsp_references(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
+  ensure_require('telescope.builtin').lsp_references(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
 end
 
 function lsp.lsp_definitions(opts)
-  require('doodleVim.utils.defer').load_immediately('telescope.nvim')
   opts = opts or {}
-  builtin.lsp_definitions(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
+  ensure_require('telescope.builtin').lsp_definitions(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
 end
 
 function lsp.lsp_type_definition(opts)
-  require('doodleVim.utils.defer').load_immediately('telescope.nvim')
   opts = opts or {}
-  builtin.lsp_type_definition(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
+  ensure_require('telescope.builtin').lsp_type_definition(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
 end
 
 function lsp.lsp_implementations(opts)
-  require('doodleVim.utils.defer').load_immediately('telescope.nvim')
   opts = opts or {}
-  builtin.lsp_implementations(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
+  ensure_require('telescope.builtin').lsp_implementations(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
 end
 
 return lsp

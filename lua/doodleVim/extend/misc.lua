@@ -3,7 +3,7 @@ local utils = require("doodleVim.utils.utils")
 local misc = {}
 
 misc.safe_exit = function()
-  require('doodleVim.utils.defer').load_immediately({'vim-floaterm', 'nvim-tree.lua'})
+  require('doodleVim.utils.defer').load_immediately('vim-floaterm')
 
   -- close floaterm
   local floatermBufnr = vim.call("floaterm#buflist#gather")
@@ -12,7 +12,7 @@ misc.safe_exit = function()
   end
 
   -- close nvim-tree
-  local view = require'nvim-tree.view'
+  local view = ensure_require('nvim-tree.view')
   if view.is_visible() then
     require('doodleVim.extend.tree').toggle()
   end
@@ -24,22 +24,20 @@ end
 misc.safe_save = function()
   require('doodleVim.utils.defer').load_immediately('auto-session')
   vim.cmd[[write]]
-  require("auto-session").SaveSession()
+  ensure_require("auto-session").SaveSession()
   vim.notify("Current Session Saved")
 end
 
 misc.gotests = function(type)
-  require('doodleVim.utils.defer').load_immediately({'auto-session', 'nvim-tree.lua'})
-
   if type == "func" then
-    require'gotests'.fun_test()
+    ensure_require('gotests').fun_test()
   elseif type == "exported" then
-    require'gotests'.exported_test()
+    ensure_require('gotests').exported_test()
   elseif type == "all" then
-    require'gotests'.all_test()
+    ensure_require('gotests').all_test()
   end
 
-  require'nvim-tree.actions.reloaders'.reload_explorer()
+  ensure_require('nvim-tree.actions.reloaders').reload_explorer()
 end
 
 misc.wrapped_notify = function(m, l, o)
@@ -66,7 +64,7 @@ misc.toggle_rnu = function()
 end
 
 misc.reload = function()
-    utils.remove_cached_package("^doodleVim")
+  utils.remove_cached_package("^doodleVim")
   require("doodleVim.core")
   vim.notify("Configuration Reloaded")
 end

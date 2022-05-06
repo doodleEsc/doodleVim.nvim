@@ -41,7 +41,7 @@ function autocmd.load_autocmds()
     },
 
     action = {
-      {"CursorHold,CursorHoldI", "*", "lua require'lightbulb'.check()"};
+      -- {"CursorHold,CursorHoldI", "*", "lua require'lightbulb'.check()"};
 	},
   }
 

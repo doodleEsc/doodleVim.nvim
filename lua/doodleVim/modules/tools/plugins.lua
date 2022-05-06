@@ -7,7 +7,7 @@ tools['dstein64/vim-startuptime'] = {
 
 tools['nvim-telescope/telescope.nvim'] = {
   opt = true,
-  setup = function() require("doodleVim.utils.defer").add("telescope.nvim", 70) end,
+  setup = function() require("doodleVim.utils.defer").register("telescope", "telescope.nvim") end,
   config = conf.telescope,
   requires = {
     {'nvim-telescope/telescope-fzy-native.nvim', opt = true},
@@ -28,9 +28,12 @@ tools['cinuor/lightbulb.nvim'] = {
 
 tools['kyazdani42/nvim-tree.lua'] = {
   opt = true,
-  setup = conf.nvim_tree_setup,
-  config = conf.nvim_tree,
-  requires = 'kyazdani42/nvim-web-devicons'
+  setup = function()
+    require("doodleVim.modules.tools.config").nvim_tree_setup()
+    require("doodleVim.utils.defer").register("nvim-tree", "nvim-tree.lua")
+  end,
+  config = conf.nvim_tree
+  -- requires = 'kyazdani42/nvim-web-devicons'
 }
 
 tools['iamcco/markdown-preview.nvim'] = {
@@ -43,7 +46,7 @@ tools['simrat39/symbols-outline.nvim'] = {
   opt = true,
   setup = function()
     require("doodleVim.modules.tools.config").symbols_outline()
-    require("doodleVim.utils.defer").packer_defer_load("symbols-outline.nvim", 500)
+    require("doodleVim.utils.defer").register("symbols-outline", "symbols-outline.nvim")
   end
 }
 
@@ -78,26 +81,28 @@ tools['nvim-lua/plenary.nvim'] = {
 
 tools['kyazdani42/nvim-web-devicons'] = {}
 
-tools['bfredl/nvim-luadev'] = {}
+-- tools['bfredl/nvim-luadev'] = {}
 
 tools['cinuor/gotests.nvim'] = {
   opt = true,
   setup = function()
-    require("doodleVim.utils.defer").packer_defer_load("gotests.nvim", 1000)
+    require("doodleVim.utils.defer").register("gotests", "gotests.nvim")
   end,
   config = conf.gotests
 }
 
 tools["cinuor/project.nvim"] = {
   opt = true,
-  setup = function() require("doodleVim.utils.defer").add("project.nvim", 90) end,
+  setup = function()
+      require("doodleVim.utils.defer").add("project.nvim", 90)
+  end,
   config = conf.project
 }
 
 tools['rmagatti/auto-session'] = {
   opt = true,
   setup = function()
-    require("doodleVim.utils.defer").add("auto-session", 70)
+    require("doodleVim.utils.defer").register("auto-session", "auto-session")
   end,
   config = conf.autosession
 }
@@ -114,7 +119,9 @@ tools['nathom/filetype.nvim'] = {
 
 tools['rcarriga/nvim-notify'] = {
   opt = true,
-  setup = function() require("doodleVim.utils.defer").packer_defer_load("nvim-notify", 100) end,
+  setup = function()
+    require("doodleVim.utils.defer").packer_defer_load("nvim-notify", 100)
+  end,
   config = conf.notify
 }
 

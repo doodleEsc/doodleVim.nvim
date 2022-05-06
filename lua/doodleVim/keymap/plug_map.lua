@@ -17,7 +17,7 @@ plug_map.normal = {
   ["t"] = {
     name = "Tree,Gotests,Translate",
     t = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').toggle()"):with_noremap():with_silent():with_label("Enhanced NvimTree Toggle")),
-    w = bind.convert_wk_format(map_cr("lua require'nvim-tree.actions.reloaders'.reload_explorer()"):with_noremap():with_silent():with_label("NvimTree Refresh")),
+    w = bind.convert_wk_format(map_cr("lua ensure_require'nvim-tree.actions.reloaders'.reload_explorer()"):with_noremap():with_silent():with_label("NvimTree Refresh")),
     u = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').gotests('func')"):with_noremap():with_silent():with_label("Generate Function Test")),
     a = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').gotests('all')"):with_noremap():with_silent():with_label("Generate All Function Test")),
     e = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').gotests('exported')"):with_noremap():with_silent():with_label("Generate Exported Function Test")),
@@ -42,7 +42,7 @@ plug_map.normal = {
 
   ["<leader>v"] = {
     name = "Symbols-Outline",
-    v = bind.convert_wk_format(map_cu('lua require"symbols-outline".toggle_outline()'):with_noremap():with_silent():with_label("Symbols And Function Preview"))
+    v = bind.convert_wk_format(map_cu('lua ensure_require"symbols-outline".toggle_outline()'):with_noremap():with_silent():with_label("Symbols And Function Preview"))
   },
 
   ["<leader>p"] = {
@@ -92,8 +92,8 @@ plug_map.normal = {
 
   ["<leader>s"] = {
     name = "Search Word",
-    w = bind.convert_wk_format(map_cr("lua require'hop'.hint_words()"):with_noremap():with_silent():with_label("Search Word")),
-    s = bind.convert_wk_format(map_cu("lua require'hop'.hint_char2()"):with_noremap():with_silent():with_label("Search By First 2 Char"))
+    w = bind.convert_wk_format(map_cr("lua ensure_require'hop'.hint_words()"):with_noremap():with_silent():with_label("Search Word")),
+    s = bind.convert_wk_format(map_cu("lua ensure_require'hop'.hint_char2()"):with_noremap():with_silent():with_label("Search By First 2 Char"))
   },
 
   ["<leader>n"] = {
@@ -108,14 +108,14 @@ plug_map.normal = {
 
   ["<F7>"] = bind.convert_wk_format(map_cu("DapContinue"):with_noremap():with_silent():with_label("Start Or Continue Debug")),
   ["<S-F7>"] = bind.convert_wk_format(map_cu("DapTerminate"):with_noremap():with_silent():with_label("Stop Debugging, Shortcut: Shift + F7")),
-  ["<F8>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.dap').debug_pause()"):with_noremap():with_silent():with_label("Pause Debug")),
-  ["<S-F8>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.dap').debug_restart()"):with_noremap():with_silent():with_label("Restart Debug")),
+  ["<F8>"] = bind.convert_wk_format(map_cr("lua ensure_require('dap').pause()"):with_noremap():with_silent():with_label("Pause Debug")),
+  ["<S-F8>"] = bind.convert_wk_format(map_cr("lua ensure_require('dap').restart()"):with_noremap():with_silent():with_label("Restart Debug")),
   ["<F9>"] = bind.convert_wk_format(map_cu("DapToggleBreakpoint"):with_noremap():with_silent():with_label("Toggle Breakpoint")),
   ["<F10>"] = bind.convert_wk_format(map_cu("DapStepOver"):with_noremap():with_silent():with_label("Step Over")),
   ["<F11>"] = bind.convert_wk_format(map_cu("DapStepInto"):with_noremap():with_silent():with_label("Step Into")),
   ["<S-F11>"] = bind.convert_wk_format(map_cu("DapStepOut"):with_noremap():with_silent():with_label("Step Out, Shortcut: Shift + F11")),
-  ["<F12>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.dap').debug_run_to_cursor()"):with_noremap():with_silent():with_label("Run To Cursor")),
-  ["<S-F12>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.dap').debug_run_last()"):with_noremap():with_silent():with_label("Run To Last, Shortcut: Shift + F12")),
+  ["<F12>"] = bind.convert_wk_format(map_cr("lua require('dap').run_to_cursor()"):with_noremap():with_silent():with_label("Run To Cursor")),
+  ["<S-F12>"] = bind.convert_wk_format(map_cr("lua ensure_require('dap').run_last()"):with_noremap():with_silent():with_label("Run To Last, Shortcut: Shift + F12")),
 
   ["<S-h>"] = bind.convert_wk_format(map_cu("BufferPrevious"):with_noremap():with_silent():with_label("Previous Buffer")),
   ["<A-h>"] = bind.convert_wk_format(map_cu("BufferMovePrevious"):with_noremap():with_silent():with_label("Re-order To Previous")),
