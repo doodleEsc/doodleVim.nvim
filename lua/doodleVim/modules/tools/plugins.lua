@@ -7,7 +7,10 @@ tools['dstein64/vim-startuptime'] = {
 
 tools['nvim-telescope/telescope.nvim'] = {
   opt = true,
-  setup = function() require("doodleVim.utils.defer").register("telescope", "telescope.nvim") end,
+  setup = function()
+      require("doodleVim.utils.defer").add("telescope.nvim", 70)
+      -- require("doodleVim.utils.defer").register("telescope", "telescope.nvim")
+  end,
   config = conf.telescope,
   requires = {
     {'nvim-telescope/telescope-fzy-native.nvim', opt = true},
