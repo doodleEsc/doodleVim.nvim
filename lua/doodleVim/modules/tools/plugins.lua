@@ -105,7 +105,7 @@ tools["cinuor/project.nvim"] = {
 tools['rmagatti/auto-session'] = {
   opt = true,
   setup = function()
-    require("doodleVim.utils.defer").register("auto-session", "auto-session")
+    require("doodleVim.utils.defer").add("auto-session", 100)
   end,
   config = conf.autosession
 }
