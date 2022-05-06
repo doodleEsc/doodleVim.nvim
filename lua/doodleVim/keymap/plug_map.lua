@@ -118,9 +118,9 @@ plug_map.normal = {
   ["<S-F12>"] = bind.convert_wk_format(map_cr("lua ensure_require('dap').run_last()"):with_noremap():with_silent():with_label("Run To Last, Shortcut: Shift + F12")),
 
   ["<S-h>"] = bind.convert_wk_format(map_cu("BufferPrevious"):with_noremap():with_silent():with_label("Previous Buffer")),
-  ["<A-h>"] = bind.convert_wk_format(map_cu("BufferMovePrevious"):with_noremap():with_silent():with_label("Re-order To Previous")),
+  ["<M-h>"] = bind.convert_wk_format(map_cu("BufferMovePrevious"):with_noremap():with_silent():with_label("Re-order To Previous")),
   ["<S-l>"] = bind.convert_wk_format(map_cu("BufferNext"):with_noremap():with_silent():with_label("Next Buffer")),
-  ["<A-l>"] = bind.convert_wk_format(map_cu("BufferMoveNext"):with_noremap():with_silent():with_label("Re-order To Next")),
+  ["<M-l>"] = bind.convert_wk_format(map_cu("BufferMoveNext"):with_noremap():with_silent():with_label("Re-order To Next")),
   ["<S-n>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').enhanced_buffer_close()"):with_noremap():with_silent():with_label("Close Current Buffer")),
   ["<S-b>"] = bind.convert_wk_format(map_cu("BufferCloseBuffersLeft"):with_noremap():with_silent():with_label("Close All Buffers Left")),
   ["<S-m>"] = bind.convert_wk_format(map_cu("BufferCloseBuffersRight"):with_noremap():with_silent():with_label("Close All Buffers Right")),
@@ -128,7 +128,10 @@ plug_map.normal = {
   ["<S-o>"] = bind.convert_wk_format(map_cu("BufferPick"):with_noremap():with_silent():with_label("Pick Buffer")),
   ["<S-s>"] = bind.convert_wk_format(map_cu("BufferOrderByDirectory"):with_noremap():with_silent():with_label("Sort Buffer")),
 
-  ["<C-Space>"] = bind.convert_wk_format(map_cr("WhichKey"):with_noremap():with_silent():with_label("Show Keymaps"))
+  ["<C-Space>"] = bind.convert_wk_format(map_cr("WhichKey"):with_noremap():with_silent():with_label("Show Keymaps")),
+
+  ["<M-n>"] = bind.convert_wk_format(map_cu("Gitsigns next_hunk"):with_noremap():with_silent():with_label("Next Hunk")),
+  ["<M-p>"] = bind.convert_wk_format(map_cu("Gitsigns prev_hunk"):with_noremap():with_silent():with_label("Previous Hunk")),
 }
 
 plug_map.visual = {
