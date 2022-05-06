@@ -1,30 +1,32 @@
-local handler = {}
+local M = {
+  defer_packages = {},
+  mod_plug_map = {},
+}
 
-local defer_packages = {}
 
-function handler.add(plugin, priority)
+function M.add(plugin, priority)
   local p = {
     priority = priority,
     plugin = plugin,
   }
-  table.insert(defer_packages, p)
+  table.insert(M.defer_packages, p)
 end
 
 local do_load = function()
   if not packer_plugins['plenary.nvim'].loaded then
     require("packer").loader('plenary.nvim')
   end
-  table.sort(defer_packages, function(a, b) return a.priority > b.priority end)
-  for _, item in pairs(defer_packages) do
+  table.sort(M.defer_packages, function(a, b) return a.priority > b.priority end)
+  for _, item in pairs(M.defer_packages) do
     require("packer").loader(item.plugin)
   end
 end
 
-function handler.load(delay)
+function M.load(delay)
   vim.defer_fn(do_load, delay)
 end
 
-function handler.packer_defer_load(plugin, timer)
+function M.packer_defer_load(plugin, timer)
   if plugin then
     timer = timer or 0
     vim.defer_fn(function()
@@ -33,7 +35,7 @@ function handler.packer_defer_load(plugin, timer)
   end
 end
 
-function handler.load_immediately(plugins)
+function M.load_immediately(plugins)
   if type(plugins) == "string" then
     if not packer_plugins[plugins].loaded then
       require("packer").loader(plugins)
@@ -47,4 +49,10 @@ function handler.load_immediately(plugins)
   end
 end
 
-return handler
+function M.register(module, plugin)
+  if not M.mod_plug_map[module] then
+      M.mod_plug_map[module] = plugin
+  end
+end
+
+return M

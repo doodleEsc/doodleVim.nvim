@@ -23,6 +23,31 @@ local createdir = function ()
   end
 end
 
+function _G.ensure_require(module)
+  local ok, packer = pcall(require, "packer")
+  if not ok then
+    return
+  end
+
+  local major_mod = module:match("^([a-z0-9_-]+)%.?")
+  if not defer.mod_plug_map[major_mod] then
+    -- no module and plugin registered
+    return
+  end
+
+  local plugin = defer.mod_plug_map[major_mod]
+  if not packer_plugins[plugin].loaded then
+    packer.loader(plugin)
+  end
+
+  local ok, module_loaded = pcall(require, module)
+  if not ok then
+    return
+  end
+
+  return module_loaded
+end
+
 local disable_distribution_plugins= function()
   vim.g.loaded_gzip              = 1
   vim.g.loaded_tar               = 1
