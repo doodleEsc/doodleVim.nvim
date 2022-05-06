@@ -41,7 +41,7 @@ function autocmd.load_autocmds()
     },
 
     action = {
-      {"CursorHold,CursorHoldI", "*", "lua require'nvim-lightbulb'.update_lightbulb()"};
+      {"CursorHold,CursorHoldI", "*", "lua require'lightbulb'.check()"};
 	},
   }
 

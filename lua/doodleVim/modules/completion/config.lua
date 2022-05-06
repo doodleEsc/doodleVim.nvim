@@ -9,37 +9,6 @@ function config.nvim_lsp_installer()
   }
 
   require('doodleVim.utils.defer').load_immediately('cmp-nvim-lsp')
-  local icons = require("doodleVim.utils.icons")
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-  vim.diagnostic.config({
-    underline = true,
-    signs = true,
-    update_in_insert = false,
-    severity_sort = true,
-    float = {
-      border = "rounded",
-      focusable = false,
-      header = { icons.diag.debug_sign .. ' Diagnostics:'},
-      source = 'always',
-    },
-    virtual_text = {
-      spacing = 4,
-      source = 'always',
-      severity = {
-      min = vim.diagnostic.severity.HINT,
-      },
-    },
-  })
-
-  local diag_icon = icons.diag
-  require("doodleVim.extend.diagnostics").setup({
-    error_sign = diag_icon.error_sign,
-    warn_sign = diag_icon.warn_sign,
-    hint_sign = diag_icon.hint_sign,
-    infor_sign = diag_icon.infor_sign,
-    debug_sign = diag_icon.debug_sign,
-    use_diagnostic_virtual_text = false,
-  })
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -67,6 +36,55 @@ function config.nvim_lsp_installer()
       capabilities = capabilities,
     }
   end
+
+  local icons = require("doodleVim.utils.icons")
+  -- add border to hover()
+  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+  vim.diagnostic.config({
+    underline = true,
+    signs = true,
+    update_in_insert = false,
+    severity_sort = true,
+    float = {
+      border = "rounded",
+      focusable = false,
+      header = { icons.diag.debug_sign .. ' Diagnostics:'},
+      source = 'always',
+    },
+    virtual_text = {
+      spacing = 4,
+      source = 'always',
+      severity = {
+      min = vim.diagnostic.severity.HINT,
+      },
+    },
+  })
+
+  -- config diagnostics sign
+  local diag_icon = icons.diag
+  require("doodleVim.extend.diagnostics").setup({
+    error_sign = diag_icon.error_sign,
+    warn_sign = diag_icon.warn_sign,
+    hint_sign = diag_icon.hint_sign,
+    infor_sign = diag_icon.infor_sign,
+    debug_sign = diag_icon.debug_sign,
+    use_diagnostic_virtual_text = false,
+  })
+
+  -- from null-ls to other lsp clients
+  -- @see https://github.com/jose-elias-alvarez/null-ls.nvim/issues/197#issuecomment-922792992
+  local default_exe_handler = vim.lsp.handlers['workspace/executeCommand']
+  vim.lsp.handlers['workspace/executeCommand'] = vim.lsp.with(function(err, result, ctx, config)
+    -- supress NULL_LS error msg
+    local prefix = 'NULL_LS'
+  
+    if err and ctx.params.command:sub(1, #prefix) == prefix then
+      return
+    end
+    return default_exe_handler(err, result, ctx, config)
+  end, { float = { border= "rounded"} })
+  
+
 end
 
 function config.nvim_cmp()
@@ -252,6 +270,7 @@ function config.null_ls()
     sources = {
       null_ls.builtins.formatting.prettier,
       null_ls.builtins.formatting.black,
+      null_ls.builtins.code_actions.gitsigns,
     },
     update_in_insert = false,
   })
