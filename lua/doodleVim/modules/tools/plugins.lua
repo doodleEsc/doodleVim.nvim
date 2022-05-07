@@ -9,7 +9,6 @@ tools['nvim-telescope/telescope.nvim'] = {
   opt = true,
   setup = function()
       require("doodleVim.utils.defer").add("telescope.nvim", 70)
-      -- require("doodleVim.utils.defer").register("telescope", "telescope.nvim")
   end,
   config = conf.telescope,
   requires = {
@@ -19,10 +18,21 @@ tools['nvim-telescope/telescope.nvim'] = {
   }
 }
 
--- tools['kosayoda/nvim-lightbulb'] = {
---   after = 'telescope.nvim',
---   config = conf.lightbulb
--- }
+tools["cinuor/project.nvim"] = {
+  opt = true,
+  setup = function()
+      require("doodleVim.utils.defer").add("project.nvim", 80)
+  end,
+  config = conf.project
+}
+
+tools['rmagatti/auto-session'] = {
+  opt = true,
+  setup = function()
+    require("doodleVim.utils.defer").add("auto-session", 90)
+  end,
+  config = conf.autosession
+}
 
 tools['cinuor/lightbulb.nvim'] = {
     after = 'telescope.nvim',
@@ -36,7 +46,6 @@ tools['kyazdani42/nvim-tree.lua'] = {
     require("doodleVim.utils.defer").register("nvim-tree", "nvim-tree.lua")
   end,
   config = conf.nvim_tree
-  -- requires = 'kyazdani42/nvim-web-devicons'
 }
 
 tools['iamcco/markdown-preview.nvim'] = {
@@ -70,12 +79,8 @@ tools['jbyuki/venn.nvim'] = {
   cmd = {'VBox', 'VFill'}
 }
 
-tools['TovarishFin/vim-solidity'] = {
-  ft = 'solidity'
-}
-
 tools['towolf/vim-helm'] = {
-  ft='helm'
+  ft='yaml'
 }
 
 tools['nvim-lua/plenary.nvim'] = {
@@ -94,21 +99,6 @@ tools['cinuor/gotests.nvim'] = {
   config = conf.gotests
 }
 
-tools["cinuor/project.nvim"] = {
-  opt = true,
-  setup = function()
-      require("doodleVim.utils.defer").add("project.nvim", 90)
-  end,
-  config = conf.project
-}
-
-tools['rmagatti/auto-session'] = {
-  opt = true,
-  setup = function()
-    require("doodleVim.utils.defer").add("auto-session", 100)
-  end,
-  config = conf.autosession
-}
 
 tools['cinuor/which-key.nvim'] = {
   opt = true,
@@ -128,9 +118,16 @@ tools['rcarriga/nvim-notify'] = {
   config = conf.notify
 }
 
+tools['AckslD/nvim-neoclip.lua'] = {
+  opt = true,
+  setup = function() require("doodleVim.utils.defer").add("nvim-neoclip.lua", 80) end,
+  config = conf.neoclip
+}
+
+
 tools['tami5/sqlite.lua'] = {
-	opt = true,
-	setup = function() require("doodleVim.utils.defer").add("sqlite.lua", 90) end,
+  opt = true,
+  setup = function() require("doodleVim.utils.defer").add("sqlite.lua", 90) end,
 }
 
 return tools
