@@ -29,7 +29,6 @@ local extend_config = function(opts)
   end
 end
 
-
 diag.setup = function(opts)
   extend_config(opts)
   local config = diag.config
