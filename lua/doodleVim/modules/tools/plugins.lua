@@ -99,7 +99,6 @@ tools['cinuor/gotests.nvim'] = {
   config = conf.gotests
 }
 
-
 tools['cinuor/which-key.nvim'] = {
   opt = true,
   setup = function() require("doodleVim.utils.defer").packer_defer_load("which-key.nvim", 100) end,
@@ -123,7 +122,6 @@ tools['AckslD/nvim-neoclip.lua'] = {
   setup = function() require("doodleVim.utils.defer").add("nvim-neoclip.lua", 80) end,
   config = conf.neoclip
 }
-
 
 tools['tami5/sqlite.lua'] = {
   opt = true,
