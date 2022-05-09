@@ -45,8 +45,8 @@ def_map.command = {
 }
 
 def_map.visual = {
-  ["<C-d>"] = bind.convert_wk_format(map_cmd("<cmd>lua require('doodleVim.extend.scroll').scroll_down()<CR>"):with_noremap():with_silent():with_label("Smooth Scroll Down"):with_mode("x")),
-  ["<C-u>"] = bind.convert_wk_format(map_cmd("<cmd>lua require('doodleVim.extend.scroll').scroll_up()<CR>"):with_noremap():with_silent():with_label("Smooth Scroll Up"):with_mode("x")),
+  ["<C-d>"] = bind.convert_wk_format(map_cmd("<cmd>lua ensure_require('neoscroll').scroll(vim.wo.scroll, true, 150)<CR>"):with_noremap():with_silent():with_label("Smooth Scroll Down"):with_mode("x")),
+  ["<C-u>"] = bind.convert_wk_format(map_cmd("<cmd>lua ensure_require('neoscroll').scroll(-vim.wo.scroll, true, 150)<CR>"):with_noremap():with_silent():with_label("Smooth Scroll Up"):with_mode("x")),
   [">"] = bind.convert_wk_format(map_cmd(">gv"):with_noremap():with_label("Indent Right"):with_mode("x")),
   ["<"] = bind.convert_wk_format(map_cmd("<gv"):with_noremap():with_label("Indent Left"):with_mode("x")),
   ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"):with_mode("x")),
