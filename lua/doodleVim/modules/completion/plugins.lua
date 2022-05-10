@@ -74,18 +74,4 @@ completion['cinuor/rename.nvim'] = {
   config = conf.rename
 }
 
-
-completion['github/copilot.vim'] = {
-  opt = true
-}
-
-completion['zbirenbaum/copilot.lua'] = {
-  after = "nvim-cmp",
-  config = conf.copilot
-}
-
-completion['zbirenbaum/copilot-cmp'] = {
-  after = { "copilot.lua", "nvim-cmp" },
-}
-
 return completion
