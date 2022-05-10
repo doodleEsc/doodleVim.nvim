@@ -15,7 +15,7 @@ Fast Neovim Configuration, Really Fast.
 * clone the repo
 	```shell
 	cd ~/.config
-	git clone https://github.com/cinuor/nvim.git
+	git clone https://github.com/doodleEsc/nvim.git
 	```
 
 * open `nvim` and wait `Packer.nvim` installed 
