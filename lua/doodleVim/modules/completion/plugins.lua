@@ -42,7 +42,7 @@ completion['L3MON4D3/LuaSnip'] = {
   after = "nvim-cmp", config = conf.luasnip
 }
 
-completion['cinuor/friendly-snippets'] = {
+completion['doodleEsc/friendly-snippets'] = {
    opt = true
 }
 
@@ -69,23 +69,9 @@ completion['danymat/neogen'] = {
   config = conf.neogen
 }
 
-completion['cinuor/rename.nvim'] = {
+completion['doodleEsc/rename.nvim'] = {
   after = {'nvim-lspconfig', 'nui.nvim'},
   config = conf.rename
-}
-
-
-completion['github/copilot.vim'] = {
-  opt = true
-}
-
-completion['zbirenbaum/copilot.lua'] = {
-  after = "nvim-cmp",
-  config = conf.copilot
-}
-
-completion['zbirenbaum/copilot-cmp'] = {
-  after = { "copilot.lua", "nvim-cmp" },
 }
 
 return completion

@@ -1,5 +1,5 @@
 #!/bin/bash
-# https://github.com/cinuor/nvim/blob/master/clipboard-provider
+# https://github.com/doodleEsc/nvim/blob/master/clipboard-provider
 #
 # clipboard provider for neovim
 #

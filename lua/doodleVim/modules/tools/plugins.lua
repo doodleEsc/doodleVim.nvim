@@ -18,7 +18,7 @@ tools['nvim-telescope/telescope.nvim'] = {
   }
 }
 
-tools["cinuor/project.nvim"] = {
+tools["doodleEsc/project.nvim"] = {
   opt = true,
   setup = function()
       require("doodleVim.utils.defer").add("project.nvim", 80)
@@ -34,7 +34,7 @@ tools['rmagatti/auto-session'] = {
   config = conf.autosession
 }
 
-tools['cinuor/lightbulb.nvim'] = {
+tools['doodleEsc/lightbulb.nvim'] = {
     after = 'telescope.nvim',
     config = conf.lightbulb
 }
@@ -91,7 +91,7 @@ tools['kyazdani42/nvim-web-devicons'] = {}
 
 -- tools['bfredl/nvim-luadev'] = {}
 
-tools['cinuor/gotests.nvim'] = {
+tools['doodleEsc/gotests.nvim'] = {
   opt = true,
   setup = function()
     require("doodleVim.utils.defer").register("gotests", "gotests.nvim")
@@ -99,7 +99,7 @@ tools['cinuor/gotests.nvim'] = {
   config = conf.gotests
 }
 
-tools['cinuor/which-key.nvim'] = {
+tools['doodleEsc/which-key.nvim'] = {
   opt = true,
   setup = function() require("doodleVim.utils.defer").packer_defer_load("which-key.nvim", 100) end,
   config = conf.which_key

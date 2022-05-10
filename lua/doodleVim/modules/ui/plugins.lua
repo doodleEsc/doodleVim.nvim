@@ -22,7 +22,7 @@ ui['nvim-lualine/lualine.nvim'] = {
   config = conf.lualine,
 }
 
-ui['cinuor/gruvbox.nvim'] = {
+ui['doodleEsc/gruvbox.nvim'] = {
   opt = true
 }
 
