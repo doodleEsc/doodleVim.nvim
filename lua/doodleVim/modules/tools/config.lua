@@ -55,8 +55,6 @@ function config.telescope()
       preview = {
         hide_on_startup = false
       },
-      -- border = true,
-      -- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
       default_mappings = {
         i = {
           ["<C-j>"]     = actions.move_selection_next,
@@ -70,7 +68,7 @@ function config.telescope()
           ["<C-t>"]     = actions.select_tab,
 
           ["<C-u>"]     = actions.preview_scrolling_up,
-          ["<C-d>"]      = actions.preview_scrolling_down,
+          ["<C-d>"]     = actions.preview_scrolling_down,
 
           ["<C-b>"]     = actions.results_scrolling_up,
           ["<C-f>"]     = actions.results_scrolling_down,
@@ -87,8 +85,8 @@ function config.telescope()
           -- ["<C-w>"] = { "<c-s-w>", type = "command" },
         },
         n = {
-          ["j"]     = actions.move_selection_next,
-          ["k"]     = actions.move_selection_previous,
+          ["j"]         = actions.move_selection_next,
+          ["k"]         = actions.move_selection_previous,
           ["<Down>"]    = actions.move_selection_next,
           ["<Up>"]      = actions.move_selection_previous,
 
@@ -98,14 +96,14 @@ function config.telescope()
           ["<C-t>"]     = actions.select_tab,
 
           ["<C-u>"]     = actions.preview_scrolling_up,
-          ["<C-d>"]      = actions.preview_scrolling_down,
+          ["<C-d>"]     = actions.preview_scrolling_down,
 
           ["<C-b>"]     = actions.results_scrolling_up,
           ["<C-f>"]     = actions.results_scrolling_down,
 
           ["<Tab>"]     = actions_layout.toggle_preview,
           ["<C-Space>"] = actions.which_key,
-          ["<C-c>"]     = actions.close,
+          ["q"]         = actions.close,
           -- ["<C-Space>"] = actions.which_key,
           -- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
           -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
