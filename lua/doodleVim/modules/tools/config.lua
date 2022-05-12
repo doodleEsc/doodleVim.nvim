@@ -513,6 +513,7 @@ function config.lightbulb()
           enabled = true,
           -- Priority of the gutter sign
           priority = 20,
+          text = "ﯦ",
       },
       float = {
           enabled = false,
