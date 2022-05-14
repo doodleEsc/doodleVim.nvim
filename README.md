@@ -8,7 +8,7 @@ Fast Neovim Configuration, Really Fast.
 * Neovim >= 0.6.1
 * tree-sitter
 * git
-* fd (https://github.com/sharkdp/fd)
+* [fd](https://github.com/sharkdp/fd)
 * ripgrep
 
 ## Installation
