@@ -1,15 +1,14 @@
 # DoodleVim
-Fast Neovim Configuration, Really Fast.
+Fast Neovim Configuration.
 
 ## Required
 
-* Python3 (with `neovim` installed)
 * Nodejs
-* Neovim >= 0.6.1
+* Neovim >= 0.7.0
 * tree-sitter
 * git
-* fd (https://github.com/sharkdp/fd)
-* ripgrep
+* [fd](https://github.com/sharkdp/fd)
+* [ripgrep](https://github.com/BurntSushi/ripgrep)
 
 ## Installation
 * clone the repo

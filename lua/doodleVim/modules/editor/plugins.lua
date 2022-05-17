@@ -52,4 +52,22 @@ editor['romgrk/barbar.nvim'] = {
   requires = {'kyazdani42/nvim-web-devicons'},
 }
 
+editor['lewis6991/gitsigns.nvim'] = {
+  opt = true,
+  config = conf.gitsigns,
+  requires = {'nvim-lua/plenary.nvim'},
+  setup = function() require("doodleVim.utils.defer").add("gitsigns.nvim", 90) end,
+}
+
+editor['lukas-reineke/indent-blankline.nvim'] = {
+  opt = true,
+  setup = function() require("doodleVim.utils.defer").add("indent-blankline.nvim", 90) end,
+  config = conf.blankline,
+}
+
+editor['jakewvincent/mkdnflow.nvim'] = {
+    ft = "markdown",
+    config = conf.mkdnflow
+}
+
 return editor
