@@ -14,7 +14,7 @@ local logo = {
 
 local function footer()
     local datetime = os.date(" %Y-%m-%d") .. "  -  "
-    local author = "שּ " .. "doodleEsc" .. "  -  "
+    local author = "שּ " .. os.getenv("USER") .. "  -  "
     local total_plugins = " " .. #vim.tbl_keys(packer_plugins) .. " plugins" .. "  -  "
     local version = vim.version()
     local nvim_version_info = " v" .. version.major .. "." .. version.minor .. "." .. version.patch
