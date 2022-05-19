@@ -14,7 +14,7 @@ local logo = {
 
 local function footer()
     local datetime = os.date(" %Y-%m-%d") .. "  -  "
-    local author = "שּ " .. os.getenv("USER") .. "  -  "
+    local author = " " .. os.getenv("USER") .. "  -  "
     local total_plugins = " " .. #vim.tbl_keys(packer_plugins) .. " plugins" .. "  -  "
     local version = vim.version()
     local nvim_version_info = " v" .. version.major .. "." .. version.minor .. "." .. version.patch
@@ -25,8 +25,8 @@ end
 dashboard.section.header.val = logo
 
 dashboard.section.buttons.val = {
-    dashboard.button("o"      , "ﱮ  Open CWD", "<cmd>ene|OpenTree<CR>"),
-    dashboard.button("e"      , "ﱐ  New file", "<cmd>ene<CR>"),
+    dashboard.button("o"      , "  Open CWD", "<cmd>ene|OpenTree<CR>"),
+    dashboard.button("e"      , "  New file", "<cmd>ene<CR>"),
     dashboard.button("s"      , "  Configuration", "<cmd>e $MYVIMRC|OpenTree<CR>"),
     dashboard.button("q"      , "  Quit", "<cmd>qa<cr>"),
     dashboard.button("SPC f h", "  Recent Projects"),
