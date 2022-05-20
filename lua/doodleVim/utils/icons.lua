@@ -40,18 +40,18 @@ local diagnostics = {
   error_sign = "",
   warn_sign  = "",
   hint_sign  = "",
-  infor_sign = "",
-  debug_sign = "",
+  infor_sign = "",
+  debug_sign = "",
   trace_sign = "",
 }
 
 local todo = {
-    fix = "",
+    fix  = "",
     todo = "",
     hack = "",
-    warn = "",
-    perf = "",
-    note = "",
+    warn = "",
+    perf = "",
+    note = "",
 }
 
 return {
