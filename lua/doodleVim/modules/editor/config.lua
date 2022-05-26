@@ -40,7 +40,7 @@ function config.todo()
         -- list of hilight groups or use the hex color if hl not found as a fallback
         colors = {
             error = { "#fb4934" },
-            hack = {"#fe8019"},
+            hack = { "#fe8019" },
             warning = { "#fabd2f" },
             info = { "#458588" },
             hint = { "#10B981" },
@@ -101,7 +101,7 @@ function config.barbar()
         animation = true,
 
         -- Enable/disable auto-hiding the tab bar when there is a single buffer
-        auto_hide = true,
+        auto_hide = false,
 
         -- Enable/disable current/total tabpages indicator (top right corner)
         tabpages = true,
@@ -263,5 +263,23 @@ function config.mkdnflow()
         }
     })
 end
+
+-- function config.jabs()
+--     require 'jabs'.setup {
+--         -- Options for the main window
+--         position = 'center', -- center, corner. Default corner
+--         width = 80, -- default 50
+--         height = 20, -- default 10
+--         border = 'rounded', -- none, single, double, rounded, solid, shadow, (or an array or chars). Default shadow
+--
+--         -- Options for preview window
+--         preview_position = 'left', -- top, bottom, left, right. Default top
+--         preview = {
+--             width = 40, -- default 70
+--             height = 60, -- default 30
+--             border = 'rounded', -- none, single, double, rounded, solid, shadow, (or an array or chars). Default double
+--         },
+--     }
+-- end
 
 return config
