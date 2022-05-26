@@ -14,7 +14,7 @@ local logo = {
 
 local function footer()
     local datetime = os.date(" %Y-%m-%d") .. "  -  "
-    local author = " " .. os.getenv("USER") .. "  -  "
+    local author = " " .. os.getenv("USER") .. "  -  "
     local total_plugins = " " .. #vim.tbl_keys(packer_plugins) .. " plugins" .. "  -  "
     local version = vim.version()
     local nvim_version_info = " v" .. version.major .. "." .. version.minor .. "." .. version.patch
@@ -25,15 +25,15 @@ end
 dashboard.section.header.val = logo
 
 dashboard.section.buttons.val = {
-    dashboard.button("o"      , "  Open CWD", "<cmd>ene|OpenTree<CR>"),
-    dashboard.button("e"      , "  New file", "<cmd>ene<CR>"),
-    dashboard.button("s"      , "  Configuration", "<cmd>e $MYVIMRC|OpenTree<CR>"),
-    dashboard.button("q"      , "  Quit", "<cmd>qa<cr>"),
-    dashboard.button("SPC f h", "  Recent Projects"),
-    dashboard.button("SPC f o", "  Recent File"),
-    dashboard.button("SPC f f", "  Find File"),
-    dashboard.button("SPC f b", "  File Browser"),
-    dashboard.button("SPC p u", "  Update Plugins"),
+    dashboard.button("o", "  Open CWD",        "<cmd>ene|OpenTree<CR>"),
+    dashboard.button("h", "  Recent Projects", "<cmd>Telescope projects<CR>"),
+    dashboard.button("r", "  Recent File",     "<cmd>Telescope oldfiles<CR>"),
+    dashboard.button("e", "  New file",        "<cmd>ene<CR>"),
+    dashboard.button("f", "  Find File",       "<cmd>Telescope find_files<CR>"),
+    dashboard.button("b", "  File Browser",    "<cmd>Telescope file_browser<CR>"),
+    dashboard.button("s", "  Configuration",   "<cmd>e $MYVIMRC|OpenTree<CR>"),
+    dashboard.button("u", "  Update Plugins",  "<cmd>PackerUpdate<CR>"),
+    dashboard.button("q", "  Quit",            "<cmd>qa<cr>"),
 }
 
 dashboard.section.footer.val = footer()

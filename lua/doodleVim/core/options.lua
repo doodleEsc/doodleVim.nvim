@@ -69,7 +69,7 @@ local function load_options()
     foldexpr       = "nvim_treesitter#foldexpr()";
     ruler          = false;
     list           = true;
-    --showtabline  = 2;
+    -- showtabline  = 2;
     winwidth       = 30;
     winminwidth    = 15;
     pumheight      = 15;
