@@ -70,9 +70,9 @@ editor['jakewvincent/mkdnflow.nvim'] = {
     config = conf.mkdnflow
 }
 
--- editor['matbme/JABS.nvim'] = {
---     setup = function() require("doodleVim.utils.defer").add("JABS.nvim", 90) end,
---     config = conf.jabs,
--- }
---
+editor['matbme/JABS.nvim'] = {
+    setup = function() require("doodleVim.utils.defer").add("JABS.nvim", 90) end,
+    config = conf.jabs,
+}
+
 return editor
