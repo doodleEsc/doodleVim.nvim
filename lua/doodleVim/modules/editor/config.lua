@@ -216,7 +216,6 @@ function config.blankline()
 end
 
 function config.mkdnflow()
-    -- ** DEFAULT SETTINGS; TO USE THESE, PASS AN EMPTY TABLE TO THE SETUP FUNCTION **
     require('mkdnflow').setup({
         filetypes = { md = true, rmd = true, markdown = true },
         create_dirs = true,
@@ -226,24 +225,27 @@ function config.mkdnflow()
             root_tell = false
         },
         wrap = false,
-        default_bib_path = '',
+        bib = {
+            default_path = nil,
+            find_in_root = false
+        },
         silent = false,
         use_mappings_table = true,
         mappings = {
-            MkdnNextLink = { 'n', '<Tab>' },
-            MkdnPrevLink = { 'n', '<S-Tab>' },
-            MkdnNextHeading = { 'n', ']' },
+            MkdnNextLink = { 'n', "'" },
+            MkdnPrevLink = { 'n', ';' },
+            MkdnNextHeading = { 'n', "]" },
             MkdnPrevHeading = { 'n', '[' },
-            MkdnGoBack = { 'n', '\\' },
-            MkdnGoForward = { 'n', '<BS>' },
+            MkdnGoBack = { 'n', '.' },
+            MkdnGoForward = { 'n', '/' },
             MkdnFollowLink = { { 'n', 'v' }, '<CR>' },
             MkdnDestroyLink = { 'n', '<M-CR>' },
             MkdnYankAnchorLink = { 'n', 'ma' },
             MkdnYankFileAnchorLink = { 'n', 'mfa' },
-            MkdnIncreaseHeading = { 'n', '=' },
-            MkdnDecreaseHeading = { 'n', '-' },
+            MkdnIncreaseHeading = { 'n', '-' },
+            MkdnDecreaseHeading = { 'n', '=' },
             MkdnToggleToDo = { 'n', '<C-t>' },
-            MkdnNewListItem = false
+            MkdnNewListItem = {'i', '<CR>'}
         },
         links = {
             style = 'markdown',
@@ -264,6 +266,57 @@ function config.mkdnflow()
             complete = 'X'
         }
     })
+
+
+
+    -- ** DEFAULT SETTINGS; TO USE THESE, PASS AN EMPTY TABLE TO THE SETUP FUNCTION **
+    -- require('mkdnflow').setup({
+    --     filetypes = { md = true, rmd = true, markdown = true },
+    --     create_dirs = true,
+    --     perspective = {
+    --         priority = 'first',
+    --         fallback = 'current',
+    --         root_tell = false
+    --     },
+    --     wrap = false,
+    --     default_bib_path = '',
+    --     silent = false,
+    --     use_mappings_table = true,
+    --     mappings = {
+    --         MkdnNextLink = { 'n', '<Tab>' },
+    --         MkdnPrevLink = { 'n', '<S-Tab>' },
+    --         MkdnNextHeading = { 'n', ']' },
+    --         MkdnPrevHeading = { 'n', '[' },
+    --         MkdnGoBack = { 'n', '\\' },
+    --         MkdnGoForward = { 'n', '<BS>' },
+    --         MkdnFollowLink = { { 'n', 'v' }, '<CR>' },
+    --         MkdnDestroyLink = { 'n', '<M-CR>' },
+    --         MkdnYankAnchorLink = { 'n', 'ma' },
+    --         MkdnYankFileAnchorLink = { 'n', 'mfa' },
+    --         MkdnIncreaseHeading = { 'n', '=' },
+    --         MkdnDecreaseHeading = { 'n', '-' },
+    --         MkdnToggleToDo = { 'n', '<C-t>' },
+    --         MkdnNewListItem = false
+    --     },
+    --     links = {
+    --         style = 'markdown',
+    --         implicit_extension = nil,
+    --         transform_implicit = false,
+    --         transform_explicit = function(text)
+    --             text = text:gsub(" ", "-")
+    --             text = text:lower()
+    --             text = os.date('%Y-%m-%d_') .. text
+    --             return (text)
+    --         end
+    --     },
+    --     to_do = {
+    --         symbols = { ' ', '-', 'X' },
+    --         update_parents = true,
+    --         not_started = ' ',
+    --         in_progress = '-',
+    --         complete = 'X'
+    --     }
+    -- })
 end
 
 return config
