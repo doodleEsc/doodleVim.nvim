@@ -89,7 +89,7 @@ tools['nvim-lua/plenary.nvim'] = {
 
 tools['kyazdani42/nvim-web-devicons'] = {}
 
-tools['bfredl/nvim-luadev'] = {}
+-- tools['bfredl/nvim-luadev'] = {}
 
 tools['doodleEsc/gotests.nvim'] = {
   opt = true,
