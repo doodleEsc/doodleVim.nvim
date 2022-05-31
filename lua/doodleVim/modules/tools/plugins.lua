@@ -42,7 +42,7 @@ tools['doodleEsc/lightbulb.nvim'] = {
 tools['kyazdani42/nvim-tree.lua'] = {
   opt = true,
   setup = function()
-    require("doodleVim.modules.tools.config").nvim_tree_setup()
+    -- require("doodleVim.modules.tools.config").nvim_tree_setup()
     require("doodleVim.utils.defer").register("nvim-tree", "nvim-tree.lua")
   end,
   config = conf.nvim_tree
@@ -89,7 +89,7 @@ tools['nvim-lua/plenary.nvim'] = {
 
 tools['kyazdani42/nvim-web-devicons'] = {}
 
--- tools['bfredl/nvim-luadev'] = {}
+tools['bfredl/nvim-luadev'] = {}
 
 tools['doodleEsc/gotests.nvim'] = {
   opt = true,
@@ -126,6 +126,12 @@ tools['AckslD/nvim-neoclip.lua'] = {
 tools['tami5/sqlite.lua'] = {
   opt = true,
   setup = function() require("doodleVim.utils.defer").add("sqlite.lua", 90) end,
+}
+
+tools['aserowy/tmux.nvim'] = {
+  opt = true,
+  setup = function() require("doodleVim.utils.defer").add("tmux.nvim", 80) end,
+  config = conf.tmux
 }
 
 return tools
