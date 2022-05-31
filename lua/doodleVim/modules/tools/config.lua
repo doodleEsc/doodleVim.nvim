@@ -153,96 +153,8 @@ function config.telescope()
     require('telescope').load_extension('ui-select')
 end
 
--- function config.nvim_tree_setup()
---     -- vim.g.nvim_tree_respect_buf_cwd = 1
---     vim.g.nvim_tree_git_hl = 0
---     vim.g.nvim_tree_highlight_opened_files = 1
---     vim.g.nvim_tree_add_trailing = 1
---     vim.g.nvim_tree_group_empty = 1
---     -- vim.g.nvim_tree_create_in_closed_folder = 1
--- end
-
 function config.nvim_tree()
     local icons = require("doodleVim.utils.icons")
-    -- require 'nvim-tree'.setup {
-    --     respect_buf_cwd                    = true,
-    --     create_in_closed_folder            = true,
-    --     auto_reload_on_write               = true,
-    --     disable_netrw                      = true,
-    --     hijack_cursor                      = true,
-    --     hijack_netrw                       = true,
-    --     hijack_unnamed_buffer_when_opening = false,
-    --     ignore_buffer_on_setup             = false,
-    --     open_on_setup                      = false,
-    --     open_on_tab                        = false,
-    --     sort_by                            = "name",
-    --     update_cwd                         = true,
-    --     view                               = {
-    --         width = 31,
-    --         height = 31,
-    --         side = 'left',
-    --         preserve_window_proportions = true,
-    --         number = false,
-    --         relativenumber = false,
-    --         signcolumn = "yes",
-    --         mappings = {
-    --             custom_only = false,
-    --             list = {}
-    --         },
-    --     },
-    --     ignore_ft_on_setup                 = {},
-    --     hijack_directories                 = {
-    --         enable = true,
-    --         auto_open = true,
-    --     },
-    --     update_focused_file                = {
-    --         enable = true,
-    --         update_cwd = true,
-    --         ignore_list = {},
-    --     },
-    --     diagnostics                        = {
-    --         enable = true,
-    --         show_on_dirs = true,
-    --         icons = {
-    --             hint = icons.diag.hint_sign,
-    --             info = icons.diag.infor_sign,
-    --             warning = icons.diag.warn_sign,
-    --             error = icons.diag.error_sign,
-    --         }
-    --     },
-    --     actions                            = {
-    --         use_system_clipboard = true,
-    --         change_dir = {
-    --             enable = true,
-    --             global = false,
-    --         },
-    --         open_file = {
-    --             quit_on_open = false,
-    --             resize_window = false,
-    --             window_picker = {
-    --                 enable = true,
-    --                 chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-    --                 exclude = {
-    --                     filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
-    --                     buftype = { "nofile", "terminal", "help" },
-    --                 },
-    --             },
-    --         },
-    --     },
-    --     git                                = {
-    --         enable = true,
-    --         ignore = false,
-    --         timeout = 400,
-    --     },
-    --     trash                              = {
-    --         cmd = "trash",
-    --         require_confirm = true,
-    --     },
-    --     system_open                        = {
-    --         cmd  = nil,
-    --         args = {}
-    --     },
-    -- }
     require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
         auto_reload_on_write = true,
         create_in_closed_folder = true,
@@ -356,7 +268,7 @@ function config.nvim_tree()
         },
         git = {
             enable = true,
-            ignore = true,
+            ignore = false,
             timeout = 200,
         },
         actions = {
