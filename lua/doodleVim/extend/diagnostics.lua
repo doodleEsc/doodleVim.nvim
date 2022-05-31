@@ -1,11 +1,11 @@
 local diag = {}
 
 diag.config = {
-	error_sign = "",
-	warn_sign = "",
-	hint_sign = "",
-	infor_sign = "",
-	debug_sign = "   ",
+	error_sign = "",
+	warn_sign = "",
+	hint_sign = "",
+	infor_sign = "",
+	debug_sign = "",
 	use_diagnostic_virtual_text = true,
 }
 
