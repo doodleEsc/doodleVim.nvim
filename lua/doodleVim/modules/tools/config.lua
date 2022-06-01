@@ -196,7 +196,8 @@ function config.nvim_tree()
                 enable = true,
                 icons = {
                     corner = "└ ",
-                    edge = "│ ",
+                    -- edge = "│ ",
+                    edge = "├ ",
                     none = "  ",
                 },
             },
