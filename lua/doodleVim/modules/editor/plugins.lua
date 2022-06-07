@@ -69,6 +69,7 @@ editor['jakewvincent/mkdnflow.nvim'] = {
 }
 
 editor['tpope/vim-surround'] = {
+    opt = true,
     setup = function() require("doodleVim.utils.defer").add("vim-surround", 80) end,
 }
 
