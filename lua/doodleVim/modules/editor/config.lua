@@ -245,7 +245,7 @@ function config.mkdnflow()
             MkdnIncreaseHeading = { 'n', '-' },
             MkdnDecreaseHeading = { 'n', '=' },
             MkdnToggleToDo = { 'n', '<C-t>' },
-            MkdnNewListItem = {'i', '<CR>'}
+            MkdnNewListItem = { 'i', '<CR>' }
         },
         links = {
             style = 'markdown',
