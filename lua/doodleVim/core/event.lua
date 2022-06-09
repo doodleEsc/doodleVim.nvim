@@ -15,9 +15,6 @@ end
 
 function autocmd.load_autocmds()
     local definitions = {
-        -- packer = {
-        --   -- {"BufWritePost","*.lua","lua require('doodleVim.core.pack').auto_compile()"};
-        -- },
         ft = {
             { "BufReadPost,BufNewFile", "*.sol", " setf solidity" },
             { "FileType", "Outline", " setlocal signcolumn=no" },
