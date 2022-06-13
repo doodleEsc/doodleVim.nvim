@@ -7,10 +7,15 @@ function config.nvim_lsp_installer()
     handler.lsp_diagnostic()
     handler.null_ls_depress()
 
-    local servers = { 'gopls', 'pyright', 'sumneko_lua' }
     require("nvim-lsp-installer").setup {
         automatic_installation = false,
     }
+
+    local servers = {}
+    local installed_servers = require("nvim-lsp-installer").get_installed_servers()
+    for _, item in ipairs(installed_servers) do
+        table.insert(servers, item.name)
+    end
 
     require('doodleVim.utils.defer').load_immediately('cmp-nvim-lsp')
     local capabilities = vim.lsp.protocol.make_client_capabilities()
