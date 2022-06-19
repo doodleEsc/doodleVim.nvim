@@ -12,4 +12,10 @@ debugger.load_debuggers = function(opts)
     end
 end
 
+debugger.DapToggleBreakpoint = function()
+    require('doodleVim.utils.defer').load_immediately('nvim-dap')
+    vim.api.nvim_command("DapToggleBreakpoint")
+end
+
+
 return debugger

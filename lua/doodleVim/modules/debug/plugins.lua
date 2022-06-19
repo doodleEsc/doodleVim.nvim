@@ -4,7 +4,7 @@ local conf = require("doodleVim.modules.debug.config")
 debug['mfussenegger/nvim-dap'] = {
     opt = true,
     setup = function()
-        require("doodleVim.utils.defer").register("nvim-dap", "nvim-dap")
+        require("doodleVim.utils.defer").packer_defer_load("nvim-dap", 500)
     end,
     config = conf.dap
 }

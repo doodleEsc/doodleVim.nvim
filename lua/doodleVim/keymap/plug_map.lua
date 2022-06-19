@@ -109,14 +109,14 @@ plug_map.normal = {
 
     ["<F7>"] = bind.convert_wk_format(map_cu("DapContinue"):with_noremap():with_silent():with_label("Start Or Continue Debug")),
     ["<S-F7>"] = bind.convert_wk_format(map_cu("DapTerminate"):with_noremap():with_silent():with_label("Stop Debugging, Shortcut: Shift + F7")),
-    ["<F8>"] = bind.convert_wk_format(map_cr("lua ensure_require('dap').pause()"):with_noremap():with_silent():with_label("Pause Debug")),
-    ["<S-F8>"] = bind.convert_wk_format(map_cr("lua ensure_require('dap').restart()"):with_noremap():with_silent():with_label("Restart Debug")),
-    ["<F9>"] = bind.convert_wk_format(map_cu("DapToggleBreakpoint"):with_noremap():with_silent():with_label("Toggle Breakpoint")),
+    ["<F8>"] = bind.convert_wk_format(map_cr("lua require('dap').pause()"):with_noremap():with_silent():with_label("Pause Debug")),
+    ["<S-F8>"] = bind.convert_wk_format(map_cr("lua require('dap').restart()"):with_noremap():with_silent():with_label("Restart Debug")),
+    ["<F9>"] = bind.convert_wk_format(map_cr("DapToggleBreakpoint"):with_noremap():with_silent():with_label("Toggle Breakpoint")),
     ["<F10>"] = bind.convert_wk_format(map_cu("DapStepOver"):with_noremap():with_silent():with_label("Step Over")),
     ["<F11>"] = bind.convert_wk_format(map_cu("DapStepInto"):with_noremap():with_silent():with_label("Step Into")),
     ["<S-F11>"] = bind.convert_wk_format(map_cu("DapStepOut"):with_noremap():with_silent():with_label("Step Out, Shortcut: Shift + F11")),
     ["<F12>"] = bind.convert_wk_format(map_cr("lua require('dap').run_to_cursor()"):with_noremap():with_silent():with_label("Run To Cursor")),
-    ["<S-F12>"] = bind.convert_wk_format(map_cr("lua ensure_require('dap').run_last()"):with_noremap():with_silent():with_label("Run To Last, Shortcut: Shift + F12")),
+    ["<S-F12>"] = bind.convert_wk_format(map_cr("lua require('dap').run_last()"):with_noremap():with_silent():with_label("Run To Last, Shortcut: Shift + F12")),
 
     ["<S-h>"] = bind.convert_wk_format(map_cu("BufferPrevious"):with_noremap():with_silent():with_label("Previous Buffer")),
     ["<M-h>"] = bind.convert_wk_format(map_cu("BufferMovePrevious"):with_noremap():with_silent():with_label("Re-order To Previous")),
