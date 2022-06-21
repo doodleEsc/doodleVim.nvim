@@ -3,9 +3,9 @@
         "flake8"
     ],
     "pylsp.plugins.flake8.enabled": true,
-    "pylsp.plugins.yapf.enabled": false,
-    "pylsp.plugins.yapf.enabled": false,
+    "pylsp.plugins.black.enabled": true,
     "pylsp.plugins.rope_completion.enabled": true,
+    "pylsp.plugins.yapf.enabled": false,
     "pylsp.plugins.pyflakes.enabled": false,
     "pylsp.plugins.mccabe.enabled": false,
     "pylsp.plugins.pycodestyle.enabled": false
