@@ -18,7 +18,7 @@ tools['nvim-telescope/telescope.nvim'] = {
     }
 }
 
-tools["doodleEsc/project.nvim"] = {
+tools['doodleEsc/project.nvim'] = {
     opt = true,
     setup = function()
         require("doodleVim.utils.defer").add("project.nvim", 80)

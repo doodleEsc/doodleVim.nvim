@@ -9,6 +9,9 @@ function config.nvim_lsp_installer()
 
     require("nvim-lsp-installer").setup {
         automatic_installation = false,
+        ui = {
+            border = "rounded"
+        }
     }
 
     local servers = {}
@@ -19,7 +22,10 @@ function config.nvim_lsp_installer()
 
     require('doodleVim.utils.defer').load_immediately('cmp-nvim-lsp')
     local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
     capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+    local lspconfig = require 'lspconfig'
 
     local on_attach = function(client, bufnr)
         vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -32,7 +38,10 @@ function config.nvim_lsp_installer()
         }, bufnr)
     end
 
-    local lspconfig = require 'lspconfig'
+    lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+        capabilities = capabilities,
+    })
+
     for _, lsp in ipairs(servers) do
         local server_available, server = require("nvim-lsp-installer.servers").get_server(lsp)
         if not server_available then
@@ -45,7 +54,17 @@ function config.nvim_lsp_installer()
             capabilities = capabilities,
         }
     end
+end
 
+function config.nlsp_settings()
+    local vim_path = require('doodleVim.core.global').vim_path
+    require("nlspsettings").setup({
+        config_home = vim_path .. '/nlsp-settings',
+        local_settings_dir = ".nlsp-settings",
+        local_settings_root_markers = { '.git' },
+        append_default_schemas = true,
+        loader = 'json'
+    })
 end
 
 function config.nvim_cmp()
@@ -227,7 +246,6 @@ function config.null_ls()
         on_init = nil,
         on_exit = nil,
         sources = {
-            null_ls.builtins.formatting.jq,
             null_ls.builtins.code_actions.gitsigns,
         },
         update_in_insert = false,

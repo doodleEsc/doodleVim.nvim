@@ -41,6 +41,9 @@ misc.gotests = function(type)
 end
 
 misc.wrapped_notify = function(m, l, o)
+    if m:match("NULL_LS_CODE_ACTION", 1) then
+        return
+    end
     local wrapped_msg = require("doodleVim.utils.utils").wrap(m, 52)
     require("notify")(wrapped_msg, l, o)
 end

@@ -54,13 +54,18 @@ completion['ray-x/lsp_signature.nvim'] = {
     after = 'nvim-lspconfig',
 }
 
+completion['tamago324/nlsp-settings.nvim'] = {
+    after = 'nvim-lspconfig',
+    config = conf.nlsp_settings
+}
+
 completion['williamboman/nvim-lsp-installer'] = {
-    after = { 'nvim-lspconfig', 'lsp_signature.nvim' },
+    after = { 'nlsp-settings.nvim', 'lsp_signature.nvim' },
     config = conf.nvim_lsp_installer
 }
 
 completion['jose-elias-alvarez/null-ls.nvim'] = {
-    after = 'nvim-lspconfig',
+    after = 'nvim-lsp-installer',
     config = conf.null_ls
 }
 
