@@ -50,4 +50,14 @@ utils.remove_cached_package = function(module)
     end
 end
 
+utils.feedkeys = function(key, mode)
+    if not key:match('<[A-Za-z0-9\\%-%[%]%^@]->', 1) then
+        vim.notify(string.format("Unsupported Key: %s, See Invalid Keys With Command :help keycodes", key), vim.log.levels.ERROR)
+        return
+    end
+
+    local feedkey = vim.api.nvim_replace_termcodes(key, true, false, true)
+    vim.api.nvim_feedkeys(feedkey, mode, false)
+end
+
 return utils

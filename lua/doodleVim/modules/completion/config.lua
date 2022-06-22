@@ -79,6 +79,7 @@ function config.nvim_cmp()
         enabled = function()
             local disabled = false
             disabled = disabled or (vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt')
+            -- disabled = disabled or (vim.api.nvim_buf_get_option(0, 'filetype') == 'TelescopePrompt')
             disabled = disabled or (vim.fn.reg_recording() ~= '')
             disabled = disabled or (vim.fn.reg_executing() ~= '')
             return not disabled
@@ -102,6 +103,7 @@ function config.nvim_cmp()
             { name = 'cmp_tabnine' },
             { name = 'buffer' },
             { name = 'path' },
+        }, {
             {
                 name = 'look',
                 keyword_length = 2,
@@ -109,24 +111,26 @@ function config.nvim_cmp()
             },
         }),
         mapping = cmp.mapping.preset.insert({
-            ['<Down>'] = {
-                i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
-            },
-            ['<Up>'] = {
-                i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
-            },
-            ['<C-n>'] = {
-                i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
-            },
-            ['<C-p>'] = {
-                i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
-            },
             ['<CR>'] = {
                 i = cmp.mapping.confirm({ select = true }),
             },
             ['<C-e>'] = {
                 i = cmp.mapping.abort(),
             },
+            ['<C-p>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_prev_item()
+                else
+                    require('doodleVim.utils.utils').feedkeys("<Up>", "i")
+                end
+            end),
+            ['<C-n>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_next_item()
+                else
+                    require('doodleVim.utils.utils').feedkeys("<Down>", "i")
+                end
+            end),
             ["<C-k>"] = cmp.mapping(function(fallback)
                 if require('luasnip').jumpable(-1) then
                     require('luasnip').jump(-1)
@@ -192,10 +196,6 @@ function config.nvim_cmp()
         }
     })
 
-    cmp.setup.filetype('TelescopePrompt', {
-        sources = cmp.config.sources({ { name = 'path' } })
-    })
-
     -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline('/', {
         mapping = cmp.mapping.preset.cmdline(),
@@ -207,6 +207,9 @@ function config.nvim_cmp()
     -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline({
+            ['<Up>'] = {
+                c = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
+            },
             ['<Down>'] = {
                 c = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
             },
