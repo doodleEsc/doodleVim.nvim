@@ -19,21 +19,21 @@ local function footer()
     local version = vim.version()
     local nvim_version_info = " v" .. version.major .. "." .. version.minor .. "." .. version.patch
 
-    return author .. datetime .. total_plugins  .. nvim_version_info
+    return author .. datetime .. total_plugins .. nvim_version_info
 end
 
 dashboard.section.header.val = logo
 
 dashboard.section.buttons.val = {
-    dashboard.button("o", "  Open CWD",        "<cmd>ene|OpenTree<CR>"),
+    dashboard.button("o", "  Open CWD", "<cmd>ene|OpenTree<CR>"),
     dashboard.button("h", "  Recent Projects", "<cmd>Telescope projects<CR>"),
-    dashboard.button("r", "  Recent File",     "<cmd>Telescope oldfiles<CR>"),
-    dashboard.button("e", "  New file",        "<cmd>ene<CR>"),
-    dashboard.button("f", "  Find File",       "<cmd>Telescope find_files<CR>"),
-    dashboard.button("b", "  File Browser",    "<cmd>Telescope file_browser<CR>"),
-    dashboard.button("s", "  Configuration",   "<cmd>e $MYVIMRC|OpenTree<CR>"),
-    dashboard.button("u", "  Update Plugins",  "<cmd>PackerUpdate<CR>"),
-    dashboard.button("q", "  Quit",            "<cmd>qa<cr>"),
+    dashboard.button("r", "  Recent File", "<cmd>Telescope oldfiles<CR>"),
+    dashboard.button("e", "  New file", "<cmd>ene<CR>"),
+    dashboard.button("f", "  Find File", "<cmd>Telescope find_files<CR>"),
+    dashboard.button("b", "  File Browser", "<cmd>Telescope file_browser<CR>"),
+    dashboard.button("s", "  Configuration", "<cmd>e $MYVIMRC|OpenTree<CR>"),
+    dashboard.button("u", "  Update Plugins", "<cmd>PackerUpdate<CR>"),
+    dashboard.button("q", "  Quit", "<cmd>qa<cr>"),
 }
 
 dashboard.section.footer.val = footer()
@@ -59,19 +59,19 @@ alpha.setup(dashboard.opts)
 vim.api.nvim_create_augroup("alpha_tabline", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = "alpha_tabline",
-  pattern = "alpha",
-  command = "set showtabline=0 laststatus=0 noruler",
+    group = "alpha_tabline",
+    pattern = "alpha",
+    command = "set showtabline=0 laststatus=0 noruler",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = "alpha_tabline",
-  pattern = "alpha",
-  callback = function()
-    vim.api.nvim_create_autocmd("BufUnload", {
-      group = "alpha_tabline",
-      buffer = 0,
-      command = "set showtabline=2 ruler laststatus=3",
-    })
-  end,
+    group = "alpha_tabline",
+    pattern = "alpha",
+    callback = function()
+        vim.api.nvim_create_autocmd("BufUnload", {
+            group = "alpha_tabline",
+            buffer = 0,
+            command = "set showtabline=2 ruler laststatus=3",
+        })
+    end,
 })

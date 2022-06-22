@@ -30,7 +30,7 @@ function config.todo()
             before = "", -- "fg" or "bg" or empty
             keyword = "bg", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
             after = "fg", -- "fg" or "bg" or empty
-            pattern = [[.*<(KEYWORDS)\v(\s+\(.*\)|:)+]], -- pattern or table of patterns, used for highlightng (vim regex)
+            pattern = [[.*<(KEYWORDS)\v(\s?\(.*\)|:)+]], -- pattern or table of patterns, used for highlightng (vim regex)
             -- pattern = [[.*<(KEYWORDS)\v(\s|:)+]], -- pattern or table of patterns, used for highlightng (vim regex)
             comments_only = true, -- uses treesitter to match keywords in comments only
             max_line_len = 400, -- ignore lines longer than this
@@ -57,7 +57,7 @@ function config.todo()
             },
             -- regex that will be used to match keywords.
             -- don't replace the (KEYWORDS) placeholder
-            pattern = [[\b(KEYWORDS)(\s+\(.*\)|:)+]], -- ripgrep regex
+            pattern = [[\b(KEYWORDS)(\s?\(.*\)|:)+]], -- ripgrep regex
         },
     }
 end
@@ -236,8 +236,8 @@ function config.mkdnflow()
             MkdnPrevLink = { 'n', ';' },
             MkdnNextHeading = { 'n', "]" },
             MkdnPrevHeading = { 'n', '[' },
-            MkdnGoBack = { 'n', '.' },
-            MkdnGoForward = { 'n', '/' },
+            MkdnGoBack = { 'n', ',' },
+            MkdnGoForward = { 'n', '.' },
             MkdnFollowLink = { { 'n', 'v' }, '<CR>' },
             MkdnDestroyLink = { 'n', '<M-CR>' },
             MkdnYankAnchorLink = { 'n', 'ma' },
@@ -245,7 +245,7 @@ function config.mkdnflow()
             MkdnIncreaseHeading = { 'n', '-' },
             MkdnDecreaseHeading = { 'n', '=' },
             MkdnToggleToDo = { 'n', '<C-t>' },
-            MkdnNewListItem = {'i', '<CR>'}
+            MkdnNewListItem = { 'i', '<CR>' }
         },
         links = {
             style = 'markdown',
@@ -266,57 +266,6 @@ function config.mkdnflow()
             complete = 'X'
         }
     })
-
-
-
-    -- ** DEFAULT SETTINGS; TO USE THESE, PASS AN EMPTY TABLE TO THE SETUP FUNCTION **
-    -- require('mkdnflow').setup({
-    --     filetypes = { md = true, rmd = true, markdown = true },
-    --     create_dirs = true,
-    --     perspective = {
-    --         priority = 'first',
-    --         fallback = 'current',
-    --         root_tell = false
-    --     },
-    --     wrap = false,
-    --     default_bib_path = '',
-    --     silent = false,
-    --     use_mappings_table = true,
-    --     mappings = {
-    --         MkdnNextLink = { 'n', '<Tab>' },
-    --         MkdnPrevLink = { 'n', '<S-Tab>' },
-    --         MkdnNextHeading = { 'n', ']' },
-    --         MkdnPrevHeading = { 'n', '[' },
-    --         MkdnGoBack = { 'n', '\\' },
-    --         MkdnGoForward = { 'n', '<BS>' },
-    --         MkdnFollowLink = { { 'n', 'v' }, '<CR>' },
-    --         MkdnDestroyLink = { 'n', '<M-CR>' },
-    --         MkdnYankAnchorLink = { 'n', 'ma' },
-    --         MkdnYankFileAnchorLink = { 'n', 'mfa' },
-    --         MkdnIncreaseHeading = { 'n', '=' },
-    --         MkdnDecreaseHeading = { 'n', '-' },
-    --         MkdnToggleToDo = { 'n', '<C-t>' },
-    --         MkdnNewListItem = false
-    --     },
-    --     links = {
-    --         style = 'markdown',
-    --         implicit_extension = nil,
-    --         transform_implicit = false,
-    --         transform_explicit = function(text)
-    --             text = text:gsub(" ", "-")
-    --             text = text:lower()
-    --             text = os.date('%Y-%m-%d_') .. text
-    --             return (text)
-    --         end
-    --     },
-    --     to_do = {
-    --         symbols = { ' ', '-', 'X' },
-    --         update_parents = true,
-    --         not_started = ' ',
-    --         in_progress = '-',
-    --         complete = 'X'
-    --     }
-    -- })
 end
 
 return config
