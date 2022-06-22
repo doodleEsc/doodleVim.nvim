@@ -3,7 +3,6 @@ Fast Neovim Configuration.
 
 ## Required
 
-* Nodejs
 * Neovim >= 0.7.0
 * tree-sitter
 * git
@@ -13,8 +12,7 @@ Fast Neovim Configuration.
 ## Installation
 * clone the repo
 	```shell
-	cd ~/.config
-	git clone https://github.com/doodleEsc/nvim.git
+	git clone https://github.com/doodleEsc/nvim.git ~/.config/nvim
 	```
 
 * open `nvim` and wait `Packer.nvim` installed 
