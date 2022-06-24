@@ -71,7 +71,7 @@ function config.comment()
 end
 
 function config.autopairs()
-    require('doodleVim.utils.defer').load_immediately('nvim-cmp')
+    require('doodleVim.utils.defer').immediate_load('nvim-cmp')
 
     local cmp = require("cmp")
     require('nvim-autopairs').setup {}

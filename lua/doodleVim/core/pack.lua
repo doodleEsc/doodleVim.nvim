@@ -11,6 +11,15 @@ local packer = nil
 local Packer = {}
 Packer.__index = Packer
 
+local plugins = setmetatable({}, {
+    __index = function(_, key)
+        if not packer then
+            Packer:load_packer()
+        end
+        return packer[key]
+    end
+})
+
 function Packer:load_plugins()
     self.repos = {}
 
@@ -56,7 +65,7 @@ function Packer:load_packer()
                 submodules     = 'submodule update --init --recursive --progress'
             },
             depth = 1, -- Git clone depth
-            clone_timeout = 60, -- Timeout, in seconds, for git clones
+            clone_timeout = 120, -- Timeout, in seconds, for git clones
             default_url_format = 'https://github.com/%s' -- Lua format string used for "aaa/bbb" style plugins
         },
         disable_commands = true
@@ -80,15 +89,6 @@ function Packer:init_ensure_plugins()
         packer.install()
     end
 end
-
-local plugins = setmetatable({}, {
-    __index = function(_, key)
-        if not packer then
-            Packer:load_packer()
-        end
-        return packer[key]
-    end
-})
 
 function plugins.ensure_plugins()
     Packer:init_ensure_plugins()
@@ -135,8 +135,6 @@ end
 function plugins.load_compile()
     if vim.fn.filereadable(compile_to_lua) == 1 then
         require('doodleVim.compiled')
-    else
-        assert('Missing packer compile file Run PackerCompile Or PackerInstall to fix')
     end
     vim.cmd [[command! PackerCompile lua require('doodleVim.core.pack').compile()]]
     vim.cmd [[command! PackerInstall lua require('doodleVim.core.pack').install()]]

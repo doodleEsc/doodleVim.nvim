@@ -3,7 +3,7 @@ local utils = require("doodleVim.utils.utils")
 local misc = {}
 
 misc.safe_exit = function()
-    require('doodleVim.utils.defer').load_immediately('vim-floaterm')
+    require('doodleVim.utils.defer').immediate_load('vim-floaterm')
 
     -- close floaterm
     local floatermBufnr = vim.call("floaterm#buflist#gather")
@@ -22,7 +22,7 @@ misc.safe_exit = function()
 end
 
 misc.safe_save = function()
-    require('doodleVim.utils.defer').load_immediately('auto-session')
+    require('doodleVim.utils.defer').immediate_load('auto-session')
     vim.cmd [[write]]
     require("auto-session").SaveSession()
     vim.notify("Current Session Saved")
@@ -73,7 +73,7 @@ misc.reload = function()
 end
 
 misc.enhanced_buffer_close = function()
-    require('doodleVim.utils.defer').load_immediately('barbar.nvim')
+    require('doodleVim.utils.defer').immediate_load('barbar.nvim')
 
     local win_num = vim.api.nvim_win_get_number(0)
     local filetype = vim.bo.filetype
