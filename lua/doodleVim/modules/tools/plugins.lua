@@ -34,11 +34,6 @@ tools['rmagatti/auto-session'] = {
     config = conf.autosession
 }
 
-tools['doodleEsc/lightbulb.nvim'] = {
-    after = 'telescope.nvim',
-    config = conf.lightbulb
-}
-
 tools['kyazdani42/nvim-tree.lua'] = {
     opt = true,
     setup = function()
@@ -51,7 +46,7 @@ tools['kyazdani42/nvim-tree.lua'] = {
 tools['iamcco/markdown-preview.nvim'] = {
     ft = 'markdown',
     setup = conf.mkdp,
-    run = function() vim.cmd [[:call mkdp#util#install()]] end,
+    run = ":call mkdp#util#install()",
 }
 
 tools['simrat39/symbols-outline.nvim'] = {
@@ -66,7 +61,7 @@ tools['voldikss/vim-floaterm'] = {
     opt = true,
     setup = function()
         require("doodleVim.modules.tools.config").floaterm()
-        require("doodleVim.utils.defer").packer_defer_load("vim-floaterm", 500)
+        require("doodleVim.utils.defer").defer_load("vim-floaterm", 500)
     end
 }
 
@@ -101,7 +96,7 @@ tools['doodleEsc/gotests.nvim'] = {
 
 tools['doodleEsc/which-key.nvim'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").packer_defer_load("which-key.nvim", 100) end,
+    setup = function() require("doodleVim.utils.defer").defer_load("which-key.nvim", 100) end,
     config = conf.which_key
 }
 
@@ -112,7 +107,7 @@ tools['nathom/filetype.nvim'] = {
 tools['rcarriga/nvim-notify'] = {
     opt = true,
     setup = function()
-        require("doodleVim.utils.defer").packer_defer_load("nvim-notify", 100)
+        require("doodleVim.utils.defer").defer_load("nvim-notify", 100)
     end,
     config = conf.notify
 }

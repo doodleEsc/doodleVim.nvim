@@ -27,7 +27,8 @@ completion['hrsh7th/cmp-path'] = {
 }
 
 completion['tzachar/cmp-tabnine'] = {
-    after = 'nvim-cmp', run = './install.sh'
+    after = 'nvim-cmp',
+    run = './install.sh'
 }
 
 completion['octaltree/cmp-look'] = {
@@ -39,7 +40,8 @@ completion['hrsh7th/cmp-cmdline'] = {
 }
 
 completion['L3MON4D3/LuaSnip'] = {
-    after = "nvim-cmp", config = conf.luasnip
+    after = "nvim-cmp",
+    config = conf.luasnip
 }
 
 completion['doodleEsc/friendly-snippets'] = {
@@ -47,7 +49,7 @@ completion['doodleEsc/friendly-snippets'] = {
 }
 
 completion['neovim/nvim-lspconfig'] = {
-    after = "nvim-cmp",
+    after = 'cmp-nvim-lsp',
 }
 
 completion['ray-x/lsp_signature.nvim'] = {
@@ -60,8 +62,14 @@ completion['tamago324/nlsp-settings.nvim'] = {
 }
 
 completion['williamboman/nvim-lsp-installer'] = {
-    after = { 'nlsp-settings.nvim', 'lsp_signature.nvim' },
-    config = conf.nvim_lsp_installer
+    opt = true,
+    after = { 'nlsp-settings.nvim', 'lsp_signature.nvim', 'nvim-lspconfig'},
+    config = conf.nvim_lsp_installer,
+}
+
+completion['doodleEsc/lightbulb.nvim'] = {
+    after = 'nvim-lsp-installer',
+    config = conf.lightbulb
 }
 
 completion['jose-elias-alvarez/null-ls.nvim'] = {

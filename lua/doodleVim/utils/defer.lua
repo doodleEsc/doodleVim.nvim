@@ -3,16 +3,11 @@ local M = {
     mod_plug_map = {},
 }
 
-
-function M.add(plugin, priority)
-    local p = {
-        priority = priority,
-        plugin = plugin,
-    }
-    table.insert(M.defer_packages, p)
-end
-
 local do_load = function()
+    if not packer_plugins then
+        return
+    end
+
     if not packer_plugins['plenary.nvim'].loaded then
         require("packer").loader('plenary.nvim')
     end
@@ -22,11 +17,28 @@ local do_load = function()
     end
 end
 
+function M.add(plugin, priority)
+    if not packer_plugins then
+        return
+    end
+    local p = {
+        priority = priority,
+        plugin = plugin,
+    }
+    table.insert(M.defer_packages, p)
+end
+
 function M.load(delay)
+    if not packer_plugins then
+        return
+    end
     vim.defer_fn(do_load, delay)
 end
 
-function M.packer_defer_load(plugin, timer)
+function M.defer_load(plugin, timer)
+    if not packer_plugins then
+        return
+    end
     if plugin then
         timer = timer or 0
         vim.defer_fn(function()
@@ -35,7 +47,10 @@ function M.packer_defer_load(plugin, timer)
     end
 end
 
-function M.load_immediately(plugins)
+function M.immediate_load(plugins)
+    if not packer_plugins then
+        return
+    end
     if type(plugins) == "string" then
         if not packer_plugins[plugins].loaded then
             require("packer").loader(plugins)
@@ -53,6 +68,34 @@ function M.register(module, plugin)
     if not M.mod_plug_map[module] then
         M.mod_plug_map[module] = plugin
     end
+end
+
+function _G.ensure_require(module)
+    if not packer_plugins then
+        return
+    end
+    local ok, packer = pcall(require, "packer")
+    if not ok then
+        return
+    end
+
+    local major_mod = module:match("^([a-z0-9_-]+)%.?")
+    if not M.mod_plug_map[major_mod] then
+        -- no module and plugin registered
+        return
+    end
+
+    local plugin = M.mod_plug_map[major_mod]
+    if not packer_plugins[plugin].loaded then
+        packer.loader(plugin)
+    end
+
+    local module_loaded_ok, module_loaded = pcall(require, module)
+    if not module_loaded_ok then
+        return
+    end
+
+    return module_loaded
 end
 
 return M

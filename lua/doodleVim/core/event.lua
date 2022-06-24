@@ -1,7 +1,7 @@
 local vim = vim
 local autocmd = {}
 
-function autocmd.nvim_create_augroups(definitions)
+local function create_augroups(definitions)
     for group_name, definition in pairs(definitions) do
         vim.api.nvim_command('augroup ' .. group_name)
         vim.api.nvim_command('autocmd!')
@@ -21,10 +21,6 @@ function autocmd.load_autocmds()
             { "FileType", "python", " setlocal colorcolumn=80" }
         },
 
-        lightbulb = {
-            { "CursorHold,CursorHoldI", "*", "lua require'lightbulb'.check()" };
-        },
-
         _general_settings = {
             { "FileType", "qf,help,man,lspinfo", "nnoremap <silent> <buffer> q :close<CR>" },
             { "TextYankPost", "*", "silent! lua vim.highlight.on_yank({higroup='IncSearch', timeout=200})" },
@@ -42,7 +38,7 @@ function autocmd.load_autocmds()
         },
     }
 
-    autocmd.nvim_create_augroups(definitions)
+    create_augroups(definitions)
 end
 
-autocmd.load_autocmds()
+return autocmd

@@ -5,7 +5,7 @@ function config.lualine()
 end
 
 function config.treesitter()
-    require('doodleVim.utils.defer').load_immediately('nvim-treesitter-textobjects')
+    require('doodleVim.utils.defer').immediate_load('nvim-treesitter-textobjects')
     require('nvim-treesitter.configs').setup {
         ensure_installed = {
             "bash",

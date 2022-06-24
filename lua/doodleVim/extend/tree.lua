@@ -1,7 +1,7 @@
 local tree = {}
 
 tree.toggle = function()
-    require('doodleVim.utils.defer').load_immediately('barbar.nvim')
+    require('doodleVim.utils.defer').immediate_load('barbar.nvim')
     local view = ensure_require('nvim-tree.view')
 
     if view.is_visible() then
