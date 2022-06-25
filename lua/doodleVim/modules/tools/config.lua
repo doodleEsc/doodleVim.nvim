@@ -5,6 +5,7 @@ function config.telescope()
         'telescope-fzy-native.nvim',
         'telescope-file-browser.nvim',
         'nvim-neoclip.lua',
+        'project.nvim',
         'telescope-ui-select.nvim'
     })
 
@@ -57,8 +58,8 @@ function config.telescope()
             },
             default_mappings = {
                 i = {
-                    ["<C-n>"]  = actions.move_selection_next,
-                    ["<C-p>"]  = actions.move_selection_previous,
+                    ["<C-n>"] = actions.move_selection_next,
+                    ["<C-p>"] = actions.move_selection_previous,
 
                     ["<CR>"]  = actions.select_default,
                     ["<C-x>"] = actions.select_horizontal,
@@ -83,8 +84,8 @@ function config.telescope()
                     -- ["<C-w>"] = { "<c-s-w>", type = "command" },
                 },
                 n = {
-                    ["<C-n>"]      = actions.move_selection_next,
-                    ["<C-p>"]      = actions.move_selection_previous,
+                    ["<C-n>"] = actions.move_selection_next,
+                    ["<C-p>"] = actions.move_selection_previous,
 
                     ["<CR>"]  = actions.select_default,
                     ["<C-x>"] = actions.select_horizontal,
@@ -385,6 +386,8 @@ end
 
 function config.translator()
     vim.g.translator_window_borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+    vim.g.translator_proxy_url = 'socks5://127.0.0.1:1080'
+    vim.g.translator_default_engines = {'google'}
 end
 
 function config.project()
