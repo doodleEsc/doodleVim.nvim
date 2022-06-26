@@ -58,8 +58,8 @@ function config.telescope()
             },
             default_mappings = {
                 i = {
-                    ["<C-n>"] = actions.move_selection_next,
-                    ["<C-p>"] = actions.move_selection_previous,
+                    ["<C-j>"] = actions.move_selection_next,
+                    ["<C-k>"] = actions.move_selection_previous,
 
                     ["<CR>"]  = actions.select_default,
                     ["<C-x>"] = actions.select_horizontal,
@@ -84,8 +84,8 @@ function config.telescope()
                     -- ["<C-w>"] = { "<c-s-w>", type = "command" },
                 },
                 n = {
-                    ["<C-n>"] = actions.move_selection_next,
-                    ["<C-p>"] = actions.move_selection_previous,
+                    ["j"] = actions.move_selection_next,
+                    ["k"] = actions.move_selection_previous,
 
                     ["<CR>"]  = actions.select_default,
                     ["<C-x>"] = actions.select_horizontal,
@@ -100,7 +100,8 @@ function config.telescope()
 
                     ["<Tab>"]     = actions_layout.toggle_preview,
                     ["<C-Space>"] = actions.which_key,
-                    ["q"]         = actions.close,
+                    ["<C-c>"]     = actions.close,
+                    ["q"]       = actions.close,
                 },
             },
         },
@@ -387,7 +388,7 @@ end
 function config.translator()
     vim.g.translator_window_borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
     vim.g.translator_proxy_url = 'socks5://127.0.0.1:1080'
-    vim.g.translator_default_engines = {'google'}
+    vim.g.translator_default_engines = { 'google' }
 end
 
 function config.project()
