@@ -1,6 +1,8 @@
 # DoodleVim
 Fast Neovim Configuration.
 
+![](https://cdn.jsdelivr.net/gh/doodleEsc/blog-images/20220627112917.png)
+
 ![](https://cdn.jsdelivr.net/gh/doodleEsc/blog-images/20220627104042.png)
 
 ## Required
