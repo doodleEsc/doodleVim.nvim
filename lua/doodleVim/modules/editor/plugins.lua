@@ -31,7 +31,7 @@ editor['karb94/neoscroll.nvim'] = {
 
 editor['folke/todo-comments.nvim'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").add("todo-comments.nvim", 100) end,
+    setup = function() require("doodleVim.utils.defer").add("todo-comments.nvim", 99) end,
     config = conf.todo
 }
 
@@ -45,7 +45,7 @@ editor['romgrk/barbar.nvim'] = {
     opt = true,
     setup = function()
         require("doodleVim.modules.editor.config").barbar()
-        require("doodleVim.utils.defer").add("barbar.nvim", 100)
+        require("doodleVim.utils.defer").add("barbar.nvim", 99)
     end,
     requires = { 'kyazdani42/nvim-web-devicons' },
 }
@@ -54,12 +54,12 @@ editor['lewis6991/gitsigns.nvim'] = {
     opt = true,
     config = conf.gitsigns,
     requires = { 'nvim-lua/plenary.nvim' },
-    setup = function() require("doodleVim.utils.defer").add("gitsigns.nvim", 90) end,
+    setup = function() require("doodleVim.utils.defer").add("gitsigns.nvim", 99) end,
 }
 
 editor['lukas-reineke/indent-blankline.nvim'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").add("indent-blankline.nvim", 90) end,
+    setup = function() require("doodleVim.utils.defer").add("indent-blankline.nvim", 99) end,
     config = conf.blankline,
 }
 
@@ -70,7 +70,7 @@ editor['jakewvincent/mkdnflow.nvim'] = {
 
 editor['tpope/vim-surround'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").add("vim-surround", 80) end,
+    setup = function() require("doodleVim.utils.defer").defer_load("vim-surround", 200) end,
 }
 
 return editor

@@ -32,6 +32,8 @@ function M.load(delay)
     if not packer_plugins then
         return
     end
+    -- table.sort(M.defer_packages, function(e1, e2) return e1.priority > e2.priority end)
+    -- print(vim.inspect(M.defer_packages))
     vim.defer_fn(do_load, delay)
 end
 

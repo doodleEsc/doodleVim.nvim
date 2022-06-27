@@ -37,7 +37,6 @@ tools['rmagatti/auto-session'] = {
 tools['kyazdani42/nvim-tree.lua'] = {
     opt = true,
     setup = function()
-        -- require("doodleVim.modules.tools.config").nvim_tree_setup()
         require("doodleVim.utils.defer").register("nvim-tree", "nvim-tree.lua")
     end,
     config = conf.nvim_tree
@@ -67,7 +66,7 @@ tools['voldikss/vim-floaterm'] = {
 
 tools['voldikss/vim-translator'] = {
     cmd = { 'TranslateW' },
-    setup = conf.translator()
+    setup = conf.translator
 }
 
 tools['jbyuki/venn.nvim'] = {
@@ -112,9 +111,9 @@ tools['rcarriga/nvim-notify'] = {
     config = conf.notify
 }
 
+-- HACK: Start by telescope config
 tools['AckslD/nvim-neoclip.lua'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").add("nvim-neoclip.lua", 80) end,
     config = conf.neoclip
 }
 
@@ -125,7 +124,7 @@ tools['tami5/sqlite.lua'] = {
 
 tools['aserowy/tmux.nvim'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").add("tmux.nvim", 80) end,
+    setup = function() require("doodleVim.utils.defer").add("tmux.nvim", 50) end,
     config = conf.tmux
 }
 
