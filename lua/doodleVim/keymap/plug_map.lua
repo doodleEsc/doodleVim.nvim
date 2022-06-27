@@ -129,7 +129,7 @@ plug_map.normal = {
     ["<S-o>"] = bind.convert_wk_format(map_cr("BufferPick"):with_noremap():with_silent():with_label("Pick Buffer")),
     ["<S-s>"] = bind.convert_wk_format(map_cr("BufferOrderByDirectory"):with_noremap():with_silent():with_label("Sort Buffer")),
 
-    ["<C-Space>"] = bind.convert_wk_format(map_cr("WhichKey"):with_noremap():with_silent():with_label("Show Keymaps")),
+    ["<C-Space>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').toggle_whichkey()"):with_noremap():with_silent():with_label("Show Keymaps")),
 
     ["<M-n>"] = bind.convert_wk_format(map_cr("Gitsigns next_hunk"):with_noremap():with_silent():with_label("Next Hunk")),
     ["<M-p>"] = bind.convert_wk_format(map_cr("Gitsigns prev_hunk"):with_noremap():with_silent():with_label("Previous Hunk")),
@@ -167,12 +167,12 @@ plug_map.visual = {
         f = bind.convert_wk_format(map_cu("VFill"):with_noremap():with_silent():with_label("Fill Box"):with_mode("v"))
     },
 
-    ["<C-Space>"] = bind.convert_wk_format(map_cu("WhichKey '' v"):with_noremap():with_label("Show Keymaps"):with_mode("v"))
+    ["<C-Space>"] = bind.convert_wk_format(map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>"):with_noremap():with_label("Show Keymaps"):with_mode("v"))
 
 }
 
 plug_map.insert = {
-    ["<C-Space>"] = bind.convert_wk_format(map_cmd("<Esc>:WhichKey '' i<CR>"):with_noremap():with_label("Show Keymaps"):with_mode("i")),
+    ["<C-Space>"] = bind.convert_wk_format(map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>"):with_noremap():with_label("Show Keymaps"):with_mode("i")),
 }
 
 return plug_map

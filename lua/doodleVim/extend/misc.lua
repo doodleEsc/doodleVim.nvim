@@ -1,6 +1,7 @@
 local utils = require("doodleVim.utils.utils")
 
 local misc = {}
+misc.which_key_loaded = false
 
 misc.safe_exit = function()
     require('doodleVim.utils.defer').immediate_load('vim-floaterm')
@@ -85,6 +86,20 @@ misc.enhanced_buffer_close = function()
         vim.cmd [[bdelete!]]
     else
         vim.cmd [[BufferClose]]
+    end
+end
+
+misc.toggle_whichkey = function()
+    local mode = vim.api.nvim_get_mode()
+    if misc.which_key_loaded then
+        require("which-key.view").on_close()
+        misc.which_key_loaded = false
+    else
+        if mode.mode == "V" or mode.mode == "\22" then
+            mode.mode = "v"
+        end
+        require("which-key").show("", mode)
+        misc.which_key_loaded = true
     end
 end
 
