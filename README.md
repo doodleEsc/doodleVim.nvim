@@ -23,16 +23,15 @@ Fast Neovim Configuration.
     ```
 2. run `nvim` and all the plugins will be installed automatically.
 
-## Interact With System Clipboard
+3. Interact With System Clipboard
+    `Neovim` needs a `clipboard provider` to handle copy and paste, see `:help provider-clipboard`
 
-`Neovim` needs a `clipboard provider` to handle copy and paste, see `:help provider-clipboard`
+    doodleEsc provides a script to handle copying and pasting, Which works with
+    `system clipboard`, `tmux` and `ssh`
 
-doodleEsc provides a script to handle copying and pasting, Which works with
-`system clipboard`, `tmux` and `ssh`
-
-```
-mv ~/.config/nvim/clipboard-provider /usr/local/bin/
-```
+    ```
+    mv ~/.config/nvim/clipboard-provider /usr/local/bin/
+    ```
 
 Note:
 * configuration in tmux
