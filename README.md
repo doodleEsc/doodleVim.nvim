@@ -11,6 +11,7 @@ Fast Neovim Configuration.
 * Python3
 * tree-sitter
 * git
+* sqlite3
 * [fd](https://github.com/sharkdp/fd)
 * [ripgrep](https://github.com/BurntSushi/ripgrep)
 
