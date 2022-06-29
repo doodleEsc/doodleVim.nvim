@@ -19,7 +19,7 @@ Fast Neovim Configuration.
 
 1. clone the repo
     ```shell
-    git clone https://github.com/doodleEsc/nvim.git ~/.config/nvim
+    git clone https://github.com/doodleEsc/doodleVim.git ~/.config/nvim
     ```
 2. run `nvim` and all the plugins will be installed automatically.
 
