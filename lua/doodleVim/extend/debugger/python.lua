@@ -1,10 +1,10 @@
 local python = {}
 
-local adapter_python_path = vim.g.python3_host_prog
-
 local is_windows = function()
     return vim.loop.os_uname().sysname:find("Windows", 1, true) and true
 end
+
+local adapter_python_path = vim.g.python3_host_prog
 
 python.adapters = function(callback, config)
     if config.request == 'attach' then
