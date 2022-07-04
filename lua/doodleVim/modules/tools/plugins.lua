@@ -117,7 +117,7 @@ tools['AckslD/nvim-neoclip.lua'] = {
     config = conf.neoclip
 }
 
-tools['tami5/sqlite.lua'] = {
+tools['kkharji/sqlite.lua'] = {
     opt = true,
     setup = function() require("doodleVim.utils.defer").add("sqlite.lua", 90) end,
 }
