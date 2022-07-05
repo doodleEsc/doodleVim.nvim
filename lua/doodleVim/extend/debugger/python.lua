@@ -73,4 +73,10 @@ python.configurations = {
     }
 }
 
+python.setup = function(dap)
+    -- TODO: check debugpy installed, otherwise install it
+    dap.adapters.python = python.adapters
+    dap.configurations.python = python.configurations
+end
+
 return python

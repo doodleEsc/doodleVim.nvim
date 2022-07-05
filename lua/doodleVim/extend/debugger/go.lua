@@ -72,4 +72,11 @@ go.configurations = {
     }
 }
 
+go.setup = function(dap)
+    -- TODO: check dlv installed, otherwise install it
+
+    dap.adapters.go = go.adapters
+    dap.configurations.go = go.configurations
+end
+
 return go
