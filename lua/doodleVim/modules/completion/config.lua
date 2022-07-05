@@ -115,7 +115,7 @@ function config.nvim_cmp()
         }),
         mapping = cmp.mapping.preset.insert({
             ['<CR>'] = {
-                i = cmp.mapping.confirm({ select = true }),
+                i = cmp.mapping.confirm({ select = false }),
             },
             ['<C-e>'] = {
                 i = cmp.mapping.abort(),
