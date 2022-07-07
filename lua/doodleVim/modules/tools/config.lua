@@ -2,7 +2,7 @@ local config = {}
 
 function config.telescope()
     require('doodleVim.utils.defer').immediate_load({
-        'telescope-fzy-native.nvim',
+        'telescope-fzf-native.nvim',
         'telescope-file-browser.nvim',
         'nvim-neoclip.lua',
         'project.nvim',
@@ -101,14 +101,17 @@ function config.telescope()
                     ["<Tab>"]     = actions_layout.toggle_preview,
                     ["<C-Space>"] = actions.which_key,
                     ["<C-c>"]     = actions.close,
-                    ["q"]       = actions.close,
+                    ["q"]         = actions.close,
                 },
             },
         },
         extensions = {
-            fzy_native = {
-                override_generic_sorter = true,
-                override_file_sorter = true,
+            fzf = {
+                fuzzy = true, -- false will only do exact matching
+                override_generic_sorter = true, -- override the generic sorter
+                override_file_sorter = true, -- override the file sorter
+                case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                -- the default case_mode is "smart_case"
             },
             ["ui-select"] = {
                 require("telescope.themes").get_dropdown {
@@ -136,7 +139,7 @@ function config.telescope()
             },
         },
     }
-    require('telescope').load_extension('fzy_native')
+    require('telescope').load_extension('fzf')
     require('telescope').load_extension('file_browser')
     require('telescope').load_extension('todo-comments')
     require('telescope').load_extension('projects')
@@ -658,6 +661,74 @@ function config.tmux()
             -- sets resize steps for y axis
             resize_step_y = 1,
         }
+    })
+end
+
+function config.mason()
+
+    require("mason").setup({
+        ui = {
+            -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
+            border = "rounded",
+
+            icons = {
+                -- The list icon to use for installed packages.
+                package_installed = "◍",
+                -- The list icon to use for packages that are installing, or queued for installation.
+                package_pending = "◍",
+                -- The list icon to use for packages that are not installed.
+                package_uninstalled = "◍",
+            },
+
+            keymaps = {
+                -- Keymap to expand a package
+                toggle_package_expand = "<CR>",
+                -- Keymap to install the package under the current cursor position
+                install_package = "i",
+                -- Keymap to reinstall/update the package under the current cursor position
+                update_package = "u",
+                -- Keymap to check for new version for the package under the current cursor position
+                check_package_version = "c",
+                -- Keymap to update all installed packages
+                update_all_packages = "U",
+                -- Keymap to check which installed packages are outdated
+                check_outdated_packages = "C",
+                -- Keymap to uninstall a package
+                uninstall_package = "X",
+                -- Keymap to cancel a package installation
+                cancel_installation = "<C-c>",
+                -- Keymap to apply language filter
+                apply_language_filter = "<C-f>",
+            },
+        },
+
+        -- The directory in which to install packages.
+        install_root_dir = require "mason.core.path".concat { vim.fn.stdpath "data", "mason" },
+
+        pip = {
+            -- These args will be added to `pip install` calls. Note that setting extra args might impact intended behavior
+            -- and is not recommended.
+            --
+            -- Example: { "--proxy", "https://proxyserver" }
+            install_args = {},
+        },
+
+        -- Controls to which degree logs are written to the log file. It's useful to set this to vim.log.levels.DEBUG when
+        -- debugging issues with package installations.
+        log_level = vim.log.levels.INFO,
+
+        -- Limit for the maximum amount of packages to be installed at the same time. Once this limit is reached, any further
+        -- packages that are requested to be installed will be put in a queue.
+        max_concurrent_installers = 4,
+
+        github = {
+            -- The template URL to use when downloading assets from GitHub.
+            -- The placeholders are the following (in order):
+            -- 1. The repository (e.g. "rust-lang/rust-analyzer")
+            -- 2. The release version (e.g. "v0.3.0")
+            -- 3. The asset name (e.g. "rust-analyzer-v0.3.0-x86_64-unknown-linux-gnu.tar.gz")
+            download_url_template = "https://github.com/%s/releases/download/%s/%s",
+        },
     })
 end
 

@@ -12,7 +12,7 @@ tools['nvim-telescope/telescope.nvim'] = {
     end,
     config = conf.telescope,
     requires = {
-        { 'nvim-telescope/telescope-fzy-native.nvim', opt = true },
+        { 'nvim-telescope/telescope-fzf-native.nvim', opt = true, run = 'make' },
         { 'nvim-telescope/telescope-file-browser.nvim', opt = true },
         { 'nvim-telescope/telescope-ui-select.nvim', opt = true }
     }
@@ -126,6 +126,15 @@ tools['aserowy/tmux.nvim'] = {
     opt = true,
     setup = function() require("doodleVim.utils.defer").add("tmux.nvim", 50) end,
     config = conf.tmux
+}
+
+tools['williamboman/mason.nvim'] = {
+    opt = true,
+    branch = "alpha",
+    setup = function()
+        require("doodleVim.utils.defer").defer_load("mason.nvim", 100)
+    end,
+    config = conf.mason
 }
 
 return tools
