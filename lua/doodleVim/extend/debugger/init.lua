@@ -1,9 +1,6 @@
 local debugger = {}
 
 debugger.load_debuggers = function(opts)
-    -- INFO: Make sure nvim-lsp-installer loaded, case we need dap binary
-    -- installed in lsp_servers
-    require('doodleVim.utils.defer').immediate_load('nvim-lsp-installer')
     require('doodleVim.utils.defer').immediate_load('nvim-dap')
     local dap = require('dap')
     for _, v in ipairs(opts) do
