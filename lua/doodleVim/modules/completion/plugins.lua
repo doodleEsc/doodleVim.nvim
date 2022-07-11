@@ -67,13 +67,20 @@ completion['williamboman/nvim-lsp-installer'] = {
     config = conf.nvim_lsp_installer,
 }
 
+completion['williamboman/mason.nvim'] = {
+    opt = true,
+    branch = "alpha",
+    after = { 'nlsp-settings.nvim', 'lsp_signature.nvim', 'nvim-lspconfig'},
+    config = conf.mason
+}
+
 completion['doodleEsc/lightbulb.nvim'] = {
-    after = 'nvim-lsp-installer',
+    after = 'mason.nvim',
     config = conf.lightbulb
 }
 
 completion['jose-elias-alvarez/null-ls.nvim'] = {
-    after = 'nvim-lsp-installer',
+    after = 'mason.nvim',
     config = conf.null_ls
 }
 

@@ -128,13 +128,5 @@ tools['aserowy/tmux.nvim'] = {
     config = conf.tmux
 }
 
-tools['williamboman/mason.nvim'] = {
-    opt = true,
-    branch = "alpha",
-    setup = function()
-        require("doodleVim.utils.defer").defer_load("mason.nvim", 100)
-    end,
-    config = conf.mason
-}
 
 return tools
