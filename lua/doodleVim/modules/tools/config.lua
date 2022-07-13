@@ -196,7 +196,7 @@ function config.nvim_tree()
 			},
 			icons = {
 				webdev_colors = true,
-				git_placement = "before",
+				git_placement = "signcolumn",
 				padding = " ",
 				symlink_arrow = "  ",
 				show = {
@@ -223,8 +223,8 @@ function config.nvim_tree()
 						staged = "✓",
 						unmerged = "",
 						renamed = "➜",
-						untracked = "",
-						deleted = "",
+						untracked = "",
+						deleted = "",
 						ignored = "◌",
 					},
 				},
@@ -247,7 +247,7 @@ function config.nvim_tree()
 		},
 		diagnostics = {
 			enable = true,
-			show_on_dirs = true,
+			show_on_dirs = false,
 			icons = {
 				hint = icons.diag.hint_sign,
 				info = icons.diag.infor_sign,
