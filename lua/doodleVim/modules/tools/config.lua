@@ -14,7 +14,7 @@ function config.telescope()
 
 	require("telescope").setup({
 		defaults = {
-			initial_mode = "normal",
+			initial_mode = "insert",
 			wrap_results = false,
 			prompt_prefix = "",
 			selection_caret = " ",
