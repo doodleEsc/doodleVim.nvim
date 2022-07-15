@@ -28,7 +28,7 @@ completion["hrsh7th/cmp-path"] = {
 
 completion["tzachar/cmp-tabnine"] = {
     after = "nvim-cmp",
-    -- run = "./install.sh",
+    run = "./install.sh",
 }
 
 completion["octaltree/cmp-look"] = {
