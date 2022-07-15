@@ -29,7 +29,7 @@ function config.treesitter()
             "vim",
             "yaml",
         },
-        sync_install = true,
+        sync_install = false,
         auto_install = false,
         highlight = {
             enable = true,
