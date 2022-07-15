@@ -7,7 +7,7 @@ ui['nvim-treesitter/nvim-treesitter'] = {
     setup = function() require("doodleVim.utils.defer").add("nvim-treesitter", 100) end,
     config = conf.treesitter,
     requires = { 'nvim-treesitter/nvim-treesitter-textobjects', opt = true },
-    run = ':TSUpdate bash cmake comment c cpp dot dockerfile go gomod gowork hjson html lua make python regex rust toml vim yaml'
+    run = ':TSUpdate bash cmake comment c cpp dot dockerfile go gomod gowork hjson html lua make python regex rust toml vim yaml markdown'
 }
 
 ui['norcalli/nvim-colorizer.lua'] = {
