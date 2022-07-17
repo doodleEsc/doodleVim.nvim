@@ -175,10 +175,10 @@ function config.nvim_tree()
             indent_markers = {
                 enable = true,
                 icons = {
-                    corner = "",
-                    edge = "",
-                    item = "",
-                    none = "",
+                    corner = "└",
+                    edge = "│",
+                    item = "│",
+                    none = " ",
                 },
             },
             icons = {
@@ -196,8 +196,8 @@ function config.nvim_tree()
                     default = "",
                     symlink = "",
                     folder = {
-                        arrow_closed = "",
-                        arrow_open = "",
+                        arrow_closed = "",
+                        arrow_open = "",
                         default = "",
                         open = "",
                         empty = "",
