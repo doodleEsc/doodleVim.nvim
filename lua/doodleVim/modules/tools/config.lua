@@ -613,12 +613,6 @@ function config.notify()
     vim.notify = require("doodleVim.extend.misc").wrapped_notify
 end
 
-function config.gotests()
-    require("gotests").setup({
-        verbose = false,
-    })
-end
-
 function config.neoclip()
     local function is_whitespace(line)
         return vim.fn.match(line, [[^\s*$]]) ~= -1

@@ -344,6 +344,19 @@ function config.luasnip()
     })
 end
 
+function config.gotools()
+    require("gotools").setup({
+        ui = {
+            border = {
+                style = "rounded",
+            },
+            win_options = {
+                winhighlight = "Normal:GruvboxBlue,FloatBorder:FloatBorder",
+            },
+        },
+    })
+end
+
 function config.null_ls()
     local null_ls = require("null-ls")
 
@@ -365,8 +378,8 @@ function config.null_ls()
         sources = {
             null_ls.builtins.code_actions.gitsigns,
             -- null_ls.builtins.formatting.stylua,
-            -- require("gotools").code_actions.gotests,
-            -- require("gotools").code_actions.gomodifytags,
+            require("gotools").code_actions.gotests,
+            require("gotools").code_actions.gomodifytags,
         },
         update_in_insert = false,
     })

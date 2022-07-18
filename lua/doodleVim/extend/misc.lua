@@ -29,18 +29,6 @@ misc.safe_save = function()
     vim.notify("Current Session Saved")
 end
 
-misc.gotests = function(type)
-    if type == "func" then
-        ensure_require('gotests').fun_test()
-    elseif type == "exported" then
-        ensure_require('gotests').exported_test()
-    elseif type == "all" then
-        ensure_require('gotests').all_test()
-    end
-
-    ensure_require('nvim-tree.actions.reloaders').reload_explorer()
-end
-
 misc.wrapped_notify = function(m, l, o)
     if m:match("NULL_LS_CODE_ACTION", 1) then
         return

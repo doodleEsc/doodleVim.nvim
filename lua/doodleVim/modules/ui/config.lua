@@ -28,6 +28,7 @@ function config.treesitter()
             "toml",
             "vim",
             "yaml",
+            "markdown"
         },
         sync_install = false,
         auto_install = true,
@@ -57,7 +58,7 @@ function config.treesitter()
                     ["ih"] = "@call.inner",
                 },
             },
-        }
+        },
     }
 end
 

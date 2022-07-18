@@ -85,14 +85,6 @@ tools['kyazdani42/nvim-web-devicons'] = {}
 
 -- tools['bfredl/nvim-luadev'] = {}
 
-tools['doodleEsc/gotests.nvim'] = {
-    opt = true,
-    setup = function()
-        require("doodleVim.utils.defer").register("gotests", "gotests.nvim")
-    end,
-    config = conf.gotests
-}
-
 tools['doodleEsc/which-key.nvim'] = {
     opt = true,
     setup = function() require("doodleVim.utils.defer").defer_load("which-key.nvim", 100) end,
