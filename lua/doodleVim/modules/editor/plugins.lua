@@ -68,9 +68,10 @@ editor['jakewvincent/mkdnflow.nvim'] = {
     config = conf.mkdnflow
 }
 
-editor['tpope/vim-surround'] = {
+editor['kylechui/nvim-surround'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").defer_load("vim-surround", 200) end,
+    setup = function() require("doodleVim.utils.defer").defer_load("nvim-surround", 200) end,
+    config = conf.nvim_surround
 }
 
 return editor

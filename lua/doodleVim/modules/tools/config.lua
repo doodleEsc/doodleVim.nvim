@@ -422,6 +422,14 @@ function config.mkdp()
     vim.g.mkdp_echo_preview_url = 1
     vim.g.mkdp_command_for_global = 1
     vim.g.mkdp_auto_close = 0
+    vim.g.mkdp_preview_options = {
+        maid = {
+            theme = "neutral",
+            flowchart = {
+                curve = 'linear'
+            }
+        }
+    }
 end
 
 function config.floaterm()
