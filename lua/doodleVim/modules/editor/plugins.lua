@@ -64,7 +64,9 @@ editor['lukas-reineke/indent-blankline.nvim'] = {
 }
 
 editor['jakewvincent/mkdnflow.nvim'] = {
-    ft = "markdown",
+    opt = true,
+    disable = true,
+    setup = function() require("doodleVim.utils.defer").add("mkdnflow.nvim", 50) end,
     config = conf.mkdnflow
 }
 
