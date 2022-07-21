@@ -67,6 +67,7 @@ function config.mason()
             "pylsp",
             "sumneko_lua",
             "jsonls",
+            "marksman"
         },
         automatic_installation = true,
     })
@@ -76,10 +77,23 @@ function config.mason()
     handler.lsp_diagnostic()
     handler.null_ls_depress()
 
-    local servers = {}
-    local installed_servers = require("mason-lspconfig.settings").current.ensure_installed
+    local function contains(tab, val)
+        for _, value in ipairs(tab) do
+            if value == val then
+                return true
+            end
+        end
+        return false
+    end
+
+    local lsp_servers = {}
+    local installed_servers = require("mason-registry").get_installed_packages()
+    local package_to_lspconfig = require("mason-lspconfig.mappings.server").package_to_lspconfig
     for _, item in ipairs(installed_servers) do
-        table.insert(servers, item)
+        if contains(item.spec.categories, "LSP") then
+            local lsp_server = package_to_lspconfig[item.name]
+            table.insert(lsp_servers, lsp_server)
+        end
     end
 
     require("doodleVim.utils.defer").immediate_load("cmp-nvim-lsp")
@@ -103,74 +117,13 @@ function config.mason()
         capabilities = capabilities,
     })
 
-    for _, lsp in ipairs(servers) do
+    for _, lsp in ipairs(lsp_servers) do
         lspconfig[lsp].setup({
             on_attach = on_attach,
             capabilities = capabilities,
         })
     end
 end
-
--- function config.nvim_lsp_installer()
--- 	require("nvim-lsp-installer").setup({
--- 		ensure_installed = {
--- 			"gopls",
--- 			"pylsp",
--- 			"sumneko_lua",
--- 			"jsonls",
--- 		},
--- 		automatic_installation = true,
--- 		ui = {
--- 			border = "rounded",
--- 		},
--- 	})
---
--- 	local handler = require("doodleVim.modules.completion.handler")
--- 	handler.lsp_hover()
--- 	handler.lsp_diagnostic()
--- 	handler.null_ls_depress()
---
--- 	local servers = {}
--- 	local installed_servers = require("nvim-lsp-installer").get_installed_servers()
--- 	for _, item in ipairs(installed_servers) do
--- 		table.insert(servers, item.name)
--- 	end
---
--- 	require("doodleVim.utils.defer").immediate_load("cmp-nvim-lsp")
--- 	local capabilities = vim.lsp.protocol.make_client_capabilities()
--- 	capabilities.textDocument.completion.completionItem.snippetSupport = true
--- 	capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
---
--- 	local lspconfig = require("lspconfig")
---
--- 	local on_attach = function(client, bufnr)
--- 		vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
--- 		-- require "doodleVim.modules.completion.handler".lsp_highlight_document(client)
--- 		require("lsp_signature").on_attach({
--- 			bind = true, -- This is mandatory, otherwise border config won't get registered.
--- 			hint_enable = false,
--- 			floating_window_above_cur_line = true,
--- 			handler_opts = { border = "rounded" },
--- 		}, bufnr)
--- 	end
---
--- 	lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
--- 		capabilities = capabilities,
--- 	})
---
--- 	for _, lsp in ipairs(servers) do
--- 		local server_available, server = require("nvim-lsp-installer.servers").get_server(lsp)
--- 		if not server_available then
--- 			server:install()
--- 		end
--- 		local default_opts = server:get_default_options()
--- 		lspconfig[lsp].setup({
--- 			cmd_env = default_opts.cmd_env,
--- 			on_attach = on_attach,
--- 			capabilities = capabilities,
--- 		})
--- 	end
--- end
 
 function config.nlsp_settings()
     local vim_path = require("doodleVim.core.global").vim_path
