@@ -18,7 +18,7 @@ function config.treesitter()
             "go",
             "gomod",
             "gowork",
-            "hjson",
+            "json",
             "html",
             "lua",
             "make",
