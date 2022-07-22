@@ -64,8 +64,19 @@ completion["tamago324/nlsp-settings.nvim"] = {
 completion["williamboman/mason.nvim"] = {
     opt = true,
     branch = "alpha",
-    after = { "nlsp-settings.nvim", "lsp_signature.nvim", "nvim-lspconfig" },
+    after = "nvim-cmp",
     config = conf.mason,
+}
+
+completion["williamboman/mason-lspconfig.nvim"] = {
+    opt = true,
+    after = {
+        "mason.nvim",
+        "nvim-lspconfig",
+        "nlsp-settings.nvim",
+        "lsp_signature.nvim"
+    },
+    config = conf.mason_lspconfig,
 }
 
 completion["doodleEsc/lightbulb.nvim"] = {

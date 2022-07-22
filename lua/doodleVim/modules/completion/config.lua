@@ -60,7 +60,10 @@ function config.mason()
             download_url_template = "https://github.com/%s/releases/download/%s/%s",
         },
     })
+end
 
+function config.mason_lspconfig()
+    require("doodleVim.utils.defer").immediate_load("mason.nvim")
     require("mason-lspconfig").setup({
         ensure_installed = {
             "gopls",
