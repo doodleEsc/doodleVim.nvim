@@ -34,11 +34,13 @@ local conditions = {
 local config = {
     options = {
         disabled_filetypes = {
-            'alpha',
-            'Outline',
-            'NvimTree',
-            'packer',
-            'startuptime',
+            statusline = {
+                'alpha',
+                'Outline',
+                'NvimTree',
+                'packer',
+                'startuptime',
+            },
         },
         -- Disable sections and component separators
         component_separators = '',
@@ -78,7 +80,7 @@ local config = {
         lualine_y = {},
         lualine_z = {},
     },
-    extensions = { 'nvim-tree' }
+    extensions = {}
 }
 
 local function ins(section, component)

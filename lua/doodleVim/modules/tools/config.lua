@@ -1,28 +1,28 @@
 local config = {}
 
 function config.telescope()
-    require('doodleVim.utils.defer').immediate_load({
-        'telescope-fzy-native.nvim',
-        'telescope-file-browser.nvim',
-        'nvim-neoclip.lua',
-        'project.nvim',
-        'telescope-ui-select.nvim'
+    require("doodleVim.utils.defer").immediate_load({
+        "telescope-fzf-native.nvim",
+        "telescope-file-browser.nvim",
+        "nvim-neoclip.lua",
+        "project.nvim",
+        "telescope-ui-select.nvim",
     })
 
-    local actions = require "telescope.actions"
-    local actions_layout = require "telescope.actions.layout"
+    local actions = require("telescope.actions")
+    local actions_layout = require("telescope.actions.layout")
 
-    require('telescope').setup {
+    require("telescope").setup({
         defaults = {
-            initial_mode = "normal",
+            initial_mode = "insert",
             wrap_results = false,
-            prompt_prefix = '',
-            selection_caret = " ",
-            sorting_strategy = 'ascending',
+            prompt_prefix = "",
+            selection_caret = " ",
+            sorting_strategy = "ascending",
             scroll_strategy = "cycle",
-            set_env = { ['COLORTERM'] = 'truecolor' },
+            set_env = { ["COLORTERM"] = "truecolor" },
             path_display = {
-                shorten = { len = 2, exclude = { -2, -1 } }
+                shorten = { len = 2, exclude = { -2, -1 } },
             },
             results_title = "Results",
             prompt_title = "Prompt",
@@ -35,7 +35,7 @@ function config.telescope()
                 "--line-number",
                 "--column",
                 "--smart-case",
-                "--trim" -- add this value
+                "--trim", -- add this value
             },
             layout_strategy = "flex",
             layout_config = {
@@ -44,24 +44,26 @@ function config.telescope()
                     height = 0.9,
                     preview_cutoff = 120,
                     preview_width = 0.45,
-                    prompt_position = "top"
+                    prompt_position = "top",
                 },
                 vertical = {
                     height = 0.9,
                     width = 0.9,
                     preview_cutoff = 40,
                     prompt_position = "top",
-                }
+                },
             },
             preview = {
-                hide_on_startup = false
+                hide_on_startup = false,
             },
             default_mappings = {
                 i = {
                     ["<C-j>"] = actions.move_selection_next,
                     ["<C-k>"] = actions.move_selection_previous,
+                    ["<C-n>"] = actions.move_selection_next,
+                    ["<C-p>"] = actions.move_selection_previous,
 
-                    ["<CR>"]  = actions.select_default,
+                    ["<CR>"] = actions.select_default,
                     ["<C-x>"] = actions.select_horizontal,
                     ["<C-v>"] = actions.select_vertical,
                     ["<C-t>"] = actions.select_tab,
@@ -72,22 +74,17 @@ function config.telescope()
                     ["<C-b>"] = actions.results_scrolling_up,
                     ["<C-f>"] = actions.results_scrolling_down,
 
-                    ["<Tab>"]     = actions_layout.toggle_preview,
+                    ["<Tab>"] = actions_layout.toggle_preview,
                     ["<C-Space>"] = actions.which_key,
-                    ["<C-c>"]     = actions.close,
-                    --
-                    -- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-                    -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-                    -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-                    -- ["<C-l>"] = actions.complete_tag,
-                    -- ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
-                    -- ["<C-w>"] = { "<c-s-w>", type = "command" },
+                    ["<C-c>"] = actions.close,
                 },
                 n = {
                     ["j"] = actions.move_selection_next,
                     ["k"] = actions.move_selection_previous,
+                    ["<C-n>"] = actions.move_selection_next,
+                    ["<C-p>"] = actions.move_selection_previous,
 
-                    ["<CR>"]  = actions.select_default,
+                    ["<CR>"] = actions.select_default,
                     ["<C-x>"] = actions.select_horizontal,
                     ["<C-v>"] = actions.select_vertical,
                     ["<C-t>"] = actions.select_tab,
@@ -98,55 +95,44 @@ function config.telescope()
                     ["<C-b>"] = actions.results_scrolling_up,
                     ["<C-f>"] = actions.results_scrolling_down,
 
-                    ["<Tab>"]     = actions_layout.toggle_preview,
+                    ["<Tab>"] = actions_layout.toggle_preview,
                     ["<C-Space>"] = actions.which_key,
-                    ["<C-c>"]     = actions.close,
-                    ["q"]       = actions.close,
+                    ["<C-c>"] = actions.close,
+                    ["q"] = actions.close,
                 },
             },
         },
         extensions = {
-            fzy_native = {
-                override_generic_sorter = true,
-                override_file_sorter = true,
+            fzf = {
+                fuzzy = true, -- false will only do exact matching
+                override_generic_sorter = true, -- override the generic sorter
+                override_file_sorter = true, -- override the file sorter
+                case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                -- the default case_mode is "smart_case"
             },
             ["ui-select"] = {
-                require("telescope.themes").get_dropdown {
-                    -- even more opts
-                }
-
-                -- pseudo code / specification for writing custom displays, like the one
-                -- for "codeactions"
-                -- specific_opts = {
-                --   [kind] = {
-                --     make_indexed = function(items) -> indexed_items, width,
-                --     make_displayer = function(widths) -> displayer
-                --     make_display = function(displayer) -> function(e)
-                --     make_ordinal = function(e) -> string
-                --   },
-                --   -- for example to disable the custom builtin "codeactions" display
-                --      do the following
-                --   codeactions = false,
-                -- }
-            }
+                require("telescope.themes").get_dropdown({
+                    initial_mode = "normal",
+                }),
+            },
         },
         pickers = {
             find_files = {
-                find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
+                find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
             },
         },
-    }
-    require('telescope').load_extension('fzy_native')
-    require('telescope').load_extension('file_browser')
-    require('telescope').load_extension('todo-comments')
-    require('telescope').load_extension('projects')
-    require('telescope').load_extension('neoclip')
-    require('telescope').load_extension('ui-select')
+    })
+    require("telescope").load_extension("fzf")
+    require("telescope").load_extension("file_browser")
+    require("telescope").load_extension("todo-comments")
+    require("telescope").load_extension("projects")
+    require("telescope").load_extension("neoclip")
+    require("telescope").load_extension("ui-select")
 end
 
 function config.nvim_tree()
     local icons = require("doodleVim.utils.icons")
-    require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
+    require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
         auto_reload_on_write = true,
         create_in_closed_folder = true,
         disable_netrw = true,
@@ -162,7 +148,9 @@ function config.nvim_tree()
         reload_on_bufenter = true,
         respect_buf_cwd = true,
         view = {
-            width = 31,
+            adaptive_size = false,
+            centralize_selection = true,
+            width = 30,
             height = 30,
             hide_root_folder = false,
             side = "left",
@@ -171,9 +159,55 @@ function config.nvim_tree()
             relativenumber = false,
             signcolumn = "yes",
             mappings = {
-                custom_only = false,
+                custom_only = true,
                 list = {
-                    -- user mappings go here
+                    { key = { "<CR>", "o" }, action = "edit" },
+                    -- { key = "<C-e>", action = "edit_in_place" },
+                    -- { key = "O", action = "edit_no_picker" },
+                    -- { key = { "<C-o>" }, action = "cd" },
+                    { key = "<C-v>", action = "vsplit" },
+                    { key = "<C-x>", action = "split" },
+                    { key = "<C-t>", action = "tabnew" },
+                    -- { key = "<", action = "prev_sibling" },
+                    -- { key = ">", action = "next_sibling" },
+                    { key = "P", action = "parent_node" },
+                    { key = "<BS>", action = "close_node" },
+                    -- { key = "<Tab>", action = "preview" },
+                    { key = "K", action = "first_sibling" },
+                    { key = "J", action = "last_sibling" },
+                    { key = "I", action = "toggle_git_ignored" },
+                    { key = "H", action = "toggle_dotfiles" },
+                    -- { key = "U", action = "toggle_custom" },
+                    { key = "<C-r>", action = "refresh" },
+                    { key = "a", action = "create" },
+                    { key = "d", action = "remove" },
+                    { key = "D", action = "trash" },
+                    { key = "r", action = "rename" },
+                    { key = "R", action = "full_rename" },
+                    { key = "x", action = "cut" },
+                    { key = "c", action = "copy" },
+                    { key = "p", action = "paste" },
+                    { key = "y", action = "copy_name" },
+                    { key = "yp", action = "copy_path" },
+                    { key = "ya", action = "copy_absolute_path" },
+                    -- { key = "[e", action = "prev_diag_item" },
+                    -- { key = "[c", action = "prev_git_item" },
+                    -- { key = "]e", action = "next_diag_item" },
+                    -- { key = "]c", action = "next_git_item" },
+                    { key = "-", action = "dir_up" },
+                    { key = "s", action = "system_open" },
+                    { key = "f", action = "live_filter" },
+                    { key = "F", action = "clear_live_filter" },
+                    { key = "q", action = "close" },
+                    { key = "<C-o>", action = "collapse_all" },
+                    { key = "E", action = "expand_all" },
+                    { key = "/", action = "search_node" },
+                    { key = ".", action = "run_file_command" },
+                    { key = "<Tab>", action = "toggle_file_info" },
+                    { key = "?", action = "toggle_help" },
+                    { key = "m", action = "toggle_mark" },
+                    { key = "bmv", action = "bulk_move" },
+
                 },
             },
         },
@@ -186,14 +220,15 @@ function config.nvim_tree()
             indent_markers = {
                 enable = true,
                 icons = {
-                    corner = "└ ",
-                    edge = "│ ",
-                    none = "  ",
+                    corner = "└",
+                    edge = "│",
+                    item = "│",
+                    none = " ",
                 },
             },
             icons = {
                 webdev_colors = true,
-                git_placement = "before",
+                git_placement = "signcolumn",
                 padding = " ",
                 symlink_arrow = "  ",
                 show = {
@@ -205,6 +240,7 @@ function config.nvim_tree()
                 glyphs = {
                     default = "",
                     symlink = "",
+                    bookmark = "",
                     folder = {
                         arrow_closed = "",
                         arrow_open = "",
@@ -220,13 +256,14 @@ function config.nvim_tree()
                         staged = "✓",
                         unmerged = "",
                         renamed = "➜",
-                        untracked = "",
-                        deleted = "",
+                        untracked = "",
+                        deleted = "",
                         ignored = "◌",
                     },
                 },
             },
             special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+            symlink_destination = true,
         },
         hijack_directories = {
             enable = true,
@@ -244,18 +281,22 @@ function config.nvim_tree()
         },
         diagnostics = {
             enable = true,
-            show_on_dirs = true,
+            show_on_dirs = false,
             icons = {
                 hint = icons.diag.hint_sign,
                 info = icons.diag.infor_sign,
                 warning = icons.diag.warn_sign,
                 error = icons.diag.error_sign,
-            }
+            },
         },
         filters = {
             dotfiles = false,
             custom = {},
             exclude = {},
+        },
+        filesystem_watchers = {
+            enable = true,
+            debounce_delay = 100,
         },
         git = {
             enable = true,
@@ -308,8 +349,10 @@ function config.nvim_tree()
                 profile = false,
             },
         },
-    }
-    require "nvim-tree.events".on_file_created(function(file) vim.cmd("edit " .. file.fname) end)
+    })
+    require("nvim-tree.events").on_file_created(function(file)
+        vim.cmd("edit " .. file.fname)
+    end)
 end
 
 function config.symbols_outline()
@@ -318,14 +361,14 @@ function config.symbols_outline()
         highlight_hovered_item = true,
         show_guides = true,
         auto_preview = false,
-        position = 'right',
+        position = "right",
         relative_width = true,
         width = 30,
         auto_close = true,
         show_numbers = false,
         show_relative_numbers = false,
         show_symbol_details = true,
-        preview_bg_highlight = 'LspSagaAutoPreview',
+        preview_bg_highlight = "LspSagaAutoPreview",
         keymaps = { -- These doodleVim.keymaps can be a string or a table for multiple keys
             close = { "<Esc>", "q" },
             goto_location = "<CR>",
@@ -363,19 +406,27 @@ function config.symbols_outline()
             Struct = { icon = icons.cmp.Struct, hl = "TSType" },
             Event = { icon = icons.cmp.Event, hl = "TSType" },
             Operator = { icon = icons.cmp.Operator, hl = "TSOperator" },
-            TypeParameter = { icon = icons.cmp.TypeParameter, hl = "TSParameter" }
-        }
+            TypeParameter = { icon = icons.cmp.TypeParameter, hl = "TSParameter" },
+        },
     }
 end
 
 function config.mkdp()
-    vim.g.mkdp_auto_start         = 0
-    vim.g.mkdp_open_to_the_world  = 1
-    vim.g.mkdp_open_ip            = '0.0.0.0'
-    vim.g.mkdp_port               = 9096
-    vim.g.mkdp_echo_preview_url   = 1
+    vim.g.mkdp_auto_start = 0
+    vim.g.mkdp_open_to_the_world = 1
+    vim.g.mkdp_open_ip = "0.0.0.0"
+    vim.g.mkdp_port = 9096
+    vim.g.mkdp_echo_preview_url = 1
     vim.g.mkdp_command_for_global = 1
-    vim.g.mkdp_auto_close         = 0
+    vim.g.mkdp_auto_close = 0
+    vim.g.mkdp_preview_options = {
+        maid = {
+            theme = "neutral",
+            flowchart = {
+                curve = 'linear'
+            }
+        }
+    }
 end
 
 function config.floaterm()
@@ -387,12 +438,12 @@ end
 
 function config.translator()
     vim.g.translator_window_borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-    vim.g.translator_proxy_url = 'socks5://127.0.0.1:1080'
-    vim.g.translator_default_engines = { 'google' }
+    vim.g.translator_proxy_url = "socks5://127.0.0.1:1080"
+    vim.g.translator_default_engines = { "google" }
 end
 
 function config.project()
-    require("project_nvim").setup {
+    require("project_nvim").setup({
         -- Manual mode doesn't automatically change your root directory, so you have
         -- the option to manually do so using `:ProjectRoot` command.
         manual_mode = false,
@@ -435,13 +486,13 @@ function config.project()
         --    "change_working_directory"  : just change the directory
         -- Note: All will change the directory regardless
         telescope_on_project_selected = function(path, open)
-            local Lib = require "auto-session-library"
-            local AutoSession = require "auto-session"
+            local Lib = require("auto-session-library")
+            local AutoSession = require("auto-session")
             local sessions_dir = AutoSession.get_root_dir()
             local session_name = Lib.escaped_session_name_from_cwd()
             local branch_name = ""
             if AutoSession.conf.auto_session_use_git_branch then
-                local out = vim.fn.systemlist('git rev-parse --abbrev-ref HEAD')
+                local out = vim.fn.systemlist("git rev-parse --abbrev-ref HEAD")
                 if vim.v.shell_error ~= 0 then
                     vim.api.nvim_err_writeln(string.format("git failed with: %s", table.concat(out, "\n")))
                 end
@@ -454,30 +505,30 @@ function config.project()
             local session_file = string.format(sessions_dir .. "%s.vim", session_name)
 
             if Lib.is_readable(session_file) then
-                vim.cmd [[silent! lua require('auto-session').RestoreSession()]]
+                vim.cmd([[silent! lua require('auto-session').RestoreSession()]])
                 vim.notify("Current Session Loaded")
             else
-                vim.cmd [[:ene]]
-                require('doodleVim.extend.tree').toggle()
+                vim.cmd([[:ene]])
+                require("doodleVim.extend.tree").toggle()
                 vim.notify("No Session Found, Open In Current Dir", "warn")
             end
-        end
-    }
+        end,
+    })
 end
 
 function config.autosession()
     vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,winpos,globals"
-    require('auto-session').setup({
-        log_level = 'info',
+    require("auto-session").setup({
+        log_level = "info",
         auto_session_enable_last_session = false,
-        auto_session_root_dir = vim.fn.stdpath('data') .. "/sessions/",
+        auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
         auto_session_enabled = false,
         auto_save_enabled = false,
         auto_restore_enabled = false,
         auto_session_suppress_dirs = {},
         -- the configs below are lua only
         bypass_session_save_file_types = nil,
-        post_restore_cmds = { require('doodleVim.extend.tree').toggle }
+        post_restore_cmds = { require("doodleVim.extend.tree").toggle },
     })
 end
 
@@ -499,13 +550,13 @@ function config.which_key()
             position = "bottom", -- bottom, top
             margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
             padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-            winblend = 0
+            winblend = 0,
         },
         ignore_missing = false,
     })
 
     -- bind common doodleVim.keymap
-    local bind = require('doodleVim.keymap.bind')
+    local bind = require("doodleVim.keymap.bind")
     local def_map = require("doodleVim.keymap.def_map")
     local plug_map = require("doodleVim.keymap.plug_map")
 
@@ -564,13 +615,6 @@ function config.notify()
     })
 
     vim.notify = require("doodleVim.extend.misc").wrapped_notify
-
-end
-
-function config.gotests()
-    require('gotests').setup({
-        verbose = false
-    })
 end
 
 function config.neoclip()
@@ -587,7 +631,7 @@ function config.neoclip()
         return true
     end
 
-    require('neoclip').setup({
+    require("neoclip").setup({
         history = 50,
         enable_persistent_history = true,
         continuous_sync = true,
@@ -597,8 +641,8 @@ function config.neoclip()
             return not all(data.event.regcontents, is_whitespace)
         end,
         preview = true,
-        default_register = { '"', '+', '*' },
-        default_register_macros = 'z',
+        default_register = { '"', "+", "*" },
+        default_register_macros = "z",
         enable_macro_history = false,
         content_spec_column = false,
         on_paste = {
@@ -610,22 +654,22 @@ function config.neoclip()
         keys = {
             telescope = {
                 i = {
-                    select = '<cr>',
-                    paste = '<c-p>',
-                    paste_behind = '<c-k>',
-                    replay = '<c-z>', -- replay a macro
-                    delete = '<c-d>', -- delete an entry
+                    select = "<cr>",
+                    paste = "<c-p>",
+                    paste_behind = "<c-k>",
+                    replay = "<c-z>", -- replay a macro
+                    delete = "<c-d>", -- delete an entry
                     custom = {},
                 },
                 n = {
-                    select = '<cr>',
-                    paste = 'p',
-                    paste_behind = 'P',
-                    replay = 'z',
-                    delete = 'd',
+                    select = "<cr>",
+                    paste = "p",
+                    paste_behind = "P",
+                    replay = "z",
+                    delete = "d",
                     custom = {},
                 },
-            }
+            },
         },
     })
 end
@@ -657,7 +701,7 @@ function config.tmux()
 
             -- sets resize steps for y axis
             resize_step_y = 1,
-        }
+        },
     })
 end
 

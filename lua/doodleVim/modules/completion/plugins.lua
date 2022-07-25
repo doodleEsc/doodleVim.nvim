@@ -1,90 +1,109 @@
 local completion = {}
-local conf = require('doodleVim.modules.completion.config')
+local conf = require("doodleVim.modules.completion.config")
 
 -- COMPLETION
-completion['hrsh7th/nvim-cmp'] = {
+completion["hrsh7th/nvim-cmp"] = {
     opt = true,
     setup = function()
         require("doodleVim.utils.defer").add("nvim-cmp", 50)
     end,
-    config = conf.nvim_cmp
+    config = conf.nvim_cmp,
 }
 
-completion['hrsh7th/cmp-nvim-lsp'] = {
-    after = "nvim-cmp"
-}
-
-completion['saadparwaiz1/cmp_luasnip'] = {
-    after = "nvim-cmp"
-}
-
-completion['hrsh7th/cmp-buffer'] = {
-    after = 'nvim-cmp'
-}
-
-completion['hrsh7th/cmp-path'] = {
-    after = 'nvim-cmp'
-}
-
-completion['tzachar/cmp-tabnine'] = {
-    after = 'nvim-cmp',
-    run = './install.sh'
-}
-
-completion['octaltree/cmp-look'] = {
-    after = 'nvim-cmp'
-}
-
-completion['hrsh7th/cmp-cmdline'] = {
-    after = 'nvim-cmp'
-}
-
-completion['L3MON4D3/LuaSnip'] = {
+completion["hrsh7th/cmp-nvim-lsp"] = {
     after = "nvim-cmp",
-    config = conf.luasnip
 }
 
-completion['doodleEsc/friendly-snippets'] = {
-    opt = true
+completion["saadparwaiz1/cmp_luasnip"] = {
+    after = "nvim-cmp",
 }
 
-completion['neovim/nvim-lspconfig'] = {
-    after = 'cmp-nvim-lsp',
+completion["hrsh7th/cmp-buffer"] = {
+    after = "nvim-cmp",
 }
 
-completion['ray-x/lsp_signature.nvim'] = {
-    after = 'nvim-lspconfig',
+completion["hrsh7th/cmp-path"] = {
+    after = "nvim-cmp",
 }
 
-completion['tamago324/nlsp-settings.nvim'] = {
-    after = 'nvim-lspconfig',
-    config = conf.nlsp_settings
+completion["tzachar/cmp-tabnine"] = {
+    after = "nvim-cmp",
+    run = "./install.sh",
 }
 
-completion['williamboman/nvim-lsp-installer'] = {
+completion["octaltree/cmp-look"] = {
+    after = "nvim-cmp",
+}
+
+completion["hrsh7th/cmp-cmdline"] = {
+    after = "nvim-cmp",
+}
+
+completion["L3MON4D3/LuaSnip"] = {
+    after = "nvim-cmp",
+    config = conf.luasnip,
+}
+
+completion["doodleEsc/friendly-snippets"] = {
     opt = true,
-    after = { 'nlsp-settings.nvim', 'lsp_signature.nvim', 'nvim-lspconfig'},
-    config = conf.nvim_lsp_installer,
 }
 
-completion['doodleEsc/lightbulb.nvim'] = {
-    after = 'nvim-lsp-installer',
-    config = conf.lightbulb
+completion["neovim/nvim-lspconfig"] = {
+    after = "cmp-nvim-lsp",
 }
 
-completion['jose-elias-alvarez/null-ls.nvim'] = {
-    after = 'nvim-lsp-installer',
-    config = conf.null_ls
+completion["ray-x/lsp_signature.nvim"] = {
+    after = "nvim-lspconfig",
 }
 
-completion['danymat/neogen'] = {
+completion["tamago324/nlsp-settings.nvim"] = {
+    after = "nvim-lspconfig",
+    config = conf.nlsp_settings,
+}
+
+completion["williamboman/mason.nvim"] = {
+    opt = true,
+    after = "nvim-cmp",
+    config = conf.mason,
+}
+
+completion["williamboman/mason-lspconfig.nvim"] = {
+    opt = true,
+    after = {
+        "mason.nvim",
+        "nvim-lspconfig",
+        "nlsp-settings.nvim",
+        "lsp_signature.nvim"
+    },
+    config = conf.mason_lspconfig,
+}
+
+completion["doodleEsc/lightbulb.nvim"] = {
+    after = "mason-lspconfig.nvim",
+    config = conf.lightbulb,
+}
+
+completion["doodleEsc/gotools.nvim"] = {
+    after = {"mason-lspconfig.nvim", "nui.nvim"},
+    config = conf.gotools
+}
+
+completion["jose-elias-alvarez/null-ls.nvim"] = {
+    after = {
+        "mason.nvim",
+        "gotools.nvim"
+    },
+    config = conf.null_ls,
+}
+
+completion["danymat/neogen"] = {
     after = { "nvim-cmp", "LuaSnip" },
-    config = conf.neogen
+    config = conf.neogen,
 }
 
-completion['doodleEsc/rename.nvim'] = {
-    after = { 'nvim-lspconfig', 'nui.nvim' },
-    config = conf.rename
+completion["doodleEsc/rename.nvim"] = {
+    after = { "nvim-lspconfig", "nui.nvim" },
+    config = conf.rename,
 }
 
 return completion

@@ -18,7 +18,7 @@ function config.treesitter()
             "go",
             "gomod",
             "gowork",
-            "hjson",
+            "json",
             "html",
             "lua",
             "make",
@@ -28,7 +28,10 @@ function config.treesitter()
             "toml",
             "vim",
             "yaml",
+            "markdown"
         },
+        sync_install = false,
+        auto_install = true,
         highlight = {
             enable = true,
             additional_vim_regex_highlighting = false,
@@ -55,7 +58,7 @@ function config.treesitter()
                     ["ih"] = "@call.inner",
                 },
             },
-        }
+        },
     }
 end
 

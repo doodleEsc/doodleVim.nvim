@@ -15,12 +15,9 @@ plug_map.raw = {
 
 plug_map.normal = {
     ["t"] = {
-        name = "Tree,Gotests,Translate",
+        name = "Tree,Translate",
         t = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').toggle()"):with_noremap():with_silent():with_label("Enhanced NvimTree Toggle")),
         w = bind.convert_wk_format(map_cr("lua ensure_require'nvim-tree.actions.reloaders'.reload_explorer()"):with_noremap():with_silent():with_label("NvimTree Refresh")),
-        u = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').gotests('func')"):with_noremap():with_silent():with_label("Generate Function Test")),
-        a = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').gotests('all')"):with_noremap():with_silent():with_label("Generate All Function Test")),
-        e = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').gotests('exported')"):with_noremap():with_silent():with_label("Generate Exported Function Test")),
         r = bind.convert_wk_format(map_cr("TranslateW"):with_silent():with_label("Translate Word In Cursor"))
     },
 
@@ -149,7 +146,7 @@ plug_map.visual = {
     },
 
     ["t"] = {
-        name = "Tree,Gotests,Translate",
+        name = "Tree,Translate",
         r = bind.convert_wk_format(map_cu("TranslateW"):with_silent():with_label("Translate Selected Buffer"):with_mode("v"))
     },
 

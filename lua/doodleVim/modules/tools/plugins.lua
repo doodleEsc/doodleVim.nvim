@@ -12,7 +12,7 @@ tools['nvim-telescope/telescope.nvim'] = {
     end,
     config = conf.telescope,
     requires = {
-        { 'nvim-telescope/telescope-fzy-native.nvim', opt = true },
+        { 'nvim-telescope/telescope-fzf-native.nvim', opt = true, run = 'make' },
         { 'nvim-telescope/telescope-file-browser.nvim', opt = true },
         { 'nvim-telescope/telescope-ui-select.nvim', opt = true }
     }
@@ -81,17 +81,7 @@ tools['nvim-lua/plenary.nvim'] = {
     opt = true
 }
 
-tools['kyazdani42/nvim-web-devicons'] = {}
-
 -- tools['bfredl/nvim-luadev'] = {}
-
-tools['doodleEsc/gotests.nvim'] = {
-    opt = true,
-    setup = function()
-        require("doodleVim.utils.defer").register("gotests", "gotests.nvim")
-    end,
-    config = conf.gotests
-}
 
 tools['doodleEsc/which-key.nvim'] = {
     opt = true,
@@ -117,7 +107,7 @@ tools['AckslD/nvim-neoclip.lua'] = {
     config = conf.neoclip
 }
 
-tools['tami5/sqlite.lua'] = {
+tools['kkharji/sqlite.lua'] = {
     opt = true,
     setup = function() require("doodleVim.utils.defer").add("sqlite.lua", 90) end,
 }
@@ -127,5 +117,6 @@ tools['aserowy/tmux.nvim'] = {
     setup = function() require("doodleVim.utils.defer").add("tmux.nvim", 50) end,
     config = conf.tmux
 }
+
 
 return tools
