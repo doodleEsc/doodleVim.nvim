@@ -61,6 +61,7 @@ M.load_options = function()
         backspace      = "indent,eol,start";
         diffopt        = "filler,iwhite,internal,algorithm:patience";
         completeopt    = "menu,menuone";
+        complete       = "",
         jumpoptions    = "stack";
         showmode       = false;
         shortmess      = "aoOTIcF";
