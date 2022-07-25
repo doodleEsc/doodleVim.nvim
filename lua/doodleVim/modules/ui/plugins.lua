@@ -17,6 +17,8 @@ ui['norcalli/nvim-colorizer.lua'] = {
     config = function() require('colorizer').setup() end
 }
 
+ui['kyazdani42/nvim-web-devicons'] = {}
+
 ui['nvim-lualine/lualine.nvim'] = {
     opt = true,
     setup = function() require("doodleVim.utils.defer").add("lualine.nvim", 99) end,

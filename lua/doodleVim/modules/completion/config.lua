@@ -191,14 +191,14 @@ function config.nvim_cmp()
                 if cmp.visible() then
                     cmp.select_prev_item()
                 else
-                    require("doodleVim.utils.utils").feedkeys("<Up>", "i")
+                    fallback()
                 end
             end),
             ["<C-n>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
                 else
-                    require("doodleVim.utils.utils").feedkeys("<Down>", "i")
+                    fallback()
                 end
             end),
             ["<C-k>"] = cmp.mapping(function(fallback)
@@ -207,7 +207,7 @@ function config.nvim_cmp()
                 elseif require("neogen").jumpable(true) then
                     require("neogen").jump_prev()
                 else
-                    fallback()
+                    require("doodleVim.utils.utils").feedkeys("<Up>", "i")
                 end
             end, { "i", "s" }),
             ["<C-j>"] = cmp.mapping(function(fallback)
@@ -216,7 +216,7 @@ function config.nvim_cmp()
                 elseif require("neogen").jumpable() then
                     require("neogen").jump_next()
                 else
-                    fallback()
+                    require("doodleVim.utils.utils").feedkeys("<Down>", "i")
                 end
             end, { "i", "s" }),
             ["<C-d>"] = cmp.mapping(function(fallback)

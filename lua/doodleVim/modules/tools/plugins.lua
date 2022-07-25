@@ -81,8 +81,6 @@ tools['nvim-lua/plenary.nvim'] = {
     opt = true
 }
 
-tools['kyazdani42/nvim-web-devicons'] = {}
-
 -- tools['bfredl/nvim-luadev'] = {}
 
 tools['doodleEsc/which-key.nvim'] = {
