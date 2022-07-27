@@ -49,9 +49,9 @@ local todo = {
     fix  = "",
     todo = "",
     hack = "",
-    warn = "",
-    perf = "",
-    note = "",
+    warn = "ﱥ",
+    perf = "",
+    note = "",
 }
 
 return {
