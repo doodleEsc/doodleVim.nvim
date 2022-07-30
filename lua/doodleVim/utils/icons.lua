@@ -37,21 +37,21 @@ local cmp = {
 }
 
 local diagnostics = {
-    error_sign = "",
+    error_sign = "",
     warn_sign  = "",
-    hint_sign  = "",
-    infor_sign = "",
-    debug_sign = "",
-    trace_sign = "",
+    hint_sign  = "",
+    infor_sign = "",
+    debug_sign = "",
+    trace_sign = "",
 }
 
 local todo = {
     fix  = "",
     todo = "",
     hack = "",
-    warn = "",
-    perf = "",
-    note = "",
+    warn = "ﱥ",
+    perf = "",
+    note = "",
 }
 
 return {
