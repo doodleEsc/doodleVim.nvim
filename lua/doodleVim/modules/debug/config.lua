@@ -1,8 +1,9 @@
 local config = {}
 
 function config.dapui()
+    local icons = require("doodleVim.utils.icons")
     require("dapui").setup({
-        icons = { expanded = "▾", collapsed = "▸" },
+        icons = { expanded = icons.arrow.down, collapsed = icons.arrow.right },
         mappings = {
             -- Use a table to apply multiple mappings
             expand = { "<CR>", "<2-LeftMouse>" },
@@ -65,16 +66,20 @@ function config.dapui()
 end
 
 function config.dap()
+    local icons = require("doodleVim.utils.icons")
+
     require("doodleVim.extend.debugger").load_debuggers({
         "go",
         "python"
     })
 
-    vim.fn.sign_define('DapBreakpoint', { text = "", texthl = 'GruvboxRed', linehl = '', numhl = '' })
-    vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "GruvboxRed", linehl = "", numhl = "" })
-    vim.fn.sign_define('DapBreakpointRejected', { text = "", texthl ="GruvboxRed", linehl = '', numhl = '' })
-    vim.fn.sign_define('DapLogPoint', { text = 'ﯽ', texthl = 'GruvboxYellow', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapStopped', { text = 'ﭥ', texthl = 'GruvboxYellow', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapBreakpoint', { text = icons.dap.breakpoint, texthl = 'GruvboxRed', linehl = '', numhl = '' })
+    vim.fn.sign_define("DapBreakpointCondition",
+        { text = icons.dap.breakpoint_condition, texthl = "GruvboxRed", linehl = "", numhl = "" })
+    vim.fn.sign_define('DapBreakpointRejected',
+        { text = icons.dap.breakpoint_rejected, texthl = "GruvboxRed", linehl = '', numhl = '' })
+    vim.fn.sign_define('DapLogPoint', { text = icons.dap.log_point, texthl = 'GruvboxYellow', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapStopped', { text = icons.dap.stopped, texthl = 'GruvboxYellow', linehl = '', numhl = '' })
 end
 
 return config

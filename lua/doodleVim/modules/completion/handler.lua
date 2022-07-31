@@ -32,7 +32,7 @@ M.lsp_diagnostic = function()
         float = {
             border = "rounded",
             focusable = false,
-            header = { icons.diag.debug_sign .. ' Diagnostics:' },
+            header = { icons.diagnostics.debug_sign .. ' Diagnostics:' },
             source = 'always',
         },
         virtual_text = {
@@ -45,11 +45,11 @@ M.lsp_diagnostic = function()
     })
 
     require("doodleVim.extend.diagnostics").setup({
-        error_sign = icons.diag.error_sign,
-        warn_sign = icons.diag.warn_sign,
-        hint_sign = icons.diag.hint_sign,
-        infor_sign = icons.diag.infor_sign,
-        debug_sign = icons.diag.debug_sign,
+        error_sign = icons.diagnostics.error_sign,
+        warn_sign = icons.diagnostics.warn_sign,
+        hint_sign = icons.diagnostics.hint_sign,
+        infor_sign = icons.diagnostics.infor_sign,
+        debug_sign = icons.diagnostics.debug_sign,
         use_diagnostic_virtual_text = false,
     })
 end

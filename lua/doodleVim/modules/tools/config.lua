@@ -9,6 +9,7 @@ function config.telescope()
         "telescope-ui-select.nvim",
     })
 
+    local icons = require("doodleVim.utils.icons")
     local actions = require("telescope.actions")
     local actions_layout = require("telescope.actions.layout")
 
@@ -17,7 +18,7 @@ function config.telescope()
             initial_mode = "insert",
             wrap_results = false,
             prompt_prefix = "",
-            selection_caret = " ",
+            selection_caret = icons.arrow.caret .. " ",
             sorting_strategy = "ascending",
             scroll_strategy = "cycle",
             set_env = { ["COLORTERM"] = "truecolor" },
@@ -238,27 +239,27 @@ function config.nvim_tree()
                     git = true,
                 },
                 glyphs = {
-                    default = "",
-                    symlink = "",
-                    bookmark = "",
+                    default = icons.file.default,
+                    symlink = icons.file.symlink,
+                    bookmark = icons.file.bookmark,
                     folder = {
-                        arrow_closed = "",
-                        arrow_open = "",
-                        default = "",
-                        open = "",
-                        empty = "",
-                        empty_open = "",
-                        symlink = "",
-                        symlink_open = "",
+                        arrow_closed = icons.arrow.right,
+                        arrow_open = icons.arrow.down,
+                        default = icons.folder.default,
+                        open = icons.folder.open,
+                        empty = icons.folder.empty,
+                        empty_open = icons.folder.empty_open,
+                        symlink = icons.folder.symlink,
+                        symlink_open = icons.folder.symlink_open,
                     },
                     git = {
-                        unstaged = "✗",
-                        staged = "✓",
-                        unmerged = "",
-                        renamed = "➜",
-                        untracked = "",
-                        deleted = "",
-                        ignored = "◌",
+                        unstaged = icons.git.unstaged,
+                        staged = icons.git.staged,
+                        unmerged = icons.git.unmerged,
+                        renamed = icons.git.renamed,
+                        untracked = icons.git.untracked,
+                        deleted = icons.git.deleted,
+                        ignored = icons.git.ignored,
                     },
                 },
             },
@@ -283,10 +284,10 @@ function config.nvim_tree()
             enable = true,
             show_on_dirs = false,
             icons = {
-                hint = icons.diag.hint_sign,
-                info = icons.diag.infor_sign,
-                warning = icons.diag.warn_sign,
-                error = icons.diag.error_sign,
+                hint = icons.diagnostics.hint_sign,
+                info = icons.diagnostics.infor_sign,
+                warning = icons.diagnostics.warn_sign,
+                error = icons.diagnostics.error_sign,
             },
         },
         filters = {
@@ -606,11 +607,11 @@ function config.notify()
 
         -- Icons for the different levels
         icons = {
-            ERROR = icons.diag.error_sign,
-            WARN = icons.diag.warn_sign,
-            INFO = icons.diag.infor_sign,
-            DEBUG = icons.diag.debug_sign,
-            TRACE = icons.diag.trace_sign,
+            ERROR = icons.diagnostics.error_sign,
+            WARN = icons.diagnostics.warn_sign,
+            INFO = icons.diagnostics.infor_sign,
+            DEBUG = icons.diagnostics.debug_sign,
+            TRACE = icons.diagnostics.trace_sign,
         },
     })
 
