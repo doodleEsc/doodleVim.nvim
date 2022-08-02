@@ -8,7 +8,7 @@ tree.toggle = function()
         require('bufferline.state').set_offset(0)
         view.close()
     else
-        require('bufferline.state').set_offset(31, 'File Explorer')
+        require('bufferline.state').set_offset(30, 'File Explorer')
         if vim.bo.filetype == "" then
             ensure_require('nvim-tree').open()
         else

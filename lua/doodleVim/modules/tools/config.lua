@@ -148,6 +148,8 @@ function config.nvim_tree()
         update_cwd = true,
         reload_on_bufenter = true,
         respect_buf_cwd = true,
+        prefer_startup_root = false,
+        sync_root_with_cwd = true,
         view = {
             adaptive_size = false,
             centralize_selection = true,
@@ -163,22 +165,15 @@ function config.nvim_tree()
                 custom_only = true,
                 list = {
                     { key = { "<CR>", "o" }, action = "edit" },
-                    -- { key = "<C-e>", action = "edit_in_place" },
-                    -- { key = "O", action = "edit_no_picker" },
-                    -- { key = { "<C-o>" }, action = "cd" },
                     { key = "<C-v>", action = "vsplit" },
                     { key = "<C-x>", action = "split" },
                     { key = "<C-t>", action = "tabnew" },
-                    -- { key = "<", action = "prev_sibling" },
-                    -- { key = ">", action = "next_sibling" },
                     { key = "P", action = "parent_node" },
                     { key = "<BS>", action = "close_node" },
-                    -- { key = "<Tab>", action = "preview" },
                     { key = "K", action = "first_sibling" },
                     { key = "J", action = "last_sibling" },
                     { key = "I", action = "toggle_git_ignored" },
                     { key = "H", action = "toggle_dotfiles" },
-                    -- { key = "U", action = "toggle_custom" },
                     { key = "<C-r>", action = "refresh" },
                     { key = "a", action = "create" },
                     { key = "d", action = "remove" },
@@ -191,16 +186,12 @@ function config.nvim_tree()
                     { key = "y", action = "copy_name" },
                     { key = "yp", action = "copy_path" },
                     { key = "ya", action = "copy_absolute_path" },
-                    -- { key = "[e", action = "prev_diag_item" },
-                    -- { key = "[c", action = "prev_git_item" },
-                    -- { key = "]e", action = "next_diag_item" },
-                    -- { key = "]c", action = "next_git_item" },
                     { key = "-", action = "dir_up" },
                     { key = "s", action = "system_open" },
                     { key = "f", action = "live_filter" },
                     { key = "F", action = "clear_live_filter" },
                     { key = "q", action = "close" },
-                    { key = "<C-o>", action = "collapse_all" },
+                    { key = "C", action = "collapse_all" },
                     { key = "E", action = "expand_all" },
                     { key = "/", action = "search_node" },
                     { key = ".", action = "run_file_command" },
@@ -351,9 +342,6 @@ function config.nvim_tree()
             },
         },
     })
-    require("nvim-tree.events").on_file_created(function(file)
-        vim.cmd("edit " .. file.fname)
-    end)
 end
 
 function config.symbols_outline()

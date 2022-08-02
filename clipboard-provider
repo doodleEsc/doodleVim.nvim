@@ -7,21 +7,23 @@
 
 : ${COPY_PROVIDERS:=osc52 pb xclip tmux local}
 : ${PASTE_PROVIDERS:=pb xclip tmux local}
-: ${TTY:=`(tty || tty </proc/$PPID/fd/0) 2>/dev/null | grep /dev/`}
+: ${TTY:=`(tty || tmux display-message -p '#{pane_tty}') 2>/dev/null | grep /dev/`}
 
 LOCAL_STORAGE=$HOME/.clipboard-provider.out
 
 main() {
-    declare p status buffer=99
+    declare status=1
     case $1 in
         copy)
             slurp
             for p in $COPY_PROVIDERS; do
-                ${p}_provider copy && status=0
+                echo $p
+                $p-provider copy && status=0
             done ;;
         paste)
             for p in $PASTE_PROVIDERS; do
-                ${p}_provider paste && status=0 && break
+                echo $p
+                $p-provider paste && status=0 && break
             done ;;
     esac
 
@@ -32,43 +34,45 @@ main() {
 slurp() { buffer=$(base64 | tr -d '\n'); }
 spit() { base64 --decode <<<"$buffer"; }
 
-is_copy() {
+is-copy() {
     if [[ "$1" == "copy" ]]; then return 0; else return 1; fi
 }
 
-tmux_provider() {
-	[[ -n $TMUX ]] || return $(is_copy $1)
+tmux-provider() {
+	[[ -n $TMUX ]] || return $(is-copy $1)
     case $1 in
         copy) spit | tmux load-buffer - ;;
         paste) tmux save-buffer - ;;
     esac
 }
 
-pb_provider() {
-    if ! command -v pbcopy &>/dev/null;then return $(is_copy $1); fi
+pb-provider() {
+    if ! command -v pbcopy &>/dev/null;then return $(is-copy $1); fi
     case $1 in
         copy) spit | pbcopy ;;
         paste) pbpaste ;;
     esac
 }
 
-osc52_provider() {
-    # HACK: this ignores stdin and looks directly at the base64 buffer
+osc52-provider() {
+    # [[ -n "$TTY" ]] || echo "ocsasdfasf" && return $(is-copy $1)
     case $1 in
-        copy) [[ -n "$TTY" ]] && printf $'\e]52;c;%s\a' "$buffer" > "$TTY" ;;
+        copy) [[ -n "$TTY" ]] && echo "asdf" && printf $'\e]52;c;%s\a' "$buffer" > "$TTY" ;;
+        # copy) echo "asdf" && printf $'\e]52;c;%s\a' "$buffer" > "$TTY" ;;
         paste) return 1 ;;
     esac
 }
 
-local_provider() {
+local-provider() {
     case $1 in
         copy) spit > $LOCAL_STORAGE ;;
         paste) cat $LOCAL_STORAGE && return 0;;
     esac
 }
 
-xclip_provider() {
-	if ! command -v xclip &>/dev/null || [[ -z $DISPLAY ]]; then return $(is_copy $1); fi
+xclip-provider() {
+    # if [[ ! command -v xclip &>/dev/null ]] && [[ -n $DISPLAY ]]; then return $(is-copy $1); fi
+    [[ -n $DISPLAY ]] && command -v xclip &>/dev/null || return $(is-copy $1)
     case $1 in
         copy) spit | xclip -i -selection clipboard;;
         paste) xclip -o -selection clipboard;;
