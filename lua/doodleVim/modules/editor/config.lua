@@ -315,7 +315,7 @@ function config.diffview()
 
     require("diffview").setup({
         diff_binaries = false, -- Show diffs for binaries
-        enhanced_diff_hl = false, -- See ':h diffview-config-enhanced_diff_hl'
+        enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
         git_cmd = { "git" }, -- The git executable followed by default args.
         use_icons = true, -- Requires nvim-web-devicons
         icons = { -- Only applies when use_icons is true.
@@ -386,13 +386,13 @@ function config.diffview()
                 ["X"]             = actions.restore_entry, -- Restore entry to the state on the left side.
                 ["R"]             = actions.refresh_files, -- Update stats and entries in the file list.
                 ["L"]             = actions.open_commit_log, -- Open the commit log panel0
-                ["<c-b>"]         = actions.scroll_view(-0.25), -- Scroll the view up
-                ["<c-f>"]         = actions.scroll_view(0.25), -- Scroll the view down
-                ["<tab>"]         = actions.select_next_entry,
-                ["<s-tab>"]       = actions.select_prev_entry,
-                ["gf"]            = actions.goto_file,
-                ["<C-w><C-f>"]    = actions.goto_file_split,
-                ["<C-w>gf"]       = actions.goto_file_tab,
+                ["<c-u>"]         = actions.scroll_view(-0.25), -- Scroll the view up
+                ["<c-d>"]         = actions.scroll_view(0.25), -- Scroll the view down
+                -- ["<tab>"]         = actions.select_next_entry,
+                -- ["<s-tab>"]       = actions.select_prev_entry,
+                -- ["gf"]            = actions.goto_file,
+                -- ["<C-w><C-f>"]    = actions.goto_file_split,
+                ["<C-o>"]       = actions.goto_file_tab,
                 ["i"]             = actions.listing_style, -- Toggle between 'list' and 'tree' views
                 ["f"]             = actions.toggle_flatten_dirs, -- Flatten empty subdirectories in tree listing style.
                 ["<leader>e"]     = actions.focus_files,
@@ -418,7 +418,7 @@ function config.diffview()
                 -- ["<s-tab>"]       = actions.select_prev_entry,
                 -- ["gf"]            = actions.goto_file,
                 -- ["<C-w><C-f>"]    = actions.goto_file_split,
-                ["<C-t>"]       = actions.goto_file_tab,
+                ["<C-t>"]         = actions.goto_file_tab,
                 ["<leader>e"]     = actions.focus_files,
                 ["<leader>b"]     = actions.toggle_files,
             },
