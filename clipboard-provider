@@ -17,12 +17,10 @@ main() {
         copy)
             slurp
             for p in $COPY_PROVIDERS; do
-                echo $p
                 $p-provider copy && status=0
             done ;;
         paste)
             for p in $PASTE_PROVIDERS; do
-                echo $p
                 $p-provider paste && status=0 && break
             done ;;
     esac
@@ -55,10 +53,8 @@ pb-provider() {
 }
 
 osc52-provider() {
-    # [[ -n "$TTY" ]] || echo "ocsasdfasf" && return $(is-copy $1)
     case $1 in
         copy) [[ -n "$TTY" ]] && echo "asdf" && printf $'\e]52;c;%s\a' "$buffer" > "$TTY" ;;
-        # copy) echo "asdf" && printf $'\e]52;c;%s\a' "$buffer" > "$TTY" ;;
         paste) return 1 ;;
     esac
 }
@@ -71,7 +67,6 @@ local-provider() {
 }
 
 xclip-provider() {
-    # if [[ ! command -v xclip &>/dev/null ]] && [[ -n $DISPLAY ]]; then return $(is-copy $1); fi
     [[ -n $DISPLAY ]] && command -v xclip &>/dev/null || return $(is-copy $1)
     case $1 in
         copy) spit | xclip -i -selection clipboard;;
