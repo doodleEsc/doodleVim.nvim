@@ -14,6 +14,13 @@ local function bind_option(options)
     end
 end
 
+-- function copy(sel)
+--   return function(lines, _)
+--     local data = vim.fn.system([[base64 | tr -d '\n']], lines)
+--     io.stdout:write('\027]52;'..sel..';'..data..'\a')
+--   end
+-- end
+
 M.load_options = function()
     local global_local = {
         termguicolors  = true;
@@ -123,9 +130,21 @@ M.load_options = function()
             ["+"] = "clipboard-provider paste",
             ["*"] = "clipboard-provider paste",
         },
-        cache_enabled = 0
+        cache_enabled = 1
     }
 
+    -- vim.g.clipboard = {
+    --     name = "myProvider",
+    --     copy = {
+    --         ["+"] = copy'c',
+    --         ["*"] = copy's',
+    --     },
+    --     paste = {
+    --         ["+"] = "clipboardprovider paste",
+    --         ["*"] = "clipboardprovider paste",
+    --     },
+    --     cache_enabled = 1
+    -- }
     if global.is_mac then
         vim.g.python_host_skip_check = 1
         vim.g.python_host_prog = '/usr/bin/python'
