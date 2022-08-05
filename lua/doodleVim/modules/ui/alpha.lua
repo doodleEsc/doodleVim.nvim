@@ -57,13 +57,11 @@ dashboard.opts = {
 alpha.setup(dashboard.opts)
 
 vim.api.nvim_create_augroup("alpha_tabline", { clear = true })
-
 vim.api.nvim_create_autocmd("FileType", {
     group = "alpha_tabline",
     pattern = "alpha",
     command = "set showtabline=0 laststatus=0 noruler",
 })
-
 vim.api.nvim_create_autocmd("FileType", {
     group = "alpha_tabline",
     pattern = "alpha",

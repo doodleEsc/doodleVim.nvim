@@ -43,11 +43,11 @@ editor['windwp/nvim-autopairs'] = {
 
 editor['romgrk/barbar.nvim'] = {
     opt = true,
+    requires = { 'kyazdani42/nvim-web-devicons' },
     setup = function()
         require("doodleVim.modules.editor.config").barbar()
         require("doodleVim.utils.defer").add("barbar.nvim", 99)
     end,
-    requires = { 'kyazdani42/nvim-web-devicons' },
 }
 
 editor['lewis6991/gitsigns.nvim'] = {

@@ -36,9 +36,7 @@ tools['rmagatti/auto-session'] = {
 
 tools['kyazdani42/nvim-tree.lua'] = {
     opt = true,
-    setup = function()
-        require("doodleVim.utils.defer").register("nvim-tree", "nvim-tree.lua")
-    end,
+    after = "barbar.nvim",
     config = conf.nvim_tree
 }
 
