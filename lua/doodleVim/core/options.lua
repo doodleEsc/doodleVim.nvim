@@ -133,18 +133,6 @@ M.load_options = function()
         cache_enabled = 1
     }
 
-    -- vim.g.clipboard = {
-    --     name = "myProvider",
-    --     copy = {
-    --         ["+"] = copy'c',
-    --         ["*"] = copy's',
-    --     },
-    --     paste = {
-    --         ["+"] = "clipboardprovider paste",
-    --         ["*"] = "clipboardprovider paste",
-    --     },
-    --     cache_enabled = 1
-    -- }
     if global.is_mac then
         vim.g.python_host_skip_check = 1
         vim.g.python_host_prog = '/usr/bin/python'

@@ -4,7 +4,7 @@ local misc = {}
 misc.which_key_loaded = false
 
 misc.safe_exit = function()
-    require('doodleVim.utils.defer').immediate_load('vim-floaterm')
+    require('doodleVim.utils.defer').immediate_load({'vim-floaterm', 'nvim-tree.lua'})
 
     -- close floaterm
     local floatermBufnr = vim.call("floaterm#buflist#gather")
@@ -13,7 +13,7 @@ misc.safe_exit = function()
     end
 
     -- close nvim-tree
-    local view = ensure_require('nvim-tree.view')
+    local view = require('nvim-tree.view')
     if view.is_visible() then
         require('doodleVim.extend.tree').toggle()
     end

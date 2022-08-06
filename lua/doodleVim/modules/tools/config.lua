@@ -342,6 +342,38 @@ function config.nvim_tree()
             },
         },
     })
+
+    local api = require('nvim-tree.api')
+    local Event = require('nvim-tree.api').events.Event
+
+    api.events.subscribe(Event.Resize, function(size)
+        require('bufferline.state').set_offset(size)
+    end)
+
+    api.events.subscribe(Event.TreeClose, function()
+        require('bufferline.state').set_offset(0)
+    end)
+
+    -- local nvim_tree_events = require('nvim-tree.events')
+    -- local bufferline = require('bufferline.state')
+
+    -- local function get_tree_size()
+    --     return vim.api.nvim_win_get_width(0)
+    -- end
+
+    -- nvim_tree_events.on_tree_open(function()
+    --     bufferline_state.set_offset(get_tree_size())
+    -- end)
+    --
+    -- nvim_tree_events.on_tree_resize(function()
+    --     bufferline_state.set_offset(get_tree_size())
+    -- end)
+    --
+    -- nvim_tree_events.on_tree_close(function()
+    --     bufferline_state.set_offset(0)
+    -- end)
+
+
 end
 
 function config.symbols_outline()
