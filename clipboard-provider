@@ -54,7 +54,7 @@ pb-provider() {
 
 osc52-provider() {
     case $1 in
-        copy) [[ -n "$TTY" ]] && echo "asdf" && printf $'\e]52;c;%s\a' "$buffer" > "$TTY" ;;
+        copy) [[ -n "$TTY" ]] && printf $'\e]52;c;%s\a' "$buffer" > "$TTY" ;;
         paste) return 1 ;;
     esac
 }
