@@ -116,5 +116,14 @@ tools['aserowy/tmux.nvim'] = {
     config = conf.tmux
 }
 
+tools['nvim-neorg/neorg'] = {
+    opt = true,
+    setup = function()
+        require("doodleVim.utils.defer").defer_load("neorg", 500)
+    end,
+    after = { "nvim-treesitter", "telescope.nvim", "nvim-cmp" },
+    config = conf.neorg
+}
+
 
 return tools

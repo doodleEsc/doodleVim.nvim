@@ -9,7 +9,7 @@ ui['nvim-treesitter/nvim-treesitter'] = {
     requires = {
         { 'nvim-treesitter/nvim-treesitter-textobjects', opt = true },
     },
-    run = ':TSUpdate bash cmake comment c cpp dot dockerfile go gomod gowork json html lua make python regex rust toml vim yaml markdown'
+    run = ':TSUpdate bash cmake comment c cpp dot dockerfile go gomod gowork json html lua make python regex rust toml vim yaml markdown norg'
 }
 
 ui['norcalli/nvim-colorizer.lua'] = {

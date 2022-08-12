@@ -53,13 +53,11 @@ editor['romgrk/barbar.nvim'] = {
 editor['lewis6991/gitsigns.nvim'] = {
     opt = true,
     config = conf.gitsigns,
-    -- requires = { 'nvim-lua/plenary.nvim' },
     setup = function() require("doodleVim.utils.defer").add("gitsigns.nvim", 99) end,
 }
 
 editor['sindrets/diffview.nvim'] = {
     opt = true,
-    -- requires = { 'nvim-lua/plenary.nvim' },
     setup = function() require("doodleVim.utils.defer").add("diffview.nvim", 99) end,
     config = conf.diffview,
 }
