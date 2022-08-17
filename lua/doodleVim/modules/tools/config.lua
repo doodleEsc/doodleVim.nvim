@@ -726,4 +726,32 @@ function config.tmux()
     })
 end
 
+function config.neorg()
+    require('neorg').setup {
+        load = {
+            ["core.defaults"] = {},
+            ["core.norg.dirman"] = {
+                config = {
+                    workspaces = {
+                        work = "~/Documents/Notes/work",
+                        home = "~/Documents/Notes/home",
+                    }
+                }
+            },
+            ["core.norg.concealer"] = {},
+            ["core.norg.completion"] = {
+                config = {
+                    engine = "nvim-cmp"
+                }
+            },
+            ["core.export"] = {},
+            ["core.export.markdown"] = {
+                config = {
+                    extensions = "all"
+                }
+            }
+        }
+    }
+end
+
 return config
