@@ -175,10 +175,8 @@ plug_map.visual = {
 
     ["<leader>c"] = {
         name = "Comment",
-        c = bind.convert_wk_format(map_cmd('<Plug>(comment_toggle_linewise_visual)'):with_noremap():with_silent():
-            with_label("Comment Selected Line"):with_mode("x")),
-        v = bind.convert_wk_format(map_cmd('<Plug>(comment_toggle_blockwise_visual)'):with_noremap():with_silent():
-            with_label("Comment Selected Code Block"):with_mode("x"))
+        c = bind.convert_wk_format(map_cmd('<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>'):with_noremap():with_silent():with_label("Comment Selected Line"):with_mode("x")),
+        v = bind.convert_wk_format(map_cmd('<ESC><CMD>lua require("Comment.api").toggle.blockwise(vim.fn.visualmode())<CR>'):with_noremap():with_silent():with_label("Comment Selected Line"):with_mode("x")),
     },
 
     ["<leader>l"] = {
