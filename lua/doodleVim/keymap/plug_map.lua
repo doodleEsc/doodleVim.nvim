@@ -56,7 +56,7 @@ plug_map.normal = {
         x = bind.convert_wk_format(map_cr("PackerClean"):with_silent():with_noremap():with_nowait():with_label("Packer Clean")),
     },
 
-    ["<leader>d"] = {
+    ["<leader>e"] = {
         name = "Show Diagnostics In Buffer Or WorkSpace",
         d = bind.convert_wk_format(map_cr("Telescope diagnostics bufnr=0"):with_noremap():with_silent():with_label("Show Diagnostics In Current Buffer")),
         e = bind.convert_wk_format(map_cr("Telescope diagnostics"):with_noremap():with_silent():with_label("Show Diagnostics In WorkSpace")),
