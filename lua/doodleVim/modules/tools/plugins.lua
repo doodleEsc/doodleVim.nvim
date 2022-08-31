@@ -49,9 +49,11 @@ tools['iamcco/markdown-preview.nvim'] = {
 tools['simrat39/symbols-outline.nvim'] = {
     opt = true,
     setup = function()
-        require("doodleVim.modules.tools.config").symbols_outline()
+        -- -- require("doodleVim.modules.tools.config").symbols_outline()
+        -- require("doodleVim.utils.defer").defer_load("symbols-outline.nvim", 200)
         require("doodleVim.utils.defer").register("symbols-outline", "symbols-outline.nvim")
-    end
+    end,
+    config = conf.symbols_outline
 }
 
 tools['voldikss/vim-floaterm'] = {
@@ -116,14 +118,14 @@ tools['aserowy/tmux.nvim'] = {
     config = conf.tmux
 }
 
-tools['nvim-neorg/neorg'] = {
-    opt = true,
-    setup = function()
-        require("doodleVim.utils.defer").defer_load("neorg", 500)
-    end,
-    after = { "nvim-treesitter", "telescope.nvim", "nvim-cmp" },
-    config = conf.neorg
-}
+-- tools['nvim-neorg/neorg'] = {
+--     opt = true,
+--     setup = function()
+--         require("doodleVim.utils.defer").defer_load("neorg", 500)
+--     end,
+--     after = { "nvim-treesitter", "telescope.nvim", "nvim-cmp" },
+--     config = conf.neorg
+-- }
 
 
 return tools
