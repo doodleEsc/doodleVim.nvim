@@ -378,26 +378,35 @@ end
 
 function config.symbols_outline()
     local icons = require("doodleVim.utils.icons")
-    vim.g.symbols_outline = {
+    require("symbols-outline").setup({
         highlight_hovered_item = true,
         show_guides = true,
         auto_preview = false,
-        position = "right",
+        position = 'right',
         relative_width = true,
         width = 30,
         auto_close = true,
         show_numbers = false,
         show_relative_numbers = false,
         show_symbol_details = true,
-        preview_bg_highlight = "LspSagaAutoPreview",
-        keymaps = { -- These doodleVim.keymaps can be a string or a table for multiple keys
+        preview_bg_highlight = 'Pmenu',
+        autofold_depth = nil,
+        auto_unfold_hover = true,
+        fold_markers = { icons.arrow.right, icons.arrow.down },
+        wrap = false,
+        keymaps = { -- These keymaps can be a string or a table for multiple keys
             close = { "<Esc>", "q" },
             goto_location = "<CR>",
             focus_location = "o",
             hover_symbol = "gh",
-            toggle_preview = "K",
+            toggle_preview = "gp",
             rename_symbol = "gn",
             code_actions = "ga",
+            fold = "h",
+            unfold = "l",
+            fold_all = "W",
+            unfold_all = "E",
+            fold_reset = "R",
         },
         lsp_blacklist = {},
         symbol_blacklist = {},
@@ -428,8 +437,9 @@ function config.symbols_outline()
             Event = { icon = icons.cmp.Event, hl = "TSType" },
             Operator = { icon = icons.cmp.Operator, hl = "TSOperator" },
             TypeParameter = { icon = icons.cmp.TypeParameter, hl = "TSParameter" },
-        },
-    }
+        }
+    })
+
 end
 
 function config.mkdp()
