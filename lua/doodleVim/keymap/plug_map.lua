@@ -133,21 +133,21 @@ plug_map.normal = {
         with_label("Run To Cursor")),
     ["<S-F12>"] = bind.convert_wk_format(map_cr("lua require('dap').run_last()"):with_noremap():with_silent():with_label("Run To Last, Shortcut: Shift + F12")),
 
+
     ["<S-h>"] = bind.convert_wk_format(map_cr("BufferPrevious"):with_noremap():with_silent():with_label("Previous Buffer")),
-    ["<M-h>"] = bind.convert_wk_format(map_cr("BufferMovePrevious"):with_noremap():with_silent():with_label("Re-order To Previous")),
     ["<S-l>"] = bind.convert_wk_format(map_cr("BufferNext"):with_noremap():with_silent():with_label("Next Buffer")),
-    ["<M-l>"] = bind.convert_wk_format(map_cr("BufferMoveNext"):with_noremap():with_silent():with_label("Re-order To Next")),
     ["<S-n>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').enhanced_buffer_close()"):
         with_noremap():with_silent():with_label("Close Current Buffer")),
-    ["<S-b>"] = bind.convert_wk_format(map_cr("BufferCloseBuffersLeft"):with_noremap():with_silent():with_label("Close All Buffers Left")),
-    ["<S-m>"] = bind.convert_wk_format(map_cr("BufferCloseBuffersRight"):with_noremap():with_silent():with_label("Close All Buffers Right")),
-    ["<S-i>"] = bind.convert_wk_format(map_cr("BufferPin"):with_noremap():with_silent():with_label("Pin Buffer")),
-    ["<S-o>"] = bind.convert_wk_format(map_cr("BufferPick"):with_noremap():with_silent():with_label("Pick Buffer")),
-    ["<S-s>"] = bind.convert_wk_format(map_cr("BufferOrderByDirectory"):with_noremap():with_silent():with_label("Sort Buffer")),
+    ["<M-s>"] = bind.convert_wk_format(map_cr("BufferOrderByDirectory"):with_noremap():with_silent():with_label("Sort Buffer")),
+    ["<M-b>"] = bind.convert_wk_format(map_cr("BufferCloseBuffersLeft"):with_noremap():with_silent():with_label("Close All Buffers Left")),
+    ["<M-m>"] = bind.convert_wk_format(map_cr("BufferCloseBuffersRight"):with_noremap():with_silent():with_label("Close All Buffers Right")),
+    ["<M-h>"] = bind.convert_wk_format(map_cr("BufferMovePrevious"):with_noremap():with_silent():with_label("Re-order To Previous")),
+    ["<M-l>"] = bind.convert_wk_format(map_cr("BufferMoveNext"):with_noremap():with_silent():with_label("Re-order To Next")),
+    ["<M-i>"] = bind.convert_wk_format(map_cr("BufferPin"):with_noremap():with_silent():with_label("Pin Buffer")),
+    ["<M-o>"] = bind.convert_wk_format(map_cr("BufferPick"):with_noremap():with_silent():with_label("Pick Buffer")),
 
     ["<C-Space>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').toggle_whichkey()"):with_noremap()
         :with_silent():with_label("Show Keymaps")),
-
     ["<M-n>"] = bind.convert_wk_format(map_cr("Gitsigns next_hunk"):with_noremap():with_silent():with_label("Next Hunk")),
     ["<M-p>"] = bind.convert_wk_format(map_cr("Gitsigns prev_hunk"):with_noremap():with_silent():with_label("Previous Hunk")),
 }
@@ -175,8 +175,10 @@ plug_map.visual = {
 
     ["<leader>c"] = {
         name = "Comment",
-        c = bind.convert_wk_format(map_cmd('<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>'):with_noremap():with_silent():with_label("Comment Selected Line"):with_mode("x")),
-        v = bind.convert_wk_format(map_cmd('<ESC><CMD>lua require("Comment.api").toggle.blockwise(vim.fn.visualmode())<CR>'):with_noremap():with_silent():with_label("Comment Selected Line"):with_mode("x")),
+        c = bind.convert_wk_format(map_cmd('<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>')
+            :with_noremap():with_silent():with_label("Comment Selected Line"):with_mode("x")),
+        v = bind.convert_wk_format(map_cmd('<ESC><CMD>lua require("Comment.api").toggle.blockwise(vim.fn.visualmode())<CR>')
+            :with_noremap():with_silent():with_label("Comment Selected Line"):with_mode("x")),
     },
 
     ["<leader>l"] = {
