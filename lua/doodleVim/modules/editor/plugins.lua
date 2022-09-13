@@ -29,7 +29,7 @@ editor['karb94/neoscroll.nvim'] = {
     config = conf.neoscroll,
 }
 
-editor['B4mbus/todo-comments.nvim'] = {
+editor['folke/todo-comments.nvim'] = {
     opt = true,
     setup = function() require("doodleVim.utils.defer").add("todo-comments.nvim", 99) end,
     config = conf.todo
