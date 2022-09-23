@@ -154,7 +154,6 @@ function config.nvim_tree()
             adaptive_size = false,
             centralize_selection = true,
             width = 30,
-            height = 30,
             hide_root_folder = false,
             side = "left",
             preserve_window_proportions = false,
