@@ -7,10 +7,6 @@ local def_map = {}
 
 def_map.normal = {
     ["Y"] = bind.convert_wk_format(map_cmd('y$'):with_label("Copy To End Of Line")),
-    -- ["<C-h>"] = bind.convert_wk_format(map_cmd('<C-w>h'):with_noremap():with_label("Switch To Left Window")),
-    -- ["<C-l>"] = bind.convert_wk_format(map_cmd('<C-w>l'):with_noremap():with_label("Switch To Right Window")),
-    -- ["<C-j>"] = bind.convert_wk_format(map_cmd('<C-w>j'):with_noremap():with_label("Switch To Down Window")),
-    -- ["<C-k>"] = bind.convert_wk_format(map_cmd('<C-w>k'):with_noremap():with_label("Switch To Up Window")),
     ["<C-q>"] = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.misc").safe_exit()'):with_noremap():with_silent():with_label("Save Session And Safe Exit")),
     ["<C-s>"] = bind.convert_wk_format(map_cr('silent! lua require("doodleVim.extend.misc").safe_save()'):with_noremap():with_silent():with_label("Save Session")),
     ["<C-d>"] = bind.convert_wk_format(map_cr("lua ensure_require('neoscroll').scroll(vim.wo.scroll, true, 150)"):with_noremap():with_silent():with_label("Smooth Scroll Down")),

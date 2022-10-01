@@ -6,10 +6,10 @@ function rhs_options:new()
         label = '',
         mode = '',
         options = {
-            noremap = false,
-            silent = false,
-            expr = false,
-            nowait = false,
+            --noremap = false,
+            --silent = false,
+            --expr = false,
+            --nowait = false,
         }
     }
     setmetatable(instance, self)
@@ -57,10 +57,10 @@ function rhs_options:with_expr()
     return self
 end
 
-function rhs_options:with_nowait()
-    self.options.nowait = true
-    return self
-end
+-- function rhs_options:with_nowait()
+--     self.options.nowait = true
+--     return self
+-- end
 
 function rhs_options:with_mode(mode)
     self.mode = mode
@@ -115,10 +115,23 @@ function pbind.convert_wk_format(value)
             mode = "n"
         end
         wkitem["mode"] = mode
-        wkitem["silent"] = options.silent
-        wkitem["noremap"] = options.noremap
-        wkitem["nowait"] = options.nowait
-        wkitem["expr"] = options.expr
+
+        if options.silent ~= nil then
+            wkitem["silent"] = options.silent
+        end
+
+        if options.noremap ~= nil then
+            wkitem["noremap"] = options.noremap
+        end
+
+        if options.nowait ~= nil then
+            wkitem["nowait"] = options.nowait
+        end
+
+        if options.expr ~= nil then
+            wkitem["expr"] = options.expr
+        end
+
     end
     return wkitem
 end

@@ -51,9 +51,9 @@ plug_map.normal = {
 
     ["<leader>p"] = {
         name = "Packer Manage",
-        u = bind.convert_wk_format(map_cr("PackerUpdate"):with_silent():with_noremap():with_nowait():with_label("Packer Update")),
-        c = bind.convert_wk_format(map_cr("PackerCompile"):with_silent():with_noremap():with_nowait():with_label("Packer Compile")),
-        x = bind.convert_wk_format(map_cr("PackerClean"):with_silent():with_noremap():with_nowait():with_label("Packer Clean")),
+        u = bind.convert_wk_format(map_cr("PackerUpdate"):with_silent():with_noremap():with_label("Packer Update")),
+        c = bind.convert_wk_format(map_cr("PackerCompile"):with_silent():with_noremap():with_label("Packer Compile")),
+        x = bind.convert_wk_format(map_cr("PackerClean"):with_silent():with_noremap():with_label("Packer Clean")),
     },
 
     ["<leader>e"] = {

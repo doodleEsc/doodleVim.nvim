@@ -83,7 +83,7 @@ tools['nvim-lua/plenary.nvim'] = {
 
 -- tools['bfredl/nvim-luadev'] = {}
 
-tools['doodleEsc/which-key.nvim'] = {
+tools['folke/which-key.nvim'] = {
     opt = true,
     setup = function() require("doodleVim.utils.defer").defer_load("which-key.nvim", 100) end,
     config = conf.which_key
