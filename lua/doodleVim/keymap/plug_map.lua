@@ -35,7 +35,7 @@ plug_map.normal = {
         r = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.lsp').lsp_references()"):with_noremap():
             with_silent():with_label("Go To Reference")),
         h = bind.convert_wk_format(map_cr("lua vim.lsp.buf.hover()"):with_noremap():with_silent():with_label("Hover Documentation")),
-        f = bind.convert_wk_format(map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Code Formatting")),
+        f = bind.convert_wk_format(map_cr("lua vim.lsp.buf.format { async = true }"):with_noremap():with_silent():with_label("Code Formatting")),
         a = bind.convert_wk_format(map_cr("lua vim.lsp.buf.code_action()"):with_noremap():with_silent():with_label("Code Action")),
         n = bind.convert_wk_format(map_cr("lua require('rename').rename()"):with_noremap():with_silent():with_label("Rename"))
     },
