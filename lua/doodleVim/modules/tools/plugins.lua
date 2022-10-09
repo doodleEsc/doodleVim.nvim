@@ -83,7 +83,7 @@ tools['nvim-lua/plenary.nvim'] = {
 
 -- tools['bfredl/nvim-luadev'] = {}
 
-tools['doodleEsc/which-key.nvim'] = {
+tools['folke/which-key.nvim'] = {
     opt = true,
     setup = function() require("doodleVim.utils.defer").defer_load("which-key.nvim", 100) end,
     config = conf.which_key
@@ -123,7 +123,6 @@ tools['nvim-neorg/neorg'] = {
     setup = function()
         require("doodleVim.utils.defer").defer_load("neorg", 500)
     end,
-    tag = "0.0.12",
     -- after = { "nvim-treesitter", "telescope.nvim", "nvim-cmp" },
     config = conf.neorg
 }

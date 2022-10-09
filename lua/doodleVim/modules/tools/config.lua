@@ -344,34 +344,15 @@ function config.nvim_tree()
 
     local api = require('nvim-tree.api')
     local Event = require('nvim-tree.api').events.Event
+    local bufferline_api = require('bufferline.api')
 
     api.events.subscribe(Event.Resize, function(size)
-        require('bufferline.state').set_offset(size)
+        bufferline_api.set_offset(size)
     end)
 
     api.events.subscribe(Event.TreeClose, function()
-        require('bufferline.state').set_offset(0)
+        bufferline_api.set_offset(0)
     end)
-
-    -- local nvim_tree_events = require('nvim-tree.events')
-    -- local bufferline = require('bufferline.state')
-
-    -- local function get_tree_size()
-    --     return vim.api.nvim_win_get_width(0)
-    -- end
-
-    -- nvim_tree_events.on_tree_open(function()
-    --     bufferline_state.set_offset(get_tree_size())
-    -- end)
-    --
-    -- nvim_tree_events.on_tree_resize(function()
-    --     bufferline_state.set_offset(get_tree_size())
-    -- end)
-    --
-    -- nvim_tree_events.on_tree_close(function()
-    --     bufferline_state.set_offset(0)
-    -- end)
-
 
 end
 
@@ -586,21 +567,38 @@ function config.which_key()
     })
 
     -- bind common doodleVim.keymap
-    local bind = require("doodleVim.keymap.bind")
-    local def_map = require("doodleVim.keymap.def_map")
-    local plug_map = require("doodleVim.keymap.plug_map")
+    -- local bind = require("doodleVim.keymap.bind")
+    local map = require("doodleVim.keymap.map")
 
     -- bind raw doodleVim.keymap
-    bind.nvim_load_mapping(plug_map.raw)
+    -- bind.nvim_load_mapping(plug_map.raw)
 
-    wk.register(def_map.normal)
-    wk.register(def_map.insert)
-    wk.register(def_map.command)
-    wk.register(def_map.visual)
+    -- wk.register(def_map.normal)
+    -- wk.register(def_map.insert)
+    -- wk.register(def_map.command)
+    -- wk.register(def_map.visual)
+    --
+    -- wk.register(plug_map.normal)
+    -- wk.register(plug_map.insert)
+    -- wk.register(plug_map.visual)
 
-    wk.register(plug_map.normal)
-    wk.register(plug_map.insert)
-    wk.register(plug_map.visual)
+    for _, mappings in pairs(map) do
+        for mode, keymaps in pairs(mappings) do
+            wk.register(keymaps, { mode = tostring(mode) })
+        end
+    end
+
+    -- wk.register({
+    --     ["<leader>tq"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>", true, true, true),
+    --         noremap = true, silent = true },
+    -- }, { mode = 't' })
+
+    -- wk.register({ ["<Esc>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>", true, true, true),
+    --     "Toggle Terminal", noremap = true, silent = true } },
+    --     { mode = 't' })
+
+
+    -- wk.register({ ["<Esc>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>"), "To normal mode" } }, { mode = "t" })
 end
 
 function config.notify()

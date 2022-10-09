@@ -41,6 +41,18 @@ local config = {
                 'packer',
                 'startuptime',
             },
+            winbar = {
+                'alpha',
+                'Outline',
+                'NvimTree',
+                'packer',
+                'startuptime',
+            }
+        },
+        refresh = {
+            statusline = 1000,
+            tabline = 1000,
+            winbar = 1000,
         },
         -- Disable sections and component separators
         component_separators = '',
