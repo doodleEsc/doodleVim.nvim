@@ -4,7 +4,7 @@ local misc = {}
 misc.which_key_loaded = false
 
 misc.safe_exit = function()
-    require('doodleVim.utils.defer').immediate_load({'vim-floaterm', 'nvim-tree.lua'})
+    require('doodleVim.utils.defer').immediate_load({ 'vim-floaterm', 'nvim-tree.lua' })
 
     -- close floaterm
     local floatermBufnr = vim.call("floaterm#buflist#gather")
@@ -89,6 +89,12 @@ misc.toggle_whichkey = function()
         require("which-key").show("", mode)
         misc.which_key_loaded = true
     end
+end
+
+misc.new_floaterm = function(dir)
+    dir = dir or "<buffer>"
+    vim.cmd("FloatermToggle")
+    vim.cmd("FloatermNew --cwd=" .. dir)
 end
 
 return misc

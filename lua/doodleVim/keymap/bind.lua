@@ -111,10 +111,14 @@ function pbind.convert_wk_format(value)
         if label ~= "" then
             table.insert(wkitem, 2, label)
         end
-        if mode == "" then
-            mode = "n"
+        -- if mode == "" then
+        --     mode = "n"
+        -- end
+        -- wkitem["mode"] = mode
+
+        if mode ~= '' then
+            wkitem["mode"] = mode
         end
-        wkitem["mode"] = mode
 
         if options.silent ~= nil then
             wkitem["silent"] = options.silent

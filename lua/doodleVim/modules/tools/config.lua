@@ -567,21 +567,38 @@ function config.which_key()
     })
 
     -- bind common doodleVim.keymap
-    local bind = require("doodleVim.keymap.bind")
-    local def_map = require("doodleVim.keymap.def_map")
-    local plug_map = require("doodleVim.keymap.plug_map")
+    -- local bind = require("doodleVim.keymap.bind")
+    local map = require("doodleVim.keymap.map")
 
     -- bind raw doodleVim.keymap
-    bind.nvim_load_mapping(plug_map.raw)
+    -- bind.nvim_load_mapping(plug_map.raw)
 
-    wk.register(def_map.normal)
-    wk.register(def_map.insert)
-    wk.register(def_map.command)
-    wk.register(def_map.visual)
+    -- wk.register(def_map.normal)
+    -- wk.register(def_map.insert)
+    -- wk.register(def_map.command)
+    -- wk.register(def_map.visual)
+    --
+    -- wk.register(plug_map.normal)
+    -- wk.register(plug_map.insert)
+    -- wk.register(plug_map.visual)
 
-    wk.register(plug_map.normal)
-    wk.register(plug_map.insert)
-    wk.register(plug_map.visual)
+    for _, mappings in pairs(map) do
+        for mode, keymaps in pairs(mappings) do
+            wk.register(keymaps, { mode = tostring(mode) })
+        end
+    end
+
+    -- wk.register({
+    --     ["<leader>tq"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>", true, true, true),
+    --         noremap = true, silent = true },
+    -- }, { mode = 't' })
+
+    -- wk.register({ ["<Esc>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>", true, true, true),
+    --     "Toggle Terminal", noremap = true, silent = true } },
+    --     { mode = 't' })
+
+
+    -- wk.register({ ["<Esc>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>"), "To normal mode" } }, { mode = "t" })
 end
 
 function config.notify()
