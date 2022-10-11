@@ -51,7 +51,7 @@ map.NvimTree_Translator = {
             t = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').toggle()"):with_noremap():
                 with_silent():
                 with_label("Enhanced NvimTree Toggle")),
-            w = bind.convert_wk_format(map_cr("lua ensure_require'nvim-tree.actions.reloaders'.reload_explorer()"):
+            w = bind.convert_wk_format(map_cmd("<Cmd>NvimTreeRefresh<CR>"):
                 with_noremap():with_silent():with_label("NvimTree Refresh")),
             r = bind.convert_wk_format(map_cr("TranslateW"):with_silent():with_label("Translate Word In Cursor"))
         },
