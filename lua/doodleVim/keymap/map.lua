@@ -306,40 +306,38 @@ map.Default = {
 
     },
     i = {
-        ["<C-b>"] = bind.convert_wk_format(map_cmd('<Left>'):with_noremap()),
-        ["<C-f>"] = bind.convert_wk_format(map_cmd('<Right>'):with_noremap()),
-        ["<C-d>"] = bind.convert_wk_format(map_cmd('<Del>'):with_noremap()),
-        ["<C-h>"] = bind.convert_wk_format(map_cmd('<BS>')),
-        ["<C-a>"] = bind.convert_wk_format(map_cmd('<ESC>^i'):with_noremap()),
-        ["<C-e>"] = bind.convert_wk_format(map_cmd('<ESC>A'):with_noremap()),
-        ["<C-l>"] = bind.convert_wk_format(map_cmd('<Esc>o'):with_noremap()),
-        ["<C-o>"] = bind.convert_wk_format(map_cmd('<Esc>O'):with_noremap()),
-        ["<C-s>"] = bind.convert_wk_format(map_cmd('<Esc>:lua require("doodleVim.extend.misc").safe_save()<CR>'):
-            with_noremap()),
-        ["<C-q>"] = bind.convert_wk_format(map_cmd('<Esc>:lua require("doodleVim.extend.misc").safe_exit()<CR>'):
-            with_noremap()),
+        ["<C-b>"] = { "<Left>", "Move Cursor To Previous", noremap = true, silent = true },
+        ["<C-f>"] = { "<Right>", "Move Cursor To Next", noremap = true, silent = true },
+        ["<C-d>"] = { "<Del>", "Delete", noremap = true, silent = true },
+        ["<C-h>"] = { "<BS>", "Backspace", noremap = true, silent = true },
+        ["<C-a>"] = { "<Esc>^i", "Append Before Head", noremap = true, silent = true },
+        ["<C-e>"] = { "<Esc>A", "Append After Tail", noremap = true, silent = true },
+        ["<C-l>"] = { "<Esc>o", "New Line", noremap = true, silent = true },
+        ["<C-o>"] = { "<Esc>O", "New Line Upper", noremap = true, silent = true },
+        ["<C-s>"] = { '<Esc>:lua require("doodleVim.extend.misc").safe_save()<CR>', "New Line Upper", noremap = true,
+            silent = true },
+        ["<C-q>"] = { '<Esc>:lua require("doodleVim.extend.misc").safe_exit()<CR>', "New Line Upper", noremap = true,
+            silent = true },
     },
     c = {
-        ["<C-b>"] = bind.convert_wk_format(map_cmd('<Left>'):with_noremap()),
-        ["<C-f>"] = bind.convert_wk_format(map_cmd('<Right>'):with_noremap()),
-        ["<C-a>"] = bind.convert_wk_format(map_cmd('<Home>'):with_noremap()),
-        ["<C-e>"] = bind.convert_wk_format(map_cmd('<End>'):with_noremap()),
-        ["<C-d>"] = bind.convert_wk_format(map_cmd('<Del>'):with_noremap()),
-        ["<C-h>"] = bind.convert_wk_format(map_cmd('<BS>'):with_noremap()),
-        ["<C-t>"] = bind.convert_wk_format(map_cmd([[<C-R>=expand("%:p:h") . "/" <CR>]]):with_noremap():
-            with_label("Show Current Directory"))
+        ["<C-b>"] = { "<Left>", "Move Cursor To Previous", noremap = true, silent = true },
+        ["<C-f>"] = { "<Right>", "Move Cursor To Next", noremap = true, silent = true },
+        ["<C-d>"] = { "<Del>", "Delete", noremap = true, silent = true },
+        ["<C-h>"] = { "<BS>", "Backspace", noremap = true, silent = true },
+        ["<C-a>"] = { "<Home>", "Home", noremap = true, silent = true },
+        ["<C-e>"] = { "<End>", "End", noremap = true, silent = true },
     },
     v = {
-        ["<C-d>"] = bind.convert_wk_format(map_cmd("<cmd>lua ensure_require('neoscroll').scroll(vim.wo.scroll, true, 150)<CR>")
-            :with_noremap():with_silent():with_label("Smooth Scroll Down")),
-        ["<C-u>"] = bind.convert_wk_format(map_cmd("<cmd>lua ensure_require('neoscroll').scroll(-vim.wo.scroll, true, 150)<CR>")
-            :with_noremap():with_silent():with_label("Smooth Scroll Up")),
-        [">"] = bind.convert_wk_format(map_cmd(">gv"):with_noremap():with_label("Indent Right")),
-        ["<"] = bind.convert_wk_format(map_cmd("<gv"):with_noremap():with_label("Indent Left")),
-        ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy")),
-        ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Cut Without Copy")),
-        ["d"] = bind.convert_wk_format(map_cmd('""d'):with_noremap():with_label("Delete Without Copy")),
-        ["P"] = bind.convert_wk_format(map_cmd('""p'):with_noremap():with_label("Paste Content In Register \"")),
+        ["<C-d>"] = { "<cmd>lua require('neoscroll').scroll(vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Down",
+            noremap = true, silent = true },
+        ["<C-u>"] = { "<cmd>lua require('neoscroll').scroll(-vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Up",
+            noremap = true, silent = true },
+        [">"] = { ">gv", "Indent Right", noremap = true },
+        ["<"] = { "<gv", "Indent Left", noremap = true },
+        ["x"] = { '"_x', "Delete Without Copy", noremap = true },
+        ["c"] = { '"_c', "Cut Without Copy", noremap = true },
+        ["d"] = { '""d', "Delete Without Copy", noremap = true },
+        ["P"] = { '""p', "Paste Content In Register \"", noremap = true },
     }
 }
 
