@@ -51,7 +51,7 @@ map.NvimTree_Translator = {
             t = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').toggle()"):with_noremap():
                 with_silent():
                 with_label("Enhanced NvimTree Toggle")),
-            w = bind.convert_wk_format(map_cr("lua ensure_require'nvim-tree.actions.reloaders'.reload_explorer()"):
+            w = bind.convert_wk_format(map_cmd("<Cmd>NvimTreeRefresh<CR>"):
                 with_noremap():with_silent():with_label("NvimTree Refresh")),
             r = bind.convert_wk_format(map_cr("TranslateW"):with_silent():with_label("Translate Word In Cursor"))
         },
@@ -96,6 +96,13 @@ map.MarkdownPreview_EasyAlign = {
         ["<leader>m"] = {
             name = "MarkdownPreview, EasyAlign",
             w = bind.convert_wk_format(map_cr('MarkdownPreviewToggle'):with_noremap():with_silent():with_label("Toggle Markdown Preview")),
+            a = bind.convert_wk_format(map_cmd("<Plug>(EasyAlign)<CR>"):with_label("EasyAlign File"))
+        }
+    },
+    v = {
+        ["<leader>m"] = {
+            name = "MarkdownPreview, EasyAlign",
+            -- w = bind.convert_wk_format(map_cr('MarkdownPreviewToggle'):with_noremap():with_silent():with_label("Toggle Markdown Preview")),
             a = bind.convert_wk_format(map_cmd("<Plug>(EasyAlign)"):with_label("EasyAlign File"))
         }
     }
