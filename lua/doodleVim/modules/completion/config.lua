@@ -354,21 +354,21 @@ function config.neogen()
     require("neogen").setup({ snippet_engine = "luasnip" })
 end
 
-function config.rename()
-    require("rename").setup({
-        rename = {
-            border = {
-                highlight = "FloatBorder",
-                style = "rounded",
-                title = " Rename ",
-                title_align = "left",
-                title_hl = "FloatBorder",
-            },
-            prompt = "➤ ",
-            prompt_hl = "Comment",
-        },
-    })
-end
+-- function config.rename()
+--     require("rename").setup({
+--         rename = {
+--             border = {
+--                 highlight = "FloatBorder",
+--                 style = "rounded",
+--                 title = " Rename ",
+--                 title_align = "left",
+--                 title_hl = "FloatBorder",
+--             },
+--             prompt = "➤ ",
+--             prompt_hl = "Comment",
+--         },
+--     })
+-- end
 
 function config.lightbulb()
     local icons = require("doodleVim.utils.icons")

@@ -34,6 +34,7 @@ ui['doodleEsc/gruvbox.nvim'] = {
 ui['MunifTanjim/nui.nvim'] = {
     opt = true,
     setup = function() require("doodleVim.utils.defer").add("nui.nvim", 99) end,
+    config = conf.nui
 }
 
 ui['goolord/alpha-nvim'] = {
