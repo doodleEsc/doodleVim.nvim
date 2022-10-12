@@ -24,7 +24,8 @@ map.Lsp = {
             f = bind.convert_wk_format(map_cr("lua vim.lsp.buf.format { async = true }"):with_noremap():with_silent():
                 with_label("Code Formatting")),
             a = bind.convert_wk_format(map_cr("lua vim.lsp.buf.code_action()"):with_noremap():with_silent():with_label("Code Action")),
-            n = bind.convert_wk_format(map_cr("lua require('rename').rename({label='Rename'})"):with_noremap():with_silent():with_label("Rename"))
+            n = bind.convert_wk_format(map_cr("lua require('rename').rename({label='Rename'})"):with_noremap():
+                with_silent():with_label("Rename"))
         },
         ["<C-n>"] = bind.convert_wk_format(map_cr("lua vim.diagnostic.goto_next()"):with_noremap():with_silent():
             with_label("Go To Next Diagnostic")),
