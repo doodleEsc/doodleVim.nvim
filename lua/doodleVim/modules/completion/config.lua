@@ -303,14 +303,6 @@ end
 function config.gotools()
     require("doodleVim.utils.defer").immediate_load("mason.nvim")
     require("gotools").setup({
-        ui = {
-            border = {
-                style = "rounded",
-            },
-            win_options = {
-                winhighlight = "Normal:GruvboxBlue,FloatBorder:FloatBorder",
-            },
-        },
         tools = {
             gotests = {
                 bin = require "mason-core.path".bin_prefix() .. "/" .. "gotests",
