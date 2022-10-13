@@ -69,6 +69,7 @@ end
 function config.nui()
     local Input = require("nui.input")
     local event = require("nui.utils.autocmd").event
+    local default_size = 20
 
     local popup_options = {
         relative = "cursor",
@@ -76,7 +77,6 @@ function config.nui()
             row = 1,
             col = 0,
         },
-        size = 20,
         border = {
             style = "rounded",
             text = {
@@ -97,6 +97,7 @@ function config.nui()
         --     label = "",
         -- }
         popup_options.border.text.top = opts and opts.label or "Input"
+        popup_options.size = default_size
 
         local default_opts = {
             prompt = opts and opts.prompt or "➤ ",
@@ -107,9 +108,18 @@ function config.nui()
                 end
             end
         }
+
         if opts and opts.default then
             default_opts.default_value = opts.default
+
+            local width = default_size + #opts.default
+            if width > vim.o.columns - 10 then
+                width = vim.o.columns - 10
+            end
+            popup_options.size = width
         end
+
+        print(vim.inspect(popup_options))
 
         local input = Input(popup_options, default_opts)
         input:map("i", "<Esc>", input.input_props.on_close, { noremap = true })
