@@ -29,7 +29,8 @@ function config.treesitter()
             "vim",
             "yaml",
             "markdown",
-            "norg"
+            "norg",
+            "solidity"
         },
         sync_install = false,
         auto_install = true,

@@ -70,7 +70,6 @@ function config.mason_lspconfig()
             "pylsp",
             "sumneko_lua",
             "jsonls",
-            "marksman"
         },
         automatic_installation = true,
     })
