@@ -329,9 +329,9 @@ map.Default = {
         ["<C-e>"] = { "<End>", "End", noremap = true, silent = true },
     },
     v = {
-        ["<C-d>"] = { "<cmd>lua require('neoscroll').scroll(vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Down",
+        ["<C-d>"] = { "<cmd>lua ensure_require('neoscroll').scroll(vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Down",
             noremap = true, silent = true },
-        ["<C-u>"] = { "<cmd>lua require('neoscroll').scroll(-vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Up",
+        ["<C-u>"] = { "<cmd>lua ensure_require('neoscroll').scroll(-vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Up",
             noremap = true, silent = true },
         [">"] = { ">gv", "Indent Right", noremap = true },
         ["<"] = { "<gv", "Indent Left", noremap = true },

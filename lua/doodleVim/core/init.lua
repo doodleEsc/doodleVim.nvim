@@ -72,6 +72,7 @@ local function load_nvim_config()
 
     pack.ensure_plugins()
     pack.load_compile()
+    defer.setup()
 
     require('doodleVim.core.command')
     set_colorscheme()
