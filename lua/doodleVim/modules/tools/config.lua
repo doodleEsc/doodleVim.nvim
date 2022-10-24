@@ -741,12 +741,13 @@ function config.neorg()
                 config = {
                     workspaces = {
                         gtd = "~/Documents/Notes/gtd",
+                        work = "~/Documents/Notes/work",
                     }
                 }
             },
             ["core.gtd.base"] = {
                 config = {
-                    workspace = "gtd",
+                    workspace = "work",
                 },
             },
             ["core.norg.concealer"] = {},
@@ -796,7 +797,7 @@ function config.neorg()
                             "core.norg.qol.todo_items.todo.task_import"
                         )
                         keybinds.map_event("norg", "n",
-                            "<Leader><Space>",
+                            "<Space><Space>",
                             "core.norg.qol.todo_items.todo.task_cycle"
                         )
                         keybinds.map_event("norg", "n",

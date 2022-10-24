@@ -28,12 +28,11 @@ function config.treesitter()
             "toml",
             "vim",
             "yaml",
-            "markdown",
             "norg",
             "solidity"
         },
         sync_install = false,
-        auto_install = true,
+        auto_install = false,
         highlight = {
             enable = true
         },
