@@ -734,6 +734,8 @@ function config.tmux()
 end
 
 function config.neorg()
+    vim.cmd[[Neorg sync-parsers]]
+
     require('neorg').setup {
         load = {
             ["core.defaults"] = {},
