@@ -741,13 +741,12 @@ function config.neorg()
                 config = {
                     workspaces = {
                         gtd = "~/Documents/Notes/gtd",
-                        work = "~/Documents/Notes/work",
                     }
                 }
             },
             ["core.gtd.base"] = {
                 config = {
-                    workspace = "work",
+                    workspace = "gtd",
                 },
             },
             ["core.norg.concealer"] = {},
