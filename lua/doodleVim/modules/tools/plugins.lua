@@ -122,6 +122,7 @@ tools['nvim-neorg/neorg'] = {
     opt = true,
     setup = function()
         require("doodleVim.extend.packer").add("neorg", function()
+            require("doodleVim.utils.defer").immediate_load("neorg")
             vim.cmd[[Neorg sync-parsers]]
         end)
     end,

@@ -10,6 +10,7 @@ ui['nvim-treesitter/nvim-treesitter'] = {
     setup = function()
         require("doodleVim.utils.defer").add("nvim-treesitter", 100)
         require("doodleVim.extend.packer").add("nvim-treesitter", function()
+            require("doodleVim.utils.defer").immediate_load("nvim-treesitter")
             vim.cmd[[TSInstallSync bash cmake comment c cpp dot dockerfile go gomod gowork json html lua make python regex rust toml vim yaml solidity]]
         end)
     end,
