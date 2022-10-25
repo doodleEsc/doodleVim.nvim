@@ -28,7 +28,6 @@ function config.treesitter()
             "toml",
             "vim",
             "yaml",
-            "norg",
             "solidity"
         },
         sync_install = false,
