@@ -66,7 +66,7 @@ completion["williamboman/mason.nvim"] = {
     setup = function()
         require("doodleVim.extend.packer").add("mason", function()
             require("doodleVim.utils.defer").immediate_load("mason.nvim")
-            vim.cmd [[MasonInstall debugpy delve gopls gotests gomodifytags json-lsp lua-language-server python-lsp-server ]]
+            vim.cmd [[MasonInstall gopls json-lsp lua-language-server python-lsp-server debugpy delve gotests gomodifytags ]]
         end)
     end,
     after = "nvim-cmp",
@@ -109,7 +109,6 @@ completion["danymat/neogen"] = {
 
 completion["doodleEsc/rename.nvim"] = {
     after = { "nvim-lspconfig", "nui.nvim" },
-    -- config = conf.rename,
 }
 
 return completion
