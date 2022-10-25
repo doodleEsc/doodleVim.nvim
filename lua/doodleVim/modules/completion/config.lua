@@ -71,7 +71,7 @@ function config.mason_lspconfig()
             "sumneko_lua",
             "jsonls",
         },
-        automatic_installation = true,
+        automatic_installation = false,
     })
 
     local handler = require("doodleVim.modules.completion.handler")
