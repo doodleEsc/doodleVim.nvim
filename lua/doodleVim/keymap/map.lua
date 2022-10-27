@@ -111,13 +111,15 @@ map.MarkdownPreview_EasyAlign = {
 
 map.Floaterm = {
     n = {
+        ["<C-Space>"] = bind.convert_wk_format(map_cr('FloatermToggle'):with_noremap():with_silent():with_label("Toggle Floaterm")),
+
         ["m"] = {
             name = "Floaterm",
-            m = bind.convert_wk_format(map_cr('FloatermToggle'):with_noremap():with_silent():with_label("Toggle Floaterm")),
-            y = bind.convert_wk_format(map_cr('FloatermNew'):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")),
-            t = bind.convert_wk_format(map_cr('FloatermNew --cwd=<buffer>'):with_noremap():with_silent():with_label("Open Floaterm In Current Buffer Dir")),
-            j = { "Kill All Floaterm In Terminal Mode" },
-            k = { "Kill Current Floaterm In Terminal Mode" },
+            -- m = bind.convert_wk_format(map_cr('FloatermToggle'):with_noremap():with_silent():with_label("Toggle Floaterm")),
+            r = bind.convert_wk_format(map_cr('FloatermNew'):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")),
+            v = bind.convert_wk_format(map_cr('FloatermNew --cwd=<buffer>'):with_noremap():with_silent():with_label("Open Floaterm In Current Buffer Dir")),
+            j = bind.convert_wk_format(map_cr('FloatermKill!'):with_noremap():with_silent():with_label("Kill All Floaterm In Terminal Mode")),
+            k = bind.convert_wk_format(map_cr('FloatermKill'):with_noremap():with_silent():with_label("Kill Current Floaterm In Terminal Mode")),
         },
     },
 
@@ -253,17 +255,17 @@ map.Bufferline = {
 
 map.WhichKey = {
     n = {
-        ["<C-Space>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').toggle_whichkey()"):
+        ["<F2>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').toggle_whichkey()"):
             with_noremap()
             :with_silent():with_label("Show Keymaps")),
     },
     v = {
-        ["<C-Space>"] = bind.convert_wk_format(map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
+        ["<F2>"] = bind.convert_wk_format(map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
             :with_noremap():with_label("Show Keymaps"))
 
     },
     i = {
-        ["<C-Space>"] = bind.convert_wk_format(map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
+        ["<F2>"] = bind.convert_wk_format(map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
             :with_noremap():with_label("Show Keymaps")),
     }
 }
