@@ -133,19 +133,8 @@ M.load_options = function()
         cache_enabled = 1
     }
 
-    if global.is_mac then
-        vim.g.python_host_skip_check = 1
-        vim.g.python_host_prog = '/usr/bin/python'
-        vim.g.python3_host_skip_check = 1
-        vim.g.python3_host_prog = '/usr/local/opt/python@3.10/bin/python3'
-    end
-
-    if global.is_linux then
-        vim.g.python_host_skip_check = 1
-        vim.g.python_host_prog = '/usr/bin/python'
-        vim.g.python3_host_skip_check = 1
-        vim.g.python3_host_prog = '/usr/bin/python3'
-    end
+    vim.g.python_host_skip_check = 1
+    vim.g.python3_host_skip_check = 1
 
     for name, value in pairs(global_local) do
         vim.o[name] = value
