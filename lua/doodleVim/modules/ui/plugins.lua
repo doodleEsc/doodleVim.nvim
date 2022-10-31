@@ -1,31 +1,6 @@
 local ui = {}
 local conf = require("doodleVim.modules.ui.config")
 
-local langs = {
-    "bash",
-    "cmake",
-    "comment",
-    "c",
-    "cpp",
-    "dot",
-    "dockerfile",
-    "go",
-    "gomod",
-    "gowork",
-    "json",
-    "html",
-    "lua",
-    "make",
-    "python",
-    "regex",
-    "rust",
-    "toml",
-    "vim",
-    "yaml",
-    "solidity"
-}
-
-
 ui['nvim-treesitter/nvim-treesitter'] = {
     opt = true,
     requires = {
@@ -35,6 +10,29 @@ ui['nvim-treesitter/nvim-treesitter'] = {
         require("doodleVim.utils.defer").add("nvim-treesitter", 100)
         require("doodleVim.extend.packer").add("nvim-treesitter", function()
             require("doodleVim.utils.defer").immediate_load("nvim-treesitter")
+            local langs = {
+                "bash",
+                "cmake",
+                "comment",
+                "c",
+                "cpp",
+                "dot",
+                "dockerfile",
+                "go",
+                "gomod",
+                "gowork",
+                "json",
+                "html",
+                "lua",
+                "make",
+                "python",
+                "regex",
+                "rust",
+                "toml",
+                "vim",
+                "yaml",
+                "solidity"
+            }
             require("nvim-treesitter.install").uninstall(langs)
             require("nvim-treesitter.install").ensure_installed_sync(langs)
         end)
