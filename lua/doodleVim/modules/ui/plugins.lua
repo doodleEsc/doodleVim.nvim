@@ -33,8 +33,11 @@ ui['nvim-treesitter/nvim-treesitter'] = {
                 "yaml",
                 "solidity"
             }
-            require("nvim-treesitter.install").uninstall(langs)
-            require("nvim-treesitter.install").ensure_installed_sync(langs)
+            local update = require("nvim-treesitter.install").update { with_sync = true }
+            local ok, _ = pcall(update, langs)
+            if not ok then
+                vim.notify("TSUpdate Failed...")
+            end
         end)
     end,
     config = conf.treesitter
