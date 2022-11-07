@@ -10,7 +10,10 @@ function config.treesitter()
         sync_install = true,
         auto_install = false,
         highlight = {
-            enable = true
+            enable = true,
+            disable = {
+                "lua",
+            },
         },
         textobjects = {
             select = {
