@@ -70,8 +70,9 @@ function config.mason_lspconfig()
             "pylsp",
             "sumneko_lua",
             "jsonls",
+            "clangd"
         },
-        automatic_installation = true,
+        automatic_installation = false,
     })
 
     local handler = require("doodleVim.modules.completion.handler")
@@ -102,6 +103,7 @@ function config.mason_lspconfig()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+    capabilities.offsetEncoding = { "utf-16" }
 
     local lspconfig = require("lspconfig")
     local on_attach = function(client, bufnr)
@@ -244,9 +246,18 @@ function config.nvim_cmp()
             },
             format = function(entry, vim_item)
                 local word = vim_item.abbr
+
                 if string.sub(word, -1, -1) == "~" then
-                    vim_item.abbr = string.sub(word, 0, -2)
+                    word = string.sub(word, 0, -2)
                 end
+
+                local width = #word
+                if width >= math.ceil(vim.o.columns / 4) then
+                    width = math.ceil(width / 4)
+                    local offset = width - #word
+                    word = string.sub(word, 0, offset)
+                end
+                vim_item.abbr = word
 
                 local icons = require("doodleVim.utils.icons")
                 vim_item.kind = string.format("%s %s", icons.cmp[vim_item.kind], vim_item.kind)
@@ -329,7 +340,10 @@ function config.null_ls()
             use_console = "async",
         },
         on_attach = nil,
-        on_init = nil,
+        -- on_init = function(new_client, _)
+        --     print(vim.inspect(new_client))
+        --     new_client.offset_encoding = 'utf-32'
+        -- end,
         on_exit = nil,
         sources = {
             null_ls.builtins.code_actions.gitsigns,

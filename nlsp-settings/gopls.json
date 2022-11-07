@@ -1,3 +1,8 @@
 {
-    "go.autocompleteUnimportedPackages": true
+    "go.autocompleteUnimportedPackages": true,
+    "gopls": {
+        "build.env": {
+            "GOFLAGS": "-tags=linux"
+        }
+    }
 }

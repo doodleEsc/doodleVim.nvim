@@ -36,6 +36,9 @@ function autocmd.load_autocmds()
             { "FileType", "gitcommit", "setlocal wrap" },
             { "FileType", "gitcommit", "setlocal spell" }
         },
+        _packer = {
+            { "User", "PackerComplete", "++once", "lua require('doodleVim.extend.packer').PostPacker()" }
+        }
     }
 
     create_augroups(definitions)

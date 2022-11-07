@@ -7,42 +7,18 @@ end
 function config.treesitter()
     require('doodleVim.utils.defer').immediate_load('nvim-treesitter-textobjects')
     require('nvim-treesitter.configs').setup {
-        ensure_installed = {
-            "bash",
-            "cmake",
-            "comment",
-            "c",
-            "cpp",
-            "dot",
-            "dockerfile",
-            "go",
-            "gomod",
-            "gowork",
-            "json",
-            "html",
-            "lua",
-            "make",
-            "python",
-            "regex",
-            "rust",
-            "toml",
-            "vim",
-            "yaml",
-            "norg",
-            "solidity"
-        },
-        sync_install = false,
+        sync_install = true,
         auto_install = false,
         highlight = {
-            enable = true
+            enable = true,
+            disable = {
+                "lua",
+            },
         },
         textobjects = {
             select = {
                 enable = true,
-
-                -- Automatically jump forward to textobj, similar to targets.vim
                 lookahead = true,
-
                 keymaps = {
                     -- You can use the capture groups defined in textobjects.scm
                     ["af"] = "@function.outer",
