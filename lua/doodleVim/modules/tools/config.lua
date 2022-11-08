@@ -261,7 +261,7 @@ function config.nvim_tree()
             auto_open = true,
         },
         update_focused_file = {
-            enable = true,
+            enable = false,
             update_cwd = true,
             ignore_list = {},
         },
