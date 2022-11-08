@@ -141,10 +141,16 @@ function config.nlsp_settings()
 end
 
 function config.nvim_cmp()
-    require("doodleVim.utils.defer").immediate_load({ "LuaSnip", "neogen" })
+    require("doodleVim.utils.defer").immediate_load({
+        "LuaSnip",
+        "neogen",
+        "cmp-under-comparator",
+    })
 
     local cmp = require("cmp")
     local types = require("cmp.types")
+    local under_comparator = require "cmp-under-comparator".under
+    local WIDE_HEIGHT = 40
 
     cmp.setup({
         enabled = function()
@@ -162,24 +168,44 @@ function config.nvim_cmp()
         },
         window = {
             completion = cmp.config.window.bordered({
+                border = "rounded",
                 winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
             }),
-            documentation = cmp.config.window.bordered({
+            documentation = {
+                max_height = math.floor(WIDE_HEIGHT * (WIDE_HEIGHT / vim.o.lines)),
+                max_width = math.floor((WIDE_HEIGHT * 2) * (vim.o.columns / (WIDE_HEIGHT * 2 * 16 / 9))),
+                border = "rounded",
                 winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-            }),
+            },
+        },
+        sorting = {
+            priority_weight = 2,
+            comparators = {
+                cmp.config.compare.offset,
+                cmp.config.compare.exact,
+                cmp.config.compare.score,
+                under_comparator,
+                cmp.config.compare.recently_used,
+                cmp.config.compare.locality,
+                cmp.config.compare.kind,
+                cmp.config.compare.sort_text,
+                cmp.config.compare.length,
+                cmp.config.compare.order,
+            },
         },
         sources = cmp.config.sources({
             { name = "nvim_lsp" },
             { name = "luasnip" },
-            { name = "cmp_tabnine" },
             { name = "buffer" },
             { name = "path" },
-        }, {
             {
                 name = "look",
-                keyword_length = 2,
+                keyword_length = 3,
                 option = { convert_case = true, loud = true },
             },
+            { name = "cmp_tabnine" },
+        }, {
+
         }),
         mapping = cmp.mapping.preset.insert({
             ["<CR>"] = {

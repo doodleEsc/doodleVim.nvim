@@ -79,7 +79,7 @@ local icons = {
         staged = "✓",
         unmerged = "",
         renamed = "➜",
-        untracked = "",
+        untracked = "+",
         deleted = "",
         ignored = "◌",
     },

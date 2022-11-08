@@ -29,12 +29,12 @@ misc.safe_save = function()
     vim.notify("Current Session Saved")
 end
 
-misc.wrapped_notify = function(m, l, o)
-    if m:match("NULL_LS_CODE_ACTION", 1) then
+misc.wrapped_notify = function(message, level, o)
+    if message:match("NULL_LS_CODE_ACTION", 1) then
         return
     end
-    local wrapped_msg = require("doodleVim.utils.utils").wrap(m, 52)
-    require("notify")(wrapped_msg, l, o)
+    local wrapped_msg = require("doodleVim.utils.utils").wrap(message, 52)
+    require("notify")(wrapped_msg, level, o)
 end
 
 misc.toggle_nu = function()

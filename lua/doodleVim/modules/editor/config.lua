@@ -21,17 +21,23 @@ function config.todo()
             PERF = { icon = icons.todo.perf, color = "default", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
             NOTE = { icon = icons.todo.note, color = "hint", alt = { "INFO" } },
         },
+        gui_style = {
+            fg = "NONE", -- The gui style to use for the fg highlight group.
+            bg = "BOLD", -- The gui style to use for the bg highlight group.
+        },
         merge_keywords = true, -- when true, custom keywords will be merged with the defaults
         -- highlighting of the line containing the todo comment
         -- * before: highlights before the keyword (typically comment characters)
         -- * keyword: highlights of the keyword
         -- * after: highlights after the keyword (todo text)
         highlight = {
+            multiline = true, -- enable multine todo comments
+            multiline_pattern = "^.", -- lua pattern to match the next multiline from the start of the matched keyword
+            multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
             before = "", -- "fg" or "bg" or empty
             keyword = "bg", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
             after = "fg", -- "fg" or "bg" or empty
             pattern = [[.*<(KEYWORDS)\v(\s?\(.*\)|:)+]], -- pattern or table of patterns, used for highlightng (vim regex)
-            -- pattern = [[.*<(KEYWORDS)\v(\s|:)+]], -- pattern or table of patterns, used for highlightng (vim regex)
             comments_only = true, -- uses treesitter to match keywords in comments only
             max_line_len = 400, -- ignore lines longer than this
             exclude = {}, -- list of file types to exclude highlighting
@@ -182,31 +188,40 @@ function config.gitsigns()
             delete       = { hl = 'GitSignsDelete', text = '_', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
             topdelete    = { hl = 'GitSignsDelete', text = '‾', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
             changedelete = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
+            untracked    = { hl = 'GitSignsAdd', text = '┆', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
         },
         signcolumn                   = true, -- Toggle with `:Gitsigns toggle_signs`
         numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
         linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
         word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
         watch_gitdir                 = {
-            interval = 2000,
+            interval = 1000,
             follow_files = true
         },
+        attach_to_untracked          = true,
         current_line_blame           = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
         current_line_blame_opts      = {
             virt_text = true,
             virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-            delay = 100,
+            delay = 1000,
             ignore_whitespace = false,
         },
+        current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+        sign_priority                = 6,
+        update_debounce              = 100,
+        status_formatter             = nil, -- Use default
+        max_file_length              = 40000, -- Disable if file is longer than this (in lines)
         preview_config               = {
             -- Options passed to nvim_open_win
-            border = 'single',
+            border = 'rounded',
             style = 'minimal',
             relative = 'cursor',
             row = 0,
             col = 1
         },
-        current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+        yadm                         = {
+            enable = false
+        },
     }
 end
 

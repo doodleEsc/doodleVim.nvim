@@ -39,6 +39,10 @@ completion["hrsh7th/cmp-cmdline"] = {
     after = "nvim-cmp",
 }
 
+completion["lukas-reineke/cmp-under-comparator"] = {
+    opt = true,
+}
+
 completion["L3MON4D3/LuaSnip"] = {
     after = "nvim-cmp",
     config = conf.luasnip,
