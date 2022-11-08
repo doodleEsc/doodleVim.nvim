@@ -45,18 +45,25 @@ map.Lsp = {
     },
 }
 
-map.NvimTree_Translator = {
+map.NvimTree = {
     n = {
-        ["t"] = {
-            name = "Tree, Translator",
-            t = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').toggle()"):with_noremap():
-                with_silent():
-                with_label("Enhanced NvimTree Toggle")),
-            w = bind.convert_wk_format(map_cmd("<Cmd>NvimTreeRefresh<CR>"):
+        ["<leader>d"] = {
+            name = "Tree",
+            d = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').toggle()"):with_noremap():with_silent():with_label("Enhanced NvimTree Toggle")),
+            f = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').find_file()"):with_noremap():with_silent():with_label("Find File")),
+            s = bind.convert_wk_format(map_cmd("<Cmd>NvimTreeRefresh<CR>"):
                 with_noremap():with_silent():with_label("NvimTree Refresh")),
-            r = bind.convert_wk_format(map_cr("TranslateW"):with_silent():with_label("Translate Word In Cursor"))
         },
     },
+}
+
+map.Translator = {
+    n = {
+        ["<leader>t"] = {
+            name = "Translator",
+            r = bind.convert_wk_format(map_cr("TranslateW"):with_silent():with_label("Translate Word In Cursor"))
+        }
+    }
 }
 
 map.SymbolsOutline = {
