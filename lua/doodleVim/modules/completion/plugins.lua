@@ -70,7 +70,7 @@ completion["williamboman/mason.nvim"] = {
     setup = function()
         require("doodleVim.extend.packer").add("mason", function()
             require("doodleVim.utils.defer").immediate_load("mason.nvim")
-            vim.cmd [[MasonInstall gopls json-lsp lua-language-server python-lsp-server debugpy delve gotests gomodifytags ]]
+            vim.cmd [[MasonInstall gopls json-lsp lua-language-server python-lsp-server debugpy delve gotests gomodifytags clangd]]
         end)
     end,
     after = "nvim-cmp",
