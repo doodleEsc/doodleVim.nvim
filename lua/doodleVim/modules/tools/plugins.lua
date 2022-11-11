@@ -64,11 +64,6 @@ tools['voldikss/vim-floaterm'] = {
     end
 }
 
-tools['voldikss/vim-translator'] = {
-    cmd = { 'TranslateW' },
-    setup = conf.translator
-}
-
 tools['anuvyklack/hydra.nvim'] = {
     opt = true,
     setup = function() require("doodleVim.utils.defer").defer_load("hydra.nvim", 100) end,

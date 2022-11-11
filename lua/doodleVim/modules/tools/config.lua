@@ -447,12 +447,6 @@ function config.floaterm()
     vim.g.floaterm_opener = "edit"
 end
 
-function config.translator()
-    vim.g.translator_window_borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-    vim.g.translator_proxy_url = "socks5://127.0.0.1:1080"
-    vim.g.translator_default_engines = { "google" }
-end
-
 function config.project()
     require("project_nvim").setup({
         -- Manual mode doesn't automatically change your root directory, so you have

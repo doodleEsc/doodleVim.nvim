@@ -55,14 +55,14 @@ map.NvimTree = {
     },
 }
 
-map.Translator = {
-    n = {
-        ["<leader>r"] = {
-            name = "Translator",
-            r = bind.convert_wk_format(map_cr("TranslateW"):with_silent():with_label("Translate Word In Cursor"))
-        }
-    }
-}
+-- map.Translator = {
+--     n = {
+--         ["<leader>r"] = {
+--             name = "Translator",
+--             r = bind.convert_wk_format(map_cr("TranslateW"):with_silent():with_label("Translate Word In Cursor"))
+--         }
+--     }
+-- }
 
 map.SymbolsOutline = {
     n = {
