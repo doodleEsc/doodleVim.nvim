@@ -66,9 +66,9 @@ map.Translator = {
 
 map.SymbolsOutline = {
     n = {
-        ["<leader>v"] = {
+        ["<leader>j"] = {
             name = "Symbols-Outline",
-            v = bind.convert_wk_format(map_cr('lua ensure_require"symbols-outline".toggle_outline()'):with_noremap():
+            j = bind.convert_wk_format(map_cr('lua ensure_require"symbols-outline".toggle_outline()'):with_noremap():
                 with_silent():with_label("Symbols And Function Preview"))
         },
     }
