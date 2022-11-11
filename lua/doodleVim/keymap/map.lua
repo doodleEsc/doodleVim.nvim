@@ -110,7 +110,7 @@ map.EasyAlign = {
 map.MarkdownPreview = {
     n = {
         ["<leader>m"] = {
-            name = "MarkdownPreview, EasyAlign",
+            name = "MarkdownPreview",
             m = bind.convert_wk_format(map_cr('MarkdownPreviewToggle'):with_noremap():with_silent():with_label("Toggle Markdown Preview"))
         }
     }

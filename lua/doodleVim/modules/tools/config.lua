@@ -857,14 +857,14 @@ function config.venn()
 
     local doodleHydra = require("doodleVim.extend.hydra")
     local hint = [[
-     Arrow^^^^^^   Select region with <C-v>
-     ^ ^ ^ ^ ^ ^   _f_: single line box
-     ^ ^ _K_ ^ ^   _d_: double line box
-     _H_ ^ ^ _L_   _h_: Hard line box
-     ^ ^ _J_ ^ ^   _o_: crossed single line
-     ^ ^ ^ ^ ^ ^   _F_: Fill the box
-     ^ ^ ^ ^ ^ ^                     _<Esc>_
-    ]]
+Arrow^^^^^^   Select region with <C-v>
+^ ^ ^ ^ ^ ^   _f_: single line box
+^ ^ _K_ ^ ^   _d_: double line box
+_H_ ^ ^ _L_   _h_: Hard line box
+^ ^ _J_ ^ ^   _o_: crossed single line
+^ ^ ^ ^ ^ ^   _F_: Fill the box
+^ ^ ^ ^ ^ ^                     _<Esc>_
+]]
 
     local Hydra = require('hydra')
     local venn_hydra = Hydra({
@@ -883,9 +883,9 @@ function config.venn()
         mode = 'n',
         heads = {
             { 'H', '<C-v>h:VBox<CR>', { silent = true } },
-            { 'J', '<C-v>j:VBox<CR>', { silent = true }  },
-            { 'K', '<C-v>k:VBox<CR>', { silent = true }  },
-            { 'L', '<C-v>l:VBox<CR>', { silent = true }  },
+            { 'J', '<C-v>j:VBox<CR>', { silent = true } },
+            { 'K', '<C-v>k:VBox<CR>', { silent = true } },
+            { 'L', '<C-v>l:VBox<CR>', { silent = true } },
             { 'f', ':VBox<CR>', { mode = 'v', silent = true } },
             { 'd', ':VBoxD<CR>', { mode = 'v', silent = true } },
             { 'h', ':VBoxH<CR>', { mode = 'v', silent = true } },
