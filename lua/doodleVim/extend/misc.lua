@@ -91,10 +91,4 @@ misc.toggle_whichkey = function()
     end
 end
 
-misc.new_floaterm = function(dir)
-    dir = dir or "<buffer>"
-    vim.cmd("FloatermToggle")
-    vim.cmd("FloatermNew --cwd=" .. dir)
-end
-
 return misc

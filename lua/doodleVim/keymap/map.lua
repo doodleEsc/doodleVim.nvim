@@ -47,19 +47,17 @@ map.Lsp = {
 
 map.NvimTree = {
     n = {
-        ["<leader>d"] = {
+        ["<leader>t"] = {
             name = "Tree",
-            d = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').toggle()"):with_noremap():with_silent():with_label("Enhanced NvimTree Toggle")),
-            f = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').find_file()"):with_noremap():with_silent():with_label("Find File")),
-            s = bind.convert_wk_format(map_cmd("<Cmd>NvimTreeRefresh<CR>"):
-                with_noremap():with_silent():with_label("NvimTree Refresh")),
+            t = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').toggle()"):with_noremap():with_silent():with_label("Enhanced NvimTree Toggle")),
+            r = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').find_file()"):with_noremap():with_silent():with_label("Find File")),
         },
     },
 }
 
 map.Translator = {
     n = {
-        ["<leader>t"] = {
+        ["<leader>r"] = {
             name = "Translator",
             r = bind.convert_wk_format(map_cr("TranslateW"):with_silent():with_label("Translate Word In Cursor"))
         }
@@ -80,7 +78,7 @@ map.Packer = {
     n = {
         ["<leader>p"] = {
             name = "Packer Manage",
-            u = bind.convert_wk_format(map_cr("PackerUpdate"):with_silent():with_noremap():with_label("Packer Update")),
+            p = bind.convert_wk_format(map_cr("PackerUpdate"):with_silent():with_noremap():with_label("Packer Update")),
             c = bind.convert_wk_format(map_cr("PackerCompile"):with_silent():with_noremap():with_label("Packer Compile")),
             x = bind.convert_wk_format(map_cr("PackerClean"):with_silent():with_noremap():with_label("Packer Clean")),
         },
@@ -89,29 +87,31 @@ map.Packer = {
 
 map.Diagnostic = {
     n = {
-        ["<leader>e"] = {
+        ["<leader>d"] = {
             name = "Show Diagnostics",
             d = bind.convert_wk_format(map_cr("Telescope diagnostics bufnr=0"):with_noremap():with_silent():with_label("Show Diagnostics In Current Buffer")),
             e = bind.convert_wk_format(map_cr("Telescope diagnostics"):with_noremap():with_silent():with_label("Show Diagnostics In WorkSpace")),
-            t = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.diagnostics').toggle_virtual_text()"):
+            f = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.diagnostics').toggle_virtual_text()"):
                 with_noremap():with_silent():with_label("Toggle Diagnostics Virtual Text"))
         },
     }
 }
 
-map.MarkdownPreview_EasyAlign = {
+map.EasyAlign = {
+    v = {
+        ["<leader>e"] = {
+            name = "EasyAlign",
+            e = bind.convert_wk_format(map_cmd("<Plug>(EasyAlign)"):with_label("EasyAlign File"))
+        }
+    }
+}
+
+
+map.MarkdownPreview = {
     n = {
         ["<leader>m"] = {
             name = "MarkdownPreview, EasyAlign",
-            w = bind.convert_wk_format(map_cr('MarkdownPreviewToggle'):with_noremap():with_silent():with_label("Toggle Markdown Preview")),
-            a = bind.convert_wk_format(map_cmd("<Plug>(EasyAlign)<CR>"):with_label("EasyAlign File"))
-        }
-    },
-    v = {
-        ["<leader>m"] = {
-            name = "MarkdownPreview, EasyAlign",
-            -- w = bind.convert_wk_format(map_cr('MarkdownPreviewToggle'):with_noremap():with_silent():with_label("Toggle Markdown Preview")),
-            a = bind.convert_wk_format(map_cmd("<Plug>(EasyAlign)"):with_label("EasyAlign File"))
+            m = bind.convert_wk_format(map_cr('MarkdownPreviewToggle'):with_noremap():with_silent():with_label("Toggle Markdown Preview"))
         }
     }
 }
@@ -120,31 +120,35 @@ map.Floaterm = {
     n = {
         ["<C-Space>"] = bind.convert_wk_format(map_cr('FloatermToggle'):with_noremap():with_silent():with_label("Toggle Floaterm")),
 
-        ["m"] = {
+        ["<leader>k"] = {
             name = "Floaterm",
-            -- m = bind.convert_wk_format(map_cr('FloatermToggle'):with_noremap():with_silent():with_label("Toggle Floaterm")),
-            r = bind.convert_wk_format(map_cr('FloatermNew'):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")),
-            v = bind.convert_wk_format(map_cr('FloatermNew --cwd=<buffer>'):with_noremap():with_silent():with_label("Open Floaterm In Current Buffer Dir")),
-            j = bind.convert_wk_format(map_cr('FloatermKill!'):with_noremap():with_silent():with_label("Kill All Floaterm In Terminal Mode")),
-            k = bind.convert_wk_format(map_cr('FloatermKill'):with_noremap():with_silent():with_label("Kill Current Floaterm In Terminal Mode")),
+            j = bind.convert_wk_format(map_cr('FloatermNew'):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")),
+            k = bind.convert_wk_format(map_cr('FloatermNew --cwd=<buffer>'):with_noremap():with_silent():with_label("Open Floaterm In Current Buffer Dir")),
+        },
+    },
+
+    v = {
+        ["<leader>k"] = {
+            name = "Floaterm",
+            j = bind.convert_wk_format(map_cr('FloatermNew'):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")),
+            k = bind.convert_wk_format(map_cr('FloatermNew --cwd=<buffer>'):with_noremap():with_silent():with_label("Open Floaterm In Current Buffer Dir")),
         },
     },
 
     t = {
-
         ["<C-Space>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>", true, true, true),
             "Toggle Terminal", noremap = true, silent = true },
         ["<C-h>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermPrev<CR>", true, true, true),
             "Go To Next Terminal", noremap = true, silent = true },
         ["<C-l>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNext<CR>", true, true, true),
             "Go To Previous Terminal", noremap = true, silent = true },
-        ["<C-j>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermKill<CR>", true, true, true),
+        ["<M-k>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill()<CR>', true, true, true),
             "Kill Current Terminal", noremap = true, silent = true },
-        ["<C-k>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermKill!<CR>", true, true, true),
+        ["<M-j>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill(true)<CR>', true, true, true),
             "Kill All Terminal", noremap = true, silent = true },
-        ["<C-y>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNew<CR>", true, true, true),
+        ["<C-j>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNew<CR>", true, true, true),
             "Floaterm In Project Root Dir", noremap = true, silent = true },
-        ["<C-t>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.misc").new_floaterm()<CR>'
+        ["<C-k>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.floaterm").new()<CR>'
             , true, true, true),
             "Floaterm In Current Buffer Dir", noremap = true, silent = true },
     }
@@ -176,11 +180,11 @@ map.Telescope = {
         ["<leader>f"] = {
             name = "Telescope Search",
             f = bind.convert_wk_format(map_cr('Telescope find_files'):with_noremap():with_silent():with_label("Find Files")),
-            d = bind.convert_wk_format(map_cr('Telescope file_browser'):with_noremap():with_silent():with_label("File Browser")),
-            g = bind.convert_wk_format(map_cr('Telescope live_grep'):with_noremap():with_silent():with_label("Live Grep")),
+            d = bind.convert_wk_format(map_cr('Telescope live_grep'):with_noremap():with_silent():with_label("Live Grep")),
+            s = bind.convert_wk_format(map_cr('Telescope file_browser'):with_noremap():with_silent():with_label("File Browser")),
             h = bind.convert_wk_format(map_cr('Telescope projects'):with_noremap():with_silent():with_label("Find Projects")),
             j = bind.convert_wk_format(map_cr('Telescope todo-comments todo'):with_noremap():with_silent():with_label("Find Todos")),
-            o = bind.convert_wk_format(map_cr('Telescope oldfiles'):with_noremap():with_silent():with_label("Find Recent Files")),
+            k = bind.convert_wk_format(map_cr('Telescope oldfiles'):with_noremap():with_silent():with_label("Find Recent Files")),
             n = bind.convert_wk_format(map_cr('Telescope neoclip'):with_noremap():with_silent():with_label("Find Saved Buffer In Clipboard")),
             b = bind.convert_wk_format(map_cr('Telescope buffers'):with_noremap():with_silent():with_label("Buffers Navigation"))
         },
@@ -199,10 +203,23 @@ map.Hop = {
     }
 }
 
-map.Neogen_toogleNu = {
+map.ToggleNumber = {
     n = {
         ["<leader>n"] = {
-            name = "Generate Documentation or Line Number Toggle",
+            name = "Toggle Line Number",
+            n = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').toggle_nu()"):with_noremap():
+                with_silent()
+                :with_label("Toggle Absolute Line Number")),
+            m = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').toggle_rnu()"):with_noremap():
+                with_silent():with_label("Toggle Relative Line Number")),
+        },
+    }
+}
+
+map.Neogen = {
+    n = {
+        ["<leader>g"] = {
+            name = "Generate Documentation",
             c = bind.convert_wk_format(map_cr("lua require('neogen').generate({type='class'})"):with_noremap():
                 with_silent()
                 :with_label("Generate Class Documentation")),
@@ -215,11 +232,6 @@ map.Neogen_toogleNu = {
             d = bind.convert_wk_format(map_cr("lua require('neogen').generate({type='file'})"):with_noremap():
                 with_silent():
                 with_label("Generate File Documentation")),
-            u = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').toggle_nu()"):with_noremap():
-                with_silent()
-                :with_label("Toggle Absolute Line Number")),
-            r = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').toggle_rnu()"):with_noremap():
-                with_silent():with_label("Toggle Relative Line Number")),
         },
     }
 }
@@ -286,14 +298,10 @@ map.Gitsigns = {
 }
 
 map.VBox = {
-    v = {
-
-        ["<leader>l"] = {
+    n = {
+        ["<leader>v"] = {
             name = "Draw Ascii Picture",
-            l = bind.convert_wk_format(map_cu("VBox"):with_noremap():with_silent():with_label("Normal Line")),
-            d = bind.convert_wk_format(map_cu("VBoxD"):with_noremap():with_silent():with_label("Double Line")),
-            h = bind.convert_wk_format(map_cu("VBoxH"):with_noremap():with_silent():with_label("Hard Line")),
-            f = bind.convert_wk_format(map_cu("VFill"):with_noremap():with_silent():with_label("Fill Box"))
+            v = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.hydra").run("venn")'):with_noremap():with_silent():with_label("Start Draw Ascii Diagram")),
         },
     }
 }

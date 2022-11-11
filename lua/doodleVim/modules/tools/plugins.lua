@@ -69,8 +69,15 @@ tools['voldikss/vim-translator'] = {
     setup = conf.translator
 }
 
+tools['anuvyklack/hydra.nvim'] = {
+    opt = true,
+    setup = function() require("doodleVim.utils.defer").defer_load("hydra.nvim", 100) end,
+}
+
 tools['jbyuki/venn.nvim'] = {
-    cmd = { 'VBox', 'VFill' }
+    opt = true,
+    after = "hydra.nvim",
+    config = conf.venn
 }
 
 tools['towolf/vim-helm'] = {
