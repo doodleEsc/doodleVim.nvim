@@ -3,6 +3,7 @@ local config = {}
 function config.mason()
     require("mason").setup({
         ui = {
+            check_outdated_packages_on_open = true,
             -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
             border = "rounded",
             icons = {
@@ -37,6 +38,7 @@ function config.mason()
 
         -- The directory in which to install packages.
         install_root_dir = require("mason-core.path").concat({ vim.fn.stdpath("data"), "mason" }),
+        PATH = "prepend",
         pip = {
             -- These args will be added to `pip install` calls. Note that setting extra args might impact intended behavior
             -- and is not recommended.
@@ -58,6 +60,9 @@ function config.mason()
             -- 2. The release version (e.g. "v0.3.0")
             -- 3. The asset name (e.g. "rust-analyzer-v0.3.0-x86_64-unknown-linux-gnu.tar.gz")
             download_url_template = "https://github.com/%s/releases/download/%s/%s",
+        },
+        providers = {
+            "mason.providers.registry-api",
         },
     })
 end
