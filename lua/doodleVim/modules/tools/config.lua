@@ -850,7 +850,8 @@ function config.venn()
     require("doodleVim.utils.defer").immediate_load("hydra.nvim")
 
     local doodleHydra = require("doodleVim.extend.hydra")
-    local hint = [[
+    local venn_hydra_factory = function()
+        local hint = [[
 Arrow^^^^^^   Select region with <C-v>
 ^ ^ ^ ^ ^ ^   _f_: single line box
 ^ ^ _K_ ^ ^   _d_: double line box
@@ -859,37 +860,40 @@ _H_ ^ ^ _L_   _h_: Hard line box
 ^ ^ ^ ^ ^ ^   _F_: Fill the box
 ^ ^ ^ ^ ^ ^                     _<Esc>_
 ]]
-
-    local Hydra = require('hydra')
-    local venn_hydra = Hydra({
-        name = 'Draw Diagram',
-        hint = hint,
-        config = {
-            color = 'pink',
-            hint = {
-                border = 'rounded',
-                position = 'top-right'
+        local Hydra = require('hydra')
+        local venn_hydra = Hydra({
+            name = 'Draw Diagram',
+            hint = hint,
+            config = {
+                color = 'pink',
+                hint = {
+                    border = 'rounded',
+                    position = 'top-right'
+                },
+                on_enter = function()
+                    vim.o.virtualedit = 'all'
+                end,
             },
-            on_enter = function()
-                vim.o.virtualedit = 'all'
-            end,
-        },
-        mode = 'n',
-        heads = {
-            { 'H', '<C-v>h:VBox<CR>', { silent = true } },
-            { 'J', '<C-v>j:VBox<CR>', { silent = true } },
-            { 'K', '<C-v>k:VBox<CR>', { silent = true } },
-            { 'L', '<C-v>l:VBox<CR>', { silent = true } },
-            { 'f', ':VBox<CR>', { mode = 'v', silent = true } },
-            { 'd', ':VBoxD<CR>', { mode = 'v', silent = true } },
-            { 'h', ':VBoxH<CR>', { mode = 'v', silent = true } },
-            { 'o', ':VBoxO<CR>', { mode = 'v', silent = true } },
-            { 'F', ':VFill<CR>', { mode = 'v', silent = true } },
-            { '<Esc>', nil, { exit = true } },
-        }
-    })
-    doodleHydra.add("venn", venn_hydra)
+            mode = 'n',
+            heads = {
+                { 'H', '<C-v>h:VBox<CR>', { silent = true } },
+                { 'J', '<C-v>j:VBox<CR>', { silent = true } },
+                { 'K', '<C-v>k:VBox<CR>', { silent = true } },
+                { 'L', '<C-v>l:VBox<CR>', { silent = true } },
+                { 'f', ':VBox<CR>', { mode = 'v', silent = true } },
+                { 'd', ':VBoxD<CR>', { mode = 'v', silent = true } },
+                { 'h', ':VBoxH<CR>', { mode = 'v', silent = true } },
+                { 'o', ':VBoxO<CR>', { mode = 'v', silent = true } },
+                { 'F', ':VFill<CR>', { mode = 'v', silent = true } },
+                { '<Esc>', nil, { exit = true } },
+            }
+        })
+        print(vim.inspect(venn_hydra))
+        return venn_hydra
+    end
 
+
+    doodleHydra.add("venn", venn_hydra_factory)
 end
 
 return config
