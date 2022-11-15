@@ -200,6 +200,7 @@ function config.nvim_cmp()
         },
         sources = cmp.config.sources({
             { name = "nvim_lsp" },
+            { name = 'treesitter' },
             { name = "luasnip" },
             { name = "buffer" },
             { name = "path" },
@@ -300,6 +301,7 @@ function config.nvim_cmp()
                     luasnip = "[SNP]",
                     path = "[PATH]",
                     look = "[LOOK]",
+                    treesitter = "[TS]"
                 })[entry.source.name]
 
                 return vim_item
@@ -389,22 +391,6 @@ end
 function config.neogen()
     require("neogen").setup({ snippet_engine = "luasnip" })
 end
-
--- function config.rename()
---     require("rename").setup({
---         rename = {
---             border = {
---                 highlight = "FloatBorder",
---                 style = "rounded",
---                 title = " Rename ",
---                 title_align = "left",
---                 title_hl = "FloatBorder",
---             },
---             prompt = "➤ ",
---             prompt_hl = "Comment",
---         },
---     })
--- end
 
 function config.lightbulb()
     local icons = require("doodleVim.utils.icons")

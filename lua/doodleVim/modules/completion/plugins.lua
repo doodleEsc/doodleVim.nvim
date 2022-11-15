@@ -39,6 +39,10 @@ completion["hrsh7th/cmp-cmdline"] = {
     after = "nvim-cmp",
 }
 
+completion["ray-x/cmp-treesitter"] = {
+    after = "nvim-cmp",
+}
+
 completion["lukas-reineke/cmp-under-comparator"] = {
     opt = true,
 }
