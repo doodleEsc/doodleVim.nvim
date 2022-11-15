@@ -10,7 +10,7 @@ ui['nvim-treesitter/nvim-treesitter'] = {
         require("doodleVim.utils.defer").add("nvim-treesitter", 100)
         require("doodleVim.extend.packer").add("nvim-treesitter", function()
             require("doodleVim.utils.defer").immediate_load("nvim-treesitter")
-            local langs = {
+            local vendor = {
                 "bash",
                 "cmake",
                 "comment",
@@ -33,10 +33,19 @@ ui['nvim-treesitter/nvim-treesitter'] = {
                 "yaml",
                 "solidity"
             }
-            local update = require("nvim-treesitter.install").update { with_sync = true }
-            local ok, _ = pcall(update, langs)
-            if not ok then
-                vim.notify("TSUpdate Failed...")
+            local langs = {}
+            local utils = require("doodleVim.utils.utils")
+            for _, lang in ipairs(vendor) do
+                if not utils.ts_is_installed(lang) then
+                    table.insert(langs, lang)
+                end
+            end
+            if #langs > 0 then
+                local update = require("nvim-treesitter.install").update { with_sync = true }
+                local ok, _ = pcall(update, langs)
+                if not ok then
+                    vim.notify("TSUpdate Failed...")
+                end
             end
         end)
     end,

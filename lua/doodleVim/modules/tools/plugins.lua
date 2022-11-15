@@ -125,7 +125,10 @@ tools['nvim-neorg/neorg'] = {
     setup = function()
         require("doodleVim.extend.packer").add("neorg", function()
             require("doodleVim.utils.defer").immediate_load("neorg")
-            vim.cmd[[Neorg sync-parsers]]
+            local utils = require("doodleVim.utils.utils")
+            if not (utils.ts_is_installed("norg") and utils.ts_is_installed("norg_meta")) then
+                vim.cmd[[Neorg sync-parsers]]
+            end
         end)
     end,
     after = { "nvim-treesitter", "telescope.nvim", "nvim-cmp" },
