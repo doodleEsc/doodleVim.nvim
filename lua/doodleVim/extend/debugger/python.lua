@@ -12,10 +12,6 @@ local get_python_path = function()
         end
         return venv_path .. '/bin/python'
     end
-    -- if M.resolve_python then
-    --     assert(type(M.resolve_python) == "function", "resolve_python must be a function")
-    --     return M.resolve_python()
-    -- end
     return nil
 end
 
@@ -31,7 +27,6 @@ end
 
 local adapter_factory = function(adapter_bin_path)
     return function(callback, config)
-        print(vim.inspect(callback))
         if config.request == "attach" then
             local port = (config.connect or config).port
             callback({

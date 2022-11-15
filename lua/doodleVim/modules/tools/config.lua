@@ -888,7 +888,6 @@ _H_ ^ ^ _L_   _h_: Hard line box
                 { '<Esc>', nil, { exit = true } },
             }
         })
-        print(vim.inspect(venn_hydra))
         return venn_hydra
     end
 

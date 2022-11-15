@@ -18,7 +18,7 @@ local adapter_factory = function(adapter_bin_path)
             stdout:close()
             handle:close()
             if code ~= 0 then
-                print("dlv exited with code", code)
+                vim.nofity("dlv exited with code: " .. code)
             end
         end)
         assert(handle, "Error running dlv: " .. tostring(pid_or_err))

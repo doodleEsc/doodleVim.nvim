@@ -96,8 +96,6 @@ function config.nui()
             popup_options.size = width
         end
 
-        print(vim.inspect(popup_options))
-
         local input = Input(popup_options, default_opts)
         input:map("i", "<Esc>", input.input_props.on_close, { noremap = true })
         input:map("i", "<C-c>", input.input_props.on_close, { noremap = true })
