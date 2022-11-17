@@ -124,7 +124,7 @@ _<Esc>_: Terminate
                     border = 'rounded',
                 },
             },
-            body = nil,
+            body = "",
             mode = 'n',
             heads = {
                 { '<F5>', dap.continue, },
