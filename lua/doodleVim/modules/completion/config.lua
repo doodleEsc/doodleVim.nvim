@@ -209,7 +209,7 @@ function config.nvim_cmp()
                 keyword_length = 3,
                 option = { convert_case = true, loud = true },
             },
-            { name = "cmp_tabnine" },
+            -- { name = "cmp_tabnine" },
         }, {
 
         }),
@@ -297,7 +297,7 @@ function config.nvim_cmp()
                 vim_item.menu = ({
                     nvim_lsp = "[LSP]",
                     buffer = "[BUF]",
-                    cmp_tabnine = "[TAB]",
+                    -- cmp_tabnine = "[TAB]",
                     luasnip = "[SNP]",
                     path = "[PATH]",
                     look = "[LOOK]",
