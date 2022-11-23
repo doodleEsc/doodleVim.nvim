@@ -57,7 +57,7 @@ ui['norcalli/nvim-colorizer.lua'] = {
     config = function() require('colorizer').setup() end
 }
 
-ui['kyazdani42/nvim-web-devicons'] = {}
+ui['nvim-tree/nvim-web-devicons'] = {}
 
 ui['nvim-lualine/lualine.nvim'] = {
     opt = true,

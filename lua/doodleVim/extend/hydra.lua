@@ -1,16 +1,17 @@
 local H = {}
+H.factories = {}
 H.hydras = {}
 
 H.add = function(key, value)
-    H.hydras[key] = value
+    H.factories[key] = value
 end
 
 H.remove = function(key)
-    H.hydras[key] = nil
+    H.factories[key] = nil
 end
 
 H.contain = function(key)
-    return H.hydras[key] ~= nil
+    return H.factories[key] ~= nil
 end
 
 H.run = function(key)
@@ -19,15 +20,19 @@ H.run = function(key)
         return
     end
 
-    local hydra_factory = H.hydras[key]
-    -- local hydra = hydra_factory()
-    -- hydra:activate()
-
-    local ok, hydra = pcall(hydra_factory)
-    if not ok then
-        vim.notify("Generate Hydra " .. key .. " Failed", vim.log.levels.ERROR)
-        return
+    local hydra, ok = nil, false
+    if H.hydras[key] ~= nil then
+        hydra = H.hydras[key]
+    else
+        local hydra_factory = H.factories[key]
+        ok, hydra = pcall(hydra_factory)
+        if not ok then
+            vim.notify("Generate Hydra " .. key .. " Failed", vim.log.levels.ERROR)
+            return
+        end
+        H.hydras[key] = hydra
     end
+
     local ok2, _ = pcall(function() hydra:activate() end)
     if not ok2 then
         vim.notify("Call " .. key .. " Failed", vim.log.levels.ERROR)

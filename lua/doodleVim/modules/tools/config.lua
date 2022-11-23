@@ -875,7 +875,6 @@ _H_ ^ ^ _L_   _h_: Hard line box
                     vim.o.virtualedit = 'all'
                 end,
             },
-            body= "",
             mode = 'n',
             heads = {
                 { 'H', '<C-v>h:VBox<CR>', { silent = true } },
