@@ -349,6 +349,10 @@ function config.gotools()
         tools = {
             gotests = {
                 bin = require "mason-core.path".bin_prefix() .. "/" .. "gotests",
+                display = {
+                    prompt = 'Select An Action',
+                    kind = 'gotools'
+                }
             },
             gomodifytags = {
                 bin = require "mason-core.path".bin_prefix() .. "/" .. "gomodifytags",
