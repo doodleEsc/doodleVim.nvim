@@ -285,19 +285,13 @@ map.WhichKey = {
 
 map.Gitsigns = {
     n = {
-        ["<M-n>"] = bind.convert_wk_format(map_cr("Gitsigns next_hunk"):with_noremap():with_silent():with_label("Next Hunk")),
-        ["<M-p>"] = bind.convert_wk_format(map_cr("Gitsigns prev_hunk"):with_noremap():with_silent():with_label("Previous Hunk")),
-
-    }
-}
-
-map.VBox = {
-    n = {
-        ["<leader>v"] = {
-            name = "Draw Ascii Picture",
+        ["<leader>h"] = {
+            name = "Hydra Tools",
+            g = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.hydra").run("gitsigns")'):with_noremap()
+                :with_silent():with_label("Start Gitsigns")),
             v = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.hydra").run("venn")'):with_noremap():
                 with_silent():with_label("Start Draw Ascii Diagram")),
-        },
+        }
     }
 }
 
