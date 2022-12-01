@@ -2,6 +2,7 @@ local global = require('doodleVim.core.global')
 local defer = require('doodleVim.utils.defer')
 local pack = require('doodleVim.core.pack')
 local event = require('doodleVim.core.event')
+local command = require('doodleVim.core.command')
 local options = require('doodleVim.core.options')
 
 -- Create cache dir and subs dir
@@ -69,12 +70,12 @@ local function load_nvim_config()
 
     options.load_options()
     event.load_autocmds()
+    command.load_user_command()
 
     pack.ensure_plugins()
     pack.load_compile()
     defer.setup()
 
-    require('doodleVim.core.command')
     set_colorscheme()
     defer.load(50)
     createdir()

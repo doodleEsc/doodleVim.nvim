@@ -10,12 +10,13 @@ tools['nvim-telescope/telescope.nvim'] = {
     setup = function()
         require("doodleVim.utils.defer").add("telescope.nvim", 70)
     end,
-    config = conf.telescope,
     requires = {
         { 'nvim-telescope/telescope-fzf-native.nvim', opt = true, run = 'make' },
         { 'nvim-telescope/telescope-file-browser.nvim', opt = true },
-        { 'nvim-telescope/telescope-ui-select.nvim', opt = true }
-    }
+        { 'nvim-telescope/telescope-ui-select.nvim', opt = true },
+        { 'LukasPietzschmann/telescope-tabs', opt = true }
+    },
+    config = conf.telescope
 }
 
 tools['doodleEsc/project.nvim'] = {
@@ -135,5 +136,16 @@ tools['nvim-neorg/neorg'] = {
     config = conf.neorg
 }
 
+tools['lewis6991/gitsigns.nvim'] = {
+    opt = true,
+    setup = function() require("doodleVim.utils.defer").add("gitsigns.nvim", 99) end,
+    config = conf.gitsigns,
+}
+
+tools['sindrets/diffview.nvim'] = {
+    opt = true,
+    setup = function() require("doodleVim.utils.defer").add("diffview.nvim", 99) end,
+    config = conf.diffview,
+}
 
 return tools

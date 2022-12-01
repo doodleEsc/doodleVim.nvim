@@ -49,8 +49,10 @@ map.NvimTree = {
     n = {
         ["<leader>t"] = {
             name = "Tree",
-            t = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').toggle()"):with_noremap():with_silent():with_label("Enhanced NvimTree Toggle")),
-            r = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').find_file()"):with_noremap():with_silent():with_label("Find File")),
+            t = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').toggle()"):with_noremap():
+                with_silent():with_label("Enhanced NvimTree Toggle")),
+            r = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').find_file()"):with_noremap():
+                with_silent():with_label("Find File")),
         },
     },
 }
@@ -133,9 +135,11 @@ map.Floaterm = {
             "Go To Next Terminal", noremap = true, silent = true },
         ["<C-l>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNext<CR>", true, true, true),
             "Go To Previous Terminal", noremap = true, silent = true },
-        ["<M-k>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill()<CR>', true, true, true),
+        ["<M-k>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill()<CR>',
+            true, true, true),
             "Kill Current Terminal", noremap = true, silent = true },
-        ["<M-j>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill(true)<CR>', true, true, true),
+        ["<M-j>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill(true)<CR>'
+            , true, true, true),
             "Kill All Terminal", noremap = true, silent = true },
         ["<C-j>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNew<CR>", true, true, true),
             "Floaterm In Project Root Dir", noremap = true, silent = true },
@@ -229,23 +233,35 @@ map.Neogen = {
 
 map.Dap = {
     n = {
-        ["<F12>"] = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.hydra").run("dap")'):with_noremap():with_silent():with_label("Start Debug Mode")),
+        ["<F12>"] = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.hydra").run("dap")'):with_noremap():
+            with_silent():with_label("Start Debug Mode")),
     }
 }
 
 map.Bufferline = {
     n = {
-        ["<S-h>"] = bind.convert_wk_format(map_cr("BufferPrevious"):with_noremap():with_silent():with_label("Previous Buffer")),
-        ["<S-l>"] = bind.convert_wk_format(map_cr("BufferNext"):with_noremap():with_silent():with_label("Next Buffer")),
-        ["<S-n>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').enhanced_buffer_close()"):
+        ["<S-h>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferPrevious')")
+            :with_noremap():with_silent():with_label("Previous Buffer")),
+        ["<S-l>"] = bind.convert_wk_format(map_cr((
+            "lua require('doodleVim.extend.tab').enhanced_bufferline('BufferNext')")):with_noremap():with_silent():
+            with_label("Next Buffer")),
+        ["<S-n>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tab').enhanced_buffer_close()"):
             with_noremap():with_silent():with_label("Close Current Buffer")),
-        ["<M-s>"] = bind.convert_wk_format(map_cr("BufferOrderByDirectory"):with_noremap():with_silent():with_label("Sort Buffer")),
-        ["<M-b>"] = bind.convert_wk_format(map_cr("BufferCloseBuffersLeft"):with_noremap():with_silent():with_label("Close All Buffers Left")),
-        ["<M-m>"] = bind.convert_wk_format(map_cr("BufferCloseBuffersRight"):with_noremap():with_silent():with_label("Close All Buffers Right")),
-        ["<M-h>"] = bind.convert_wk_format(map_cr("BufferMovePrevious"):with_noremap():with_silent():with_label("Re-order To Previous")),
-        ["<M-l>"] = bind.convert_wk_format(map_cr("BufferMoveNext"):with_noremap():with_silent():with_label("Re-order To Next")),
-        ["<M-i>"] = bind.convert_wk_format(map_cr("BufferPin"):with_noremap():with_silent():with_label("Pin Buffer")),
-        ["<M-o>"] = bind.convert_wk_format(map_cr("BufferPick"):with_noremap():with_silent():with_label("Pick Buffer")),
+        ["<M-s>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferOrderByDirectory')")
+            :with_noremap():with_silent():with_label("Sort Buffer")),
+        ["<M-b>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferCloseBuffersLeft')")
+            :with_noremap():with_silent():with_label("Close All Buffers Left")),
+        ["<M-m>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferCloseBuffersRight')")
+            :with_noremap():with_silent():with_label("Close All Buffers Right")),
+        ["<M-h>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferMovePrevious')")
+            :with_noremap():with_silent():with_label("Re-order To Previous")),
+        -- ["<M-l>"] = bind.convert_wk_format(map_cr("BufferMoveNext"):with_noremap():with_silent():with_label("Re-order To Next")),
+        ["<M-l>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferMoveNext')")
+            :with_noremap():with_silent():with_label("Re-order To Next")),
+        ["<M-i>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferPin')")
+            :with_noremap():with_silent():with_label("Pin Buffer")),
+        ["<M-o>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferPick')")
+            :with_noremap():with_silent():with_label("Pick Buffer")),
 
     }
 }
@@ -279,7 +295,8 @@ map.VBox = {
     n = {
         ["<leader>v"] = {
             name = "Draw Ascii Picture",
-            v = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.hydra").run("venn")'):with_noremap():with_silent():with_label("Start Draw Ascii Diagram")),
+            v = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.hydra").run("venn")'):with_noremap():
+                with_silent():with_label("Start Draw Ascii Diagram")),
         },
     }
 }
