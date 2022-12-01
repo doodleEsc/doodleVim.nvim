@@ -895,56 +895,6 @@ function config.neorg()
     }
 end
 
-function config.venn()
-    require("doodleVim.utils.defer").immediate_load("hydra.nvim")
-
-    local doodleHydra = require("doodleVim.extend.hydra")
-    local venn_hydra_factory = function()
-        local hint = [[
-Arrow^^^^^^   Select region with <C-v>
-^ ^ ^ ^ ^ ^   _f_: single line box
-^ ^ _K_ ^ ^   _d_: double line box
-_H_ ^ ^ _L_   _h_: Hard line box
-^ ^ _J_ ^ ^   _o_: crossed single line
-^ ^ ^ ^ ^ ^   _F_: Fill the box
-^ ^ ^ ^ ^ ^                     _<Esc>_
-]]
-        local Hydra = require('hydra')
-        local venn_hydra = Hydra({
-            name = 'Draw Diagram',
-            hint = hint,
-            config = {
-                color = 'pink',
-                invoke_on_body = false,
-                hint = {
-                    border = 'rounded',
-                    position = 'top-right'
-                },
-                on_enter = function()
-                    vim.o.virtualedit = 'all'
-                end,
-            },
-            mode = 'n',
-            heads = {
-                { 'H', '<C-v>h:VBox<CR>', { silent = true } },
-                { 'J', '<C-v>j:VBox<CR>', { silent = true } },
-                { 'K', '<C-v>k:VBox<CR>', { silent = true } },
-                { 'L', '<C-v>l:VBox<CR>', { silent = true } },
-                { 'f', ':VBox<CR>', { mode = 'v', silent = true } },
-                { 'd', ':VBoxD<CR>', { mode = 'v', silent = true } },
-                { 'h', ':VBoxH<CR>', { mode = 'v', silent = true } },
-                { 'o', ':VBoxO<CR>', { mode = 'v', silent = true } },
-                { 'F', ':VFill<CR>', { mode = 'v', silent = true } },
-                { '<Esc>', nil, { exit = true } },
-            }
-        })
-        return venn_hydra
-    end
-
-
-    doodleHydra.add("venn", venn_hydra_factory)
-end
-
 function config.gitsigns()
     local gitsigns = require('gitsigns')
     gitsigns.setup {
@@ -1057,39 +1007,39 @@ function config.diffview()
             view = {
                 -- The `view` bindings are active in the diff buffers, only when the current
                 -- tabpage is a Diffview.
-                ["<tab>"]     = actions.select_next_entry, -- Open the diff for the next file
-                ["<s-tab>"]   = actions.select_prev_entry, -- Open the diff for the previous file
-                ["ge"]        = actions.goto_file_edit, -- Open the file in a new tabpage
+                ["<tab>"]   = actions.select_next_entry, -- Open the diff for the next file
+                ["<s-tab>"] = actions.select_prev_entry, -- Open the diff for the previous file
+                ["ge"]      = actions.goto_file_edit, -- Open the file in a new tabpage
                 -- ["<C-w>gf"]    = actions.goto_file, -- Open the file in a new split in the previous tabpage
                 -- ["<C-w><C-f>"] = actions.goto_file_split, -- Open the file in a new split
                 -- ["<leader>e"] = actions.focus_files, -- Bring focus to the files panel
                 -- ["<leader>b"] = actions.toggle_files, -- Toggle the files panel.
             },
             file_panel = {
-                ["j"]             = actions.next_entry, -- Bring the cursor to the next file entry
-                ["<down>"]        = actions.next_entry,
-                ["k"]             = actions.prev_entry, -- Bring the cursor to the previous file entry.
-                ["<up>"]          = actions.prev_entry,
-                ["<cr>"]          = actions.select_entry, -- Open the diff for the selected entry.
-                ["o"]             = actions.select_entry,
+                ["j"]         = actions.next_entry, -- Bring the cursor to the next file entry
+                ["<down>"]    = actions.next_entry,
+                ["k"]         = actions.prev_entry, -- Bring the cursor to the previous file entry.
+                ["<up>"]      = actions.prev_entry,
+                ["<cr>"]      = actions.select_entry, -- Open the diff for the selected entry.
+                ["o"]         = actions.select_entry,
                 -- ["<2-LeftMouse>"] = actions.select_entry,
-                ["-"]             = actions.toggle_stage_entry, -- Stage / unstage the selected entry.
-                ["S"]             = actions.stage_all, -- Stage all entries.
-                ["U"]             = actions.unstage_all, -- Unstage all entries.
-                ["X"]             = actions.restore_entry, -- Restore entry to the state on the left side.
-                ["R"]             = actions.refresh_files, -- Update stats and entries in the file list.
-                ["L"]             = actions.open_commit_log, -- Open the commit log panel0
-                ["<c-u>"]         = actions.scroll_view(-0.25), -- Scroll the view up
-                ["<c-d>"]         = actions.scroll_view(0.25), -- Scroll the view down
+                ["-"]         = actions.toggle_stage_entry, -- Stage / unstage the selected entry.
+                ["S"]         = actions.stage_all, -- Stage all entries.
+                ["U"]         = actions.unstage_all, -- Unstage all entries.
+                ["X"]         = actions.restore_entry, -- Restore entry to the state on the left side.
+                ["R"]         = actions.refresh_files, -- Update stats and entries in the file list.
+                ["L"]         = actions.open_commit_log, -- Open the commit log panel0
+                ["<c-u>"]     = actions.scroll_view(-0.25), -- Scroll the view up
+                ["<c-d>"]     = actions.scroll_view(0.25), -- Scroll the view down
                 -- ["<tab>"]         = actions.select_next_entry,
                 -- ["<s-tab>"]       = actions.select_prev_entry,
                 -- ["gf"]            = actions.goto_file,
                 -- ["<C-w><C-f>"]    = actions.goto_file_split,
-                ["<C-o>"]         = actions.goto_file_tab,
-                ["i"]             = actions.listing_style, -- Toggle between 'list' and 'tree' views
-                ["f"]             = actions.toggle_flatten_dirs, -- Flatten empty subdirectories in tree listing style.
-                ["<leader>e"]     = actions.focus_files,
-                ["<leader>b"]     = actions.toggle_files,
+                ["<C-o>"]     = actions.goto_file_tab,
+                ["i"]         = actions.listing_style, -- Toggle between 'list' and 'tree' views
+                ["f"]         = actions.toggle_flatten_dirs, -- Flatten empty subdirectories in tree listing style.
+                ["<leader>e"] = actions.focus_files,
+                ["<leader>b"] = actions.toggle_files,
             },
             file_history_panel = {
                 ["g!"]            = actions.options, -- Open the option panel
@@ -1121,6 +1071,10 @@ function config.diffview()
             },
         },
     })
+end
+
+function config.hydra()
+    require("doodleVim.modules.tools.hydra")
 end
 
 return config

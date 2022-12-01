@@ -50,8 +50,6 @@ tools['iamcco/markdown-preview.nvim'] = {
 tools['simrat39/symbols-outline.nvim'] = {
     opt = true,
     setup = function()
-        -- -- require("doodleVim.modules.tools.config").symbols_outline()
-        -- require("doodleVim.utils.defer").defer_load("symbols-outline.nvim", 200)
         require("doodleVim.utils.defer").register("symbols-outline", "symbols-outline.nvim")
     end,
     config = conf.symbols_outline
@@ -61,19 +59,19 @@ tools['voldikss/vim-floaterm'] = {
     opt = true,
     setup = function()
         require("doodleVim.modules.tools.config").floaterm()
-        require("doodleVim.utils.defer").defer_load("vim-floaterm", 500)
+        require("doodleVim.utils.defer").defer_load("vim-floaterm", 200)
     end
 }
 
 tools['anuvyklack/hydra.nvim'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").defer_load("hydra.nvim", 100) end,
+    setup = function() require("doodleVim.utils.defer").defer_load("hydra.nvim", 200) end,
+    config = conf.hydra
 }
 
 tools['jbyuki/venn.nvim'] = {
     opt = true,
-    after = "hydra.nvim",
-    config = conf.venn
+    setup = function() require("doodleVim.utils.defer").defer_load("venn.nvim", 200) end,
 }
 
 tools['towolf/vim-helm'] = {
@@ -128,7 +126,7 @@ tools['nvim-neorg/neorg'] = {
             require("doodleVim.utils.defer").immediate_load("neorg")
             local utils = require("doodleVim.utils.utils")
             if not (utils.ts_is_installed("norg") and utils.ts_is_installed("norg_meta")) then
-                vim.cmd[[Neorg sync-parsers]]
+                vim.cmd [[Neorg sync-parsers]]
             end
         end)
     end,
@@ -144,7 +142,7 @@ tools['lewis6991/gitsigns.nvim'] = {
 
 tools['sindrets/diffview.nvim'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").add("diffview.nvim", 99) end,
+    setup = function() require("doodleVim.utils.defer").defer_load("diffview.nvim", 100) end,
     config = conf.diffview,
 }
 

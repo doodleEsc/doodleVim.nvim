@@ -3,7 +3,7 @@ local conf = require("doodleVim.modules.debug.config")
 
 debug['mfussenegger/nvim-dap'] = {
     opt = true,
-    after = { "mason.nvim", "hydra.nvim" },
+    after = "mason.nvim",
     config = conf.dap
 }
 
