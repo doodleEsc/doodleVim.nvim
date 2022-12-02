@@ -175,12 +175,12 @@ map.Telescope = {
         ["<leader>f"] = {
             name = "Telescope Search",
             f = bind.convert_wk_format(map_cr('Telescope find_files'):with_noremap():with_silent():with_label("Find Files")),
-            d = bind.convert_wk_format(map_cr('Telescope live_grep'):with_noremap():with_silent():with_label("Live Grep")),
+            g = bind.convert_wk_format(map_cr('Telescope live_grep'):with_noremap():with_silent():with_label("Live Grep")),
             s = bind.convert_wk_format(map_cr('Telescope file_browser'):with_noremap():with_silent():with_label("File Browser")),
-            h = bind.convert_wk_format(map_cr('Telescope projects'):with_noremap():with_silent():with_label("Find Projects")),
-            j = bind.convert_wk_format(map_cr('Telescope todo-comments todo'):with_noremap():with_silent():with_label("Find Todos")),
-            k = bind.convert_wk_format(map_cr('Telescope oldfiles'):with_noremap():with_silent():with_label("Find Recent Files")),
-            n = bind.convert_wk_format(map_cr('Telescope neoclip'):with_noremap():with_silent():with_label("Find Saved Buffer In Clipboard")),
+            p = bind.convert_wk_format(map_cr('Telescope projects'):with_noremap():with_silent():with_label("Find Projects")),
+            t = bind.convert_wk_format(map_cr('Telescope todo-comments todo'):with_noremap():with_silent():with_label("Find Todos")),
+            r = bind.convert_wk_format(map_cr('Telescope oldfiles'):with_noremap():with_silent():with_label("Find Recent Files")),
+            c = bind.convert_wk_format(map_cr('Telescope command_history'):with_noremap():with_silent():with_label("Find Command History")),
             b = bind.convert_wk_format(map_cr('Telescope buffers'):with_noremap():with_silent():with_label("Buffers Navigation"))
         },
     }
@@ -306,6 +306,7 @@ map.Default = {
             with_noremap():with_silent():with_label("Smooth Scroll Down")),
         ["<C-u>"] = bind.convert_wk_format(map_cr("lua ensure_require('neoscroll').scroll(-vim.wo.scroll, true, 150)"):
             with_noremap():with_silent():with_label("Smooth Scroll Up")),
+        ["<M-n>"] = bind.convert_wk_format(map_cr("tabnext"):with_noremap():with_silent():with_label("Next Tabpage")),
         ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy")),
         ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Change Without Copy")),
         ["d"] = bind.convert_wk_format(map_cmd('""d'):with_noremap():with_label("Delete Without Copy")),

@@ -164,14 +164,12 @@ end
 local telescope_hydra_factory = function()
     local hint = [[
    _f_: files
-   _o_: old files   _g_: live grep
-   _p_: projects    _/_: search in file
- 
-   _h_: vim help    _c_: execute command
-   _k_: keymaps     _;_: commands history 
-   _O_: options     _?_: search history
+   _g_: live grep
+   _r_: recent files
+   _p_: projects        _b_: buffers
+   _t_: todos           _c_: commands history  
 ^
-_<Enter>_: Telescope           _<Esc>_
+  _<Enter>_: Telescope           _<Esc>_
 ]]
     local Hydra = require("hydra")
     local cmd = require('hydra.keymap-util').cmd
@@ -189,15 +187,11 @@ _<Enter>_: Telescope           _<Esc>_
         heads = {
             { 'f', cmd 'Telescope find_files' },
             { 'g', cmd 'Telescope live_grep' },
-            { 'o', cmd 'Telescope oldfiles', { desc = 'recently opened files' } },
-            { 'h', cmd 'Telescope help_tags', { desc = 'vim help' } },
-            { 'k', cmd 'Telescope keymaps' },
-            { 'O', cmd 'Telescope vim_options' },
+            { 'r', cmd 'Telescope oldfiles', { desc = 'recently opened files' } },
+            { 't', cmd 'Telescope todo-comments todo', { desc = 'find todos' } },
             { 'p', cmd 'Telescope projects', { desc = 'projects' } },
-            { '/', cmd 'Telescope current_buffer_fuzzy_find', { desc = 'search in file' } },
-            { '?', cmd 'Telescope search_history', { desc = 'search history' } },
-            { ';', cmd 'Telescope command_history', { desc = 'command-line history' } },
-            { 'c', cmd 'Telescope commands', { desc = 'execute command' } },
+            { 'b', cmd 'Telescope buffers', { desc = 'find buffers' } },
+            { 'c', cmd 'Telescope command_history', { desc = 'command-line history' } },
             { '<Enter>', cmd 'Telescope', { exit = true, desc = 'list all pickers' } },
             { '<Esc>', nil, { exit = true, nowait = true } },
         }
