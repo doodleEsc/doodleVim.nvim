@@ -31,7 +31,8 @@ ui['nvim-treesitter/nvim-treesitter'] = {
                 "toml",
                 "vim",
                 "yaml",
-                "solidity"
+                "solidity",
+                "markdown"
             }
             local langs = {}
             local utils = require("doodleVim.utils.utils")
