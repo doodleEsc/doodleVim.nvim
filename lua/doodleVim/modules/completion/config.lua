@@ -198,6 +198,7 @@ function config.nvim_cmp()
                 cmp.config.compare.order,
             },
         },
+        PreselectMode = "none",
         sources = cmp.config.sources({
             { name = "nvim_lsp" },
             { name = 'treesitter' },
