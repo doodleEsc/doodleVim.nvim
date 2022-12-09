@@ -112,20 +112,18 @@ map.MarkdownPreview = {
 map.Floaterm = {
     n = {
         ["<C-Space>"] = bind.convert_wk_format(map_cr('FloatermToggle'):with_noremap():with_silent():with_label("Toggle Floaterm")),
-
-        ["<leader>k"] = {
-            name = "Floaterm",
-            j = bind.convert_wk_format(map_cr('FloatermNew'):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")),
-            k = bind.convert_wk_format(map_cr('FloatermNew --cwd=<buffer>'):with_noremap():with_silent():with_label("Open Floaterm In Current Buffer Dir")),
-        },
+        ["<M-j>"] = bind.convert_wk_format(map_cr('FloatermNew'):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")),
+        ["<M-k>"] = bind.convert_wk_format(map_cr('FloatermNew --cwd=<buffer>'):with_noremap():with_silent():with_label("Open Floaterm In Current Buffer Dir")),
     },
 
     v = {
-        ["<leader>k"] = {
-            name = "Floaterm",
-            j = bind.convert_wk_format(map_cr('FloatermNew'):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")),
-            k = bind.convert_wk_format(map_cr('FloatermNew --cwd=<buffer>'):with_noremap():with_silent():with_label("Open Floaterm In Current Buffer Dir")),
-        },
+        ["<M-j>"] = bind.convert_wk_format(map_cr('FloatermNew'):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")),
+        ["<M-k>"] = bind.convert_wk_format(map_cr('FloatermNew --cwd=<buffer>'):with_noremap():with_silent():with_label("Open Floaterm In Current Buffer Dir")),
+        -- ["<leader>k"] = {
+        --     name = "Floaterm",
+        --     j = bind.convert_wk_format(map_cr('FloatermNew'):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")),
+        --     k = bind.convert_wk_format(map_cr('FloatermNew --cwd=<buffer>'):with_noremap():with_silent():with_label("Open Floaterm In Current Buffer Dir")),
+        -- },
     },
 
     t = {
@@ -135,15 +133,15 @@ map.Floaterm = {
             "Go To Next Terminal", noremap = true, silent = true },
         ["<C-l>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNext<CR>", true, true, true),
             "Go To Previous Terminal", noremap = true, silent = true },
-        ["<M-k>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill()<CR>',
+        ["<C-k>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill()<CR>',
             true, true, true),
             "Kill Current Terminal", noremap = true, silent = true },
-        ["<M-j>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill(true)<CR>'
+        ["<C-j>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill(true)<CR>'
             , true, true, true),
             "Kill All Terminal", noremap = true, silent = true },
-        ["<C-j>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNew<CR>", true, true, true),
+        ["<M-j>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNew<CR>", true, true, true),
             "Floaterm In Project Root Dir", noremap = true, silent = true },
-        ["<C-k>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.floaterm").new()<CR>'
+        ["<M-k>"] = { vim.api.nvim_replace_termcodes('<C-\\><C-N>:lua require("doodleVim.extend.floaterm").new()<CR>'
             , true, true, true),
             "Floaterm In Current Buffer Dir", noremap = true, silent = true },
     }
@@ -255,7 +253,6 @@ map.Bufferline = {
             :with_noremap():with_silent():with_label("Close All Buffers Right")),
         ["<M-h>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferMovePrevious')")
             :with_noremap():with_silent():with_label("Re-order To Previous")),
-        -- ["<M-l>"] = bind.convert_wk_format(map_cr("BufferMoveNext"):with_noremap():with_silent():with_label("Re-order To Next")),
         ["<M-l>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferMoveNext')")
             :with_noremap():with_silent():with_label("Re-order To Next")),
         ["<M-i>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferPin')")
