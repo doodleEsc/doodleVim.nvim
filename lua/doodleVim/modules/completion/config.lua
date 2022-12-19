@@ -3,6 +3,7 @@ local config = {}
 function config.mason()
     require("mason").setup({
         ui = {
+            check_outdated_packages_on_open = true,
             -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
             border = "rounded",
             icons = {
@@ -37,6 +38,7 @@ function config.mason()
 
         -- The directory in which to install packages.
         install_root_dir = require("mason-core.path").concat({ vim.fn.stdpath("data"), "mason" }),
+        PATH = "prepend",
         pip = {
             -- These args will be added to `pip install` calls. Note that setting extra args might impact intended behavior
             -- and is not recommended.
@@ -58,6 +60,9 @@ function config.mason()
             -- 2. The release version (e.g. "v0.3.0")
             -- 3. The asset name (e.g. "rust-analyzer-v0.3.0-x86_64-unknown-linux-gnu.tar.gz")
             download_url_template = "https://github.com/%s/releases/download/%s/%s",
+        },
+        providers = {
+            "mason.providers.registry-api",
         },
     })
 end
@@ -193,8 +198,10 @@ function config.nvim_cmp()
                 cmp.config.compare.order,
             },
         },
+        PreselectMode = "none",
         sources = cmp.config.sources({
             { name = "nvim_lsp" },
+            { name = 'treesitter' },
             { name = "luasnip" },
             { name = "buffer" },
             { name = "path" },
@@ -203,7 +210,7 @@ function config.nvim_cmp()
                 keyword_length = 3,
                 option = { convert_case = true, loud = true },
             },
-            { name = "cmp_tabnine" },
+            -- { name = "cmp_tabnine" },
         }, {
 
         }),
@@ -291,10 +298,11 @@ function config.nvim_cmp()
                 vim_item.menu = ({
                     nvim_lsp = "[LSP]",
                     buffer = "[BUF]",
-                    cmp_tabnine = "[TAB]",
+                    -- cmp_tabnine = "[TAB]",
                     luasnip = "[SNP]",
                     path = "[PATH]",
                     look = "[LOOK]",
+                    treesitter = "[TS]"
                 })[entry.source.name]
 
                 return vim_item
@@ -342,6 +350,10 @@ function config.gotools()
         tools = {
             gotests = {
                 bin = require "mason-core.path".bin_prefix() .. "/" .. "gotests",
+                display = {
+                    prompt = 'Select An Action',
+                    kind = 'gotools'
+                }
             },
             gomodifytags = {
                 bin = require "mason-core.path".bin_prefix() .. "/" .. "gomodifytags",
@@ -376,6 +388,7 @@ function config.null_ls()
             -- null_ls.builtins.formatting.stylua,
             require("gotools").code_actions.gotests,
             require("gotools").code_actions.gomodifytags,
+            require("gotools").code_actions.impl,
         },
         update_in_insert = false,
     })
@@ -384,22 +397,6 @@ end
 function config.neogen()
     require("neogen").setup({ snippet_engine = "luasnip" })
 end
-
--- function config.rename()
---     require("rename").setup({
---         rename = {
---             border = {
---                 highlight = "FloatBorder",
---                 style = "rounded",
---                 title = " Rename ",
---                 title_align = "left",
---                 title_hl = "FloatBorder",
---             },
---             prompt = "➤ ",
---             prompt_hl = "Comment",
---         },
---     })
--- end
 
 function config.lightbulb()
     local icons = require("doodleVim.utils.icons")

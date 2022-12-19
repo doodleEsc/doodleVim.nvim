@@ -12,6 +12,7 @@ M.PostPacker = function()
         if not ok then
             vim.notify("Function: '" .. name .. "' Runs Failed")
         end
+        -- fn()
     end
 
     vim.cmd [[doautocmd User BinInstallDone]]

@@ -35,6 +35,22 @@ function config.dapui()
                 position = "bottom",
             },
         },
+        controls = {
+            -- Requires Neovim nightly (or 0.8 when released)
+            enabled = true,
+            -- Display controls in this element
+            element = "repl",
+            icons = {
+                pause = " ",
+                play = "契",
+                step_into = " ",
+                step_over = " ",
+                step_out = " ",
+                step_back = "玲",
+                run_last = "↻ ",
+                terminate = "栗",
+            },
+        },
         floating = {
             max_height = nil, -- These can be integers or a float between 0 and 1.
             max_width = nil, -- Floats will be treated as percentage of your screen.
@@ -46,6 +62,7 @@ function config.dapui()
         windows = { indent = 1 },
         render = {
             max_type_length = nil, -- Can be integer or nil.
+            max_value_lines = 100
         }
     })
 
@@ -73,13 +90,15 @@ function config.dap()
         "python"
     })
 
-    vim.fn.sign_define('DapBreakpoint', { text = icons.dap.breakpoint, texthl = 'GruvboxRed', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapBreakpoint',
+        { text = icons.dap.breakpoint, texthl = 'GruvboxRedSign', linehl = '', numhl = '' })
     vim.fn.sign_define("DapBreakpointCondition",
-        { text = icons.dap.breakpoint_condition, texthl = "GruvboxRed", linehl = "", numhl = "" })
+        { text = icons.dap.breakpoint_condition, texthl = "GruvboxRedSign", linehl = "", numhl = "" })
     vim.fn.sign_define('DapBreakpointRejected',
-        { text = icons.dap.breakpoint_rejected, texthl = "GruvboxRed", linehl = '', numhl = '' })
-    vim.fn.sign_define('DapLogPoint', { text = icons.dap.log_point, texthl = 'GruvboxYellow', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapStopped', { text = icons.dap.stopped, texthl = 'GruvboxYellow', linehl = '', numhl = '' })
+        { text = icons.dap.breakpoint_rejected, texthl = "GruvboxRedSign", linehl = '', numhl = '' })
+    vim.fn.sign_define('DapLogPoint',
+        { text = icons.dap.log_point, texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapStopped', { text = icons.dap.stopped, texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
 end
 
 return config

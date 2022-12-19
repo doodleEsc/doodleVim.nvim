@@ -60,4 +60,8 @@ utils.feedkeys = function(key, mode)
     vim.api.nvim_feedkeys(feedkey, mode, false)
 end
 
+utils.ts_is_installed = function(lang)
+    return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".so", false) > 0
+end
+
 return utils
