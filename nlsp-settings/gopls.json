@@ -12,9 +12,15 @@
             "gc_details": true,
             "generate": true,
             "regenerate_cgo": true,
+            "test": true,
             "tidy": true,
             "upgrade_dependency": true,
             "vendor": true
+        },
+        "ui.completion.usePlaceholders": true,
+        "ui.diagnostic.analyses":{
+            "nilness": true,
+            "shadow": true
         }
     }
 }
