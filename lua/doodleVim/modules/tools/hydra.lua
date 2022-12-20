@@ -200,12 +200,46 @@ local telescope_hydra_factory = function()
     return telescope_hydra
 end
 
+local neorg_hydra_factory = function()
+    local hint = [[
+   _v_: view todo
+   _c_: capture todo
+   _e_: edit todo
+^
+  _<Enter>_: Neorg           _<Esc>_
+]]
+    local Hydra = require("hydra")
+    local cmd = require('hydra.keymap-util').cmd
+    local neorg_hydra = Hydra({
+        name = 'Neorg',
+        hint = hint,
+        config = {
+            color = 'teal',
+            hint = {
+                position = 'middle',
+                border = 'rounded',
+            },
+        },
+        mode = 'n',
+        heads = {
+            { 'v', cmd 'Neorg gtd views' },
+            { 'c', cmd 'Neorg gtd capture' },
+            { 'e', cmd 'Neorg gtd edit' },
+            { '<Enter>', cmd 'Neorg', { exit = true, desc = 'list all modules' } },
+            { '<Esc>', nil, { exit = true, nowait = true } },
+        }
+    })
+
+    return neorg_hydra
+end
+
 
 local hydra_factories = {
     venn = venn_hydra_factory,
     dap = dap_hydra_factory,
     gitsigns = gitsign_hydra_factory,
     telescope = telescope_hydra_factory,
+    neorg = neorg_hydra_factory,
 }
 
 for name, factory in pairs(hydra_factories) do

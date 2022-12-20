@@ -288,6 +288,8 @@ map.Gitsigns = {
                 :with_silent():with_label("Start Gitsigns")),
             v = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.hydra").run("venn")'):with_noremap():
                 with_silent():with_label("Start Draw Ascii Diagram")),
+            n = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.hydra").run("neorg")'):with_noremap():
+                with_silent():with_label("Start Neorg")),
         }
     }
 }
