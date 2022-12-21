@@ -782,14 +782,19 @@ function config.neorg()
             ["core.norg.dirman"] = {
                 config = {
                     workspaces = {
-                        gtd = "~/Documents/Notes/gtd",
+                        work = "~/Documents/Notes/work",
                     }
                 }
             },
             ["core.gtd.base"] = {
                 config = {
-                    workspace = "gtd",
+                    workspace = "work",
                 },
+            },
+            ["core.norg.journal"] = {
+                config = {
+                    workspace = "work",
+                }
             },
             ["core.norg.concealer"] = {},
             ["core.norg.completion"] = {
@@ -797,6 +802,7 @@ function config.neorg()
                     engine = "nvim-cmp"
                 }
             },
+            ["core.norg.qol.toc"] = {},
             ["core.export"] = {},
             ["core.export.markdown"] = {
                 config = {
@@ -805,88 +811,14 @@ function config.neorg()
             },
             ["core.keybinds"] = {
                 config = {
-                    default_keybinds = false,
                     hook = function(keybinds)
 
-                        -- Mode: neorg
-                        keybinds.map_event("norg", "n",
-                            "<Leader>dd",
-                            "core.norg.qol.todo_items.todo.task_done"
-                        )
-                        keybinds.map_event("norg", "n",
-                            "<Leader>du",
-                            "core.norg.qol.todo_items.todo.task_undone"
-                        )
-                        keybinds.map_event("norg", "n",
-                            "<Leader>dp",
-                            "core.norg.qol.todo_items.todo.task_pending"
-                        )
-                        keybinds.map_event("norg", "n",
-                            "<Leader>dh",
-                            "core.norg.qol.todo_items.todo.task_on_hold"
-                        )
-                        keybinds.map_event("norg", "n",
-                            "<Leader>dc",
-                            "core.norg.qol.todo_items.todo.task_cancelled"
-                        )
-                        keybinds.map_event("norg", "n",
-                            "<Leader>dr",
-                            "core.norg.qol.todo_items.todo.task_recurring"
-                        )
-                        keybinds.map_event("norg", "n",
-                            "<Leader>di",
-                            "core.norg.qol.todo_items.todo.task_import"
-                        )
-                        keybinds.map_event("norg", "n",
-                            "<Space><Space>",
-                            "core.norg.qol.todo_items.todo.task_cycle"
-                        )
-                        keybinds.map_event("norg", "n",
-                            "<Leader>kc",
-                            "core.gtd.base.capture"
-                        )
-                        keybinds.map_event("norg", "n",
-                            "<Leader>kv",
-                            "core.gtd.base.views"
-                        )
-                        keybinds.map_event("norg", "n",
-                            "<Leader>ke",
-                            "core.gtd.base.edit"
-                        )
-                        keybinds.map_event("norg", "n",
-                            "<Leader>nn",
-                            "core.norg.dirman.new.note"
-                        )
-                        keybinds.map_event("norg", "n",
-                            "<CR>",
-                            "core.norg.esupports.hop.hop-link"
-                        )
-
                         -- Mode: gtd-displays
-                        keybinds.map_event("gtd-displays", "n",
-                            "<CR>",
-                            "core.gtd.ui.goto_task"
-                        )
-                        keybinds.map_event("gtd-displays", "n",
-                            "q",
-                            "core.gtd.ui.close"
-                        )
-                        keybinds.map_event("gtd-displays", "n",
-                            "<Esc>",
-                            "core.gtd.ui.close"
-                        )
-                        keybinds.map_event("gtd-displays", "n",
-                            "<C-c>",
-                            "core.gtd.ui.close"
-                        )
-                        keybinds.map_event("gtd-displays", "n",
-                            "e",
-                            "core.gtd.ui.edit_task"
-                        )
-                        keybinds.map_event("gtd-displays", "n",
-                            "<Tab>",
-                            "core.gtd.ui.details"
-                        )
+                        keybinds.remap("gtd-displays", "n", "<CR>", "<cmd>GoToTask<CR>")
+                        -- keybinds.map_event("gtd-displays", "n",
+                        --     "<CR>",
+                        --     "core.gtd.ui.goto_task"
+                        -- )
                     end
                 }
             }
