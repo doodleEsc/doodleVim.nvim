@@ -288,8 +288,18 @@ map.Gitsigns = {
                 :with_silent():with_label("Start Gitsigns")),
             v = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.hydra").run("venn")'):with_noremap():
                 with_silent():with_label("Start Draw Ascii Diagram")),
-            n = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.hydra").run("neorg")'):with_noremap():
-                with_silent():with_label("Start Neorg")),
+            t = bind.convert_wk_format(map_cr('lua require("doodleVim.extend.hydra").run("telescope")'):with_noremap():
+                with_silent():with_label("Start Telescope")),
+        }
+    }
+}
+
+map.Neorg = {
+    n = {
+        ["<leader>o"] = {
+            name = "Neorg gtd",
+            v = bind.convert_wk_format(map_cr("Neorg gtd views"):with_noremap():with_silent():with_label("GTD view")),
+            c = bind.convert_wk_format(map_cr("Neorg gtd capture"):with_noremap():with_silent():with_label("GTD capture"))
         }
     }
 }

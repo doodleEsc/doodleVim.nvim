@@ -100,7 +100,7 @@ local gitsign_hydra_factory = function()
  _K_: prev hunk     _u_: undo last stage   _b_: blame line
  _p_: preview hunk  _S_: stage buffer      _B_: blame show full
  ^
- ^ ^             _<Enter>_: Lazygit        _q_: exit
+ ^ ^             _<Enter>_: Lazygit        _<Esc>_: exit
 ]]
 
     local Hydra = require("hydra")
@@ -109,7 +109,7 @@ local gitsign_hydra_factory = function()
         name = 'Git',
         hint = hint,
         config = {
-            buffer = bufnr,
+            buffer = true,
             color = 'pink',
             hint = {
                 border = 'rounded'
@@ -155,7 +155,7 @@ local gitsign_hydra_factory = function()
             { 'b', gitsigns.blame_line, { desc = 'blame' } },
             { 'B', function() gitsigns.blame_line { full = true } end, { desc = 'blame show full' } },
             { '<Enter>', '<Cmd>Lazygit<CR>', { exit = true, desc = 'Lazygit' } },
-            { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
+            { '<Esc>', nil, { exit = true, nowait = true, desc = 'exit' } },
         }
     })
     return gitsigns_hydra
@@ -202,11 +202,10 @@ end
 
 local neorg_hydra_factory = function()
     local hint = [[
-   _v_: view todo
-   _c_: capture todo
-   _e_: edit todo
+      _<S-d>_ : done  _<S-u>_: undone      _<S-p>_: pending    _<S-c>_: cancel
+   _<C-Space>_: cycle _<S-r>_: recurring   _<S-i>_: important  _<S-h>_: on hold
 ^
-  _<Enter>_: Neorg           _<Esc>_
+  _<Enter>_: Neorg                                  _<Esc>_
 ]]
     local Hydra = require("hydra")
     local cmd = require('hydra.keymap-util').cmd
@@ -214,19 +213,30 @@ local neorg_hydra_factory = function()
         name = 'Neorg',
         hint = hint,
         config = {
-            color = 'teal',
+            buffer = true,
+            color = 'pink',
             hint = {
-                position = 'middle',
                 border = 'rounded',
             },
+            on_enter = function()
+                vim.cmd 'Neorg mode norg'
+            end,
+            on_exit = function()
+                vim.cmd 'Neorg return'
+            end,
         },
         mode = 'n',
         heads = {
-            { 'v', cmd 'Neorg gtd views' },
-            { 'c', cmd 'Neorg gtd capture' },
-            { 'e', cmd 'Neorg gtd edit' },
+            { '<S-d>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_done' },
+            { '<S-u>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_undone' },
+            { '<S-p>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_pending' },
+            { '<S-c>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_cancelled' },
+            { '<S-r>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_recurring' },
+            { '<S-i>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_important' },
+            { '<S-h>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_on_hold' },
+            { '<C-Space>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_cycle' },
             { '<Enter>', cmd 'Neorg', { exit = true, desc = 'list all modules' } },
-            { '<Esc>', nil, { exit = true, nowait = true } },
+            { '<Esc>', cmd 'bp', { exit = true, nowait = true, desc = 'exit' } },
         }
     })
 
