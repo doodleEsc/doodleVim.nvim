@@ -121,16 +121,15 @@ tools['aserowy/tmux.nvim'] = {
 
 tools['nvim-neorg/neorg'] = {
     opt = true,
-    run = ":Neorg sync-parsers",
-    -- setup = function()
-    --     require("doodleVim.extend.packer").add("neorg", function()
-    --         require("doodleVim.utils.defer").immediate_load("neorg")
-    --         local utils = require("doodleVim.utils.utils")
-    --         if not (utils.ts_is_installed("norg") and not utils.ts_is_installed("norg_meta")) then
-    --             vim.cmd 'Neorg sync-parsers'
-    --         end
-    --     end)
-    -- end,
+    setup = function()
+        require("doodleVim.extend.packer").add("neorg", function()
+            require("doodleVim.utils.defer").immediate_load("neorg")
+            local utils = require("doodleVim.utils.utils")
+            if not utils.ts_is_installed("norg") and not utils.ts_is_installed("norg_meta") then
+                vim.cmd('Neorg sync-parsers')
+            end
+        end)
+    end,
     after = { "nvim-treesitter", "telescope.nvim", "nvim-cmp" },
     config = conf.neorg
 }
