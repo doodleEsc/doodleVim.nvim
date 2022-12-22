@@ -126,9 +126,8 @@ tools['nvim-neorg/neorg'] = {
             require("doodleVim.utils.defer").immediate_load({ "neorg", "nvim-treesitter" })
             local utils = require("doodleVim.utils.utils")
             if not utils.ts_is_installed("norg") and not utils.ts_is_installed("norg_meta") then
-                vim.schedule(function()
-                    vim.cmd('Neorg sync-parsers')
-                end)
+                vim.cmd("TSInstallSync! norg")
+                vim.cmd("TSInstallSync! norg_meta")
             end
         end)
     end,
