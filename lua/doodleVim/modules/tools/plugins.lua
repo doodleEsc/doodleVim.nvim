@@ -121,19 +121,6 @@ tools['aserowy/tmux.nvim'] = {
 
 tools['nvim-neorg/neorg'] = {
     opt = true,
-    setup = function()
-        require("doodleVim.extend.packer").add("neorg", function()
-            require("doodleVim.utils.defer").immediate_load({ "neorg", "nvim-treesitter" })
-            local utils = require("doodleVim.utils.utils")
-            if not utils.ts_is_installed("norg") and not utils.ts_is_installed("norg_meta") then
-                local ok = pcall(vim.cmd, "TSInstallSync! norg")
-                if not ok then
-                    vim.notify([[Unable to install norg parser.]])
-                end
-                pcall(vim.cmd, "TSInstallSync! norg_meta")
-            end
-        end)
-    end,
     after = { "nvim-treesitter", "telescope.nvim", "nvim-cmp" },
     config = conf.neorg
 }
