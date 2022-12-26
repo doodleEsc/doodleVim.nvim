@@ -775,56 +775,50 @@ function config.tmux()
     })
 end
 
-function config.neorg()
-    require('neorg').setup {
-        load = {
-            ["core.defaults"] = {},
-            ["core.norg.dirman"] = {
-                config = {
-                    workspaces = {
-                        work = "~/Documents/Notes/work",
-                    }
-                }
-            },
-            ["core.gtd.base"] = {
-                config = {
-                    workspace = "work",
-                },
-            },
-            ["core.norg.journal"] = {
-                config = {
-                    workspace = "work",
-                }
-            },
-            ["core.norg.concealer"] = {},
-            ["core.norg.completion"] = {
-                config = {
-                    engine = "nvim-cmp"
-                }
-            },
-            ["core.norg.qol.toc"] = {},
-            ["core.export"] = {},
-            ["core.export.markdown"] = {
-                config = {
-                    extensions = "all"
-                }
-            },
-            ["core.keybinds"] = {
-                config = {
-                    hook = function(keybinds)
-
-                        -- Mode: gtd-displays
-                        keybinds.remap("gtd-displays", "n", "<CR>", "<cmd>GoToTask<CR>")
-                        -- keybinds.map_event("gtd-displays", "n",
-                        --     "<CR>",
-                        --     "core.gtd.ui.goto_task"
-                        -- )
-                    end
-                }
-            }
-        }
-    }
-end
+-- function config.neorg()
+--     require('neorg').setup {
+--         load = {
+--             ["core.defaults"] = {},
+--             ["core.norg.dirman"] = {
+--                 config = {
+--                     workspaces = {
+--                         work = "~/Documents/Notes/work",
+--                     }
+--                 }
+--             },
+--             -- ["core.gtd.base"] = {
+--             --     config = {
+--             --         workspace = "work",
+--             --     },
+--             -- },
+--             ["core.norg.journal"] = {
+--                 config = {
+--                     workspace = "work",
+--                 }
+--             },
+--             ["core.norg.concealer"] = {},
+--             ["core.norg.completion"] = {
+--                 config = {
+--                     engine = "nvim-cmp"
+--                 }
+--             },
+--             ["core.norg.qol.toc"] = {},
+--             ["core.export"] = {},
+--             ["core.export.markdown"] = {
+--                 config = {
+--                     extensions = "all"
+--                 }
+--             },
+--             -- ["core.keybinds"] = {
+--             --     config = {
+--             --         hook = function(keybinds)
+--             --             keybinds.remap("gtd-displays", "n", "<CR>", "<cmd>GoToTask<CR>")
+--             --         end
+--             --     }
+--             -- }
+--         }
+--     }
+-- end
 
 function config.gitsigns()
     local gitsigns = require('gitsigns')
