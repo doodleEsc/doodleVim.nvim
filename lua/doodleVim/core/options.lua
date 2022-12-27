@@ -14,13 +14,6 @@ local function bind_option(options)
     end
 end
 
--- function copy(sel)
---   return function(lines, _)
---     local data = vim.fn.system([[base64 | tr -d '\n']], lines)
---     io.stdout:write('\027]52;'..sel..';'..data..'\a')
---   end
--- end
-
 M.load_options = function()
     local global_local = {
         termguicolors  = true;

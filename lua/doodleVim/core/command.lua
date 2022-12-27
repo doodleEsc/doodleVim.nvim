@@ -28,20 +28,20 @@ function M.load_user_command()
                 floaterm.run('lazygit', { title = 'lazygit', name = 'lazygit' })
             end,
         },
-        {
-            "GoToTask",
-            function()
-                if vim.bo.filetype == "norg" then
-                    local s = vim.api.nvim_get_current_line()
-                    if string.match(s, "^- %[.+%] .+$") ~= nil then
-                        vim.cmd 'Neorg keybind gtd-displays core.gtd.ui.goto_task'
-                        vim.schedule(function()
-                            require("doodleVim.extend.hydra").run("neorg")
-                        end)
-                    end
-                end
-            end
-        }
+        -- {
+        --     "GoToTask",
+        --     function()
+        --         if vim.bo.filetype == "norg" then
+        --             local s = vim.api.nvim_get_current_line()
+        --             if string.match(s, "^- %[.+%] .+$") ~= nil then
+        --                 vim.cmd 'Neorg keybind gtd-displays core.gtd.ui.goto_task'
+        --                 vim.schedule(function()
+        --                     require("doodleVim.extend.hydra").run("neorg")
+        --                 end)
+        --             end
+        --         end
+        --     end
+        -- }
     }
     create_command(commands)
 end
