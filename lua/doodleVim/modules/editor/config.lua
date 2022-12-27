@@ -77,7 +77,7 @@ function config.comment()
 end
 
 function config.autopairs()
-    require('doodleVim.utils.defer').immediate_load('nvim-cmp')
+    -- require('doodleVim.utils.defer').immediate_load('nvim-cmp')
 
     local cmp = require("cmp")
     require('nvim-autopairs').setup {}
@@ -283,7 +283,6 @@ end
 
 function config.nvim_surround()
     require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
     })
 end
 

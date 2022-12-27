@@ -1,6 +1,7 @@
 local global = require('doodleVim.core.global')
 local defer = require('doodleVim.utils.defer')
-local pack = require('doodleVim.core.pack')
+-- local pack = require('doodleVim.core.pack')
+local lazy = require('doodleVim.core.lazy')
 local event = require('doodleVim.core.event')
 local command = require('doodleVim.core.command')
 local options = require('doodleVim.core.options')
@@ -8,11 +9,11 @@ local options = require('doodleVim.core.options')
 -- Create cache dir and subs dir
 local createdir = function()
     local data_dir = {
-        global.cache_dir .. 'backup',
-        global.cache_dir .. 'session',
-        global.cache_dir .. 'swap',
-        global.cache_dir .. 'tags',
-        global.cache_dir .. 'undo'
+        global.cache_dir .. '/backup',
+        global.cache_dir .. '/session',
+        global.cache_dir .. '/swap',
+        global.cache_dir .. '/tags',
+        global.cache_dir .. '/undo'
     }
     -- There only check once that If cache_dir exists
     -- Then I don't want to check subs dir exists
@@ -72,8 +73,8 @@ local function load_nvim_config()
     event.load_autocmds()
     command.load_user_command()
 
-    pack.ensure_plugins()
-    pack.load_compile()
+    lazy.ensure_plugins()
+    -- pack.load_compile()
     defer.setup()
 
     set_colorscheme()

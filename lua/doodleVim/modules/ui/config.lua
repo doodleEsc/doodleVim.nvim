@@ -5,7 +5,7 @@ function config.lualine()
 end
 
 function config.treesitter()
-    require('doodleVim.utils.defer').immediate_load('nvim-treesitter-textobjects')
+    -- require('doodleVim.utils.defer').immediate_load('nvim-treesitter-textobjects')
     require('nvim-treesitter.configs').setup {
         sync_install = true,
         auto_install = false,

@@ -2,14 +2,14 @@ local ui = {}
 local conf = require("doodleVim.modules.ui.config")
 
 ui['nvim-treesitter/nvim-treesitter'] = {
-    opt = true,
-    requires = {
-        { 'nvim-treesitter/nvim-treesitter-textobjects', opt = true },
+    lazy = true,
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter-textobjects',
     },
-    setup = function()
-        require("doodleVim.utils.defer").add("nvim-treesitter", 100)
+    init = function()
+        -- require("doodleVim.utils.defer").add("nvim-treesitter", 100)
         require("doodleVim.extend.packer").add("nvim-treesitter", function()
-            require("doodleVim.utils.defer").immediate_load("nvim-treesitter")
+            -- require("doodleVim.utils.defer").immediate_load("nvim-treesitter")
             local vendor = {
                 "bash",
                 "cmake",
@@ -80,22 +80,24 @@ ui['norcalli/nvim-colorizer.lua'] = {
     config = function() require('colorizer').setup() end
 }
 
-ui['nvim-tree/nvim-web-devicons'] = {}
+ui['nvim-tree/nvim-web-devicons'] = {
+    lazy = false
+}
 
 ui['nvim-lualine/lualine.nvim'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").add("lualine.nvim", 99) end,
-    requires = { 'kyazdani42/nvim-web-devicons' },
+    -- lazy = true,
+    -- init = function() require("doodleVim.utils.defer").add("lualine.nvim", 99) end,
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = conf.lualine,
 }
 
 ui['doodleEsc/gruvbox.nvim'] = {
-    opt = true
+    lazy = true
 }
 
 ui['MunifTanjim/nui.nvim'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").add("nui.nvim", 99) end,
+    -- lazy = true,
+    -- init = function() require("doodleVim.utils.defer").add("nui.nvim", 99) end,
     config = conf.nui
 }
 

@@ -1,4 +1,5 @@
 local config = {}
+local vim_path = require('doodleVim.core.global').vim_path
 
 function config.mason()
     require("mason").setup({
@@ -68,7 +69,7 @@ function config.mason()
 end
 
 function config.mason_lspconfig()
-    require("doodleVim.utils.defer").immediate_load("mason.nvim")
+    -- require("doodleVim.utils.defer").immediate_load("mason.nvim")
     require("mason-lspconfig").setup({
         ensure_installed = {
             "gopls",
@@ -104,7 +105,7 @@ function config.mason_lspconfig()
         end
     end
 
-    require("doodleVim.utils.defer").immediate_load("cmp-nvim-lsp")
+    -- require("doodleVim.utils.defer").immediate_load("cmp-nvim-lsp")
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
@@ -135,7 +136,6 @@ function config.mason_lspconfig()
 end
 
 function config.nlsp_settings()
-    local vim_path = require("doodleVim.core.global").vim_path
     require("nlspsettings").setup({
         config_home = vim_path .. "/nlsp-settings",
         local_settings_dir = ".nlsp-settings",
@@ -146,11 +146,11 @@ function config.nlsp_settings()
 end
 
 function config.nvim_cmp()
-    require("doodleVim.utils.defer").immediate_load({
-        "LuaSnip",
-        "neogen",
-        "cmp-under-comparator",
-    })
+    -- require("doodleVim.utils.defer").immediate_load({
+    --     "LuaSnip",
+    --     "neogen",
+    --     "cmp-under-comparator",
+    -- })
 
     local cmp = require("cmp")
     local types = require("cmp.types")
@@ -345,7 +345,7 @@ function config.luasnip()
 end
 
 function config.gotools()
-    require("doodleVim.utils.defer").immediate_load("mason.nvim")
+    -- require("doodleVim.utils.defer").immediate_load("mason.nvim")
     require("gotools").setup({
         tools = {
             gotests = {

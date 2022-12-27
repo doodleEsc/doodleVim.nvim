@@ -29,11 +29,11 @@ editor['karb94/neoscroll.nvim'] = {
     config = conf.neoscroll,
 }
 
-editor['folke/todo-comments.nvim'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").add("todo-comments.nvim", 99) end,
-    config = conf.todo
-}
+-- editor['folke/todo-comments.nvim'] = {
+--     opt = true,
+--     setup = function() require("doodleVim.utils.defer").add("todo-comments.nvim", 99) end,
+--     config = conf.todo
+-- }
 
 editor['windwp/nvim-autopairs'] = {
     opt = true,

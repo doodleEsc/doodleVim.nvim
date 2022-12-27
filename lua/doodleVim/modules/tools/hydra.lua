@@ -1,14 +1,14 @@
 local doodleHydra = require("doodleVim.extend.hydra")
 
 -- ensure all dependency loaded
-require("doodleVim.utils.defer").immediate_load({
-    "hydra.nvim",
-    "venn.nvim",
-    "gitsigns.nvim",
-    "vim-floaterm",
-    "telescope.nvim",
-    "nvim-dap"
-})
+-- require("doodleVim.utils.defer").immediate_load({
+--     "hydra.nvim",
+--     "venn.nvim",
+--     "gitsigns.nvim",
+--     "vim-floaterm",
+--     "telescope.nvim",
+--     "nvim-dap"
+-- })
 
 local venn_hydra_factory = function()
     local hint = [[

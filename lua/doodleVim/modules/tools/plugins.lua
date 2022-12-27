@@ -5,27 +5,40 @@ tools['dstein64/vim-startuptime'] = {
     cmd = 'StartupTime'
 }
 
+-- require("telescope").load_extension("fzf")
+-- require("telescope").load_extension("file_browser")
+-- require("telescope").load_extension("todo-comments")
+-- require("telescope").load_extension("projects")
+-- require("telescope").load_extension("neoclip")
+-- require("telescope").load_extension("ui-select")
+-- require("telescope").load_extension("telescope-tabs")
+
 tools['nvim-telescope/telescope.nvim'] = {
-    opt = true,
-    setup = function()
-        require("doodleVim.utils.defer").add("telescope.nvim", 70)
-    end,
-    requires = {
-        { 'nvim-telescope/telescope-fzf-native.nvim', opt = true, run = 'make' },
-        { 'nvim-telescope/telescope-file-browser.nvim', opt = true },
-        { 'nvim-telescope/telescope-ui-select.nvim', opt = true },
-        { 'LukasPietzschmann/telescope-tabs', opt = true }
+    -- opt = true,
+    -- setup = function()
+    --     require("doodleVim.utils.defer").add("telescope.nvim", 70)
+    -- end,
+    cmd = { "Telescope" },
+    dependencies = {
+        'nvim-telescope/telescope-file-browser.nvim',
+        'nvim-telescope/telescope-ui-select.nvim',
+        'kkharji/sqlite.lua',
+        'LukasPietzschmann/telescope-tabs',
+        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+        { 'doodleEsc/project.nvim', config = conf.project },
+        { 'AckslD/nvim-neoclip.lua', config = conf.neoclip },
+        { 'folke/todo-comments.nvim', config = conf.todo },
     },
     config = conf.telescope
 }
 
-tools['doodleEsc/project.nvim'] = {
-    opt = true,
-    setup = function()
-        require("doodleVim.utils.defer").add("project.nvim", 80)
-    end,
-    config = conf.project
-}
+-- tools['doodleEsc/project.nvim'] = {
+--     opt = true,
+--     setup = function()
+--         require("doodleVim.utils.defer").add("project.nvim", 80)
+--     end,
+--     config = conf.project
+-- }
 
 tools['rmagatti/auto-session'] = {
     opt = true,
@@ -102,11 +115,11 @@ tools['rcarriga/nvim-notify'] = {
     config = conf.notify
 }
 
--- HACK: Start by telescope config
-tools['AckslD/nvim-neoclip.lua'] = {
-    opt = true,
-    config = conf.neoclip
-}
+-- -- HACK: Start by telescope config
+-- tools['AckslD/nvim-neoclip.lua'] = {
+--     opt = true,
+--     config = conf.neoclip
+-- }
 
 tools['kkharji/sqlite.lua'] = {
     opt = true,
