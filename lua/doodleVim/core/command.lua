@@ -21,13 +21,15 @@ function M.load_user_command()
     local commands = {
         { "GruvboxDump", gruvbox.dump },
         { "ReloadConfig", misc.reload },
-        { "OpenTree", tree.toggle },
+        { "ToggleTree", tree.toggle },
+        { "FindTreeFile", tree.find_file },
         {
             "Lazygit",
             function()
                 floaterm.run('lazygit', { title = 'lazygit', name = 'lazygit' })
             end,
         },
+        { "ToggleWhichkey", misc.toggle_whichkey },
         -- {
         --     "GoToTask",
         --     function()

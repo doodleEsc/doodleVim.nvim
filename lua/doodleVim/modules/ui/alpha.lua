@@ -25,14 +25,14 @@ end
 dashboard.section.header.val = logo
 
 dashboard.section.buttons.val = {
-    dashboard.button("o", "  Open CWD", "<cmd>ene|OpenTree<CR>"),
+    dashboard.button("o", "  Open CWD", "<cmd>ene|ToggleTree<CR>"),
     dashboard.button("h", "  Recent Projects", "<cmd>Telescope projects<CR>"),
     dashboard.button("r", "  Recent File", "<cmd>Telescope oldfiles<CR>"),
     dashboard.button("e", "  New file", "<cmd>ene<CR>"),
     dashboard.button("f", "  Find File", "<cmd>Telescope find_files<CR>"),
     dashboard.button("b", "  File Browser", "<cmd>Telescope file_browser<CR>"),
-    dashboard.button("s", "  Configuration", "<cmd>e $MYVIMRC|OpenTree<CR>"),
-    dashboard.button("u", "  Update Plugins", "<cmd>PackerUpdate<CR>"),
+    dashboard.button("s", "  Configuration", "<cmd>e $MYVIMRC|ToggleTree<CR>"),
+    dashboard.button("u", "  Update Plugins", "<cmd>Lazy sync<CR>"),
     dashboard.button("q", "  Quit", "<cmd>qa<cr>"),
 }
 

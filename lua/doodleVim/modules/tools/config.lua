@@ -576,8 +576,8 @@ function config.autosession()
         auto_session_enable_last_session = false,
         auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
         auto_session_enabled = false,
-        auto_save_enabled = false,
-        auto_restore_enabled = false,
+        auto_save_enabled = nil,
+        auto_restore_enabled = nil,
         auto_session_suppress_dirs = {},
         -- the configs below are lua only
         bypass_session_save_file_types = nil,
@@ -1069,6 +1069,183 @@ function config.todo()
             -- don't replace the (KEYWORDS) placeholder
             pattern = [[\b(KEYWORDS)(\s?\(.*\)|:)+]], -- ripgrep regex
         },
+    }
+end
+
+function config.dapui()
+    local icons = require("doodleVim.utils.icons")
+    require("dapui").setup({
+        icons = { expanded = icons.arrow.down, collapsed = icons.arrow.right },
+        mappings = {
+            -- Use a table to apply multiple mappings
+            expand = { "<CR>", "<2-LeftMouse>" },
+            open = "o",
+            remove = "d",
+            edit = "e",
+            repl = "r",
+            toggle = "t"
+        },
+        expand_lines = vim.fn.has("nvim-0.7"),
+        layouts = {
+            {
+                elements = {
+                    -- Elements can be strings or table with id and size keys.
+                    { id = "scopes", size = 0.25 },
+                    "breakpoints",
+                    "stacks",
+                    "watches",
+                },
+                size = 40,
+                position = "left",
+            },
+            {
+                elements = {
+                    "repl",
+                    "console",
+                },
+                size = 10,
+                position = "bottom",
+            },
+        },
+        controls = {
+            -- Requires Neovim nightly (or 0.8 when released)
+            enabled = true,
+            -- Display controls in this element
+            element = "repl",
+            icons = {
+                pause = " ",
+                play = "契",
+                step_into = " ",
+                step_over = " ",
+                step_out = " ",
+                step_back = "玲",
+                run_last = "↻ ",
+                terminate = "栗",
+            },
+        },
+        floating = {
+            max_height = nil, -- These can be integers or a float between 0 and 1.
+            max_width = nil, -- Floats will be treated as percentage of your screen.
+            border = "rounded", -- Border style. Can be "single", "double" or "rounded"
+            mappings = {
+                close = { "q", "<Esc>" },
+            },
+        },
+        windows = { indent = 1 },
+        render = {
+            max_type_length = nil, -- Can be integer or nil.
+            max_value_lines = 100
+        }
+    })
+
+    local dap, dapui = require "dap", require "dapui"
+    dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+    end
+    dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+    end
+    dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+    end
+    -- for some debug adapter, terminate or exit events will no fire, use disconnect reuest instead
+    dap.listeners.before.disconnect["dapui_config"] = function()
+        dapui.close()
+    end
+end
+
+function config.dap()
+    local icons = require("doodleVim.utils.icons")
+
+    require("doodleVim.extend.debugger").load_debuggers({
+        "go",
+        "python"
+    })
+
+    vim.fn.sign_define('DapBreakpoint',
+        { text = icons.dap.breakpoint, texthl = 'GruvboxRedSign', linehl = '', numhl = '' })
+    vim.fn.sign_define("DapBreakpointCondition",
+        { text = icons.dap.breakpoint_condition, texthl = "GruvboxRedSign", linehl = "", numhl = "" })
+    vim.fn.sign_define('DapBreakpointRejected',
+        { text = icons.dap.breakpoint_rejected, texthl = "GruvboxRedSign", linehl = '', numhl = '' })
+    vim.fn.sign_define('DapLogPoint',
+        { text = icons.dap.log_point, texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapStopped', { text = icons.dap.stopped, texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
+end
+
+
+function config.barbar()
+    local icons = require("doodleVim.utils.icons")
+    vim.g.bufferline = {
+        -- Enable/disable animations
+        animation = true,
+
+        -- Enable/disable auto-hiding the tab bar when there is a single buffer
+        auto_hide = true,
+
+        -- Enable/disable current/total tabpages indicator (top right corner)
+        tabpages = true,
+
+        -- Enable/disable close button
+        closable = true,
+
+        -- Enables/disable clickable tabs
+        --  - left-click: go to buffer
+        --  - middle-click: delete buffer
+        clickable = true,
+
+        -- Excludes buffers from the tabline
+        exclude_ft = {
+            'alpha',
+            'dap-repl',
+        },
+        exclude_name = {
+            'alpha',
+        },
+
+        -- Enable/disable icons
+        -- if set to 'numbers', will show buffer index in the tabline
+        -- if set to 'both', will show buffer index and icons in the tabline
+        icons = true,
+
+        -- If set, the icon color will follow its corresponding buffer
+        -- highlight group. By default, the Buffer*Icon group is linked to the
+        -- Buffer* group (see Highlighting below). Otherwise, it will take its
+        -- default value as defined by devicons.
+        icon_custom_colors = false,
+
+        -- Configure icons on the bufferline.
+        icon_separator_active = icons.misc.line_sep,
+        icon_separator_inactive = icons.misc.line_sep,
+        icon_close_tab = icons.misc.close,
+        icon_close_tab_modified = icons.misc.circle_dot,
+        icon_pinned = icons.misc.pin,
+
+        -- If true, new buffers will be inserted at the end of the list.
+        -- Default is to insert after current buffer.
+        insert_at_end = false,
+        insert_at_start = false,
+
+        -- Sets the maximum padding width with which to surround each tab
+        maximum_padding = 1,
+
+        -- Sets the maximum buffer name length.
+        maximum_length = 30,
+
+        -- If set, the letters for each buffer in buffer-pick mode will be
+        -- assigned based on their name. Otherwise or in case all letters are
+        -- already assigned, the behavior is to assign letters in order of
+        -- usability (see order below)
+        semantic_letters = true,
+
+        -- New buffer letters are assigned in this order. This order is
+        -- optimal for the qwerty keyboard layout but might need adjustement
+        -- for other layouts.
+        letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
+
+        -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
+        -- where X is the buffer number. But only a static string is accepted here.
+        no_name_title = nil,
     }
 end
 

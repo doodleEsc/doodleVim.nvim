@@ -52,7 +52,8 @@ end
 
 utils.feedkeys = function(key, mode)
     if not key:match('<[A-Za-z0-9\\%-%[%]%^@]->', 1) then
-        vim.notify(string.format("Unsupported Key: %s, See Invalid Keys With Command :help keycodes", key), vim.log.levels.ERROR)
+        vim.notify(string.format("Unsupported Key: %s, See Invalid Keys With Command :help keycodes", key),
+            vim.log.levels.ERROR)
         return
     end
 
@@ -62,6 +63,15 @@ end
 
 utils.ts_is_installed = function(lang)
     return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".so", false) > 0
+end
+
+utils.contains = function(tab, val)
+    for _, value in ipairs(tab) do
+        if value == val then
+            return true
+        end
+    end
+    return false
 end
 
 return utils

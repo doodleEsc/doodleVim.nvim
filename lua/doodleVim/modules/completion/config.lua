@@ -1,5 +1,6 @@
 local config = {}
 local vim_path = require('doodleVim.core.global').vim_path
+local utils = require('doodleVim.utils.utils')
 
 function config.mason()
     require("mason").setup({
@@ -69,7 +70,6 @@ function config.mason()
 end
 
 function config.mason_lspconfig()
-    -- require("doodleVim.utils.defer").immediate_load("mason.nvim")
     require("mason-lspconfig").setup({
         ensure_installed = {
             "gopls",
@@ -86,35 +86,29 @@ function config.mason_lspconfig()
     handler.lsp_diagnostic()
     handler.null_ls_depress()
 
-    local function contains(tab, val)
-        for _, value in ipairs(tab) do
-            if value == val then
-                return true
-            end
-        end
-        return false
-    end
-
     local lsp_servers = {}
     local installed_servers = require("mason-registry").get_installed_packages()
     local package_to_lspconfig = require("mason-lspconfig.mappings.server").package_to_lspconfig
     for _, item in ipairs(installed_servers) do
-        if contains(item.spec.categories, "LSP") then
+        if utils.contains(item.spec.categories, "LSP") then
             local lsp_server = package_to_lspconfig[item.name]
             table.insert(lsp_servers, lsp_server)
         end
     end
 
-    -- require("doodleVim.utils.defer").immediate_load("cmp-nvim-lsp")
+
+    -- local global_capabilities = vim.lsp.protocol.make_client_capabilities()
+    -- global_capabilities.textDocument.completion.completionItem.snippetSupport = true
+
     local capabilities = vim.lsp.protocol.make_client_capabilities()
+    -- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
     capabilities.textDocument.completion.completionItem.snippetSupport = true
-    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
     capabilities.offsetEncoding = { "utf-16" }
+    -- print(vim.inspect(capabilities))
 
     local lspconfig = require("lspconfig")
-    local on_attach = function(client, bufnr)
+    local on_attach = function(_, bufnr)
         vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-        -- require "doodleVim.modules.completion.handler".lsp_highlight_document(client)
         require("lsp_signature").on_attach({
             bind = true, -- This is mandatory, otherwise border config won't get registered.
             hint_enable = false,
@@ -127,11 +121,15 @@ function config.mason_lspconfig()
         capabilities = capabilities,
     })
 
+    print(vim.inspect(capabilities))
+
     for _, lsp in ipairs(lsp_servers) do
-        lspconfig[lsp].setup({
+        lspconfig[lsp].setup {
             on_attach = on_attach,
-            capabilities = capabilities,
-        })
+            flags = {
+                debounce_text_changes = 150,
+            },
+        }
     end
 end
 
@@ -146,12 +144,6 @@ function config.nlsp_settings()
 end
 
 function config.nvim_cmp()
-    -- require("doodleVim.utils.defer").immediate_load({
-    --     "LuaSnip",
-    --     "neogen",
-    --     "cmp-under-comparator",
-    -- })
-
     local cmp = require("cmp")
     local types = require("cmp.types")
     local under_comparator = require "cmp-under-comparator".under
@@ -334,6 +326,11 @@ function config.nvim_cmp()
             { name = "path" },
         }),
     })
+
+    -- setup autopairs
+    require('nvim-autopairs').setup {}
+    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
 end
 
 function config.luasnip()

@@ -46,37 +46,6 @@ function Lazy:load_lazy()
         api.nvim_command('packadd lazy.nvim')
         lazy = require('lazy')
     end
-    -- packer.init({
-    --     compile_path = packer_compiled,
-    --     -- git = { clone_timeout = 120 },
-    --     git = {
-    --         cmd = 'git', -- The base command for git operations
-    --         subcommands = { -- Format strings for git subcommands
-    --             update         = 'pull --ff-only --progress --rebase=false',
-    --             install        = 'clone --depth %i --no-single-branch --progress',
-    --             fetch          = 'fetch --depth 999999 --progress',
-    --             checkout       = 'checkout %s --',
-    --             update_branch  = 'merge --ff-only @{u}',
-    --             current_branch = 'branch --show-current',
-    --             diff           = 'log --color=never --pretty=format:FMT --no-show-signature HEAD@{1}...HEAD',
-    --             diff_fmt       = '%%h %%s (%%cr)',
-    --             get_rev        = 'rev-parse --short HEAD',
-    --             get_msg        = 'log --color=never --pretty=format:FMT --no-show-signature HEAD -n 1',
-    --             submodules     = 'submodule update --init --recursive --progress'
-    --         },
-    --         depth = 1, -- Git clone depth
-    --         clone_timeout = 60, -- Timeout, in seconds, for git clones
-    --         default_url_format = 'https://github.com/%s' -- Lua format string used for "aaa/bbb" style plugins
-    --     },
-    --     disable_commands = true
-    -- })
-    -- packer.reset()
-    -- local use = packer.use
-    -- self:load_plugins()
-    -- use { "wbthomason/packer.nvim", opt = true }
-    -- for _, repo in ipairs(self.repos) do
-    --     use(repo)
-    -- end
 
     self:load_plugins()
     lazy.setup(self.repos, {
@@ -87,6 +56,40 @@ function Lazy:load_lazy()
             timeout = 120, -- kill processes that take more than 2 minutes
             url_format = "https://github.com/%s.git",
         },
+        ui = {
+            border = "rounded",
+        },
+        performance = {
+            cache = {
+                enabled = true,
+                path = vim.fn.stdpath("cache") .. "/lazy/cache",
+                -- Once one of the following events triggers, caching will be disabled.
+                -- To cache all modules, set this to `{}`, but that is not recommended.
+                -- The default is to disable on:
+                --  * VimEnter: not useful to cache anything else beyond startup
+                --  * BufReadPre: this will be triggered early when opening a file from the command line directly
+                -- disable_events = { "VimEnter", "BufReadPre" },
+                disable_events = {},
+                ttl = 3600 * 24 * 5, -- keep unused modules for up to 5 days
+            },
+            reset_packpath = true, -- reset the package path to improve startup time
+            rtp = {
+                reset = true, -- reset the runtime path to $VIMRUNTIME and your config directory
+                ---@type string[]
+                paths = {}, -- add any custom paths here that you want to indluce in the rtp
+                ---@type string[] list any plugins you want to disable here
+                disabled_plugins = {
+                    "gzip",
+                    "matchit",
+                    "matchparen",
+                    "netrwPlugin",
+                    "tarPlugin",
+                    "tohtml",
+                    "tutor",
+                    "zipPlugin",
+                },
+            },
+        }
     })
 end
 

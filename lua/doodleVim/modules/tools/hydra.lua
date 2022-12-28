@@ -20,6 +20,7 @@ _H_ ^ ^ _L_   _h_: Hard line box
 ^ ^ ^ ^ ^ ^   _F_: Fill the box
 ^ ^ ^ ^ ^ ^                     _<Esc>_
 ]]
+    require("doodleVim.utils.defer").immediate_load("venn.nvim")
     local Hydra = require('hydra')
     local venn_hydra = Hydra({
         name = 'Draw Diagram',
@@ -55,6 +56,8 @@ end
 
 
 local dap_hydra_factory = function()
+
+
     local hint = [[
 _<F5>_ : Continue             _<S-F5>_ : Terminate
 _<F6>_ : Restart
@@ -64,6 +67,7 @@ _<F11>_: Step Into            _<S-F11>_: Step Out
 ^
 _<Esc>_: Terminate
 ]]
+    require("doodleVim.utils.defer").immediate_load("nvim-dap")
     local Hydra = require('hydra')
     local dap = require("dap")
     local dap_hydra = Hydra({
@@ -103,6 +107,7 @@ local gitsign_hydra_factory = function()
  ^ ^             _<Enter>_: Lazygit        _<Esc>_: exit
 ]]
 
+    require("doodleVim.utils.defer").immediate_load("gitsigns.nvim")
     local Hydra = require("hydra")
     local gitsigns = require("gitsigns")
     local gitsigns_hydra = Hydra({
@@ -171,6 +176,7 @@ local telescope_hydra_factory = function()
 ^
   _<Enter>_: Telescope           _<Esc>_
 ]]
+    require("doodleVim.utils.defer").immediate_load("telescope.nvim")
     local Hydra = require("hydra")
     local cmd = require('hydra.keymap-util').cmd
     local telescope_hydra = Hydra({

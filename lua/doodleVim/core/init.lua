@@ -68,16 +68,14 @@ end
 local function load_nvim_config()
     disable_distribution_plugins()
     set_leader_map()
-
     options.load_options()
-    event.load_autocmds()
-    command.load_user_command()
 
     lazy.ensure_plugins()
-    -- pack.load_compile()
-    defer.setup()
-
+    event.load_autocmds()
+    command.load_user_command()
     set_colorscheme()
+
+    defer.setup()
     defer.load(50)
     createdir()
 end

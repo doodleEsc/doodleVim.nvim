@@ -49,9 +49,9 @@ map.NvimTree = {
     n = {
         ["<leader>t"] = {
             name = "Tree",
-            t = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').toggle()"):with_noremap():
+            t = bind.convert_wk_format(map_cmd("<Cmd>ToggleTree<CR>"):with_noremap():
                 with_silent():with_label("Enhanced NvimTree Toggle")),
-            r = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.tree').find_file()"):with_noremap():
+            r = bind.convert_wk_format(map_cmd("<Cmd>FindTreeFile<CR>"):with_noremap():
                 with_silent():with_label("Find File")),
         },
     },
@@ -61,8 +61,7 @@ map.SymbolsOutline = {
     n = {
         ["<leader>j"] = {
             name = "Symbols-Outline",
-            j = bind.convert_wk_format(map_cr('lua ensure_require"symbols-outline".toggle_outline()'):with_noremap():
-                with_silent():with_label("Symbols And Function Preview"))
+            j = bind.convert_wk_format(map_cmd('<Cmd>SymbolsOutline<CR>'):with_noremap():with_silent():with_label("Symbols And Function Preview"))
         },
     }
 }
@@ -94,7 +93,7 @@ map.EasyAlign = {
     v = {
         ["<leader>e"] = {
             name = "EasyAlign",
-            e = bind.convert_wk_format(map_cmd("<Plug>(EasyAlign)"):with_label("EasyAlign File"))
+            e = bind.convert_wk_format(map_cmd("<Cmd>EasyAlign<CR>"):with_label("EasyAlign File"))
         }
     }
 }
@@ -192,6 +191,10 @@ map.Hop = {
                 with_label("Search Word")),
             s = bind.convert_wk_format(map_cr("lua ensure_require'hop'.hint_char2()"):with_noremap():with_silent():
                 with_label("Search By First 2 Char"))
+            -- w = bind.convert_wk_format(map_cr("lua require'hop'.hint_words()"):with_noremap():with_silent():
+            --     with_label("Search Word")),
+            -- s = bind.convert_wk_format(map_cr("lua require'hop'.hint_char2()"):with_noremap():with_silent():
+            --     with_label("Search By First 2 Char"))
         },
     }
 }
@@ -265,18 +268,14 @@ map.Bufferline = {
 
 map.WhichKey = {
     n = {
-        ["<F2>"] = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.misc').toggle_whichkey()"):
-            with_noremap()
-            :with_silent():with_label("Show Keymaps")),
+        ["<F2>"] = bind.convert_wk_format(map_cmd("<Cmd>ToggleWhichKey<CR>"):with_noremap():with_silent():with_label("Show Keymaps")),
     },
     v = {
-        ["<F2>"] = bind.convert_wk_format(map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
-            :with_noremap():with_label("Show Keymaps"))
+        ["<F2>"] = bind.convert_wk_format(map_cmd("<Cmd>ToggleWhichKey<CR>"):with_noremap():with_silent():with_label("Show Keymaps")),
 
     },
     i = {
-        ["<F2>"] = bind.convert_wk_format(map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
-            :with_noremap():with_label("Show Keymaps")),
+        ["<F2>"] = bind.convert_wk_format(map_cmd("<Cmd>ToggleWhichKey<CR>"):with_noremap():with_silent():with_label("Show Keymaps")),
     }
 }
 
@@ -305,6 +304,10 @@ map.Default = {
             with_noremap():with_silent():with_label("Smooth Scroll Down")),
         ["<C-u>"] = bind.convert_wk_format(map_cr("lua ensure_require('neoscroll').scroll(-vim.wo.scroll, true, 150)"):
             with_noremap():with_silent():with_label("Smooth Scroll Up")),
+        -- ["<C-d>"] = bind.convert_wk_format(map_cr("lua require('neoscroll').scroll(vim.wo.scroll, true, 150)"):
+        --     with_noremap():with_silent():with_label("Smooth Scroll Down")),
+        -- ["<C-u>"] = bind.convert_wk_format(map_cr("lua require('neoscroll').scroll(-vim.wo.scroll, true, 150)"):
+        --     with_noremap():with_silent():with_label("Smooth Scroll Up")),
         ["<M-n>"] = bind.convert_wk_format(map_cr("tabnext"):with_noremap():with_silent():with_label("Next Tabpage")),
         ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy")),
         ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Change Without Copy")),
@@ -335,9 +338,13 @@ map.Default = {
         ["<C-e>"] = { "<End>", "End", noremap = true, silent = true },
     },
     v = {
-        ["<C-d>"] = { "<cmd>lua ensure_require('neoscroll').scroll(vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Down",
+        -- ["<C-d>"] = { "<cmd>lua ensure_require('neoscroll').scroll(vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Down",
+        --     noremap = true, silent = true },
+        -- ["<C-u>"] = { "<cmd>lua ensure_require('neoscroll').scroll(-vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Up",
+        --     noremap = true, silent = true },
+        ["<C-d>"] = { "<cmd>lua require('neoscroll').scroll(vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Down",
             noremap = true, silent = true },
-        ["<C-u>"] = { "<cmd>lua ensure_require('neoscroll').scroll(-vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Up",
+        ["<C-u>"] = { "<cmd>lua require('neoscroll').scroll(-vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Up",
             noremap = true, silent = true },
         [">"] = { ">gv", "Indent Right", noremap = true },
         ["<"] = { "<gv", "Indent Left", noremap = true },

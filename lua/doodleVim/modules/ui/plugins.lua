@@ -7,7 +7,7 @@ ui['nvim-treesitter/nvim-treesitter'] = {
         'nvim-treesitter/nvim-treesitter-textobjects',
     },
     init = function()
-        -- require("doodleVim.utils.defer").add("nvim-treesitter", 100)
+        require("doodleVim.utils.defer").add("nvim-treesitter", 100)
         require("doodleVim.extend.packer").add("nvim-treesitter", function()
             -- require("doodleVim.utils.defer").immediate_load("nvim-treesitter")
             local vendor = {
@@ -75,7 +75,7 @@ ui['nvim-treesitter/nvim-treesitter'] = {
     config = conf.treesitter
 }
 
-ui['norcalli/nvim-colorizer.lua'] = {
+ui['NvChad/nvim-colorizer.lua'] = {
     ft = { "lua", "vim", "markdown" },
     config = function() require('colorizer').setup() end
 }
@@ -85,9 +85,11 @@ ui['nvim-tree/nvim-web-devicons'] = {
 }
 
 ui['nvim-lualine/lualine.nvim'] = {
-    -- lazy = true,
-    -- init = function() require("doodleVim.utils.defer").add("lualine.nvim", 99) end,
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    lazy = true,
+    init = function() require("doodleVim.utils.defer").add("lualine.nvim", 99) end,
+    dependencies = {
+        'nvim-tree/nvim-web-devicons'
+    },
     config = conf.lualine,
 }
 
@@ -96,12 +98,15 @@ ui['doodleEsc/gruvbox.nvim'] = {
 }
 
 ui['MunifTanjim/nui.nvim'] = {
-    -- lazy = true,
-    -- init = function() require("doodleVim.utils.defer").add("nui.nvim", 99) end,
+    lazy = true,
+    -- init = function()
+    --     require("doodleVim.utils.defer").add("nui.nvim", 99)
+    -- end,
     config = conf.nui
 }
 
 ui['goolord/alpha-nvim'] = {
+    lazy = false,
     config = conf.alpha
 }
 
