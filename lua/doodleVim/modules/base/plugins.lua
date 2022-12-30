@@ -1,15 +1,50 @@
-local ui = {}
-local conf = require("doodleVim.modules.ui.config")
+local base = {}
+local conf = require("doodleVim.modules.base.config")
 
-ui['nvim-treesitter/nvim-treesitter'] = {
+base['nvim-tree/nvim-web-devicons'] = {
+    opt = true,
+    setup = function() require("doodleVim.utils.defer").add("nvim-web-devicons", 100) end,
+}
+
+base['nvim-lua/plenary.nvim'] = {
+    opt = true,
+    setup = function() require("doodleVim.utils.defer").add("plenary.nvim", 100) end,
+}
+
+base['doodleEsc/gruvbox.nvim'] = { opt = true }
+
+base['NvChad/nvim-colorizer.lua'] = {
+    ft = { "lua", "vim", "markdown" },
+    config = conf.color,
+}
+
+base['nathom/filetype.nvim'] = {
+    setup = function() vim.g.did_load_filetypes = 1 end
+}
+
+base['MunifTanjim/nui.nvim'] = {
+    opt = true,
+    setup = function() require("doodleVim.utils.defer").add("nui.nvim", 99) end,
+    config = conf.nui
+}
+
+base['rcarriga/nvim-notify'] = {
+    opt = true,
+    setup = function()
+        require("doodleVim.utils.defer").add("nvim-notify", 100)
+    end,
+    config = conf.notify
+}
+
+base['nvim-treesitter/nvim-treesitter'] = {
     opt = true,
     requires = {
         { 'nvim-treesitter/nvim-treesitter-textobjects', opt = true },
     },
     setup = function()
-        require("doodleVim.utils.defer").add("nvim-treesitter", 100)
+        require("doodleVim.utils.defer").add("nvim-treesitter", 99)
         require("doodleVim.extend.packer").add("nvim-treesitter", function()
-            require("doodleVim.utils.defer").immediate_load("nvim-treesitter")
+            -- require("doodleVim.utils.defer").immediate_load("nvim-treesitter")
             local vendor = {
                 "bash",
                 "cmake",
@@ -75,32 +110,14 @@ ui['nvim-treesitter/nvim-treesitter'] = {
     config = conf.treesitter
 }
 
-ui['norcalli/nvim-colorizer.lua'] = {
-    ft = { "lua", "vim", "markdown" },
-    config = function() require('colorizer').setup() end
-}
-
-ui['nvim-tree/nvim-web-devicons'] = {}
-
-ui['nvim-lualine/lualine.nvim'] = {
+base["neovim/nvim-lspconfig"] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").add("lualine.nvim", 99) end,
-    requires = { 'kyazdani42/nvim-web-devicons' },
-    config = conf.lualine,
+    setup = function() require("doodleVim.utils.defer").add("nvim-lspconfig", 99) end,
 }
 
-ui['doodleEsc/gruvbox.nvim'] = {
-    opt = true
-}
-
-ui['MunifTanjim/nui.nvim'] = {
+base['kkharji/sqlite.lua'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").add("nui.nvim", 99) end,
-    config = conf.nui
+    setup = function() require("doodleVim.utils.defer").add("sqlite.lua", 90) end,
 }
 
-ui['goolord/alpha-nvim'] = {
-    config = conf.alpha
-}
-
-return ui
+return base

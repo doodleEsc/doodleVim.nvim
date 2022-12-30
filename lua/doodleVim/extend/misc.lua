@@ -4,8 +4,6 @@ local misc = {}
 misc.which_key_loaded = false
 
 misc.safe_exit = function()
-    require('doodleVim.utils.defer').immediate_load({ 'vim-floaterm', 'nvim-tree.lua' })
-
     -- close floaterm
     local floatermBufnr = vim.call("floaterm#buflist#gather")
     if #floatermBufnr ~= 0 then
@@ -23,7 +21,6 @@ misc.safe_exit = function()
 end
 
 misc.safe_save = function()
-    require('doodleVim.utils.defer').immediate_load('auto-session')
     vim.cmd [[write]]
     require("auto-session").SaveSession()
     vim.notify("Current Session Saved")

@@ -7,12 +7,6 @@ editor['numToStr/Comment.nvim'] = {
     config = conf.comment,
 }
 
-editor['phaazon/hop.nvim'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").register("hop", "hop.nvim") end,
-    config = conf.hop
-}
-
 editor['andymass/vim-matchup'] = {
     opt = true,
     setup = function() require("doodleVim.utils.defer").defer_load("vim-matchup", 200) end,
@@ -20,7 +14,7 @@ editor['andymass/vim-matchup'] = {
 
 editor['junegunn/vim-easy-align'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").defer_load("vim-easy-align", 500) end,
+    setup = function() require("doodleVim.utils.defer").defer_load("vim-easy-align", 200) end,
 }
 
 editor['karb94/neoscroll.nvim'] = {
@@ -29,30 +23,24 @@ editor['karb94/neoscroll.nvim'] = {
     config = conf.neoscroll,
 }
 
-editor['folke/todo-comments.nvim'] = {
+editor['phaazon/hop.nvim'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").add("todo-comments.nvim", 99) end,
-    config = conf.todo
+    setup = function() require("doodleVim.utils.defer").register("hop", "hop.nvim") end,
+    config = conf.hop
 }
 
-editor['windwp/nvim-autopairs'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").defer_load("nvim-autopairs", 200) end,
-    config = conf.autopairs
-}
 
 editor['romgrk/barbar.nvim'] = {
     opt = true,
-    requires = { 'kyazdani42/nvim-web-devicons' },
     setup = function()
+        require("doodleVim.utils.defer").add("barbar.nvim", 89)
         require("doodleVim.modules.editor.config").barbar()
-        require("doodleVim.utils.defer").add("barbar.nvim", 99)
     end,
 }
 
 editor['lukas-reineke/indent-blankline.nvim'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").add("indent-blankline.nvim", 99) end,
+    setup = function() require("doodleVim.utils.defer").add("indent-blankline.nvim", 89) end,
     config = conf.blankline,
 }
 
@@ -61,10 +49,20 @@ editor['jakewvincent/mkdnflow.nvim'] = {
     config = conf.mkdnflow
 }
 
-editor['kylechui/nvim-surround'] = {
+editor['nvim-lualine/lualine.nvim'] = {
     opt = true,
-    setup = function() require("doodleVim.utils.defer").defer_load("nvim-surround", 200) end,
-    config = conf.nvim_surround
+    setup = function() require("doodleVim.utils.defer").add("lualine.nvim", 89) end,
+    config = conf.lualine,
+}
+
+editor['lewis6991/gitsigns.nvim'] = {
+    opt = true,
+    setup = function() require("doodleVim.utils.defer").add("gitsigns.nvim", 89) end,
+    config = conf.gitsigns,
+}
+
+editor['goolord/alpha-nvim'] = {
+    config = conf.alpha
 }
 
 return editor

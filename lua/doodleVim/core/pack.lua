@@ -136,11 +136,12 @@ function plugins.load_compile()
     if vim.fn.filereadable(compile_to_lua) == 1 then
         require('doodleVim.compiled')
     end
-    vim.cmd [[command! PackerCompile lua require('doodleVim.core.pack').compile()]]
+    vim.cmd [[command! -nargs=* PackerCompile  lua require('doodleVim.core.pack').compile(<q-args>)]]
     vim.cmd [[command! PackerInstall lua require('doodleVim.core.pack').install()]]
     vim.cmd [[command! PackerUpdate lua require('doodleVim.core.pack').update()]]
     vim.cmd [[command! PackerSync lua require('doodleVim.core.pack').sync()]]
     vim.cmd [[command! PackerClean lua require('doodleVim.core.pack').clean()]]
+    vim.cmd [[command! PackerProfile lua require('doodleVim.core.pack').profile_output()]]
     vim.cmd [[autocmd User PackerComplete lua require('doodleVim.core.pack').compile()]]
     vim.cmd [[autocmd User PackerCompileDone lua require('doodleVim.core.pack').convert_compile_file()]]
     vim.cmd [[command! PackerStatus  lua require('doodleVim.core.pack').status()]]

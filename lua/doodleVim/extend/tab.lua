@@ -3,8 +3,6 @@ local M = {}
 M.disabled = false
 
 M.enhanced_buffer_close = function()
-    require('doodleVim.utils.defer').immediate_load('barbar.nvim')
-
     if M.disabled then
         return
     end
@@ -23,7 +21,6 @@ M.enhanced_buffer_close = function()
 end
 
 M.enhanced_bufferline = function(cmd)
-    require('doodleVim.utils.defer').immediate_load('barbar.nvim')
     if M.disabled then
         return
     end
@@ -32,13 +29,11 @@ M.enhanced_bufferline = function(cmd)
 end
 
 M.disable = function()
-    require('doodleVim.utils.defer').immediate_load('barbar.nvim')
     require 'bufferline.render'.disable()
     M.disabled = true
 end
 
 M.enable = function()
-    require('doodleVim.utils.defer').immediate_load('barbar.nvim')
     require 'bufferline.render'.enable()
     M.disabled = false
 end

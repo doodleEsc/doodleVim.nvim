@@ -67,8 +67,11 @@ function config.mason()
     })
 end
 
-function config.mason_lspconfig()
-    require("doodleVim.utils.defer").immediate_load("mason.nvim")
+function config.mason_lspconfig(_, plugin)
+    if plugin.after and #plugin.after > 0 then
+        require("doodleVim.utils.defer").immediate_load(plugin.after)
+    end
+
     require("mason-lspconfig").setup({
         ensure_installed = {
             "gopls",
@@ -145,16 +148,14 @@ function config.nlsp_settings()
     })
 end
 
-function config.nvim_cmp()
-    require("doodleVim.utils.defer").immediate_load({
-        "LuaSnip",
-        "neogen",
-        "cmp-under-comparator",
-    })
+function config.nvim_cmp(_, plugin)
+    if plugin.after and #plugin.after > 0 then
+        require("doodleVim.utils.defer").immediate_load(plugin.after)
+    end
 
     local cmp = require("cmp")
     local types = require("cmp.types")
-    local under_comparator = require "cmp-under-comparator".under
+    local under_comparator = require("cmp-under-comparator").under
     local WIDE_HEIGHT = 40
 
     cmp.setup({
@@ -190,6 +191,7 @@ function config.nvim_cmp()
                 cmp.config.compare.exact,
                 cmp.config.compare.score,
                 under_comparator,
+                -- require("cmp-under-comparator").under,
                 cmp.config.compare.recently_used,
                 cmp.config.compare.locality,
                 cmp.config.compare.kind,
@@ -334,6 +336,11 @@ function config.nvim_cmp()
             { name = "path" },
         }),
     })
+
+    require('nvim-autopairs').setup {}
+    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
+
 end
 
 function config.luasnip()
@@ -345,7 +352,7 @@ function config.luasnip()
 end
 
 function config.gotools()
-    require("doodleVim.utils.defer").immediate_load("mason.nvim")
+    -- require("doodleVim.utils.defer").immediate_load("mason.nvim")
     require("gotools").setup({
         tools = {
             gotests = {
@@ -366,9 +373,12 @@ function config.gotools()
     })
 end
 
-function config.null_ls()
-    local null_ls = require("null-ls")
+function config.null_ls(_, plugin)
+    if plugin.after and #plugin.after > 0 then
+        require("doodleVim.utils.defer").immediate_load(plugin.after)
+    end
 
+    local null_ls = require("null-ls")
     null_ls.setup({
         cmd = { "nvim" },
         debounce = 250,
@@ -457,6 +467,10 @@ function config.lightbulb()
         pattern = "*",
         command = "lua require'lightbulb'.check()",
     })
+end
+
+function config.nvim_surround()
+    require("nvim-surround").setup({})
 end
 
 return config

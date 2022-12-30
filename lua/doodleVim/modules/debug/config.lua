@@ -83,13 +83,12 @@ function config.dapui()
 end
 
 function config.dap()
-    local icons = require("doodleVim.utils.icons")
 
+    local icons = require("doodleVim.utils.icons")
     require("doodleVim.extend.debugger").load_debuggers({
         "go",
         "python"
     })
-
     vim.fn.sign_define('DapBreakpoint',
         { text = icons.dap.breakpoint, texthl = 'GruvboxRedSign', linehl = '', numhl = '' })
     vim.fn.sign_define("DapBreakpointCondition",
