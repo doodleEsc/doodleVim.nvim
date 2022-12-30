@@ -41,7 +41,7 @@ completion["williamboman/mason-lspconfig.nvim"] = {
             opt = true,
             setup = function()
                 require("doodleVim.extend.packer").add("mason", function()
-                    -- require("doodleVim.utils.defer").immediate_load("mason.nvim")
+                    require("doodleVim.utils.defer").immediate_load("mason.nvim")
                     local binaries = { "gopls", "json-lsp", "lua-language-server", "python-lsp-server", "debugpy",
                         "delve",
                         "gotests", "gomodifytags", "clangd", "impl" }
