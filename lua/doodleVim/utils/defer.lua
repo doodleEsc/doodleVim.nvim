@@ -53,25 +53,6 @@ function M.register(module, plugin)
     end
 end
 
--- function M.load_fn(plugins, fn)
---     print(fn)
---     return function()
---         if type(plugins) == "string" then
---             require("packer").loader(plugins)
---         elseif type(plugins) == "table" then
---             local value = vim.fn.join(plugins, " ")
---             print(value)
---             require("packer").loader(value)
---         end
---         print(fn)
---         fn()
---         -- local ok, _ = pcall(fn)
---         -- if not ok then
---         --     print("Run config function failed")
---         -- end
---     end
--- end
-
 function M.setup()
     _G.ensure_require = function(module)
         local major_mod = module:match("^([a-z0-9_-]+)%.?")

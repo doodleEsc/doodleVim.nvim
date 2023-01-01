@@ -98,7 +98,6 @@ base['nvim-treesitter/nvim-treesitter'] = {
                     table.insert(langs, lang)
                 end
             end
-            print(vim.inspect(langs))
             if #langs > 0 then
                 local update = require("nvim-treesitter.install").update { with_sync = true }
                 local ok, _ = pcall(update, langs)
