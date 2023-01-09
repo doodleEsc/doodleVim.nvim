@@ -38,6 +38,9 @@ function autocmd.load_autocmds()
         },
         _packer = {
             { "User", "PackerComplete", "++once", "lua require('doodleVim.extend.packer').PostPacker()" }
+        },
+        _neorg = {
+            { "FileType", "norg", 'lua require("doodleVim.extend.hydra").run("neorg")' },
         }
     }
 

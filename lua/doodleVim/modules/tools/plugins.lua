@@ -101,17 +101,11 @@ tools['aserowy/tmux.nvim'] = {
     config = conf.tmux
 }
 
--- tools['nvim-neorg/neorg'] = {
---     opt = true,
---     after = { "nvim-treesitter", "telescope.nvim", "nvim-cmp" },
---     config = conf.neorg
--- }
-
--- tools['lewis6991/gitsigns.nvim'] = {
---     opt = true,
---     setup = function() require("doodleVim.utils.defer").add("gitsigns.nvim", 99) end,
---     config = conf.gitsigns,
--- }
+tools['nvim-neorg/neorg'] = {
+    opt = true,
+    setup = function() require("doodleVim.utils.defer").add("neorg", 40) end,
+    config = conf.neorg
+}
 
 tools['sindrets/diffview.nvim'] = {
     opt = true,
