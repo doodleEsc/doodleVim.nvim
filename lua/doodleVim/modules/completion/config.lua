@@ -158,6 +158,15 @@ function config.nvim_cmp(_, plugin)
     local under_comparator = require("cmp-under-comparator").under
     local WIDE_HEIGHT = 40
 
+    local check_back_space = function()
+        local col = vim.fn.col('.') - 1
+        if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+            return true
+        else
+            return false
+        end
+    end
+
     cmp.setup({
         enabled = function()
             local disabled = false
@@ -216,27 +225,52 @@ function config.nvim_cmp(_, plugin)
         }, {
 
         }),
-        mapping = cmp.mapping.preset.insert({
+        mapping = {
             ["<CR>"] = {
                 i = cmp.mapping.confirm({ select = false }),
             },
-            ["<C-e>"] = {
-                i = cmp.mapping.abort(),
-            },
+            ['<C-e>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.abort()
+                else
+                    cmp.complete()
+                end
+            end),
             ["<C-p>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()
                 else
                     fallback()
                 end
-            end),
+            end, { "i", "s" }),
             ["<C-n>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
                 else
                     fallback()
                 end
-            end),
+            end, { "i", "s" }),
+            -- when menu is visible, navigate to next item
+            -- when line is empty, insert a tab character
+            -- else, activate completion
+            ['<Tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_next_item()
+                elseif check_back_space() then
+                    fallback()
+                else
+                    cmp.complete()
+                end
+            end, { 'i', 's' }),
+            -- when menu is visible, navigate to previous item on list
+            -- else, revert to default behavior
+            ['<S-Tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_prev_item()
+                else
+                    fallback()
+                end
+            end, { 'i', 's' }),
             ["<C-k>"] = cmp.mapping(function(fallback)
                 if require("luasnip").jumpable(-1) then
                     require("luasnip").jump(-1)
@@ -269,7 +303,7 @@ function config.nvim_cmp(_, plugin)
                     fallback()
                 end
             end, { "i", "s" }),
-        }),
+        },
         view = {
             entries = { name = "custom", selection_order = "top_down" },
         },
