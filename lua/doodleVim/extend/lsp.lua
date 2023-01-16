@@ -39,6 +39,33 @@ local function file_and_details_entry(opts)
     end
 end
 
+local function range_from_selection()
+    local mode = vim.api.nvim_get_mode()
+    if mode == 'v' or mode == 'V' then
+        local start = vim.fn.getpos('v')
+        local end_ = vim.fn.getpos('.')
+        local start_row = start[2]
+        local start_col = start[3]
+        local end_row = end_[2]
+        local end_col = end_[3]
+
+        -- A user can start visual selection at the end and move backwards
+        -- Normalize the range to start < end
+        if start_row == end_row and end_col < start_col then
+            end_col, start_col = start_col, end_col
+        elseif end_row < start_row then
+            start_row, end_row = end_row, start_row
+            start_col, end_col = end_col, start_col
+        end
+        return {
+            ['start'] = { start_row, start_col - 1 },
+            ['end'] = { end_row, end_col - 1 },
+        }
+    else
+        return nil
+    end
+end
+
 function lsp.lsp_references(opts)
     opts = opts or {}
     require('telescope.builtin').lsp_references(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
@@ -51,12 +78,14 @@ end
 
 function lsp.lsp_type_definition(opts)
     opts = opts or {}
-    require('telescope.builtin').lsp_type_definition(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
+    require('telescope.builtin').lsp_type_definition(vim.tbl_extend("force", opts,
+        { entry_maker = file_and_details_entry() }))
 end
 
 function lsp.lsp_implementations(opts)
     opts = opts or {}
-    require('telescope.builtin').lsp_implementations(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
+    require('telescope.builtin').lsp_implementations(vim.tbl_extend("force", opts,
+        { entry_maker = file_and_details_entry() }))
 end
 
 return lsp

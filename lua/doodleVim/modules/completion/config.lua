@@ -489,13 +489,13 @@ function config.lightbulb()
         },
     })
 
-    vim.api.nvim_create_augroup("lightbulb", { clear = true })
-
-    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-        group = "lightbulb",
-        pattern = "*",
-        command = "lua require'lightbulb'.check()",
-    })
+    -- vim.api.nvim_create_augroup("lightbulb", { clear = true })
+    --
+    -- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    --     group = "lightbulb",
+    --     pattern = "*",
+    --     command = "lua require'lightbulb'.check()",
+    -- })
 end
 
 function config.nvim_surround()

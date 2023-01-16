@@ -20,11 +20,11 @@ map.Lsp = {
                 with_silent():with_label("Go To Implementation")),
             r = bind.convert_wk_format(map_cr("lua require('doodleVim.extend.lsp').lsp_references()"):with_noremap():
                 with_silent():with_label("Go To Reference")),
-            h = bind.convert_wk_format(map_cr("lua vim.lsp.buf.hover()"):with_noremap():with_silent():with_label("Hover Documentation")),
+            h = bind.convert_wk_format(map_cmd("<Cmd>lua vim.lsp.buf.hover()<CR>"):with_noremap():with_silent():with_label("Hover Documentation")),
             f = bind.convert_wk_format(map_cr("lua vim.lsp.buf.format { async = true }"):with_noremap():with_silent():
                 with_label("Code Formatting")),
-            a = bind.convert_wk_format(map_cr("lua vim.lsp.buf.code_action()"):with_noremap():with_silent():with_label("Code Action")),
-            n = bind.convert_wk_format(map_cr("lua require('rename').rename({label='Rename'})"):with_noremap():
+            a = bind.convert_wk_format(map_cmd("<Cmd>lua vim.lsp.buf.code_action()<CR>"):with_noremap():with_silent():with_label("Code Action")),
+            n = bind.convert_wk_format(map_cmd("<Cmd>lua require('rename').rename({label='Rename'})<CR>"):with_noremap():
                 with_silent():with_label("Rename"))
         },
         ["<C-n>"] = bind.convert_wk_format(map_cr("lua vim.diagnostic.goto_next()"):with_noremap():with_silent():
@@ -37,10 +37,11 @@ map.Lsp = {
     v = {
         ["g"] = {
             name = "Lsp Function",
-            f = bind.convert_wk_format(map_cu("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Selected Code Formatting")),
-            a = bind.convert_wk_format(map_cu("lua vim.lsp.buf.code_action()"):with_noremap():with_silent():
-                with_label("Range Code Action")),
-            n = bind.convert_wk_format(map_cr("lua require('rename').rename()"):with_noremap():with_silent():with_label("Rename"))
+            f = bind.convert_wk_format(map_cmd("<Cmd>lua vim.lsp.buf.formatting()<CR>"):with_noremap():with_silent():with_label("Selected Code Formatting")),
+            a = bind.convert_wk_format(map_cmd("<Cmd>lua vim.lsp.buf.code_action()<CR>"):
+                with_noremap():with_silent():with_label("Range Code Action")),
+            n = bind.convert_wk_format(map_cmd("<Cmd>lua require('rename').rename({label='Rename'})<CR>"):with_noremap():
+                with_silent():with_label("Rename"))
         },
     },
 }
