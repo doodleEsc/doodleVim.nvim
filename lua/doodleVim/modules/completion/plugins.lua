@@ -22,6 +22,20 @@ completion['hrsh7th/nvim-cmp'] = {
     config = conf.nvim_cmp,
 }
 
+completion['neovim/nvim-lspconfig'] = {
+    event = "BufReadPre",
+    dependencies = {
+      "mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      {
+        "hrsh7th/cmp-nvim-lsp",
+        cond = function()
+          return require("lazyvim.util").has("nvim-cmp")
+        end,
+      },
+    },
+}
+
 -- completion['tamago324/nlsp-settings.nvim'] = {
 --     lazy = true,
 --     dependencies = {
