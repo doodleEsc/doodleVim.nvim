@@ -19,7 +19,7 @@ ui['nvim-treesitter/nvim-treesitter'] = {
 
 ui['goolord/alpha-nvim'] = {
     lazy = true,
-    event = "VeryLazy",
+    event = "VimEnter",
     config = conf.alpha
 }
 
