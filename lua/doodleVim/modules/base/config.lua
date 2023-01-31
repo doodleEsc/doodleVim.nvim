@@ -111,42 +111,4 @@ function config.notify(plugin, opts)
     vim.notify = require("doodleVim.extend.misc").wrapped_notify
 end
 
-function config.treesitter(plugin, opts)
-    -- if plugin.after and #plugin.after > 0 then
-    --     require("doodleVim.utils.defer").immediate_load(plugin.after)
-    -- end
-    --
-    require('nvim-treesitter.configs').setup {
-        sync_install = true,
-        auto_install = false,
-        highlight = {
-            enable = true,
-            disable = {
-                "lua",
-                "help",
-            },
-        },
-        textobjects = {
-            select = {
-                enable = true,
-                lookahead = true,
-                keymaps = {
-                    -- You can use the capture groups defined in textobjects.scm
-                    ["af"] = "@function.outer",
-                    ["if"] = "@function.inner",
-                    ["ac"] = "@class.outer",
-                    ["ic"] = "@class.inner",
-                    ["al"] = "@loop.outer",
-                    ["il"] = "@loop.inner",
-                    ["ab"] = "@block.outer",
-                    ["ib"] = "@block.inner",
-                    ["as"] = "@statement.outer",
-                    ["ah"] = "@call.outer",
-                    ["ih"] = "@call.inner",
-                },
-            },
-        },
-    }
-end
-
 return config

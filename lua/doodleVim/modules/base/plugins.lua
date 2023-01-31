@@ -1,6 +1,5 @@
 local base = {}
 local conf = require("doodleVim.modules.base.config")
-local setup = require("doodleVim.modules.base.setup")
 
 base['nvim-tree/nvim-web-devicons'] = { lazy = true }
 
@@ -12,7 +11,6 @@ base['nathom/filetype.nvim'] = {
 
 base['MunifTanjim/nui.nvim'] = {
     lazy = true,
-    event = "VeryLazy",
     config = conf.nui
 }
 
@@ -25,13 +23,6 @@ base['rcarriga/nvim-notify'] = {
 base['NvChad/nvim-colorizer.lua'] = {
     ft = { "lua", "vim", "markdown" },
     config = conf.color,
-}
-
-base['nvim-treesitter/nvim-treesitter'] = {
-    event = "BufReadPost",
-    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
-    init = setup.treesitter,
-    config = conf.treesitter
 }
 
 return base

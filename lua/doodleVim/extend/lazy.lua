@@ -6,7 +6,7 @@ M.add = function(name, fn)
     M.fns[name] = fn
 end
 
-M.PostPacker = function()
+M.PostInstall = function()
     for name, fn in pairs(M.fns) do
         local ok, _ = pcall(fn)
         if not ok then

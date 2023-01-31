@@ -85,10 +85,10 @@ function autocmd.load_autocmds()
             {
                 event = "User",
                 opts = {
-                    pattern = "LazySync",
+                    pattern = {"LazySync", "LazyUpdate"},
                     once = true,
                     callback = function()
-                        require('doodleVim.extend.lazy').PostPacker()
+                        require('doodleVim.extend.lazy').PostInstall()
                     end,
                 }
 
