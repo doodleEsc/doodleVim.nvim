@@ -99,15 +99,8 @@ function config.neoscroll()
     })
 end
 
-
 function config.hop()
     require 'hop'.setup()
-end
-
-function config.blankline()
-    require("indent_blankline").setup {
-        show_end_of_line = true,
-    }
 end
 
 function config.mkdnflow()
@@ -205,6 +198,18 @@ end
 
 function config.nvim_surround()
     require("nvim-surround").setup({
+        keymaps = {
+            insert = "<C-y>s",
+            insert_line = "<C-y>l",
+            normal = "ys",
+            normal_cur = "yss",
+            normal_line = "yl",
+            normal_cur_line = "yll",
+            visual = "s",
+            visual_line = "gl",
+            delete = "ds",
+            change = "cs",
+        },
     })
 end
 

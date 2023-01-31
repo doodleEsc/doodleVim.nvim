@@ -1,5 +1,5 @@
 local global = require('doodleVim.core.global')
-local defer = require('doodleVim.utils.defer')
+-- local defer = require('doodleVim.utils.defer')
 -- local pack = require('doodleVim.core.pack')
 local lazy = require('doodleVim.core.lazy')
 local event = require('doodleVim.core.event')
@@ -69,14 +69,14 @@ local function load_nvim_config()
     disable_distribution_plugins()
     set_leader_map()
     options.load_options()
-
-    lazy.ensure_plugins()
     event.load_autocmds()
     command.load_user_command()
+
+    lazy.ensure_plugins()
     set_colorscheme()
 
-    defer.setup()
-    defer.load(50)
+    -- defer.setup()
+    -- defer.load(50)
     createdir()
 end
 

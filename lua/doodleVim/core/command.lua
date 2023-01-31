@@ -21,29 +21,13 @@ function M.load_user_command()
     local commands = {
         { "GruvboxDump", gruvbox.dump },
         { "ReloadConfig", misc.reload },
-        { "ToggleTree", tree.toggle },
-        { "FindTreeFile", tree.find_file },
+        { "OpenTree", tree.toggle },
         {
             "Lazygit",
             function()
                 floaterm.run('lazygit', { title = 'lazygit', name = 'lazygit' })
             end,
         },
-        { "ToggleWhichkey", misc.toggle_whichkey },
-        -- {
-        --     "GoToTask",
-        --     function()
-        --         if vim.bo.filetype == "norg" then
-        --             local s = vim.api.nvim_get_current_line()
-        --             if string.match(s, "^- %[.+%] .+$") ~= nil then
-        --                 vim.cmd 'Neorg keybind gtd-displays core.gtd.ui.goto_task'
-        --                 vim.schedule(function()
-        --                     require("doodleVim.extend.hydra").run("neorg")
-        --                 end)
-        --             end
-        --         end
-        --     end
-        -- }
     }
     create_command(commands)
 end

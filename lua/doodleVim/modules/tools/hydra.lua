@@ -1,15 +1,5 @@
 local doodleHydra = require("doodleVim.extend.hydra")
 
--- ensure all dependency loaded
--- require("doodleVim.utils.defer").immediate_load({
---     "hydra.nvim",
---     "venn.nvim",
---     "gitsigns.nvim",
---     "vim-floaterm",
---     "telescope.nvim",
---     "nvim-dap"
--- })
-
 local venn_hydra_factory = function()
     local hint = [[
 Arrow^^^^^^   Select region with <C-v>
@@ -20,7 +10,6 @@ _H_ ^ ^ _L_   _h_: Hard line box
 ^ ^ ^ ^ ^ ^   _F_: Fill the box
 ^ ^ ^ ^ ^ ^                     _<Esc>_
 ]]
-    require("doodleVim.utils.defer").immediate_load("venn.nvim")
     local Hydra = require('hydra')
     local venn_hydra = Hydra({
         name = 'Draw Diagram',
@@ -56,8 +45,6 @@ end
 
 
 local dap_hydra_factory = function()
-
-
     local hint = [[
 _<F5>_ : Continue             _<S-F5>_ : Terminate
 _<F6>_ : Restart
@@ -67,7 +54,6 @@ _<F11>_: Step Into            _<S-F11>_: Step Out
 ^
 _<Esc>_: Terminate
 ]]
-    require("doodleVim.utils.defer").immediate_load("nvim-dap")
     local Hydra = require('hydra')
     local dap = require("dap")
     local dap_hydra = Hydra({
@@ -107,7 +93,6 @@ local gitsign_hydra_factory = function()
  ^ ^             _<Enter>_: Lazygit        _<Esc>_: exit
 ]]
 
-    require("doodleVim.utils.defer").immediate_load("gitsigns.nvim")
     local Hydra = require("hydra")
     local gitsigns = require("gitsigns")
     local gitsigns_hydra = Hydra({
@@ -176,7 +161,6 @@ local telescope_hydra_factory = function()
 ^
   _<Enter>_: Telescope           _<Esc>_
 ]]
-    require("doodleVim.utils.defer").immediate_load("telescope.nvim")
     local Hydra = require("hydra")
     local cmd = require('hydra.keymap-util').cmd
     local telescope_hydra = Hydra({
@@ -206,48 +190,49 @@ local telescope_hydra_factory = function()
     return telescope_hydra
 end
 
--- local neorg_hydra_factory = function()
---     local hint = [[
---       _<S-d>_ : done  _<S-u>_: undone      _<S-p>_: pending    _<S-c>_: cancel
---    _<C-Space>_: cycle _<S-r>_: recurring   _<S-i>_: important  _<S-h>_: on hold
--- ^
---   _<Enter>_: Neorg                                  _<Esc>_
--- ]]
---     local Hydra = require("hydra")
---     local cmd = require('hydra.keymap-util').cmd
---     local neorg_hydra = Hydra({
---         name = 'Neorg',
---         hint = hint,
---         config = {
---             buffer = true,
---             color = 'pink',
---             hint = {
---                 border = 'rounded',
---             },
---             on_enter = function()
---                 vim.cmd 'Neorg mode norg'
---             end,
---             on_exit = function()
---                 vim.cmd 'Neorg return'
---             end,
---         },
---         mode = 'n',
---         heads = {
---             { '<S-d>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_done' },
---             { '<S-u>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_undone' },
---             { '<S-p>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_pending' },
---             { '<S-c>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_cancelled' },
---             { '<S-r>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_recurring' },
---             { '<S-i>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_important' },
---             { '<S-h>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_on_hold' },
---             { '<C-Space>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_cycle' },
---             { '<Enter>', cmd 'Neorg', { exit = true, desc = 'list all modules' } },
---             { '<Esc>', nil, { exit = true, nowait = true, desc = 'exit' } },
---         }
---     })
---
---     return neorg_hydra
--- end
+local neorg_hydra_factory = function()
+    local hint = [[
+       _D_ : done       _U_: undone      _P_: pending    _C_: cancel    
+   _<C-Space>_: cycle   _R_: recurring   _I_: important  _H_: on hold   
+^
+  _<Enter>_: Neorg    _<Esc>_: exit hydra mode           _q_: quit      
+]]
+    local Hydra = require("hydra")
+    local cmd = require('hydra.keymap-util').cmd
+    local neorg_hydra = Hydra({
+        name = 'Neorg',
+        hint = hint,
+        config = {
+            buffer = true,
+            color = 'pink',
+            hint = {
+                border = 'rounded',
+            },
+            on_enter = function()
+                vim.cmd 'Neorg mode norg'
+            end,
+            -- on_exit = function()
+            --     vim.cmd 'Neorg return'
+            -- end,
+        },
+        mode = 'n',
+        heads = {
+            { 'D', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_done' },
+            { 'U', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_undone' },
+            { 'P', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_pending' },
+            { 'C', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_cancelled' },
+            { 'R', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_recurring' },
+            { 'I', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_important' },
+            { 'H', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_on_hold' },
+            { '<C-Space>', cmd 'Neorg keybind norg core.norg.qol.todo_items.todo.task_cycle' },
+            { '<Enter>', cmd 'Neorg', { exit = true, desc = 'list all modules' } },
+            { '<Esc>', cmd 'write', { exit = true, nowait = true, desc = 'exit without return' } },
+            { 'q', cmd 'write|Neorg return', { exit = true, nowait = true, desc = 'exit' } },
+        }
+    })
+
+    return neorg_hydra
+end
 
 
 local hydra_factories = {

@@ -25,7 +25,7 @@ end
 dashboard.section.header.val = logo
 
 dashboard.section.buttons.val = {
-    dashboard.button("o", "  Open CWD", "<cmd>ene|ToggleTree<CR>"),
+    dashboard.button("o", "  Open CWD", "<cmd>ene|OpenTree<CR>"),
     dashboard.button("h", "  Recent Projects", "<cmd>Telescope projects<CR>"),
     dashboard.button("r", "  Recent File", "<cmd>Telescope oldfiles<CR>"),
     dashboard.button("e", "  New file", "<cmd>ene<CR>"),

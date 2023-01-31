@@ -80,36 +80,30 @@ function Lazy:load_lazy()
                 ---@type string[] list any plugins you want to disable here
                 disabled_plugins = {
                     "gzip",
+                    "tar",
+                    "tarPlugin",
+                    "zip",
+                    "zipPlugin",
+                    "getscript",
+                    "getscriptPlugin",
+                    "vimball",
+                    "vimballPlugin",
                     "matchit",
                     "matchparen",
+                    "2html_plugin",
+                    "logiPat",
+                    "rrhelper",
+                    "netrw",
                     "netrwPlugin",
-                    "tarPlugin",
+                    "netrwSettings",
+                    "netrwFileHandlers",
+                    "tutor_mode_plugin",
+                    "remote_plugins",
+                    "spellfile_plugin",
+                    "shada_plugin",
                     "tohtml",
+                    "spellfile",
                     "tutor",
-                    "zipPlugin",
---"gzip       
---tar              
---tarPlugin        
---zip              
---zipPlugin        
---getscript        
---getscriptPlugin  
---vimball          
---vimballPlugin    
---matchit          
---matchparen       
---2html_plugin     
---logiPat          
---rrhelper         
---netrw            
---netrwPlugin      
---netrwSettings    
---netrwFileHandlers
---tutor_mode_plugin
---remote_plugins   
---spellfile_plugin 
---shada_plugin     
-
                 },
             },
         }

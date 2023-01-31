@@ -15,7 +15,7 @@ M.PostPacker = function()
         -- fn()
     end
 
-    vim.cmd [[doautocmd User BinInstallDone]]
+    vim.api.nvim_exec_autocmds("User", { pattern = "BinInstallDone", modeline = false })
 end
 
 return M

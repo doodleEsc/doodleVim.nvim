@@ -1,3 +1,5 @@
+local api = vim.api
+
 local M = {
     defer_packages = {},
     mod_plug_map = {},
@@ -43,25 +45,10 @@ function M.register(module, plugin)
     end
 end
 
-function M.setup()
-
-    _G.ensure_require = function(module)
-        local major_mod = module:match("^([a-z0-9_-]+)%.?")
-        if not M.mod_plug_map[major_mod] then
-            return
-        end
-
-        local plugin = M.mod_plug_map[major_mod]
-        local item = {plugins = plugin}
-        require("lazy").load(item)
-
-        local module_loaded_ok, module_loaded = pcall(require, module)
-        if not module_loaded_ok then
-            return
-        end
-
-        return module_loaded
-    end
+function M.defer_start(delay)
+    vim.defer_fn(function()
+        vim.api.nvim_exec_autocmds("User", { pattern = "DeferStart", modeline = false })
+    end, delay)
 end
 
 return M

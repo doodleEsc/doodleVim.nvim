@@ -1,113 +1,58 @@
 local ui = {}
 local conf = require("doodleVim.modules.ui.config")
+local setup = require("doodleVim.modules.ui.setup")
 
-ui['nvim-treesitter/nvim-treesitter'] = {
-    lazy = true,
-    dependencies = {
-        'nvim-treesitter/nvim-treesitter-textobjects',
-    },
-    init = function()
-        require("doodleVim.utils.defer").add("nvim-treesitter", 100)
-        require("doodleVim.extend.packer").add("nvim-treesitter", function()
-            -- require("doodleVim.utils.defer").immediate_load("nvim-treesitter")
-            local vendor = {
-                "bash",
-                "cmake",
-                "comment",
-                "c",
-                "cpp",
-                "dot",
-                "dockerfile",
-                "go",
-                "gomod",
-                "gowork",
-                "json",
-                "html",
-                "lua",
-                "make",
-                "python",
-                "regex",
-                "rust",
-                "toml",
-                "vim",
-                "yaml",
-                "solidity",
-                "markdown",
-            }
 
-            -- -- HACK: add norg and norg_meta parser_info to nvim-treesitter
-
-            -- local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
-            -- parser_configs.norg = {
-            --     install_info = {
-            --         url = "https://github.com/nvim-neorg/tree-sitter-norg",
-            --         files = { "src/parser.c", "src/scanner.cc" },
-            --         branch = "main",
-            --         revision = "5d9c76b5c9927955f7c5d5d946397584e307f69f",
-            --     }
-            -- }
-            --
-            -- parser_configs.norg_meta = {
-            --     install_info = {
-            --         url = "https://github.com/nvim-neorg/tree-sitter-norg-meta",
-            --         files = { "src/parser.c" },
-            --         branch = "main",
-            --         revision = "e93dcbc56a472649547cfc288f10ae4a93ef8795",
-            --     }
-            -- }
-
-            local langs = {}
-            local utils = require("doodleVim.utils.utils")
-            for _, lang in ipairs(vendor) do
-                if not utils.ts_is_installed(lang) then
-                    table.insert(langs, lang)
-                end
-            end
-            if #langs > 0 then
-                local update = require("nvim-treesitter.install").update { with_sync = true }
-                local ok, _ = pcall(update, langs)
-                if not ok then
-                    vim.notify("TSUpdate Failed...")
-                end
-            end
-        end)
-    end,
-    config = conf.treesitter
-}
+ui['doodleEsc/gruvbox.nvim'] = { lazy = false }
 
 ui['NvChad/nvim-colorizer.lua'] = {
     ft = { "lua", "vim", "markdown" },
-    config = function() require('colorizer').setup() end
+    config = conf.color,
 }
 
-ui['nvim-tree/nvim-web-devicons'] = {
-    lazy = false
+ui['nvim-treesitter/nvim-treesitter'] = {
+    event = "VeryLazy",
+    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    init = setup.treesitter,
+    config = conf.treesitter
+}
+
+ui['goolord/alpha-nvim'] = {
+    lazy = true,
+    event = "VeryLazy",
+    config = conf.alpha
 }
 
 ui['nvim-lualine/lualine.nvim'] = {
     lazy = true,
-    init = function() require("doodleVim.utils.defer").add("lualine.nvim", 99) end,
-    dependencies = {
-        'nvim-tree/nvim-web-devicons'
-    },
+    event = "VeryLazy",
+    dependencies = {'nvim-tree/nvim-web-devicons'},
     config = conf.lualine,
 }
 
-ui['doodleEsc/gruvbox.nvim'] = {
-    lazy = true
-}
-
-ui['MunifTanjim/nui.nvim'] = {
+ui['folke/todo-comments.nvim'] = {
     lazy = true,
-    -- init = function()
-    --     require("doodleVim.utils.defer").add("nui.nvim", 99)
-    -- end,
-    config = conf.nui
+    event = "VeryLazy",
+    config = conf.todo
 }
 
-ui['goolord/alpha-nvim'] = {
-    lazy = false,
-    config = conf.alpha
+ui['lewis6991/gitsigns.nvim'] = {
+    lazy = true,
+    event = "VeryLazy",
+    config = conf.gitsigns,
+}
+
+ui['romgrk/barbar.nvim'] = {
+    lazy = true,
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    event = "VeryLazy",
+    init = setup.barbar,
+}
+
+ui['lukas-reineke/indent-blankline.nvim'] = {
+    lazy = true,
+    event = "VeryLazy",
+    config = conf.blankline,
 }
 
 return ui
