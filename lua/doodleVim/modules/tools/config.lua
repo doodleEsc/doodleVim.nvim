@@ -1,14 +1,14 @@
 local config = {}
 
 function config.telescope()
-    require("doodleVim.utils.defer").immediate_load({
-        "telescope-fzf-native.nvim",
-        "telescope-file-browser.nvim",
-        "nvim-neoclip.lua",
-        "project.nvim",
-        "telescope-ui-select.nvim",
-        "telescope-tabs"
-    })
+    -- require("doodleVim.utils.defer").immediate_load({
+    --     "telescope-fzf-native.nvim",
+    --     "telescope-file-browser.nvim",
+    --     "nvim-neoclip.lua",
+    --     "project.nvim",
+    --     "telescope-ui-select.nvim",
+    --     "telescope-tabs"
+    -- })
 
     local icons = require("doodleVim.utils.icons")
     local actions = require("telescope.actions")
@@ -576,8 +576,8 @@ function config.autosession()
         auto_session_enable_last_session = false,
         auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
         auto_session_enabled = false,
-        auto_save_enabled = false,
-        auto_restore_enabled = false,
+        auto_save_enabled = nil,
+        auto_restore_enabled = nil,
         auto_session_suppress_dirs = {},
         -- the configs below are lua only
         bypass_session_save_file_types = nil,
@@ -608,83 +608,14 @@ function config.which_key()
         ignore_missing = false,
     })
 
-    -- bind common doodleVim.keymap
-    -- local bind = require("doodleVim.keymap.bind")
-    local map = require("doodleVim.keymap.map")
-
-    -- bind raw doodleVim.keymap
-    -- bind.nvim_load_mapping(plug_map.raw)
-
-    -- wk.register(def_map.normal)
-    -- wk.register(def_map.insert)
-    -- wk.register(def_map.command)
-    -- wk.register(def_map.visual)
-    --
-    -- wk.register(plug_map.normal)
-    -- wk.register(plug_map.insert)
-    -- wk.register(plug_map.visual)
-
-    for _, mappings in pairs(map) do
-        for mode, keymaps in pairs(mappings) do
-            wk.register(keymaps, { mode = tostring(mode) })
+    vim.defer_fn(function()
+        local map = require("doodleVim.keymap.map")
+        for _, mappings in pairs(map) do
+            for mode, keymaps in pairs(mappings) do
+                require("which-key").register(keymaps, { mode = tostring(mode) })
+            end
         end
-    end
-
-    -- wk.register({
-    --     ["<leader>tq"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>", true, true, true),
-    --         noremap = true, silent = true },
-    -- }, { mode = 't' })
-
-    -- wk.register({ ["<Esc>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>", true, true, true),
-    --     "Toggle Terminal", noremap = true, silent = true } },
-    --     { mode = 't' })
-
-
-    -- wk.register({ ["<Esc>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>"), "To normal mode" } }, { mode = "t" })
-end
-
-function config.notify()
-    local icons = require("doodleVim.utils.icons")
-    local nvim_notify = require("notify")
-    nvim_notify.setup({
-        -- Animation style (see below for details)
-        stages = "slide",
-
-        -- Function called when a new window is opened, use for changing win settings/config
-        on_open = nil,
-
-        -- Function called when a window is closed
-        on_close = nil,
-
-        -- Render function for notifications. See notify-render()
-        render = "default",
-
-        -- Default timeout for notifications
-        timeout = 2000,
-
-        -- Max number of columns for messages
-        max_width = nil,
-        -- Max number of lines for a message
-        max_height = nil,
-
-        -- For stages that change opacity this is treated as the highlight behind the window
-        -- Set this to either a highlight group, an RGB hex value e.g. "#000000" or a function returning an RGB code for dynamic values
-        background_colour = "Normal",
-
-        -- Minimum width for notification windows
-        minimum_width = 36,
-
-        -- Icons for the different levels
-        icons = {
-            ERROR = icons.diagnostics.error_sign,
-            WARN = icons.diagnostics.warn_sign,
-            INFO = icons.diagnostics.infor_sign,
-            DEBUG = icons.diagnostics.debug_sign,
-            TRACE = icons.diagnostics.trace_sign,
-        },
-    })
-
-    vim.notify = require("doodleVim.extend.misc").wrapped_notify
+    end, 100)
 end
 
 function config.neoclip()
@@ -820,52 +751,6 @@ end
 --     }
 -- end
 
-function config.gitsigns()
-    local gitsigns = require('gitsigns')
-    gitsigns.setup {
-        signs                        = {
-            add          = { hl = 'GitSignsAdd', text = '│', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
-            change       = { hl = 'GitSignsChange', text = '│', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
-            delete       = { hl = 'GitSignsDelete', text = '_', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-            topdelete    = { hl = 'GitSignsDelete', text = '‾', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-            changedelete = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
-            untracked    = { hl = 'GitSignsAdd', text = '┆', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
-        },
-        signcolumn                   = true, -- Toggle with `:Gitsigns toggle_signs`
-        numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
-        linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
-        word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
-        watch_gitdir                 = {
-            interval = 1000,
-            follow_files = true
-        },
-        attach_to_untracked          = true,
-        current_line_blame           = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-        current_line_blame_opts      = {
-            virt_text = true,
-            virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-            delay = 1000,
-            ignore_whitespace = false,
-        },
-        current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-        sign_priority                = 6,
-        update_debounce              = 100,
-        status_formatter             = nil, -- Use default
-        max_file_length              = 40000, -- Disable if file is longer than this (in lines)
-        preview_config               = {
-            -- Options passed to nvim_open_win
-            border = 'rounded',
-            style = 'minimal',
-            relative = 'cursor',
-            row = 0,
-            col = 1
-        },
-        yadm                         = {
-            enable = false
-        },
-    }
-end
-
 function config.diffview()
     local icons = require("doodleVim.utils.icons")
     local actions = require("diffview.actions")
@@ -1000,8 +885,109 @@ function config.diffview()
     })
 end
 
-function config.hydra()
+function config.hydra(plugin)
     require("doodleVim.modules.tools.hydra")
+end
+
+function config.dapui()
+    local icons = require("doodleVim.utils.icons")
+    require("dapui").setup({
+        icons = { expanded = icons.arrow.down, collapsed = icons.arrow.right },
+        mappings = {
+            -- Use a table to apply multiple mappings
+            expand = { "<CR>", "<2-LeftMouse>" },
+            open = "o",
+            remove = "d",
+            edit = "e",
+            repl = "r",
+            toggle = "t"
+        },
+        expand_lines = vim.fn.has("nvim-0.7"),
+        layouts = {
+            {
+                elements = {
+                    -- Elements can be strings or table with id and size keys.
+                    { id = "scopes", size = 0.25 },
+                    "breakpoints",
+                    "stacks",
+                    "watches",
+                },
+                size = 40,
+                position = "left",
+            },
+            {
+                elements = {
+                    "repl",
+                    "console",
+                },
+                size = 10,
+                position = "bottom",
+            },
+        },
+        controls = {
+            -- Requires Neovim nightly (or 0.8 when released)
+            enabled = true,
+            -- Display controls in this element
+            element = "repl",
+            icons = {
+                pause = " ",
+                play = "契",
+                step_into = " ",
+                step_over = " ",
+                step_out = " ",
+                step_back = "玲",
+                run_last = "↻ ",
+                terminate = "栗",
+            },
+        },
+        floating = {
+            max_height = nil, -- These can be integers or a float between 0 and 1.
+            max_width = nil, -- Floats will be treated as percentage of your screen.
+            border = "rounded", -- Border style. Can be "single", "double" or "rounded"
+            mappings = {
+                close = { "q", "<Esc>" },
+            },
+        },
+        windows = { indent = 1 },
+        render = {
+            max_type_length = nil, -- Can be integer or nil.
+            max_value_lines = 100
+        }
+    })
+
+    local dap, dapui = require "dap", require "dapui"
+    dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+    end
+    dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+    end
+    dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+    end
+    -- for some debug adapter, terminate or exit events will no fire, use disconnect reuest instead
+    dap.listeners.before.disconnect["dapui_config"] = function()
+        dapui.close()
+    end
+end
+
+function config.dap()
+    local icons = require("doodleVim.utils.icons")
+
+    require("doodleVim.extend.debugger").load_debuggers({
+        "go",
+        "python"
+    })
+
+    vim.fn.sign_define('DapBreakpoint',
+        { text = icons.dap.breakpoint, texthl = 'GruvboxRedSign', linehl = '', numhl = '' })
+    vim.fn.sign_define("DapBreakpointCondition",
+        { text = icons.dap.breakpoint_condition, texthl = "GruvboxRedSign", linehl = "", numhl = "" })
+    vim.fn.sign_define('DapBreakpointRejected',
+        { text = icons.dap.breakpoint_rejected, texthl = "GruvboxRedSign", linehl = '', numhl = '' })
+    vim.fn.sign_define('DapLogPoint',
+        { text = icons.dap.log_point, texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapStopped', { text = icons.dap.stopped, texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
 end
 
 return config

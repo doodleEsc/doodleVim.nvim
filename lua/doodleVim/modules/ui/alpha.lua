@@ -15,7 +15,7 @@ local logo = {
 local function footer()
     local datetime = os.date(" %Y-%m-%d") .. "  -  "
     local author = " " .. os.getenv("USER") .. "  -  "
-    local total_plugins = " " .. #vim.tbl_keys(packer_plugins) .. " plugins" .. "  -  "
+    local total_plugins = " " .. require("lazy").stats().count .. " plugins" .. "  -  "
     local version = vim.version()
     local nvim_version_info = " v" .. version.major .. "." .. version.minor .. "." .. version.patch
 
@@ -31,8 +31,8 @@ dashboard.section.buttons.val = {
     dashboard.button("e", "  New file", "<cmd>ene<CR>"),
     dashboard.button("f", "  Find File", "<cmd>Telescope find_files<CR>"),
     dashboard.button("b", "  File Browser", "<cmd>Telescope file_browser<CR>"),
-    dashboard.button("s", "  Configuration", "<cmd>e $MYVIMRC|OpenTree<CR>"),
-    dashboard.button("u", "  Update Plugins", "<cmd>PackerUpdate<CR>"),
+    dashboard.button("s", "  Configuration", "<cmd>e $MYVIMRC|ToggleTree<CR>"),
+    dashboard.button("u", "  Update Plugins", "<cmd>Lazy sync<CR>"),
     dashboard.button("q", "  Quit", "<cmd>qa<cr>"),
 }
 

@@ -4,7 +4,7 @@ local vim_path = require('doodleVim.core.global').vim_path
 local colors_path = vim_path .. "/colors"
 
 gruvbox.dump = function()
-    require('doodleVim.utils.defer').immediate_load('gruvbox.nvim')
+    -- require('doodleVim.utils.defer').immediate_load('gruvbox.nvim')
     local groups = require("gruvbox.groups").setup()
     local color_file_path = colors_path .. "/gruvbox.lua"
 

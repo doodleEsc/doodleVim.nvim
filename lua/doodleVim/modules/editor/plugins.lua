@@ -2,68 +2,39 @@ local editor = {}
 local conf = require("doodleVim.modules.editor.config")
 
 editor['numToStr/Comment.nvim'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").defer_load("Comment.nvim", 200) end,
+    lazy = true,
     config = conf.comment,
 }
 
 editor['phaazon/hop.nvim'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").register("hop", "hop.nvim") end,
+    lazy = true,
     config = conf.hop
 }
 
 editor['andymass/vim-matchup'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").defer_load("vim-matchup", 200) end,
+    lazy = true,
+    event = "User DeferStart",
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
 }
 
 editor['junegunn/vim-easy-align'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").defer_load("vim-easy-align", 500) end,
+    lazy = true,
 }
 
 editor['karb94/neoscroll.nvim'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").register("neoscroll", "neoscroll.nvim") end,
+    lazy = true,
     config = conf.neoscroll,
 }
 
-editor['folke/todo-comments.nvim'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").add("todo-comments.nvim", 99) end,
-    config = conf.todo
-}
-
-editor['windwp/nvim-autopairs'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").defer_load("nvim-autopairs", 200) end,
-    config = conf.autopairs
-}
-
-editor['romgrk/barbar.nvim'] = {
-    opt = true,
-    requires = { 'kyazdani42/nvim-web-devicons' },
-    setup = function()
-        require("doodleVim.modules.editor.config").barbar()
-        require("doodleVim.utils.defer").add("barbar.nvim", 99)
-    end,
-}
-
-editor['lukas-reineke/indent-blankline.nvim'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").add("indent-blankline.nvim", 99) end,
-    config = conf.blankline,
-}
-
 editor['jakewvincent/mkdnflow.nvim'] = {
+    lazy = true,
     ft = "markdown",
     config = conf.mkdnflow
 }
 
 editor['kylechui/nvim-surround'] = {
-    opt = true,
-    setup = function() require("doodleVim.utils.defer").defer_load("nvim-surround", 200) end,
+    lazy = true,
+    event = "User DeferStart",
     config = conf.nvim_surround
 }
 
