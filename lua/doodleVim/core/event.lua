@@ -3,7 +3,7 @@ local autocmd = {}
 
 local function create_augroups(definitions)
     for group_name, definition in pairs(definitions) do
-        local group = api.nvim_create_augroup(group_name, {clear = true})
+        local group = api.nvim_create_augroup(group_name, { clear = true })
         for _, def in ipairs(definition) do
             local opts = def.opts
             opts.group = group
@@ -85,7 +85,7 @@ function autocmd.load_autocmds()
             {
                 event = "User",
                 opts = {
-                    pattern = {"LazySync", "LazyUpdate"},
+                    pattern = { "LazySync", "LazyUpdate" },
                     once = true,
                     callback = function()
                         require('doodleVim.extend.lazy').PostInstall()
@@ -93,21 +93,6 @@ function autocmd.load_autocmds()
                 }
 
             },
-            -- {
-            --     event = "UIEnter",
-            --     opts = {
-            --         pattern = "*",
-            --         callback = function()
-            --             require('doodleVim.utils.defer').defer_start(1000)
-            --         end
-            --     }
-            -- },
-            -- {
-            --     event = "User",
-            --     opts = {
-            --         pattern = "DeferStart",
-            --     }
-            -- }
         },
 
         _defer_start = {
@@ -116,17 +101,11 @@ function autocmd.load_autocmds()
                 opts = {
                     pattern = "*",
                     callback = function()
-                        require('doodleVim.utils.defer').defer_start(50)
+                        require('doodleVim.utils.defer').defer_start(100)
                     end
                 }
             },
-            -- {
-            --     event = "User",
-            --     opts = {
-            --         pattern = "DeferStart",
-            --     }
-            -- }
-        }
+        },
     }
 
     create_augroups(definitions)

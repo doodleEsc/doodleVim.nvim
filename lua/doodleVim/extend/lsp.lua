@@ -41,26 +41,34 @@ end
 
 function lsp.lsp_references(opts)
     opts = opts or {}
-    -- require('doodleVim.utils.defer').immediate_load('barbar.nvim')
     require('telescope.builtin').lsp_references(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
 end
 
 function lsp.lsp_definitions(opts)
     opts = opts or {}
-    -- require('doodleVim.utils.defer').immediate_load('barbar.nvim')
     require('telescope.builtin').lsp_definitions(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
 end
 
 function lsp.lsp_type_definition(opts)
     opts = opts or {}
-    -- require('doodleVim.utils.defer').immediate_load('barbar.nvim')
-    require('telescope.builtin').lsp_type_definition(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
+    require('telescope.builtin').lsp_type_definition(vim.tbl_extend("force", opts,
+        { entry_maker = file_and_details_entry() }))
 end
 
 function lsp.lsp_implementations(opts)
     opts = opts or {}
-    -- require('doodleVim.utils.defer').immediate_load('barbar.nvim')
-    require('telescope.builtin').lsp_implementations(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
+    require('telescope.builtin').lsp_implementations(vim.tbl_extend("force", opts,
+        { entry_maker = file_and_details_entry() }))
+end
+
+function lsp.register_on_attach(on_attach)
+    vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+            local buffer = args.buf
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
+            on_attach(client, buffer)
+        end,
+    })
 end
 
 return lsp
