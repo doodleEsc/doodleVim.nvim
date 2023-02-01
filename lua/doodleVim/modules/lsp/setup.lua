@@ -17,4 +17,16 @@ function lsp.mason(plugin)
     end)
 end
 
+function lsp.lsp_signature(plugin)
+    require("doodleVim.extend.lsp").register_on_attach(function(client, bufnr)
+        require "lsp_signature".on_attach({
+            bind = true, -- This is mandatory, otherwise border config won't get registered.
+            hint_enable = false,
+            handler_opts = {
+                border = "rounded"
+            }
+        }, bufnr)
+    end)
+end
+
 return lsp
