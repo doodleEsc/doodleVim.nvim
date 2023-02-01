@@ -61,4 +61,9 @@ lsp['doodleEsc/lightbulb.nvim'] = {
     config = conf.lightbulb
 }
 
+lsp['ray-x/lsp_signature.nvim'] = {
+    lazy = true,
+    init = setup.lsp_signature,
+}
+
 return lsp
