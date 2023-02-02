@@ -3,7 +3,9 @@ local conf = require("doodleVim.modules.ui.config")
 local setup = require("doodleVim.modules.ui.setup")
 
 
-ui['doodleEsc/gruvbox.nvim'] = { lazy = false }
+ui['ellisonleao/gruvbox.nvim'] = {
+    lazy = true,
+}
 
 ui['NvChad/nvim-colorizer.lua'] = {
     ft = { "lua", "vim", "markdown" },
@@ -27,7 +29,7 @@ ui['goolord/alpha-nvim'] = {
 ui['nvim-lualine/lualine.nvim'] = {
     lazy = true,
     event = "VeryLazy",
-    dependencies = {'nvim-tree/nvim-web-devicons'},
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = conf.lualine,
 }
 

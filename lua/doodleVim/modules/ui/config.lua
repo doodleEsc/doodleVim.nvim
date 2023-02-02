@@ -114,7 +114,6 @@ function config.todo()
     }
 end
 
-
 function config.gitsigns()
     local gitsigns = require('gitsigns')
     gitsigns.setup {
