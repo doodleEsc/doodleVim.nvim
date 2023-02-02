@@ -38,4 +38,9 @@ editor['kylechui/nvim-surround'] = {
     config = conf.nvim_surround
 }
 
+editor['gorbit99/codewindow.nvim'] = {
+    lazy = true,
+    config = conf.codewindow
+}
+
 return editor

@@ -5,6 +5,61 @@ local map_cmd = bind.map_cmd
 
 local map = {}
 
+map.Default = {
+    n = {
+        ["Y"] = map_cmd('y$'):with_label("Copy To End Of Line"),
+        ["<C-q>"] = map_cr('lua require("doodleVim.extend.misc").safe_exit()'):with_noremap():
+            with_silent():with_label("Save Session And Safe Exit"),
+        ["<C-s>"] = map_cr('silent! lua require("doodleVim.extend.misc").safe_save()'):
+            with_noremap():with_silent():with_label("Save Session"),
+        ["<C-d>"] = map_cr("lua require('neoscroll').scroll(vim.wo.scroll, true, 150)"):
+            with_noremap():with_silent():with_label("Smooth Scroll Down"),
+        ["<C-u>"] = map_cr("lua require('neoscroll').scroll(-vim.wo.scroll, true, 150)"):
+            with_noremap():with_silent():with_label("Smooth Scroll Up"),
+        ["<M-n>"] = map_cr("tabnext"):with_noremap():with_silent():with_label("Next Tabpage"),
+        ["x"] = map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"),
+        ["c"] = map_cmd('"_c'):with_noremap():with_label("Change Without Copy"),
+        ["d"] = map_cmd('""d'):with_noremap():with_label("Delete Without Copy"),
+        ["P"] = map_cmd('""p'):with_noremap():with_label("Paste Content In Register \""),
+
+    },
+    i = {
+        ["<C-b>"] = { "<Left>", "Move Cursor To Previous", noremap = true, silent = true },
+        ["<C-f>"] = { "<Right>", "Move Cursor To Next", noremap = true, silent = true },
+        ["<C-d>"] = { "<Del>", "Delete", noremap = true, silent = true },
+        ["<C-h>"] = { "<BS>", "Backspace", noremap = true, silent = true },
+        ["<C-a>"] = { "<Esc>^i", "Append Before Head", noremap = true, silent = true },
+        ["<C-e>"] = { "<Esc>A", "Append After Tail", noremap = true, silent = true },
+        ["<C-l>"] = { "<Esc>o", "New Line", noremap = true, silent = true },
+        ["<C-o>"] = { "<Esc>O", "New Line Upper", noremap = true, silent = true },
+        ["<C-s>"] = { '<Esc>:lua require("doodleVim.extend.misc").safe_save()<CR>', "New Line Upper", noremap = true,
+            silent = true },
+        ["<C-q>"] = { '<Esc>:lua require("doodleVim.extend.misc").safe_exit()<CR>', "New Line Upper", noremap = true,
+            silent = true },
+    },
+    c = {
+        ["<C-b>"] = { "<Left>", "Move Cursor To Previous", noremap = true, silent = true },
+        ["<C-f>"] = { "<Right>", "Move Cursor To Next", noremap = true, silent = true },
+        ["<C-d>"] = { "<Del>", "Delete", noremap = true, silent = true },
+        ["<C-h>"] = { "<BS>", "Backspace", noremap = true, silent = true },
+        ["<C-a>"] = { "<Home>", "Home", noremap = true, silent = true },
+        ["<C-e>"] = { "<End>", "End", noremap = true, silent = true },
+    },
+    v = {
+        ["<C-d>"] = { "<cmd>lua require('neoscroll').scroll(vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Down",
+            noremap = true, silent = true },
+        ["<C-u>"] = { "<cmd>lua require('neoscroll').scroll(-vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Up",
+            noremap = true, silent = true },
+        [">"] = { ">gv", "Indent Right", noremap = true },
+        ["<"] = { "<gv", "Indent Left", noremap = true },
+        ["x"] = { '"_x', "Delete Without Copy", noremap = true },
+        ["c"] = { '"_c', "Cut Without Copy", noremap = true },
+        ["d"] = { '""d', "Delete Without Copy", noremap = true },
+        ["P"] = { '""p', "Paste Content In Register \"", noremap = true },
+    }
+}
+
+
 map.Lsp = {
     n = {
         ["g"] = {
@@ -290,57 +345,15 @@ map.Hydra = {
     }
 }
 
-map.Default = {
+map.codewindow = {
     n = {
-        ["Y"] = map_cmd('y$'):with_label("Copy To End Of Line"),
-        ["<C-q>"] = map_cr('lua require("doodleVim.extend.misc").safe_exit()'):with_noremap():
-            with_silent():with_label("Save Session And Safe Exit"),
-        ["<C-s>"] = map_cr('silent! lua require("doodleVim.extend.misc").safe_save()'):
-            with_noremap():with_silent():with_label("Save Session"),
-        ["<C-d>"] = map_cr("lua require('neoscroll').scroll(vim.wo.scroll, true, 150)"):
-            with_noremap():with_silent():with_label("Smooth Scroll Down"),
-        ["<C-u>"] = map_cr("lua require('neoscroll').scroll(-vim.wo.scroll, true, 150)"):
-            with_noremap():with_silent():with_label("Smooth Scroll Up"),
-        ["<M-n>"] = map_cr("tabnext"):with_noremap():with_silent():with_label("Next Tabpage"),
-        ["x"] = map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"),
-        ["c"] = map_cmd('"_c'):with_noremap():with_label("Change Without Copy"),
-        ["d"] = map_cmd('""d'):with_noremap():with_label("Delete Without Copy"),
-        ["P"] = map_cmd('""p'):with_noremap():with_label("Paste Content In Register \""),
-
-    },
-    i = {
-        ["<C-b>"] = { "<Left>", "Move Cursor To Previous", noremap = true, silent = true },
-        ["<C-f>"] = { "<Right>", "Move Cursor To Next", noremap = true, silent = true },
-        ["<C-d>"] = { "<Del>", "Delete", noremap = true, silent = true },
-        ["<C-h>"] = { "<BS>", "Backspace", noremap = true, silent = true },
-        ["<C-a>"] = { "<Esc>^i", "Append Before Head", noremap = true, silent = true },
-        ["<C-e>"] = { "<Esc>A", "Append After Tail", noremap = true, silent = true },
-        ["<C-l>"] = { "<Esc>o", "New Line", noremap = true, silent = true },
-        ["<C-o>"] = { "<Esc>O", "New Line Upper", noremap = true, silent = true },
-        ["<C-s>"] = { '<Esc>:lua require("doodleVim.extend.misc").safe_save()<CR>', "New Line Upper", noremap = true,
-            silent = true },
-        ["<C-q>"] = { '<Esc>:lua require("doodleVim.extend.misc").safe_exit()<CR>', "New Line Upper", noremap = true,
-            silent = true },
-    },
-    c = {
-        ["<C-b>"] = { "<Left>", "Move Cursor To Previous", noremap = true, silent = true },
-        ["<C-f>"] = { "<Right>", "Move Cursor To Next", noremap = true, silent = true },
-        ["<C-d>"] = { "<Del>", "Delete", noremap = true, silent = true },
-        ["<C-h>"] = { "<BS>", "Backspace", noremap = true, silent = true },
-        ["<C-a>"] = { "<Home>", "Home", noremap = true, silent = true },
-        ["<C-e>"] = { "<End>", "End", noremap = true, silent = true },
-    },
-    v = {
-        ["<C-d>"] = { "<cmd>lua require('neoscroll').scroll(vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Down",
-            noremap = true, silent = true },
-        ["<C-u>"] = { "<cmd>lua require('neoscroll').scroll(-vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Up",
-            noremap = true, silent = true },
-        [">"] = { ">gv", "Indent Right", noremap = true },
-        ["<"] = { "<gv", "Indent Left", noremap = true },
-        ["x"] = { '"_x', "Delete Without Copy", noremap = true },
-        ["c"] = { '"_c', "Cut Without Copy", noremap = true },
-        ["d"] = { '""d', "Delete Without Copy", noremap = true },
-        ["P"] = { '""p', "Paste Content In Register \"", noremap = true },
+        ["<leader>w"] = {
+            name = "Code Window",
+            w = map_cr('lua require("codewindow").toggle_minimap()'):with_noremap()
+                :with_silent():with_label("Toggle Code Window"),
+            e = map_cr('lua require("codewindow").toggle_focus()'):with_noremap()
+                :with_silent():with_label("Toggle Code Focus"),
+        }
     }
 }
 
