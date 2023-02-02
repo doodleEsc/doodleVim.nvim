@@ -28,7 +28,7 @@ tools['kkharji/sqlite.lua'] = {
 
 tools['doodleEsc/project.nvim'] = {
     lazy = true,
-    event = "VeryLazy",
+    event = "VimEnter",
     dependencies = { 'rmagatti/auto-session' },
     config = conf.project
 }
