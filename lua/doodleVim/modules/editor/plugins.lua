@@ -19,6 +19,7 @@ editor['andymass/vim-matchup'] = {
 
 editor['junegunn/vim-easy-align'] = {
     lazy = true,
+    event = "User DeferStart",
 }
 
 editor['karb94/neoscroll.nvim'] = {
