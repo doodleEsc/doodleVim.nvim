@@ -69,7 +69,6 @@ tools['voldikss/vim-floaterm'] = {
 
 tools['anuvyklack/hydra.nvim'] = {
     lazy = true,
-    -- event = "User DeferStart",
     dependencies = {
         'jbyuki/venn.nvim',
         'nvim-telescope/telescope.nvim',

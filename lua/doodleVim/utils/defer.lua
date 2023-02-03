@@ -47,7 +47,11 @@ end
 
 function M.defer_start(delay)
     vim.defer_fn(function()
-        vim.api.nvim_exec_autocmds("User", { pattern = "DeferStart", modeline = false })
+        if next(vim.fn.argv()) ~= nil then
+            vim.api.nvim_exec_autocmds("User", { pattern = "DeferStartWithFile", modeline = false })
+        else
+            vim.api.nvim_exec_autocmds("User", { pattern = "DeferStart", modeline = false })
+        end
     end, delay)
 end
 
