@@ -88,7 +88,7 @@ tools['towolf/vim-helm'] = {
 
 tools['folke/which-key.nvim'] = {
     lazy = true,
-    event = "User DeferStart",
+    event = "User DeferStartWithFile",
     config = conf.which_key
 }
 
