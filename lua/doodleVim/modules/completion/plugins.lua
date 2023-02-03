@@ -26,6 +26,7 @@ completion['hrsh7th/nvim-cmp'] = {
         'windwp/nvim-autopairs',
         'danymat/neogen',
         'L3MON4D3/LuaSnip',
+        'mortepau/codicons.nvim',
     },
     config = conf.nvim_cmp,
 }

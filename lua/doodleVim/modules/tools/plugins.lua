@@ -11,6 +11,7 @@ tools['nvim-telescope/telescope.nvim'] = {
         'folke/todo-comments.nvim',
         'doodleEsc/project.nvim',
         'AckslD/nvim-neoclip.lua',
+        'mortepau/codicons.nvim',
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
     config = conf.telescope
@@ -68,7 +69,7 @@ tools['voldikss/vim-floaterm'] = {
 
 tools['anuvyklack/hydra.nvim'] = {
     lazy = true,
-    event = "User DeferStart",
+    -- event = "User DeferStart",
     dependencies = {
         'jbyuki/venn.nvim',
         'nvim-telescope/telescope.nvim',
@@ -122,7 +123,10 @@ tools['mfussenegger/nvim-dap'] = {
 
 tools['rcarriga/nvim-dap-ui'] = {
     lazy = true,
-    config = conf.dapui
+    init = function(plugin)
+        vim.g.dapui_setup = false
+    end,
+    -- config = conf.dapui
 }
 
 return tools
