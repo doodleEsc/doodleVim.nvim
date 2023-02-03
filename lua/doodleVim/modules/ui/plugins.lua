@@ -28,14 +28,14 @@ ui['goolord/alpha-nvim'] = {
 
 ui['nvim-lualine/lualine.nvim'] = {
     lazy = true,
-    event = "VeryLazy",
+    event = "User DeferStartWithFile",
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = conf.lualine,
 }
 
 ui['folke/todo-comments.nvim'] = {
     lazy = true,
-    event = "VeryLazy",
+    event = "User DeferStartWithFile",
     dependencies = {
         'mortepau/codicons.nvim'
     },
@@ -44,20 +44,20 @@ ui['folke/todo-comments.nvim'] = {
 
 ui['lewis6991/gitsigns.nvim'] = {
     lazy = true,
-    event = "VeryLazy",
+    event = "User DeferStartWithFile",
     config = conf.gitsigns,
 }
 
 ui['romgrk/barbar.nvim'] = {
     lazy = true,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    event = "VeryLazy",
+    event = "User DeferStartWithFile",
     init = setup.barbar,
 }
 
 ui['lukas-reineke/indent-blankline.nvim'] = {
     lazy = true,
-    event = "VeryLazy",
+    event = "User DeferStartWithFile",
     config = conf.blankline,
 }
 
