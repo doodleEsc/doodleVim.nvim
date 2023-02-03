@@ -10,7 +10,18 @@ gruvbox.palette_overrides = {
 gruvbox.overrides = {
     FloatermBorder = { link = "GruvboxOrange" },
     CodewindowBorder = { fg = "#665c54" },
-    Pmenu = { link = "Normal" }
+    Pmenu = { link = "Normal" },
+    TelescopeNormal = { link = "GruvboxBlue" },
+    TelescopeSelection = { link = "GruvboxYellowBold" },
+    TelescopeMultiSelection = { link = "GruvboxGray" },
+    TelescopeSelectionCaret = { link = "GruvboxRed" },
+    TelescopeBorder = { link = "TelescopeNormal" },
+    TelescopePromptBorder = { link = "TelescopeNormal" },
+    TelescopeResultsBorder = { link = "TelescopeNormal" },
+    TelescopePreviewBorder = { link = "TelescopeNormal" },
+    TelescopeMatching = { link = "GruvboxRedBold" },
+    TelescopePromptPrefix = { link = "GruvboxRed" },
+    TelescopePrompt = { link = "TelescopeNormal" }
 }
 
 

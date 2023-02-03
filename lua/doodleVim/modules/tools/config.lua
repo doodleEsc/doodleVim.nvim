@@ -10,7 +10,10 @@ function config.telescope()
     --     "telescope-tabs"
     -- })
 
+    -- TODO: remove it
     local icons = require("doodleVim.utils.icons")
+
+    local codicons = require("codicons")
     local actions = require("telescope.actions")
     local actions_layout = require("telescope.actions.layout")
 
@@ -70,11 +73,11 @@ function config.telescope()
                     ["<C-v>"] = actions.select_vertical,
                     ["<C-t>"] = actions.select_tab,
 
-                    ["<C-u>"] = actions.preview_scrolling_up,
-                    ["<C-d>"] = actions.preview_scrolling_down,
+                    ["<C-b>"] = actions.preview_scrolling_up,
+                    ["<C-f>"] = actions.preview_scrolling_down,
 
-                    ["<C-b>"] = actions.results_scrolling_up,
-                    ["<C-f>"] = actions.results_scrolling_down,
+                    ["<C-u>"] = actions.results_scrolling_up,
+                    ["<C-d>"] = actions.results_scrolling_down,
 
                     ["<Tab>"] = actions_layout.toggle_preview,
                     ["<C-Space>"] = actions.which_key,
@@ -91,11 +94,11 @@ function config.telescope()
                     ["<C-v>"] = actions.select_vertical,
                     ["<C-t>"] = actions.select_tab,
 
-                    ["<C-u>"] = actions.preview_scrolling_up,
-                    ["<C-d>"] = actions.preview_scrolling_down,
+                    ["<C-b>"] = actions.preview_scrolling_up,
+                    ["<C-f>"] = actions.preview_scrolling_down,
 
-                    ["<C-b>"] = actions.results_scrolling_up,
-                    ["<C-f>"] = actions.results_scrolling_down,
+                    ["<C-u>"] = actions.results_scrolling_up,
+                    ["<C-d>"] = actions.results_scrolling_down,
 
                     ["<Tab>"] = actions_layout.toggle_preview,
                     ["<C-Space>"] = actions.which_key,
@@ -900,20 +903,26 @@ function config.dapui()
             remove = "d",
             edit = "e",
             repl = "r",
-            toggle = "t"
+            toggle = "t",
         },
-        expand_lines = vim.fn.has("nvim-0.7"),
+        element_mappings = {},
+        expand_lines = vim.fn.has("nvim-0.7") == 1,
+        force_buffers = true,
         layouts = {
             {
+                -- You can change the order of elements in the sidebar
                 elements = {
-                    -- Elements can be strings or table with id and size keys.
-                    { id = "scopes", size = 0.25 },
-                    "breakpoints",
-                    "stacks",
-                    "watches",
+                    -- Provide IDs as strings or tables with "id" and "size" keys
+                    {
+                        id = "scopes",
+                        size = 0.25, -- Can be float or integer > 1
+                    },
+                    { id = "breakpoints", size = 0.25 },
+                    { id = "stacks", size = 0.25 },
+                    { id = "watches", size = 0.25 },
                 },
                 size = 40,
-                position = "left",
+                position = "left", -- Can be "left" or "right"
             },
             {
                 elements = {
@@ -921,13 +930,19 @@ function config.dapui()
                     "console",
                 },
                 size = 10,
-                position = "bottom",
+                position = "bottom", -- Can be "bottom" or "top"
+            },
+        },
+        floating = {
+            max_height = nil,
+            max_width = nil,
+            border = "rounded",
+            mappings = {
+                ["close"] = { "q", "<Esc>" },
             },
         },
         controls = {
-            -- Requires Neovim nightly (or 0.8 when released)
-            enabled = true,
-            -- Display controls in this element
+            enabled = vim.fn.exists("+winbar") == 1,
             element = "repl",
             icons = {
                 pause = " ",
@@ -935,40 +950,89 @@ function config.dapui()
                 step_into = " ",
                 step_over = " ",
                 step_out = " ",
-                step_back = "玲",
+                step_back = " ",
                 run_last = "↻ ",
                 terminate = "栗",
+                -- pause = "",
+                -- play = "",
+                -- step_into = "",
+                -- step_over = "",
+                -- step_out = "",
+                -- step_back = "",
+                -- run_last = "",
+                -- terminate = "",
             },
         },
-        floating = {
-            max_height = nil, -- These can be integers or a float between 0 and 1.
-            max_width = nil, -- Floats will be treated as percentage of your screen.
-            border = "rounded", -- Border style. Can be "single", "double" or "rounded"
-            mappings = {
-                close = { "q", "<Esc>" },
-            },
-        },
-        windows = { indent = 1 },
         render = {
             max_type_length = nil, -- Can be integer or nil.
-            max_value_lines = 100
-        }
+            max_value_lines = 100, -- Can be integer or nil.
+            indent = 1,
+        },
     })
+    -- require("dapui").setup({
+    --     icons = { expanded = icons.arrow.down, collapsed = icons.arrow.right },
+    --     mappings = {
+    --         -- Use a table to apply multiple mappings
+    --         expand = { "<CR>", "<2-LeftMouse>" },
+    --         open = "o",
+    --         remove = "d",
+    --         edit = "e",
+    --         repl = "r",
+    --         toggle = "t"
+    --     },
+    --     expand_lines = vim.fn.has("nvim-0.7"),
+    --     layouts = {
+    --         {
+    --             elements = {
+    --                 -- Elements can be strings or table with id and size keys.
+    --                 { id = "scopes", size = 0.25 },
+    --                 "breakpoints",
+    --                 "stacks",
+    --                 "watches",
+    --             },
+    --             size = 40,
+    --             position = "left",
+    --         },
+    --         {
+    --             elements = {
+    --                 "repl",
+    --                 "console",
+    --             },
+    --             size = 10,
+    --             position = "bottom",
+    --         },
+    --     },
+    --     controls = {
+    --         -- Requires Neovim nightly (or 0.8 when released)
+    --         enabled = true,
+    --         -- Display controls in this element
+    --         element = "repl",
+    --         icons = {
+    --             pause = " ",
+    --             play = "契",
+    --             step_into = " ",
+    --             step_over = " ",
+    --             step_out = " ",
+    --             step_back = "玲",
+    --             run_last = "↻ ",
+    --             terminate = "栗",
+    --         },
+    --     },
+    --     floating = {
+    --         max_height = nil, -- These can be integers or a float between 0 and 1.
+    --         max_width = nil, -- Floats will be treated as percentage of your screen.
+    --         border = "rounded", -- Border style. Can be "single", "double" or "rounded"
+    --         mappings = {
+    --             close = { "q", "<Esc>" },
+    --         },
+    --     },
+    --     windows = { indent = 1 },
+    --     render = {
+    --         max_type_length = nil, -- Can be integer or nil.
+    --         max_value_lines = 100
+    --     }
+    -- })
 
-    local dap, dapui = require "dap", require "dapui"
-    dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open()
-    end
-    dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close()
-    end
-    dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close()
-    end
-    -- for some debug adapter, terminate or exit events will no fire, use disconnect reuest instead
-    dap.listeners.before.disconnect["dapui_config"] = function()
-        dapui.close()
-    end
 end
 
 function config.dap()
@@ -988,6 +1052,37 @@ function config.dap()
     vim.fn.sign_define('DapLogPoint',
         { text = icons.dap.log_point, texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
     vim.fn.sign_define('DapStopped', { text = icons.dap.stopped, texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
+
+    local dap, dapui = require "dap", require "dapui"
+    dap.listeners.after.event_initialized["dapui_config"] = function()
+        if not vim.g.dapui_setup then
+            require("doodleVim.modules.tools.config").dapui()
+            vim.g.dapui_setup = true
+        end
+        dapui.open()
+    end
+    dap.listeners.before.event_terminated["dapui_config"] = function()
+        if not vim.g.dapui_setup then
+            require("doodleVim.modules.tools.config").dapui()
+            vim.g.dapui_setup = true
+        end
+        dapui.close()
+    end
+    dap.listeners.before.event_exited["dapui_config"] = function()
+        if not vim.g.dapui_setup then
+            require("doodleVim.modules.tools.config").dapui()
+            vim.g.dapui_setup = true
+        end
+        dapui.close()
+    end
+    -- for some debug adapter, terminate or exit events will no fire, use disconnect reuest instead
+    dap.listeners.before.disconnect["dapui_config"] = function()
+        if not vim.g.dapui_setup then
+            require("doodleVim.modules.tools.config").dapui()
+            vim.g.dapui_setup = true
+        end
+        dapui.close()
+    end
 end
 
 return config

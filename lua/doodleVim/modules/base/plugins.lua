@@ -3,6 +3,8 @@ local conf = require("doodleVim.modules.base.config")
 
 base['nvim-tree/nvim-web-devicons'] = { lazy = true }
 
+base['mortepau/codicons.nvim'] = { lazy = true }
+
 base['nvim-lua/plenary.nvim'] = { lazy = true }
 
 base['nathom/filetype.nvim'] = {

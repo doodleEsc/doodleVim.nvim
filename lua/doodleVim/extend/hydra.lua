@@ -15,6 +15,11 @@ H.contain = function(key)
 end
 
 H.run = function(key)
+    if not pcall(require, "hydra") then
+        vim.notify("Failed Loading Hydra", vim.log.levels.ERROR)
+        return
+    end
+
     if not H.contain(key) then
         vim.notify("No Such Hydra Factory: " .. key, vim.log.levels.ERROR)
         return

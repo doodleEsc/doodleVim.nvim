@@ -36,6 +36,9 @@ ui['nvim-lualine/lualine.nvim'] = {
 ui['folke/todo-comments.nvim'] = {
     lazy = true,
     event = "VeryLazy",
+    dependencies = {
+        'mortepau/codicons.nvim'
+    },
     config = conf.todo
 }
 

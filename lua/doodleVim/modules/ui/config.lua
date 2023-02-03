@@ -47,25 +47,28 @@ function config.lualine()
 end
 
 function config.todo()
+    -- TODO: remove it
     local icons = require("doodleVim.utils.icons")
+
+    local codicons = require('codicons')
     require("todo-comments").setup {
         signs = true, -- show icons in the signs column
         sign_priority = 8, -- sign priority
         -- keywords recognized as todo comments
         keywords = {
             FIX = {
-                icon = icons.todo.fix, -- icon used for the sign, and in search results
+                icon = codicons.get("bug"), -- icon used for the sign, and in search results
                 color = "error", -- can be a hex color, or a named color (see below)
                 alt = {
                     "FIXME", "BUG", "FIXIT", "ISSUE", "ERROR",
                 }, -- a set of other keywords that all map to this FIX keywords
                 -- signs = false, -- configure signs for some keywords individually
             },
-            TODO = { icon = icons.todo.todo, color = "info" },
-            HACK = { icon = icons.todo.hack, color = "warning" },
-            WARN = { icon = icons.todo.warn, color = "warning", alt = { "WARNING", "XXX" } },
-            PERF = { icon = icons.todo.perf, color = "default", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-            NOTE = { icon = icons.todo.note, color = "hint", alt = { "INFO" } },
+            TODO = { icon = codicons.get("check"), color = "info" },
+            HACK = { icon = codicons.get("flame"), color = "warning" },
+            WARN = { icon = codicons.get("warning"), color = "warning", alt = { "WARNING", "XXX" } },
+            PERF = { icon = codicons.get("clock"), color = "default", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+            NOTE = { icon = codicons.get("note"), color = "hint", alt = { "INFO" } },
         },
         gui_style = {
             fg = "NONE", -- The gui style to use for the fg highlight group.

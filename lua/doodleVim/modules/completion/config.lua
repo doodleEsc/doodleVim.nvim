@@ -1,13 +1,14 @@
 local config = {}
--- local vim_path = require('doodleVim.core.global').vim_path
--- local utils = require('doodleVim.utils.utils')
---
---
---
 
 function config.nvim_cmp(plugin, opts)
+    require("codicons.extensions.completion_item_kind").set({
+        include_icon = true,
+        include_label = true,
+        monospaced = true,
+        override = {}
+    })
+
     local cmp = require("cmp")
-    local types = require("cmp.types")
     local under_comparator = require("cmp-under-comparator").under
     local WIDE_HEIGHT = 40
 
@@ -144,14 +145,34 @@ function config.nvim_cmp(plugin, opts)
             end, { "i", "s" }),
             ["<C-d>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
-                    cmp.scroll_docs(2)
+                    cmp.select_next_item({
+                        behavior = cmp.SelectBehavior.Select,
+                        count = 6
+                    })
                 else
                     fallback()
                 end
             end, { "i", "s" }),
             ["<C-u>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
-                    cmp.scroll_docs(-2)
+                    cmp.select_prev_item({
+                        behavior = cmp.SelectBehavior.Select,
+                        count = 6
+                    })
+                else
+                    fallback()
+                end
+            end, { "i", "s" }),
+            ["<C-f>"] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.scroll_docs(2)
+                else
+                    fallback()
+                end
+            end, { "i", "s" }),
+            ["<C-b>"] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.scroll_docs(2)
                 else
                     fallback()
                 end
@@ -181,8 +202,8 @@ function config.nvim_cmp(plugin, opts)
                 end
                 vim_item.abbr = word
 
-                local icons = require("doodleVim.utils.icons")
-                vim_item.kind = string.format("%s %s", icons.cmp[vim_item.kind], vim_item.kind)
+                local cmd = require("cmp")
+                vim_item.kind = vim.lsp.protocol.CompletionItemKind[cmp.lsp.CompletionItemKind[vim_item.kind]]
 
                 vim_item.menu = ({
                     nvim_lsp = "[LSP]",
@@ -211,10 +232,10 @@ function config.nvim_cmp(plugin, opts)
     cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline({
             ["<Up>"] = {
-                c = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
+                c = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
             },
             ["<Down>"] = {
-                c = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
+                c = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
             },
         }),
         sources = cmp.config.sources({
