@@ -50,6 +50,8 @@ map.Default = {
             noremap = true, silent = true },
         ["<C-u>"] = { "<cmd>lua require('neoscroll').scroll(-vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Up",
             noremap = true, silent = true },
+    },
+    x = {
         [">"] = { ">gv", "Indent Right", noremap = true },
         ["<"] = { "<gv", "Indent Left", noremap = true },
         ["x"] = { '"_x', "Delete Without Copy", noremap = true },
@@ -89,7 +91,7 @@ map.Lsp = {
 
 
     },
-    v = {
+    x = {
         ["g"] = {
             name = "Lsp Function",
             f = map_cu("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Selected Code Formatting"),
