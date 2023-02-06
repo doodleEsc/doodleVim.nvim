@@ -77,10 +77,10 @@ map.Lsp = {
                 with_silent():with_label("Go To Implementation"),
             r = map_cr("lua require('doodleVim.extend.lsp').lsp_references()"):with_noremap():
                 with_silent():with_label("Go To Reference"),
-            h = map_cr("lua vim.lsp.buf.hover()"):with_noremap():with_silent():with_label("Hover Documentation"),
-            f = map_cr("lua vim.lsp.buf.format { async = true }"):with_noremap():with_silent():
+            h = map_cr("lua require('doodleVim.extend.lsp').hover()"):with_noremap():with_silent():with_label("Hover Documentation"),
+            f = map_cr("lua require('doodleVim.extend.lsp').format({async=true})"):with_noremap():with_silent():
                 with_label("Code Formatting"),
-            a = map_cr("lua vim.lsp.buf.code_action()"):with_noremap():with_silent():with_label("Code Action"),
+            a = map_cr("lua require('doodleVim.extend.lsp').code_action()"):with_noremap():with_silent():with_label("Code Action"),
             n = map_cr("lua require('rename').rename({label='Rename'})"):with_noremap():
                 with_silent():with_label("Rename"),
         },

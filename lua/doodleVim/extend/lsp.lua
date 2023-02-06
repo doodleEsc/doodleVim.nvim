@@ -40,25 +40,79 @@ local function file_and_details_entry(opts)
 end
 
 function lsp.lsp_references(opts)
+    local load_ok, _ = pcall(require("doodleVim.utils.defer").optimisticLoad, "telescope.nvim")
+    if not load_ok then
+        vim.notify("Failed Calling Optimistic Load")
+    end
     opts = opts or {}
     require('telescope.builtin').lsp_references(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
 end
 
 function lsp.lsp_definitions(opts)
+    local load_ok, _ = pcall(require("doodleVim.utils.defer").optimisticLoad, "telescope.nvim")
+    if not load_ok then
+        vim.notify("Failed Calling Optimistic Load")
+    end
     opts = opts or {}
     require('telescope.builtin').lsp_definitions(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
 end
 
 function lsp.lsp_type_definition(opts)
+    local load_ok, _ = pcall(require("doodleVim.utils.defer").optimisticLoad, "telescope.nvim")
+    if not load_ok then
+        vim.notify("Failed Calling Optimistic Load")
+    end
     opts = opts or {}
     require('telescope.builtin').lsp_type_definition(vim.tbl_extend("force", opts,
         { entry_maker = file_and_details_entry() }))
 end
 
 function lsp.lsp_implementations(opts)
+    local load_ok, _ = pcall(require("doodleVim.utils.defer").optimisticLoad, "telescope.nvim")
+    if not load_ok then
+        vim.notify("Failed Calling Optimistic Load")
+    end
     opts = opts or {}
     require('telescope.builtin').lsp_implementations(vim.tbl_extend("force", opts,
         { entry_maker = file_and_details_entry() }))
+end
+
+function lsp.code_action(opts)
+    local load_ok, _ = pcall(require("doodleVim.utils.defer").optimisticLoad, "telescope.nvim")
+    if not load_ok then
+        vim.notify("Failed Calling Optimistic Load")
+    end
+    opts = opts or {}
+    local ok, _ = pcall(vim.lsp.buf.code_action)
+    if not ok then
+        vim.notify("Failed Calling LSP Code Action")
+    end
+end
+
+function lsp.hover(opts)
+    local load_ok, _ = pcall(require("doodleVim.utils.defer").optimisticLoad, "telescope.nvim")
+    if not load_ok then
+        vim.notify("Failed Calling Optimistic Load")
+    end
+    opts = opts or {}
+    local ok, _ = pcall(vim.lsp.buf.hover)
+    if not ok then
+        vim.notify("Failed Calling LSP Hover")
+    end
+end
+
+
+function lsp.format(opts)
+    local load_ok, _ = pcall(require("doodleVim.utils.defer").optimisticLoad, "telescope.nvim")
+    if not load_ok then
+        vim.notify("Failed Calling Optimistic Load")
+    end
+
+    opts = opts or {}
+    local ok, _ = pcall(vim.lsp.buf.format, opts)
+    if not ok then
+        vim.notify("Failed Calling LSP Format")
+    end
 end
 
 function lsp.register_on_attach(on_attach)
