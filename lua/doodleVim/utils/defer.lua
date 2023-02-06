@@ -54,4 +54,13 @@ function M.defer_start(delay)
     end, delay)
 end
 
+function M.optimisticLoad(plugins)
+    plugins = type(plugins) == "string" and { plugins } or plugins
+    for _, plugin in ipairs(plugins) do
+        if not require("lazy.core.config").plugins[plugin]._.loaded then
+            require("lazy").load({ plugins = plugin })
+        end
+    end
+end
+
 return M
