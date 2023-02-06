@@ -41,7 +41,10 @@ tools['rmagatti/auto-session'] = {
 
 tools['kyazdani42/nvim-tree.lua'] = {
     lazy = true,
-    dependencies = { 'romgrk/barbar.nvim' },
+    dependencies = {
+        'romgrk/barbar.nvim',
+        'mortepau/codicons.nvim',
+    },
     config = conf.nvim_tree
 }
 
@@ -54,6 +57,9 @@ tools['iamcco/markdown-preview.nvim'] = {
 
 tools['simrat39/symbols-outline.nvim'] = {
     lazy = true,
+    dependencies = {
+        'mortepau/codicons.nvim',
+    },
     config = conf.symbols_outline
 }
 
@@ -108,6 +114,9 @@ tools['aserowy/tmux.nvim'] = {
 tools['sindrets/diffview.nvim'] = {
     lazy = true,
     cmd = { 'DiffviewOpen' },
+    dependencies = {
+        'mortepau/codicons.nvim',
+    },
     config = conf.diffview,
 }
 
@@ -116,6 +125,7 @@ tools['mfussenegger/nvim-dap'] = {
     dependencies = {
         "williamboman/mason.nvim",
         'rcarriga/nvim-dap-ui',
+        'mortepau/codicons.nvim',
     },
     config = conf.dap
 }
@@ -125,7 +135,6 @@ tools['rcarriga/nvim-dap-ui'] = {
     init = function(plugin)
         vim.g.dapui_setup = false
     end,
-    -- config = conf.dapui
 }
 
 return tools

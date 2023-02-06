@@ -178,7 +178,7 @@ function config.null_ls()
 end
 
 function config.lightbulb()
-    local icons = require("doodleVim.utils.icons")
+    local codicons = require("codicons")
     require("lightbulb").setup({
         -- LSP client names to ignore
         -- Example: {"sumneko_lua", "null-ls"}
@@ -187,12 +187,12 @@ function config.lightbulb()
             enabled = true,
             -- Priority of the gutter sign
             priority = 20,
-            text = icons.diagnostics.hint_sign,
+            text = codicons.get("lightbulb"),
         },
         float = {
             enabled = false,
             -- Text to show in the popup float
-            text = icons.diagnostics.hint_sign,
+            text = codicons.get("lightbulb"),
             -- Available keys for window options:
             -- - height     of floating window
             -- - width      of floating window
@@ -212,14 +212,14 @@ function config.lightbulb()
         virtual_text = {
             enabled = false,
             -- Text to show at virtual text
-            text = icons.diagnostics.hint_sign,
+            text = codicons.get("lightbulb"),
             -- highlight mode to use for virtual text (replace, combine, blend), see :help nvim_buf_set_extmark() for reference
             hl_mode = "replace",
         },
         status_text = {
             enabled = false,
             -- Text to provide when code actions are available
-            text = icons.diagnostics.hint_sign,
+            text = codicons.get("lightbulb"),
             -- Text to provide when no actions are available
             text_unavailable = "",
         },
