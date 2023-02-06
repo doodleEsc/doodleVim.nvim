@@ -16,6 +16,8 @@ gruvbox.overrides = {
     RenamerBorder = { link = "GruvboxBlue" },
     RenamerTitle = { link = "Title" },
     Pmenu = { link = "Normal" },
+
+    -- Telescope
     TelescopeNormal = { link = "GruvboxBlue" },
     TelescopeSelection = { link = "GruvboxYellowBold" },
     TelescopeMultiSelection = { link = "GruvboxGray" },
@@ -26,7 +28,11 @@ gruvbox.overrides = {
     TelescopePreviewBorder = { link = "TelescopeNormal" },
     TelescopeMatching = { link = "GruvboxRedBold" },
     TelescopePromptPrefix = { link = "GruvboxRed" },
-    TelescopePrompt = { link = "TelescopeNormal" }
+    TelescopePrompt = { link = "TelescopeNormal" },
+
+    -- NvimTree
+    NvimTreeOpenedFile = { fg = "#b8bb26", bold = true },
+
 }
 
 
