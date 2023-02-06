@@ -10,9 +10,6 @@ function config.telescope()
     --     "telescope-tabs"
     -- })
 
-    -- TODO: remove it
-    local icons = require("doodleVim.utils.icons")
-
     local codicons = require("codicons")
     local actions = require("telescope.actions")
     local actions_layout = require("telescope.actions.layout")
@@ -22,7 +19,7 @@ function config.telescope()
             initial_mode = "insert",
             wrap_results = false,
             prompt_prefix = "",
-            selection_caret = icons.arrow.caret .. " ",
+            selection_caret = codicons.get("telescope") .. " ",
             sorting_strategy = "ascending",
             scroll_strategy = "cycle",
             set_env = { ["COLORTERM"] = "truecolor" },
@@ -184,7 +181,7 @@ function config.telescope()
 end
 
 function config.nvim_tree()
-    local icons = require("doodleVim.utils.icons")
+    local codicons = require("codicons")
     require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
         auto_reload_on_write = true,
         disable_netrw = true,
@@ -272,7 +269,7 @@ function config.nvim_tree()
                 webdev_colors = true,
                 git_placement = "signcolumn",
                 padding = " ",
-                symlink_arrow = "  ",
+                symlink_arrow = codicons.get("arrow-small-right"),
                 show = {
                     file = true,
                     folder = true,
@@ -280,27 +277,27 @@ function config.nvim_tree()
                     git = true,
                 },
                 glyphs = {
-                    default = icons.file.default,
-                    symlink = icons.file.symlink,
-                    bookmark = icons.file.bookmark,
+                    default = codicons.get("file"),
+                    symlink = codicons.get("file-symlink-file"),
+                    bookmark = codicons.get("bookmark"),
                     folder = {
-                        arrow_closed = icons.arrow.right,
-                        arrow_open = icons.arrow.down,
-                        default = icons.folder.default,
-                        open = icons.folder.open,
-                        empty = icons.folder.empty,
-                        empty_open = icons.folder.empty_open,
-                        symlink = icons.folder.symlink,
-                        symlink_open = icons.folder.symlink_open,
+                        arrow_closed = "",
+                        arrow_open = "",
+                        default = codicons.get("folder"),
+                        open = codicons.get("folder-opened"),
+                        empty = codicons.get("folder"),
+                        empty_open = codicons.get("folder-opened"),
+                        symlink = codicons.get("file-symlink-directory"),
+                        symlink_open = codicons.get("folder-opened"),
                     },
                     git = {
-                        unstaged = icons.git.unstaged,
-                        staged = icons.git.staged,
-                        unmerged = icons.git.unmerged,
-                        renamed = icons.git.renamed,
-                        untracked = icons.git.untracked,
-                        deleted = icons.git.deleted,
-                        ignored = icons.git.ignored,
+                        unstaged = codicons.get("diff"),
+                        staged = codicons.get("diff-added"),
+                        unmerged = codicons.get("diff-modified"),
+                        renamed = codicons.get("diff-renamed"),
+                        untracked = codicons.get("zoom-in"),
+                        deleted = codicons.get("diff-removed"),
+                        ignored = codicons.get("diff-ignored"),
                     },
                 },
             },
@@ -325,10 +322,10 @@ function config.nvim_tree()
             enable = true,
             show_on_dirs = false,
             icons = {
-                hint = icons.diagnostics.hint_sign,
-                info = icons.diagnostics.infor_sign,
-                warning = icons.diagnostics.warn_sign,
-                error = icons.diagnostics.error_sign,
+                hint = codicons.get("question"),
+                info = codicons.get("info"),
+                warning = codicons.get("warning"),
+                error = codicons.get("error"),
             },
         },
         filters = {
@@ -408,7 +405,7 @@ function config.nvim_tree()
 end
 
 function config.symbols_outline()
-    local icons = require("doodleVim.utils.icons")
+    local codicons = require("codicons")
     require("symbols-outline").setup({
         highlight_hovered_item = true,
         show_guides = true,
@@ -423,7 +420,7 @@ function config.symbols_outline()
         preview_bg_highlight = 'Pmenu',
         autofold_depth = nil,
         auto_unfold_hover = true,
-        fold_markers = { icons.arrow.right, icons.arrow.down },
+        fold_markers = { codicons.get("arrow-small-right"), codicons.get("arrow-small-down") },
         wrap = false,
         keymaps = { -- These keymaps can be a string or a table for multiple keys
             close = { "<Esc>", "q" },
@@ -442,32 +439,34 @@ function config.symbols_outline()
         lsp_blacklist = {},
         symbol_blacklist = {},
         symbols = {
-            File = { icon = icons.cmp.File, hl = "@text.uri" },
-            Module = { icon = icons.cmp.Module, hl = "@namespace" },
-            Namespace = { icon = icons.cmp.Namespace, hl = "@namespace" },
-            Package = { icon = icons.cmp.Package, hl = "@namespace" },
-            Class = { icon = icons.cmp.Class, hl = "@type" },
-            Method = { icon = icons.cmp.Method, hl = "@method" },
-            Property = { icon = icons.cmp.Property, hl = "@property" },
-            Field = { icon = icons.cmp.Field, hl = "@field" },
-            Constructor = { icon = icons.cmp.Constructor, hl = "@constructor" },
-            Enum = { icon = icons.cmp.Enum, hl = "@constant" },
-            Interface = { icon = icons.cmp.Interface, hl = "@type" },
-            Function = { icon = icons.cmp.Function, hl = "@function" },
-            Variable = { icon = icons.cmp.Variable, hl = "@variable" },
-            Constant = { icon = icons.cmp.Constant, hl = "@constant" },
-            String = { icon = icons.cmp.String, hl = "@string" },
-            Number = { icon = icons.cmp.Number, hl = "@number" },
-            Boolean = { icon = icons.cmp.Boolean, hl = "@boolean" },
-            Array = { icon = icons.cmp.Array, hl = "@variable" },
-            Object = { icon = icons.cmp.Object, hl = "@type.definition" },
-            Key = { icon = icons.cmp.Keyword, hl = "@field" },
-            Null = { icon = icons.cmp.Null, hl = "@none" },
-            EnumMember = { icon = icons.cmp.EnumMember, hl = "@constant" },
-            Struct = { icon = icons.cmp.Struct, hl = "@type.definition" },
-            Event = { icon = icons.cmp.Event, hl = "@text.note" },
-            Operator = { icon = icons.cmp.Operator, hl = "@operator" },
-            TypeParameter = { icon = icons.cmp.TypeParameter, hl = "@parameter" },
+            File = { icon = codicons.get("symbol-file"), hl = "@text.uri" },
+            Module = { icon = codicons.get("symbol-module"), hl = "@namespace" },
+            Namespace = { icon = codicons.get("symbol-namespace"), hl = "@namespace" },
+            Package = { icon = codicons.get("symbol-package"), hl = "@namespace" },
+            Class = { icon = codicons.get("symbol-class"), hl = "@type" },
+            Method = { icon = codicons.get("symbol-method"), hl = "@method" },
+            Property = { icon = codicons.get("symbol-property"), hl = "@method" },
+            Field = { icon = codicons.get("symbol-field"), hl = "@field" },
+            Constructor = { icon = codicons.get("symbol-constructor"), hl = "@constructor" },
+            Enum = { icon = codicons.get("symbol-enum"), hl = "@type" },
+            Interface = { icon = codicons.get("symbol-interface"), hl = "@type" },
+            Function = { icon = codicons.get("symbol-function"), hl = "@function" },
+            Variable = { icon = codicons.get("symbol-variable"), hl = "@constant" },
+            Constant = { icon = codicons.get("symbol-constant"), hl = "@constant" },
+            String = { icon = codicons.get("symbol-string"), hl = "@string" },
+            Number = { icon = codicons.get("symbol-number"), hl = "@number" },
+            Boolean = { icon = codicons.get("symbol-boolean"), hl = "@boolean" },
+            Array = { icon = codicons.get("symbol-array"), hl = "@constant" },
+            Object = { icon = codicons.get("symbol-object"), hl = "@type" },
+            Key = { icon = codicons.get("symbol-key"), hl = "@type" },
+            Null = { icon = codicons.get("symbol-null"), hl = "@type" },
+            EnumMember = { icon = codicons.get("symbol-enum-member"), hl = "@field" },
+            Struct = { icon = codicons.get("symbol-struct"), hl = "@type" },
+            Event = { icon = codicons.get("symbol-event"), hl = "@type" },
+            Operator = { icon = codicons.get("symbol-operator"), hl = "@operator" },
+            TypeParameter = { icon = codicons.get("symbol-type-parameter"), hl = "@parameter" },
+            Component = { icon = codicons.get("symbol-misc"), hl = "@function" },
+            Fragment = { icon = codicons.get("symbol-misc"), hl = "@constant" },
         }
     })
 
@@ -755,7 +754,7 @@ end
 -- end
 
 function config.diffview()
-    local icons = require("doodleVim.utils.icons")
+    local codicons = require("codicons")
     local actions = require("diffview.actions")
 
     require("diffview").setup({
@@ -764,12 +763,12 @@ function config.diffview()
         git_cmd = { "git" }, -- The git executable followed by default args.
         use_icons = true, -- Requires nvim-web-devicons
         icons = { -- Only applies when use_icons is true.
-            folder_closed = icons.folder.default,
-            folder_open = icons.folder.open,
+            folder_closed = codicons.get("folder"),
+            folder_open = codicons.get("folder-opened"),
         },
         signs = {
-            fold_closed = icons.arrow.right,
-            fold_open = icons.arrow.down,
+            fold_closed = codicons.get("arrow-small-right"),
+            fold_open = codicons.get("arrow-small-down"),
         },
         file_panel = {
             listing_style = "tree", -- One of 'list' or 'tree'
@@ -893,9 +892,13 @@ function config.hydra(plugin)
 end
 
 function config.dapui()
-    local icons = require("doodleVim.utils.icons")
+    local codicons = require("codicons")
     require("dapui").setup({
-        icons = { expanded = icons.arrow.down, collapsed = icons.arrow.right },
+        icons = {
+            expanded = codicons.get("arrow-small-down"),
+            current_frame = codicons.get("arrow-small-right"),
+            collapsed = codicons.get("arrow-small-right")
+        },
         mappings = {
             -- Use a table to apply multiple mappings
             expand = { "<CR>", "<2-LeftMouse>" },
@@ -945,22 +948,14 @@ function config.dapui()
             enabled = vim.fn.exists("+winbar") == 1,
             element = "repl",
             icons = {
-                pause = " ",
-                play = "契",
-                step_into = " ",
-                step_over = " ",
-                step_out = " ",
-                step_back = " ",
-                run_last = "↻ ",
-                terminate = "栗",
-                -- pause = "",
-                -- play = "",
-                -- step_into = "",
-                -- step_over = "",
-                -- step_out = "",
-                -- step_back = "",
-                -- run_last = "",
-                -- terminate = "",
+                pause = codicons.get("debug-pause"),
+                play = codicons.get("debug-start"),
+                step_into = codicons.get("debug-step-into"),
+                step_over = codicons.get("debug-step-over"),
+                step_out = codicons.get("debug-step-out"),
+                step_back = codicons.get("debug-step-back"),
+                run_last = codicons.get("debug-rerun"),
+                terminate = codicons.get("debug-stop"),
             },
         },
         render = {
@@ -969,89 +964,25 @@ function config.dapui()
             indent = 1,
         },
     })
-    -- require("dapui").setup({
-    --     icons = { expanded = icons.arrow.down, collapsed = icons.arrow.right },
-    --     mappings = {
-    --         -- Use a table to apply multiple mappings
-    --         expand = { "<CR>", "<2-LeftMouse>" },
-    --         open = "o",
-    --         remove = "d",
-    --         edit = "e",
-    --         repl = "r",
-    --         toggle = "t"
-    --     },
-    --     expand_lines = vim.fn.has("nvim-0.7"),
-    --     layouts = {
-    --         {
-    --             elements = {
-    --                 -- Elements can be strings or table with id and size keys.
-    --                 { id = "scopes", size = 0.25 },
-    --                 "breakpoints",
-    --                 "stacks",
-    --                 "watches",
-    --             },
-    --             size = 40,
-    --             position = "left",
-    --         },
-    --         {
-    --             elements = {
-    --                 "repl",
-    --                 "console",
-    --             },
-    --             size = 10,
-    --             position = "bottom",
-    --         },
-    --     },
-    --     controls = {
-    --         -- Requires Neovim nightly (or 0.8 when released)
-    --         enabled = true,
-    --         -- Display controls in this element
-    --         element = "repl",
-    --         icons = {
-    --             pause = " ",
-    --             play = "契",
-    --             step_into = " ",
-    --             step_over = " ",
-    --             step_out = " ",
-    --             step_back = "玲",
-    --             run_last = "↻ ",
-    --             terminate = "栗",
-    --         },
-    --     },
-    --     floating = {
-    --         max_height = nil, -- These can be integers or a float between 0 and 1.
-    --         max_width = nil, -- Floats will be treated as percentage of your screen.
-    --         border = "rounded", -- Border style. Can be "single", "double" or "rounded"
-    --         mappings = {
-    --             close = { "q", "<Esc>" },
-    --         },
-    --     },
-    --     windows = { indent = 1 },
-    --     render = {
-    --         max_type_length = nil, -- Can be integer or nil.
-    --         max_value_lines = 100
-    --     }
-    -- })
-
 end
 
 function config.dap()
-    local icons = require("doodleVim.utils.icons")
-
+    local codicons = require("codicons")
     require("doodleVim.extend.debugger").load_debuggers({
         "go",
         "python"
     })
 
     vim.fn.sign_define('DapBreakpoint',
-        { text = icons.dap.breakpoint, texthl = 'GruvboxRedSign', linehl = '', numhl = '' })
+        { text = codicons.get("debug-breakpoint"), texthl = 'GruvboxRedSign', linehl = '', numhl = '' })
     vim.fn.sign_define("DapBreakpointCondition",
-        { text = icons.dap.breakpoint_condition, texthl = "GruvboxRedSign", linehl = "", numhl = "" })
+        { text = codicons.get("debug-breakpoint-conditional"), texthl = "GruvboxRedSign", linehl = "", numhl = "" })
     vim.fn.sign_define('DapBreakpointRejected',
-        { text = icons.dap.breakpoint_rejected, texthl = "GruvboxRedSign", linehl = '', numhl = '' })
+        { text = codicons.get("debug-breakpoint-unsupported"), texthl = "GruvboxRedSign", linehl = '', numhl = '' })
     vim.fn.sign_define('DapLogPoint',
-        { text = icons.dap.log_point, texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapStopped', { text = icons.dap.stopped, texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
+        { text = codicons.get("debug-breakpoint-log"), texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapStopped',
+        { text = codicons.get("debug-stop"), texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
 
     local dap, dapui = require "dap", require "dapui"
     dap.listeners.after.event_initialized["dapui_config"] = function()

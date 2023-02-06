@@ -3,65 +3,105 @@ local config = {}
 function config.nui(plugin, opts)
     local Input = require("nui.input")
     local event = require("nui.utils.autocmd").event
-    local default_size = 20
 
-    local popup_options = {
-        relative = "cursor",
-        position = {
-            row = 1,
-            col = 0,
-        },
-        border = {
-            style = "rounded",
-            text = {
-                top = "Input",
-                top_align = "left",
-            }
-        },
-        win_options = {
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-        },
-    }
+    local UIInput = Input:extend("UIInput")
 
-    local custom_input = function(opts, on_confirm)
-        -- local opts = {
-        --     prompt = "",
-        --     default = "",
-        --     completion = "",
-        --     label = "",
-        -- }
-        popup_options.border.text.top = opts and opts.label or "Input"
-        popup_options.size = default_size
+    local function get_label_text(label, default_label)
+        local label_text = label or default_label
+        if label_text:sub(-1) == ":" then
+            label_text = "[" .. label_text:sub(1, -2) .. "]"
+        end
+        return label_text
+    end
 
-        local default_opts = {
-            prompt = opts and opts.prompt or "➤ ",
+    -- local opts = {
+    --     label = "border_top_text",
+    --     prompt = ">",
+    --     default = "box default value",
+    -- }
+
+    function UIInput:init(opts, on_done)
+        local border_top_text = get_label_text(opts.label, "[Input]")
+        local default_value = tostring(opts.default)
+        local prompt = opts.prompt or "➤ " 
+
+        UIInput.super.init(self, {
+            relative = "cursor",
+            position = {
+                row = 1,
+                col = 0,
+            },
+            size = {
+                -- minimum width 20
+                width = math.max(20, vim.api.nvim_strwidth(default_value)),
+            },
+            border = {
+                style = "rounded",
+                text = {
+                    top = border_top_text,
+                    top_align = "left",
+                },
+            },
+            win_options = {
+                winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+            },
+        }, {
+            prompt = prompt,
+            default_value = default_value,
+            on_close = function()
+                on_done(nil)
+            end,
             on_submit = function(value)
-                local ok, _ = pcall(on_confirm, value)
-                if not ok then
-                    vim.notify("Failed to run function", vim.log.levels.ERROR)
-                end
-            end
-        }
+                on_done(value)
+            end,
+        })
 
-        if opts and opts.default then
-            default_opts.default_value = opts.default
+        -- cancel operation if cursor leaves input
+        self:on(event.BufLeave, function()
+            on_done(nil)
+        end, { once = true })
 
-            local width = default_size + #opts.default
-            if width > vim.o.columns - 10 then
-                width = vim.o.columns - 10
-            end
-            popup_options.size = width
+        -- cancel operation if <Esc> is pressed
+        self:map("n", "<Esc>", function()
+            on_done(nil)
+        end, { noremap = true, nowait = true })
+
+        self:map("i", "<Esc>", function()
+            on_done(nil)
+        end, { noremap = true, nowait = true })
+
+        self:map("n", "<C-c>", function()
+            on_done(nil)
+        end, { noremap = true, nowait = true })
+
+        self:map("i", "<C-c>", function()
+            on_done(nil)
+        end, { noremap = true, nowait = true })
+    end
+
+    local input_ui
+    vim.ui.input = function(opts, on_confirm)
+        assert(type(on_confirm) == "function", "missing on_confirm function")
+
+        if input_ui then
+            -- ensure single ui.input operation
+            vim.api.nvim_err_writeln("busy: another input is pending!")
+            return
         end
 
-        local input = Input(popup_options, default_opts)
-        input:map("i", "<Esc>", input.input_props.on_close, { noremap = true })
-        input:map("i", "<C-c>", input.input_props.on_close, { noremap = true })
-        input:mount()
-        input:on(event.BufLeave, function()
-            input:unmount()
+        input_ui = UIInput(opts, function(value)
+            if input_ui then
+                -- if it's still mounted, unmount it
+                input_ui:unmount()
+            end
+            -- pass the input value
+            on_confirm(value)
+            -- indicate the operation is done
+            input_ui = nil
         end)
+
+        input_ui:mount()
     end
-    vim.ui.input = custom_input
 end
 
 function config.color(plugin, opts)
@@ -69,7 +109,7 @@ function config.color(plugin, opts)
 end
 
 function config.notify(plugin, opts)
-    local icons = require("doodleVim.utils.icons")
+    local codicons = require("codicons")
     local nvim_notify = require("notify")
     nvim_notify.setup({
         -- Animation style (see below for details)
@@ -101,11 +141,11 @@ function config.notify(plugin, opts)
 
         -- Icons for the different levels
         icons = {
-            ERROR = icons.diagnostics.error_sign,
-            WARN = icons.diagnostics.warn_sign,
-            INFO = icons.diagnostics.infor_sign,
-            DEBUG = icons.diagnostics.debug_sign,
-            TRACE = icons.diagnostics.trace_sign,
+            ERROR = codicons.get("error"),
+            WARN = codicons.get("warning"),
+            INFO = codicons.get("info"),
+            DEBUG = codicons.get("debug"),
+            TRACE = codicons.get("search"),
         },
     })
     vim.notify = require("doodleVim.extend.misc").wrapped_notify

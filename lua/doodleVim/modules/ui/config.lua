@@ -47,9 +47,6 @@ function config.lualine()
 end
 
 function config.todo()
-    -- TODO: remove it
-    local icons = require("doodleVim.utils.icons")
-
     local codicons = require('codicons')
     require("todo-comments").setup {
         signs = true, -- show icons in the signs column

@@ -69,7 +69,7 @@ function ui.treesitter(plugin)
 end
 
 function ui.barbar(plugin)
-    local icons = require("doodleVim.utils.icons")
+    local codicons = require("codicons")
     vim.g.bufferline = {
         -- Enable/disable animations
         animation = true,
@@ -109,11 +109,11 @@ function ui.barbar(plugin)
         icon_custom_colors = false,
 
         -- Configure icons on the bufferline.
-        icon_separator_active = icons.misc.line_sep,
-        icon_separator_inactive = icons.misc.line_sep,
-        icon_close_tab = icons.misc.close,
-        icon_close_tab_modified = icons.misc.circle_dot,
-        icon_pinned = icons.misc.pin,
+        icon_separator_active = "│",
+        icon_separator_inactive = "│",
+        icon_close_tab = codicons.get("close"),
+        icon_close_tab_modified = codicons.get("circle-filled"),
+        icon_pinned = codicons.get("pinned"),
 
         -- If true, new buffers will be inserted at the end of the list.
         -- Default is to insert after current buffer.

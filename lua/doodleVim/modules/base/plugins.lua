@@ -19,6 +19,9 @@ base['MunifTanjim/nui.nvim'] = {
 base['rcarriga/nvim-notify'] = {
     lazy = true,
     event = "VeryLazy",
+    dependencies = {
+        'mortepau/codicons.nvim'
+    },
     config = conf.notify
 }
 

@@ -50,7 +50,10 @@ ui['lewis6991/gitsigns.nvim'] = {
 
 ui['romgrk/barbar.nvim'] = {
     lazy = true,
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = {
+        'nvim-tree/nvim-web-devicons',
+        'mortepau/codicons.nvim'
+    },
     event = "User DeferStartWithFile",
     init = setup.barbar,
 }

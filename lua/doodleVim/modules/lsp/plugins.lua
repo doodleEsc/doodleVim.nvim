@@ -9,6 +9,7 @@ lsp['neovim/nvim-lspconfig'] = {
         'williamboman/mason.nvim',
         "williamboman/mason-lspconfig.nvim",
         'tamago324/nlsp-settings.nvim',
+        'mortepau/codicons.nvim',
         {
             "hrsh7th/cmp-nvim-lsp",
             cond = function()
@@ -57,6 +58,7 @@ lsp['doodleEsc/lightbulb.nvim'] = {
     event = "BufReadPost",
     dependencies = {
         'neovim/nvim-lspconfig',
+        'mortepau/codicons.nvim'
     },
     config = conf.lightbulb
 }

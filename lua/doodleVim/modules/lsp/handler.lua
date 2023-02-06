@@ -1,6 +1,6 @@
 local M = {}
 
-local icons = require("doodleVim.utils.icons")
+local codicons = require("codicons")
 
 M.lsp_highlight_document = function(client)
     -- Set autocommands conditional on server_capabilities
@@ -32,7 +32,7 @@ M.lsp_diagnostic = function()
         float = {
             border = "rounded",
             focusable = false,
-            header = { icons.diagnostics.debug_sign .. ' Diagnostics:' },
+            header = { codicons.get("debug") .. ' Diagnostics:' },
             source = 'always',
         },
         virtual_text = {
@@ -45,11 +45,11 @@ M.lsp_diagnostic = function()
     })
 
     require("doodleVim.extend.diagnostics").setup({
-        error_sign = icons.diagnostics.error_sign,
-        warn_sign = icons.diagnostics.warn_sign,
-        hint_sign = icons.diagnostics.hint_sign,
-        infor_sign = icons.diagnostics.infor_sign,
-        debug_sign = icons.diagnostics.debug_sign,
+        error_sign = codicons.get("error"),
+        warn_sign = codicons.get("warning"),
+        hint_sign = codicons.get("question"),
+        infor_sign = codicons.get("info"),
+        debug_sign = codicons.get("debug"),
         use_diagnostic_virtual_text = false,
     })
 end

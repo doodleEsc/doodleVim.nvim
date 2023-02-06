@@ -8,8 +8,13 @@ gruvbox.palette_overrides = {
 }
 
 gruvbox.overrides = {
+    LightBulb = { link = "GruvboxYellowSign" },
+    FloatBorder = { link = "GruvboxBlue" },
     FloatermBorder = { link = "GruvboxOrange" },
     CodewindowBorder = { fg = "#665c54" },
+    RenamerNormal = { link = "Normal" },
+    RenamerBorder = { link = "GruvboxBlue" },
+    RenamerTitle = { link = "Title" },
     Pmenu = { link = "Normal" },
     TelescopeNormal = { link = "GruvboxBlue" },
     TelescopeSelection = { link = "GruvboxYellowBold" },

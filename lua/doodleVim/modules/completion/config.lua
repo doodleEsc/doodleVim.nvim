@@ -63,7 +63,7 @@ function config.nvim_cmp(plugin, opts)
                 cmp.config.compare.order,
             },
         },
-        PreselectMode = "none",
+        preselect = cmp.PreselectMode.None,
         sources = cmp.config.sources({
             { name = "nvim_lsp" },
             { name = 'treesitter' },
@@ -81,7 +81,7 @@ function config.nvim_cmp(plugin, opts)
         }),
         mapping = {
             ["<CR>"] = {
-                i = cmp.mapping.confirm({ select = false }),
+                i = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
             },
             ['<C-e>'] = cmp.mapping(function(fallback)
                 if cmp.visible() then
