@@ -82,7 +82,6 @@ function config.mason()
                 apply_language_filter = "<C-f>",
             },
         },
-
         -- The directory in which to install packages.
         install_root_dir = require("mason-core.path").concat({ vim.fn.stdpath("data"), "mason" }),
         PATH = "prepend",
@@ -99,7 +98,6 @@ function config.mason()
         -- Limit for the maximum amount of packages to be installed at the same time. Once this limit is reached, any further
         -- packages that are requested to be installed will be put in a queue.
         max_concurrent_installers = 4,
-
         github = {
             -- The template URL to use when downloading assets from GitHub.
             -- The placeholders are the following (in order):
@@ -132,6 +130,7 @@ function config.gotools()
             },
             gomodifytags = {
                 bin = require "mason-core.path".bin_prefix() .. "/" .. "gomodifytags",
+                skip_unexported = true,
             },
             impl = {
                 bin = require "mason-core.path".bin_prefix() .. "/" .. "impl",
@@ -141,7 +140,6 @@ function config.gotools()
             prompt = 'Select An Action',
             kind = 'gotools'
         },
-
     })
 end
 
