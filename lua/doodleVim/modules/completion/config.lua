@@ -163,16 +163,16 @@ function config.nvim_cmp(plugin, opts)
                     fallback()
                 end
             end, { "i", "s" }),
-            ["<C-f>"] = cmp.mapping(function(fallback)
+            ["<M-n>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.scroll_docs(2)
                 else
                     fallback()
                 end
             end, { "i", "s" }),
-            ["<C-b>"] = cmp.mapping(function(fallback)
+            ["<M-p>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
-                    cmp.scroll_docs(2)
+                    cmp.scroll_docs(-2)
                 else
                     fallback()
                 end

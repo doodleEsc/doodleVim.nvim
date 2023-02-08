@@ -15,7 +15,10 @@ ui['NvChad/nvim-colorizer.lua'] = {
 ui['nvim-treesitter/nvim-treesitter'] = {
     lazy = true,
     event = "BufReadPost",
-    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        'nvim-treesitter/playground'
+    },
     init = setup.treesitter,
     config = conf.treesitter
 }
