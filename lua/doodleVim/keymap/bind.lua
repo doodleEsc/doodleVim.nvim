@@ -21,7 +21,7 @@ function rhs_options:map_cmd(cmd_string)
 end
 
 function rhs_options:map_cr(cmd_string)
-    self[1] = ("<cmd>%s<cr>"):format(cmd_string)
+    self[1] = (":%s<cr>"):format(cmd_string)
     return self
 end
 
@@ -31,7 +31,7 @@ function rhs_options:map_args(cmd_string)
 end
 
 function rhs_options:map_cu(cmd_string)
-    self[1] = ("<cmd><C-u>%s<cr>"):format(cmd_string)
+    self[1] = (":<C-u>%s<cr>"):format(cmd_string)
     return self
 end
 
