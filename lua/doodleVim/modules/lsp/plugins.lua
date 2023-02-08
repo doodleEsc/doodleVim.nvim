@@ -54,8 +54,9 @@ lsp['doodleEsc/gotools.nvim'] = {
     config = conf.gotools
 }
 
-lsp['doodleEsc/lightbulb.nvim'] = {
-    event = "BufReadPost",
+lsp['kosayoda/nvim-lightbulb'] = {
+    lazy = true,
+    event = "User DeferStartWithFile",
     dependencies = {
         'neovim/nvim-lspconfig',
         'mortepau/codicons.nvim'

@@ -32,8 +32,8 @@ M.lsp_diagnostic = function()
         float = {
             border = "rounded",
             focusable = false,
-            header = { codicons.get("debug") .. ' Diagnostics:' },
-            source = 'always',
+            header = { codicons.get("debug") .. '  Diagnostics:', "DiagnosticHeader" },
+            source = 'if_many',
         },
         virtual_text = {
             spacing = 4,
