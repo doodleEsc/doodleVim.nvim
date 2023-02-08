@@ -13,6 +13,7 @@ base['nathom/filetype.nvim'] = {
 
 base['MunifTanjim/nui.nvim'] = {
     lazy = true,
+    event = "VeryLazy",
     config = conf.nui
 }
 

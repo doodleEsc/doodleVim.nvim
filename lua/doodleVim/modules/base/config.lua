@@ -22,7 +22,7 @@ function config.nui(plugin, opts)
 
     function UIInput:init(opts, on_done)
         local border_top_text = get_label_text(opts.label, "[Input]")
-        local default_value = tostring(opts.default)
+        local default_value = opts.default or ""
         local prompt = opts.prompt or "➤ " 
 
         UIInput.super.init(self, {
