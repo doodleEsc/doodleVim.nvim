@@ -20,7 +20,7 @@ function config.telescope()
             wrap_results = false,
             prompt_prefix = "",
             -- selection_caret = codicons.get("telescope") .. " ",
-            selection_caret = "󰜴" .. " ",
+            selection_caret = "" .. " ",
             sorting_strategy = "ascending",
             scroll_strategy = "cycle",
             set_env = { ["COLORTERM"] = "truecolor" },
