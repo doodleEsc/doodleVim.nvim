@@ -8,7 +8,7 @@ function config.nui(plugin, opts)
 
     local function get_label_text(label, default_label)
         local label_text = label or default_label
-        if label_text:sub(-1) == ":" then
+        if label_text:sub( -1) == ":" then
             label_text = "[" .. label_text:sub(1, -2) .. "]"
         end
         return label_text
@@ -23,7 +23,7 @@ function config.nui(plugin, opts)
     function UIInput:init(opts, on_done)
         local border_top_text = get_label_text(opts.label, "[Input]")
         local default_value = opts.default or ""
-        local prompt = opts.prompt or "➤ " 
+        local prompt = opts.prompt or "➤ "
 
         UIInput.super.init(self, {
             relative = "cursor",
@@ -90,17 +90,19 @@ function config.nui(plugin, opts)
         end
 
         input_ui = UIInput(opts, function(value)
-            if input_ui then
-                -- if it's still mounted, unmount it
-                input_ui:unmount()
-            end
-            -- pass the input value
-            on_confirm(value)
-            -- indicate the operation is done
-            input_ui = nil
-        end)
+                if input_ui then
+                    -- if it's still mounted, unmount it
+                    input_ui:unmount()
+                end
+                -- pass the input value
+                on_confirm(value)
+                -- indicate the operation is done
+                input_ui = nil
+            end)
 
-        input_ui:mount()
+        vim.schedule(function()
+            input_ui:mount()
+        end)
     end
 end
 
@@ -114,31 +116,23 @@ function config.notify(plugin, opts)
     nvim_notify.setup({
         -- Animation style (see below for details)
         stages = "slide",
-
         -- Function called when a new window is opened, use for changing win settings/config
         on_open = nil,
-
         -- Function called when a window is closed
         on_close = nil,
-
         -- Render function for notifications. See notify-render()
         render = "default",
-
         -- Default timeout for notifications
         timeout = 2000,
-
         -- Max number of columns for messages
         max_width = nil,
         -- Max number of lines for a message
         max_height = nil,
-
         -- For stages that change opacity this is treated as the highlight behind the window
         -- Set this to either a highlight group, an RGB hex value e.g. "#000000" or a function returning an RGB code for dynamic values
         background_colour = "Normal",
-
         -- Minimum width for notification windows
         minimum_width = 36,
-
         -- Icons for the different levels
         icons = {
             ERROR = codicons.get("error"),
