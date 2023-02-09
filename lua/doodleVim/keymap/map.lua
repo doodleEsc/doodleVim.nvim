@@ -31,7 +31,7 @@ map.Default = {
         ["<C-a>"] = { "<Esc>^i", "Append Before Head", noremap = true, silent = true },
         ["<C-e>"] = { "<Esc>A", "Append After Tail", noremap = true, silent = true },
         ["<C-l>"] = { "<Esc>o", "New Line", noremap = true, silent = true },
-        ["<C-o>"] = { "<Esc>O", "New Line Upper", noremap = true, silent = true },
+        -- ["<C-o>"] = { "<Esc>O", "New Line Upper", noremap = true, silent = true },
         ["<C-s>"] = { '<Esc>:lua require("doodleVim.extend.misc").safe_save()<CR>', "New Line Upper", noremap = true,
             silent = true },
         ["<C-q>"] = { '<Esc>:lua require("doodleVim.extend.misc").safe_exit()<CR>', "New Line Upper", noremap = true,
