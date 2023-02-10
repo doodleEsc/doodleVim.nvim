@@ -97,7 +97,7 @@ function autocmd.load_autocmds()
 
         _defer_start = {
             {
-                event = "VimEnter",
+                event = "BufWinEnter",
                 opts = {
                     pattern = "*",
                     callback = function()

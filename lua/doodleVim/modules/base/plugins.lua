@@ -7,9 +7,7 @@ base['mortepau/codicons.nvim'] = { lazy = true }
 
 base['nvim-lua/plenary.nvim'] = { lazy = true }
 
-base['nathom/filetype.nvim'] = {
-    init = function(plugin) vim.g.did_load_filetypes = 1 end
-}
+base['nathom/filetype.nvim'] = {}
 
 base['MunifTanjim/nui.nvim'] = {
     lazy = true,

@@ -13,13 +13,13 @@ editor['phaazon/hop.nvim'] = {
 
 editor['andymass/vim-matchup'] = {
     lazy = true,
-    event = "User DeferStartWithFile",
+    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
 }
 
 editor['junegunn/vim-easy-align'] = {
     lazy = true,
-    event = "User DeferStartWithFile",
+    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
 }
 
 editor['karb94/neoscroll.nvim'] = {
@@ -35,7 +35,7 @@ editor['jakewvincent/mkdnflow.nvim'] = {
 
 editor['kylechui/nvim-surround'] = {
     lazy = true,
-    event = "User DeferStartWithFile",
+    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
     config = conf.nvim_surround
 }
 

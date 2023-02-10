@@ -1,6 +1,7 @@
 local fn, uv, api = vim.fn, vim.loop, vim.api
 local vim_path = require('doodleVim.core.global').vim_path
 local data_dir = require('doodleVim.core.global').data_dir
+local is_mac = require('doodleVim.core.global').is_mac
 -- local doodleVim_dir = vim_path .. '/lua/doodleVim'
 local modules_dir = vim_path .. '/lua/doodleVim/modules'
 -- local packer_compiled = data_dir .. 'packer_compiled.vim'
@@ -51,12 +52,14 @@ function Lazy:load_lazy()
     lazy.setup(self.repos, {
         root = data_dir .. '/site/pack/lazy/opt',
         lockfile = data_dir .. "/lazy-lock.json",
+        concurrency = 20,
         git = {
             log = { "--since=3 days ago" }, -- show commits from the last 3 days
             timeout = 120, -- kill processes that take more than 2 minutes
             url_format = "https://github.com/%s.git",
         },
         ui = {
+            wrap = true, -- wrap the lines in the ui
             border = "rounded",
         },
         performance = {
@@ -68,8 +71,8 @@ function Lazy:load_lazy()
                 -- The default is to disable on:
                 --  * VimEnter: not useful to cache anything else beyond startup
                 --  * BufReadPre: this will be triggered early when opening a file from the command line directly
-                -- disable_events = { "VimEnter", "BufReadPre" },
-                disable_events = {},
+                disable_events = { "VimEnter", "BufReadPre" },
+                -- disable_events = {},
                 ttl = 3600 * 24 * 5, -- keep unused modules for up to 5 days
             },
             reset_packpath = true, -- reset the package path to improve startup time
@@ -111,19 +114,20 @@ function Lazy:load_lazy()
 end
 
 function Lazy:init_ensure_plugins()
-    local lazy_dir = data_dir .. '/site/pack/lazy/opt/lazy.nvim'
-    if not vim.loop.fs_stat(lazy_dir) then
+    local lazy_path = data_dir .. '/site/pack/lazy/opt/lazy.nvim'
+    if not vim.loop.fs_stat(lazy_path) then
         vim.fn.system({
             "git",
             "clone",
             "--filter=blob:none",
             "--single-branch",
             "https://github.com/folke/lazy.nvim.git",
-            lazy_dir,
+            lazy_path,
         })
         self:load_lazy()
         lazy.install()
     end
+    vim.opt.rtp:prepend(lazy_path)
     self:load_lazy()
 end
 

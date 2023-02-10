@@ -29,7 +29,7 @@ tools['kkharji/sqlite.lua'] = {
 
 tools['doodleEsc/project.nvim'] = {
     lazy = true,
-    event = "VimEnter",
+    event = "User DeferStart",
     dependencies = { 'rmagatti/auto-session' },
     config = conf.project
 }
@@ -94,7 +94,7 @@ tools['towolf/vim-helm'] = {
 
 tools['folke/which-key.nvim'] = {
     lazy = true,
-    event = "User DeferStartWithFile",
+    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
     config = conf.which_key
 }
 
@@ -134,6 +134,13 @@ tools['rcarriga/nvim-dap-ui'] = {
     lazy = true,
     init = function(plugin)
         vim.g.dapui_setup = false
+    end,
+}
+
+tools["dstein64/vim-startuptime"] = {
+    cmd = "StartupTime",
+    init = function()
+        vim.g.startuptime_tries = 10
     end,
 }
 

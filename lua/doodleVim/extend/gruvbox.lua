@@ -16,7 +16,6 @@ gruvbox.overrides = {
     RenamerBorder = { link = "GruvboxBlue" },
     RenamerTitle = { link = "Title" },
     Pmenu = { link = "Normal" },
-
     -- Telescope
     TelescopeNormal = { link = "GruvboxBlue" },
     TelescopeSelection = { link = "GruvboxYellowBold" },
@@ -29,10 +28,8 @@ gruvbox.overrides = {
     TelescopeMatching = { link = "GruvboxRedBold" },
     TelescopePromptPrefix = { link = "GruvboxRed" },
     TelescopePrompt = { link = "TelescopeNormal" },
-
     -- NvimTree
     NvimTreeOpenedFile = { fg = "#b8bb26", bold = true },
-
     -- Diagnostic
     DiagnosticHeader = { link = "GruvboxBlue" },
 }
@@ -53,15 +50,22 @@ gruvbox.dump = function()
     end
 
     local file = io.open(color_file_path, "w")
+
+    local import = "local api = vim.api\n"
+    if file ~= nil then
+        file:write(import)
+    else
+        vim.notify("Can't open file " .. color_file_path .. "'", vim.log.levels.ERROR)
+        return
+    end
     for group, hl in pairs(groups) do
-        local line = "vim.api.nvim_set_hl(0,'" .. group .. "', " .. vim.inspect(hl) .. ")\n"
+        local line = "api.nvim_set_hl(0,'" .. group .. "', " .. vim.inspect(hl) .. ")\n"
         if file ~= nil then
             file:write(line)
         else
             vim.notify("Can't open file " .. color_file_path .. "'", vim.log.levels.ERROR)
             return
         end
-
     end
 
     if file ~= nil then
