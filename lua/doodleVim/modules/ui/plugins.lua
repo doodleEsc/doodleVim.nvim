@@ -15,6 +15,7 @@ ui['NvChad/nvim-colorizer.lua'] = {
 ui['nvim-treesitter/nvim-treesitter'] = {
     lazy = true,
     event = "BufReadPost",
+    cmd = { "TSUpdate", "TSInstall", "TSUninstall" },
     dependencies = {
         'nvim-treesitter/nvim-treesitter-textobjects',
         'nvim-treesitter/playground'
