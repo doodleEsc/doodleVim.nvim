@@ -34,6 +34,7 @@ lsp['tamago324/nlsp-settings.nvim'] = {
 lsp['williamboman/mason.nvim'] = {
     lazy = true,
     init = setup.mason,
+    cmd = {"Mason", "MasonInstall", "MasonUninstall"},
     config = conf.mason,
 }
 
