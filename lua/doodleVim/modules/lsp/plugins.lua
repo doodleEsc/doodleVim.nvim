@@ -10,6 +10,7 @@ lsp['neovim/nvim-lspconfig'] = {
         "williamboman/mason-lspconfig.nvim",
         'tamago324/nlsp-settings.nvim',
         'mortepau/codicons.nvim',
+        'j-hui/fidget.nvim',
         {
             "hrsh7th/cmp-nvim-lsp",
             cond = function()
@@ -18,6 +19,11 @@ lsp['neovim/nvim-lspconfig'] = {
         },
     },
     config = conf.lspconfig
+}
+
+lsp['j-hui/fidget.nvim'] = {
+    lazy = true,
+    config = conf.fidget
 }
 
 lsp['tamago324/nlsp-settings.nvim'] = {
@@ -56,7 +62,7 @@ lsp['doodleEsc/gotools.nvim'] = {
 
 lsp['kosayoda/nvim-lightbulb'] = {
     lazy = true,
-    event = "User DeferStartWithFile",
+    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
     dependencies = {
         'neovim/nvim-lspconfig',
         'mortepau/codicons.nvim'

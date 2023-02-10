@@ -232,63 +232,50 @@ function config.lightbulb()
             events = { "CursorHold", "CursorHoldI" }
         }
     })
+end
 
-
-
-
-    -- require("lightbulb").setup({
-    --     -- LSP client names to ignore
-    --     -- Example: {"sumneko_lua", "null-ls"}
-    --     ignore = { "null-ls" },
-    --     sign = {
-    --         enabled = true,
-    --         -- Priority of the gutter sign
-    --         priority = 20,
-    --         text = codicons.get("lightbulb"),
-    --     },
-    --     float = {
-    --         enabled = false,
-    --         -- Text to show in the popup float
-    --         text = codicons.get("lightbulb"),
-    --         -- Available keys for window options:
-    --         -- - height     of floating window
-    --         -- - width      of floating window
-    --         -- - wrap_at    character to wrap at for computing height
-    --         -- - max_width  maximal width of floating window
-    --         -- - max_height maximal height of floating window
-    --         -- - pad_left   number of columns to pad contents at left
-    --         -- - pad_right  number of columns to pad contents at right
-    --         -- - pad_top    number of lines to pad contents at top
-    --         -- - pad_bottom number of lines to pad contents at bottom
-    --         -- - offset_x   x-axis offset of the floating window
-    --         -- - offset_y   y-axis offset of the floating window
-    --         -- - anchor     corner of float to place at the cursor (NW, NE, SW, SE)
-    --         -- - winblend   transparency of the window (0-100)
-    --         win_opts = {},
-    --     },
-    --     virtual_text = {
-    --         enabled = false,
-    --         -- Text to show at virtual text
-    --         text = codicons.get("lightbulb"),
-    --         -- highlight mode to use for virtual text (replace, combine, blend), see :help nvim_buf_set_extmark() for reference
-    --         hl_mode = "replace",
-    --     },
-    --     status_text = {
-    --         enabled = false,
-    --         -- Text to provide when code actions are available
-    --         text = codicons.get("lightbulb"),
-    --         -- Text to provide when no actions are available
-    --         text_unavailable = "",
-    --     },
-    -- })
-    --
-    -- vim.api.nvim_create_augroup("lightbulb", { clear = true })
-    --
-    -- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-    --     group = "lightbulb",
-    --     pattern = "*",
-    --     command = "lua require'lightbulb'.check()",
-    -- })
+function config.fidget(plugin, opts)
+    require "fidget".setup({
+        text = {
+            spinner = "pipe", -- animation shown when tasks are ongoing
+            done = "✔", -- character shown when all tasks are complete
+            commenced = "Started", -- message shown when task starts
+            completed = "Completed", -- message shown when task completes
+        },
+        align = {
+            bottom = true, -- align fidgets along bottom edge of buffer
+            right = true, -- align fidgets along right edge of buffer
+        },
+        timer = {
+            spinner_rate = 125, -- frame rate of spinner animation, in ms
+            fidget_decay = 2000, -- how long to keep around empty fidget, in ms
+            task_decay = 1000, -- how long to keep around completed task, in ms
+        },
+        window = {
+            relative = "win", -- where to anchor, either "win" or "editor"
+            blend = 100, -- &winblend for the window
+            zindex = nil, -- the zindex value for the window
+            border = "none", -- style of border for the fidget window
+        },
+        fmt = {
+            leftpad = true, -- right-justify text in fidget box
+            stack_upwards = true, -- list of tasks grows upwards
+            max_width = 0, -- maximum width of the fidget box
+            fidget = -- function to format fidget title
+            function(fidget_name, spinner)
+                return string.format("%s %s", spinner, fidget_name)
+            end,
+            task = -- function to format each task line
+            function(task_name, message, percentage)
+                return string.format(
+                        "%s%s [%s]",
+                        message,
+                        percentage and string.format(" (%s%%)", percentage) or "",
+                        task_name
+                    )
+            end,
+        }
+    })
 end
 
 return config
