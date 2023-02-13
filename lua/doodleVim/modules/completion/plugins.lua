@@ -8,6 +8,7 @@ completion['danymat/neogen'] = {
 
 completion['L3MON4D3/LuaSnip'] = {
     lazy = true,
+    version = "1.2.*",
     config = conf.luasnip
 }
 
@@ -22,7 +23,7 @@ completion['hrsh7th/nvim-cmp'] = {
         'hrsh7th/cmp-cmdline',
         'ray-x/cmp-treesitter',
         'lukas-reineke/cmp-under-comparator',
-        'doodleEsc/friendly-snippets',
+        'rafamadriz/friendly-snippets',
         'windwp/nvim-autopairs',
         'danymat/neogen',
         'L3MON4D3/LuaSnip',

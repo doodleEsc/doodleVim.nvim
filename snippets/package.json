@@ -1,0 +1,19 @@
+{
+    "name": "custom-snippets",
+    "contributes": {
+        "snippets": [
+            {
+                "language": [
+                    "common"
+                ],
+                "path": "./common.json"
+            },
+            {
+                "language": [
+                    "go"
+                ],
+                "path": "./go.json"
+            }
+        ]
+    }
+}

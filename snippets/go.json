@@ -1,0 +1,7 @@
+{
+    "xml tag": {
+        "prefix": "xml",
+        "body": "`xml:\"$1\"`",
+        "description": "Snippet for struct xml tag"
+    }
+}
