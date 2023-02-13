@@ -126,8 +126,8 @@ function config.nvim_cmp(plugin, opts)
                 end
             end, { 'i', 's' }),
             ["<C-k>"] = cmp.mapping(function(fallback)
-                if require("luasnip").jumpable(-1) then
-                    require("luasnip").jump(-1)
+                if require("luasnip").jumpable( -1) then
+                    require("luasnip").jump( -1)
                 elseif require("neogen").jumpable(true) then
                     require("neogen").jump_prev()
                 else
@@ -172,7 +172,7 @@ function config.nvim_cmp(plugin, opts)
             end, { "i", "s" }),
             ["<M-p>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
-                    cmp.scroll_docs(-2)
+                    cmp.scroll_docs( -2)
                 else
                     fallback()
                 end
@@ -206,14 +206,14 @@ function config.nvim_cmp(plugin, opts)
                 vim_item.kind = vim.lsp.protocol.CompletionItemKind[cmp.lsp.CompletionItemKind[vim_item.kind]]
 
                 vim_item.menu = ({
-                    nvim_lsp = "[LSP]",
-                    buffer = "[BUF]",
-                    -- cmp_tabnine = "[TAB]",
-                    luasnip = "[SNP]",
-                    path = "[PATH]",
-                    look = "[LOOK]",
-                    treesitter = "[TS]"
-                })[entry.source.name]
+                        nvim_lsp = "[LSP]",
+                        buffer = "[BUF]",
+                        -- cmp_tabnine = "[TAB]",
+                        luasnip = "[SNP]",
+                        path = "[PATH]",
+                        look = "[LOOK]",
+                        treesitter = "[TS]"
+                    })[entry.source.name]
 
                 return vim_item
             end,
@@ -251,9 +251,10 @@ function config.nvim_cmp(plugin, opts)
 end
 
 function config.luasnip()
+    require("luasnip.loaders.from_vscode").lazy_load()
     require("luasnip.loaders.from_vscode").lazy_load({
         paths = {
-            "~/.local/share/nvim/site/pack/lazy/opt/friendly-snippets",
+            "~/.config/nvim/snippets",
         },
     })
 end
