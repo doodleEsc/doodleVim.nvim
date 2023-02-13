@@ -27,9 +27,6 @@ function config.lspconfig(plugin, opts)
             end
         end
 
-        if server == "sumneko_lua" then
-            server = "lua_ls"
-        end
         require("lspconfig")[server].setup(server_opts)
     end
 
