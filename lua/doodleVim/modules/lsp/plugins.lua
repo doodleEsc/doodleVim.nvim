@@ -52,12 +52,15 @@ lsp['doodleEsc/rename.nvim'] = {
     lazy = true,
     dependencies = {
         'neovim/nvim-lspconfig',
-        'MunifTanjim/nui.nvim',
+        'stevearc/dressing.nvim',
     },
 }
 
 lsp['doodleEsc/gotools.nvim'] = {
     lazy = true,
+    dependencies = {
+        'stevearc/dressing.nvim',
+    },
     config = conf.gotools
 }
 

@@ -1,16 +1,6 @@
 local config = {}
 
 function config.telescope()
-    -- require("doodleVim.utils.defer").immediate_load({
-    --     "telescope-fzf-native.nvim",
-    --     "telescope-file-browser.nvim",
-    --     "nvim-neoclip.lua",
-    --     "project.nvim",
-    --     "telescope-ui-select.nvim",
-    --     "telescope-tabs"
-    -- })
-
-    local codicons = require("codicons")
     local actions = require("telescope.actions")
     local actions_layout = require("telescope.actions.layout")
 
@@ -116,55 +106,55 @@ function config.telescope()
                 case_mode = "smart_case", -- or "ignore_case" or "respect_case"
                 -- the default case_mode is "smart_case"
             },
-            ["ui-select"] = {
-                require("telescope.themes").get_dropdown({
-                    initial_mode = "normal",
-                }),
-                specific_opts = {
-                    -- for gotools.nvim
-                    ["gotools"] = {
-                        make_indexed = function(items)
-                            local indexed_items = {}
-                            local widths = {
-                                idx = 0,
-                                command_title = 0,
-                            }
-                            for idx, item in ipairs(items) do
-                                local entry = {
-                                    idx = idx,
-                                    command_title = item,
-                                    text = item,
-                                }
-                                table.insert(indexed_items, entry)
-                                widths.idx = math.max(widths.idx, require "plenary.strings".strdisplaywidth(entry.idx))
-                                widths.command_title = math.max(widths.command_title,
-                                    require "plenary.strings".strdisplaywidth(entry.command_title))
-                            end
-                            return indexed_items, widths
-                        end,
-                        make_displayer = function(widths)
-                            return require "telescope.pickers.entry_display".create {
-                                separator = " ",
-                                items = {
-                                    { width = widths.idx + 1 }, -- +1 for ":" suffix
-                                    { width = widths.command_title },
-                                },
-                            }
-                        end,
-                        make_display = function(displayer)
-                            return function(e)
-                                return displayer {
-                                    { e.value.idx .. ":", "TelescopePromptPrefix" },
-                                    { e.value.command_title },
-                                }
-                            end
-                        end,
-                        make_ordinal = function(e)
-                            return e.idx .. e.command_title
-                        end,
-                    },
-                }
-            },
+            -- ["ui-select"] = {
+            --     require("telescope.themes").get_dropdown({
+            --         initial_mode = "normal",
+            --     }),
+            --     specific_opts = {
+            --         -- for gotools.nvim
+            --         ["gotools"] = {
+            --             make_indexed = function(items)
+            --                 local indexed_items = {}
+            --                 local widths = {
+            --                     idx = 0,
+            --                     command_title = 0,
+            --                 }
+            --                 for idx, item in ipairs(items) do
+            --                     local entry = {
+            --                         idx = idx,
+            --                         command_title = item,
+            --                         text = item,
+            --                     }
+            --                     table.insert(indexed_items, entry)
+            --                     widths.idx = math.max(widths.idx, require "plenary.strings".strdisplaywidth(entry.idx))
+            --                     widths.command_title = math.max(widths.command_title,
+            --                         require "plenary.strings".strdisplaywidth(entry.command_title))
+            --                 end
+            --                 return indexed_items, widths
+            --             end,
+            --             make_displayer = function(widths)
+            --                 return require "telescope.pickers.entry_display".create {
+            --                     separator = " ",
+            --                     items = {
+            --                         { width = widths.idx + 1 }, -- +1 for ":" suffix
+            --                         { width = widths.command_title },
+            --                     },
+            --                 }
+            --             end,
+            --             make_display = function(displayer)
+            --                 return function(e)
+            --                     return displayer {
+            --                         { e.value.idx .. ":", "TelescopePromptPrefix" },
+            --                         { e.value.command_title },
+            --                     }
+            --                 end
+            --             end,
+            --             make_ordinal = function(e)
+            --                 return e.idx .. e.command_title
+            --             end,
+            --         },
+            --     }
+            -- },
         },
         pickers = {
             find_files = {
@@ -177,7 +167,7 @@ function config.telescope()
     require("telescope").load_extension("todo-comments")
     require("telescope").load_extension("projects")
     require("telescope").load_extension("neoclip")
-    require("telescope").load_extension("ui-select")
+    -- require("telescope").load_extension("ui-select")
     require("telescope").load_extension("telescope-tabs")
 end
 

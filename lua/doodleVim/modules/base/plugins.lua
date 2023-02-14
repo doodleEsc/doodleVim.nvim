@@ -7,12 +7,21 @@ base['mortepau/codicons.nvim'] = { lazy = true }
 
 base['nvim-lua/plenary.nvim'] = { lazy = true }
 
+base['stevearc/dressing.nvim'] = {
+    lazy = true,
+    event = "VeryLazy",
+    dependencies = {
+        'MunifTanjim/nui.nvim',
+    },
+    config = conf.dressing
+}
+
 base['nathom/filetype.nvim'] = {}
 
 base['MunifTanjim/nui.nvim'] = {
     lazy = true,
     event = "VeryLazy",
-    config = conf.nui
+    -- config = conf.nui
 }
 
 base['rcarriga/nvim-notify'] = {

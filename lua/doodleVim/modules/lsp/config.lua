@@ -142,6 +142,68 @@ function config.gotools()
             kind = 'gotools'
         },
     })
+
+
+
+    require("dressing.select.telescope").custom_kind["gotools"] = function(opts, defaults, items)
+        local finders = require("telescope.finders")
+        local make_indexed = function(items)
+            local indexed_items = {}
+            local widths = {
+                idx = 0,
+                command_title = 0,
+            }
+            for idx, item in ipairs(items) do
+                local entry = {
+                    idx = idx,
+                    command_title = item,
+                    text = item,
+                }
+                table.insert(indexed_items, entry)
+                widths.idx = math.max(widths.idx, require "plenary.strings".strdisplaywidth(entry.idx))
+                widths.command_title = math.max(widths.command_title,
+                        require "plenary.strings".strdisplaywidth(entry.command_title))
+            end
+            return indexed_items, widths
+        end
+
+        local make_displayer = function(widths)
+            return require "telescope.pickers.entry_display".create {
+                    separator = " ",
+                    items = {
+                        { width = widths.idx + 1 }, -- +1 for ":" suffix
+                        { width = widths.command_title },
+                    },
+                }
+        end
+        local make_display_factory = function(displayer)
+            return function(e)
+                return displayer {
+                        { e.value.idx .. ":",   "TelescopePromptPrefix" },
+                        { e.value.command_title },
+                    }
+            end
+        end
+
+        local make_ordinal = function(e)
+            return e.idx .. e.command_title
+        end
+
+        local indexed_items, widths = make_indexed(items)
+        local displayer = make_displayer(widths)
+        local make_display = make_display_factory(displayer)
+
+        defaults.finder = finders.new_table {
+                results = indexed_items,
+                entry_maker = function(e)
+                    return {
+                        value = e,
+                        display = make_display,
+                        ordinal = make_ordinal(e),
+                    }
+                end,
+            }
+    end
 end
 
 function config.null_ls()

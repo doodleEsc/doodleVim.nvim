@@ -6,12 +6,11 @@ tools['nvim-telescope/telescope.nvim'] = {
     cmd = { "Telescope" },
     dependencies = {
         'nvim-telescope/telescope-file-browser.nvim',
-        'nvim-telescope/telescope-ui-select.nvim',
+        -- 'nvim-telescope/telescope-ui-select.nvim',
         'LukasPietzschmann/telescope-tabs',
         'folke/todo-comments.nvim',
         'doodleEsc/project.nvim',
         'AckslD/nvim-neoclip.lua',
-        'mortepau/codicons.nvim',
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
     config = conf.telescope
