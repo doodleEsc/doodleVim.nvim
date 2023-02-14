@@ -81,7 +81,7 @@ map.Lsp = {
             f = map_cr("lua require('doodleVim.extend.lsp').format({async=true})"):with_noremap():with_silent():
             with_label("Code Formatting"),
             a = map_cr("lua require('doodleVim.extend.lsp').code_action()"):with_noremap():with_silent():with_label("Code Action"),
-            n = map_cr("lua require('rename').rename({label='Rename'})"):with_noremap():
+            n = map_cr("lua require('rename').rename({prompt='Rename'})"):with_noremap():
             with_silent():with_label("Rename"),
         },
         ["<C-n>"] = map_cr("lua vim.diagnostic.goto_next()"):with_noremap():with_silent():
