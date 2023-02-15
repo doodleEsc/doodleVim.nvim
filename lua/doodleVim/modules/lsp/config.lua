@@ -143,8 +143,6 @@ function config.gotools()
         },
     })
 
-
-
     require("dressing.select.telescope").custom_kind["gotools"] = function(opts, defaults, items)
         local finders = require("telescope.finders")
         local make_indexed = function(items)
@@ -162,26 +160,26 @@ function config.gotools()
                 table.insert(indexed_items, entry)
                 widths.idx = math.max(widths.idx, require "plenary.strings".strdisplaywidth(entry.idx))
                 widths.command_title = math.max(widths.command_title,
-                        require "plenary.strings".strdisplaywidth(entry.command_title))
+                    require "plenary.strings".strdisplaywidth(entry.command_title))
             end
             return indexed_items, widths
         end
 
         local make_displayer = function(widths)
             return require "telescope.pickers.entry_display".create {
-                    separator = " ",
-                    items = {
-                        { width = widths.idx + 1 }, -- +1 for ":" suffix
-                        { width = widths.command_title },
-                    },
-                }
+                separator = " ",
+                items = {
+                    { width = widths.idx + 1 }, -- +1 for ":" suffix
+                    { width = widths.command_title },
+                },
+            }
         end
         local make_display_factory = function(displayer)
             return function(e)
                 return displayer {
-                        { e.value.idx .. ":",   "TelescopePromptPrefix" },
-                        { e.value.command_title },
-                    }
+                    { e.value.idx .. ":",   "TelescopePromptPrefix" },
+                    { e.value.command_title },
+                }
             end
         end
 
@@ -194,15 +192,17 @@ function config.gotools()
         local make_display = make_display_factory(displayer)
 
         defaults.finder = finders.new_table {
-                results = indexed_items,
-                entry_maker = function(e)
-                    return {
-                        value = e,
-                        display = make_display,
-                        ordinal = make_ordinal(e),
-                    }
-                end,
-            }
+            results = indexed_items,
+            entry_maker = function(e)
+                return {
+                    value = e,
+                    display = make_display,
+                    ordinal = make_ordinal(e),
+                }
+            end,
+        }
+
+        defaults.initial_mode = "normal"
     end
 end
 
@@ -331,11 +331,11 @@ function config.fidget(plugin, opts)
             task = -- function to format each task line
             function(task_name, message, percentage)
                 return string.format(
-                        "%s%s [%s]",
-                        message,
-                        percentage and string.format(" (%s%%)", percentage) or "",
-                        task_name
-                    )
+                    "%s%s [%s]",
+                    message,
+                    percentage and string.format(" (%s%%)", percentage) or "",
+                    task_name
+                )
             end,
         }
     })
