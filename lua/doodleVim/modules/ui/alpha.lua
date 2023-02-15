@@ -31,7 +31,7 @@ dashboard.section.buttons.val = {
     dashboard.button("e", "  New file", "<cmd>doautocmd User DeferStartWithFile|ene<CR>"),
     dashboard.button("f", "  Find File", "<cmd>doautocmd User DeferStartWithFile|Telescope find_files<CR>"),
     dashboard.button("b", "  File Browser", "<cmd>doautocmd User DeferStartWithFile|Telescope file_browser<CR>"),
-    dashboard.button("s", "  Configuration", "<cmd>doautocmd User DeferStartWithFile|e $MYVIMRC|ToggleTree<CR>"),
+    dashboard.button("s", "  Configuration", "<cmd>doautocmd User DeferStartWithFile|e $MYVIMRC|OpenTree<CR>"),
     dashboard.button("u", "  Update Plugins", "<cmd>doautocmd User DeferStartWithFile|Lazy sync<CR>"),
     dashboard.button("q", "  Quit", "<cmd>doautocmd User DeferStartWithFile|qa<cr>"),
 }
