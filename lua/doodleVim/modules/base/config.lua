@@ -306,6 +306,13 @@ function config.dressing(plugin, opts)
             get_config = nil,
         },
     })
+
+    local custom_kind = require("dressing.select.telescope").custom_kind
+    local original_func = custom_kind["codeaction"]
+    custom_kind["codeaction"] = function(opts, defaults, items)
+        original_func(opts, defaults, items)
+        defaults.initial_mode = "normal"
+    end
 end
 
 return config
