@@ -11,6 +11,10 @@ function config.lspconfig(plugin, opts)
     local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     capabilities.offsetEncoding = { "utf-16" }
+    capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true
+    }
 
     local function setup(server)
         local server_opts = servers[server] or {}

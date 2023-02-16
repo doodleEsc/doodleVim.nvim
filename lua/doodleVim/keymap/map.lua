@@ -357,4 +357,16 @@ map.codewindow = {
     }
 }
 
+map.nvim_ufo = {
+    n = {
+        ["z"] = {
+            name = "Folding",
+            R = map_cr("lua require('ufo').openAllFolds()"):with_noremap():with_silent():with_label("Open All Folds"),
+            M = map_cr("lua require('ufo').closeAllFolds()"):with_noremap():with_silent():with_label("Close All Folds"),
+            r = map_cr("lua require('ufo').openFoldsExceptKinds()"):with_noremap():with_silent():with_label("Open Folds Except Kinds"),
+            m = map_cr("lua require('ufo').closeFoldsWith()"):with_noremap():with_silent():with_label("Open All Folds"),
+        }
+    }
+}
+
 return map

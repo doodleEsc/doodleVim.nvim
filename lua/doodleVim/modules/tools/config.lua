@@ -173,7 +173,8 @@ end
 
 function config.nvim_tree()
     local codicons = require("codicons")
-    require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
+    require("nvim-tree").setup({
+        -- BEGIN_DEFAULT_OPTS
         auto_reload_on_write = true,
         disable_netrw = true,
         hijack_cursor = true,
@@ -203,40 +204,40 @@ function config.nvim_tree()
                 custom_only = true,
                 list = {
                     { key = { "<CR>", "o" }, action = "edit" },
-                    { key = "<C-v>", action = "vsplit" },
-                    { key = "<C-x>", action = "split" },
-                    { key = "<C-t>", action = "tabnew" },
-                    { key = "P", action = "parent_node" },
-                    { key = "<BS>", action = "close_node" },
-                    { key = "K", action = "first_sibling" },
-                    { key = "J", action = "last_sibling" },
-                    { key = "I", action = "toggle_git_ignored" },
-                    { key = "H", action = "toggle_dotfiles" },
-                    { key = "<C-r>", action = "refresh" },
-                    { key = "a", action = "create" },
-                    { key = "d", action = "remove" },
-                    { key = "D", action = "trash" },
-                    { key = "r", action = "rename" },
-                    { key = "R", action = "full_rename" },
-                    { key = "x", action = "cut" },
-                    { key = "c", action = "copy" },
-                    { key = "p", action = "paste" },
-                    { key = "y", action = "copy_name" },
-                    { key = "yp", action = "copy_path" },
-                    { key = "ya", action = "copy_absolute_path" },
-                    { key = "-", action = "dir_up" },
-                    { key = "s", action = "system_open" },
-                    { key = "f", action = "live_filter" },
-                    { key = "F", action = "clear_live_filter" },
-                    { key = "q", action = "close" },
-                    { key = "C", action = "collapse_all" },
-                    { key = "E", action = "expand_all" },
-                    { key = "/", action = "search_node" },
-                    { key = ".", action = "run_file_command" },
-                    { key = "<Tab>", action = "toggle_file_info" },
-                    { key = "?", action = "toggle_help" },
-                    { key = "m", action = "toggle_mark" },
-                    { key = "bmv", action = "bulk_move" },
+                    { key = "<C-v>",         action = "vsplit" },
+                    { key = "<C-x>",         action = "split" },
+                    { key = "<C-t>",         action = "tabnew" },
+                    { key = "P",             action = "parent_node" },
+                    { key = "<BS>",          action = "close_node" },
+                    { key = "K",             action = "first_sibling" },
+                    { key = "J",             action = "last_sibling" },
+                    { key = "I",             action = "toggle_git_ignored" },
+                    { key = "H",             action = "toggle_dotfiles" },
+                    { key = "<C-r>",         action = "refresh" },
+                    { key = "a",             action = "create" },
+                    { key = "d",             action = "remove" },
+                    { key = "D",             action = "trash" },
+                    { key = "r",             action = "rename" },
+                    { key = "R",             action = "full_rename" },
+                    { key = "x",             action = "cut" },
+                    { key = "c",             action = "copy" },
+                    { key = "p",             action = "paste" },
+                    { key = "y",             action = "copy_name" },
+                    { key = "yp",            action = "copy_path" },
+                    { key = "ya",            action = "copy_absolute_path" },
+                    { key = "-",             action = "dir_up" },
+                    { key = "s",             action = "system_open" },
+                    { key = "f",             action = "live_filter" },
+                    { key = "F",             action = "clear_live_filter" },
+                    { key = "q",             action = "close" },
+                    { key = "C",             action = "collapse_all" },
+                    { key = "E",             action = "expand_all" },
+                    { key = "/",             action = "search_node" },
+                    { key = ".",             action = "run_file_command" },
+                    { key = "<Tab>",         action = "toggle_file_info" },
+                    { key = "?",             action = "toggle_help" },
+                    { key = "m",             action = "toggle_mark" },
+                    { key = "bmv",           action = "bulk_move" },
 
                 },
             },
@@ -392,7 +393,6 @@ function config.nvim_tree()
     api.events.subscribe(Event.TreeClose, function()
         bufferline_api.set_offset(0)
     end)
-
 end
 
 function config.symbols_outline()
@@ -460,7 +460,6 @@ function config.symbols_outline()
             Fragment = { icon = codicons.get("symbol-misc"), hl = "@constant" },
         }
     })
-
 end
 
 function config.mkdp()
@@ -493,36 +492,28 @@ function config.project()
         -- Manual mode doesn't automatically change your root directory, so you have
         -- the option to manually do so using `:ProjectRoot` command.
         manual_mode = false,
-
         -- Methods of detecting the root directory. **"lsp"** uses the native neovim
         -- lsp, while **"pattern"** uses vim-rooter like glob pattern matching. Here
         -- order matters: if one is not detected, the other is used as fallback. You
         -- can also delete or rearangne the detection methods.
         detection_methods = { "lsp", "pattern" },
-
         -- All the patterns used to detect root dir, when **"pattern"** is in
         -- detection_methods
         patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "poetry.lock" },
-
         -- Table of lsp clients to ignore by name
         -- eg: { "efm", ... }
         ignore_lsp = {},
-
         -- Don't calculate root dir on specific directories
         -- Ex: { "~/.cargo/*", ... }
         exclude_dirs = {},
-
         -- Show hidden files in telescope
         show_hidden = false,
-
         -- When set to false, you will get a message when project.nvim changes your
         -- directory.
         silent_chdir = true,
-
         -- Path where project.nvim will store the project history for use in
         -- telescope
         datapath = vim.fn.stdpath("data"),
-
         -- Function to call when you select a project from telecope
         -- Accepts:
         --    "find_project_files"        : call 'Telescope find_files' on project
@@ -834,7 +825,7 @@ function config.diffview()
                 ["X"]         = actions.restore_entry, -- Restore entry to the state on the left side.
                 ["R"]         = actions.refresh_files, -- Update stats and entries in the file list.
                 ["L"]         = actions.open_commit_log, -- Open the commit log panel0
-                ["<c-u>"]     = actions.scroll_view(-0.25), -- Scroll the view up
+                ["<c-u>"]     = actions.scroll_view( -0.25), -- Scroll the view up
                 ["<c-d>"]     = actions.scroll_view(0.25), -- Scroll the view down
                 -- ["<tab>"]         = actions.select_next_entry,
                 -- ["<s-tab>"]       = actions.select_prev_entry,
@@ -860,7 +851,7 @@ function config.diffview()
                 ["<cr>"]          = actions.select_entry,
                 ["o"]             = actions.select_entry,
                 ["<2-LeftMouse>"] = actions.select_entry,
-                ["<c-u>"]         = actions.scroll_view(-0.25),
+                ["<c-u>"]         = actions.scroll_view( -0.25),
                 ["<c-d>"]         = actions.scroll_view(0.25),
                 -- ["<tab>"]         = actions.select_next_entry,
                 -- ["<s-tab>"]       = actions.select_prev_entry,
@@ -912,8 +903,8 @@ function config.dapui()
                         size = 0.25, -- Can be float or integer > 1
                     },
                     { id = "breakpoints", size = 0.25 },
-                    { id = "stacks", size = 0.25 },
-                    { id = "watches", size = 0.25 },
+                    { id = "stacks",      size = 0.25 },
+                    { id = "watches",     size = 0.25 },
                 },
                 size = 40,
                 position = "left", -- Can be "left" or "right"
@@ -1005,6 +996,43 @@ function config.dap()
         end
         dapui.close()
     end
+end
+
+function config.nvim_ufo(plugin, opts)
+    local handler = function(virtText, lnum, endLnum, width, truncate)
+        local newVirtText = {}
+        local suffix = ('  %d '):format(endLnum - lnum)
+        local sufWidth = vim.fn.strdisplaywidth(suffix)
+        local targetWidth = width - sufWidth
+        local curWidth = 0
+        for _, chunk in ipairs(virtText) do
+            local chunkText = chunk[1]
+            local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            if targetWidth > curWidth + chunkWidth then
+                table.insert(newVirtText, chunk)
+            else
+                chunkText = truncate(chunkText, targetWidth - curWidth)
+                local hlGroup = chunk[2]
+                table.insert(newVirtText, { chunkText, hlGroup })
+                chunkWidth = vim.fn.strdisplaywidth(chunkText)
+                -- str width returned from truncate() may less than 2nd argument, need padding
+                if curWidth + chunkWidth < targetWidth then
+                    suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+                end
+                break
+            end
+            curWidth = curWidth + chunkWidth
+        end
+        table.insert(newVirtText, { suffix, 'MoreMsg' })
+        return newVirtText
+    end
+
+    require('ufo').setup({
+        fold_virt_text_handler = handler,
+        provider_selector = function(bufnr, filetype, buftype)
+            return { 'treesitter', 'indent' }
+        end
+    })
 end
 
 return config
