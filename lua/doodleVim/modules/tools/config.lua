@@ -1041,6 +1041,13 @@ function config.orgmode(plugin, opts)
     orgmode.setup({
         org_agenda_files = { '~/Documents/Notes/agenda.org' },
         org_default_notes_file = '~/Documents/Notes/default.org',
+        org_todo_keywords = { 'TODO', 'WAITING', '|', 'DONE', 'DELEGATED' },
+        org_todo_keyword_faces = {
+            TODO = ':background #fb4934 :foreground #ebdbb2', -- overrides builtin color for `TODO` keyword
+            WAITING = ':background #fabd2f :foreground #ebdbb2 :weight bold',
+            DONE = ':background #10B981 :foreground #ebdbb2',
+            DELEGATED = ':background #7C3AED :foreground #ebdbb2 :slant italic :underline on',
+        }
     })
 end
 
