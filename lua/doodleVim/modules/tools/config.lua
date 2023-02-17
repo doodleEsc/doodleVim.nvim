@@ -1035,4 +1035,13 @@ function config.nvim_ufo(plugin, opts)
     })
 end
 
+function config.orgmode(plugin, opts)
+    local orgmode = require("orgmode")
+    orgmode.setup_ts_grammar()
+    orgmode.setup({
+        org_agenda_files = { '~/Documents/Notes/agenda.org' },
+        org_default_notes_file = '~/Documents/Notes/default.org',
+    })
+end
+
 return config

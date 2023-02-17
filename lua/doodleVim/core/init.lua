@@ -17,7 +17,7 @@ local createdir = function()
     -- There only check once that If cache_dir exists
     -- Then I don't want to check subs dir exists
     if not vim.loop.fs_stat(global.cache_dir) then
-        vim.fn.system({ "mkdir", "-p", "global.cache_dir" })
+        vim.fn.system({ "mkdir", "-p", global.cache_dir })
         for _, v in pairs(data_dir) do
             if not vim.loop.fs_stat(v) == 0 then
                 vim.fn.system({ "mkdir", "-p", v })
