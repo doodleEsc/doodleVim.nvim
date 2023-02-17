@@ -101,7 +101,7 @@ function autocmd.load_autocmds()
                 opts = {
                     pattern = "*",
                     callback = function()
-                        require('doodleVim.utils.defer').defer_start(100)
+                        require('doodleVim.utils.defer').defer_start(150)
                     end
                 }
             },

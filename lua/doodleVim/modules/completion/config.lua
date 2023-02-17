@@ -70,6 +70,7 @@ function config.nvim_cmp(plugin, opts)
             { name = "luasnip" },
             { name = "buffer" },
             { name = "path" },
+            { name = 'orgmode' },
             {
                 name = "look",
                 keyword_length = 3,
