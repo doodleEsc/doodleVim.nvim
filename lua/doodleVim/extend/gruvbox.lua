@@ -32,6 +32,8 @@ gruvbox.overrides = {
     NvimTreeOpenedFile = { fg = "#b8bb26", bold = true },
     -- Diagnostic
     DiagnosticHeader = { link = "GruvboxBlue" },
+    -- marks
+    MarkSignHL = { link = "GruvboxPurpleSign" }
 }
 
 

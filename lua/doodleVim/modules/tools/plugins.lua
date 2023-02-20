@@ -163,4 +163,10 @@ tools['nvim-orgmode/orgmode'] = {
     config = conf.orgmode
 }
 
+tools['chentoast/marks.nvim'] = {
+    lazy = true,
+    event = "User DeferStartWithFile",
+    config = conf.marks
+}
+
 return tools
