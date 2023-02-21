@@ -231,6 +231,7 @@ map.Telescope = {
             r = map_cr('Telescope oldfiles'):with_noremap():with_silent():with_label("Find Recent Files"),
             c = map_cr('Telescope command_history'):with_noremap():with_silent():with_label("Find Command History"),
             b = map_cr('Telescope buffers'):with_noremap():with_silent():with_label("Buffers Navigation"),
+            m = map_cr('Telescope marks'):with_noremap():with_silent():with_label("Find Marks"),
         },
     }
 }
