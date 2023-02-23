@@ -233,6 +233,7 @@ function config.null_ls()
         on_exit = nil,
         sources = {
             null_ls.builtins.code_actions.gitsigns,
+            null_ls.builtins.diagnostics.solhint,
             -- null_ls.builtins.formatting.stylua,
             require("gotools").code_actions.gotests,
             require("gotools").code_actions.gomodifytags,

@@ -2,8 +2,20 @@ local lsp = {}
 
 function lsp.mason(plugin)
     require('doodleVim.extend.lazy').add('mason', function()
-        local binaries = { 'gopls', 'json-lsp', 'lua-language-server', 'python-lsp-server', 'delve',
-            'gotests', 'gomodifytags', 'impl', 'clangd', 'debugpy' }
+        local binaries = {
+            'gopls',
+            'json-lsp',
+            'lua-language-server',
+            'python-lsp-server',
+            'delve',
+            'gotests',
+            'gomodifytags',
+            'impl',
+            'clangd',
+            'debugpy',
+            'ruff',
+            'solhint',
+        }
         local register = require('mason-registry')
         local bins = ''
         for _, bin in ipairs(binaries) do
