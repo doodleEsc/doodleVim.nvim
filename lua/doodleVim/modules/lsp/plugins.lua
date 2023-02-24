@@ -11,6 +11,7 @@ lsp['neovim/nvim-lspconfig'] = {
         'tamago324/nlsp-settings.nvim',
         'mortepau/codicons.nvim',
         'j-hui/fidget.nvim',
+        'utilyre/barbecue.nvim',
         {
             "hrsh7th/cmp-nvim-lsp",
             cond = function()
@@ -34,7 +35,7 @@ lsp['tamago324/nlsp-settings.nvim'] = {
 lsp['williamboman/mason.nvim'] = {
     lazy = true,
     init = setup.mason,
-    cmd = {"Mason", "MasonInstall", "MasonUninstall"},
+    cmd = { "Mason", "MasonInstall", "MasonUninstall" },
     config = conf.mason,
 }
 
@@ -77,6 +78,16 @@ lsp['kosayoda/nvim-lightbulb'] = {
 lsp['ray-x/lsp_signature.nvim'] = {
     lazy = true,
     init = setup.lsp_signature,
+}
+
+lsp['utilyre/barbecue.nvim'] = {
+    lazy = true,
+    version = "*",
+    dependencies = {
+        "SmiteshP/nvim-navic",
+        "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    config = conf.barbecue
 }
 
 return lsp

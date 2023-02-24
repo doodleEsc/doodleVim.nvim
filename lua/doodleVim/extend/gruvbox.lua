@@ -61,7 +61,7 @@ gruvbox.dump = function()
         return
     end
     for group, hl in pairs(groups) do
-        local line = "api.nvim_set_hl(0,'" .. group .. "', " .. vim.inspect(hl) .. ")\n"
+        local line = "api.nvim_set_hl(0, '" .. group .. "', " .. vim.inspect(hl, {newline="", indent=" "}) .. ")\n"
         if file ~= nil then
             file:write(line)
         else

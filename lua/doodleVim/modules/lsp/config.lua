@@ -346,4 +346,234 @@ function config.fidget(plugin, opts)
     })
 end
 
+function config.barbecue(plugin, opts)
+    local codicons = require("codicons")
+    require("barbecue").setup({
+        ---Whether to attach navic to language servers automatically.
+        ---
+        ---@type boolean
+        attach_navic = true,
+        ---Whether to create winbar updater autocmd.
+        ---
+        ---@type boolean
+        create_autocmd = true,
+        ---Buftypes to enable winbar in.
+        ---
+        ---@type string[]
+        include_buftypes = { "" },
+        ---Filetypes not to enable winbar in.
+        ---
+        ---@type string[]
+        exclude_filetypes = { "gitcommit", "toggleterm" },
+        modifiers = {
+            ---Filename modifiers applied to dirname.
+            ---
+            ---See: `:help filename-modifiers`
+            ---
+            ---@type string
+            dirname = ":~:.",
+
+            ---Filename modifiers applied to basename.
+            ---
+            ---See: `:help filename-modifiers`
+            ---
+            ---@type string
+            basename = "",
+        },
+        ---Whether to display path to file.
+        ---
+        ---@type boolean
+        show_dirname = false,
+        ---Whether to display file name.
+        ---
+        ---@type boolean
+        show_basename = true,
+        ---Whether to replace file icon with the modified symbol when buffer is
+        ---modified.
+        ---
+        ---@type boolean
+        show_modified = false,
+        ---Get modified status of file.
+        ---
+        ---NOTE: This can be used to get file modified status from SCM (e.g. git)
+        ---
+        ---@type fun(bufnr: number): boolean
+        modified = function(bufnr) return vim.bo[bufnr].modified end,
+        ---Whether to show/use navic in the winbar.
+        ---
+        ---@type boolean
+        show_navic = true,
+        ---Get leading custom section contents.
+        ---
+        ---NOTE: This function shouldn't do any expensive actions as it is run on each
+        ---render.
+        ---
+        ---@type fun(bufnr: number): barbecue.Config.custom_section
+        lead_custom_section = function() return " " end,
+        ---@alias barbecue.Config.custom_section
+        ---|string # Literal string.
+        ---|{ [1]: string, [2]: string? }[] # List-like table of `[text, highlight?]` tuples in which `highlight` is optional.
+        ---
+        ---Get custom section contents.
+        ---
+        ---NOTE: This function shouldn't do any expensive actions as it is run on each
+        ---render.
+        ---
+        ---@type fun(bufnr: number): barbecue.Config.custom_section
+        custom_section = function() return " " end,
+        ---@alias barbecue.Config.theme
+        ---|'"auto"' # Use your current colorscheme's theme or generate a theme based on it.
+        ---|string # Theme located under `barbecue.theme` module.
+        ---|barbecue.Theme # Same as '"auto"' but override it with the given table.
+        ---
+        ---Theme to be used for generating highlight groups dynamically.
+        ---
+        ---@type barbecue.Config.theme
+
+        --         return {
+        --   dark0_hard = "#1d2021",
+        --   dark0 = "#282828",
+        --   dark0_soft = "#32302f",
+        --   dark1 = "#3c3836",
+        --   dark2 = "#504945",
+        --   dark3 = "#665c54",
+        --   dark4 = "#7c6f64",
+        --   light0_hard = "#f9f5d7",
+        --   light0 = "#fbf1c7",
+        --   light0_soft = "#f2e5bc",
+        --   light1 = "#ebdbb2",
+        --   light2 = "#d5c4a1",
+        --   light3 = "#bdae93",
+        --   light4 = "#a89984",
+        --   bright_red = "#fb4934",
+        --   bright_green = "#b8bb26",
+        --   bright_yellow = "#fabd2f",
+        --   bright_blue = "#83a598",
+        --   bright_purple = "#d3869b",
+        --   bright_aqua = "#8ec07c",
+        --   bright_orange = "#fe8019",
+        --   neutral_red = "#cc241d",
+        --   neutral_green = "#98971a",
+        --   neutral_yellow = "#d79921",
+        --   neutral_blue = "#458588",
+        --   neutral_purple = "#b16286",
+        --   neutral_aqua = "#689d6a",
+        --   neutral_orange = "#d65d0e",
+        --   faded_red = "#9d0006",
+        --   faded_green = "#79740e",
+        --   faded_yellow = "#b57614",
+        --   faded_blue = "#076678",
+        --   faded_purple = "#8f3f71",
+        --   faded_aqua = "#427b58",
+        --   faded_orange = "#af3a03",
+        --   gray = "#928374",
+        -- }
+
+
+
+        theme = {
+            -- this highlight is used to override other highlights
+            -- you can take advantage of its `bg` and set a background throughout your winbar
+            -- (e.g. basename will look like this: { fg = "#c0caf5", bold = true })
+            normal = { fg = "#bdae93", bg = "#32302f" },
+
+            -- these highlights correspond to symbols table from config
+            ellipsis = { fg = "#bdae93" },
+            separator = { fg = "#737aa2" },
+            modified = { fg = "#fb4934" },
+
+            -- these highlights represent the _text_ of three main parts of barbecue
+            dirname = { fg = "#83a598" },
+            basename = { bold = true },
+            context = {},
+
+            -- these highlights are used for context/navic icons
+            context_module = { fg = "#fe8019" },
+            context_field = { fg = "#d3869b" },
+            context_file = { fg = "#83a598" },
+            context_boolean = { fg = "#fe8019" },
+            context_string = { fg = "#b8bb26" },
+            context_operator = { fg = "#fb4934" },
+            context_null = { fg = "#fe8019" },
+            context_event = { fg = "#fabd2f" },
+            context_namespace = { fg = "#83a598" },
+            context_class = { fg = "#fabd2f" },
+            context_method = { fg = "#83a598" },
+            context_property = { fg = "#8ec07c" },
+            context_constructor = { fg = "#83a598" },
+            context_enum = { fg = "#d3869b" },
+            context_interface = { fg = "#b8bb26" },
+            context_package = { fg = "#8ec07c" },
+            context_constant = { fg = "#fe8019" },
+            context_object = { fg = "#fe8019" },
+            context_key = { fg = "#8ec07c" },
+            context_enum_member = { fg = "#fabd2f" },
+            context_struct = { fg = "#d3869b" },
+            context_array = { fg = "#fe8019" },
+            context_type_parameter = { fg = "#fb4934" },
+            context_function = { fg = "#83a598" },
+            context_variable = { fg = "#d3869b" },
+            context_number = { fg = "#fe8019" },
+        },
+        ---Whether context text should follow its icon's color.
+        ---
+        ---@type boolean
+        context_follow_icon_color = false,
+        symbols = {
+            ---Modification indicator.
+            ---
+            ---@type string
+            modified = "●",
+
+            ---Truncation indicator.
+            ---
+            ---@type string
+            ellipsis = "…",
+
+            ---Entry separator.
+            ---
+            ---@type string
+            separator = "",
+        },
+        ---@alias barbecue.Config.kinds
+        ---|false # Disable kind icons.
+        ---|table<string, string> # Type to icon mapping.
+        ---
+        ---Icons for different context entry kinds.
+        ---
+        ---@type barbecue.Config.kinds
+        kinds = {
+            File          = codicons.get("symbol-file"),
+            Module        = codicons.get("symbol-module"),
+            Namespace     = codicons.get("symbol-namespace"),
+            Package       = codicons.get("symbol-package"),
+            Class         = codicons.get("symbol-class"),
+            Method        = codicons.get("symbol-method"),
+            Property      = codicons.get("symbol-property"),
+            Field         = codicons.get("symbol-field"),
+            Constructor   = codicons.get("symbol-constructor"),
+            Enum          = codicons.get("symbol-enum"),
+            Interface     = codicons.get("symbol-interface"),
+            Function      = codicons.get("symbol-function"),
+            Variable      = codicons.get("symbol-variable"),
+            Constant      = codicons.get("symbol-constant"),
+            String        = codicons.get("symbol-string"),
+            Number        = codicons.get("symbol-number"),
+            Boolean       = codicons.get("symbol-boolean"),
+            Array         = codicons.get("symbol-array"),
+            Object        = codicons.get("symbol-object"),
+            Key           = codicons.get("symbol-key"),
+            Null          = codicons.get("symbol-null"),
+            EnumMember    = codicons.get("symbol-enum-member"),
+            Struct        = codicons.get("symbol-struct"),
+            Event         = codicons.get("symbol-event"),
+            Operator      = codicons.get("symbol-operator"),
+            TypeParameter = codicons.get("symbol-type-parameter"),
+            Component     = codicons.get("symbol-misc"),
+            Fragment      = codicons.get("symbol-misc"),
+
+        },
+    })
+end
+
 return config
