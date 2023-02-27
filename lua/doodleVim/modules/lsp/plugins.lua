@@ -83,6 +83,7 @@ lsp['ray-x/lsp_signature.nvim'] = {
 lsp['utilyre/barbecue.nvim'] = {
     lazy = true,
     version = "*",
+    enabled = false,
     dependencies = {
         "SmiteshP/nvim-navic",
         "nvim-tree/nvim-web-devicons", -- optional dependency
