@@ -364,7 +364,7 @@ function config.barbecue(plugin, opts)
         ---Filetypes not to enable winbar in.
         ---
         ---@type string[]
-        exclude_filetypes = { "gitcommit", "toggleterm" },
+        exclude_filetypes = { "gitcommit", "toggleterm", "DressingInput" },
         modifiers = {
             ---Filename modifiers applied to dirname.
             ---
