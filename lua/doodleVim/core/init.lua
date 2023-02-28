@@ -1,12 +1,11 @@
--- local global = require('doodleVim.core.global')
--- local lazy = require('doodleVim.core.lazy')
--- local event = require('doodleVim.core.event')
--- local command = require('doodleVim.core.command')
--- local options = require('doodleVim.core.options')
+local global = require('doodleVim.core.global')
+local lazy = require('doodleVim.core.lazy')
+local event = require('doodleVim.core.event')
+local command = require('doodleVim.core.command')
+local options = require('doodleVim.core.options')
 
 -- Create cache dir and subs dir
 local createdir = function()
-    local global = require('doodleVim.core.global')
     local data_dir = {
         global.cache_dir .. '/backup',
         global.cache_dir .. '/session',
@@ -76,10 +75,10 @@ local function load_nvim_config()
     set_leader_map()
     set_colorscheme()
 
-    require('doodleVim.core.options').load_options()
-    require('doodleVim.core.event').load_autocmds()
-    require('doodleVim.core.command').load_user_command()
-    require('doodleVim.core.lazy').ensure_plugins()
+    options.load_options()
+    event.load_autocmds()
+    command.load_user_command()
+    lazy.ensure_plugins()
 end
 
 load_nvim_config()

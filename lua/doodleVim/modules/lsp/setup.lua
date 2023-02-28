@@ -41,4 +41,7 @@ function lsp.lsp_signature(plugin)
     end)
 end
 
+function lsp.nvim_lspconfig(plugin)
+    -- require("doodleVim.utils.defer").defer_load("", )
+end
 return lsp
