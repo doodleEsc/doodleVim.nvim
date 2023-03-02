@@ -4,7 +4,7 @@ local setup = require('doodleVim.modules.lsp.setup')
 
 lsp['neovim/nvim-lspconfig'] = {
     lazy = true,
-    event = "User DeferStartWithFile",
+    event = "BufReadPost",
     dependencies = {
         'williamboman/mason.nvim',
         "williamboman/mason-lspconfig.nvim",
