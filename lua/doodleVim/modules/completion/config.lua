@@ -84,7 +84,7 @@ function config.nvim_cmp(plugin, opts)
             ["<CR>"] = {
                 i = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
             },
-            ['<C-e>'] = cmp.mapping(function(fallback)
+            ['<C-x>'] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.abort()
                 else
