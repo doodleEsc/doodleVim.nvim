@@ -88,7 +88,7 @@ function autocmd.load_autocmds()
                     pattern = { "LazySync", "LazyUpdate" },
                     once = true,
                     callback = function()
-                        require('doodleVim.extend.lazy').PostInstall()
+                        require("doodleVim.extend.lazy").PostInstall()
                     end,
                 }
 
@@ -101,7 +101,7 @@ function autocmd.load_autocmds()
                 opts = {
                     pattern = "*",
                     callback = function()
-                        require('doodleVim.utils.defer').defer_start(150)
+                        require('doodleVim.utils.defer').emit_user_event(150)
                     end
                 }
             },

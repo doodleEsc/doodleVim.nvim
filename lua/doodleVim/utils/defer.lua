@@ -5,6 +5,15 @@ local M = {
     mod_plug_map = {},
 }
 
+local UserDefinedEvent = {
+    "DeferStart",
+    function()
+        if next(vim.fn.argv()) ~= nil then
+            api.nvim_exec_autocmds("User", { pattern = "DeferStartWithFile", modeline = false })
+        end
+    end,
+}
+
 local do_load = function()
     table.sort(M.defer_packages, function(a, b) return a.priority > b.priority end)
     for _, item in pairs(M.defer_packages) do
@@ -45,15 +54,14 @@ function M.register(module, plugin)
     end
 end
 
-function M.defer_start(delay)
+function M.emit_user_event(delay)
     vim.defer_fn(function()
-
-        -- NOTE: do defer start
-        api.nvim_exec_autocmds("User", { pattern = "DeferStart", modeline = false })
-
-        -- NOTE: emit event if vim starts with a file
-        if next(vim.fn.argv()) ~= nil then
-            api.nvim_exec_autocmds("User", { pattern = "DeferStartWithFile", modeline = false })
+        for _, event in ipairs(UserDefinedEvent) do
+            if type(event) == "string" then
+                api.nvim_exec_autocmds("User", { pattern = event, modeline = false })
+            elseif type(event) == "function" then
+                pcall(event)
+            end
         end
     end, delay)
 end
