@@ -129,22 +129,27 @@ end
 
 function config.gotools()
     require("gotools").setup({
-        tools = {
-            gotests = {
-                bin = require "mason-core.path".bin_prefix() .. "/" .. "gotests",
+        gotests = {
+            bin = require "mason-core.path".bin_prefix() .. "/" .. "gotests",
+            win_opts = {
+                prompt = 'Select An Action',
+                kind = 'gotools'
             },
-            gomodifytags = {
-                bin = require "mason-core.path".bin_prefix() .. "/" .. "gomodifytags",
-                skip_unexported = true,
+        },
+        gomodifytags = {
+            bin = require "mason-core.path".bin_prefix() .. "/" .. "gomodifytags",
+            skip_unexported = true,
+            win_opts = {
+                prompt = 'Tags:',
             },
-            impl = {
-                bin = require "mason-core.path".bin_prefix() .. "/" .. "impl",
-            }
         },
-        select_opts = {
-            prompt = 'Select An Action',
-            kind = 'gotools'
-        },
+        impl = {
+            bin = require "mason-core.path".bin_prefix() .. "/" .. "impl",
+            win_opts = {
+                prompt = 'Select An Action',
+                kind = 'gotools'
+            },
+        }
     })
 
     require("dressing.select.telescope").custom_kind["gotools"] = function(opts, defaults, items)
@@ -305,43 +310,43 @@ end
 function config.fidget(plugin, opts)
     require "fidget".setup({
         text = {
-            spinner = "pipe", -- animation shown when tasks are ongoing
-            done = "󰞑 ", -- character shown when all tasks are complete
-            commenced = "Started", -- message shown when task starts
+            spinner = "pipe",        -- animation shown when tasks are ongoing
+            done = "󰞑 ",          -- character shown when all tasks are complete
+            commenced = "Started",   -- message shown when task starts
             completed = "Completed", -- message shown when task completes
         },
         align = {
             bottom = true, -- align fidgets along bottom edge of buffer
-            right = true, -- align fidgets along right edge of buffer
+            right = true,  -- align fidgets along right edge of buffer
         },
         timer = {
-            spinner_rate = 125, -- frame rate of spinner animation, in ms
+            spinner_rate = 125,  -- frame rate of spinner animation, in ms
             fidget_decay = 2000, -- how long to keep around empty fidget, in ms
-            task_decay = 1000, -- how long to keep around completed task, in ms
+            task_decay = 1000,   -- how long to keep around completed task, in ms
         },
         window = {
             relative = "win", -- where to anchor, either "win" or "editor"
-            blend = 100, -- &winblend for the window
-            zindex = nil, -- the zindex value for the window
-            border = "none", -- style of border for the fidget window
+            blend = 100,      -- &winblend for the window
+            zindex = nil,     -- the zindex value for the window
+            border = "none",  -- style of border for the fidget window
         },
         fmt = {
-            leftpad = true, -- right-justify text in fidget box
+            leftpad = true,       -- right-justify text in fidget box
             stack_upwards = true, -- list of tasks grows upwards
-            max_width = 0, -- maximum width of the fidget box
-            fidget = -- function to format fidget title
-            function(fidget_name, spinner)
-                return string.format("%s %s", spinner, fidget_name)
-            end,
+            max_width = 0,        -- maximum width of the fidget box
+            fidget =              -- function to format fidget title
+                function(fidget_name, spinner)
+                    return string.format("%s %s", spinner, fidget_name)
+                end,
             task = -- function to format each task line
-            function(task_name, message, percentage)
-                return string.format(
-                    "%s%s [%s]",
-                    message,
-                    percentage and string.format(" (%s%%)", percentage) or "",
-                    task_name
-                )
-            end,
+                function(task_name, message, percentage)
+                    return string.format(
+                        "%s%s [%s]",
+                        message,
+                        percentage and string.format(" (%s%%)", percentage) or "",
+                        task_name
+                    )
+                end,
         }
     })
 end
@@ -372,7 +377,6 @@ function config.barbecue(plugin, opts)
             ---
             ---@type string
             dirname = ":~:.",
-
             ---Filename modifiers applied to basename.
             ---
             ---See: `:help filename-modifiers`
@@ -476,17 +480,14 @@ function config.barbecue(plugin, opts)
             -- you can take advantage of its `bg` and set a background throughout your winbar
             -- (e.g. basename will look like this: { fg = "#c0caf5", bold = true })
             normal = { fg = "#bdae93", bg = "#32302f" },
-
             -- these highlights correspond to symbols table from config
             ellipsis = { fg = "#bdae93" },
             separator = { fg = "#737aa2" },
             modified = { fg = "#fb4934" },
-
             -- these highlights represent the _text_ of three main parts of barbecue
             dirname = { fg = "#83a598" },
             basename = { bold = true },
             context = {},
-
             -- these highlights are used for context/navic icons
             context_module = { fg = "#fe8019" },
             context_field = { fg = "#d3869b" },
@@ -524,12 +525,10 @@ function config.barbecue(plugin, opts)
             ---
             ---@type string
             modified = "●",
-
             ---Truncation indicator.
             ---
             ---@type string
             ellipsis = "…",
-
             ---Entry separator.
             ---
             ---@type string
@@ -571,7 +570,6 @@ function config.barbecue(plugin, opts)
             TypeParameter = codicons.get("symbol-type-parameter"),
             Component     = codicons.get("symbol-misc"),
             Fragment      = codicons.get("symbol-misc"),
-
         },
     })
 end

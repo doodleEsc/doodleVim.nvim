@@ -32,7 +32,7 @@ ui['goolord/alpha-nvim'] = {
 
 ui['nvim-lualine/lualine.nvim'] = {
     lazy = true,
-    event = "BufReadPost",
+    event = { "User DeferStart", "BufReadPost" },
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = conf.lualine,
 }
