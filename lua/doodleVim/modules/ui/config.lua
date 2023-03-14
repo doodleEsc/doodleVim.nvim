@@ -54,14 +54,14 @@ function config.todo()
         -- keywords recognized as todo comments
         keywords = {
             FIX = {
-                icon = codicons.get("bug"), -- icon used for the sign, and in search results
+                icon = codicons.get("tools"), -- icon used for the sign, and in search results
                 color = "error", -- can be a hex color, or a named color (see below)
                 alt = {
                     "FIXME", "BUG", "FIXIT", "ISSUE", "ERROR",
                 }, -- a set of other keywords that all map to this FIX keywords
                 -- signs = false, -- configure signs for some keywords individually
             },
-            TODO = { icon = codicons.get("check"), color = "info" },
+            TODO = { icon = codicons.get("checklist"), color = "info" },
             HACK = { icon = codicons.get("flame"), color = "warning" },
             WARN = { icon = codicons.get("warning"), color = "warning", alt = { "WARNING", "XXX" } },
             PERF = { icon = codicons.get("clock"), color = "default", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
