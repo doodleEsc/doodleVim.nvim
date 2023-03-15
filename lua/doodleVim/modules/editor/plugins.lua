@@ -27,12 +27,6 @@ editor['karb94/neoscroll.nvim'] = {
     config = conf.neoscroll,
 }
 
-editor['jakewvincent/mkdnflow.nvim'] = {
-    lazy = true,
-    ft = "markdown",
-    config = conf.mkdnflow
-}
-
 editor['kylechui/nvim-surround'] = {
     lazy = true,
     event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
