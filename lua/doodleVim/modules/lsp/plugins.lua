@@ -24,6 +24,7 @@ lsp['neovim/nvim-lspconfig'] = {
 
 lsp['j-hui/fidget.nvim'] = {
     lazy = true,
+    enabled = false,
     config = conf.fidget
 }
 
