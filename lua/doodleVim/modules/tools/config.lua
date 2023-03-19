@@ -912,7 +912,7 @@ function config.dapui()
             {
                 elements = {
                     "repl",
-                    "console",
+                    -- "console",
                 },
                 size = 10,
                 position = "bottom", -- Can be "bottom" or "top"
