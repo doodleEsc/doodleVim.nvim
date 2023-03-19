@@ -17,8 +17,14 @@ function config.lspconfig(plugin, opts)
     }
 
     local function setup(server)
-        local server_opts = servers[server] or {}
-        server_opts.capabilities = capabilities
+        local server_opts = vim.tbl_deep_extend("force", {
+            capabilities = vim.deepcopy(capabilities),
+        }, servers[server] or {})
+
+        if server_opts.disabled then
+            return
+        end
+
         if opts.setup then
             if opts.setup[server] then
                 if opts.setup[server](server, server_opts) then
@@ -572,6 +578,72 @@ function config.barbecue(plugin, opts)
             Fragment      = codicons.get("symbol-misc"),
         },
     })
+end
+
+function config.jdtls(plugin, opts)
+    -- local jdtls_path = require("mason-core.path").bin_prefix("jdtls")
+    local function trim(s)
+        return (s:gsub("^%s*(.-)%s*$", "%1"))
+    end
+
+    local java_debug_path = require("mason-core.path").package_prefix("java-debug-adapter")
+    local jdtls_path = require("mason-core.path").package_prefix("jdtls")
+
+    local java_debug_jar_path = trim(vim.fn.system({
+        "find", java_debug_path .. "/extension/server", "-name", "com.microsoft.java.debug.plugin-*.jar"
+    }))
+
+    local jdtls_jar_path = trim(vim.fn.system({
+        "find", jdtls_path .. "/plugins", "-name", "org.eclipse.equinox.launcher_*.jar"
+    }))
+
+    local os_name = vim.loop.os_uname().sysname
+    local system = os_name == "Linux" and "linux" or os_name == "Windows" and "win" or "mac"
+    local config_path = jdtls_path .. "/config_" .. system
+    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+    local workspace = vim.env.HOME .. "/.cache/jdtls/workspace/" .. project_name
+    local lombok_jar = jdtls_path .. "/plugins/" .. "lombok.jar"
+
+    local javaagent = "-javaagent:" .. lombok_jar
+    local Xbootclasspath = "-Xbootclasspath/a:" .. lombok_jar
+
+    local conf = {
+        cmd = {
+            'java',
+            '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+            '-Dosgi.bundles.defaultStartLevel=4',
+            '-Declipse.product=org.eclipse.jdt.ls.core.product',
+            '-Dlog.protocol=true',
+            '-Dlog.level=ALL',
+            '-Xms1g',
+            '--add-modules=ALL-SYSTEM',
+            '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+            javaagent,
+            Xbootclasspath,
+            '-jar', jdtls_jar_path,
+            '-configuration', config_path,
+            '-data', workspace
+        },
+        root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+        init_options = {
+            bundles = { vim.fn.glob(java_debug_jar_path, 1) }
+        },
+        on_attach = function(client, bufnr)
+            require('jdtls').setup_dap({
+                hotcodereplace = 'auto',
+            })
+            require('jdtls.dap').setup_dap_main_class_configs({
+                on_ready = function()
+                    local dap = require("dap")
+                    for _, java_config in pairs(dap.configurations.java) do
+                        java_config.console = 'internalConsole'
+                    end
+                end
+            })
+        end
+    }
+    require('jdtls').start_or_attach(conf)
 end
 
 return config
