@@ -75,7 +75,11 @@ function M.contains(tab, val)
 end
 
 function M.has(plugin)
-  return require("lazy.core.config").plugins[plugin] ~= nil
+    return require("lazy.core.config").plugins[plugin] ~= nil
+end
+
+function M.trim(s)
+    return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
 
 return M

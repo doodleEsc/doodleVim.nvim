@@ -582,9 +582,10 @@ end
 
 function config.jdtls(plugin, opts)
     -- local jdtls_path = require("mason-core.path").bin_prefix("jdtls")
-    local function trim(s)
-        return (s:gsub("^%s*(.-)%s*$", "%1"))
-    end
+    -- local function trim(s)
+    --     return (s:gsub("^%s*(.-)%s*$", "%1"))
+    -- end
+    local trim = require("doodleVim.utils.utils").trim
 
     local java_debug_path = require("mason-core.path").package_prefix("java-debug-adapter")
     local jdtls_path = require("mason-core.path").package_prefix("jdtls")

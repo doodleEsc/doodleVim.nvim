@@ -262,7 +262,7 @@ end
 local hydra_factories = {
     -- neorg = neorg_hydra_factory,
     venn = venn_hydra_factory,
-    dap = dap_hydra_factory,
+    -- dap = dap_hydra_factory,
     gitsigns = gitsign_hydra_factory,
     telescope = telescope_hydra_factory,
 }
