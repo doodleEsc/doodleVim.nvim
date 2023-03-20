@@ -933,7 +933,8 @@ function config.dapui()
                 step_out = codicons.get("debug-step-out"),
                 step_back = codicons.get("debug-step-back"),
                 run_last = codicons.get("debug-rerun"),
-                terminate = codicons.get("debug-disconnect"),
+                terminate = codicons.get("debug-stop"),
+                disconnect = codicons.get("debug-disconnect"),
             },
         },
         render = {
@@ -1051,7 +1052,7 @@ function config.breakpoints(plugin, opts)
     require('persistent-breakpoints').setup {
         save_dir = vim.fn.stdpath('data') .. '/nvim_checkpoints',
         -- when to load the breakpoints? "BufReadPost" is recommanded.
-        load_breakpoints_event = {"User DeferLoadStuff"},
+        load_breakpoints_event = { "User DeferLoadStuff" },
         -- record the performance of different function. run :lua require('persistent-breakpoints.api').print_perf_data() to see the result.
         perf_record = false,
     }
