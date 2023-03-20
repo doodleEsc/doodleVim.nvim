@@ -12,6 +12,7 @@ local UserDefinedEvent = {
             api.nvim_exec_autocmds("User", { pattern = "DeferStartWithFile", modeline = false })
         end
     end,
+    "DeferLoadStuff"
 }
 
 local do_load = function()

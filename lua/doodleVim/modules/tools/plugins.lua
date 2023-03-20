@@ -77,7 +77,6 @@ tools['anuvyklack/hydra.nvim'] = {
     dependencies = {
         'jbyuki/venn.nvim',
         'nvim-telescope/telescope.nvim',
-        'mfussenegger/nvim-dap',
         'lewis6991/gitsigns.nvim',
     },
     config = conf.hydra
@@ -134,6 +133,12 @@ tools['rcarriga/nvim-dap-ui'] = {
     init = function(plugin)
         vim.g.dapui_setup = false
     end,
+}
+
+tools['Weissle/persistent-breakpoints.nvim'] = {
+    lazy = true,
+    event = "User DeferStartWithFile",
+    config = conf.breakpoints
 }
 
 tools["dstein64/vim-startuptime"] = {
