@@ -581,30 +581,36 @@ function config.barbecue(plugin, opts)
 end
 
 function config.jdtls(plugin, opts)
-    -- local jdtls_path = require("mason-core.path").bin_prefix("jdtls")
-    -- local function trim(s)
-    --     return (s:gsub("^%s*(.-)%s*$", "%1"))
-    -- end
     local trim = require("doodleVim.utils.utils").trim
 
-    local java_debug_path = require("mason-core.path").package_prefix("java-debug-adapter")
+    -- get current system
+    local os_name = vim.loop.os_uname().sysname
+    local system = os_name == "Linux" and "linux" or os_name == "Windows" and "win" or "mac"
+
+    -- get jdtls and config jar path
     local jdtls_path = require("mason-core.path").package_prefix("jdtls")
-
-    local java_debug_jar_path = trim(vim.fn.system({
-        "find", java_debug_path .. "/extension/server", "-name", "com.microsoft.java.debug.plugin-*.jar"
-    }))
-
     local jdtls_jar_path = trim(vim.fn.system({
         "find", jdtls_path .. "/plugins", "-name", "org.eclipse.equinox.launcher_*.jar"
     }))
-
-    local os_name = vim.loop.os_uname().sysname
-    local system = os_name == "Linux" and "linux" or os_name == "Windows" and "win" or "mac"
     local config_path = jdtls_path .. "/config_" .. system
+
+    -- get bundles
+    local java_debug_path = require("mason-core.path").package_prefix("java-debug-adapter")
+    local java_test_path = require("mason-core.path").package_prefix("java-test")
+    local java_debug_jar_path = trim(vim.fn.system({
+        "find", java_debug_path .. "/extension/server", "-name", "com.microsoft.java.debug.plugin-*.jar"
+    }))
+    local bundles = {
+        vim.fn.glob(java_debug_jar_path, 1),
+    }
+    vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_path .. "/extension/server/*.jar", 1), "\n"))
+
+    -- get project workspace
     local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
     local workspace = vim.env.HOME .. "/.cache/jdtls/workspace/" .. project_name
-    local lombok_jar = jdtls_path .. "/plugins/" .. "lombok.jar"
 
+    -- get lombok path
+    local lombok_jar = jdtls_path .. "/plugins/" .. "lombok.jar"
     local javaagent = "-javaagent:" .. lombok_jar
     local Xbootclasspath = "-Xbootclasspath/a:" .. lombok_jar
 
@@ -628,7 +634,7 @@ function config.jdtls(plugin, opts)
         },
         root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
         init_options = {
-            bundles = { vim.fn.glob(java_debug_jar_path, 1) }
+            bundles = bundles,
         },
         on_attach = function(client, bufnr)
             require('jdtls').setup_dap({
