@@ -9,7 +9,8 @@ base['nvim-lua/plenary.nvim'] = { lazy = true }
 
 base['stevearc/dressing.nvim'] = {
     lazy = true,
-    event = "VeryLazy",
+    -- event = "VeryLazy",
+    event = "User LazyVimStarted",
     dependencies = {
         'MunifTanjim/nui.nvim',
     },
@@ -20,13 +21,12 @@ base['nathom/filetype.nvim'] = {}
 
 base['MunifTanjim/nui.nvim'] = {
     lazy = true,
-    -- event = "VeryLazy",
-    -- config = conf.nui
 }
 
 base['rcarriga/nvim-notify'] = {
     lazy = true,
-    event = "VeryLazy",
+    -- event = "VeryLazy",
+    event = "User LazyVimStarted",
     dependencies = {
         'mortepau/codicons.nvim'
     },
