@@ -1058,13 +1058,6 @@ function config.breakpoints(plugin, opts)
     }
 end
 
-function config.cellular(plugin, opts)
 
-    local scramble = require("doodleVim.extend.animations.scramble")
-    local slide = require("doodleVim.extend.animations.slide")
-
-    require("cellular-automaton").register_animation(slide)
-    require("cellular-automaton").register_animation(scramble)
-end
 
 return config
