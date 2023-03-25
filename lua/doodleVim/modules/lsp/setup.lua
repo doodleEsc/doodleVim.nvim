@@ -16,7 +16,9 @@ function lsp.mason(plugin)
             'ruff',
             'solhint',
             'jdtls',
-            'java-debug-adapter'
+            'java-debug-adapter',
+            'java-test',
+            'xmlformatter'
         }
         local register = require('mason-registry')
         local bins = ''
