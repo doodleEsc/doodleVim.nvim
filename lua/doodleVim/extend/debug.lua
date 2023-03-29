@@ -2,6 +2,7 @@ local M = {}
 local defer = require("doodleVim.utils.defer")
 
 M.workersMap = {}
+M.testDebugFns = {}
 
 function M.enable_debug_mode()
     defer.emit_user_event("StartDebug")
@@ -25,6 +26,22 @@ function M.load_worker()
             end
         end
     end
+end
+
+function M.register_test_fn_debug(ft, fn)
+    if M.testDebugFns[ft] == nil then
+        M.testDebugFns[ft] = fn
+    end
+end
+
+function M.debug_test()
+    local ft = vim.bo.filetype
+    local fn = M.testDebugFns[ft]
+    if fn ~= nil and type(fn) == "function" then
+        pcall(fn)
+        return
+    end
+    vim.notify("No Test Debug Function Found For FileType: " .. ft, vim.log.levels.WARN)
 end
 
 function M.wrapped_command(cmd)

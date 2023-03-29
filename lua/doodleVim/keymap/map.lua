@@ -275,6 +275,7 @@ map.Neogen = {
 map.Dap = {
     n = {
         ["<leader>dd"] = map_cr('lua require("doodleVim.extend.debug").enable_debug_mode()'):with_noremap():with_silent():with_label("Start Debug Mode"),
+        ["<leader>dt"] = map_cr('lua require("doodleVim.extend.debug").debug_test()'):with_noremap():with_silent():with_label("Debug Test"),
         ["<F5>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("DapContinue")'):with_noremap():with_silent():with_label("Debug Continue"),
         ["<S-F5>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("DapTerminate")'):with_noremap():with_silent():with_label("Debug Terminate"),
         ["<F6>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("DapRestartFrame")'):with_noremap():with_silent():with_label("Debug Restart Frame"),
@@ -283,6 +284,9 @@ map.Dap = {
         ["<F10>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("DapStepOver")'):with_noremap():with_silent():with_label("Run Step Over"),
         ["<F11>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("DapStepInto")'):with_noremap():with_silent():with_label("Run Step Into"),
         ["<S-F11>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("DapStepOut")'):with_noremap():with_silent():with_label("Run Step Out"),
+    },
+    x = {
+        ["<leader>dt"] = map_cr('lua require("doodleVim.extend.debug").debug_test()'):with_noremap():with_silent():with_label("Debug Test"),
     }
 }
 

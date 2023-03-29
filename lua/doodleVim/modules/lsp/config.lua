@@ -654,6 +654,19 @@ function config.jdtls(plugin, opts)
         end
     }
     require('jdtls').start_or_attach(conf)
+
+    require("doodleVim.extend.debug").register_test_fn_debug("java", function()
+        vim.ui.select({ "Nearest", "Class"},
+            { prompt = "Select Test Type", format_item = function(item) return " " .. item end },
+            function(choice)
+                if choice == "Nearest" then
+                    require'jdtls'.test_nearest_method()
+                elseif choice == "Class" then
+                    require'jdtls'.test_class()
+                end
+            end
+        )
+    end)
 end
 
 return config
