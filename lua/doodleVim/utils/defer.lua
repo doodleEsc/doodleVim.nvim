@@ -55,16 +55,20 @@ function M.register(module, plugin)
     end
 end
 
-function M.emit_user_event(delay)
+function M.defer_emit_user_event(delay)
     vim.defer_fn(function()
         for _, event in ipairs(UserDefinedEvent) do
-            if type(event) == "string" then
-                api.nvim_exec_autocmds("User", { pattern = event, modeline = false })
-            elseif type(event) == "function" then
-                pcall(event)
-            end
+            M.emit_user_event(event)
         end
     end, delay)
+end
+
+function M.emit_user_event(event)
+    if type(event) == "string" then
+        api.nvim_exec_autocmds("User", { pattern = event, modeline = false })
+    elseif type(event) == "function" then
+        pcall(event)
+    end
 end
 
 function M.optimisticLoad(plugins)

@@ -590,29 +590,29 @@ function config.jdtls(plugin, opts)
     local system = os_name == "Linux" and "linux" or os_name == "Windows" and "win" or "mac"
 
     -- get jdtls and config jar path
-    local jdtls_path = require("mason-core.path").package_prefix("jdtls")
+    local jdtls_home = require("mason-core.path").package_prefix("jdtls")
     local jdtls_jar_path = trim(vim.fn.system({
-        "find", jdtls_path .. "/plugins", "-name", "org.eclipse.equinox.launcher_*.jar"
+        "find", jdtls_home .. "/plugins", "-name", "org.eclipse.equinox.launcher_*.jar"
     }))
-    local config_path = jdtls_path .. "/config_" .. system
+    local config_path = jdtls_home .. "/config_" .. system
 
     -- get bundles
-    local java_debug_path = require("mason-core.path").package_prefix("java-debug-adapter")
-    local java_test_path = require("mason-core.path").package_prefix("java-test")
+    local java_debug_home = require("mason-core.path").package_prefix("java-debug-adapter")
+    local java_test_home = require("mason-core.path").package_prefix("java-test")
     local java_debug_jar_path = trim(vim.fn.system({
-        "find", java_debug_path .. "/extension/server", "-name", "com.microsoft.java.debug.plugin-*.jar"
+        "find", java_debug_home .. "/extension/server", "-name", "com.microsoft.java.debug.plugin-*.jar"
     }))
     local bundles = {
         vim.fn.glob(java_debug_jar_path, 1),
     }
-    vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_path .. "/extension/server/*.jar", 1), "\n"))
+    vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_home .. "/extension/server/*.jar", 1), "\n"))
 
     -- get project workspace
     local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
     local workspace = vim.env.HOME .. "/.cache/jdtls/workspace/" .. project_name
 
     -- get lombok path
-    local lombok_jar = jdtls_path .. "/plugins/" .. "lombok.jar"
+    local lombok_jar = jdtls_home .. "/plugins/" .. "lombok.jar"
     local javaagent = "-javaagent:" .. lombok_jar
     local Xbootclasspath = "-Xbootclasspath/a:" .. lombok_jar
 

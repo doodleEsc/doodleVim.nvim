@@ -126,11 +126,11 @@ map.SymbolsOutline = {
 
 map.Diagnostic = {
     n = {
-        ["<leader>d"] = {
+        ["<leader>e"] = {
             name = "Show Diagnostics",
-            d = map_cr("Telescope diagnostics bufnr=0"):with_noremap():with_silent():with_label(
+            e = map_cr("Telescope diagnostics bufnr=0"):with_noremap():with_silent():with_label(
                 "Show Diagnostics In Current Buffer"),
-            e = map_cr("Telescope diagnostics"):with_noremap():with_silent():with_label("Show Diagnostics In WorkSpace"),
+            w = map_cr("Telescope diagnostics"):with_noremap():with_silent():with_label("Show Diagnostics In WorkSpace"),
             f = map_cr("lua require('doodleVim.extend.diagnostics').toggle_virtual_text()"):
             with_noremap():with_silent():with_label("Toggle Diagnostics Virtual Text"),
         },
@@ -274,14 +274,15 @@ map.Neogen = {
 
 map.Dap = {
     n = {
-        ["<F5>"] = map_cr('DapContinue'):with_noremap():with_silent():with_label("Debug Continue"),
-        ["<S-F5>"] = map_cr('DapTerminate'):with_noremap():with_silent():with_label("Debug Terminate"),
-        ["<F6>"] = map_cr('DapRestartFrame'):with_noremap():with_silent():with_label("Debug Restart Frame"),
-        ["<F9>"] = map_cr('PBToggleBreakpoint'):with_noremap():with_silent():with_label("Toggle Breakpoint"),
-        ["<S-F9>"] = map_cr('PBClearAllBreakpoints'):with_noremap():with_silent():with_label("Clean All Breakpoint"),
-        ["<F10>"] = map_cr('DapStepOver'):with_noremap():with_silent():with_label("Run Step Over"),
-        ["<F11>"] = map_cr('DapStepInto'):with_noremap():with_silent():with_label("Run Step Into"),
-        ["<S-F11>"] = map_cr('DapStepOut'):with_noremap():with_silent():with_label("Run Step Out"),
+        ["<leader>dd"] = map_cr('lua require("doodleVim.extend.debug").enable_debug_mode()'):with_noremap():with_silent():with_label("Start Debug Mode"),
+        ["<F5>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("DapContinue")'):with_noremap():with_silent():with_label("Debug Continue"),
+        ["<S-F5>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("DapTerminate")'):with_noremap():with_silent():with_label("Debug Terminate"),
+        ["<F6>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("DapRestartFrame")'):with_noremap():with_silent():with_label("Debug Restart Frame"),
+        ["<F9>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("PBToggleBreakpoint")'):with_noremap():with_silent():with_label("Toggle Breakpoint"),
+        ["<S-F9>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("PBClearAllBreakpoints")'):with_noremap():with_silent():with_label("Clean All Breakpoint"),
+        ["<F10>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("DapStepOver")'):with_noremap():with_silent():with_label("Run Step Over"),
+        ["<F11>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("DapStepInto")'):with_noremap():with_silent():with_label("Run Step Into"),
+        ["<S-F11>"] = map_cr('lua require("doodleVim.extend.debug").wrapped_command("DapStepOut")'):with_noremap():with_silent():with_label("Run Step Out"),
     }
 }
 
