@@ -1067,6 +1067,21 @@ function config.dap_python(plugin, opts)
     for _, pyconfig in pairs(require("dap").configurations.python) do
         pyconfig.console = 'internalConsole'
     end
+
+    require("doodleVim.extend.debug").register_test_fn_debug("python", function()
+        vim.ui.select({ "Method", "Class", "Selection" },
+            { prompt = "Select Test Type", format_item = function(item) return " " .. item end },
+            function(choice)
+                if choice == "Method" then
+                    require('dap-python').test_method() 
+                elseif choice == "Class" then
+                    require('dap-python').test_class()
+                else
+                    require('dap-python').debug_selection()
+                end
+            end
+        )
+    end)
 end
 
 function config.dap_go(plugin, opts)
@@ -1074,6 +1089,18 @@ function config.dap_go(plugin, opts)
     for _, goconfig in pairs(require("dap").configurations.go) do
         goconfig.console = 'internalConsole'
     end
+    require("doodleVim.extend.debug").register_test_fn_debug("go", function()
+        vim.ui.select({ "Nearest", "Recent"},
+            { prompt = "Select Test Type", format_item = function(item) return " " .. item end },
+            function(choice)
+                if choice == "Nearest" then
+                    require('dap-go').debug_test()
+                elseif choice == "Recent" then
+                    require('dap-go').debug_last_test()
+                end
+            end
+        )
+    end)
 end
 
 return config
