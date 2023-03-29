@@ -947,11 +947,8 @@ end
 
 function config.dap()
     local codicons = require("codicons")
-    require("doodleVim.extend.debugger").load_debuggers({
-        "go",
-        "python"
-    })
 
+    -- setup sign
     vim.fn.sign_define('DapBreakpoint',
         { text = codicons.get("debug-breakpoint"), texthl = 'GruvboxRedSign', linehl = '', numhl = '' })
     vim.fn.sign_define("DapBreakpointCondition",
@@ -963,6 +960,7 @@ function config.dap()
     vim.fn.sign_define('DapStopped',
         { text = codicons.get("debug-continue"), texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
 
+    -- setup dapui
     local dap, dapui = require "dap", require "dapui"
     dap.listeners.after.event_initialized["dapui_config"] = function()
         if not vim.g.dapui_setup then
@@ -993,6 +991,9 @@ function config.dap()
         end
         dapui.close()
     end
+
+    -- setup adapter
+    require("doodleVim.extend.debug").load_worker()
 end
 
 function config.nvim_ufo(plugin, opts)
@@ -1058,6 +1059,21 @@ function config.breakpoints(plugin, opts)
     }
 end
 
+function config.dap_python(plugin, opts)
+    local debugpy_home = require("mason-core.path").package_prefix("debugpy")
+    local python_venv_bin = debugpy_home .. "/venv/bin/python"
+    require('dap-python').setup(python_venv_bin)
 
+    for _, pyconfig in pairs(require("dap").configurations.python) do
+        pyconfig.console = 'internalConsole'
+    end
+end
+
+function config.dap_go(plugin, opts)
+    require('dap-go').setup()
+    for _, goconfig in pairs(require("dap").configurations.go) do
+        goconfig.console = 'internalConsole'
+    end
+end
 
 return config

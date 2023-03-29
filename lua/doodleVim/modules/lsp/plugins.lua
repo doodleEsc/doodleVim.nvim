@@ -38,7 +38,7 @@ lsp['j-hui/fidget.nvim'] = {
 lsp['mfussenegger/nvim-jdtls'] = {
     lazy = true,
     dependencies = {
-        'mfussenegger/nvim-dap',
+        -- 'mfussenegger/nvim-dap',
         'williamboman/mason.nvim',
     },
     ft = "java",

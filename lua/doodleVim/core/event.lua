@@ -101,7 +101,7 @@ function autocmd.load_autocmds()
                 opts = {
                     pattern = "*",
                     callback = function()
-                        require('doodleVim.utils.defer').emit_user_event(150)
+                        require('doodleVim.utils.defer').defer_emit_user_event(150)
                     end
                 }
             },
