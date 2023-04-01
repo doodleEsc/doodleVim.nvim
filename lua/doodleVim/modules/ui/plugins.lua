@@ -49,7 +49,7 @@ ui['romgrk/barbar.nvim'] = {
     dependencies = {
         'nvim-tree/nvim-web-devicons',
     },
-    init = setup.barbar,
+    config = conf.barbar,
 }
 
 ui['lukas-reineke/indent-blankline.nvim'] = {
