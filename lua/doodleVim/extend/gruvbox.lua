@@ -8,32 +8,36 @@ gruvbox.palette_overrides = {
 }
 
 gruvbox.overrides = {
-    LightBulb = { link = "GruvboxYellowSign" },
-    FloatBorder = { link = "GruvboxBlue" },
-    FloatermBorder = { link = "GruvboxOrange" },
-    CodewindowBorder = { fg = "#665c54" },
-    RenamerNormal = { link = "Normal" },
-    RenamerBorder = { link = "GruvboxBlue" },
-    RenamerTitle = { link = "Title" },
-    Pmenu = { link = "Normal" },
+    LightBulb               = { link = "GruvboxYellowSign" },
+    FloatBorder             = { link = "GruvboxBlue" },
+    FloatermBorder          = { link = "GruvboxOrange" },
+    CodewindowBorder        = { fg = "#665c54" },
+    RenamerNormal           = { link = "Normal" },
+    RenamerBorder           = { link = "GruvboxBlue" },
+    RenamerTitle            = { link = "Title" },
+    Pmenu                   = { link = "Normal" },
     -- Telescope
-    TelescopeNormal = { link = "GruvboxBlue" },
-    TelescopeSelection = { link = "GruvboxYellowBold" },
+    TelescopeNormal         = { link = "GruvboxBlue" },
+    TelescopeSelection      = { link = "GruvboxYellowBold" },
     TelescopeMultiSelection = { link = "GruvboxGray" },
     TelescopeSelectionCaret = { link = "GruvboxRed" },
-    TelescopeBorder = { link = "TelescopeNormal" },
-    TelescopePromptBorder = { link = "TelescopeNormal" },
-    TelescopeResultsBorder = { link = "TelescopeNormal" },
-    TelescopePreviewBorder = { link = "TelescopeNormal" },
-    TelescopeMatching = { link = "GruvboxRedBold" },
-    TelescopePromptPrefix = { link = "GruvboxRed" },
-    TelescopePrompt = { link = "TelescopeNormal" },
+    TelescopeBorder         = { link = "TelescopeNormal" },
+    TelescopePromptBorder   = { link = "TelescopeNormal" },
+    TelescopeResultsBorder  = { link = "TelescopeNormal" },
+    TelescopePreviewBorder  = { link = "TelescopeNormal" },
+    TelescopeMatching       = { link = "GruvboxRedBold" },
+    TelescopePromptPrefix   = { link = "GruvboxRed" },
+    TelescopePrompt         = { link = "TelescopeNormal" },
     -- NvimTree
-    NvimTreeOpenedFile = { fg = "#b8bb26", bold = true },
+    NvimTreeOpenedFile      = { fg = "#b8bb26", bold = true },
     -- Diagnostic
-    DiagnosticHeader = { link = "GruvboxBlue" },
+    DiagnosticHeader        = { link = "GruvboxBlue" },
     -- marks
-    MarkSignHL = { link = "GruvboxPurpleSign" }
+    MarkSignHL              = { link = "GruvboxPurpleSign" },
+    -- LspReference
+    LspReferenceRead        = { bold = true, bg = "#504945", },
+    LspReferenceText        = { bold = true, bg = "#504945", },
+    LspReferenceWrite       = { bold = true, bg = "#504945", },
 }
 
 
@@ -61,7 +65,7 @@ gruvbox.dump = function()
         return
     end
     for group, hl in pairs(groups) do
-        local line = "api.nvim_set_hl(0, '" .. group .. "', " .. vim.inspect(hl, {newline="", indent=" "}) .. ")\n"
+        local line = "api.nvim_set_hl(0, '" .. group .. "', " .. vim.inspect(hl, { newline = "", indent = " " }) .. ")\n"
         if file ~= nil then
             file:write(line)
         else

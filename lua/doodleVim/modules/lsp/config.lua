@@ -7,6 +7,7 @@ function config.lspconfig(plugin, opts)
     handler.lsp_hover()
     handler.lsp_diagnostic()
     handler.null_ls_depress()
+    handler.lsp_highlight_document()
 
     local servers = opts.servers or {}
     local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())

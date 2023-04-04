@@ -2,6 +2,24 @@ local M = {}
 
 local codicons = require("codicons")
 
+M.lsp_highlight_document = function()
+    require("doodleVim.extend.lsp").register_on_attach(function(client, bufnr)
+        if client.server_capabilities.documentHighlightProvider then
+            vim.api.nvim_exec(
+                [[
+                  augroup lsp_document_highlight
+                    autocmd! * <buffer>
+                    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+                    autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+                    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+                  augroup END
+                ]],
+                false
+            )
+        end
+    end)
+end
+
 M.lsp_hover = function()
     vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 end
