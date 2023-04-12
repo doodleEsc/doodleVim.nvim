@@ -172,17 +172,23 @@ function config.nvim_tree()
         hijack_cursor = true,
         hijack_netrw = true,
         hijack_unnamed_buffer_when_opening = false,
-        ignore_buffer_on_setup = false,
-        open_on_setup = false,
-        open_on_setup_file = false,
-        open_on_tab = false,
+        -- ignore_buffer_on_setup = false,
+        -- open_on_setup = false,
+        -- open_on_setup_file = false,
+        -- open_on_tab = false,
         sort_by = "name",
         update_cwd = true,
         reload_on_bufenter = true,
         respect_buf_cwd = true,
         prefer_startup_root = false,
         sync_root_with_cwd = true,
+        root_dirs = {},
+        on_attach = "default",
+        remove_keymaps = false,
+        select_prompts = false,
         view = {
+            cursorline = true,
+            debounce_delay = 15,
             adaptive_size = false,
             centralize_selection = true,
             width = 30,
@@ -233,25 +239,44 @@ function config.nvim_tree()
 
                 },
             },
+            float = {
+                enable = false,
+                quit_on_focus_loss = true,
+                open_win_config = {
+                    relative = "editor",
+                    border = "rounded",
+                    width = 30,
+                    height = 30,
+                    row = 1,
+                    col = 1,
+                },
+            },
         },
         renderer = {
+            full_name = false,
+            highlight_modified = "all",
+            root_folder_label = ":~:s?$?/..?",
+            indent_width = 2,
+            indent_markers = {
+                enable = true,
+                inline_arrows = true,
+                icons = {
+                    corner = "└",
+                    edge = "│",
+                    item = "│",
+                    bottom = "─",
+                    none = " ",
+                },
+            },
             add_trailing = false,
             group_empty = false,
             highlight_git = true,
             highlight_opened_files = "all",
             root_folder_modifier = ":~",
-            indent_markers = {
-                enable = true,
-                icons = {
-                    corner = "└",
-                    edge = "│",
-                    item = "│",
-                    none = " ",
-                },
-            },
             icons = {
                 webdev_colors = true,
                 git_placement = "signcolumn",
+                modified_placement = "after",
                 padding = " ",
                 symlink_arrow = codicons.get("arrow-small-right"),
                 show = {
@@ -259,11 +284,13 @@ function config.nvim_tree()
                     folder = true,
                     folder_arrow = true,
                     git = true,
+                    modified = true,
                 },
                 glyphs = {
                     default = codicons.get("file"),
                     symlink = codicons.get("file-symlink-file"),
                     bookmark = codicons.get("bookmark"),
+                    modified = "●",
                     folder = {
                         arrow_closed = "",
                         arrow_open = "",
@@ -297,7 +324,7 @@ function config.nvim_tree()
             update_cwd = true,
             ignore_list = {},
         },
-        ignore_ft_on_setup = {},
+        -- ignore_ft_on_setup = {},
         system_open = {
             cmd = "",
             args = {},
@@ -305,6 +332,12 @@ function config.nvim_tree()
         diagnostics = {
             enable = true,
             show_on_dirs = false,
+            show_on_open_dirs = true,
+            debounce_delay = 50,
+            severity = {
+                -- min = vim.diagnostic.severity.HINT,
+                max = vim.diagnostic.severity.ERROR,
+            },
             icons = {
                 hint = codicons.get("question"),
                 info = codicons.get("info"),
@@ -314,17 +347,27 @@ function config.nvim_tree()
         },
         filters = {
             dotfiles = false,
+            git_clean = false,
+            no_buffer = false,
             custom = {},
             exclude = {},
         },
         filesystem_watchers = {
             enable = true,
             debounce_delay = 100,
+            ignore_dirs = {},
         },
         git = {
             enable = true,
             ignore = false,
             timeout = 200,
+            show_on_dirs = true,
+            show_on_open_dirs = true,
+        },
+        modified = {
+            enable = true,
+            show_on_dirs = true,
+            show_on_open_dirs = true,
         },
         actions = {
             use_system_clipboard = true,
@@ -335,12 +378,23 @@ function config.nvim_tree()
             },
             expand_all = {
                 max_folder_discovery = 300,
+                exclude = {},
+            },
+            file_popup = {
+                open_win_config = {
+                    col = 1,
+                    row = 1,
+                    relative = "cursor",
+                    border = "shadow",
+                    style = "minimal",
+                },
             },
             open_file = {
                 quit_on_open = false,
                 resize_window = true,
                 window_picker = {
                     enable = true,
+                    picker = "default",
                     chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
                     exclude = {
                         filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
@@ -353,12 +407,32 @@ function config.nvim_tree()
             },
         },
         trash = {
-            cmd = "trash",
-            require_confirm = true,
+            cmd = "gio trash",
         },
         live_filter = {
             prefix = "[FILTER]: ",
-            always_show_folders = false,
+            always_show_folders = true,
+        },
+        tab = {
+            sync = {
+                open = false,
+                close = false,
+                ignore = {},
+            },
+        },
+        notify = {
+            threshold = vim.log.levels.INFO,
+        },
+        ui = {
+            confirm = {
+                remove = true,
+                trash = true,
+            },
+        },
+        experimental = {
+            git = {
+                async = false,
+            },
         },
         log = {
             enable = false,
@@ -367,9 +441,11 @@ function config.nvim_tree()
                 all = false,
                 config = false,
                 copy_paste = false,
+                dev = false,
                 diagnostics = false,
                 git = false,
                 profile = false,
+                watcher = false,
             },
         },
     })
@@ -1073,7 +1149,7 @@ function config.dap_python(plugin, opts)
             { prompt = "Select Test Type", format_item = function(item) return " " .. item end },
             function(choice)
                 if choice == "Method" then
-                    require('dap-python').test_method() 
+                    require('dap-python').test_method()
                 elseif choice == "Class" then
                     require('dap-python').test_class()
                 else
@@ -1090,7 +1166,7 @@ function config.dap_go(plugin, opts)
         goconfig.console = 'internalConsole'
     end
     require("doodleVim.extend.debug").register_test_fn_debug("go", function()
-        vim.ui.select({ "Nearest", "Recent"},
+        vim.ui.select({ "Nearest", "Recent" },
             { prompt = "Select Test Type", format_item = function(item) return " " .. item end },
             function(choice)
                 if choice == "Nearest" then
