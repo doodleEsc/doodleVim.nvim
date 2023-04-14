@@ -32,14 +32,14 @@ ui['goolord/alpha-nvim'] = {
 
 ui['nvim-lualine/lualine.nvim'] = {
     lazy = true,
-    event = { "User DeferStart", "BufReadPost" },
+    event = "BufReadPost",
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = conf.lualine,
 }
 
 ui['lewis6991/gitsigns.nvim'] = {
     lazy = true,
-    event = "BufReadPost",
+    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
     config = conf.gitsigns,
 }
 
