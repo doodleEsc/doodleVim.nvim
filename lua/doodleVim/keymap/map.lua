@@ -79,10 +79,12 @@ map.Lsp = {
                 "Hover Documentation"),
             f = map_cr("lua require('doodleVim.extend.lsp').format({async=true})"):with_noremap():with_silent():
             with_label("Code Formatting"),
-            a = map_cr("lua require('doodleVim.extend.lsp').code_action()"):with_noremap():with_silent():with_label(
-                "Code Action"),
             n = map_cr("lua require('rename').rename({prompt='Rename'})"):with_noremap():
             with_silent():with_label("Rename"),
+        },
+        ["m"] = {
+            name = "Code Action",
+            a = map_cr("lua require('doodleVim.extend.lsp').code_action()"):with_noremap():with_silent():with_label("Code Action"),
         },
         ["<C-n>"] = map_cr("lua vim.diagnostic.goto_next()"):with_noremap():with_silent():
         with_label("Go To Next Diagnostic"),
@@ -94,10 +96,13 @@ map.Lsp = {
             name = "Lsp Function",
             f = map_cmd("<Cmd>lua require('doodleVim.extend.lsp').format({async=true})<CR>"):with_noremap():with_silent()
                 :with_label("Selected Code Formatting"),
-            a = map_cmd("<Cmd>lua require('doodleVim.extend.lsp').code_action()<CR>"):with_noremap():with_silent():
-            with_label("Range Code Action"),
             n = map_cmd("<Cmd>lua require('rename').rename({label='Rename'})<CR>"):with_noremap():with_silent()
                 :with_label("Rename"),
+        },
+        ["m"] = {
+            name = "Code Action in Visual Mode",
+            a = map_cmd("<Cmd>lua require('doodleVim.extend.lsp').code_action()<CR>"):with_noremap():with_silent():
+            with_label("Range Code Action"),
         },
     },
 }
@@ -138,7 +143,7 @@ map.Diagnostic = {
 }
 
 map.EasyAlign = {
-    v = {
+    x = {
         ["<leader>e"] = {
             name = "EasyAlign",
             e = map_cmd("<Cmd>EasyAlign<CR>"):with_label("EasyAlign File"),
@@ -198,7 +203,7 @@ map.Comment = {
             with_silent():with_label("Comment Current Line With Block"),
         },
     },
-    v = {
+    x = {
         ["<leader>c"] = {
             name = "Comment",
             c = map_cmd('<ESC><CMD>lua require("Comment.api").locked("toggle.linewise")(vim.fn.visualmode())<CR>')
@@ -322,7 +327,7 @@ map.WhichKey = {
             with_noremap()
             :with_silent():with_label("Show Keymaps"),
     },
-    v = {
+    x = {
         ["<C-_>"] = map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
             :with_noremap():with_label("Show Keymaps"),
     },
