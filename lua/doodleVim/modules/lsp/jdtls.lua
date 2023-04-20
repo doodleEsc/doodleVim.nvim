@@ -100,7 +100,7 @@ function jdtls.setup()
                 runtimes = {
                     {
                         name = "JavaSE-17",
-                        path = home .. "/.sdkman/candidates/java/17.0.6-oracle/",
+                        path = home .. "/.sdkman/candidates/java/17.0.7-amzn/",
                     },
                 }
             },
