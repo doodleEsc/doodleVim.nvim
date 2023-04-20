@@ -165,6 +165,7 @@ end
 
 function config.nvim_tree()
     local codicons = require("codicons")
+    local on_attach = require("doodleVim.extend.tree").on_attach
     require("nvim-tree").setup({
         -- BEGIN_DEFAULT_OPTS
         auto_reload_on_write = true,
@@ -183,7 +184,7 @@ function config.nvim_tree()
         prefer_startup_root = false,
         sync_root_with_cwd = true,
         root_dirs = {},
-        on_attach = "default",
+        on_attach = on_attach,
         remove_keymaps = false,
         select_prompts = false,
         view = {
@@ -198,47 +199,6 @@ function config.nvim_tree()
             number = false,
             relativenumber = false,
             signcolumn = "yes",
-            mappings = {
-                custom_only = true,
-                list = {
-                    { key = { "<CR>", "o" }, action = "edit" },
-                    { key = "<C-v>",         action = "vsplit" },
-                    { key = "<C-x>",         action = "split" },
-                    { key = "<C-t>",         action = "tabnew" },
-                    { key = "P",             action = "parent_node" },
-                    { key = "<BS>",          action = "close_node" },
-                    { key = "K",             action = "first_sibling" },
-                    { key = "J",             action = "last_sibling" },
-                    { key = "I",             action = "toggle_git_ignored" },
-                    { key = "H",             action = "toggle_dotfiles" },
-                    { key = "<C-r>",         action = "refresh" },
-                    { key = "a",             action = "create" },
-                    { key = "d",             action = "remove" },
-                    { key = "D",             action = "trash" },
-                    { key = "r",             action = "rename" },
-                    { key = "R",             action = "full_rename" },
-                    { key = "x",             action = "cut" },
-                    { key = "c",             action = "copy" },
-                    { key = "p",             action = "paste" },
-                    { key = "y",             action = "copy_name" },
-                    { key = "yp",            action = "copy_path" },
-                    { key = "ya",            action = "copy_absolute_path" },
-                    { key = "-",             action = "dir_up" },
-                    { key = "s",             action = "system_open" },
-                    { key = "f",             action = "live_filter" },
-                    { key = "F",             action = "clear_live_filter" },
-                    { key = "q",             action = "close" },
-                    { key = "C",             action = "collapse_all" },
-                    { key = "E",             action = "expand_all" },
-                    { key = "/",             action = "search_node" },
-                    { key = ".",             action = "run_file_command" },
-                    { key = "<Tab>",         action = "toggle_file_info" },
-                    { key = "?",             action = "toggle_help" },
-                    { key = "m",             action = "toggle_mark" },
-                    { key = "bmv",           action = "bulk_move" },
-
-                },
-            },
             float = {
                 enable = false,
                 quit_on_focus_loss = true,

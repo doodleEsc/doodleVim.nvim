@@ -78,8 +78,8 @@ function M.has(plugin)
     return require("lazy.core.config").plugins[plugin] ~= nil
 end
 
-function M.trim(s)
-    return (s:gsub("^%s*(.-)%s*$", "%1"))
+function M.trim(str)
+    return str:gsub("^%s*(.-)%s*$", "%1")
 end
 
 return M
