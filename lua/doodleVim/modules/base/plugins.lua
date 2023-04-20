@@ -17,7 +17,7 @@ base['stevearc/dressing.nvim'] = {
     config = conf.dressing
 }
 
-base['nathom/filetype.nvim'] = {}
+-- base['nathom/filetype.nvim'] = {}
 
 base['MunifTanjim/nui.nvim'] = {
     lazy = true,
