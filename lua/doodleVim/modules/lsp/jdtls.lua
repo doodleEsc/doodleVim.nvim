@@ -33,13 +33,16 @@ function jdtls.setup()
     local workspace = vim.env.HOME .. "/.cache/jdtls/workspace/" .. project_name
 
     -- get lombok path
-    local lombok_jar = jdtls_home .. "/plugins/" .. "lombok.jar"
+    local lombok_jar = trim(jdtls_home .. "/plugins/" .. "lombok.jar")
     local javaagent = "-javaagent:" .. lombok_jar
     local Xbootclasspath = "-Xbootclasspath/a:" .. lombok_jar
 
     -- update capabilities
     local extendedClientCapabilities = require('jdtls').extendedClientCapabilities
     extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+
+    -- home
+    local home = os.getenv('HOME')
 
     local config = {
         flags = {
@@ -62,23 +65,7 @@ function jdtls.setup()
             bundles = bundles,
             extendedClientCapabilities = extendedClientCapabilities
         },
-        cmd = {
-            'java',
-            '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-            '-Dosgi.bundles.defaultStartLevel=4',
-            '-Declipse.product=org.eclipse.jdt.ls.core.product',
-            '-Dlog.protocol=true',
-            '-Dlog.level=ALL',
-            '-Xms1g',
-            '--add-modules=ALL-SYSTEM',
-            '--add-opens', 'java.base/java.util=ALL-UNNAMED',
-            '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-            javaagent,
-            Xbootclasspath,
-            '-jar', jdtls_jar_path,
-            '-configuration', config_path,
-            '-data', workspace
-        }
+        cmd = { home .. "/.config/nvim/bin/java_lsp.sh", workspace }
     }
 
     config.settings = {
@@ -113,7 +100,7 @@ function jdtls.setup()
                 runtimes = {
                     {
                         name = "JavaSE-17",
-                        path = "/usr/local/jdk-17.0.6.jdk/Contents/Home",
+                        path = home .. "/.sdkman/candidates/java/17.0.6-oracle/",
                     },
                 }
             },
