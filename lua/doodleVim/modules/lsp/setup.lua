@@ -48,7 +48,7 @@ function lsp.mason(plugin)
                     lombok_jar
                 })
                 vim.fn.system({
-                    "chomd",
+                    "chmod",
                     "755",
                     lombok_jar,
                 })
