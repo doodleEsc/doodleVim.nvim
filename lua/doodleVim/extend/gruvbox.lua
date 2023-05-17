@@ -38,6 +38,9 @@ gruvbox.overrides = {
     LspReferenceRead        = { bold = true, bg = "#504945", },
     LspReferenceText        = { bold = true, bg = "#504945", },
     LspReferenceWrite       = { bold = true, bg = "#504945", },
+    -- LspLens
+    LspLens                 = { link = "Comment" },
+    IndentLine              = { link = "Comment" },
 }
 
 

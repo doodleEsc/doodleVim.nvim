@@ -552,7 +552,7 @@ function config.project()
         --    "change_working_directory"  : just change the directory
         -- Note: All will change the directory regardless
         telescope_on_project_selected = function(path, open)
-            local Lib = require("auto-session-library")
+            local Lib = require("auto-session.lib")
             local AutoSession = require("auto-session")
             local sessions_dir = AutoSession.get_root_dir()
             local session_name = Lib.escaped_session_name_from_cwd()
@@ -585,13 +585,14 @@ end
 function config.autosession()
     vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,winpos,globals"
     require("auto-session").setup({
-        log_level = "info",
+        log_level = "error",
         auto_session_enable_last_session = false,
         auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
         auto_session_enabled = false,
         auto_save_enabled = nil,
         auto_restore_enabled = nil,
-        auto_session_suppress_dirs = {},
+        auto_session_suppress_dirs = nil,
+        auto_session_use_git_branch = nil,
         -- the configs below are lua only
         bypass_session_save_file_types = nil,
         post_restore_cmds = { require("doodleVim.extend.tree").toggle },
