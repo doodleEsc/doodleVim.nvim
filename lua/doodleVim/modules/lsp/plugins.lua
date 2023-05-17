@@ -38,7 +38,6 @@ lsp['j-hui/fidget.nvim'] = {
 lsp['mfussenegger/nvim-jdtls'] = {
     lazy = true,
     dependencies = {
-        -- 'mfussenegger/nvim-dap',
         'williamboman/mason.nvim',
     },
     ft = "java",
@@ -65,6 +64,12 @@ lsp['jose-elias-alvarez/null-ls.nvim'] = {
         'williamboman/mason.nvim',
     },
     config = conf.null_ls,
+}
+
+lsp['VidocqH/lsp-lens.nvim'] = {
+    lazy = true,
+    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
+    config = conf.lsp_lens
 }
 
 lsp['doodleEsc/rename.nvim'] = {

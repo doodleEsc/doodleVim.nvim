@@ -552,7 +552,7 @@ function config.project()
         --    "change_working_directory"  : just change the directory
         -- Note: All will change the directory regardless
         telescope_on_project_selected = function(path, open)
-            local Lib = require("auto-session-library")
+            local Lib = require("auto-session.lib")
             local AutoSession = require("auto-session")
             local sessions_dir = AutoSession.get_root_dir()
             local session_name = Lib.escaped_session_name_from_cwd()
