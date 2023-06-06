@@ -29,13 +29,6 @@ tree.on_attach = function(bufnr)
         return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
     end
 
-
-    -- Default mappings not inserted as:
-    --  remove_keymaps = true
-    --  OR
-    --  view.mappings.custom_only = true
-
-
     -- Mappings migrated from view.mappings.list
     --
     -- You will need to insert "your code goes here" for any mappings with a custom action_cb

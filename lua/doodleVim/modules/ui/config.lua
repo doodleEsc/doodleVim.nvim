@@ -229,6 +229,7 @@ function config.barbar(plugin, opts)
                 enabled = true,
             },
             separator = { left = '│', right = '' },
+            separator_at_end = true,
             -- Configure the icons on the bufferline when modified or pinned.
             -- Supports all the base icon options.
             modified = { button = '●' },
