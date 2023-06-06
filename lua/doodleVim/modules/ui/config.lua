@@ -213,7 +213,7 @@ function config.barbar(plugin, opts)
             -- Configure the base icons on the bufferline.
             buffer_index = true,
             buffer_number = false,
-            button = '',
+            button = '×',
             -- Enables / disables diagnostic symbols
             diagnostics = {
                 [vim.diagnostic.severity.ERROR] = { enabled = false, icon = ' ' },
@@ -229,6 +229,7 @@ function config.barbar(plugin, opts)
                 enabled = true,
             },
             separator = { left = '│', right = '' },
+            separator_at_end = true,
             -- Configure the icons on the bufferline when modified or pinned.
             -- Supports all the base icon options.
             modified = { button = '●' },
