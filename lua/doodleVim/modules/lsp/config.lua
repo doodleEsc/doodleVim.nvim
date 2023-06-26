@@ -1,6 +1,6 @@
 local config = {}
 local api = vim.api
-local vim_path = require('doodleVim.core.global').vim_path
+local vim_path = require("doodleVim.core.global").vim_path
 
 function config.lspconfig(plugin, opts)
     local handler = require("doodleVim.modules.lsp.handler")
@@ -10,13 +10,13 @@ function config.lspconfig(plugin, opts)
     handler.lsp_highlight_document()
 
     local servers = opts.servers or {}
-    local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    capabilities.offsetEncoding = { "utf-16" }
-    capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true
-    }
+    local capabilities = vim.tbl_deep_extend(
+        "force",
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        require("cmp_nvim_lsp").default_capabilities(),
+        opts.capabilities or {}
+    )
 
     local function setup(server)
         local server_opts = vim.tbl_deep_extend("force", {
@@ -138,26 +138,26 @@ end
 function config.gotools()
     require("gotools").setup({
         gotests = {
-            bin = require "mason-core.path".bin_prefix() .. "/" .. "gotests",
+            bin = require("mason-core.path").bin_prefix() .. "/" .. "gotests",
             win_opts = {
-                prompt = 'Select An Action',
-                kind = 'gotools'
+                prompt = "Select An Action",
+                kind = "gotools",
             },
         },
         gomodifytags = {
-            bin = require "mason-core.path".bin_prefix() .. "/" .. "gomodifytags",
+            bin = require("mason-core.path").bin_prefix() .. "/" .. "gomodifytags",
             skip_unexported = true,
             win_opts = {
-                prompt = 'Tags:',
+                prompt = "Tags:",
             },
         },
         impl = {
-            bin = require "mason-core.path".bin_prefix() .. "/" .. "impl",
+            bin = require("mason-core.path").bin_prefix() .. "/" .. "impl",
             win_opts = {
-                prompt = 'Select An Action',
-                kind = 'gotools'
+                prompt = "Select An Action",
+                kind = "gotools",
             },
-        }
+        },
     })
 
     require("dressing.select.telescope").custom_kind["gotools"] = function(opts, defaults, items)
@@ -175,28 +175,28 @@ function config.gotools()
                     text = item,
                 }
                 table.insert(indexed_items, entry)
-                widths.idx = math.max(widths.idx, require "plenary.strings".strdisplaywidth(entry.idx))
-                widths.command_title = math.max(widths.command_title,
-                    require "plenary.strings".strdisplaywidth(entry.command_title))
+                widths.idx = math.max(widths.idx, require("plenary.strings").strdisplaywidth(entry.idx))
+                widths.command_title =
+                    math.max(widths.command_title, require("plenary.strings").strdisplaywidth(entry.command_title))
             end
             return indexed_items, widths
         end
 
         local make_displayer = function(widths)
-            return require "telescope.pickers.entry_display".create {
+            return require("telescope.pickers.entry_display").create({
                 separator = " ",
                 items = {
                     { width = widths.idx + 1 }, -- +1 for ":" suffix
                     { width = widths.command_title },
                 },
-            }
+            })
         end
         local make_display_factory = function(displayer)
             return function(e)
-                return displayer {
+                return displayer({
                     { e.value.idx .. ":",   "TelescopePromptPrefix" },
                     { e.value.command_title },
-                }
+                })
             end
         end
 
@@ -208,7 +208,7 @@ function config.gotools()
         local displayer = make_displayer(widths)
         local make_display = make_display_factory(displayer)
 
-        defaults.finder = finders.new_table {
+        defaults.finder = finders.new_table({
             results = indexed_items,
             entry_maker = function(e)
                 return {
@@ -217,7 +217,7 @@ function config.gotools()
                     ordinal = make_ordinal(e),
                 }
             end,
-        }
+        })
 
         defaults.initial_mode = "normal"
     end
@@ -251,8 +251,9 @@ function config.null_ls()
             null_ls.builtins.code_actions.gitsigns,
             null_ls.builtins.diagnostics.solhint,
             null_ls.builtins.formatting.xmlformat.with({
-                extra_args = { "--indent", "4" }
+                extra_args = { "--indent", "4" },
             }),
+            null_ls.builtins.formatting.stylua,
         },
         update_in_insert = false,
     })
@@ -264,7 +265,7 @@ function config.lightbulb()
     vim.fn.sign_define("LightBulbSign", { text = codicons.get("lightbulb"), texthl = "GruvboxYellowSign" })
 
     -- Showing defaults
-    require('nvim-lightbulb').setup({
+    require("nvim-lightbulb").setup({
         -- LSP client names to ignore
         -- Example: {"sumneko_lua", "null-ls"}
         ignore = { "null-ls" },
@@ -305,59 +306,15 @@ function config.lightbulb()
             -- Text to provide when code actions are available
             text = "💡",
             -- Text to provide when no actions are available
-            text_unavailable = ""
+            text_unavailable = "",
         },
         autocmd = {
             enabled = true,
             -- see :help autocmd-pattern
             pattern = { "*" },
             -- see :help autocmd-events
-            events = { "CursorHold", "CursorHoldI" }
-        }
-    })
-end
-
-function config.fidget(plugin, opts)
-    require "fidget".setup({
-        text = {
-            spinner = "pipe",        -- animation shown when tasks are ongoing
-            done = "󰞑 ",          -- character shown when all tasks are complete
-            commenced = "Started",   -- message shown when task starts
-            completed = "Completed", -- message shown when task completes
+            events = { "CursorHold", "CursorHoldI" },
         },
-        align = {
-            bottom = true, -- align fidgets along bottom edge of buffer
-            right = true,  -- align fidgets along right edge of buffer
-        },
-        timer = {
-            spinner_rate = 125,  -- frame rate of spinner animation, in ms
-            fidget_decay = 2000, -- how long to keep around empty fidget, in ms
-            task_decay = 1000,   -- how long to keep around completed task, in ms
-        },
-        window = {
-            relative = "win", -- where to anchor, either "win" or "editor"
-            blend = 100,      -- &winblend for the window
-            zindex = nil,     -- the zindex value for the window
-            border = "none",  -- style of border for the fidget window
-        },
-        fmt = {
-            leftpad = true,       -- right-justify text in fidget box
-            stack_upwards = true, -- list of tasks grows upwards
-            max_width = 0,        -- maximum width of the fidget box
-            fidget =              -- function to format fidget title
-                function(fidget_name, spinner)
-                    return string.format("%s %s", spinner, fidget_name)
-                end,
-            task = -- function to format each task line
-                function(task_name, message, percentage)
-                    return string.format(
-                        "%s%s [%s]",
-                        message,
-                        percentage and string.format(" (%s%%)", percentage) or "",
-                        task_name
-                    )
-                end,
-        }
     })
 end
 
@@ -412,7 +369,9 @@ function config.barbecue(plugin, opts)
         ---NOTE: This can be used to get file modified status from SCM (e.g. git)
         ---
         ---@type fun(bufnr: number): boolean
-        modified = function(bufnr) return vim.bo[bufnr].modified end,
+        modified = function(bufnr)
+            return vim.bo[bufnr].modified
+        end,
         ---Whether to show/use navic in the winbar.
         ---
         ---@type boolean
@@ -423,7 +382,9 @@ function config.barbecue(plugin, opts)
         ---render.
         ---
         ---@type fun(bufnr: number): barbecue.Config.custom_section
-        lead_custom_section = function() return " " end,
+        lead_custom_section = function()
+            return " "
+        end,
         ---@alias barbecue.Config.custom_section
         ---|string # Literal string.
         ---|{ [1]: string, [2]: string? }[] # List-like table of `[text, highlight?]` tuples in which `highlight` is optional.
@@ -434,7 +395,9 @@ function config.barbecue(plugin, opts)
         ---render.
         ---
         ---@type fun(bufnr: number): barbecue.Config.custom_section
-        custom_section = function() return " " end,
+        custom_section = function()
+            return " "
+        end,
         ---@alias barbecue.Config.theme
         ---|'"auto"' # Use your current colorscheme's theme or generate a theme based on it.
         ---|string # Theme located under `barbecue.theme` module.
@@ -482,8 +445,6 @@ function config.barbecue(plugin, opts)
         --   faded_orange = "#af3a03",
         --   gray = "#928374",
         -- }
-
-
 
         theme = {
             -- this highlight is used to override other highlights
@@ -552,34 +513,34 @@ function config.barbecue(plugin, opts)
         ---
         ---@type barbecue.Config.kinds
         kinds = {
-            File          = codicons.get("symbol-file"),
-            Module        = codicons.get("symbol-module"),
-            Namespace     = codicons.get("symbol-namespace"),
-            Package       = codicons.get("symbol-package"),
-            Class         = codicons.get("symbol-class"),
-            Method        = codicons.get("symbol-method"),
-            Property      = codicons.get("symbol-property"),
-            Field         = codicons.get("symbol-field"),
-            Constructor   = codicons.get("symbol-constructor"),
-            Enum          = codicons.get("symbol-enum"),
-            Interface     = codicons.get("symbol-interface"),
-            Function      = codicons.get("symbol-function"),
-            Variable      = codicons.get("symbol-variable"),
-            Constant      = codicons.get("symbol-constant"),
-            String        = codicons.get("symbol-string"),
-            Number        = codicons.get("symbol-number"),
-            Boolean       = codicons.get("symbol-boolean"),
-            Array         = codicons.get("symbol-array"),
-            Object        = codicons.get("symbol-object"),
-            Key           = codicons.get("symbol-key"),
-            Null          = codicons.get("symbol-null"),
-            EnumMember    = codicons.get("symbol-enum-member"),
-            Struct        = codicons.get("symbol-struct"),
-            Event         = codicons.get("symbol-event"),
-            Operator      = codicons.get("symbol-operator"),
+            File = codicons.get("symbol-file"),
+            Module = codicons.get("symbol-module"),
+            Namespace = codicons.get("symbol-namespace"),
+            Package = codicons.get("symbol-package"),
+            Class = codicons.get("symbol-class"),
+            Method = codicons.get("symbol-method"),
+            Property = codicons.get("symbol-property"),
+            Field = codicons.get("symbol-field"),
+            Constructor = codicons.get("symbol-constructor"),
+            Enum = codicons.get("symbol-enum"),
+            Interface = codicons.get("symbol-interface"),
+            Function = codicons.get("symbol-function"),
+            Variable = codicons.get("symbol-variable"),
+            Constant = codicons.get("symbol-constant"),
+            String = codicons.get("symbol-string"),
+            Number = codicons.get("symbol-number"),
+            Boolean = codicons.get("symbol-boolean"),
+            Array = codicons.get("symbol-array"),
+            Object = codicons.get("symbol-object"),
+            Key = codicons.get("symbol-key"),
+            Null = codicons.get("symbol-null"),
+            EnumMember = codicons.get("symbol-enum-member"),
+            Struct = codicons.get("symbol-struct"),
+            Event = codicons.get("symbol-event"),
+            Operator = codicons.get("symbol-operator"),
             TypeParameter = codicons.get("symbol-type-parameter"),
-            Component     = codicons.get("symbol-misc"),
-            Fragment      = codicons.get("symbol-misc"),
+            Component = codicons.get("symbol-misc"),
+            Fragment = codicons.get("symbol-misc"),
         },
     })
 end
@@ -596,33 +557,19 @@ function config.jdtls(plugin, opts)
     })
 
     require("doodleVim.extend.debug").register_test_fn_debug("java", function()
-        vim.ui.select({ "Nearest", "Class" },
-            { prompt = "Select Test Type", format_item = function(item) return " " .. item end },
-            function(choice)
-                if choice == "Nearest" then
-                    require('jdtls').test_nearest_method()
-                elseif choice == "Class" then
-                    require('jdtls').test_class()
-                end
+        vim.ui.select({ "Nearest", "Class" }, {
+            prompt = "Select Test Type",
+            format_item = function(item)
+                return " " .. item
+            end,
+        }, function(choice)
+            if choice == "Nearest" then
+                require("jdtls").test_nearest_method()
+            elseif choice == "Class" then
+                require("jdtls").test_class()
             end
-        )
+        end)
     end)
-end
-
-function config.lsp_lens(plugin, opts)
-    require 'lsp-lens'.setup({
-        enable = true,
-        include_declaration = false, -- Reference include declaration
-        sections = {
-            -- Enable / Disable specific request
-            definition = false,
-            references = true,
-            implementation = true,
-        },
-        ignore_filetype = {
-            "prisma",
-        },
-    })
 end
 
 return config

@@ -69,7 +69,7 @@ function config.nvim_cmp(plugin, opts)
             { name = 'treesitter' },
             { name = "luasnip" },
             { name = "buffer" },
-            { name = "path" },
+            { name = "async_path" },
             { name = 'orgmode' },
             {
                 name = "look",

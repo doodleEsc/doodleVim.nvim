@@ -18,7 +18,7 @@ completion['hrsh7th/nvim-cmp'] = {
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
         'saadparwaiz1/cmp_luasnip',
-        'hrsh7th/cmp-path',
+        'FelipeLema/cmp-async-path',
         'octaltree/cmp-look',
         'hrsh7th/cmp-cmdline',
         'ray-x/cmp-treesitter',
