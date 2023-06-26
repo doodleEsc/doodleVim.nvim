@@ -1,17 +1,16 @@
 local lsp = {}
-local conf = require('doodleVim.modules.lsp.config')
-local setup = require('doodleVim.modules.lsp.setup')
+local conf = require("doodleVim.modules.lsp.config")
+local setup = require("doodleVim.modules.lsp.setup")
 
-lsp['neovim/nvim-lspconfig'] = {
+lsp["neovim/nvim-lspconfig"] = {
     lazy = true,
     event = "BufReadPost",
     dependencies = {
-        'williamboman/mason.nvim',
+        "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        'tamago324/nlsp-settings.nvim',
-        'mortepau/codicons.nvim',
-        'j-hui/fidget.nvim',
-        'utilyre/barbecue.nvim',
+        "tamago324/nlsp-settings.nvim",
+        "mortepau/codicons.nvim",
+        "utilyre/barbecue.nvim",
         {
             "hrsh7th/cmp-nvim-lsp",
             cond = function()
@@ -22,96 +21,83 @@ lsp['neovim/nvim-lspconfig'] = {
     opts = {
         servers = {
             jdtls = {
-                disabled = true
-            }
-        }
+                disabled = true,
+            },
+        },
     },
-    config = conf.lspconfig
+    config = conf.lspconfig,
 }
 
-lsp['j-hui/fidget.nvim'] = {
-    lazy = true,
-    enabled = false,
-    config = conf.fidget
-}
-
-lsp['mfussenegger/nvim-jdtls'] = {
+lsp["mfussenegger/nvim-jdtls"] = {
     lazy = true,
     dependencies = {
-        'williamboman/mason.nvim',
+        "williamboman/mason.nvim",
     },
     ft = "java",
-    config = conf.jdtls
+    config = conf.jdtls,
 }
 
-lsp['tamago324/nlsp-settings.nvim'] = {
+lsp["tamago324/nlsp-settings.nvim"] = {
     lazy = true,
     config = conf.nlsp_settings,
 }
 
-lsp['williamboman/mason.nvim'] = {
+lsp["williamboman/mason.nvim"] = {
     lazy = true,
     init = setup.mason,
     cmd = { "Mason", "MasonInstall", "MasonUninstall" },
     config = conf.mason,
 }
 
-lsp['jose-elias-alvarez/null-ls.nvim'] = {
+lsp["jose-elias-alvarez/null-ls.nvim"] = {
     lazy = true,
     event = "User DeferStartWithFile",
     dependencies = {
-        'doodleEsc/gotools.nvim',
-        'williamboman/mason.nvim',
+        "doodleEsc/gotools.nvim",
+        "williamboman/mason.nvim",
     },
     config = conf.null_ls,
 }
 
-lsp['VidocqH/lsp-lens.nvim'] = {
-    lazy = true,
-    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
-    config = conf.lsp_lens
-}
-
-lsp['doodleEsc/rename.nvim'] = {
+lsp["doodleEsc/rename.nvim"] = {
     lazy = true,
     dependencies = {
-        'neovim/nvim-lspconfig',
-        'stevearc/dressing.nvim',
+        "neovim/nvim-lspconfig",
+        "stevearc/dressing.nvim",
     },
 }
 
-lsp['doodleEsc/gotools.nvim'] = {
+lsp["doodleEsc/gotools.nvim"] = {
     lazy = true,
     dependencies = {
-        'stevearc/dressing.nvim',
+        "stevearc/dressing.nvim",
     },
-    config = conf.gotools
+    config = conf.gotools,
 }
 
-lsp['kosayoda/nvim-lightbulb'] = {
+lsp["kosayoda/nvim-lightbulb"] = {
     lazy = true,
     event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
     dependencies = {
-        'neovim/nvim-lspconfig',
-        'mortepau/codicons.nvim'
+        "neovim/nvim-lspconfig",
+        "mortepau/codicons.nvim",
     },
-    config = conf.lightbulb
+    config = conf.lightbulb,
 }
 
-lsp['ray-x/lsp_signature.nvim'] = {
+lsp["ray-x/lsp_signature.nvim"] = {
     lazy = true,
     init = setup.lsp_signature,
 }
 
-lsp['utilyre/barbecue.nvim'] = {
+lsp["utilyre/barbecue.nvim"] = {
     lazy = true,
     version = "*",
-    enabled = false,
     dependencies = {
         "SmiteshP/nvim-navic",
         "nvim-tree/nvim-web-devicons", -- optional dependency
     },
-    config = conf.barbecue
+    config = conf.barbecue,
 }
 
 return lsp

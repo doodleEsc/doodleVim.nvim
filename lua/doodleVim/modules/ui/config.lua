@@ -1,11 +1,11 @@
 local config = {}
 
 function config.color(plugin, opts)
-    require('colorizer').setup()
+    require("colorizer").setup()
 end
 
 function config.treesitter(plugin, opts)
-    require('nvim-treesitter.configs').setup {
+    require("nvim-treesitter.configs").setup({
         sync_install = true,
         auto_install = false,
         highlight = {
@@ -35,7 +35,7 @@ function config.treesitter(plugin, opts)
                 },
             },
         },
-    }
+    })
 end
 
 function config.alpha()
@@ -43,21 +43,25 @@ function config.alpha()
 end
 
 function config.lualine()
-    require('doodleVim.modules.ui.lualine')
+    require("doodleVim.modules.ui.lualine")
 end
 
 function config.todo()
-    local codicons = require('codicons')
-    require("todo-comments").setup {
-        signs = true,      -- show icons in the signs column
+    local codicons = require("codicons")
+    require("todo-comments").setup({
+        signs = true, -- show icons in the signs column
         sign_priority = 8, -- sign priority
         -- keywords recognized as todo comments
         keywords = {
             FIX = {
                 icon = codicons.get("tools"), -- icon used for the sign, and in search results
-                color = "error",              -- can be a hex color, or a named color (see below)
+                color = "error",  -- can be a hex color, or a named color (see below)
                 alt = {
-                    "FIXME", "BUG", "FIXIT", "ISSUE", "ERROR",
+                    "FIXME",
+                    "BUG",
+                    "FIXIT",
+                    "ISSUE",
+                    "ERROR",
                 }, -- a set of other keywords that all map to this FIX keywords
                 -- signs = false, -- configure signs for some keywords individually
             },
@@ -68,8 +72,8 @@ function config.todo()
             NOTE = { icon = codicons.get("note"), color = "hint", alt = { "INFO" } },
         },
         gui_style = {
-            fg = "NONE",       -- The gui style to use for the fg highlight group.
-            bg = "BOLD",       -- The gui style to use for the bg highlight group.
+            fg = "NONE", -- The gui style to use for the fg highlight group.
+            bg = "BOLD", -- The gui style to use for the bg highlight group.
         },
         merge_keywords = true, -- when true, custom keywords will be merged with the defaults
         -- highlighting of the line containing the todo comment
@@ -77,16 +81,16 @@ function config.todo()
         -- * keyword: highlights of the keyword
         -- * after: highlights after the keyword (todo text)
         highlight = {
-            multiline = true,                            -- enable multine todo comments
-            multiline_pattern = "^.",                    -- lua pattern to match the next multiline from the start of the matched keyword
-            multiline_context = 10,                      -- extra lines that will be re-evaluated when changing a line
-            before = "",                                 -- "fg" or "bg" or empty
-            keyword = "bg",                              -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
-            after = "fg",                                -- "fg" or "bg" or empty
+            multiline = true,                   -- enable multine todo comments
+            multiline_pattern = "^.",           -- lua pattern to match the next multiline from the start of the matched keyword
+            multiline_context = 10,             -- extra lines that will be re-evaluated when changing a line
+            before = "",                        -- "fg" or "bg" or empty
+            keyword = "bg",                     -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
+            after = "fg",                       -- "fg" or "bg" or empty
             pattern = [[.*<(KEYWORDS)\v(\s?\(.*\)|:)+]], -- pattern or table of patterns, used for highlightng (vim regex)
-            comments_only = true,                        -- uses treesitter to match keywords in comments only
-            max_line_len = 400,                          -- ignore lines longer than this
-            exclude = {},                                -- list of file types to exclude highlighting
+            comments_only = true,               -- uses treesitter to match keywords in comments only
+            max_line_len = 400,                 -- ignore lines longer than this
+            exclude = {},                       -- list of file types to exclude highlighting
         },
         -- list of named colors where we try to extract the guifg from the
         -- list of hilight groups or use the hex color if hl not found as a fallback
@@ -111,64 +115,63 @@ function config.todo()
             -- don't replace the (KEYWORDS) placeholder
             pattern = [[\b(KEYWORDS)(\s?\(.*\)|:)+]], -- ripgrep regex
         },
-    }
+    })
 end
 
 function config.gitsigns()
-    local gitsigns = require('gitsigns')
-    gitsigns.setup {
-        signs                        = {
-            add          = { hl = 'GitSignsAdd', text = '│', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
-            change       = { hl = 'GitSignsChange', text = '│', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
-            delete       = { hl = 'GitSignsDelete', text = '_', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-            topdelete    = { hl = 'GitSignsDelete', text = '‾', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-            changedelete = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
-            untracked    = { hl = 'GitSignsAdd', text = '┆', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
+    require("gitsigns").setup({
+        signs = {
+            add = { text = "│" },
+            change = { text = "│" },
+            delete = { text = "_" },
+            topdelete = { text = "‾" },
+            changedelete = { text = "~" },
+            untracked = { text = "┆" },
         },
-        signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
-        numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
-        linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
-        word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
-        watch_gitdir                 = {
+        signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+        numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+        linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+        word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+        watch_gitdir = {
             interval = 1000,
-            follow_files = true
+            follow_files = true,
         },
-        attach_to_untracked          = true,
-        current_line_blame           = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-        current_line_blame_opts      = {
+        attach_to_untracked = true,
+        current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+        current_line_blame_opts = {
             virt_text = true,
-            virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+            virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
             delay = 1000,
             ignore_whitespace = false,
         },
-        current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-        sign_priority                = 6,
-        update_debounce              = 100,
-        status_formatter             = nil,   -- Use default
-        max_file_length              = 40000, -- Disable if file is longer than this (in lines)
-        preview_config               = {
+        current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+        sign_priority = 6,
+        update_debounce = 100,
+        status_formatter = nil, -- Use default
+        max_file_length = 40000, -- Disable if file is longer than this (in lines)
+        preview_config = {
             -- Options passed to nvim_open_win
-            border = 'rounded',
-            style = 'minimal',
-            relative = 'cursor',
+            border = "rounded",
+            style = "minimal",
+            relative = "cursor",
             row = 0,
-            col = 1
+            col = 1,
         },
-        yadm                         = {
-            enable = false
+        yadm = {
+            enable = false,
         },
-    }
+    })
 end
 
 function config.blankline()
-    require("indent_blankline").setup {
+    require("indent_blankline").setup({
         show_end_of_line = true,
-    }
+    })
 end
 
 function config.barbar(plugin, opts)
     -- Set barbar's options
-    require 'barbar'.setup {
+    require("barbar").setup({
         -- Enable/disable animations
         animation = true,
 
@@ -185,19 +188,19 @@ function config.barbar(plugin, opts)
 
         -- Excludes buffers from the tabline
         exclude_ft = {
-            'alpha',
-            'dap-repl',
+            "alpha",
+            "dap-repl",
         },
-        exclude_name = { 'alpha' },
+        exclude_name = { "alpha" },
 
         -- A buffer to this direction will be focused (if it exists) when closing the current buffer.
         -- Valid options are 'left' (the default) and 'right'
-        focus_on_close = 'left',
+        focus_on_close = "left",
 
         -- Hide inactive buffers and file extensions. Other options are `alternate`, `current`, and `visible`.
         hide = {
             extensions = true,
-            inactive = false
+            inactive = false,
         },
 
         -- Disable highlighting alternate buffers
@@ -213,10 +216,10 @@ function config.barbar(plugin, opts)
             -- Configure the base icons on the bufferline.
             buffer_index = true,
             buffer_number = false,
-            button = '×',
+            button = "×",
             -- Enables / disables diagnostic symbols
             diagnostics = {
-                [vim.diagnostic.severity.ERROR] = { enabled = false, icon = ' ' },
+                [vim.diagnostic.severity.ERROR] = { enabled = false, icon = " " },
                 [vim.diagnostic.severity.WARN] = { enabled = false },
                 [vim.diagnostic.severity.INFO] = { enabled = false },
                 [vim.diagnostic.severity.HINT] = { enabled = false },
@@ -228,17 +231,17 @@ function config.barbar(plugin, opts)
                 -- Requires `nvim-web-devicons` if `true`
                 enabled = true,
             },
-            separator = { left = '│', right = '' },
+            separator = { left = "│", right = "" },
             separator_at_end = true,
             -- Configure the icons on the bufferline when modified or pinned.
             -- Supports all the base icon options.
-            modified = { button = '●' },
-            pinned = { button = '車' },
+            modified = { button = "●" },
+            pinned = { button = "車" },
             -- Configure the icons on the bufferline based on the visibility of a buffer.
             -- Supports all the base icon options, plus `modified` and `pinned`.
             alternate = { filetype = { enabled = false } },
             current = { buffer_index = true },
-            inactive = { button = '×', buffer_index = true },
+            inactive = { button = "×", buffer_index = true },
             visible = { modified = { buffer_number = false } },
         },
 
@@ -265,12 +268,12 @@ function config.barbar(plugin, opts)
         -- New buffer letters are assigned in this order. This order is
         -- optimal for the qwerty keyboard layout but might need adjustement
         -- for other layouts.
-        letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
+        letters = "asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP",
 
         -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
         -- where X is the buffer number. But only a static string is accepted here.
         no_name_title = nil,
-    }
+    })
 end
 
 return config

@@ -177,7 +177,7 @@ function config.nvim_tree()
         root_dirs = {},
         prefer_startup_root = false,
         sync_root_with_cwd = true,
-        reload_on_bufenter = true,
+        reload_on_bufenter = false,
         respect_buf_cwd = true,
         on_attach = on_attach,
         remove_keymaps = false,
@@ -275,18 +275,17 @@ function config.nvim_tree()
             auto_open = true,
         },
         update_focused_file = {
-            enable = false,
+            enable = true,
             update_cwd = true,
             ignore_list = {},
         },
-        -- ignore_ft_on_setup = {},
         system_open = {
             cmd = "",
             args = {},
         },
         diagnostics = {
             enable = true,
-            show_on_dirs = false,
+            show_on_dirs = true,
             show_on_open_dirs = true,
             debounce_delay = 50,
             severity = {
@@ -362,7 +361,7 @@ function config.nvim_tree()
             },
         },
         trash = {
-            cmd = "gio trash",
+            cmd = "git trash",
         },
         live_filter = {
             prefix = "[FILTER]: ",
