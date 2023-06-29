@@ -48,7 +48,7 @@ function lsp.lsp_references(opts)
     require('telescope.builtin').lsp_references(vim.tbl_extend("force", opts,
         {
             entry_maker = file_and_details_entry(),
-            jump_type = "never",
+            -- jump_type = "never",
         }))
 end
 

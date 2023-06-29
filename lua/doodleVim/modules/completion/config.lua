@@ -5,7 +5,7 @@ function config.nvim_cmp(plugin, opts)
         include_icon = true,
         include_label = true,
         monospaced = true,
-        override = {}
+        override = {},
     })
 
     local cmp = require("cmp")
@@ -13,8 +13,8 @@ function config.nvim_cmp(plugin, opts)
     local WIDE_HEIGHT = 40
 
     local check_back_space = function()
-        local col = vim.fn.col('.') - 1
-        if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+        local col = vim.fn.col(".") - 1
+        if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
             return true
         else
             return false
@@ -66,25 +66,23 @@ function config.nvim_cmp(plugin, opts)
         preselect = cmp.PreselectMode.None,
         sources = cmp.config.sources({
             { name = "nvim_lsp" },
-            { name = 'treesitter' },
+            { name = "treesitter" },
             { name = "luasnip" },
             { name = "buffer" },
             { name = "async_path" },
-            { name = 'orgmode' },
+            { name = "orgmode" },
             {
                 name = "look",
                 keyword_length = 3,
                 option = { convert_case = true, loud = true },
             },
             -- { name = "cmp_tabnine" },
-        }, {
-
-        }),
+        }, {}),
         mapping = {
             ["<CR>"] = {
                 i = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
             },
-            ['<C-x>'] = cmp.mapping(function(fallback)
+            ["<C-x>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.abort()
                 else
@@ -108,7 +106,7 @@ function config.nvim_cmp(plugin, opts)
             -- when menu is visible, navigate to next item
             -- when line is empty, insert a tab character
             -- else, activate completion
-            ['<Tab>'] = cmp.mapping(function(fallback)
+            ["<Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
                 elseif check_back_space() then
@@ -116,19 +114,19 @@ function config.nvim_cmp(plugin, opts)
                 else
                     cmp.complete()
                 end
-            end, { 'i', 's' }),
+            end, { "i", "s" }),
             -- when menu is visible, navigate to previous item on list
             -- else, revert to default behavior
-            ['<S-Tab>'] = cmp.mapping(function(fallback)
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()
                 else
                     fallback()
                 end
-            end, { 'i', 's' }),
+            end, { "i", "s" }),
             ["<C-k>"] = cmp.mapping(function(fallback)
-                if require("luasnip").jumpable( -1) then
-                    require("luasnip").jump( -1)
+                if require("luasnip").jumpable(-1) then
+                    require("luasnip").jump(-1)
                 elseif require("neogen").jumpable(true) then
                     require("neogen").jump_prev()
                 else
@@ -148,7 +146,7 @@ function config.nvim_cmp(plugin, opts)
                 if cmp.visible() then
                     cmp.select_next_item({
                         behavior = cmp.SelectBehavior.Select,
-                        count = 6
+                        count = 6,
                     })
                 else
                     fallback()
@@ -158,7 +156,7 @@ function config.nvim_cmp(plugin, opts)
                 if cmp.visible() then
                     cmp.select_prev_item({
                         behavior = cmp.SelectBehavior.Select,
-                        count = 6
+                        count = 6,
                     })
                 else
                     fallback()
@@ -173,7 +171,7 @@ function config.nvim_cmp(plugin, opts)
             end, { "i", "s" }),
             ["<M-p>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
-                    cmp.scroll_docs( -2)
+                    cmp.scroll_docs(-2)
                 else
                     fallback()
                 end
@@ -181,6 +179,11 @@ function config.nvim_cmp(plugin, opts)
         },
         view = {
             entries = { name = "custom", selection_order = "top_down" },
+        },
+        experimental = {
+            ghost_text = {
+                hl_group = "CmpGhostText",
+            },
         },
         formatting = {
             fields = {
@@ -207,14 +210,14 @@ function config.nvim_cmp(plugin, opts)
                 vim_item.kind = vim.lsp.protocol.CompletionItemKind[cmp.lsp.CompletionItemKind[vim_item.kind]]
 
                 vim_item.menu = ({
-                        nvim_lsp = "[LSP]",
-                        buffer = "[BUF]",
-                        -- cmp_tabnine = "[TAB]",
-                        luasnip = "[SNP]",
-                        path = "[PATH]",
-                        look = "[LOOK]",
-                        treesitter = "[TS]"
-                    })[entry.source.name]
+                    nvim_lsp = "[LSP]",
+                    buffer = "[BUF]",
+                    -- cmp_tabnine = "[TAB]",
+                    luasnip = "[SNP]",
+                    path = "[PATH]",
+                    look = "[LOOK]",
+                    treesitter = "[TS]",
+                })[entry.source.name]
 
                 return vim_item
             end,
@@ -246,9 +249,9 @@ function config.nvim_cmp(plugin, opts)
         }),
     })
 
-    require('nvim-autopairs').setup {}
+    require("nvim-autopairs").setup({})
     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
+    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 end
 
 function config.luasnip()
