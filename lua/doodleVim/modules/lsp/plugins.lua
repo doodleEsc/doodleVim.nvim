@@ -6,17 +6,11 @@ lsp["neovim/nvim-lspconfig"] = {
 	lazy = true,
 	event = "BufReadPost",
 	dependencies = {
-		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		"tamago324/nlsp-settings.nvim",
 		"mortepau/codicons.nvim",
 		"utilyre/barbecue.nvim",
-		{
-			"hrsh7th/cmp-nvim-lsp",
-			cond = function()
-				return require("doodleVim.utils.utils").has("nvim-cmp")
-			end,
-		},
+		"hrsh7th/cmp-nvim-lsp",
 	},
 	opts = {
 		servers = {
@@ -28,11 +22,12 @@ lsp["neovim/nvim-lspconfig"] = {
 	config = conf.lspconfig,
 }
 
+lsp["hrsh7th/cmp-nvim-lsp"] = {
+	lazy = true,
+}
+
 lsp["mfussenegger/nvim-jdtls"] = {
 	lazy = true,
-	dependencies = {
-		"williamboman/mason.nvim",
-	},
 	ft = "java",
 	config = conf.jdtls,
 }
@@ -52,10 +47,9 @@ lsp["williamboman/mason.nvim"] = {
 lsp["jose-elias-alvarez/null-ls.nvim"] = {
 	lazy = true,
 	event = "User DeferStartWithFile",
-	dependencies = {
-		"doodleEsc/gotools.nvim",
-		"williamboman/mason.nvim",
-	},
+	-- dependencies = {
+	--     "doodleEsc/gotools.nvim",
+	-- },
 	config = conf.null_ls,
 }
 
@@ -69,6 +63,7 @@ lsp["doodleEsc/rename.nvim"] = {
 
 lsp["doodleEsc/gotools.nvim"] = {
 	lazy = true,
+	ft = "go",
 	dependencies = {
 		"stevearc/dressing.nvim",
 	},
