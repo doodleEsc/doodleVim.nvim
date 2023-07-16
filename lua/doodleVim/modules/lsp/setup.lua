@@ -31,12 +31,12 @@ function lsp.mason(plugin)
             vim.cmd("MasonInstall" .. bins)
         end
 
-        local trim = require("doodleVim.utils.utils").trim
+        -- local trim = require("doodleVim.utils.utils").trim
         local jdtls_path = require("mason-core.path").package_prefix("jdtls")
         local lombok_jar = jdtls_path .. "/plugins/" .. "lombok.jar"
 
         -- pylsp install dependencies;
-        vim.cmd("PylspInstall python-lsp-black pyls-isort python-lsp-ruff pylsp-rope")
+        -- vim.cmd("PylspInstall python-lsp-black pyls-isort python-lsp-ruff pylsp-rope")
 
         -- check lombok and install
         if not vim.loop.fs_stat(lombok_jar) then
