@@ -44,6 +44,7 @@ tools["kyazdani42/nvim-tree.lua"] = {
     dependencies = {
         "romgrk/barbar.nvim",
         "mortepau/codicons.nvim",
+        "nvim-tree/nvim-web-devicons",
     },
     config = conf.nvim_tree,
 }
@@ -179,6 +180,11 @@ tools["nvim-orgmode/orgmode"] = {
     lazy = true,
     event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
     config = conf.orgmode,
+}
+
+tools["LunarVim/bigfile.nvim"] = {
+    -- lazy = true,
+    config = conf.bigfile,
 }
 
 return tools
