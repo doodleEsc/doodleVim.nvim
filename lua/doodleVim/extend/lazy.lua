@@ -14,7 +14,6 @@ M.PostInstall = function()
         end
         -- fn()
     end
-
     vim.api.nvim_exec_autocmds("User", { pattern = "BinInstallDone", modeline = false })
 end
 
