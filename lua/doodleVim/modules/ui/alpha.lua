@@ -14,8 +14,8 @@ local logo = {
 
 local function footer()
     local datetime = os.date(" %Y-%m-%d") .. "  -  "
-    local author = " " .. os.getenv("USER") .. "  -  "
-    local total_plugins = " " .. require("lazy").stats().count .. " plugins" .. "  -  "
+    local author = "󰊠 " .. os.getenv("USER") .. "  -  "
+    local total_plugins = "󰪚 " .. require("lazy").stats().count .. " plugins" .. "  -  "
     local version = vim.version()
     local nvim_version_info = " v" .. version.major .. "." .. version.minor .. "." .. version.patch
 
@@ -25,20 +25,19 @@ end
 dashboard.section.header.val = logo
 
 dashboard.section.buttons.val = {
-    dashboard.button("o", "  Open CWD", "<cmd>doautocmd User DeferStartWithFile|ene|OpenTree<CR>"),
-    dashboard.button("h", "  Recent Projects", "<cmd>doautocmd User DeferStartWithFile|Telescope projects<CR>"),
-    dashboard.button("r", "  Recent File", "<cmd>doautocmd User DeferStartWithFile|Telescope oldfiles<CR>"),
-    dashboard.button("e", "  New file", "<cmd>doautocmd User DeferStartWithFile|ene<CR>"),
-    dashboard.button("f", "  Find File", "<cmd>doautocmd User DeferStartWithFile|Telescope find_files<CR>"),
-    dashboard.button("b", "  File Browser", "<cmd>doautocmd User DeferStartWithFile|Telescope file_browser<CR>"),
-    dashboard.button("s", "  Configuration", "<cmd>doautocmd User DeferStartWithFile|e $MYVIMRC|OpenTree<CR>"),
-    dashboard.button("u", "  Update Plugins", "<cmd>doautocmd User DeferStartWithFile|Lazy sync<CR>"),
-    dashboard.button("q", "  Quit", "<cmd>doautocmd User DeferStartWithFile|qa<cr>"),
+    dashboard.button("o", "  Open CWD", "<cmd>doautocmd User DeferStartWithFile|ene|OpenTree<CR>"),
+    dashboard.button("h", "  Recent Projects", "<cmd>doautocmd User DeferStartWithFile|Telescope projects<CR>"),
+    dashboard.button("r", "  Recent File", "<cmd>doautocmd User DeferStartWithFile|Telescope oldfiles<CR>"),
+    dashboard.button("e", "  New file", "<cmd>doautocmd User DeferStartWithFile|ene<CR>"),
+    dashboard.button("f", "  Find File", "<cmd>doautocmd User DeferStartWithFile|Telescope find_files<CR>"),
+    dashboard.button("b", "  File Browser", "<cmd>doautocmd User DeferStartWithFile|Telescope file_browser<CR>"),
+    dashboard.button("s", "  Configuration", "<cmd>doautocmd User DeferStartWithFile|e $MYVIMRC|OpenTree<CR>"),
+    dashboard.button("u", "  Update Plugins", "<cmd>doautocmd User DeferStartWithFile|Lazy sync<CR>"),
+    dashboard.button("q", "  Quit", "<cmd>doautocmd User DeferStartWithFile|qa<cr>"),
 }
 
 dashboard.section.footer.val = footer()
 dashboard.section.footer.opts.hl = "Constant"
-
 
 dashboard.opts = {
     layout = {

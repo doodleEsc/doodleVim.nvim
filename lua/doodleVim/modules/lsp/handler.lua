@@ -21,7 +21,7 @@ M.lsp_highlight_document = function()
 end
 
 M.lsp_hover = function()
-    vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 end
 
 M.lsp_diagnostic = function()
@@ -33,12 +33,12 @@ M.lsp_diagnostic = function()
         float = {
             border = "rounded",
             focusable = false,
-            header = { codicons.get("debug") .. '  Diagnostics:', "DiagnosticHeader" },
-            source = 'if_many',
+            header = { codicons.get("debug") .. "  Diagnostics:", "DiagnosticHeader" },
+            source = "if_many",
         },
         virtual_text = {
             spacing = 4,
-            source = 'always',
+            source = "always",
             severity = {
                 min = vim.diagnostic.severity.HINT,
             },
@@ -58,11 +58,11 @@ end
 M.null_ls_depress = function()
     -- from null-ls to other lsp clients
     -- @see https://github.com/jose-elias-alvarez/null-ls.nvim/issues/197#issuecomment-922792992
-    local default_exe_handler = vim.lsp.handlers['workspace/executeCommand']
-    vim.lsp.handlers['workspace/executeCommand'] = function(err, result, ctx, config)
+    local default_exe_handler = vim.lsp.handlers["workspace/executeCommand"]
+    vim.lsp.handlers["workspace/executeCommand"] = function(err, result, ctx, config)
         -- supress NULL_LS error msg
         --
-        local prefix = 'NULL_LS'
+        local prefix = "NULL_LS"
         if err and ctx.params.command:sub(1, #prefix) == prefix then
             return
         end

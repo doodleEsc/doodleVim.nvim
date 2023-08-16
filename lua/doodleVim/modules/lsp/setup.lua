@@ -38,7 +38,6 @@ function lsp.mason(plugin)
         -- pylsp install dependencies;
         -- vim.cmd("PylspInstall python-lsp-black pyls-isort python-lsp-ruff pylsp-rope")
 
-        vim.notify("adfasdfasdfasf")
         -- check lombok and install
         if not vim.loop.fs_stat(lombok_jar) then
             vim.schedule(function()
