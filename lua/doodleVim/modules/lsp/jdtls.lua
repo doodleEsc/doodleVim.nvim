@@ -13,7 +13,10 @@ function jdtls.setup()
     -- get jdtls and config jar path
     local jdtls_home = require("mason-core.path").package_prefix("jdtls")
     local jdtls_jar_path = trim(vim.fn.system({
-        "find", jdtls_home .. "/plugins", "-name", "org.eclipse.equinox.launcher_*.jar"
+        "find",
+        jdtls_home .. "/plugins",
+        "-name",
+        "org.eclipse.equinox.launcher_*.jar",
     }))
     local config_path = jdtls_home .. "/config_" .. system
 
@@ -21,7 +24,10 @@ function jdtls.setup()
     local java_debug_home = require("mason-core.path").package_prefix("java-debug-adapter")
     local java_test_home = require("mason-core.path").package_prefix("java-test")
     local java_debug_jar_path = trim(vim.fn.system({
-        "find", java_debug_home .. "/extension/server", "-name", "com.microsoft.java.debug.plugin-*.jar"
+        "find",
+        java_debug_home .. "/extension/server",
+        "-name",
+        "com.microsoft.java.debug.plugin-*.jar",
     }))
     local bundles = {
         vim.fn.glob(java_debug_jar_path, 1),
@@ -29,7 +35,7 @@ function jdtls.setup()
     vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_home .. "/extension/server/*.jar", 1), "\n"))
 
     -- get project workspace
-    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
     local workspace = vim.env.HOME .. "/.cache/jdtls/workspace/" .. project_name
 
     -- get lombok path
@@ -38,11 +44,11 @@ function jdtls.setup()
     local Xbootclasspath = "-Xbootclasspath/a:" .. lombok_jar
 
     -- update capabilities
-    local extendedClientCapabilities = require('jdtls').extendedClientCapabilities
+    local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
     extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
     -- home
-    local home = os.getenv('HOME')
+    local home = os.getenv("HOME")
 
     local config = {
         flags = {
@@ -50,22 +56,22 @@ function jdtls.setup()
         },
         capabilities = {
             workspace = {
-                configuration = true
+                configuration = true,
             },
             textDocument = {
                 completion = {
                     completionItem = {
-                        snippetSupport = true
-                    }
-                }
-            }
+                        snippetSupport = true,
+                    },
+                },
+            },
         },
-        root_dir = require('jdtls.setup').find_root({ 'gradlew', 'pom.xml', '.git' }),
+        root_dir = require("jdtls.setup").find_root({ "gradlew", "pom.xml", ".git" }),
         init_options = {
             bundles = bundles,
-            extendedClientCapabilities = extendedClientCapabilities
+            extendedClientCapabilities = extendedClientCapabilities,
         },
-        cmd = { home .. "/.config/nvim/bin/java_lsp.sh", workspace }
+        cmd = { home .. "/.config/nvim/bin/java_lsp.sh", workspace },
     }
 
     config.settings = {
@@ -73,7 +79,7 @@ function jdtls.setup()
         -- ['java.format.settings.profile'] = "GoogleStyle",
         java = {
             signatureHelp = { enabled = true },
-            contentProvider = { preferred = 'fernflower' },
+            contentProvider = { preferred = "fernflower" },
             completion = {
                 favoriteStaticMembers = {
                     "org.hamcrest.MatcherAssert.assertThat",
@@ -82,8 +88,8 @@ function jdtls.setup()
                     "org.junit.jupiter.api.Assertions.*",
                     "java.util.Objects.requireNonNull",
                     "java.util.Objects.requireNonNullElse",
-                    "org.mockito.Mockito.*"
-                }
+                    "org.mockito.Mockito.*",
+                },
             },
             sources = {
                 organizeImports = {
@@ -93,8 +99,8 @@ function jdtls.setup()
             },
             codeGeneration = {
                 toString = {
-                    template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}"
-                }
+                    template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+                },
             },
             configuration = {
                 runtimes = {
@@ -102,65 +108,65 @@ function jdtls.setup()
                         name = "JavaSE-17",
                         path = home .. "/.sdkman/candidates/java/17.0.7-amzn/",
                     },
-                }
+                },
             },
         },
     }
 
     config.on_init = function(client, _)
-        client.notify('workspace/didChangeConfiguration', { settings = config.settings })
+        client.notify("workspace/didChangeConfiguration", { settings = config.settings })
     end
 
     config.on_attach = function(client, bufnr)
-        require 'jdtls.setup'.add_commands()
-        require('jdtls').setup_dap({
-            hotcodereplace = 'auto',
+        require("jdtls.setup").add_commands()
+        require("jdtls").setup_dap({
+            hotcodereplace = "auto",
         })
-        require('jdtls.dap').setup_dap_main_class_configs({
+        require("jdtls.dap").setup_dap_main_class_configs({
             on_ready = function()
                 local dap = require("dap")
                 for _, java_config in pairs(dap.configurations.java) do
-                    java_config.console = 'internalConsole'
+                    java_config.console = "internalConsole"
                 end
-            end
+            end,
         })
     end
 
-
-    local finders = require 'telescope.finders'
-    local sorters = require 'telescope.sorters'
-    local actions = require 'telescope.actions'
-    local pickers = require 'telescope.pickers'
-    require('jdtls.ui').pick_one_async = function(items, prompt, label_fn, cb)
+    local finders = require("telescope.finders")
+    local sorters = require("telescope.sorters")
+    local actions = require("telescope.actions")
+    local pickers = require("telescope.pickers")
+    require("jdtls.ui").pick_one_async = function(items, prompt, label_fn, cb)
         local opts = {}
-        pickers.new(opts, {
-            prompt_title    = prompt,
-            finder          = finders.new_table {
-                results = items,
-                entry_maker = function(entry)
-                    return {
-                        value = entry,
-                        display = label_fn(entry),
-                        ordinal = label_fn(entry),
-                    }
+        pickers
+            .new(opts, {
+                prompt_title = prompt,
+                finder = finders.new_table({
+                    results = items,
+                    entry_maker = function(entry)
+                        return {
+                            value = entry,
+                            display = label_fn(entry),
+                            ordinal = label_fn(entry),
+                        }
+                    end,
+                }),
+                sorter = sorters.get_generic_fuzzy_sorter(),
+                attach_mappings = function(prompt_bufnr)
+                    actions.goto_file_selection_edit:replace(function()
+                        local selection = actions.get_selected_entry(prompt_bufnr)
+                        actions.close(prompt_bufnr)
+
+                        cb(selection.value)
+                    end)
+
+                    return true
                 end,
-            },
-            sorter          = sorters.get_generic_fuzzy_sorter(),
-            attach_mappings = function(prompt_bufnr)
-                actions.goto_file_selection_edit:replace(function()
-                    local selection = actions.get_selected_entry(prompt_bufnr)
-                    actions.close(prompt_bufnr)
-
-                    cb(selection.value)
-                end)
-
-                return true
-            end,
-        }):find()
+            })
+            :find()
     end
 
-
-    require('jdtls').start_or_attach(config)
+    require("jdtls").start_or_attach(config)
 end
 
 return jdtls

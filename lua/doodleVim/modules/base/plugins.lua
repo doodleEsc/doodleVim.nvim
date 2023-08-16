@@ -1,42 +1,42 @@
 local base = {}
 local conf = require("doodleVim.modules.base.config")
 
-base['nvim-tree/nvim-web-devicons'] = {
+base["nvim-tree/nvim-web-devicons"] = {
     lazy = true,
-    config = conf.nvim_web_devicons
+    config = conf.nvim_web_devicons,
 }
 
-base['mortepau/codicons.nvim'] = { lazy = true }
+base["mortepau/codicons.nvim"] = { lazy = true }
 
-base['nvim-lua/plenary.nvim'] = { lazy = true }
+base["nvim-lua/plenary.nvim"] = { lazy = true }
 
-base['stevearc/dressing.nvim'] = {
+base["stevearc/dressing.nvim"] = {
     lazy = true,
     -- event = "VeryLazy",
     event = "User LazyVimStarted",
     dependencies = {
-        'MunifTanjim/nui.nvim',
+        "MunifTanjim/nui.nvim",
     },
-    config = conf.dressing
+    config = conf.dressing,
 }
 
 -- base['nathom/filetype.nvim'] = {}
 
-base['MunifTanjim/nui.nvim'] = {
+base["MunifTanjim/nui.nvim"] = {
     lazy = true,
 }
 
-base['rcarriga/nvim-notify'] = {
+base["rcarriga/nvim-notify"] = {
     lazy = true,
     -- event = "VeryLazy",
     event = "User LazyVimStarted",
     dependencies = {
-        'mortepau/codicons.nvim'
+        "mortepau/codicons.nvim",
     },
-    config = conf.notify
+    config = conf.notify,
 }
 
-base['NvChad/nvim-colorizer.lua'] = {
+base["NvChad/nvim-colorizer.lua"] = {
     ft = { "lua", "vim", "markdown" },
     config = conf.color,
 }

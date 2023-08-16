@@ -9,20 +9,20 @@ function config.cellular(plugin, opts)
 end
 
 function config.killersheep(plugin, opts)
-    require("killersheep").setup {
-        gore = true,           -- Enables/disables blood and gore.
+    require("killersheep").setup({
+        gore = true,  -- Enables/disables blood and gore.
         keymaps = {
-            move_left = "h",   -- Keymap to move cannon to the left.
-            move_right = "l",  -- Keymap to move cannon to the right.
+            move_left = "h", -- Keymap to move cannon to the left.
+            move_right = "l", -- Keymap to move cannon to the right.
             shoot = "<Space>", -- Keymap to shoot the cannon.
         },
-    }
+    })
 end
 
 function config.blackjack(plugin, opts)
     require("blackjack").setup({
-        card_style = "mini",                             -- Can be "mini" or "large".
-        suit_style = "black",                            -- Can be "black" or "white".
+        card_style = "mini",                       -- Can be "mini" or "large".
+        suit_style = "black",                      -- Can be "black" or "white".
         scores_path = "/home/foo/blackjack_scores.json", -- Default location to store the scores.json file.
     })
 end
@@ -31,7 +31,7 @@ function config.sudoku(plugin, opts)
     -- These are the defaults for the settings
     require("sudoku").setup({
         persist_settings = true, -- safe the settings under vim.fn.stdpath("data"), usually ~/.local/share/nvim,
-        persist_games = true,    -- persist a history of all played games
+        persist_games = true, -- persist a history of all played games
         default_mappings = true, -- if set to false you need to set your own, like the following:
         mappings = {
             { key = "x",     action = "clear_cell" },
@@ -67,7 +67,7 @@ function config.sudoku(plugin, opts)
             same_number = { fg = "white", gui = "bold" },
             set_number = { fg = "white", gui = "italic" },
             error = { fg = "white", bg = "#843434" },
-        }
+        },
     })
 end
 

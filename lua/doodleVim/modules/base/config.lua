@@ -32,12 +32,16 @@ function config.nvim_web_devicons(plugin, opts)
             --     color = "#f1502f",
             --     name = "Gitignore",
             -- },
-            ["txt"] = {
-                icon = "",
-                -- color = "#447028",
-                cterm_color = "22",
-                name = "Txt",
-            },
+            -- ["txt"] = {
+            --     icon = "",
+            --     -- color = "#447028",
+            --     cterm_color = "22",
+            --     name = "Txt",
+            -- },
+            -- ["dockerfile"] = {
+            --     icon = "",
+            --     name = "Dockerfile",
+            -- },
         },
         -- same as `override` but specifically for overrides by extension
         -- takes effect when `strict` is true
