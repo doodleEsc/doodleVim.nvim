@@ -184,6 +184,13 @@ tools["nvim-orgmode/orgmode"] = {
 
 tools["LunarVim/bigfile.nvim"] = {
     -- lazy = true,
+    cond = function()
+        if vim.fn.argc() == 0 then
+            return false
+        else
+            return true
+        end
+    end,
     config = conf.bigfile,
 }
 

@@ -5,7 +5,7 @@ local autocmd = {}
 local UserDefinedEvent = {
     "DeferStart",
     function()
-        if next(vim.fn.argv()) ~= nil then
+        if vim.fn.argc() == 0 then
             api.nvim_exec_autocmds("User", { pattern = "DeferStartWithFile", modeline = false })
         end
     end,
