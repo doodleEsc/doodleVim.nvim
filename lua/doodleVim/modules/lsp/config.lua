@@ -268,7 +268,9 @@ function config.lightbulb()
     require("nvim-lightbulb").setup({
         ignore = {
             clients = { "null-ls" },
-            ft = {},
+            ft = {
+                "NvimTree",
+            },
         },
         sign = {
             enabled = true,
