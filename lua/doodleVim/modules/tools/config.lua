@@ -3,6 +3,45 @@ local config = {}
 function config.telescope()
     local actions = require("telescope.actions")
     local actions_layout = require("telescope.actions.layout")
+    -- local action_state = require("telescope.actions.state")
+
+    -- actions.select_default:enhance({
+    --     pre = function(prompt_bufnr)
+    --         print("asdfasdfasfasfasdf")
+    --         local api = require("nvim-tree.api")
+    --         api.tree.close()
+    --     end,
+    -- })
+
+    -- local transform_mod = require("telescope.actions.mt").transform_mod
+
+    -- local custom_actions = transform_mod({
+    --     open_by_tree = function(prompt_bufnr)
+    --         actions.close(prompt_bufnr)
+    --         local api = require("nvim-tree.api")
+    --         -- if api.tree.is_visible() then
+    --             local openfile = require("nvim-tree.actions.node.open-file")
+    --             local selection = action_state.get_selected_entry()
+    --             local filename = selection.filename
+    --             if filename == nil then
+    --                 filename = selection[1]
+    --             end
+    --             openfile.fn("preview", filename)
+    --         -- end
+    --
+    --         -- local selection = action_state.get_selected_entry()
+    --
+    --         -- if require("doodleVim.extend.lazy").loaded("nvim-tree.lua") then
+    --         --     local api = require("nvim-tree.api")
+    --         --     if api.tree.is_visible() then
+    --         --         vim.cmd("wincmd l")
+    --         --     end
+    --         --     -- if api.tree.is_tree_buf() then
+    --         --     --     vim.cmd("wincmd l")
+    --         --     -- end
+    --         -- end
+    --     end,
+    -- })
 
     require("telescope").setup({
         defaults = {
@@ -166,6 +205,7 @@ end
 function config.nvim_tree()
     local codicons = require("codicons")
     local on_attach = require("doodleVim.extend.tree").on_attach
+    local sort_by = require("doodleVim.extend.tree").get_sort_by
     require("nvim-tree").setup({
         -- BEGIN_DEFAULT_OPTS
         auto_reload_on_write = true,
@@ -173,7 +213,7 @@ function config.nvim_tree()
         hijack_cursor = true,
         hijack_netrw = true,
         hijack_unnamed_buffer_when_opening = false,
-        sort_by = "name",
+        sort_by = sort_by,
         root_dirs = {},
         prefer_startup_root = false,
         sync_root_with_cwd = true,
@@ -187,7 +227,6 @@ function config.nvim_tree()
             adaptive_size = false,
             centralize_selection = true,
             width = 30,
-            hide_root_folder = false,
             side = "left",
             preserve_window_proportions = false,
             number = false,
@@ -216,6 +255,11 @@ function config.nvim_tree()
             highlight_git = true,
             highlight_opened_files = "all",
             root_folder_modifier = ":~",
+            highlight_diagnostics = false,
+            highlight_bookmarks = "none",
+            highlight_clipboard = "name",
+            special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+            symlink_destination = true,
             indent_markers = {
                 enable = true,
                 inline_arrows = true,
@@ -266,8 +310,6 @@ function config.nvim_tree()
                     },
                 },
             },
-            special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
-            symlink_destination = true,
         },
         hijack_directories = {
             enable = true,
