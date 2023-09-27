@@ -18,6 +18,12 @@ local cycle_sort = function()
     api.tree.reload()
 end
 
+local resize = function(delta)
+    return function()
+        vim.cmd("tabdo NvimTreeResize " .. delta)
+    end
+end
+
 tree.toggle = function()
     if vim.bo.filetype == "alpha" then
         return
@@ -60,8 +66,6 @@ tree.find_directory_and_focus = function()
         attach_mappings = open_nvim_tree,
     })
 end
-
-tree.cycle_sort = function() end
 
 tree.get_sort_by = function()
     return SORT_METHODS[sort_current]
@@ -125,9 +129,11 @@ tree.on_attach = function(bufnr)
     vim.keymap.set("n", "x", api.fs.cut, opts("Cut"))
     vim.keymap.set("n", "y", api.fs.copy.filename, opts("Copy Name"))
     vim.keymap.set("n", "Y", api.fs.copy.relative_path, opts("Copy Relative Path"))
-    vim.keymap.set("n", "T", cycle_sort, opts("Cycle Sort"))
     vim.keymap.set("n", "<2-LeftMouse>", api.node.open.edit, opts("Open"))
     vim.keymap.set("n", "<2-RightMouse>", api.tree.change_root_to_node, opts("CD"))
+    vim.keymap.set("n", "T", cycle_sort, opts("Cycle Sort"))
+    vim.keymap.set("n", "<Tab>", resize("+5"), opts("resize +5"))
+    vim.keymap.set("n", "<S-Tab>", resize("-5"), opts("resize -5"))
 end
 
 return tree
