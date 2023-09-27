@@ -27,6 +27,7 @@ function ui.treesitter(plugin)
             "solidity",
             "markdown",
             "org",
+            "java",
         }
 
         -- HACK: add norg and norg_meta parser_info to nvim-treesitter
@@ -34,11 +35,11 @@ function ui.treesitter(plugin)
         local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
         parser_configs.org = {
             install_info = {
-                url = 'https://github.com/milisims/tree-sitter-org',
+                url = "https://github.com/milisims/tree-sitter-org",
                 revision = "081179c52b3e8175af62b9b91dc099d010c38770",
-                files = { 'src/parser.c', 'src/scanner.cc' },
+                files = { "src/parser.c", "src/scanner.cc" },
             },
-            filetype = 'org',
+            filetype = "org",
         }
 
         local langs = {}
@@ -49,7 +50,7 @@ function ui.treesitter(plugin)
             end
         end
         if #langs > 0 then
-            local update = require("nvim-treesitter.install").update { with_sync = true }
+            local update = require("nvim-treesitter.install").update({ with_sync = true })
             local ok, _ = pcall(update, langs)
             if not ok then
                 vim.notify("TSUpdate Failed...")
