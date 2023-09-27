@@ -126,6 +126,8 @@ tools["mfussenegger/nvim-dap"] = {
     dependencies = {
         "rcarriga/nvim-dap-ui",
         "mortepau/codicons.nvim",
+        -- { "mfussenegger/nvim-dap-python", lazy = true, ft = "python" },
+        -- { "leoluz/nvim-dap-go",           lazy = true, ft = "go" },
     },
     config = conf.dap,
 }
@@ -140,17 +142,20 @@ tools["rcarriga/nvim-dap-ui"] = {
 tools["mfussenegger/nvim-dap-python"] = {
     lazy = true,
     init = setup.dap_python,
+    ft = "python",
     config = conf.dap_python,
 }
 
 tools["leoluz/nvim-dap-go"] = {
     lazy = true,
     init = setup.dap_go,
+    ft = "go",
     config = conf.dap_go,
 }
 
 tools["Weissle/persistent-breakpoints.nvim"] = {
     lazy = true,
+    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
     init = setup.persistent_breakpoints,
     config = conf.breakpoints,
 }
@@ -183,14 +188,15 @@ tools["nvim-orgmode/orgmode"] = {
 }
 
 tools["LunarVim/bigfile.nvim"] = {
-    -- lazy = true,
-    cond = function()
-        if vim.fn.argc() == 0 then
-            return false
-        else
-            return true
-        end
-    end,
+    lazy = true,
+    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
+    -- cond = function()
+    --     if vim.fn.argc() == 0 then
+    --         return false
+    --     else
+    --         return true
+    --     end
+    -- end,
     config = conf.bigfile,
 }
 
