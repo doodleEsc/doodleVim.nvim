@@ -27,6 +27,12 @@ function M.load_user_command()
                 floaterm.run("lazygit", { title = "lazygit", name = "lazygit" })
             end,
         },
+        {
+            "PyDepInstall",
+            function()
+                vim.cmd("PylspInstall python-lsp-black pyls-isort python-lsp-ruff pylsp-rope")
+            end,
+        },
     }
     create_command(commands)
 end
