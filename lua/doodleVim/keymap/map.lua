@@ -124,11 +124,11 @@ map.Lsp = {
                 :with_silent()
                 :with_label("Code Action"),
         },
-        ["<C-n>"] = map_cr("lua vim.diagnostic.goto_next()")
+        ["<C-]>"] = map_cr("lua vim.diagnostic.goto_next()")
             :with_noremap()
             :with_silent()
             :with_label("Go To Next Diagnostic"),
-        ["<C-p>"] = map_cr("lua vim.diagnostic.goto_prev()")
+        ["<C-[>"] = map_cr("lua vim.diagnostic.goto_prev()")
             :with_noremap()
             :with_silent()
             :with_label("Go To Previous Diagnostic"),
@@ -529,17 +529,17 @@ map.WhichKey = {
         ["<C-_>"] = map_cr("lua require('doodleVim.extend.misc').toggle_whichkey()")
             :with_noremap()
             :with_silent()
-            :with_label("Show Keymaps"),
+            :with_label("Show Keymaps, Press Ctrl+/"),
     },
     x = {
         ["<C-_>"] = map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
             :with_noremap()
-            :with_label("Show Keymaps"),
+            :with_label("Show Keymaps, Press Ctrl+/"),
     },
     i = {
         ["<C-_>"] = map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
             :with_noremap()
-            :with_label("Show Keymaps"),
+            :with_label("Show Keymaps, Press Ctrl+/"),
     },
 }
 
