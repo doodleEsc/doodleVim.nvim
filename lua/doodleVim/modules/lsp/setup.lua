@@ -19,6 +19,8 @@ function lsp.mason(plugin)
             "java-debug-adapter",
             "java-test",
             "xmlformatter",
+            "docker-compose-language-service",
+            "dockerfile-language-server",
         }
         local register = require("mason-registry")
         local bins = ""

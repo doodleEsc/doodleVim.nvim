@@ -12,6 +12,7 @@ function ui.treesitter(plugin)
             "dot",
             "dockerfile",
             "go",
+            "gosum",
             "gomod",
             "gowork",
             "json",
