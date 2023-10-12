@@ -188,15 +188,8 @@ tools["nvim-orgmode/orgmode"] = {
 }
 
 tools["LunarVim/bigfile.nvim"] = {
-    lazy = true,
-    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
-    -- cond = function()
-    --     if vim.fn.argc() == 0 then
-    --         return false
-    --     else
-    --         return true
-    --     end
-    -- end,
+    -- lazy = true,
+    -- event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
     config = conf.bigfile,
 }
 

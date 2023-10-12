@@ -2,6 +2,15 @@ local config = {}
 local api = vim.api
 local vim_path = require("doodleVim.core.global").vim_path
 
+local function extend_or_override(config, custom, ...)
+    if type(custom) == "function" then
+        config = custom(config, ...) or config
+    elseif custom then
+        config = vim.tbl_deep_extend("force", config, custom) --[[@as table]]
+    end
+    return config
+end
+
 function config.lspconfig(plugin, opts)
     local handler = require("doodleVim.modules.lsp.handler")
     handler.lsp_hover()
@@ -677,31 +686,47 @@ function config.barbecue(plugin, opts)
     })
 end
 
-function config.jdtls(plugin, opts)
-    local group = api.nvim_create_augroup("jdtls_lsp", { clear = true })
-    api.nvim_create_autocmd("FileType", {
-        group = group,
+-- function config.jdtls(plugin, opts)
+--     local group = api.nvim_create_augroup("jdtls_lsp", { clear = true })
+--     api.nvim_create_autocmd("FileType", {
+--         group = group,
+--         pattern = "java",
+--         callback = function()
+--             require("doodleVim.modules.lsp.jdtls").setup()
+--         end,
+--         desc = "Setup jdtls lsp in every java file",
+--     })
+--
+--     require("doodleVim.extend.debug").register_test_fn_debug("java", function()
+--         vim.ui.select({ "Nearest", "Class" }, {
+--             prompt = "Select Test Type",
+--             format_item = function(item)
+--                 return " " .. item
+--             end,
+--         }, function(choice)
+--             if choice == "Nearest" then
+--                 require("jdtls").test_nearest_method()
+--             elseif choice == "Class" then
+--                 require("jdtls").test_class()
+--             end
+--         end)
+--     end)
+-- end
+
+function config.jdtls(plugin, options)
+    -- local opts = require("doodleVim.modules.lsp.jdtls").get_opts()
+
+    local function attach_jdtls()
+        local jdtls_config = require("doodleVim.modules.lsp.jdtls").get_config()
+        require("jdtls").start_or_attach(jdtls_config)
+    end
+
+    vim.api.nvim_create_autocmd("FileType", {
         pattern = "java",
-        callback = function()
-            require("doodleVim.modules.lsp.jdtls").setup()
-        end,
-        desc = "Setup jdtls lsp in every java file",
+        callback = attach_jdtls,
     })
 
-    require("doodleVim.extend.debug").register_test_fn_debug("java", function()
-        vim.ui.select({ "Nearest", "Class" }, {
-            prompt = "Select Test Type",
-            format_item = function(item)
-                return " " .. item
-            end,
-        }, function(choice)
-            if choice == "Nearest" then
-                require("jdtls").test_nearest_method()
-            elseif choice == "Class" then
-                require("jdtls").test_class()
-            end
-        end)
-    end)
+    attach_jdtls()
 end
 
 return config
