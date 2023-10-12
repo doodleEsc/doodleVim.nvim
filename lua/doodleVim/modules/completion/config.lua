@@ -86,21 +86,21 @@ function config.nvim_cmp(plugin, opts)
                 if cmp.visible() then
                     cmp.abort()
                 else
-                    cmp.complete()
+                    fallback()
                 end
             end),
             ["<C-p>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()
                 else
-                    fallback()
+                    cmp.complete()
                 end
             end, { "i", "s" }),
             ["<C-n>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
                 else
-                    fallback()
+                    cmp.complete()
                 end
             end, { "i", "s" }),
             -- when menu is visible, navigate to next item
@@ -149,7 +149,7 @@ function config.nvim_cmp(plugin, opts)
                         count = 6,
                     })
                 else
-                    fallback()
+                    cmp.complete()
                 end
             end, { "i", "s" }),
             ["<C-u>"] = cmp.mapping(function(fallback)
@@ -159,7 +159,7 @@ function config.nvim_cmp(plugin, opts)
                         count = 6,
                     })
                 else
-                    fallback()
+                    cmp.complete()
                 end
             end, { "i", "s" }),
             ["<M-n>"] = cmp.mapping(function(fallback)
