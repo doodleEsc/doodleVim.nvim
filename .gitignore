@@ -8,3 +8,5 @@ plugin/
 test/
 .luarc.json
 compiled.lua
+env/
+OPENAI_API_KEY

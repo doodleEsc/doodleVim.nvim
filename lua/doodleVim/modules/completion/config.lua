@@ -9,6 +9,7 @@ function config.nvim_cmp(plugin, opts)
     })
 
     local cmp = require("cmp")
+    local lspkind = require("lspkind")
     local under_comparator = require("cmp-under-comparator").under
     local WIDE_HEIGHT = 40
 
@@ -70,13 +71,12 @@ function config.nvim_cmp(plugin, opts)
             { name = "luasnip" },
             { name = "buffer" },
             { name = "async_path" },
-            { name = "orgmode" },
             {
                 name = "look",
                 keyword_length = 3,
                 option = { convert_case = true, loud = true },
             },
-            -- { name = "cmp_tabnine" },
+            { name = "orgmode" },
         }, {}),
         mapping = {
             ["<CR>"] = {
@@ -186,41 +186,32 @@ function config.nvim_cmp(plugin, opts)
             },
         },
         formatting = {
-            fields = {
-                cmp.ItemField.Abbr,
-                cmp.ItemField.Kind,
-                cmp.ItemField.Menu,
-            },
-            format = function(entry, vim_item)
-                local word = vim_item.abbr
+            format = lspkind.cmp_format({
+                mode = "symbol_text",
+                maxwidth = 50,
+                ellipsis_char = "...",
+                symbol_map = {},
 
-                if string.sub(word, -1, -1) == "~" then
-                    word = string.sub(word, 0, -2)
-                end
+                before = function(entry, vim_item)
+                    local word = vim_item.abbr
 
-                local width = #word
-                if width >= math.ceil(vim.o.columns / 4) then
-                    width = math.ceil(width / 4)
-                    local offset = width - #word
-                    word = string.sub(word, 0, offset)
-                end
-                vim_item.abbr = word
+                    if string.sub(word, -1, -1) == "~" then
+                        word = string.sub(word, 0, -2)
+                    end
+                    vim_item.abbr = word
 
-                local cmd = require("cmp")
-                vim_item.kind = vim.lsp.protocol.CompletionItemKind[cmp.lsp.CompletionItemKind[vim_item.kind]]
+                    vim_item.menu = ({
+                        nvim_lsp = "[LSP]",
+                        buffer = "[BUF]",
+                        luasnip = "[SNP]",
+                        path = "[PATH]",
+                        look = "[LOOK]",
+                        treesitter = "[TS]",
+                    })[entry.source.name]
 
-                vim_item.menu = ({
-                    nvim_lsp = "[LSP]",
-                    buffer = "[BUF]",
-                    -- cmp_tabnine = "[TAB]",
-                    luasnip = "[SNP]",
-                    path = "[PATH]",
-                    look = "[LOOK]",
-                    treesitter = "[TS]",
-                })[entry.source.name]
-
-                return vim_item
-            end,
+                    return vim_item
+                end,
+            }),
         },
     })
 
@@ -265,6 +256,10 @@ end
 
 function config.neogen()
     require("neogen").setup({ snippet_engine = "luasnip" })
+end
+
+function config.codeium()
+    require("codeium").setup({})
 end
 
 return config

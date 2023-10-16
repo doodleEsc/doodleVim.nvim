@@ -193,4 +193,25 @@ tools["LunarVim/bigfile.nvim"] = {
     config = conf.bigfile,
 }
 
+tools["Bryley/neoai.nvim"] = {
+    lazy = true,
+    cmd = {
+        "NeoAI",
+        "NeoAIOpen",
+        "NeoAIClose",
+        "NeoAIToggle",
+        "NeoAIContext",
+        "NeoAIContextOpen",
+        "NeoAIContextClose",
+        "NeoAIInject",
+        "NeoAIInjectCode",
+        "NeoAIInjectContext",
+        "NeoAIInjectContextCode",
+    },
+    dependencies = {
+        "MunifTanjim/nui.nvim",
+    },
+    config = conf.neoai,
+}
+
 return tools

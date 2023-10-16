@@ -28,6 +28,7 @@ completion["hrsh7th/nvim-cmp"] = {
         "danymat/neogen",
         "L3MON4D3/LuaSnip",
         "mortepau/codicons.nvim",
+        "onsails/lspkind.nvim",
     },
     config = conf.nvim_cmp,
 }

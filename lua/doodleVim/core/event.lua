@@ -97,6 +97,8 @@ function autocmd.load_autocmds()
                         "tsplayground",
                         "DressingSelect",
                         "Jaq",
+                        "neoai-input",
+                        "neoai-output",
                     },
                     callback = function()
                         vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true })

@@ -1,6 +1,7 @@
 local bind = require("doodleVim.keymap.bind")
 local map_cr = bind.map_cr
 local map_cmd = bind.map_cmd
+local map_cu = bind.map_cu
 
 local map = {}
 
@@ -175,10 +176,26 @@ map.SymbolsOutline = {
     n = {
         ["<leader>j"] = {
             name = "Symbols-Outline",
-            j = map_cr("lua require'symbols-outline'.toggle_outline()")
+            j = map_cr("lua require('symbols-outline').toggle_outline()")
                 :with_noremap()
                 :with_silent()
                 :with_label("Symbols And Function Preview"),
+        },
+    },
+}
+
+map.Neoai = {
+    n = {
+        ["<leader>a"] = {
+            name = "NeoAI",
+            i = map_cmd("<Cmd>NeoAI<CR>"):with_noremap():with_silent():with_label("NeoAI Toggle"),
+        },
+    },
+
+    x = {
+        ["<leader>a"] = {
+            name = "NeoAI Context",
+            i = map_cu("'<,'>NeoAIContext"):with_noremap():with_silent():with_label("NeoAI Context"),
         },
     },
 }
