@@ -116,10 +116,10 @@ function config.telescope()
                 show_preview = false,
             },
             fzf = {
-                fuzzy = true,       -- false will only do exact matching
+                fuzzy = true,                   -- false will only do exact matching
                 override_generic_sorter = true, -- override the generic sorter
-                override_file_sorter = true, -- override the file sorter
-                case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                override_file_sorter = true,    -- override the file sorter
+                case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
                 -- the default case_mode is "smart_case"
             },
             -- ["ui-select"] = {
@@ -633,9 +633,9 @@ function config.which_key()
         },
         operators = {},
         window = {
-            border = "single", -- none, single, double, shadow
-            position = "bottom", -- bottom, top
-            margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+            border = "single",        -- none, single, double, shadow
+            position = "bottom",      -- bottom, top
+            margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]
             padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
             winblend = 0,
         },
@@ -787,10 +787,10 @@ function config.diffview()
     local actions = require("diffview.actions")
 
     require("diffview").setup({
-        diff_binaries = false, -- Show diffs for binaries
+        diff_binaries = false,   -- Show diffs for binaries
         enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
-        git_cmd = { "git" }, -- The git executable followed by default args.
-        use_icons = true,  -- Requires nvim-web-devicons
+        git_cmd = { "git" },     -- The git executable followed by default args.
+        use_icons = true,        -- Requires nvim-web-devicons
         icons = {
             -- Only applies when use_icons is true.
             folder_closed = codicons.get("folder"),
@@ -804,7 +804,7 @@ function config.diffview()
             listing_style = "tree", -- One of 'list' or 'tree'
             tree_options = {
                 -- Only applies when listing_style is 'tree'
-                flatten_dirs = true, -- Flatten dirs that only contain one single dir
+                flatten_dirs = true,             -- Flatten dirs that only contain one single dir
                 folder_statuses = "only_folded", -- One of 'never', 'only_folded' or 'always'.
             },
             win_config = {
@@ -850,50 +850,50 @@ function config.diffview()
                     require("doodleVim.extend.tab").enable()
                 end)
             end,
-        },                   -- See ':h diffview-config-hooks'
+        },                            -- See ':h diffview-config-hooks'
         keymaps = {
             disable_defaults = false, -- Disable the default keymaps
             view = {
                 -- The `view` bindings are active in the diff buffers, only when the current
                 -- tabpage is a Diffview.
-                ["<tab>"] = actions.select_next_entry, -- Open the diff for the next file
+                ["<tab>"] = actions.select_next_entry,   -- Open the diff for the next file
                 ["<s-tab>"] = actions.select_prev_entry, -- Open the diff for the previous file
-                ["ge"] = actions.goto_file_edit, -- Open the file in a new tabpage
+                ["ge"] = actions.goto_file_edit,         -- Open the file in a new tabpage
                 -- ["<C-w>gf"]    = actions.goto_file, -- Open the file in a new split in the previous tabpage
                 -- ["<C-w><C-f>"] = actions.goto_file_split, -- Open the file in a new split
                 -- ["<leader>e"] = actions.focus_files, -- Bring focus to the files panel
                 -- ["<leader>b"] = actions.toggle_files, -- Toggle the files panel.
             },
             file_panel = {
-                ["j"] = actions.next_entry, -- Bring the cursor to the next file entry
+                ["j"] = actions.next_entry,      -- Bring the cursor to the next file entry
                 ["<down>"] = actions.next_entry,
-                ["k"] = actions.prev_entry, -- Bring the cursor to the previous file entry.
+                ["k"] = actions.prev_entry,      -- Bring the cursor to the previous file entry.
                 ["<up>"] = actions.prev_entry,
                 ["<cr>"] = actions.select_entry, -- Open the diff for the selected entry.
                 ["o"] = actions.select_entry,
                 -- ["<2-LeftMouse>"] = actions.select_entry,
-                ["-"] = actions.toggle_stage_entry, -- Stage / unstage the selected entry.
-                ["S"] = actions.stage_all,  -- Stage all entries.
-                ["U"] = actions.unstage_all, -- Unstage all entries.
-                ["X"] = actions.restore_entry, -- Restore entry to the state on the left side.
-                ["R"] = actions.refresh_files, -- Update stats and entries in the file list.
-                ["L"] = actions.open_commit_log, -- Open the commit log panel0
+                ["-"] = actions.toggle_stage_entry,     -- Stage / unstage the selected entry.
+                ["S"] = actions.stage_all,              -- Stage all entries.
+                ["U"] = actions.unstage_all,            -- Unstage all entries.
+                ["X"] = actions.restore_entry,          -- Restore entry to the state on the left side.
+                ["R"] = actions.refresh_files,          -- Update stats and entries in the file list.
+                ["L"] = actions.open_commit_log,        -- Open the commit log panel0
                 ["<c-u>"] = actions.scroll_view(-0.25), -- Scroll the view up
-                ["<c-d>"] = actions.scroll_view(0.25), -- Scroll the view down
+                ["<c-d>"] = actions.scroll_view(0.25),  -- Scroll the view down
                 -- ["<tab>"]         = actions.select_next_entry,
                 -- ["<s-tab>"]       = actions.select_prev_entry,
                 -- ["gf"]            = actions.goto_file,
                 -- ["<C-w><C-f>"]    = actions.goto_file_split,
                 ["<C-o>"] = actions.goto_file_tab,
-                ["i"] = actions.listing_style, -- Toggle between 'list' and 'tree' views
+                ["i"] = actions.listing_style,       -- Toggle between 'list' and 'tree' views
                 ["f"] = actions.toggle_flatten_dirs, -- Flatten empty subdirectories in tree listing style.
                 ["<leader>e"] = actions.focus_files,
                 ["<leader>b"] = actions.toggle_files,
             },
             file_history_panel = {
-                ["g!"] = actions.options,   -- Open the option panel
+                ["g!"] = actions.options,               -- Open the option panel
                 ["<C-A-d>"] = actions.open_in_diffview, -- Open the entry under the cursor in a diffview
-                ["y"] = actions.copy_hash,  -- Copy the commit hash of the entry under the cursor
+                ["y"] = actions.copy_hash,              -- Copy the commit hash of the entry under the cursor
                 ["L"] = actions.open_commit_log,
                 ["zR"] = actions.open_all_folds,
                 ["zM"] = actions.close_all_folds,
@@ -1120,7 +1120,7 @@ function config.breakpoints(plugin, opts)
     require("persistent-breakpoints").setup({
         save_dir = vim.fn.stdpath("data") .. "/nvim_checkpoints",
         -- when to load the breakpoints? "BufReadPost" is recommanded.
-        load_breakpoints_event = { "User DeferLoadStuff" },
+        load_breakpoints_event = { "BufReadPost" },
         -- record the performance of different function. run :lua require('persistent-breakpoints.api').print_perf_data() to see the result.
         perf_record = false,
     })
@@ -1177,9 +1177,9 @@ end
 function config.bigfile(plugin, opts)
     -- default config
     require("bigfile").setup({
-        filesize = 1, -- size of the file in MiB, the plugin round file sizes to the closest MiB
+        filesize = 1,      -- size of the file in MiB, the plugin round file sizes to the closest MiB
         pattern = { "*" }, -- autocmd pattern or function see <### Overriding the detection of big files>
-        features = { -- features to disable
+        features = {       -- features to disable
             "indent_blankline",
             "illuminate",
             "lsp",
@@ -1198,9 +1198,9 @@ function config.neoai(plugin, opts)
         ui = {
             output_popup_text = "NeoAI",
             input_popup_text = "Prompt",
-            width = 30,      -- As percentage eg. 30%
+            width = 30,               -- As percentage eg. 30%
             output_popup_height = 80, -- As percentage eg. 80%
-            submit = "<Enter>", -- Key binding to submit the prompt
+            submit = "<Enter>",       -- Key binding to submit the prompt
         },
         models = {
             {
