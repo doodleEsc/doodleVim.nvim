@@ -19,6 +19,8 @@ function lsp.mason(plugin)
             "java-debug-adapter",
             "java-test",
             "xmlformatter",
+            "docker-compose-language-service",
+            "dockerfile-language-server",
         }
         local register = require("mason-registry")
         local bins = ""
@@ -34,9 +36,6 @@ function lsp.mason(plugin)
         -- local trim = require("doodleVim.utils.utils").trim
         local jdtls_path = require("mason-core.path").package_prefix("jdtls")
         local lombok_jar = jdtls_path .. "/plugins/" .. "lombok.jar"
-
-        -- pylsp install dependencies;
-        -- vim.cmd("PylspInstall python-lsp-black pyls-isort python-lsp-ruff pylsp-rope")
 
         -- check lombok and install
         if not vim.loop.fs_stat(lombok_jar) then

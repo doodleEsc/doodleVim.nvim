@@ -1,33 +1,34 @@
 local completion = {}
-local conf = require('doodleVim.modules.completion.config')
+local conf = require("doodleVim.modules.completion.config")
 
-completion['danymat/neogen'] = {
+completion["danymat/neogen"] = {
     lazy = true,
-    config = conf.neogen
+    config = conf.neogen,
 }
 
-completion['L3MON4D3/LuaSnip'] = {
+completion["L3MON4D3/LuaSnip"] = {
     lazy = true,
     version = "1.2.*",
-    config = conf.luasnip
+    config = conf.luasnip,
 }
 
-completion['hrsh7th/nvim-cmp'] = {
-    event = 'InsertEnter',
+completion["hrsh7th/nvim-cmp"] = {
+    event = "InsertEnter",
     dependencies = {
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-buffer',
-        'saadparwaiz1/cmp_luasnip',
-        'FelipeLema/cmp-async-path',
-        'octaltree/cmp-look',
-        'hrsh7th/cmp-cmdline',
-        'ray-x/cmp-treesitter',
-        'lukas-reineke/cmp-under-comparator',
-        'rafamadriz/friendly-snippets',
-        'windwp/nvim-autopairs',
-        'danymat/neogen',
-        'L3MON4D3/LuaSnip',
-        'mortepau/codicons.nvim',
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "saadparwaiz1/cmp_luasnip",
+        "FelipeLema/cmp-async-path",
+        "octaltree/cmp-look",
+        "hrsh7th/cmp-cmdline",
+        "ray-x/cmp-treesitter",
+        "lukas-reineke/cmp-under-comparator",
+        "rafamadriz/friendly-snippets",
+        "windwp/nvim-autopairs",
+        "danymat/neogen",
+        "L3MON4D3/LuaSnip",
+        "mortepau/codicons.nvim",
+        "onsails/lspkind.nvim",
     },
     config = conf.nvim_cmp,
 }

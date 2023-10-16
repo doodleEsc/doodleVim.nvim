@@ -4,12 +4,35 @@ function config.telescope()
     local actions = require("telescope.actions")
     local actions_layout = require("telescope.actions.layout")
 
+    -- disable binary preview
+    local previewers = require("telescope.previewers")
+    local Job = require("plenary.job")
+    local new_maker = function(filepath, bufnr, opts)
+        filepath = vim.fn.expand(filepath)
+        Job:new({
+            command = "file",
+            args = { "--mime-type", "-b", filepath },
+            on_exit = function(j)
+                local mime_type = vim.split(j:result()[1], "/")[1]
+                if mime_type == "text" then
+                    previewers.buffer_previewer_maker(filepath, bufnr, opts)
+                else
+                    -- maybe we want to write something to the buffer here
+                    vim.schedule(function()
+                        vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "BINARY" })
+                    end)
+                end
+            end,
+        }):sync()
+    end
+
     require("telescope").setup({
         defaults = {
             initial_mode = "insert",
             wrap_results = false,
             prompt_prefix = "",
             -- selection_caret = codicons.get("telescope") .. " ",
+            buffer_previewer_maker = new_maker,
             selection_caret = "" .. " ",
             sorting_strategy = "ascending",
             scroll_strategy = "cycle",
@@ -48,6 +71,7 @@ function config.telescope()
             },
             preview = {
                 hide_on_startup = false,
+                filesize_limit = 0.2, -- MB
             },
             default_mappings = {
                 i = {
@@ -166,6 +190,7 @@ end
 function config.nvim_tree()
     local codicons = require("codicons")
     local on_attach = require("doodleVim.extend.tree").on_attach
+    local sort_by = require("doodleVim.extend.tree").get_sort_by
     require("nvim-tree").setup({
         -- BEGIN_DEFAULT_OPTS
         auto_reload_on_write = true,
@@ -173,14 +198,13 @@ function config.nvim_tree()
         hijack_cursor = true,
         hijack_netrw = true,
         hijack_unnamed_buffer_when_opening = false,
-        sort_by = "name",
+        sort_by = sort_by,
         root_dirs = {},
         prefer_startup_root = false,
         sync_root_with_cwd = true,
         reload_on_bufenter = false,
         respect_buf_cwd = true,
         on_attach = on_attach,
-        remove_keymaps = false,
         select_prompts = false,
         view = {
             cursorline = true,
@@ -188,7 +212,6 @@ function config.nvim_tree()
             adaptive_size = false,
             centralize_selection = true,
             width = 30,
-            hide_root_folder = false,
             side = "left",
             preserve_window_proportions = false,
             number = false,
@@ -209,9 +232,19 @@ function config.nvim_tree()
         },
         renderer = {
             full_name = false,
-            highlight_modified = "all",
+            highlight_modified = "none",
             root_folder_label = ":~:s?$?/..?",
             indent_width = 2,
+            add_trailing = false,
+            group_empty = false,
+            highlight_git = true,
+            highlight_opened_files = "all",
+            root_folder_modifier = ":~",
+            highlight_diagnostics = false,
+            highlight_bookmarks = "none",
+            highlight_clipboard = "name",
+            special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+            symlink_destination = true,
             indent_markers = {
                 enable = true,
                 inline_arrows = true,
@@ -223,11 +256,6 @@ function config.nvim_tree()
                     none = " ",
                 },
             },
-            add_trailing = false,
-            group_empty = false,
-            highlight_git = true,
-            highlight_opened_files = "all",
-            root_folder_modifier = ":~",
             icons = {
                 webdev_colors = true,
                 git_placement = "signcolumn",
@@ -267,8 +295,6 @@ function config.nvim_tree()
                     },
                 },
             },
-            special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
-            symlink_destination = true,
         },
         hijack_directories = {
             enable = true,
@@ -404,9 +430,9 @@ function config.nvim_tree()
         },
     })
 
-    local api = require('nvim-tree.api')
-    local Event = require('nvim-tree.api').events.Event
-    local bufferline_api = require('bufferline.api')
+    local api = require("nvim-tree.api")
+    local Event = require("nvim-tree.api").events.Event
+    local bufferline_api = require("bufferline.api")
 
     api.events.subscribe(Event.Resize, function(size)
         bufferline_api.set_offset(size)
@@ -423,14 +449,14 @@ function config.symbols_outline()
         highlight_hovered_item = true,
         show_guides = true,
         auto_preview = false,
-        position = 'right',
+        position = "right",
         relative_width = true,
         width = 30,
         auto_close = true,
         show_numbers = false,
         show_relative_numbers = false,
         show_symbol_details = true,
-        preview_bg_highlight = 'Pmenu',
+        preview_bg_highlight = "Pmenu",
         autofold_depth = nil,
         auto_unfold_hover = true,
         fold_markers = { codicons.get("arrow-small-right"), codicons.get("arrow-small-down") },
@@ -481,7 +507,7 @@ function config.symbols_outline()
             TypeParameter = { icon = codicons.get("symbol-type-parameter"), hl = "@parameter" },
             Component = { icon = codicons.get("symbol-misc"), hl = "@function" },
             Fragment = { icon = codicons.get("symbol-misc"), hl = "@constant" },
-        }
+        },
     })
 end
 
@@ -497,9 +523,9 @@ function config.mkdp()
         maid = {
             theme = "neutral",
             flowchart = {
-                curve = 'linear'
-            }
-        }
+                curve = "linear",
+            },
+        },
     }
 end
 
@@ -797,7 +823,7 @@ function config.diffview()
                     multi_file = {
                         diff_merges = "first-parent",
                     },
-                }
+                },
             },
             win_config = {
                 -- See ':h diffview-config-win_config'
@@ -816,12 +842,12 @@ function config.diffview()
         hooks = {
             view_enter = function(_)
                 vim.schedule(function()
-                    require('doodleVim.extend.tab').disable()
+                    require("doodleVim.extend.tab").disable()
                 end)
             end,
             view_leave = function(_)
                 vim.schedule(function()
-                    require('doodleVim.extend.tab').enable()
+                    require("doodleVim.extend.tab").enable()
                 end)
             end,
         },                            -- See ':h diffview-config-hooks'
@@ -830,67 +856,67 @@ function config.diffview()
             view = {
                 -- The `view` bindings are active in the diff buffers, only when the current
                 -- tabpage is a Diffview.
-                ["<tab>"]   = actions.select_next_entry, -- Open the diff for the next file
+                ["<tab>"] = actions.select_next_entry,   -- Open the diff for the next file
                 ["<s-tab>"] = actions.select_prev_entry, -- Open the diff for the previous file
-                ["ge"]      = actions.goto_file_edit,    -- Open the file in a new tabpage
+                ["ge"] = actions.goto_file_edit,         -- Open the file in a new tabpage
                 -- ["<C-w>gf"]    = actions.goto_file, -- Open the file in a new split in the previous tabpage
                 -- ["<C-w><C-f>"] = actions.goto_file_split, -- Open the file in a new split
                 -- ["<leader>e"] = actions.focus_files, -- Bring focus to the files panel
                 -- ["<leader>b"] = actions.toggle_files, -- Toggle the files panel.
             },
             file_panel = {
-                ["j"]         = actions.next_entry,   -- Bring the cursor to the next file entry
-                ["<down>"]    = actions.next_entry,
-                ["k"]         = actions.prev_entry,   -- Bring the cursor to the previous file entry.
-                ["<up>"]      = actions.prev_entry,
-                ["<cr>"]      = actions.select_entry, -- Open the diff for the selected entry.
-                ["o"]         = actions.select_entry,
+                ["j"] = actions.next_entry,      -- Bring the cursor to the next file entry
+                ["<down>"] = actions.next_entry,
+                ["k"] = actions.prev_entry,      -- Bring the cursor to the previous file entry.
+                ["<up>"] = actions.prev_entry,
+                ["<cr>"] = actions.select_entry, -- Open the diff for the selected entry.
+                ["o"] = actions.select_entry,
                 -- ["<2-LeftMouse>"] = actions.select_entry,
-                ["-"]         = actions.toggle_stage_entry, -- Stage / unstage the selected entry.
-                ["S"]         = actions.stage_all,          -- Stage all entries.
-                ["U"]         = actions.unstage_all,        -- Unstage all entries.
-                ["X"]         = actions.restore_entry,      -- Restore entry to the state on the left side.
-                ["R"]         = actions.refresh_files,      -- Update stats and entries in the file list.
-                ["L"]         = actions.open_commit_log,    -- Open the commit log panel0
-                ["<c-u>"]     = actions.scroll_view(-0.25), -- Scroll the view up
-                ["<c-d>"]     = actions.scroll_view(0.25),  -- Scroll the view down
+                ["-"] = actions.toggle_stage_entry,     -- Stage / unstage the selected entry.
+                ["S"] = actions.stage_all,              -- Stage all entries.
+                ["U"] = actions.unstage_all,            -- Unstage all entries.
+                ["X"] = actions.restore_entry,          -- Restore entry to the state on the left side.
+                ["R"] = actions.refresh_files,          -- Update stats and entries in the file list.
+                ["L"] = actions.open_commit_log,        -- Open the commit log panel0
+                ["<c-u>"] = actions.scroll_view(-0.25), -- Scroll the view up
+                ["<c-d>"] = actions.scroll_view(0.25),  -- Scroll the view down
                 -- ["<tab>"]         = actions.select_next_entry,
                 -- ["<s-tab>"]       = actions.select_prev_entry,
                 -- ["gf"]            = actions.goto_file,
                 -- ["<C-w><C-f>"]    = actions.goto_file_split,
-                ["<C-o>"]     = actions.goto_file_tab,
-                ["i"]         = actions.listing_style,       -- Toggle between 'list' and 'tree' views
-                ["f"]         = actions.toggle_flatten_dirs, -- Flatten empty subdirectories in tree listing style.
+                ["<C-o>"] = actions.goto_file_tab,
+                ["i"] = actions.listing_style,       -- Toggle between 'list' and 'tree' views
+                ["f"] = actions.toggle_flatten_dirs, -- Flatten empty subdirectories in tree listing style.
                 ["<leader>e"] = actions.focus_files,
                 ["<leader>b"] = actions.toggle_files,
             },
             file_history_panel = {
-                ["g!"]            = actions.options,          -- Open the option panel
-                ["<C-A-d>"]       = actions.open_in_diffview, -- Open the entry under the cursor in a diffview
-                ["y"]             = actions.copy_hash,        -- Copy the commit hash of the entry under the cursor
-                ["L"]             = actions.open_commit_log,
-                ["zR"]            = actions.open_all_folds,
-                ["zM"]            = actions.close_all_folds,
-                ["j"]             = actions.next_entry,
-                ["<down>"]        = actions.next_entry,
-                ["k"]             = actions.prev_entry,
-                ["<up>"]          = actions.prev_entry,
-                ["<cr>"]          = actions.select_entry,
-                ["o"]             = actions.select_entry,
+                ["g!"] = actions.options,               -- Open the option panel
+                ["<C-A-d>"] = actions.open_in_diffview, -- Open the entry under the cursor in a diffview
+                ["y"] = actions.copy_hash,              -- Copy the commit hash of the entry under the cursor
+                ["L"] = actions.open_commit_log,
+                ["zR"] = actions.open_all_folds,
+                ["zM"] = actions.close_all_folds,
+                ["j"] = actions.next_entry,
+                ["<down>"] = actions.next_entry,
+                ["k"] = actions.prev_entry,
+                ["<up>"] = actions.prev_entry,
+                ["<cr>"] = actions.select_entry,
+                ["o"] = actions.select_entry,
                 ["<2-LeftMouse>"] = actions.select_entry,
-                ["<c-u>"]         = actions.scroll_view(-0.25),
-                ["<c-d>"]         = actions.scroll_view(0.25),
+                ["<c-u>"] = actions.scroll_view(-0.25),
+                ["<c-d>"] = actions.scroll_view(0.25),
                 -- ["<tab>"]         = actions.select_next_entry,
                 -- ["<s-tab>"]       = actions.select_prev_entry,
                 -- ["gf"]            = actions.goto_file,
                 -- ["<C-w><C-f>"]    = actions.goto_file_split,
-                ["<C-t>"]         = actions.goto_file_tab,
-                ["<leader>e"]     = actions.focus_files,
-                ["<leader>b"]     = actions.toggle_files,
+                ["<C-t>"] = actions.goto_file_tab,
+                ["<leader>e"] = actions.focus_files,
+                ["<leader>b"] = actions.toggle_files,
             },
             option_panel = {
                 ["<tab>"] = actions.select_entry,
-                ["q"]     = actions.close,
+                ["q"] = actions.close,
             },
         },
     })
@@ -906,7 +932,7 @@ function config.dapui()
         icons = {
             expanded = codicons.get("arrow-small-down"),
             current_frame = codicons.get("arrow-small-right"),
-            collapsed = codicons.get("arrow-small-right")
+            collapsed = codicons.get("arrow-small-right"),
         },
         mappings = {
             -- Use a table to apply multiple mappings
@@ -980,19 +1006,29 @@ function config.dap()
     local codicons = require("codicons")
 
     -- setup sign
-    vim.fn.sign_define('DapBreakpoint',
-        { text = codicons.get("debug-breakpoint"), texthl = 'GruvboxRedSign', linehl = '', numhl = '' })
-    vim.fn.sign_define("DapBreakpointCondition",
-        { text = codicons.get("debug-breakpoint-conditional"), texthl = "GruvboxRedSign", linehl = "", numhl = "" })
-    vim.fn.sign_define('DapBreakpointRejected',
-        { text = codicons.get("debug-breakpoint-unsupported"), texthl = "GruvboxRedSign", linehl = '', numhl = '' })
-    vim.fn.sign_define('DapLogPoint',
-        { text = codicons.get("debug-breakpoint-log"), texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapStopped',
-        { text = codicons.get("debug-continue"), texthl = 'GruvboxYellowSign', linehl = '', numhl = '' })
+    vim.fn.sign_define(
+        "DapBreakpoint",
+        { text = codicons.get("debug-breakpoint"), texthl = "GruvboxRedSign", linehl = "", numhl = "" }
+    )
+    vim.fn.sign_define(
+        "DapBreakpointCondition",
+        { text = codicons.get("debug-breakpoint-conditional"), texthl = "GruvboxRedSign", linehl = "", numhl = "" }
+    )
+    vim.fn.sign_define(
+        "DapBreakpointRejected",
+        { text = codicons.get("debug-breakpoint-unsupported"), texthl = "GruvboxRedSign", linehl = "", numhl = "" }
+    )
+    vim.fn.sign_define(
+        "DapLogPoint",
+        { text = codicons.get("debug-breakpoint-log"), texthl = "GruvboxYellowSign", linehl = "", numhl = "" }
+    )
+    vim.fn.sign_define(
+        "DapStopped",
+        { text = codicons.get("debug-continue"), texthl = "GruvboxYellowSign", linehl = "", numhl = "" }
+    )
 
     -- setup dapui
-    local dap, dapui = require "dap", require "dapui"
+    local dap, dapui = require("dap"), require("dapui")
     dap.listeners.after.event_initialized["dapui_config"] = function()
         if not vim.g.dapui_setup then
             require("doodleVim.modules.tools.config").dapui()
@@ -1030,7 +1066,7 @@ end
 function config.nvim_ufo(plugin, opts)
     local handler = function(virtText, lnum, endLnum, width, truncate)
         local newVirtText = {}
-        local suffix = ('  %d '):format(endLnum - lnum)
+        local suffix = ("  %d "):format(endLnum - lnum)
         local sufWidth = vim.fn.strdisplaywidth(suffix)
         local targetWidth = width - sufWidth
         local curWidth = 0
@@ -1046,21 +1082,21 @@ function config.nvim_ufo(plugin, opts)
                 chunkWidth = vim.fn.strdisplaywidth(chunkText)
                 -- str width returned from truncate() may less than 2nd argument, need padding
                 if curWidth + chunkWidth < targetWidth then
-                    suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+                    suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
                 end
                 break
             end
             curWidth = curWidth + chunkWidth
         end
-        table.insert(newVirtText, { suffix, 'MoreMsg' })
+        table.insert(newVirtText, { suffix, "MoreMsg" })
         return newVirtText
     end
 
-    require('ufo').setup({
+    require("ufo").setup({
         fold_virt_text_handler = handler,
         provider_selector = function(bufnr, filetype, buftype)
-            return { 'treesitter', 'indent' }
-        end
+            return { "treesitter", "indent" }
+        end,
     })
 end
 
@@ -1068,70 +1104,185 @@ function config.orgmode(plugin, opts)
     local orgmode = require("orgmode")
     orgmode.setup_ts_grammar()
     orgmode.setup({
-        org_agenda_files = { '~/Documents/Notes/agenda.org' },
-        org_default_notes_file = '~/Documents/Notes/default.org',
-        org_todo_keywords = { 'TODO', 'WAITING', '|', 'DONE', 'DELEGATED' },
+        org_agenda_files = { "~/Documents/Notes/agenda.org" },
+        org_default_notes_file = "~/Documents/Notes/default.org",
+        org_todo_keywords = { "TODO", "WAITING", "|", "DONE", "DELEGATED" },
         org_todo_keyword_faces = {
-            TODO = ':background #fb4934 :foreground #ebdbb2', -- overrides builtin color for `TODO` keyword
-            WAITING = ':background #fabd2f :foreground #ebdbb2 :weight bold',
-            DONE = ':background #10B981 :foreground #ebdbb2',
-            DELEGATED = ':background #7C3AED :foreground #ebdbb2 :slant italic :underline on',
-        }
+            TODO = ":background #fb4934 :foreground #ebdbb2", -- overrides builtin color for `TODO` keyword
+            WAITING = ":background #fabd2f :foreground #ebdbb2 :weight bold",
+            DONE = ":background #10B981 :foreground #ebdbb2",
+            DELEGATED = ":background #7C3AED :foreground #ebdbb2 :slant italic :underline on",
+        },
     })
 end
 
 function config.breakpoints(plugin, opts)
-    require('persistent-breakpoints').setup {
-        save_dir = vim.fn.stdpath('data') .. '/nvim_checkpoints',
+    require("persistent-breakpoints").setup({
+        save_dir = vim.fn.stdpath("data") .. "/nvim_checkpoints",
         -- when to load the breakpoints? "BufReadPost" is recommanded.
-        load_breakpoints_event = { "User DeferLoadStuff" },
+        load_breakpoints_event = { "BufReadPost" },
         -- record the performance of different function. run :lua require('persistent-breakpoints.api').print_perf_data() to see the result.
         perf_record = false,
-    }
+    })
 end
 
 function config.dap_python(plugin, opts)
     local debugpy_home = require("mason-core.path").package_prefix("debugpy")
     local python_venv_bin = debugpy_home .. "/venv/bin/python"
-    require('dap-python').setup(python_venv_bin)
+    require("dap-python").setup(python_venv_bin)
 
     for _, pyconfig in pairs(require("dap").configurations.python) do
-        pyconfig.console = 'internalConsole'
+        pyconfig.console = "internalConsole"
     end
 
     require("doodleVim.extend.debug").register_test_fn_debug("python", function()
-        vim.ui.select({ "Method", "Class", "Selection" },
-            { prompt = "Select Test Type", format_item = function(item) return " " .. item end },
-            function(choice)
-                if choice == "Method" then
-                    require('dap-python').test_method()
-                elseif choice == "Class" then
-                    require('dap-python').test_class()
-                else
-                    require('dap-python').debug_selection()
-                end
+        vim.ui.select({ "Method", "Class", "Selection" }, {
+            prompt = "Select Test Type",
+            format_item = function(item)
+                return " " .. item
+            end,
+        }, function(choice)
+            if choice == "Method" then
+                require("dap-python").test_method()
+            elseif choice == "Class" then
+                require("dap-python").test_class()
+            else
+                require("dap-python").debug_selection()
             end
-        )
+        end)
     end)
 end
 
 function config.dap_go(plugin, opts)
-    require('dap-go').setup()
+    require("dap-go").setup()
     for _, goconfig in pairs(require("dap").configurations.go) do
-        goconfig.console = 'internalConsole'
+        goconfig.console = "internalConsole"
     end
     require("doodleVim.extend.debug").register_test_fn_debug("go", function()
-        vim.ui.select({ "Nearest", "Recent" },
-            { prompt = "Select Test Type", format_item = function(item) return " " .. item end },
-            function(choice)
-                if choice == "Nearest" then
-                    require('dap-go').debug_test()
-                elseif choice == "Recent" then
-                    require('dap-go').debug_last_test()
-                end
+        vim.ui.select({ "Nearest", "Recent" }, {
+            prompt = "Select Test Type",
+            format_item = function(item)
+                return " " .. item
+            end,
+        }, function(choice)
+            if choice == "Nearest" then
+                require("dap-go").debug_test()
+            elseif choice == "Recent" then
+                require("dap-go").debug_last_test()
             end
-        )
+        end)
     end)
+end
+
+function config.bigfile(plugin, opts)
+    -- default config
+    require("bigfile").setup({
+        filesize = 1,      -- size of the file in MiB, the plugin round file sizes to the closest MiB
+        pattern = { "*" }, -- autocmd pattern or function see <### Overriding the detection of big files>
+        features = {       -- features to disable
+            "indent_blankline",
+            "illuminate",
+            "lsp",
+            "treesitter",
+            "syntax",
+            "matchparen",
+            "vimopts",
+            "filetype",
+        },
+    })
+end
+
+function config.neoai(plugin, opts)
+    require("neoai").setup({
+        -- Below are the default options, feel free to override what you would like changed
+        ui = {
+            output_popup_text = "NeoAI",
+            input_popup_text = "Prompt",
+            width = 30,               -- As percentage eg. 30%
+            output_popup_height = 80, -- As percentage eg. 80%
+            submit = "<Enter>",       -- Key binding to submit the prompt
+        },
+        models = {
+            {
+                name = "openai",
+                model = "gpt-3.5-turbo",
+                params = nil,
+            },
+        },
+
+        register_output = {
+            ["g"] = function(output)
+                return output
+            end,
+            ["c"] = require("neoai.utils").extract_code_snippets,
+        },
+
+        inject = {
+            cutoff_width = 75,
+        },
+
+        prompts = {
+            context_prompt = function(context)
+                return "Hey, I'd like to provide some context for future "
+                    .. "messages. Here is the code/text that I want to refer "
+                    .. "to in our upcoming conversations:\n\n"
+                    .. context
+            end,
+        },
+        mappings = {
+            ["select_up"] = "<C-k>",
+            ["select_down"] = "<C-j>",
+        },
+        open_ai = {
+            api_key = {
+                -- env = "OPENAI_API_KEY",
+                -- value = nil,
+
+                -- `get` is is a function that retrieves an API key, can be used to override the default method.
+                -- get = function() ... end
+                -- Here is some code for a function that retrieves an API key. You can use it with
+                -- the Linux 'pass' application.
+                get = function()
+                    local file_path = "~/.config/nvim/env/OPENAI_API_KEY"
+                    local key = vim.fn.system("cat " .. file_path)
+                    key = string.gsub(key, "\n$", "")
+                    return key
+                end,
+            },
+        },
+
+        shortcuts = {
+            {
+                name = "textify",
+                key = "<leader>as",
+                desc = "fix text with AI",
+                use_context = true,
+                prompt = [[
+                Please rewrite the text to make it more readable, clear,
+                concise, and fix any grammatical, punctuation, or spelling
+                errors
+            ]],
+                modes = { "v" },
+                strip_function = nil,
+            },
+
+            {
+                name = "gitcommit",
+                key = "<leader>ag",
+                desc = "generate git commit message",
+                use_context = false,
+                prompt = function()
+                    return [[
+                    Using the following git diff generate a consise and
+                    clear git commit message, with a short title summary
+                    that is 75 characters or less:
+                ]] .. vim.fn.system("git diff --cached")
+                end,
+                modes = { "n" },
+                strip_function = nil,
+            },
+        },
+    })
 end
 
 return config

@@ -1,42 +1,41 @@
 local games = {}
 local conf = require("doodleVim.modules.games.config")
 
-games['eandrju/cellular-automaton.nvim'] = {
+games["eandrju/cellular-automaton.nvim"] = {
     lazy = true,
     cmd = "CellularAutomaton",
-    config = conf.cellular
+    config = conf.cellular,
 }
 
-games['alec-gibson/nvim-tetris'] = {
+games["alec-gibson/nvim-tetris"] = {
     lazy = true,
-    cmd = "Tetris"
+    cmd = "Tetris",
 }
 
-games['seandewar/killersheep.nvim'] = {
+games["seandewar/killersheep.nvim"] = {
     lazy = true,
     cmd = "KillKillKill",
-    config = conf.killersheep
+    config = conf.killersheep,
 }
 
-games['seandewar/nvimesweeper'] = {
+games["seandewar/nvimesweeper"] = {
     lazy = true,
-    cmd = "Nvimesweeper"
+    cmd = "Nvimesweeper",
 }
 
-games['alanfortlink/blackjack.nvim'] = {
+games["alanfortlink/blackjack.nvim"] = {
     lazy = true,
     dependencies = {
-        'nvim-lua/plenary.nvim'
+        "nvim-lua/plenary.nvim",
     },
     cmd = { "BlackJackNewGame", "BlackJackQuit", "BlackJackResetScores" },
-    config = conf.blackjack
+    config = conf.blackjack,
 }
 
-games['jim-fx/sudoku.nvim'] = {
+games["jim-fx/sudoku.nvim"] = {
     lazy = true,
     cmd = "Sudoku",
-    config = conf.sudoku
+    config = conf.sudoku,
 }
-
 
 return games

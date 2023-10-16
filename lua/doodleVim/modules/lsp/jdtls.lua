@@ -1,71 +1,62 @@
 local jdtls = {}
 local trim = require("doodleVim.utils.utils").trim
 
-local function get_system()
-    local os_name = vim.loop.os_uname().sysname
-    local system = os_name == "Linux" and "linux" or os_name == "Windows" and "win" or "mac"
-    return system
-end
-
-function jdtls.setup()
-    -- get current system
-    local system = get_system()
-    -- get jdtls and config jar path
-    local jdtls_home = require("mason-core.path").package_prefix("jdtls")
-    local jdtls_jar_path = trim(vim.fn.system({
-        "find", jdtls_home .. "/plugins", "-name", "org.eclipse.equinox.launcher_*.jar"
-    }))
-    local config_path = jdtls_home .. "/config_" .. system
+function jdtls.get_config()
+    local mason_registry = require("mason-registry")
 
     -- get bundles
-    local java_debug_home = require("mason-core.path").package_prefix("java-debug-adapter")
-    local java_test_home = require("mason-core.path").package_prefix("java-test")
-    local java_debug_jar_path = trim(vim.fn.system({
-        "find", java_debug_home .. "/extension/server", "-name", "com.microsoft.java.debug.plugin-*.jar"
-    }))
-    local bundles = {
-        vim.fn.glob(java_debug_jar_path, 1),
-    }
-    vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_home .. "/extension/server/*.jar", 1), "\n"))
+    local bundles = {}
+    if mason_registry.is_installed("java-debug-adapter") then
+        local java_debug_home = require("mason-core.path").package_prefix("java-debug-adapter")
+        local java_debug_jar_path = trim(vim.fn.system({
+            "find",
+            java_debug_home .. "/extension/server",
+            "-name",
+            "com.microsoft.java.debug.plugin-*.jar",
+        }))
+        table.insert(bundles, vim.fn.glob(java_debug_jar_path, 1))
+    end
+
+    if mason_registry.is_installed("java-test") then
+        local java_test_home = require("mason-core.path").package_prefix("java-test")
+        vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_home .. "/extension/server/*.jar", 1), "\n"))
+    end
 
     -- get project workspace
-    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
     local workspace = vim.env.HOME .. "/.cache/jdtls/workspace/" .. project_name
 
-    -- get lombok path
-    local lombok_jar = trim(jdtls_home .. "/plugins/" .. "lombok.jar")
-    local javaagent = "-javaagent:" .. lombok_jar
-    local Xbootclasspath = "-Xbootclasspath/a:" .. lombok_jar
-
     -- update capabilities
-    local extendedClientCapabilities = require('jdtls').extendedClientCapabilities
+    local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
     extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
     -- home
-    local home = os.getenv('HOME')
+    local home = os.getenv("HOME")
 
     local config = {
+        -- name = "jdtls",
+        -- filetypes = { "java" },
         flags = {
             allow_incremental_sync = true,
         },
         capabilities = {
             workspace = {
-                configuration = true
+                configuration = true,
             },
             textDocument = {
                 completion = {
                     completionItem = {
-                        snippetSupport = true
-                    }
-                }
-            }
+                        snippetSupport = true,
+                    },
+                },
+            },
         },
-        root_dir = require('jdtls.setup').find_root({ 'gradlew', 'pom.xml', '.git' }),
+        -- root_dir = require("jdtls.setup").find_root({ "gradlew", "pom.xml", ".git" }),
         init_options = {
             bundles = bundles,
-            extendedClientCapabilities = extendedClientCapabilities
+            extendedClientCapabilities = extendedClientCapabilities,
         },
-        cmd = { home .. "/.config/nvim/bin/java_lsp.sh", workspace }
+        cmd = { home .. "/.config/nvim/bin/java_lsp.sh", workspace },
     }
 
     config.settings = {
@@ -73,7 +64,7 @@ function jdtls.setup()
         -- ['java.format.settings.profile'] = "GoogleStyle",
         java = {
             signatureHelp = { enabled = true },
-            contentProvider = { preferred = 'fernflower' },
+            contentProvider = { preferred = "fernflower" },
             completion = {
                 favoriteStaticMembers = {
                     "org.hamcrest.MatcherAssert.assertThat",
@@ -82,8 +73,8 @@ function jdtls.setup()
                     "org.junit.jupiter.api.Assertions.*",
                     "java.util.Objects.requireNonNull",
                     "java.util.Objects.requireNonNullElse",
-                    "org.mockito.Mockito.*"
-                }
+                    "org.mockito.Mockito.*",
+                },
             },
             sources = {
                 organizeImports = {
@@ -93,74 +84,109 @@ function jdtls.setup()
             },
             codeGeneration = {
                 toString = {
-                    template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}"
-                }
+                    template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+                },
             },
             configuration = {
                 runtimes = {
                     {
                         name = "JavaSE-17",
-                        path = home .. "/.sdkman/candidates/java/17.0.7-amzn/",
+                        path = home .. "/.sdkman/candidates/java/17.0.8-amzn/",
                     },
-                }
+                },
             },
         },
     }
 
     config.on_init = function(client, _)
-        client.notify('workspace/didChangeConfiguration', { settings = config.settings })
+        client.notify("workspace/didChangeConfiguration", { settings = config.settings })
     end
 
+    -- setup handler
+    config.handlers = {}
+    local function configuration_handler(err, result, ctx, config)
+        local client_id = ctx.client_id
+        local bufnr = 0
+        local client = vim.lsp.get_client_by_id(client_id)
+        if client then
+            -- This isn't done in start_or_attach because a user could use a plugin like editorconfig to configure tabsize/spaces
+            -- That plugin may run after `start_or_attach` which is why we defer the setting lookup.
+            -- This ensures the language-server will use the latest version of the options
+            client.config.settings = vim.tbl_deep_extend("keep", client.config.settings or {}, {
+                java = {
+                    format = {
+                        insertSpaces = vim.api.nvim_buf_get_option(bufnr, "expandtab"),
+                        tabSize = vim.lsp.util.get_effective_tabstop(bufnr),
+                    },
+                },
+            })
+        end
+        return vim.lsp.handlers["workspace/configuration"](err, result, ctx, config)
+    end
+
+    local status_callback = function(_, result)
+        vim.api.nvim_command(
+            string.format(':echohl Function | echo "%s" | echohl None', string.sub(result.message, 1, vim.v.echospace))
+        )
+    end
+    config.handlers["language/status"] = status_callback
+    config.handlers["workspace/configuration"] = configuration_handler
+
+    -- setup capabilities
+    local capabilities =
+        vim.tbl_deep_extend("keep", config.capabilities or {}, vim.lsp.protocol.make_client_capabilities())
+    local extra_capabilities = {
+        textDocument = {
+            codeAction = {
+                codeActionLiteralSupport = {
+                    codeActionKind = {
+                        valueSet = {
+                            "source.generate.toString",
+                            "source.generate.hashCodeEquals",
+                            "source.organizeImports",
+                        },
+                    },
+                },
+            },
+        },
+    }
+    config.capabilities = vim.tbl_deep_extend("keep", capabilities, extra_capabilities)
+
     config.on_attach = function(client, bufnr)
-        require 'jdtls.setup'.add_commands()
-        require('jdtls').setup_dap({
-            hotcodereplace = 'auto',
+        require("jdtls.setup").add_commands()
+        require("jdtls").setup_dap({
+            hotcodereplace = "auto",
         })
-        require('jdtls.dap').setup_dap_main_class_configs({
+        require("jdtls.dap").setup_dap_main_class_configs({
             on_ready = function()
                 local dap = require("dap")
                 for _, java_config in pairs(dap.configurations.java) do
-                    java_config.console = 'internalConsole'
+                    java_config.console = "internalConsole"
                 end
-            end
-        })
-    end
-
-
-    local finders = require 'telescope.finders'
-    local sorters = require 'telescope.sorters'
-    local actions = require 'telescope.actions'
-    local pickers = require 'telescope.pickers'
-    require('jdtls.ui').pick_one_async = function(items, prompt, label_fn, cb)
-        local opts = {}
-        pickers.new(opts, {
-            prompt_title    = prompt,
-            finder          = finders.new_table {
-                results = items,
-                entry_maker = function(entry)
-                    return {
-                        value = entry,
-                        display = label_fn(entry),
-                        ordinal = label_fn(entry),
-                    }
-                end,
-            },
-            sorter          = sorters.get_generic_fuzzy_sorter(),
-            attach_mappings = function(prompt_bufnr)
-                actions.goto_file_selection_edit:replace(function()
-                    local selection = actions.get_selected_entry(prompt_bufnr)
-                    actions.close(prompt_bufnr)
-
-                    cb(selection.value)
-                end)
-
-                return true
             end,
-        }):find()
+        })
+
+        local function buf_set_keymap(...)
+            vim.api.nvim_buf_set_keymap(bufnr, ...)
+        end
+
+        local function buf_set_option(...)
+            vim.api.nvim_buf_set_option(bufnr, ...)
+        end
+
+        buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+
+        -- java keymap
+        local opts = { noremap = true, silent = true }
+        buf_set_keymap("n", "<leader>di", "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
+        -- buf_set_keymap("n", "<leader>dt", "<Cmd>lua require'jdtls'.test_class()<CR>", opts)
+        -- buf_set_keymap("n", "<leader>dn", "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", opts)
+        buf_set_keymap("v", "<leader>de", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
+        buf_set_keymap("n", "<leader>de", "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
+        buf_set_keymap("v", "<leader>dm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
     end
 
-
-    require('jdtls').start_or_attach(config)
+    return config
 end
 
 return jdtls

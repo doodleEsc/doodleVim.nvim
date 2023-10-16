@@ -44,6 +44,7 @@ tools["kyazdani42/nvim-tree.lua"] = {
     dependencies = {
         "romgrk/barbar.nvim",
         "mortepau/codicons.nvim",
+        "nvim-tree/nvim-web-devicons",
     },
     config = conf.nvim_tree,
 }
@@ -125,6 +126,8 @@ tools["mfussenegger/nvim-dap"] = {
     dependencies = {
         "rcarriga/nvim-dap-ui",
         "mortepau/codicons.nvim",
+        -- { "mfussenegger/nvim-dap-python", lazy = true, ft = "python" },
+        -- { "leoluz/nvim-dap-go",           lazy = true, ft = "go" },
     },
     config = conf.dap,
 }
@@ -139,17 +142,20 @@ tools["rcarriga/nvim-dap-ui"] = {
 tools["mfussenegger/nvim-dap-python"] = {
     lazy = true,
     init = setup.dap_python,
+    ft = "python",
     config = conf.dap_python,
 }
 
 tools["leoluz/nvim-dap-go"] = {
     lazy = true,
     init = setup.dap_go,
+    ft = "go",
     config = conf.dap_go,
 }
 
 tools["Weissle/persistent-breakpoints.nvim"] = {
     lazy = true,
+    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
     init = setup.persistent_breakpoints,
     config = conf.breakpoints,
 }
@@ -179,6 +185,33 @@ tools["nvim-orgmode/orgmode"] = {
     lazy = true,
     event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
     config = conf.orgmode,
+}
+
+tools["LunarVim/bigfile.nvim"] = {
+    -- lazy = true,
+    -- event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
+    config = conf.bigfile,
+}
+
+tools["Bryley/neoai.nvim"] = {
+    lazy = true,
+    cmd = {
+        "NeoAI",
+        "NeoAIOpen",
+        "NeoAIClose",
+        "NeoAIToggle",
+        "NeoAIContext",
+        "NeoAIContextOpen",
+        "NeoAIContextClose",
+        "NeoAIInject",
+        "NeoAIInjectCode",
+        "NeoAIInjectContext",
+        "NeoAIInjectContextCode",
+    },
+    dependencies = {
+        "MunifTanjim/nui.nvim",
+    },
+    config = conf.neoai,
 }
 
 return tools

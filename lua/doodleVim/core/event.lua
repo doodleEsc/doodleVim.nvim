@@ -9,7 +9,6 @@ local UserDefinedEvent = {
             api.nvim_exec_autocmds("User", { pattern = "DeferStartWithFile", modeline = false })
         end
     end,
-    "DeferLoadStuff",
 }
 
 local function create_augroups(definitions)
@@ -97,6 +96,8 @@ function autocmd.load_autocmds()
                         "tsplayground",
                         "DressingSelect",
                         "Jaq",
+                        "neoai-input",
+                        "neoai-output",
                     },
                     callback = function()
                         vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true })

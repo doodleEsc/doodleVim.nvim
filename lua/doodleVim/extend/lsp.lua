@@ -2,23 +2,23 @@ local lsp = {}
 
 local function file_and_details_entry(opts)
     opts = opts or {}
-    local displayer = require('telescope.pickers.entry_display').create {
+    local displayer = require("telescope.pickers.entry_display").create({
         separator = "│ ",
         items = {
             { width = 8 },
             { width = 0.5 },
             { remaining = true },
         },
-    }
+    })
 
     local make_display = function(entry)
-        local filename = require('telescope.utils').transform_path(opts, entry.filename)
+        local filename = require("telescope.utils").transform_path(opts, entry.filename)
         local line_info = { table.concat({ entry.lnum, entry.col }, ":"), "TelescopeResultsLineNr" }
-        return displayer {
+        return displayer({
             line_info,
             filename,
             entry.text:gsub("^%s*(.-)%s*$", "%1"):gsub(".* | ", ""),
-        }
+        })
     end
 
     return function(entry)
@@ -45,11 +45,10 @@ function lsp.lsp_references(opts)
         vim.notify("Failed Calling Optimistic Load")
     end
     opts = opts or {}
-    require('telescope.builtin').lsp_references(vim.tbl_extend("force", opts,
-        {
-            entry_maker = file_and_details_entry(),
-            -- jump_type = "never",
-        }))
+    require("telescope.builtin").lsp_references(vim.tbl_extend("force", opts, {
+        entry_maker = file_and_details_entry(),
+        -- jump_type = "never",
+    }))
 end
 
 function lsp.lsp_definitions(opts)
@@ -58,7 +57,9 @@ function lsp.lsp_definitions(opts)
         vim.notify("Failed Calling Optimistic Load")
     end
     opts = opts or {}
-    require('telescope.builtin').lsp_definitions(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
+    require("telescope.builtin").lsp_definitions(
+        vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() })
+    )
 end
 
 function lsp.lsp_type_definition(opts)
@@ -67,8 +68,9 @@ function lsp.lsp_type_definition(opts)
         vim.notify("Failed Calling Optimistic Load")
     end
     opts = opts or {}
-    require('telescope.builtin').lsp_type_definition(vim.tbl_extend("force", opts,
-        { entry_maker = file_and_details_entry() }))
+    require("telescope.builtin").lsp_type_definition(
+        vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() })
+    )
 end
 
 function lsp.lsp_implementations(opts)
@@ -77,8 +79,9 @@ function lsp.lsp_implementations(opts)
         vim.notify("Failed Calling Optimistic Load")
     end
     opts = opts or {}
-    require('telescope.builtin').lsp_implementations(vim.tbl_extend("force", opts,
-        { entry_maker = file_and_details_entry() }))
+    require("telescope.builtin").lsp_implementations(
+        vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() })
+    )
 end
 
 function lsp.code_action()
@@ -108,6 +111,8 @@ function lsp.register_on_attach(on_attach)
         callback = function(args)
             local buffer = args.buf
             local client = vim.lsp.get_client_by_id(args.data.client_id)
+            -- print(buffer)
+            -- print(vim.inspect(client))
             on_attach(client, buffer)
         end,
     })
