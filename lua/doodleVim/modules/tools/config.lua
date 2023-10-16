@@ -1243,68 +1243,42 @@ function config.neoai(plugin, opts)
                 -- Here is some code for a function that retrieves an API key. You can use it with
                 -- the Linux 'pass' application.
                 get = function()
-                    local file_path = "~/.config/nvim/OPENAI_API_KEY"
+                    local file_path = "~/.config/nvim/env/OPENAI_API_KEY"
                     local key = vim.fn.system("cat " .. file_path)
-                    key = string.gsub(key, "\n", "")
+                    key = string.gsub(key, "\n$", "")
                     return key
-                    -- local key = vim.fn.system("pass show openai/mytestkey")
-                    -- key = string.gsub(key, "\n", "")
-                    -- return key
                 end,
             },
         },
 
         shortcuts = {
-
             {
-
                 name = "textify",
-
                 key = "<leader>as",
-
                 desc = "fix text with AI",
-
                 use_context = true,
-
                 prompt = [[
-
                 Please rewrite the text to make it more readable, clear,
-
                 concise, and fix any grammatical, punctuation, or spelling
-
                 errors
-
             ]],
-
                 modes = { "v" },
-
                 strip_function = nil,
             },
 
             {
-
                 name = "gitcommit",
-
                 key = "<leader>ag",
-
                 desc = "generate git commit message",
-
                 use_context = false,
-
                 prompt = function()
                     return [[
-
                     Using the following git diff generate a consise and
-
                     clear git commit message, with a short title summary
-
                     that is 75 characters or less:
-
                 ]] .. vim.fn.system("git diff --cached")
                 end,
-
                 modes = { "n" },
-
                 strip_function = nil,
             },
         },

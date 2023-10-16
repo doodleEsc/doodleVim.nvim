@@ -8,24 +8,24 @@ misc.safe_exit = function()
     if require("lazy.core.config").plugins["vim-floaterm"]._.loaded then
         local floatermBufnr = vim.call("floaterm#buflist#gather")
         if #floatermBufnr ~= 0 then
-            vim.cmd [[FloatermKill]]
+            vim.cmd([[FloatermKill]])
         end
     end
 
     -- close nvim-tree
     if require("lazy.core.config").plugins["nvim-tree.lua"]._.loaded then
-        local view = require('nvim-tree.view')
+        local view = require("nvim-tree.view")
         if view.is_visible() then
-            require('doodleVim.extend.tree').toggle()
+            require("doodleVim.extend.tree").toggle()
         end
     end
 
     -- quit
-    vim.cmd [[confirm qa]]
+    vim.cmd([[confirm qa]])
 end
 
 misc.safe_save = function()
-    vim.cmd [[write]]
+    vim.cmd([[write]])
     require("auto-session").SaveSession()
     vim.notify("Current Session Saved")
 end
@@ -39,20 +39,20 @@ misc.wrapped_notify = function(message, level, o)
 end
 
 misc.toggle_nu = function()
-    vim.cmd [[:set nornu]]
+    vim.cmd([[:set nornu]])
     if vim.wo.nu then
-        vim.cmd [[:set nonu]]
+        vim.cmd([[:set nonu]])
     else
-        vim.cmd [[:set nu]]
+        vim.cmd([[:set nu]])
     end
 end
 
 misc.toggle_rnu = function()
-    vim.cmd [[:set nonu]]
+    vim.cmd([[:set nonu]])
     if vim.wo.rnu then
-        vim.cmd [[:set nornu]]
+        vim.cmd([[:set nornu]])
     else
-        vim.cmd [[:set rnu]]
+        vim.cmd([[:set rnu]])
     end
 end
 
