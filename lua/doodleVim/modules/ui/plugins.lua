@@ -7,7 +7,8 @@ ui["ellisonleao/gruvbox.nvim"] = {
 }
 
 ui["NvChad/nvim-colorizer.lua"] = {
-	ft = { "lua", "vim", "markdown" },
+    lazy = true,
+	event = "BufReadPost",
 	config = conf.color,
 }
 
