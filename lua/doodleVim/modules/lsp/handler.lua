@@ -5,17 +5,27 @@ local codicons = require("codicons")
 M.lsp_highlight_document = function()
     require("doodleVim.extend.lsp").register_on_attach(function(client, bufnr)
         if client.server_capabilities.documentHighlightProvider then
-            vim.api.nvim_exec(
-                [[
-                  augroup lsp_document_highlight
-                    autocmd! * <buffer>
-                    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-                    autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-                    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-                  augroup END
-                ]],
-                false
-            )
+            local CursorHoldOpts = {
+                group = "lsp_document_highlight",
+                buffer = bufnr,
+                callback = vim.lsp.buf.document_highlight,
+            }
+
+            local CursorHoldIOpts = {
+                group = "lsp_document_highlight",
+                buffer = bufnr,
+                callback = vim.lsp.buf.document_highlight,
+            }
+
+            local CursorMovedOpts = {
+                group = "lsp_document_highlight",
+                buffer = bufnr,
+                callback = vim.lsp.buf.clear_references,
+            }
+            vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+            vim.api.nvim_create_autocmd("CursorHold", CursorHoldOpts)
+            vim.api.nvim_create_autocmd("CursorHoldI", CursorHoldIOpts)
+            vim.api.nvim_create_autocmd("CursorMoved", CursorMovedOpts)
         end
     end)
 end
