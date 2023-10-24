@@ -171,7 +171,7 @@ ins_c {
 ins_c {
     'diagnostics',
     sources = { 'nvim_lsp' },
-    symbols = { error = ' ', warn = ' ', info = ' ' },
+    symbols = { error = ' ', warn = ' ', info = ' ' },
     diagnostics_color = {
         color_error = { fg = colors.red },
         color_warn = { fg = colors.yellow },
@@ -222,7 +222,7 @@ ins_x {
 
 ins_x {
     'branch',
-    icon = '',
+    icon = ' ',
     color = { fg = colors.violet, gui = 'bold' },
     padding = { left = 1, right = 0 },
 }
