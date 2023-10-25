@@ -24,7 +24,7 @@ map.Default = {
             :with_noremap()
             :with_silent()
             :with_label("Smooth Scroll Up"),
-        ["<M-n>"] = map_cr("tabnext"):with_noremap():with_silent():with_label("Next Tabpage"),
+        -- ["<M-n>"] = map_cr("tabnext"):with_noremap():with_silent():with_label("Next Tabpage"),
         ["x"] = map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"),
         ["c"] = map_cmd('"_c'):with_noremap():with_label("Change Without Copy"),
         ["d"] = map_cmd('""d'):with_noremap():with_label("Delete Without Copy"),
@@ -125,11 +125,11 @@ map.Lsp = {
                 :with_silent()
                 :with_label("Code Action"),
         },
-        ["<C-]>"] = map_cr("lua vim.diagnostic.goto_next()")
+        ["<M-j>"] = map_cr("lua vim.diagnostic.goto_next()")
             :with_noremap()
             :with_silent()
             :with_label("Go To Next Diagnostic"),
-        ["<C-[>"] = map_cr("lua vim.diagnostic.goto_prev()")
+        ["<M-k>"] = map_cr("lua vim.diagnostic.goto_prev()")
             :with_noremap()
             :with_silent()
             :with_label("Go To Previous Diagnostic"),
@@ -241,15 +241,15 @@ map.MarkdownPreview = {
 map.Floaterm = {
     n = {
         ["<C-Space>"] = map_cr("FloatermToggle"):with_noremap():with_silent():with_label("Toggle Floaterm"),
-        ["<M-j>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
-        ["<M-k>"] = map_cr("FloatermNew --cwd=<buffer>")
+        ["<M-n>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
+        ["<M-m>"] = map_cr("FloatermNew --cwd=<buffer>")
             :with_noremap()
             :with_silent()
             :with_label("Open Floaterm In Current Buffer Dir"),
     },
     v = {
-        ["<M-j>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
-        ["<M-k>"] = map_cr("FloatermNew --cwd=<buffer>")
+        ["<M-n>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
+        ["<M-m>"] = map_cr("FloatermNew --cwd=<buffer>")
             :with_noremap()
             :with_silent()
             :with_label("Open Floaterm In Current Buffer Dir"),
@@ -273,7 +273,7 @@ map.Floaterm = {
             noremap = true,
             silent = true,
         },
-        ["<C-k>"] = {
+        ["<M-x>"] = {
             vim.api.nvim_replace_termcodes(
                 '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill()<CR>',
                 true,
@@ -284,7 +284,7 @@ map.Floaterm = {
             noremap = true,
             silent = true,
         },
-        ["<C-j>"] = {
+        ["<M-q>"] = {
             vim.api.nvim_replace_termcodes(
                 '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill(true)<CR>',
                 true,
@@ -295,13 +295,13 @@ map.Floaterm = {
             noremap = true,
             silent = true,
         },
-        ["<M-j>"] = {
+        ["<M-n>"] = {
             vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNew<CR>", true, true, true),
             "Floaterm In Project Root Dir",
             noremap = true,
             silent = true,
         },
-        ["<M-k>"] = {
+        ["<M-m>"] = {
             vim.api.nvim_replace_termcodes(
                 '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").new()<CR>',
                 true,
@@ -389,6 +389,10 @@ map.Telescope = {
                 :with_silent()
                 :with_label("Find Directory And Focus"),
         },
+        ["<C-t>"] = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope resume")')
+            :with_noremap()
+            :with_silent()
+            :with_label("Resume Telescope"),
     },
 }
 
