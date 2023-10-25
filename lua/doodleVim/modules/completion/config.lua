@@ -69,13 +69,13 @@ function config.nvim_cmp(plugin, opts)
             { name = "nvim_lsp" },
             { name = "treesitter" },
             { name = "luasnip" },
-            { name = "buffer" },
-            { name = "async_path" },
             {
                 name = "look",
-                keyword_length = 3,
+                keyword_length = 2,
                 option = { convert_case = true, loud = true },
             },
+            { name = "buffer" },
+            { name = "async_path" },
             { name = "orgmode" },
         }, {}),
         mapping = {
