@@ -53,7 +53,9 @@ tools["iamcco/markdown-preview.nvim"] = {
     lazy = true,
     ft = "markdown",
     init = conf.mkdp,
-    build = ":call mkdp#util#install()",
+    build = function()
+        vim.fn["mkdp#util#install"]()
+    end,
 }
 
 tools["simrat39/symbols-outline.nvim"] = {

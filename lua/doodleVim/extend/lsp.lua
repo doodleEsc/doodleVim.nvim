@@ -47,7 +47,17 @@ function lsp.lsp_references(opts)
     opts = opts or {}
     require("telescope.builtin").lsp_references(vim.tbl_extend("force", opts, {
         entry_maker = file_and_details_entry(),
-        -- jump_type = "never",
+    }))
+end
+
+function lsp.lsp_incoming_calls(opts)
+    local load_ok, _ = pcall(require("doodleVim.utils.defer").optimisticLoad, "telescope.nvim")
+    if not load_ok then
+        vim.notify("Failed Calling Optimistic Load")
+    end
+    opts = opts or {}
+    require("telescope.builtin").lsp_incoming_calls(vim.tbl_extend("force", opts, {
+        entry_maker = file_and_details_entry(),
     }))
 end
 
@@ -68,7 +78,7 @@ function lsp.lsp_type_definition(opts)
         vim.notify("Failed Calling Optimistic Load")
     end
     opts = opts or {}
-    require("telescope.builtin").lsp_type_definition(
+    require("telescope.builtin").lsp_type_definitions(
         vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() })
     )
 end
