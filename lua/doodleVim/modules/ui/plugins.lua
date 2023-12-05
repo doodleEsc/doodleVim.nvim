@@ -6,15 +6,9 @@ ui["ellisonleao/gruvbox.nvim"] = {
 	lazy = true,
 }
 
-ui["NvChad/nvim-colorizer.lua"] = {
-    lazy = true,
-	event = "BufReadPost",
-	config = conf.color,
-}
-
 ui["nvim-treesitter/nvim-treesitter"] = {
 	lazy = true,
-	event = "BufReadPost",
+	event = "User VeryLazy",
 	cmd = { "TSUpdate", "TSInstall", "TSUninstall" },
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter-textobjects",
@@ -45,8 +39,7 @@ ui["lewis6991/gitsigns.nvim"] = {
 
 ui["romgrk/barbar.nvim"] = {
 	lazy = true,
-	-- event = "BufReadPost",
-	event = "User FileOpened",
+	event = "User VeryLazy",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},

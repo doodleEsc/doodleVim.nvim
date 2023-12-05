@@ -9,6 +9,10 @@ local UserDefinedEvent = {
             api.nvim_exec_autocmds("User", { pattern = "DeferStartWithFile", modeline = false })
         end
     end,
+    function()
+        pcall(require, "lspconfig")
+        vim.cmd("LspStart")
+    end
 }
 
 local function create_augroups(definitions)
@@ -149,11 +153,11 @@ function autocmd.load_autocmds()
 
         _defer_start = {
             {
-                event = "VimEnter",
+                event = "UIEnter",
                 opts = {
                     pattern = "*",
                     callback = function()
-                        require("doodleVim.utils.defer").defer_emit_user_event(150, UserDefinedEvent)
+                        require("doodleVim.utils.defer").defer_emit_user_event(100, UserDefinedEvent)
                     end,
                 },
             },
@@ -161,7 +165,8 @@ function autocmd.load_autocmds()
 
         _file_opened = {
             {
-                event = { "BufRead", "BufReadPost", "BufWinEnter", "BufNewFile" },
+                -- event = { "BufRead", "BufReadPost", "BufWinEnter", "BufNewFile" },
+                event = "BufReadPost",
                 opts = {
                     pattern = "*",
                     nested = true,

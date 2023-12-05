@@ -12,55 +12,64 @@
 LOCAL_STORAGE=$HOME/.clipboard-provider.out
 
 main() {
+    declare status=1
     case $1 in
         copy)
-            buffer=$(base64 | tr -d '\n')
+            slurp
             for p in $COPY_PROVIDERS; do
-                if $p-provider copy; then exit 0; fi
+                $p-provider copy && status=0
             done ;;
         paste)
             for p in $PASTE_PROVIDERS; do
-                if $p-provider paste; then exit 0; fi
+                $p-provider paste && status=0 && break
             done ;;
     esac
-    exit 1
+
+    exit $status
+}
+
+# N.B. buffer is global for simplicity
+slurp() { buffer=$(base64 | tr -d '\n'); }
+spit() { base64 --decode <<<"$buffer"; }
+
+is-copy() {
+    if [[ "$1" == "copy" ]]; then return 0; else return 1; fi
 }
 
 tmux-provider() {
-    [[ -n $TMUX ]] || return 1
+	[[ -n $TMUX ]] || return $(is-copy $1)
     case $1 in
-        copy) base64 --decode <<<"$buffer" | tmux load-buffer - ;;
+        copy) spit | tmux load-buffer - ;;
         paste) tmux save-buffer - ;;
     esac
 }
 
 pb-provider() {
-    command -v pbcopy &>/dev/null || return 1
+    if ! command -v pbcopy &>/dev/null;then return $(is-copy $1); fi
     case $1 in
-        copy) base64 --decode <<<"$buffer" | pbcopy ;;
+        copy) spit | pbcopy ;;
         paste) pbpaste ;;
     esac
 }
 
 osc52-provider() {
-    [[ -n "$TTY" ]] || return 1
     case $1 in
-        copy) printf $'\e]52;c;%s\a' "$buffer" > "$TTY" ;;
+        copy) [[ -n "$TTY" ]] && printf $'\e]52;c;%s\a' "$buffer" > "$TTY" ;;
         paste) return 1 ;;
     esac
 }
 
 local-provider() {
     case $1 in
-        copy) base64 --decode <<<"$buffer" > $LOCAL_STORAGE ;;
-        paste) cat $LOCAL_STORAGE ;;
+        copy) spit > $LOCAL_STORAGE ;;
+        paste) cat $LOCAL_STORAGE && return 0;;
     esac
 }
 
 xclip-provider() {
-    [[ -n $DISPLAY ]] && command -v xclip &>/dev/null || return 1
+    [[ -n $DISPLAY ]] && command -v xclip &>/dev/null || return $(is-copy $1)
     case $1 in
-        copy) base64 --decode <<<"$buffer" | xclip -i -selection clipboard;;
+        copy) spit | xclip -i -selection clipboard;;
         paste) xclip -o -selection clipboard;;
     esac
 }

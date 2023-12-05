@@ -37,6 +37,7 @@ base["rcarriga/nvim-notify"] = {
 }
 
 base["NvChad/nvim-colorizer.lua"] = {
+    lazy = true,
     ft = { "lua", "vim", "markdown" },
     config = conf.color,
 }
