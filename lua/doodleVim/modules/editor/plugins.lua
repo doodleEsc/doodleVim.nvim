@@ -1,5 +1,6 @@
 local editor = {}
 local conf = require("doodleVim.modules.editor.config")
+local lazy = require("doodleVim.extend.lazy")
 
 editor["numToStr/Comment.nvim"] = {
     lazy = true,
@@ -13,13 +14,14 @@ editor["phaazon/hop.nvim"] = {
 
 editor["andymass/vim-matchup"] = {
     lazy = true,
-    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
+    init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "vim-matchup", "match-up"),
     dependencies = { "nvim-treesitter/nvim-treesitter" },
 }
 
 editor["junegunn/vim-easy-align"] = {
     lazy = true,
     event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
+    -- init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "vim-easy-align", "easy_align.vim"),
 }
 
 editor["karb94/neoscroll.nvim"] = {
@@ -29,7 +31,7 @@ editor["karb94/neoscroll.nvim"] = {
 
 editor["kylechui/nvim-surround"] = {
     lazy = true,
-    event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
+    init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "nvim-surround", "nvim-surround"),
     config = conf.nvim_surround,
 }
 

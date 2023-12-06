@@ -1,7 +1,15 @@
 local lsp = {}
 
 function lsp.mason(plugin)
-    require("doodleVim.extend.lazy").add("mason", function()
+    require("doodleVim.extend.lazy").register_defer_load("DeferStart", 100, "mason", function()
+        local ok, _ = pcall(require, "mason")
+        if not ok then
+            vim.notify("mason load failed", vim.log.levels.ERROR)
+            return
+        end
+    end)
+
+    require("doodleVim.extend.lazy").register_post_install("mason", function()
         local binaries = {
             "gopls",
             "json-lsp",

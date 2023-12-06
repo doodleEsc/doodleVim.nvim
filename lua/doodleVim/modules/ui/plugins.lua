@@ -1,20 +1,14 @@
 local ui = {}
 local conf = require("doodleVim.modules.ui.config")
 local setup = require("doodleVim.modules.ui.setup")
+local lazy = require("doodleVim.extend.lazy")
 
 ui["ellisonleao/gruvbox.nvim"] = {
 	lazy = true,
 }
 
-ui["NvChad/nvim-colorizer.lua"] = {
-    lazy = true,
-	event = "BufReadPost",
-	config = conf.color,
-}
-
 ui["nvim-treesitter/nvim-treesitter"] = {
 	lazy = true,
-	event = "BufReadPost",
 	cmd = { "TSUpdate", "TSInstall", "TSUninstall" },
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter-textobjects",
@@ -32,21 +26,22 @@ ui["goolord/alpha-nvim"] = {
 
 ui["nvim-lualine/lualine.nvim"] = {
 	lazy = true,
-	event = "User VeryLazy",
+	-- init = lazy.register_defer_load_helper("DeferStart", 100, "lualine.nvim", "lualine"),
+	event = { "BufReadPost" },
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = conf.lualine,
 }
 
 ui["lewis6991/gitsigns.nvim"] = {
 	lazy = true,
-	event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
+	init = lazy.register_defer_load_helper("DeferStartWithFile", 100, "gitsigns.nvim", "gitsigns"),
 	config = conf.gitsigns,
 }
 
 ui["romgrk/barbar.nvim"] = {
 	lazy = true,
-	-- event = "BufReadPost",
-	event = "User FileOpened",
+	-- init = lazy.register_defer_load_helper("DeferStartWithFile", 100, "barbar.nvim", "barbar"),
+	event = { "BufReadPost" },
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
@@ -55,13 +50,13 @@ ui["romgrk/barbar.nvim"] = {
 
 ui["lukas-reineke/indent-blankline.nvim"] = {
 	lazy = true,
-	event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
+	init = lazy.register_defer_load_helper("DeferStartWithFile", 100, "indent-blankline.nvim", "ibl"),
 	config = conf.blankline,
 }
 
 ui["folke/todo-comments.nvim"] = {
 	lazy = true,
-	event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
+	init = lazy.register_defer_load_helper("DeferStartWithFile", 100, "todo-comments.nvim", "todo-comments"),
 	dependencies = {
 		"mortepau/codicons.nvim",
 	},
