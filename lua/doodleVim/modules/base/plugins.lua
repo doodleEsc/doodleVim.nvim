@@ -12,8 +12,7 @@ base["nvim-lua/plenary.nvim"] = { lazy = true }
 
 base["stevearc/dressing.nvim"] = {
     lazy = true,
-    -- event = "VeryLazy",
-    event = "User LazyVimStarted",
+    -- event = "User LazyVimStarted",
     dependencies = {
         "MunifTanjim/nui.nvim",
     },

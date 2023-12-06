@@ -3,6 +3,7 @@ local gruvbox = require("doodleVim.extend.gruvbox")
 local misc = require("doodleVim.extend.misc")
 local floaterm = require("doodleVim.extend.floaterm")
 local tree = require("doodleVim.extend.tree")
+local lazy = require("doodleVim.extend.lazy")
 
 local M = {}
 
@@ -31,6 +32,12 @@ function M.load_user_command()
             "PyDepInstall",
             function()
                 vim.cmd("PylspInstall python-lsp-black pyls-isort python-lsp-ruff pylsp-rope")
+            end,
+        },
+        {
+            "ShowEventHandlers",
+            function()
+                lazy.show_event_handlers();
             end,
         },
     }

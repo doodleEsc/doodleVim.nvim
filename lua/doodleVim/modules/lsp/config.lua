@@ -714,8 +714,6 @@ end
 -- end
 
 function config.jdtls(plugin, options)
-    -- local opts = require("doodleVim.modules.lsp.jdtls").get_opts()
-
     local function attach_jdtls()
         local jdtls_config = require("doodleVim.modules.lsp.jdtls").get_config()
         require("jdtls").start_or_attach(jdtls_config)
