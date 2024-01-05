@@ -8,7 +8,6 @@ tools["nvim-telescope/telescope.nvim"] = {
 	cmd = { "Telescope" },
 	dependencies = {
 		"nvim-telescope/telescope-file-browser.nvim",
-		-- 'nvim-telescope/telescope-ui-select.nvim',
 		"LukasPietzschmann/telescope-tabs",
 		"folke/todo-comments.nvim",
 		"doodleEsc/project.nvim",
@@ -26,7 +25,6 @@ tools["AckslD/nvim-neoclip.lua"] = {
 
 tools["doodleEsc/project.nvim"] = {
 	lazy = true,
-	-- event = "User DeferStart",
 	init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "project.nvim", "project_nvim"),
 	dependencies = { "rmagatti/auto-session", lazy = true, config = conf.autosession },
 	config = conf.project,
@@ -135,27 +133,6 @@ tools["mfussenegger/nvim-dap"] = {
 	config = conf.dap,
 }
 
--- tools["rcarriga/nvim-dap-ui"] = {
--- 	lazy = true,
--- 	init = function(plugin)
--- 		vim.g.dapui_setup = false
--- 	end,
--- }
-
--- tools["mfussenegger/nvim-dap-python"] = {
--- 	lazy = true,
--- 	init = setup.dap_python,
--- 	ft = "python",
--- 	config = conf.dap_python,
--- }
-
--- tools["leoluz/nvim-dap-go"] = {
--- 	lazy = true,
--- 	init = setup.dap_go,
--- 	ft = "go",
--- 	config = conf.dap_go,
--- }
-
 tools["Weissle/persistent-breakpoints.nvim"] = {
 	lazy = true,
 	event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
@@ -180,15 +157,7 @@ tools["kevinhwang91/nvim-ufo"] = {
 	config = conf.nvim_ufo,
 }
 
--- tools["nvim-orgmode/orgmode"] = {
--- 	lazy = true,
--- 	event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
--- 	config = conf.orgmode,
--- }
-
 tools["LunarVim/bigfile.nvim"] = {
-	-- lazy = true,
-	-- event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
 	config = conf.bigfile,
 }
 

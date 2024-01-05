@@ -18,9 +18,17 @@
             "vendor": true
         },
         "ui.completion.usePlaceholders": true,
-        "ui.diagnostic.analyses":{
+        "ui.diagnostic.analyses": {
             "nilness": true,
             "shadow": true
+        },
+        "hints": {
+            "assignVariableTypes": true,
+            "compositeLiteralFields": true,
+            "constantValues": true,
+            "functionTypeParameters": true,
+            "parameterNames": true,
+            "rangeVariableTypes": true
         }
     }
 }
