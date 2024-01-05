@@ -19,6 +19,7 @@ lsp["neovim/nvim-lspconfig"] = {
 		"utilyre/barbecue.nvim",
 		{ "hrsh7th/cmp-nvim-lsp", lazy = true },
 		{ "tamago324/nlsp-settings.nvim", config = conf.nlsp_settings, lazy = true },
+		-- { "lvimuser/lsp-inlayhints.nvim", config = conf.inlayhints, lazy = true },
 	},
 	opts = {
 		servers = {
@@ -92,6 +93,12 @@ lsp["kosayoda/nvim-lightbulb"] = {
 lsp["ray-x/lsp_signature.nvim"] = {
 	lazy = true,
 	init = setup.lsp_signature,
+}
+
+lsp["lvimuser/lsp-inlayhints.nvim"] = {
+	lazy = true,
+	init = setup.inlayhints,
+    config = conf.inlayhints,
 }
 
 return lsp
