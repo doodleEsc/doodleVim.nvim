@@ -76,10 +76,4 @@ function lsp.lsp_signature(plugin)
 	end)
 end
 
-function lsp.inlayhints(plugin)
-	require("doodleVim.extend.lsp").register_on_attach(function(client, bufnr)
-		require("lsp-inlayhints").on_attach(client, bufnr)
-	end)
-end
-
 return lsp

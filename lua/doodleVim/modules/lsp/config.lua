@@ -605,8 +605,4 @@ function config.jdtls(plugin, options)
 	attach_jdtls()
 end
 
-function config.inlayhints(plugin, options)
-	require("lsp-inlayhints").setup()
-end
-
 return config
