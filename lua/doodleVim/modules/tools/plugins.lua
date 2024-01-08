@@ -79,7 +79,7 @@ tools["anuvyklack/hydra.nvim"] = {
 
 tools["towolf/vim-helm"] = {
 	lazy = true,
-	ft = "yaml",
+    ft = {"helm", "yaml"}
 }
 
 tools["folke/which-key.nvim"] = {
