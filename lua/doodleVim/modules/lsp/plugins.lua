@@ -26,6 +26,13 @@ lsp["neovim/nvim-lspconfig"] = {
 			jdtls = {
 				disabled = true,
 			},
+			lua_ls = {
+				capabilities = {
+					textDocument = {
+						formatting = false,
+					},
+				},
+			},
 		},
 	},
 	config = conf.lspconfig,
@@ -68,6 +75,11 @@ lsp["nvimtools/none-ls.nvim"] = {
 	dependencies = {
 		"stevearc/dressing.nvim",
 		"doodleEsc/gotools.nvim",
+		{
+			"jay-babu/mason-null-ls.nvim",
+			cmd = { "NullLsInstall", "NullLsUninstall" },
+			config = conf.mason_null_ls,
+		},
 	},
 	config = conf.null_ls,
 }
@@ -98,7 +110,7 @@ lsp["ray-x/lsp_signature.nvim"] = {
 lsp["lvimuser/lsp-inlayhints.nvim"] = {
 	lazy = true,
 	init = setup.inlayhints,
-    config = conf.inlayhints,
+	config = conf.inlayhints,
 }
 
 return lsp

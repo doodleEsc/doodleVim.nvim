@@ -4,76 +4,76 @@ local misc = {}
 misc.which_key_loaded = false
 
 misc.safe_exit = function()
-    -- close floaterm
-    if require("lazy.core.config").plugins["vim-floaterm"]._.loaded then
-        local floatermBufnr = vim.call("floaterm#buflist#gather")
-        if #floatermBufnr ~= 0 then
-            vim.cmd([[FloatermKill]])
-        end
-    end
+	-- close floaterm
+	if require("lazy.core.config").plugins["vim-floaterm"]._.loaded then
+		local floatermBufnr = vim.call("floaterm#buflist#gather")
+		if #floatermBufnr ~= 0 then
+			vim.cmd([[FloatermKill]])
+		end
+	end
 
-    -- close nvim-tree
-    if require("lazy.core.config").plugins["nvim-tree.lua"]._.loaded then
-        local view = require("nvim-tree.view")
-        if view.is_visible() then
-            require("doodleVim.extend.tree").toggle()
-        end
-    end
+	-- close nvim-tree
+	if require("lazy.core.config").plugins["nvim-tree.lua"]._.loaded then
+		local view = require("nvim-tree.view")
+		if view.is_visible() then
+			require("doodleVim.extend.tree").toggle()
+		end
+	end
 
-    -- quit
-    vim.cmd([[confirm qa]])
+	-- quit
+	vim.cmd([[confirm qa]])
 end
 
 misc.safe_save = function()
-    vim.cmd([[write]])
-    require("auto-session").SaveSession()
-    vim.notify("Current Session Saved")
+	vim.cmd([[write]])
+	require("auto-session").SaveSession()
+	vim.notify("Current Session Saved")
 end
 
 misc.wrapped_notify = function(message, level, o)
-    if message:match("NULL_LS_CODE_ACTION", 1) then
-        return
-    end
-    local wrapped_msg = require("doodleVim.utils.utils").wrap(message, 52)
-    require("notify")(wrapped_msg, level, o)
+	if message:match("NULL_LS_CODE_ACTION", 1) then
+		return
+	end
+	local wrapped_msg = require("doodleVim.utils.utils").wrap(message, 52)
+	require("notify")(wrapped_msg, level, o)
 end
 
 misc.toggle_nu = function()
-    vim.cmd([[:set nornu]])
-    if vim.wo.nu then
-        vim.cmd([[:set nonu]])
-    else
-        vim.cmd([[:set nu]])
-    end
+	vim.cmd([[:set nornu]])
+	if vim.wo.nu then
+		vim.cmd([[:set nonu]])
+	else
+		vim.cmd([[:set nu]])
+	end
 end
 
 misc.toggle_rnu = function()
-    vim.cmd([[:set nonu]])
-    if vim.wo.rnu then
-        vim.cmd([[:set nornu]])
-    else
-        vim.cmd([[:set rnu]])
-    end
+	vim.cmd([[:set nonu]])
+	if vim.wo.rnu then
+		vim.cmd([[:set nornu]])
+	else
+		vim.cmd([[:set rnu]])
+	end
 end
 
 misc.reload = function()
-    utils.remove_cached_package("^doodleVim")
-    require("doodleVim.core")
-    vim.notify("Configuration Reloaded")
+	utils.remove_cached_package("^doodleVim")
+	require("doodleVim.core")
+	vim.notify("Configuration Reloaded")
 end
 
 misc.toggle_whichkey = function()
-    local mode = vim.api.nvim_get_mode()
-    if misc.which_key_loaded then
-        require("which-key.view").on_close()
-        misc.which_key_loaded = false
-    else
-        if mode.mode == "V" or mode.mode == "\22" then
-            mode.mode = "v"
-        end
-        require("which-key").show("", mode)
-        misc.which_key_loaded = true
-    end
+	local mode = vim.api.nvim_get_mode()
+	if misc.which_key_loaded then
+		require("which-key.view").on_close()
+		misc.which_key_loaded = false
+	else
+		if mode.mode == "V" or mode.mode == "\22" then
+			mode.mode = "v"
+		end
+		require("which-key").show("", mode)
+		misc.which_key_loaded = true
+	end
 end
 
 return misc
