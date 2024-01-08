@@ -1,1 +1,1 @@
-require('doodleVim.core')
+require("doodleVim.core")

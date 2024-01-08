@@ -1,8 +1,8 @@
 local api = vim.api
 
 local M = {
-    -- defer_packages = {},
-    -- mod_plug_map = {},
+	-- defer_packages = {},
+	-- mod_plug_map = {},
 }
 
 -- local do_load = function()
@@ -70,12 +70,12 @@ local M = {
 -- end
 
 function M.optimisticLoad(plugins)
-    plugins = type(plugins) == "string" and { plugins } or plugins
-    for _, plugin in ipairs(plugins) do
-        if not require("lazy.core.config").plugins[plugin]._.loaded then
-            require("lazy").load({ plugins = plugin })
-        end
-    end
+	plugins = type(plugins) == "string" and { plugins } or plugins
+	for _, plugin in ipairs(plugins) do
+		if not require("lazy.core.config").plugins[plugin]._.loaded then
+			require("lazy").load({ plugins = plugin })
+		end
+	end
 end
 
 return M
