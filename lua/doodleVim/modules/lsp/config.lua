@@ -245,9 +245,9 @@ function config.null_ls()
 			require("gotools").code_actions.impl,
 			null_ls.builtins.code_actions.gitsigns,
 			null_ls.builtins.diagnostics.solhint,
-			null_ls.builtins.formatting.xmlformat.with({
-				extra_args = { "--indent", "4" },
-			}),
+			-- null_ls.builtins.formatting.xmlformat.with({
+			-- 	extra_args = { "--indent", "4" },
+			-- }),
 			null_ls.builtins.formatting.stylua,
 		},
 		update_in_insert = false,

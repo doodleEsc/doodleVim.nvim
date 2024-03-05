@@ -22,6 +22,8 @@ function M.load_user_command()
 		{ "GruvboxDump", gruvbox.dump },
 		{ "ReloadConfig", misc.reload },
 		{ "OpenTree", tree.toggle },
+		{ "TSInstallAll", misc.treesitter_install_all },
+		{ "LspInstallAll", misc.lsp_install_all },
 		{
 			"Lazygit",
 			function()

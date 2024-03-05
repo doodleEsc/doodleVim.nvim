@@ -76,4 +76,118 @@ misc.toggle_whichkey = function()
 	end
 end
 
+misc.treesitter_install_all = function()
+	local status, _ = pcall(require, "nvim-treesitter")
+	if status then
+		local vendor = {
+			"bash",
+			"cmake",
+			"comment",
+			"c",
+			"cpp",
+			"dot",
+			"dockerfile",
+			"go",
+			"gosum",
+			"gomod",
+			"gowork",
+			"json",
+			"html",
+			"lua",
+			"make",
+			"python",
+			"regex",
+			"rust",
+			"toml",
+			"vim",
+			"yaml",
+			"solidity",
+			"markdown",
+			"org",
+			"java",
+		}
+
+		-- HACK: add norg and norg_meta parser_info to nvim-treesitter
+
+		local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+		parser_configs.org = {
+			install_info = {
+				url = "https://github.com/milisims/tree-sitter-org",
+				revision = "081179c52b3e8175af62b9b91dc099d010c38770",
+				files = { "src/parser.c", "src/scanner.cc" },
+			},
+			filetype = "org",
+		}
+
+		local langs = {}
+		local utils = require("doodleVim.utils.utils")
+		for _, lang in ipairs(vendor) do
+			if not utils.ts_is_installed(lang) then
+				table.insert(langs, lang)
+			end
+		end
+		if #langs > 0 then
+			local update = require("nvim-treesitter.install").update({ with_sync = true })
+			local ok, _ = pcall(update, langs)
+			if not ok then
+				vim.notify("TSUpdate Failed...")
+			end
+		end
+	end
+end
+
+misc.lsp_install_all = function()
+	local binaries = {
+		"gopls",
+		"json-lsp",
+		"lua-language-server",
+		"python-lsp-server",
+		"delve",
+		"gotests",
+		"gomodifytags",
+		"impl",
+		"clangd",
+		"debugpy",
+		"ruff",
+		"solhint",
+		"jdtls",
+		"java-debug-adapter",
+		"java-test",
+		"xmlformatter",
+		"docker-compose-language-service",
+		"dockerfile-language-server",
+	}
+	local register = require("mason-registry")
+	local bins = ""
+	for _, bin in ipairs(binaries) do
+		if not register.is_installed(bin) then
+			bins = bins .. " " .. bin
+		end
+	end
+	if #bins > 0 then
+		vim.cmd("MasonInstall" .. bins)
+	end
+
+	-- local trim = require("doodleVim.utils.utils").trim
+	local jdtls_path = require("mason-core.path").package_prefix("jdtls")
+	local lombok_jar = jdtls_path .. "/plugins/" .. "lombok.jar"
+
+	-- check lombok and install
+	if not vim.loop.fs_stat(lombok_jar) then
+		vim.schedule(function()
+			vim.fn.system({
+				"wget",
+				"https://projectlombok.org/downloads/lombok.jar",
+				"-O",
+				lombok_jar,
+			})
+			vim.fn.system({
+				"chmod",
+				"755",
+				lombok_jar,
+			})
+		end)
+	end
+end
+
 return misc
