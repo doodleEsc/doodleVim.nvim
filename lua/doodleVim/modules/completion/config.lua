@@ -255,7 +255,10 @@ function config.luasnip()
 end
 
 function config.neogen()
-	require("neogen").setup({ snippet_engine = "luasnip" })
+	require("neogen").setup{
+        enabled = true,
+        snippet_engine = "luasnip"
+    }
 end
 
 function config.codeium()

@@ -10,8 +10,14 @@ tools["nvim-telescope/telescope.nvim"] = {
 		"nvim-telescope/telescope-file-browser.nvim",
 		"LukasPietzschmann/telescope-tabs",
 		"folke/todo-comments.nvim",
-		"doodleEsc/project.nvim",
 		"AckslD/nvim-neoclip.lua",
+		{
+			"doodleEsc/project.nvim",
+			lazy = true,
+			init = lazy.register_defer_load_helper("DeferStart", 80, "project.nvim", "project_nvim"),
+			dependencies = { "rmagatti/auto-session", lazy = true, config = conf.autosession },
+			config = conf.project,
+		},
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},
 	config = conf.telescope,
@@ -21,13 +27,6 @@ tools["AckslD/nvim-neoclip.lua"] = {
 	lazy = true,
 	dependencies = { "kkharji/sqlite.lua", lazy = true },
 	config = conf.neoclip,
-}
-
-tools["doodleEsc/project.nvim"] = {
-	lazy = true,
-	init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "project.nvim", "project_nvim"),
-	dependencies = { "rmagatti/auto-session", lazy = true, config = conf.autosession },
-	config = conf.project,
 }
 
 tools["kyazdani42/nvim-tree.lua"] = {

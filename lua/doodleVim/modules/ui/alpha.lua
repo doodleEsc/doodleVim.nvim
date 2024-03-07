@@ -26,7 +26,7 @@ dashboard.section.header.val = logo
 
 dashboard.section.buttons.val = {
 	dashboard.button("o", "  Open CWD", "<cmd>doautocmd User DeferStartWithFile|ene|OpenTree<CR>"),
-	dashboard.button("h", "  Recent Projects", "<cmd>doautocmd User DeferStartWithFile|Telescope projects<CR>"),
+	dashboard.button("p", "  Recent Projects", "<cmd>doautocmd User DeferStartWithFile|Telescope projects<CR>"),
 	dashboard.button("r", "  Recent File", "<cmd>doautocmd User DeferStartWithFile|Telescope oldfiles<CR>"),
 	dashboard.button("e", "  New file", "<cmd>doautocmd User DeferStartWithFile|ene<CR>"),
 	dashboard.button("f", "  Find File", "<cmd>doautocmd User DeferStartWithFile|Telescope find_files<CR>"),
