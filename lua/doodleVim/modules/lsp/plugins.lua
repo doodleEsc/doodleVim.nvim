@@ -64,6 +64,9 @@ lsp["mfussenegger/nvim-jdtls"] = {
 lsp["williamboman/mason.nvim"] = {
 	lazy = true,
 	init = setup.mason,
+	dependencies = {
+		"stevearc/dressing.nvim",
+	},
 	config = conf.mason,
 }
 
