@@ -51,6 +51,7 @@ function config.nvim_cmp(plugin, opts)
 		sorting = {
 			priority_weight = 2,
 			comparators = {
+				require("copilot_cmp.comparators").prioritize,
 				cmp.config.compare.offset,
 				cmp.config.compare.exact,
 				cmp.config.compare.score,
@@ -66,9 +67,10 @@ function config.nvim_cmp(plugin, opts)
 		},
 		preselect = cmp.PreselectMode.None,
 		sources = cmp.config.sources({
-			{ name = "nvim_lsp" },
-			{ name = "treesitter" },
-			{ name = "luasnip" },
+			{ name = "nvim_lsp", group_index = 2 },
+			{ name = "copilot", group_index = 2 },
+			{ name = "treesitter", group_index = 2 },
+			{ name = "luasnip", group_index = 2 },
 			{
 				name = "look",
 				keyword_length = 2,
@@ -190,7 +192,7 @@ function config.nvim_cmp(plugin, opts)
 				mode = "symbol_text",
 				maxwidth = 50,
 				ellipsis_char = "...",
-				symbol_map = {},
+				symbol_map = { Copilot = "" },
 
 				before = function(entry, vim_item)
 					local word = vim_item.abbr
@@ -207,6 +209,7 @@ function config.nvim_cmp(plugin, opts)
 						path = "[PATH]",
 						look = "[LOOK]",
 						treesitter = "[TS]",
+						copilot = "[COPILOT]",
 					})[entry.source.name]
 
 					return vim_item
@@ -254,11 +257,19 @@ function config.luasnip()
 	})
 end
 
+function config.copilot_cmp()
+	require("copilot_cmp").setup()
+end
+
+function config.copilot()
+	require("copilot").setup({})
+end
+
 function config.neogen()
-	require("neogen").setup{
-        enabled = true,
-        snippet_engine = "luasnip"
-    }
+	require("neogen").setup({
+		enabled = true,
+		snippet_engine = "luasnip",
+	})
 end
 
 function config.codeium()
