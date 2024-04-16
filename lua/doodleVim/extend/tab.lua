@@ -11,7 +11,7 @@ M.enhanced_buffer_close = function()
 
 	local win_num = vim.api.nvim_win_get_number(0)
 	local filetype = vim.bo.filetype
-	if filetype == "TelescopePrompt" then
+	if filetype == "TelescopePrompt" or filetype == "NvimTree" then
 		return
 	end
 
