@@ -431,17 +431,17 @@ function config.nvim_tree()
 		},
 	})
 
-	local api = require("nvim-tree.api")
-	local Event = require("nvim-tree.api").events.Event
-	local bufferline_api = require("bufferline.api")
-
-	api.events.subscribe(Event.Resize, function(size)
-		bufferline_api.set_offset(size)
-	end)
-
-	api.events.subscribe(Event.TreeClose, function()
-		bufferline_api.set_offset(0)
-	end)
+	-- local api = require("nvim-tree.api")
+	-- local Event = require("nvim-tree.api").events.Event
+	-- local bufferline_api = require("bufferline.api")
+	--
+	-- api.events.subscribe(Event.Resize, function(size)
+	-- 	bufferline_api.set_offset(size)
+	-- end)
+	--
+	-- api.events.subscribe(Event.TreeClose, function()
+	-- 	bufferline_api.set_offset(0)
+	-- end)
 end
 
 function config.symbols_outline()
