@@ -1,4 +1,5 @@
 local tools = {}
+local global = require("doodleVim.core.global")
 local conf = require("doodleVim.modules.tools.config")
 local setup = require("doodleVim.modules.tools.setup")
 local lazy = require("doodleVim.extend.lazy")
@@ -113,6 +114,9 @@ tools["mfussenegger/nvim-dap"] = {
 			init = function(plugin)
 				vim.g.dapui_setup = false
 			end,
+			dependencies = {
+				"nvim-neotest/nvim-nio",
+			},
 		},
 		{
 			"mfussenegger/nvim-dap-python",
@@ -179,6 +183,11 @@ tools["Bryley/neoai.nvim"] = {
 		"MunifTanjim/nui.nvim",
 	},
 	config = conf.neoai,
+}
+
+tools["keaising/im-select.nvim"] = {
+	cond = global.is_mac,
+	config = conf.im_select,
 }
 
 return tools

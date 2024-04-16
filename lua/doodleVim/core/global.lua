@@ -2,8 +2,11 @@ local global = {}
 local home = os.getenv("HOME")
 local path_sep = "/"
 local os_name = vim.loop.os_uname().sysname
+local os_release = vim.loop.os_uname().release
 
 function global:load_variables()
+	self.os = os_name
+	self.os_release = os_release
 	self.is_mac = os_name == "Darwin"
 	self.is_linux = os_name == "Linux"
 	self.path_sep = path_sep

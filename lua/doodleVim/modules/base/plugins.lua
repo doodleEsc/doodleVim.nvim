@@ -41,4 +41,8 @@ base["NvChad/nvim-colorizer.lua"] = {
 	config = conf.color,
 }
 
+base["nvim-neotest/nvim-nio"] = {
+	lazy = true,
+}
+
 return base
