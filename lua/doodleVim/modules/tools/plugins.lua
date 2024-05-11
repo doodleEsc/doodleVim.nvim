@@ -164,7 +164,7 @@ tools["LunarVim/bigfile.nvim"] = {
 	config = conf.bigfile,
 }
 
-tools["Bryley/neoai.nvim"] = {
+tools["doodleEsc/neoai.nvim"] = {
 	lazy = true,
 	cmd = {
 		"NeoAI",

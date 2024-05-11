@@ -1250,6 +1250,14 @@ function config.neoai(plugin, opts)
 					return key
 				end,
 			},
+			base_url = {
+				get = function()
+					local file_path = "~/.config/nvim/env/OPENAI_BASE_URL"
+					local base_url = vim.fn.system("cat " .. file_path)
+					base_url = string.gsub(base_url, "\n$", "")
+					return base_url
+				end,
+			},
 		},
 
 		shortcuts = {

@@ -149,7 +149,7 @@ misc.lsp_install_all = function()
 		"clangd",
 		"debugpy",
 		"ruff",
-		"solhint",
+		-- "solhint",
 		"jdtls",
 		"java-debug-adapter",
 		"java-test",
