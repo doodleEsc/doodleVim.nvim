@@ -50,6 +50,7 @@ ui["romgrk/barbar.nvim"] = {
 
 ui["lukas-reineke/indent-blankline.nvim"] = {
 	lazy = true,
+	main = "ibl",
 	init = lazy.register_defer_load_helper("DeferStartWithFile", 100, "indent-blankline.nvim", "ibl"),
 	config = conf.blankline,
 }
