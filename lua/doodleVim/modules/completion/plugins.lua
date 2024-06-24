@@ -24,9 +24,6 @@ completion["hrsh7th/nvim-cmp"] = {
 			lazy = true,
 			cmd = "Copilot",
 			config = conf.copilot,
-			init = function()
-				vim.g.copilot_proxy = "127.0.0.1:7890"
-			end,
 		},
 	},
 	config = conf.nvim_cmp,

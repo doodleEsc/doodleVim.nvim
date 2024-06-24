@@ -302,8 +302,8 @@ function config.nvim_tree()
 			auto_open = true,
 		},
 		update_focused_file = {
-			enable = true,
-			update_cwd = true,
+			enable = false,
+			update_cwd = false,
 			ignore_list = {},
 		},
 		system_open = {
