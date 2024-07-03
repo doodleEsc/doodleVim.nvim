@@ -1,4 +1,3 @@
-local global = require("doodleVim.core.global")
 local config = {}
 
 function config.telescope()
@@ -738,51 +737,6 @@ function config.tmux()
 	})
 end
 
--- function config.neorg()
---     require('neorg').setup {
---         load = {
---             ["core.defaults"] = {},
---             ["core.norg.dirman"] = {
---                 config = {
---                     workspaces = {
---                         work = "~/Documents/Notes/work",
---                     }
---                 }
---             },
---             -- ["core.gtd.base"] = {
---             --     config = {
---             --         workspace = "work",
---             --     },
---             -- },
---             ["core.norg.journal"] = {
---                 config = {
---                     workspace = "work",
---                 }
---             },
---             ["core.norg.concealer"] = {},
---             ["core.norg.completion"] = {
---                 config = {
---                     engine = "nvim-cmp"
---                 }
---             },
---             ["core.norg.qol.toc"] = {},
---             ["core.export"] = {},
---             ["core.export.markdown"] = {
---                 config = {
---                     extensions = "all"
---                 }
---             },
---             -- ["core.keybinds"] = {
---             --     config = {
---             --         hook = function(keybinds)
---             --             keybinds.remap("gtd-displays", "n", "<CR>", "<cmd>GoToTask<CR>")
---             --         end
---             --     }
---             -- }
---         }
---     }
--- end
-
 function config.diffview()
 	local codicons = require("codicons")
 	local actions = require("diffview.actions")
@@ -1115,64 +1069,6 @@ function config.orgmode(plugin, opts)
 			DELEGATED = ":background #7C3AED :foreground #ebdbb2 :slant italic :underline on",
 		},
 	})
-end
-
-function config.breakpoints(plugin, opts)
-	require("persistent-breakpoints").setup({
-		save_dir = vim.fn.stdpath("data") .. "/nvim_checkpoints",
-		-- when to load the breakpoints? "BufReadPost" is recommanded.
-		load_breakpoints_event = { "BufReadPost" },
-		-- record the performance of different function. run :lua require('persistent-breakpoints.api').print_perf_data() to see the result.
-		perf_record = false,
-	})
-end
-
-function config.dap_python(plugin, opts)
-	local debugpy_home = require("mason-core.path").package_prefix("debugpy")
-	local python_venv_bin = debugpy_home .. "/venv/bin/python"
-	require("dap-python").setup(python_venv_bin)
-
-	for _, pyconfig in pairs(require("dap").configurations.python) do
-		pyconfig.console = "internalConsole"
-	end
-
-	require("doodleVim.extend.debug").register_test_fn_debug("python", function()
-		vim.ui.select({ "Method", "Class", "Selection" }, {
-			prompt = "Select Test Type",
-			format_item = function(item)
-				return " " .. item
-			end,
-		}, function(choice)
-			if choice == "Method" then
-				require("dap-python").test_method()
-			elseif choice == "Class" then
-				require("dap-python").test_class()
-			else
-				require("dap-python").debug_selection()
-			end
-		end)
-	end)
-end
-
-function config.dap_go(plugin, opts)
-	require("dap-go").setup()
-	for _, goconfig in pairs(require("dap").configurations.go) do
-		goconfig.console = "internalConsole"
-	end
-	require("doodleVim.extend.debug").register_test_fn_debug("go", function()
-		vim.ui.select({ "Nearest", "Recent" }, {
-			prompt = "Select Test Type",
-			format_item = function(item)
-				return " " .. item
-			end,
-		}, function(choice)
-			if choice == "Nearest" then
-				require("dap-go").debug_test()
-			elseif choice == "Recent" then
-				require("dap-go").debug_last_test()
-			end
-		end)
-	end)
 end
 
 function config.bigfile(plugin, opts)

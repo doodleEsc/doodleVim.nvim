@@ -47,45 +47,6 @@ lsp["utilyre/barbecue.nvim"] = {
 	},
 }
 
-lsp["mfussenegger/nvim-jdtls"] = {
-	lazy = true,
-	init = lazy.register_defer_load_helper("DeferStartWithFile", 98, "nvim-jdtls", function()
-		if vim.bo.filetype == "java" then
-			local ok, _ = pcall(require, "jdtls")
-			if not ok then
-				vim.notify("nvim-jdtls load failed", vim.log.levels.ERROR)
-				return
-			end
-		end
-	end),
-	config = conf.jdtls,
-}
-
-lsp["williamboman/mason.nvim"] = {
-	lazy = true,
-	init = setup.mason,
-	dependencies = {
-		"stevearc/dressing.nvim",
-	},
-	config = conf.mason,
-}
-
-lsp["nvimtools/none-ls.nvim"] = {
-	lazy = true,
-	-- init = setup.null_ls,
-	init = lazy.register_defer_load_helper("DeferStartWithFile", 98, "none-ls.nvim", "null-ls"),
-	dependencies = {
-		"stevearc/dressing.nvim",
-		"doodleEsc/gotools.nvim",
-		{
-			"jay-babu/mason-null-ls.nvim",
-			cmd = { "NullLsInstall", "NullLsUninstall" },
-			config = conf.mason_null_ls,
-		},
-	},
-	config = conf.null_ls,
-}
-
 lsp["doodleEsc/rename.nvim"] = {
 	lazy = true,
 	init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "rename.nvim", "rename"),
@@ -108,5 +69,44 @@ lsp["ray-x/lsp_signature.nvim"] = {
 	lazy = true,
 	init = setup.lsp_signature,
 }
+
+lsp["mfussenegger/nvim-jdtls"] = {
+	lazy = true,
+	init = lazy.register_defer_load_helper("DeferStartWithFile", 98, "nvim-jdtls", function()
+		if vim.bo.filetype == "java" then
+			local ok, _ = pcall(require, "jdtls")
+			if not ok then
+				vim.notify("nvim-jdtls load failed", vim.log.levels.ERROR)
+				return
+			end
+		end
+	end),
+	config = conf.jdtls,
+}
+
+lsp["williamboman/mason.nvim"] = {
+	lazy = true,
+	init = setup.mason,
+	config = conf.mason,
+	dependencies = {
+		"stevearc/dressing.nvim",
+	},
+}
+
+lsp["nvimtools/none-ls.nvim"] = {
+	lazy = true,
+	config = conf.null_ls,
+}
+
+lsp["jay-babu/mason-null-ls.nvim"] = {
+	lazy = true,
+	init = lazy.register_defer_load_helper("DeferStartWithFile", 98, "mason-null-ls.nvim", "mason-null-ls"),
+	dependencies = {
+		"williamboman/mason.nvim",
+		"nvimtools/none-ls.nvim",
+	},
+	config = conf.mason_null_ls,
+}
+
 
 return lsp

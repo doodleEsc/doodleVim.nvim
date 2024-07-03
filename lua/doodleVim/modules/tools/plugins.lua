@@ -1,7 +1,6 @@
 local tools = {}
 local global = require("doodleVim.core.global")
 local conf = require("doodleVim.modules.tools.config")
-local setup = require("doodleVim.modules.tools.setup")
 local lazy = require("doodleVim.extend.lazy")
 
 tools["nvim-telescope/telescope.nvim"] = {
@@ -101,46 +100,6 @@ tools["sindrets/diffview.nvim"] = {
 		"mortepau/codicons.nvim",
 	},
 	config = conf.diffview,
-}
-
-tools["mfussenegger/nvim-dap"] = {
-	lazy = true,
-	event = { "User StartDebug" },
-	dependencies = {
-		"mortepau/codicons.nvim",
-		{
-			"rcarriga/nvim-dap-ui",
-			lazy = true,
-			init = function(plugin)
-				vim.g.dapui_setup = false
-			end,
-			dependencies = {
-				"nvim-neotest/nvim-nio",
-			},
-		},
-		{
-			"mfussenegger/nvim-dap-python",
-			lazy = true,
-			-- ft = "python",
-			init = setup.dap_python,
-			config = conf.dap_python,
-		},
-		{
-			"leoluz/nvim-dap-go",
-			lazy = true,
-			-- ft = "go",
-			init = setup.dap_go,
-			config = conf.dap_go,
-		},
-	},
-	config = conf.dap,
-}
-
-tools["Weissle/persistent-breakpoints.nvim"] = {
-	lazy = true,
-	event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
-	init = setup.persistent_breakpoints,
-	config = conf.breakpoints,
 }
 
 tools["dstein64/vim-startuptime"] = {
