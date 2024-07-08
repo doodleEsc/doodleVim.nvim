@@ -364,10 +364,10 @@ map.Telescope = {
 				:with_noremap()
 				:with_silent()
 				:with_label("Find Projects"),
-			t = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope todo-comments todo")')
-				:with_noremap()
-				:with_silent()
-				:with_label("Find Todos"),
+			-- t = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope todo-comments todo")')
+			-- 	:with_noremap()
+			-- 	:with_silent()
+			-- 	:with_label("Find Todos"),
 			r = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope oldfiles")')
 				:with_noremap()
 				:with_silent()
@@ -421,6 +421,18 @@ map.ToggleNumber = {
 				:with_noremap()
 				:with_silent()
 				:with_label("Toggle Relative Line Number"),
+		},
+	},
+}
+
+map.barbecue = {
+	n = {
+		["<leader>b"] = {
+			name = "Toggle Barbecu",
+			b = map_cr("lua require('doodleVim.extend.misc').toggle_barbecue()")
+				:with_noremap()
+				:with_silent()
+				:with_label("Toggle Barbecu"),
 		},
 	},
 }

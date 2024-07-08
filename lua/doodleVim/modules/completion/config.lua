@@ -51,7 +51,7 @@ function config.nvim_cmp(plugin, opts)
 		sorting = {
 			priority_weight = 2,
 			comparators = {
-				require("copilot_cmp.comparators").prioritize,
+				-- require("copilot_cmp.comparators").prioritize,
 				cmp.config.compare.offset,
 				cmp.config.compare.exact,
 				cmp.config.compare.score,
@@ -68,7 +68,7 @@ function config.nvim_cmp(plugin, opts)
 		preselect = cmp.PreselectMode.None,
 		sources = cmp.config.sources({
 			{ name = "nvim_lsp", group_index = 2 },
-			{ name = "copilot", group_index = 2 },
+			-- { name = "copilot", group_index = 2 },
 			{ name = "treesitter", group_index = 2 },
 			{ name = "luasnip", group_index = 2 },
 			{
@@ -192,7 +192,7 @@ function config.nvim_cmp(plugin, opts)
 				mode = "symbol_text",
 				maxwidth = 50,
 				ellipsis_char = "...",
-				symbol_map = { Copilot = "" },
+				-- symbol_map = { Copilot = "" },
 
 				before = function(entry, vim_item)
 					local word = vim_item.abbr
@@ -209,7 +209,7 @@ function config.nvim_cmp(plugin, opts)
 						path = "[PATH]",
 						look = "[LOOK]",
 						treesitter = "[TS]",
-						copilot = "[COPILOT]",
+						-- copilot = "[COPILOT]",
 					})[entry.source.name]
 
 					return vim_item
@@ -261,10 +261,6 @@ function config.copilot_cmp()
 	require("copilot_cmp").setup()
 end
 
-function config.copilot()
-	require("copilot").setup({})
-end
-
 function config.neogen()
 	require("neogen").setup({
 		enabled = true,
@@ -273,7 +269,28 @@ function config.neogen()
 end
 
 function config.codeium()
-	require("codeium").setup({})
+	require("codeium").setup()
+
+	-- require("codeium").setup({
+	-- 	manager_path = nil,
+	-- 	bin_path = vim.fn.stdpath("data") .. "/codeium/bin",
+	-- 	config_path = vim.fn.stdpath("data") .. "/codeium/config.json",
+	-- 	language_server_download_url = "https://github.com",
+	-- 	api = {
+	-- 		host = "server.codeium.com",
+	-- 		port = "443",
+	-- 		path = "/",
+	-- 		portal_url = "codeium.com",
+	-- 	},
+	-- 	enterprise_mode = nil,
+	-- 	detect_proxy = true,
+	-- 	tools = {},
+	-- 	wrapper = nil,
+	-- 	enable_chat = true,
+	-- 	enable_local_search = false,
+	-- 	enable_index_service = false,
+	-- 	search_max_workspace_file_count = 5000,
+	-- })
 end
 
 return config

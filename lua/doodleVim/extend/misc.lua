@@ -2,6 +2,17 @@ local utils = require("doodleVim.utils.utils")
 
 local misc = {}
 misc.which_key_loaded = false
+misc.barbecue_shown = false
+
+misc.toggle_barbecue = function()
+	if not misc.barbecue_shown then
+		require("barbecue.ui").toggle(true)
+		misc.barbecue_shown = true
+	else
+		require("barbecue.ui").toggle(false)
+		misc.barbecue_shown = false
+	end
+end
 
 misc.safe_exit = function()
 	-- close floaterm
@@ -124,57 +135,59 @@ misc.treesitter_install_all = function()
 end
 
 misc.lsp_install_all = function()
-	local binaries = {
-		"gopls",
-		"json-lsp",
-		"lua-language-server",
-		"python-lsp-server",
-		"delve",
-		"gotests",
-		"gomodifytags",
-		"impl",
-		"clangd",
-		"debugpy",
-		"ruff",
-		-- "solhint",
-		"jdtls",
-		"java-debug-adapter",
-		"java-test",
-		"xmlformatter",
-		"docker-compose-language-service",
-		"dockerfile-language-server",
-	}
-	local register = require("mason-registry")
-	local bins = ""
-	for _, bin in ipairs(binaries) do
-		if not register.is_installed(bin) then
-			bins = bins .. " " .. bin
-		end
-	end
-	if #bins > 0 then
-		vim.cmd("MasonInstall" .. bins)
-	end
-
-	-- local trim = require("doodleVim.utils.utils").trim
-	local jdtls_path = require("mason-core.path").package_prefix("jdtls")
-	local lombok_jar = jdtls_path .. "/plugins/" .. "lombok.jar"
-
-	-- check lombok and install
-	if not vim.loop.fs_stat(lombok_jar) then
-		vim.schedule(function()
-			vim.fn.system({
-				"wget",
-				"https://projectlombok.org/downloads/lombok.jar",
-				"-O",
-				lombok_jar,
-			})
-			vim.fn.system({
-				"chmod",
-				"755",
-				lombok_jar,
-			})
-		end)
-	end
+	-- local binaries = {
+	-- 	"gopls",
+	-- 	"json-lsp",
+	-- 	"lua-language-server",
+	-- 	"python-lsp-server",
+	-- 	"delve",
+	-- 	"gotests",
+	-- 	"gomodifytags",
+	-- 	"impl",
+	-- 	"clangd",
+	-- 	"debugpy",
+	-- 	"ruff",
+	-- 	-- "solhint",
+	-- 	"jdtls",
+	-- 	"java-debug-adapter",
+	-- 	"java-test",
+	-- 	"xmlformatter",
+	-- 	"docker-compose-language-service",
+	-- 	"dockerfile-language-server",
+	-- }
+	-- local register = require("mason-registry")
+	-- local bins = ""
+	-- for _, bin in ipairs(binaries) do
+	-- 	if not register.is_installed(bin) then
+	-- 		bins = bins .. " " .. bin
+	-- 	end
+	-- end
+	-- if #bins > 0 then
+	-- 	vim.cmd("MasonInstall" .. bins)
+	-- end
+	--
+	-- -- local trim = require("doodleVim.utils.utils").trim
+	-- local jdtls_path = require("mason-core.path").package_prefix("jdtls")
+	-- local lombok_jar = jdtls_path .. "/plugins/" .. "lombok.jar"
+	--
+	-- -- check lombok and install
+	-- if not vim.loop.fs_stat(lombok_jar) then
+	-- 	vim.schedule(function()
+	-- 		vim.fn.system({
+	-- 			"wget",
+	-- 			"https://projectlombok.org/downloads/lombok.jar",
+	-- 			"-O",
+	-- 			lombok_jar,
+	-- 		})
+	-- 		vim.fn.system({
+	-- 			"chmod",
+	-- 			"755",
+	-- 			lombok_jar,
+	-- 		})
+	-- 	end)
+	-- end
+	--
+	require("doodleVim.modules.lsp.setup").mason()
 end
 
 return misc

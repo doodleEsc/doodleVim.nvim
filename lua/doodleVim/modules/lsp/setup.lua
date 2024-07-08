@@ -1,6 +1,6 @@
 local lsp = {}
 
-function lsp.mason(plugin)
+function lsp.mason()
 	require("doodleVim.extend.lazy").register_defer_load("DeferStart", 100, "mason", function()
 		local ok, _ = pcall(require, "mason")
 		if not ok then
@@ -11,24 +11,20 @@ function lsp.mason(plugin)
 
 	require("doodleVim.extend.lazy").register_post_install("mason", function()
 		local binaries = {
-			"gopls",
-			"json-lsp",
-			"lua-language-server",
-			"python-lsp-server",
-			"delve",
-			"gotests",
-			"gomodifytags",
-			"impl",
 			"clangd",
+			"codespell",
 			"debugpy",
-			"ruff",
-			"solhint",
-			"jdtls",
+			"delve",
+			"gomodifytags",
+			"gopls",
+			"impl",
 			"java-debug-adapter",
 			"java-test",
-			"xmlformatter",
-			"docker-compose-language-service",
-			"dockerfile-language-server",
+			"jdtls",
+			"lua-language-server",
+			"python-lsp-server",
+			"ruff",
+			"stylua",
 		}
 		local register = require("mason-registry")
 		local bins = ""
@@ -41,24 +37,48 @@ function lsp.mason(plugin)
 			vim.cmd("MasonInstall" .. bins)
 		end
 
-		-- local trim = require("doodleVim.utils.utils").trim
+		-- local jdtls_path = require("mason-core.path").package_prefix("jdtls")
+		-- local lombok_jar = jdtls_path .. "/plugins/" .. "lombok.jar"
+		--
+		-- -- check lombok and install
+		-- if not vim.loop.fs_stat(lombok_jar) then
+		-- 	vim.schedule(function()
+		-- 		vim.fn.system({
+		-- 			"wget",
+		-- 			"https://projectlombok.org/downloads/lombok.jar",
+		-- 			"-O",
+		-- 			lombok_jar,
+		-- 		})
+		-- 		vim.fn.system({
+		-- 			"chmod",
+		-- 			"755",
+		-- 			lombok_jar,
+		-- 		})
+		-- 	end)
+		-- end
+
 		local jdtls_path = require("mason-core.path").package_prefix("jdtls")
 		local lombok_jar = jdtls_path .. "/plugins/" .. "lombok.jar"
 
-		-- check lombok and install
+		-- 检查 lombok.jar 是否存在，如果不存在则下载并设置权限
 		if not vim.loop.fs_stat(lombok_jar) then
+			vim.notify("adfasdfasdf")
 			vim.schedule(function()
-				vim.fn.system({
-					"wget",
-					"https://projectlombok.org/downloads/lombok.jar",
-					"-O",
-					lombok_jar,
-				})
-				vim.fn.system({
-					"chmod",
-					"755",
-					lombok_jar,
-				})
+				local handle
+				local function on_exit()
+					vim.loop.spawn("chmod", {
+						args = { "755", lombok_jar },
+					}, function()
+						print("lombok.jar 下载并设置权限成功")
+					end)
+				end
+
+				handle = vim.loop.spawn("wget", {
+					args = { "https://projectlombok.org/downloads/lombok.jar", "-O", lombok_jar },
+				}, function()
+					handle:close()
+					on_exit()
+				end)
 			end)
 		end
 	end)

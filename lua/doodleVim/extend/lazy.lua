@@ -24,7 +24,7 @@ M.loaded = function(plugin)
 	return require("lazy.core.config").plugins[plugin]._.loaded
 end
 
-local function emit_user_event(event)
+local function _emit_user_event(event)
 	if type(event) == "string" then
 		api.nvim_exec_autocmds("User", { pattern = event, modeline = false })
 	elseif type(event) == "function" then
@@ -32,11 +32,9 @@ local function emit_user_event(event)
 	end
 end
 
-M.defer_emit_user_event = function(delay, events)
+M.emit_user_event = function(delay, event)
 	vim.defer_fn(function()
-		for _, event in ipairs(events) do
-			emit_user_event(event)
-		end
+		_emit_user_event(event)
 	end, delay)
 end
 

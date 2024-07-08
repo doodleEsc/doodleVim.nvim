@@ -2,7 +2,7 @@ local config = {}
 
 function config.nvim_web_devicons(plugin, opts)
 	require("nvim-web-devicons").setup({
-		-- your personnal icons can go here (to override)
+		-- your personal icons can go here (to override)
 		-- you can specify color or cterm_color instead of specifying both of them
 		-- DevIcon will be appended to `name`
 		override = {
@@ -17,7 +17,7 @@ function config.nvim_web_devicons(plugin, opts)
 		-- if set to false all icons will have the default icon's color
 		color_icons = true,
 		-- globally enable default icons (default to false)
-		-- will get overriden by `get_icons` option
+		-- will get overridden by `get_icons` option
 		default = false,
 		-- globally enable "strict" selection of icons - icon will be looked up in
 		-- different tables, first by filename, and if not found by extension; this
@@ -165,40 +165,6 @@ function config.color(plugin, opts)
 	require("colorizer").setup()
 end
 
-function config.notify(plugin, opts)
-	local codicons = require("codicons")
-	local nvim_notify = require("notify")
-	nvim_notify.setup({
-		-- Animation style (see below for details)
-		stages = "slide",
-		-- Function called when a new window is opened, use for changing win settings/config
-		on_open = nil,
-		-- Function called when a window is closed
-		on_close = nil,
-		-- Render function for notifications. See notify-render()
-		render = "default",
-		-- Default timeout for notifications
-		timeout = 2000,
-		-- Max number of columns for messages
-		max_width = nil,
-		-- Max number of lines for a message
-		max_height = nil,
-		-- For stages that change opacity this is treated as the highlight behind the window
-		-- Set this to either a highlight group, an RGB hex value e.g. "#000000" or a function returning an RGB code for dynamic values
-		background_colour = "Normal",
-		-- Minimum width for notification windows
-		minimum_width = 36,
-		-- Icons for the different levels
-		icons = {
-			ERROR = codicons.get("error"),
-			WARN = codicons.get("warning"),
-			INFO = codicons.get("info"),
-			DEBUG = codicons.get("debug"),
-			TRACE = codicons.get("search"),
-		},
-	})
-	vim.notify = require("doodleVim.extend.misc").wrapped_notify
-end
 
 function config.dressing(plugin, opts)
 	require("dressing").setup({

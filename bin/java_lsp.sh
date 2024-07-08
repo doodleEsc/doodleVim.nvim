@@ -17,20 +17,38 @@ CONFIG="$HOME/.local/share/nvim/mason/packages/jdtls/config_$OSTYPE"
 LOMBOK="$HOME/.local/share/nvim/mason/packages/jdtls/plugins/lombok.jar"
 
 export GRADLE_HOME='$HOME/.sdkman/candidates/gradle/current/bin/gradle'
+
+
+# java \
+#   -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044 \
+#   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
+#   -Dosgi.bundles.defaultStartLevel=4 \
+#   -Declipse.product=org.eclipse.jdt.ls.core.product \
+#   -Dlog.protocol=true \
+#   -Dlog.level=ALL \
+#   -Xms1g \
+#   -Xmx2G \
+#   -javaagent:$LOMBOK \
+#   -Xbootclasspath/a:$LOMBOK \
+#   -jar $(echo "$JAR") \
+#   -configuration "$CONFIG" \
+#   -data "$1" \
+#   --add-modules=ALL-SYSTEM \
+#   --add-opens java.base/java.util=ALL-UNNAMED \
+#   --add-opens java.base/java.lang=ALL-UNNAMED
+
+
 java \
-  -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044 \
-  -Declipse.application=org.eclipse.jdt.ls.core.id1 \
-  -Dosgi.bundles.defaultStartLevel=4 \
-  -Declipse.product=org.eclipse.jdt.ls.core.product \
-  -Dlog.protocol=true \
-  -Dlog.level=ALL \
-  -Xms1g \
-  -Xmx2G \
-  -javaagent:$LOMBOK \
-  -Xbootclasspath/a:$LOMBOK \
-  -jar $(echo "$JAR") \
-  -configuration "$CONFIG" \
-  -data "$1" \
-  --add-modules=ALL-SYSTEM \
-  --add-opens java.base/java.util=ALL-UNNAMED \
-  --add-opens java.base/java.lang=ALL-UNNAMED
+    -Declipse.application=org.eclipse.jdt.ls.core.id1 \
+    -Dosgi.bundles.defaultStartLevel=4 \
+    -Declipse.product=org.eclipse.jdt.ls.core.product \
+    -Dlog.protocol=true \
+    -Dlog.level=ALL \
+    -Xmx1g \
+    -javaagent:$LOMBOK \
+    --add-modules=ALL-SYSTEM \
+    --add-opens java.base/java.util=ALL-UNNAMED \
+    --add-opens java.base/java.lang=ALL-UNNAMED \
+    -jar  $(echo "$JAR") \
+    -configuration $CONFIG \
+    -data $1

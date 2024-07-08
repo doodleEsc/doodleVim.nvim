@@ -1,3 +1,4 @@
+local vim = vim
 local tools = {}
 local global = require("doodleVim.core.global")
 local conf = require("doodleVim.modules.tools.config")
@@ -9,18 +10,25 @@ tools["nvim-telescope/telescope.nvim"] = {
 	dependencies = {
 		"nvim-telescope/telescope-file-browser.nvim",
 		"LukasPietzschmann/telescope-tabs",
-		"folke/todo-comments.nvim",
 		"AckslD/nvim-neoclip.lua",
-		{
-			"doodleEsc/project.nvim",
-			lazy = true,
-			init = lazy.register_defer_load_helper("DeferStart", 80, "project.nvim", "project_nvim"),
-			dependencies = { "rmagatti/auto-session", lazy = true, config = conf.autosession },
-			config = conf.project,
-		},
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},
 	config = conf.telescope,
+}
+
+tools["doodleEsc/project.nvim"] = {
+	lazy = true,
+	init = lazy.register_defer_load_helper("DeferStart", 100, "project.nvim", "project_nvim"),
+	dependencies = {
+		"rmagatti/auto-session",
+		"nvim-telescope/telescope.nvim",
+	},
+	config = conf.project,
+}
+
+tools["rmagatti/auto-session"] = {
+	lazy = true,
+	config = conf.autosession,
 }
 
 tools["AckslD/nvim-neoclip.lua"] = {
@@ -29,7 +37,7 @@ tools["AckslD/nvim-neoclip.lua"] = {
 	config = conf.neoclip,
 }
 
-tools["kyazdani42/nvim-tree.lua"] = {
+tools["nvim-tree/nvim-tree.lua"] = {
 	lazy = true,
 	dependencies = {
 		"romgrk/barbar.nvim",
@@ -83,13 +91,13 @@ tools["towolf/vim-helm"] = {
 
 tools["folke/which-key.nvim"] = {
 	lazy = true,
-	init = lazy.register_defer_load_helper("DeferStart", 80, "which-key.nvim", "which-key"),
+	init = lazy.register_defer_load_helper("DeferStart", 100, "which-key.nvim", "which-key"),
 	config = conf.which_key,
 }
 
 tools["aserowy/tmux.nvim"] = {
 	lazy = true,
-	init = lazy.register_defer_load_helper("DeferStart", 80, "tmux.nvim", "tmux"),
+	init = lazy.register_defer_load_helper("DeferStart", 100, "tmux.nvim", "tmux"),
 	config = conf.tmux,
 }
 
@@ -111,7 +119,6 @@ tools["dstein64/vim-startuptime"] = {
 
 tools["kevinhwang91/nvim-ufo"] = {
 	lazy = true,
-	init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "nvim-ufo", "ufo"),
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 		{ "kevinhwang91/promise-async", lazy = true },
@@ -147,6 +154,24 @@ tools["doodleEsc/neoai.nvim"] = {
 tools["keaising/im-select.nvim"] = {
 	cond = global.is_mac,
 	config = conf.im_select,
+}
+
+tools["rcarriga/nvim-notify"] = {
+	lazy = true,
+	event = {"User LazyVimStarted"},
+	dependencies = {
+		"mortepau/codicons.nvim",
+	},
+	config = conf.notify,
+}
+
+tools["folke/todo-comments.nvim"] = {
+	lazy = true,
+	event = { "User DeferBufReadPost" },
+	dependencies = {
+		"mortepau/codicons.nvim",
+	},
+	config = conf.todo,
 }
 
 return tools

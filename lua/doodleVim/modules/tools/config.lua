@@ -1,3 +1,4 @@
+local vim = vim
 local config = {}
 
 function config.telescope()
@@ -122,55 +123,6 @@ function config.telescope()
 				case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 				-- the default case_mode is "smart_case"
 			},
-			-- ["ui-select"] = {
-			--     require("telescope.themes").get_dropdown({
-			--         initial_mode = "normal",
-			--     }),
-			--     specific_opts = {
-			--         -- for gotools.nvim
-			--         ["gotools"] = {
-			--             make_indexed = function(items)
-			--                 local indexed_items = {}
-			--                 local widths = {
-			--                     idx = 0,
-			--                     command_title = 0,
-			--                 }
-			--                 for idx, item in ipairs(items) do
-			--                     local entry = {
-			--                         idx = idx,
-			--                         command_title = item,
-			--                         text = item,
-			--                     }
-			--                     table.insert(indexed_items, entry)
-			--                     widths.idx = math.max(widths.idx, require "plenary.strings".strdisplaywidth(entry.idx))
-			--                     widths.command_title = math.max(widths.command_title,
-			--                         require "plenary.strings".strdisplaywidth(entry.command_title))
-			--                 end
-			--                 return indexed_items, widths
-			--             end,
-			--             make_displayer = function(widths)
-			--                 return require "telescope.pickers.entry_display".create {
-			--                     separator = " ",
-			--                     items = {
-			--                         { width = widths.idx + 1 }, -- +1 for ":" suffix
-			--                         { width = widths.command_title },
-			--                     },
-			--                 }
-			--             end,
-			--             make_display = function(displayer)
-			--                 return function(e)
-			--                     return displayer {
-			--                         { e.value.idx .. ":", "TelescopePromptPrefix" },
-			--                         { e.value.command_title },
-			--                     }
-			--                 end
-			--             end,
-			--             make_ordinal = function(e)
-			--                 return e.idx .. e.command_title
-			--             end,
-			--         },
-			--     }
-			-- },
 		},
 		pickers = {
 			find_files = {
@@ -180,10 +132,8 @@ function config.telescope()
 	})
 	require("telescope").load_extension("fzf")
 	require("telescope").load_extension("file_browser")
-	require("telescope").load_extension("todo-comments")
 	require("telescope").load_extension("projects")
 	require("telescope").load_extension("neoclip")
-	-- require("telescope").load_extension("ui-select")
 	require("telescope").load_extension("telescope-tabs")
 end
 
@@ -407,11 +357,6 @@ function config.nvim_tree()
 			confirm = {
 				remove = true,
 				trash = true,
-			},
-		},
-		experimental = {
-			git = {
-				async = false,
 			},
 		},
 		log = {
@@ -1005,7 +950,7 @@ function config.dap()
 		end
 		dapui.close()
 	end
-	-- for some debug adapter, terminate or exit events will no fire, use disconnect reuest instead
+	-- for some debug adapter, terminate or exit events will no fire, use disconnect request instead
 	dap.listeners.before.disconnect["dapui_config"] = function()
 		if not vim.g.dapui_setup then
 			require("doodleVim.modules.tools.config").dapui()
@@ -1223,6 +1168,113 @@ function config.im_select(plugin, opts)
 
 		-- Async run `default_command` to switch IM or not
 		async_switch_im = true,
+	})
+end
+
+function config.notify(plugin, opts)
+	local codicons = require("codicons")
+	local nvim_notify = require("notify")
+	nvim_notify.setup({
+		-- Animation style (see below for details)
+		stages = "slide",
+		-- Function called when a new window is opened, use for changing win settings/config
+		on_open = nil,
+		-- Function called when a window is closed
+		on_close = nil,
+		-- Render function for notifications. See notify-render()
+		render = "default",
+		-- Default timeout for notifications
+		timeout = 2000,
+		-- Max number of columns for messages
+		max_width = nil,
+		-- Max number of lines for a message
+		max_height = nil,
+		-- For stages that change opacity this is treated as the highlight behind the window
+		-- Set this to either a highlight group, an RGB hex value e.g. "#000000" or a function returning an RGB code for dynamic values
+		background_colour = "Normal",
+		-- Minimum width for notification windows
+		minimum_width = 36,
+		-- Icons for the different levels
+		icons = {
+			ERROR = codicons.get("error"),
+			WARN = codicons.get("warning"),
+			INFO = codicons.get("info"),
+			DEBUG = codicons.get("debug"),
+			TRACE = codicons.get("search"),
+		},
+	})
+	vim.notify = require("doodleVim.extend.misc").wrapped_notify
+end
+
+function config.todo()
+	local codicons = require("codicons")
+	require("todo-comments").setup({
+		signs = true, -- show icons in the signs column
+		sign_priority = 8, -- sign priority
+		-- keywords recognized as todo comments
+		keywords = {
+			FIX = {
+				icon = codicons.get("tools"), -- icon used for the sign, and in search results
+				color = "error", -- can be a hex color, or a named color (see below)
+				alt = {
+					"FIXME",
+					"BUG",
+					"FIXIT",
+					"ISSUE",
+					"ERROR",
+				}, -- a set of other keywords that all map to this FIX keywords
+				-- signs = false, -- configure signs for some keywords individually
+			},
+			TODO = { icon = codicons.get("checklist"), color = "info" },
+			HACK = { icon = codicons.get("flame"), color = "warning" },
+			WARN = { icon = codicons.get("warning"), color = "warning", alt = { "WARNING", "XXX" } },
+			PERF = { icon = codicons.get("clock"), color = "default", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+			NOTE = { icon = codicons.get("note"), color = "hint", alt = { "INFO" } },
+		},
+		gui_style = {
+			fg = "NONE", -- The gui style to use for the fg highlight group.
+			bg = "BOLD", -- The gui style to use for the bg highlight group.
+		},
+		merge_keywords = true, -- when true, custom keywords will be merged with the defaults
+		-- highlighting of the line containing the todo comment
+		-- * before: highlights before the keyword (typically comment characters)
+		-- * keyword: highlights of the keyword
+		-- * after: highlights after the keyword (todo text)
+		highlight = {
+			multiline = true, -- enable multine todo comments
+			multiline_pattern = "^.", -- lua pattern to match the next multiline from the start of the matched keyword
+			multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
+			before = "", -- "fg" or "bg" or empty
+			keyword = "bg", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
+			after = "fg", -- "fg" or "bg" or empty
+			pattern = [[.*<(KEYWORDS)\v(\s?\(.*\)|:)+]], -- pattern or table of patterns, used for highlightng (vim regex)
+			comments_only = true, -- uses treesitter to match keywords in comments only
+			max_line_len = 400, -- ignore lines longer than this
+			exclude = {}, -- list of file types to exclude highlighting
+		},
+		-- list of named colors where we try to extract the guifg from the
+		-- list of highlight groups or use the hex color if hl not found as a fallback
+		colors = {
+			error = { "#fb4934" },
+			hack = { "#fe8019" },
+			warning = { "#fabd2f" },
+			info = { "#458588" },
+			hint = { "#10B981" },
+			default = { "#7C3AED" },
+		},
+		search = {
+			command = "rg",
+			args = {
+				"--color=never",
+				"--no-heading",
+				"--with-filename",
+				"--line-number",
+				"--column",
+			},
+			-- regex that will be used to match keywords.
+			-- don't replace the (KEYWORDS) placeholder
+			pattern = [[\b(KEYWORDS)(\s?\(.*\)|:)+]], -- ripgrep regex
+		},
 	})
 end
 

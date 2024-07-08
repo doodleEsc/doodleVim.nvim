@@ -1,3 +1,4 @@
+local vim = vim
 local global = require("doodleVim.core.global")
 
 local M = {}

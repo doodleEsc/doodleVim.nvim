@@ -25,15 +25,15 @@ end
 dashboard.section.header.val = logo
 
 dashboard.section.buttons.val = {
-	dashboard.button("o", "  Open CWD", "<cmd>doautocmd User DeferStartWithFile|ene|OpenTree<CR>"),
-	dashboard.button("p", "  Recent Projects", "<cmd>doautocmd User DeferStartWithFile|Telescope projects<CR>"),
-	dashboard.button("r", "  Recent File", "<cmd>doautocmd User DeferStartWithFile|Telescope oldfiles<CR>"),
-	dashboard.button("e", "  New file", "<cmd>doautocmd User DeferStartWithFile|ene<CR>"),
-	dashboard.button("f", "  Find File", "<cmd>doautocmd User DeferStartWithFile|Telescope find_files<CR>"),
-	dashboard.button("b", "  File Browser", "<cmd>doautocmd User DeferStartWithFile|Telescope file_browser<CR>"),
-	dashboard.button("s", "  Configuration", "<cmd>doautocmd User DeferStartWithFile|e $MYVIMRC|OpenTree<CR>"),
-	dashboard.button("u", "  Update Plugins", "<cmd>doautocmd User DeferStartWithFile|Lazy sync<CR>"),
-	dashboard.button("q", "  Quit", "<cmd>doautocmd User DeferStartWithFile|qa<cr>"),
+	dashboard.button("o", "  Open CWD", "<cmd>doautocmd User DeferStart|ene|OpenTree<CR>"),
+	dashboard.button("p", "  Recent Projects", "<cmd>doautocmd User DeferStart|Telescope projects<CR>"),
+	dashboard.button("r", "  Recent File", "<cmd>doautocmd User DeferStart|Telescope oldfiles<CR>"),
+	dashboard.button("e", "  New file", "<cmd>doautocmd User DeferStart|ene<CR>"),
+	dashboard.button("f", "  Find File", "<cmd>doautocmd User DeferStart|Telescope find_files<CR>"),
+	dashboard.button("b", "  File Browser", "<cmd>doautocmd User DeferStart|Telescope file_browser<CR>"),
+	dashboard.button("s", "  Configuration", "<cmd>doautocmd User DeferStart|e $MYVIMRC|OpenTree<CR>"),
+	dashboard.button("u", "  Update Plugins", "<cmd>doautocmd User DeferStart|Lazy sync<CR>"),
+	dashboard.button("q", "  Quit", "<cmd>doautocmd User DeferStart|qa<cr>"),
 }
 
 dashboard.section.footer.val = footer()

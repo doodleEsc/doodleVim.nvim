@@ -3,24 +3,30 @@ local trim = require("doodleVim.utils.utils").trim
 
 function jdtls.get_config()
 	local mason_registry = require("mason-registry")
+	-- local lombok_jar = mason_registry.get_package("jdtls"):get_install_path() .. "/lombok.jar"
 
 	-- get bundles
 	local bundles = {}
 	if mason_registry.is_installed("java-debug-adapter") then
 		local java_debug_home = require("mason-core.path").package_prefix("java-debug-adapter")
+		vim.notify(java_debug_home)
 		local java_debug_jar_path = trim(vim.fn.system({
 			"find",
 			java_debug_home .. "/extension/server",
 			"-name",
 			"com.microsoft.java.debug.plugin-*.jar",
 		}))
+
+		vim.notify(java_debug_jar_path)
 		table.insert(bundles, vim.fn.glob(java_debug_jar_path, 1))
 	end
 
-	if mason_registry.is_installed("java-test") then
-		local java_test_home = require("mason-core.path").package_prefix("java-test")
-		vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_home .. "/extension/server/*.jar", 1), "\n"))
-	end
+	vim.notify(vim.inspect(bundles))
+
+	-- if mason_registry.is_installed("java-test") then
+	-- 	local java_test_home = require("mason-core.path").package_prefix("java-test")
+	-- 	vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_home .. "/extension/server/*.jar", 1), "\n"))
+	-- end
 
 	-- get project workspace
 	local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
@@ -51,7 +57,9 @@ function jdtls.get_config()
 				},
 			},
 		},
-		-- root_dir = require("jdtls.setup").find_root({ "gradlew", "pom.xml", ".git" }),
+
+		root_dir = vim.fs.root(0, { ".git", "mvnw", "gradlew" }),
+
 		init_options = {
 			bundles = bundles,
 			extendedClientCapabilities = extendedClientCapabilities,
@@ -87,14 +95,14 @@ function jdtls.get_config()
 					template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
 				},
 			},
-			configuration = {
-				runtimes = {
-					{
-						name = "JavaSE-17",
-						path = home .. "/.sdkman/candidates/java/17.0.8-amzn/",
-					},
-				},
-			},
+			-- configuration = {
+			-- 	runtimes = {
+			-- 		{
+			-- 			name = "JavaSE",
+			-- 			path = home .. "/.sdkman/candidates/java/current/",
+			-- 		},
+			-- 	},
+			-- },
 		},
 	}
 

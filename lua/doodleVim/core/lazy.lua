@@ -1,27 +1,15 @@
-local fn, api = vim.fn, vim.api
+local vim = vim
 local vim_path = require("doodleVim.core.global").vim_path
 local data_dir = require("doodleVim.core.global").data_dir
 local modules_dir = vim_path .. "/lua/doodleVim/modules"
-local lazy = nil
 
 local Lazy = {}
-Lazy.__index = Lazy
-
-local plugins = setmetatable({}, {
-	__index = function(_, key)
-		if not lazy then
-			Lazy:load_packer()
-		end
-		return lazy[key]
-	end,
-})
-
-function Lazy:load_plugins()
-	self.repos = {}
+local load_plugins = function()
+	local repos = {}
 
 	local get_plugins_list = function()
 		local list = {}
-		local tmp = vim.split(fn.globpath(modules_dir, "*/plugins.lua"), "\n")
+		local tmp = vim.split(vim.fn.globpath(modules_dir, "*/plugins.lua"), "\n")
 		for _, f in ipairs(tmp) do
 			list[#list + 1] = f:sub(#modules_dir - 16, -1)
 		end
@@ -30,27 +18,44 @@ function Lazy:load_plugins()
 
 	local plugins_file = get_plugins_list()
 	for _, m in ipairs(plugins_file) do
-		local repos = require(m:sub(0, #m - 4))
-		for repo, conf in pairs(repos) do
-			self.repos[#self.repos + 1] = vim.tbl_extend("force", { repo }, conf)
+		local mrepos = require(m:sub(0, #m - 4))
+		for repo, conf in pairs(mrepos) do
+			repos[#repos + 1] = vim.tbl_extend("force", { repo }, conf)
 		end
 	end
+
+	return repos
 end
 
-function Lazy:load_lazy(install)
-	local should_install = install or false
-	if not lazy then
-		api.nvim_command("packadd lazy.nvim")
-		lazy = require("lazy")
+function Lazy.ensure_lazy_installed()
+	local lazypath = vim.fn.stdpath("data") .. "/site/pack/lazy/opt/lazy.nvim"
+	vim.print(lazypath)
+	if not (vim.uv or vim.loop).fs_stat(lazypath) then
+		local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+		local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+		if vim.v.shell_error ~= 0 then
+			vim.api.nvim_echo({
+				{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+				{ out, "WarningMsg" },
+				{ "\nPress any key to exit..." },
+			}, true, {})
+			vim.fn.getchar()
+			os.exit(1)
+		end
 	end
+	vim.opt.rtp:prepend(lazypath)
+end
 
-	self:load_plugins()
-	lazy.setup(self.repos, {
+function Lazy.setup_lazy()
+	local repos = load_plugins()
+
+	require("lazy").setup({
 		root = data_dir .. "/site/pack/lazy/opt",
 		lockfile = data_dir .. "/lazy-lock.json",
 		concurrency = 20,
+		spec = repos,
 		git = {
-			log = { "--since=3 days ago" }, -- show commits from the last 3 days
+			log = { "--since=5 days ago" }, -- show commits from the last 5 days
 			timeout = 120, -- kill processes that take more than 2 minutes
 			url_format = "https://github.com/%s.git",
 		},
@@ -60,6 +65,10 @@ function Lazy:load_lazy(install)
 			---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
 			patterns = {}, -- For example {"folke"}
 			fallback = false, -- Fallback to git when local plugin doesn't exist
+		},
+		install = {
+			-- install missing plugins on startup. This doesn't increase startup time.
+			missing = true,
 		},
 		ui = {
 			wrap = true, -- wrap the lines in the ui
@@ -85,61 +94,36 @@ function Lazy:load_lazy(install)
 				paths = {}, -- add any custom paths here that you want to indluce in the rtp
 				---@type string[] list any plugins you want to disable here
 				disabled_plugins = {
-					-- "gzip",
-					-- "tar",
-					-- "tarPlugin",
-					-- "zip",
-					-- "zipPlugin",
-					-- "getscript",
-					-- "getscriptPlugin",
-					-- "vimball",
-					-- "vimballPlugin",
-					-- "matchit",
-					-- "matchparen",
-					-- "2html_plugin",
-					-- "logiPat",
-					-- "rrhelper",
-					-- "netrw",
-					-- "netrwPlugin",
-					-- "netrwSettings",
-					-- "netrwFileHandlers",
-					-- "tutor_mode_plugin",
-					-- "remote_plugins",
-					-- "spellfile_plugin",
-					-- "shada_plugin",
-					-- "tohtml",
-					-- "spellfile",
-					-- "tutor",
+					"gzip",
+					"tar",
+					"tarPlugin",
+					"zip",
+					"zipPlugin",
+					"getscript",
+					"getscriptPlugin",
+					"vimball",
+					"vimballPlugin",
+					"matchit",
+					"matchparen",
+					"2html_plugin",
+					"logiPat",
+					"rrhelper",
+					"netrw",
+					"netrwPlugin",
+					"netrwSettings",
+					"netrwFileHandlers",
+					"tutor_mode_plugin",
+					"remote_plugins",
+					"spellfile_plugin",
+					"shada_plugin",
+					"tohtml",
+					"spellfile",
+					"tutor",
 				},
 			},
 		},
+		checker = { enabled = true },
 	})
-
-	if should_install then
-		lazy.install()
-	end
 end
 
-function Lazy:init_ensure_plugins()
-	local lazy_path = data_dir .. "/site/pack/lazy/opt/lazy.nvim"
-	local should_install = false
-	if not vim.loop.fs_stat(lazy_path) then
-		vim.fn.system({
-			"git",
-			"clone",
-			"--filter=blob:none",
-			"--single-branch",
-			"https://github.com/folke/lazy.nvim.git",
-			lazy_path,
-		})
-		should_install = true
-	end
-	self:load_lazy(should_install)
-	vim.opt.rtp:prepend(lazy_path)
-end
-
-function plugins.ensure_plugins()
-	Lazy:init_ensure_plugins()
-end
-
-return plugins
+return Lazy

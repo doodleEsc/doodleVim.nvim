@@ -1,15 +1,6 @@
-local ui = {}
-local vim = vim
+local editor = {}
 
-function ui.treesitter(plugin)
-	require("doodleVim.extend.lazy").register_defer_load("DeferStartWithFile", 100, "nvim-treesitter.nvim", function()
-		local ok, _ = pcall(require, "nvim-treesitter")
-		if not ok then
-			vim.notify("nvim-treesitter load failed", vim.log.levels.ERROR)
-			return
-		end
-	end)
-
+function editor.treesitter(plugin)
 	require("doodleVim.extend.lazy").register_post_install("nvim-treesitter", function()
 		local status, _ = pcall(require, "nvim-treesitter")
 		if status then
@@ -59,4 +50,4 @@ function ui.treesitter(plugin)
 	end)
 end
 
-return ui
+return editor

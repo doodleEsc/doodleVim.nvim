@@ -1,7 +1,6 @@
 local debug = {}
 local conf = require("doodleVim.modules.debug.config")
 local setup = require("doodleVim.modules.debug.setup")
-local lazy = require("doodleVim.extend.lazy")
 
 debug["rcarriga/nvim-dap-ui"] = {
 	lazy = true,
@@ -39,7 +38,7 @@ debug["mfussenegger/nvim-dap"] = {
 
 debug["Weissle/persistent-breakpoints.nvim"] = {
 	lazy = true,
-	event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
+	event = { "BufReadPost" },
 	init = setup.persistent_breakpoints,
 	config = conf.breakpoints,
 }

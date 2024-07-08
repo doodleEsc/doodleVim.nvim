@@ -2,19 +2,6 @@ local api = vim.api
 local vim = vim
 local autocmd = {}
 
-local UserDefinedEvent = {
-	"DeferStart",
-	function()
-		if next(vim.fn.argv()) ~= nil then
-			api.nvim_exec_autocmds("User", { pattern = "DeferStartWithFile", modeline = false })
-		end
-	end,
-	-- function()
-	--     pcall(require, "lspconfig")
-	--     vim.cmd("LspStart")
-	-- end
-}
-
 local function create_augroups(definitions)
 	for group_name, definition in pairs(definitions) do
 		if type(group_name) == "string" and group_name ~= "" then
@@ -138,7 +125,7 @@ function autocmd.load_autocmds()
 			},
 		},
 
-		_lazy = {
+		_lazy_post_install = {
 			{
 				event = "User",
 				opts = {
@@ -151,13 +138,25 @@ function autocmd.load_autocmds()
 			},
 		},
 
-		_after_vim_start = {
+		_delay_vim_start = {
 			{
 				event = "UIEnter",
 				opts = {
 					pattern = "*",
 					callback = function()
-						require("doodleVim.extend.lazy").defer_emit_user_event(100, UserDefinedEvent)
+						require("doodleVim.extend.lazy").emit_user_event(100, "DeferStart")
+					end,
+				},
+			},
+		},
+
+		_delay_buf_read_post = {
+			{
+				event = "BufReadPost",
+				opts = {
+					pattern = "*",
+					callback = function()
+						require("doodleVim.extend.lazy").emit_user_event(50, "DeferBufReadPost")
 					end,
 				},
 			},
@@ -169,23 +168,7 @@ function autocmd.load_autocmds()
 				opts = {
 					pattern = "DeferStart",
 					callback = function()
-						-- require("doodleVim.extend.lazy").PostInstall()
-						-- vim.notify("User DeferStart Event")
 						require("doodleVim.extend.lazy").start_event_handlers("DeferStart")
-					end,
-				},
-			},
-		},
-
-		_defer_start_with_file = {
-			{
-				event = "User",
-				opts = {
-					pattern = "DeferStartWithFile",
-					callback = function()
-						-- require("doodleVim.extend.lazy").PostInstall()
-						-- vim.notify("User DeferStartWithFile Event")
-						require("doodleVim.extend.lazy").start_event_handlers("DeferStartWithFile")
 					end,
 				},
 			},

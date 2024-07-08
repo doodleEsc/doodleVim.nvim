@@ -385,194 +385,6 @@ function config.lightbulb()
 	})
 end
 
-function config.barbecue(plugin, opts)
-	local codicons = require("codicons")
-	require("barbecue").setup({
-		---Whether to attach navic to language servers automatically.
-		---
-		---@type boolean
-		attach_navic = true,
-		---Whether to create winbar updater autocmd.
-		---
-		---@type boolean
-		create_autocmd = true,
-		---Buftypes to enable winbar in.
-		---
-		---@type string[]
-		include_buftypes = { "" },
-		---Filetypes not to enable winbar in.
-		---
-		---@type string[]
-		exclude_filetypes = { "gitcommit", "toggleterm", "DressingInput" },
-		modifiers = {
-			---Filename modifiers applied to dirname.
-			---
-			---See: `:help filename-modifiers`
-			---
-			---@type string
-			dirname = ":~:.",
-			---Filename modifiers applied to basename.
-			---
-			---See: `:help filename-modifiers`
-			---
-			---@type string
-			basename = "",
-		},
-		---Whether to display path to file.
-		---
-		---@type boolean
-		show_dirname = false,
-		---Whether to display file name.
-		---
-		---@type boolean
-		show_basename = true,
-		---Whether to replace file icon with the modified symbol when buffer is
-		---modified.
-		---
-		---@type boolean
-		show_modified = false,
-		---Get modified status of file.
-		---
-		---NOTE: This can be used to get file modified status from SCM (e.g. git)
-		---
-		---@type fun(bufnr: number): boolean
-		modified = function(bufnr)
-			return vim.bo[bufnr].modified
-		end,
-		---Whether to show/use navic in the winbar.
-		---
-		---@type boolean
-		show_navic = true,
-		---Get leading custom section contents.
-		---
-		---NOTE: This function shouldn't do any expensive actions as it is run on each
-		---render.
-		---
-		---@type fun(bufnr: number): barbecue.Config.custom_section
-		lead_custom_section = function()
-			return " "
-		end,
-		---@alias barbecue.Config.custom_section
-		---|string # Literal string.
-		---|{ [1]: string, [2]: string? }[] # List-like table of `[text, highlight?]` tuples in which `highlight` is optional.
-		---
-		---Get custom section contents.
-		---
-		---NOTE: This function shouldn't do any expensive actions as it is run on each
-		---render.
-		---
-		---@type fun(bufnr: number): barbecue.Config.custom_section
-		custom_section = function()
-			return " "
-		end,
-		---@alias barbecue.Config.theme
-		---|'"auto"' # Use your current colorscheme's theme or generate a theme based on it.
-		---|string # Theme located under `barbecue.theme` module.
-		---|barbecue.Theme # Same as '"auto"' but override it with the given table.
-		---
-		---Theme to be used for generating highlight groups dynamically.
-		---
-		---@type barbecue.Config.theme
-
-		theme = {
-			-- this highlight is used to override other highlights
-			-- you can take advantage of its `bg` and set a background throughout your winbar
-			-- (e.g. basename will look like this: { fg = "#c0caf5", bold = true })
-			normal = { fg = "#bdae93", bg = "#32302f" },
-			-- these highlights correspond to symbols table from config
-			ellipsis = { fg = "#bdae93" },
-			separator = { fg = "#737aa2" },
-			modified = { fg = "#fb4934" },
-			-- these highlights represent the _text_ of three main parts of barbecue
-			dirname = { fg = "#83a598" },
-			basename = { bold = true },
-			context = {},
-			-- these highlights are used for context/navic icons
-			context_module = { fg = "#fe8019" },
-			context_field = { fg = "#d3869b" },
-			context_file = { fg = "#83a598" },
-			context_boolean = { fg = "#fe8019" },
-			context_string = { fg = "#b8bb26" },
-			context_operator = { fg = "#fb4934" },
-			context_null = { fg = "#fe8019" },
-			context_event = { fg = "#fabd2f" },
-			context_namespace = { fg = "#83a598" },
-			context_class = { fg = "#fabd2f" },
-			context_method = { fg = "#83a598" },
-			context_property = { fg = "#8ec07c" },
-			context_constructor = { fg = "#83a598" },
-			context_enum = { fg = "#d3869b" },
-			context_interface = { fg = "#b8bb26" },
-			context_package = { fg = "#8ec07c" },
-			context_constant = { fg = "#fe8019" },
-			context_object = { fg = "#fe8019" },
-			context_key = { fg = "#8ec07c" },
-			context_enum_member = { fg = "#fabd2f" },
-			context_struct = { fg = "#d3869b" },
-			context_array = { fg = "#fe8019" },
-			context_type_parameter = { fg = "#fb4934" },
-			context_function = { fg = "#83a598" },
-			context_variable = { fg = "#d3869b" },
-			context_number = { fg = "#fe8019" },
-		},
-		---Whether context text should follow its icon's color.
-		---
-		---@type boolean
-		context_follow_icon_color = false,
-		symbols = {
-			---Modification indicator.
-			---
-			---@type string
-			modified = "●",
-			---Truncation indicator.
-			---
-			---@type string
-			ellipsis = "…",
-			---Entry separator.
-			---
-			---@type string
-			separator = "",
-		},
-		---@alias barbecue.Config.kinds
-		---|false # Disable kind icons.
-		---|table<string, string> # Type to icon mapping.
-		---
-		---Icons for different context entry kinds.
-		---
-		---@type barbecue.Config.kinds
-		kinds = {
-			File = codicons.get("symbol-file"),
-			Module = codicons.get("symbol-module"),
-			Namespace = codicons.get("symbol-namespace"),
-			Package = codicons.get("symbol-package"),
-			Class = codicons.get("symbol-class"),
-			Method = codicons.get("symbol-method"),
-			Property = codicons.get("symbol-property"),
-			Field = codicons.get("symbol-field"),
-			Constructor = codicons.get("symbol-constructor"),
-			Enum = codicons.get("symbol-enum"),
-			Interface = codicons.get("symbol-interface"),
-			Function = codicons.get("symbol-function"),
-			Variable = codicons.get("symbol-variable"),
-			Constant = codicons.get("symbol-constant"),
-			String = codicons.get("symbol-string"),
-			Number = codicons.get("symbol-number"),
-			Boolean = codicons.get("symbol-boolean"),
-			Array = codicons.get("symbol-array"),
-			Object = codicons.get("symbol-object"),
-			Key = codicons.get("symbol-key"),
-			Null = codicons.get("symbol-null"),
-			EnumMember = codicons.get("symbol-enum-member"),
-			Struct = codicons.get("symbol-struct"),
-			Event = codicons.get("symbol-event"),
-			Operator = codicons.get("symbol-operator"),
-			TypeParameter = codicons.get("symbol-type-parameter"),
-			Component = codicons.get("symbol-misc"),
-			Fragment = codicons.get("symbol-misc"),
-		},
-	})
-end
-
 function config.jdtls(plugin, options)
 	local function attach_jdtls()
 		local jdtls_config = require("doodleVim.modules.lsp.jdtls").get_config()
@@ -586,5 +398,33 @@ function config.jdtls(plugin, options)
 
 	attach_jdtls()
 end
+
+function config.mason_null_ls()
+	require("mason-null-ls").setup({
+		-- A list of sources to install if they're not already installed.
+		-- This setting has no relation with the `automatic_installation` setting.
+		ensure_installed = {},
+		-- Enable or disable null-ls methods to get set up
+		-- This setting is useful if some functionality is handled by other plugins such as `conform` and `nvim-lint`
+		methods = {
+			diagnostics = true,
+			formatting = true,
+			code_actions = true,
+			completion = true,
+			hover = true,
+		},
+		-- Run `require("null-ls").setup`.
+		-- Will automatically install masons tools based on selected sources in `null-ls`.
+		-- Can also be an exclusion list.
+		-- Example: `automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }`
+		automatic_installation = false,
+		-- See [#handlers-usage](#handlers-usage) section
+		handlers = nil,
+	})
+end
+
+-- function config.copilot()
+-- 	require("copilot").setup({})
+-- end
 
 return config

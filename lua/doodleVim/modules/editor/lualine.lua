@@ -126,6 +126,13 @@ local function ins_z(component)
 	ins(config.sections.lualine_z, component)
 end
 
+-- ins_a({
+-- 	"copilot",
+-- 	"encoding",
+-- 	"fileformat",
+-- 	"filetype",
+-- })
+--
 ins_c({
 	-- mode component
 	function()
