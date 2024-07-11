@@ -208,7 +208,7 @@ function config.barbar(plugin, opts)
 			-- Or, specify the event which the sidebar executes when leaving:
 			["neo-tree"] = { event = "BufWipeout" },
 			-- Or, specify all three
-			Outline = { event = "BufWinLeave", text = "symbols-outline", align = "right" },
+			Outline = { event = "BufWinLeave", text = "outline", align = "right" },
 		},
 
 		-- New buffer letters are assigned in this order. This order is

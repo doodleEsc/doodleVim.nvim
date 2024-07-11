@@ -1,4 +1,17 @@
+local vim = vim
+
 local lualine = require("lualine")
+
+local function diff_source()
+	local gitsigns = vim.b.gitsigns_status_dict
+	if gitsigns then
+		return {
+			added = gitsigns.added,
+			modified = gitsigns.changed,
+			removed = gitsigns.removed,
+		}
+	end
+end
 
 -- Color table for highlights
 -- stylua: ignore
@@ -196,7 +209,7 @@ ins_x({
 
 ins_x({
 	"progress",
-	padding = { left = 0, right = 1 },
+	padding = { left = 1, right = 1 },
 	color = { fg = colors.fg, gui = "bold" },
 	separator = "-",
 })
@@ -215,35 +228,47 @@ ins_x({
 	fmt = string.upper, -- I'm not sure why it's upper case either ;)
 	cond = conditions.hide_in_width,
 	color = { fg = colors.green, gui = "bold" },
-	padding = { left = 1, right = 0 },
-})
-
-ins_x({
-	"fileformat",
-	fmt = string.upper,
-	icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-	color = { fg = colors.green, gui = "bold" },
 	padding = { left = 1, right = 1 },
 	separator = "┃",
 })
 
-ins_x({
-	"branch",
-	icon = " ",
-	color = { fg = colors.violet, gui = "bold" },
-	padding = { left = 1, right = 0 },
-})
+-- ins_x({
+-- 	"fileformat",
+-- 	fmt = string.upper,
+-- 	icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
+-- 	color = { fg = colors.green, gui = "bold" },
+-- 	padding = { left = 1, right = 1 },
+-- 	separator = "┃",
+-- })
+
+-- ins_x({
+-- 	"branch",
+-- 	icon = "",
+-- 	color = { fg = colors.violet, gui = "bold" },
+-- 	padding = { left = 1, right = 1 },
+-- 	separator = "┃",
+-- })
 
 ins_x({
 	"diff",
 	-- Is it me or the symbol for modified us really weird
 	symbols = { added = " ", modified = " ", removed = " " },
+	source = diff_source,
 	diff_color = {
 		added = { fg = colors.green },
 		modified = { fg = colors.orange },
 		removed = { fg = colors.red },
 	},
 	cond = conditions.hide_in_width,
+	separator = "┃",
+})
+
+ins_x({
+	"b:gitsigns_head",
+	icon = "",
+	color = { fg = colors.violet, gui = "bold" },
+	padding = { left = 1, right = 1 },
+	separator = "┃",
 })
 
 -- Now don't forget to initialize lualine

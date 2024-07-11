@@ -172,11 +172,11 @@ map.NvimTree = {
 	},
 }
 
-map.SymbolsOutline = {
+map.Outline = {
 	n = {
 		["<leader>j"] = {
-			name = "Symbols-Outline",
-			j = map_cr("lua require('symbols-outline').toggle_outline()")
+			name = "Outline",
+			j = map_cr("lua require('outline').toggle_outline()")
 				:with_noremap()
 				:with_silent()
 				:with_label("Symbols And Function Preview"),

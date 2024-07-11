@@ -16,7 +16,7 @@ completion["hrsh7th/nvim-cmp"] = {
 		"windwp/nvim-autopairs",
 		"mortepau/codicons.nvim",
 		"onsails/lspkind.nvim",
-		"Exafunction/codeium.nvim",
+		-- "Exafunction/codeium.nvim",
 		{ "danymat/neogen", lazy = true, config = conf.neogen },
 		{ "L3MON4D3/LuaSnip", lazy = true, version = "1.2.*", config = conf.luasnip },
 		-- { "zbirenbaum/copilot-cmp", lazy = true, config = conf.copilot_cmp },

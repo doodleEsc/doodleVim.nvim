@@ -56,12 +56,10 @@ tools["iamcco/markdown-preview.nvim"] = {
 	end,
 }
 
-tools["simrat39/symbols-outline.nvim"] = {
+tools["hedyhli/outline.nvim"] = {
 	lazy = true,
-	dependencies = {
-		"mortepau/codicons.nvim",
-	},
-	config = conf.symbols_outline,
+	cmd = { "Outline", "OutlineOpen" },
+	config = conf.outline,
 }
 
 tools["voldikss/vim-floaterm"] = {
@@ -158,7 +156,7 @@ tools["keaising/im-select.nvim"] = {
 
 tools["rcarriga/nvim-notify"] = {
 	lazy = true,
-	event = {"User LazyVimStarted"},
+	event = { "User LazyVimStarted" },
 	dependencies = {
 		"mortepau/codicons.nvim",
 	},
