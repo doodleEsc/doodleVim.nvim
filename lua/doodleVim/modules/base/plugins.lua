@@ -22,6 +22,11 @@ base["nvim-tree/nvim-web-devicons"] = {
 	config = conf.nvim_web_devicons,
 }
 
+base['echasnovski/mini.icons'] = {
+    lazy = true,
+    config = conf.mini_icons
+}
+
 base["mortepau/codicons.nvim"] = { lazy = true }
 
 base["stevearc/dressing.nvim"] = {

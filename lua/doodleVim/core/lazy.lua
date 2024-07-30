@@ -122,7 +122,7 @@ function Lazy.setup_lazy()
 				},
 			},
 		},
-		checker = { enabled = true },
+		checker = { enabled = false },
 	})
 end
 

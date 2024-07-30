@@ -28,7 +28,7 @@ function editor.treesitter(plugin)
 				"yaml",
 				"solidity",
 				"markdown",
-				"org",
+				"vimdoc",
 				"java",
 			}
 

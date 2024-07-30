@@ -165,7 +165,6 @@ function config.color(plugin, opts)
 	require("colorizer").setup()
 end
 
-
 function config.dressing(plugin, opts)
 	require("dressing").setup({
 		input = {
@@ -330,6 +329,27 @@ function config.dressing(plugin, opts)
 		original_func(opts, defaults, items)
 		defaults.initial_mode = "normal"
 	end
+end
+
+function config.mini_icons(plugin, opts)
+	require("mini.icons").setup({
+		-- Icon style: 'glyph' or 'ascii'
+		style = "glyph",
+
+		-- Customize per category. See `:h MiniIcons.config` for details.
+		default = {},
+		directory = {},
+		extension = {},
+		file = {},
+		filetype = {},
+		lsp = {},
+		os = {},
+
+		-- Control which extensions will be considered during "file" resolution
+		use_file_extension = function(ext, file)
+			return true
+		end,
+	})
 end
 
 return config

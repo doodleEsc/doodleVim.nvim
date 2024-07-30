@@ -10,6 +10,7 @@ function config.nvim_cmp(plugin, opts)
 	})
 
 	local cmp = require("cmp")
+	local luasnip = require("luasnip")
 	local lspkind = require("lspkind")
 	local under_comparator = require("cmp-under-comparator").under
 	local WIDE_HEIGHT = 40
@@ -82,9 +83,17 @@ function config.nvim_cmp(plugin, opts)
 			{ name = "orgmode" },
 		}, {}),
 		mapping = {
-			["<CR>"] = {
-				i = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
-			},
+			["<CR>"] = cmp.mapping({
+				i = function(fallback)
+					if cmp.visible() and cmp.get_active_entry() then
+						cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+					else
+						fallback()
+					end
+				end,
+				s = cmp.mapping.confirm({ select = true }),
+				c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+			}),
 			["<C-x>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.abort()
@@ -128,28 +137,30 @@ function config.nvim_cmp(plugin, opts)
 				end
 			end, { "i", "s" }),
 			["<C-k>"] = cmp.mapping(function(fallback)
-				if require("luasnip").jumpable(-1) then
-					require("luasnip").jump(-1)
-				elseif require("neogen").jumpable(true) then
-					require("neogen").jump_prev()
+				if cmp.visible() then
+					cmp.select_prev_item()
+				elseif luasnip.locally_jumpable(-1) then
+					luasnip.jump(-1)
 				else
-					require("doodleVim.utils.utils").feedkeys("<Up>", "i")
+					fallback()
 				end
 			end, { "i", "s" }),
+
 			["<C-j>"] = cmp.mapping(function(fallback)
-				if require("luasnip").expand_or_jumpable() then
-					require("luasnip").expand_or_jump()
-				elseif require("neogen").jumpable() then
-					require("neogen").jump_next()
+				if cmp.visible() then
+					cmp.select_next_item()
+				elseif luasnip.locally_jumpable(1) then
+					luasnip.jump(1)
 				else
-					require("doodleVim.utils.utils").feedkeys("<Down>", "i")
+					fallback()
 				end
 			end, { "i", "s" }),
+
 			["<C-d>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item({
 						behavior = cmp.SelectBehavior.Select,
-						count = 6,
+						count = 5,
 					})
 				else
 					cmp.complete()
@@ -159,7 +170,7 @@ function config.nvim_cmp(plugin, opts)
 				if cmp.visible() then
 					cmp.select_prev_item({
 						behavior = cmp.SelectBehavior.Select,
-						count = 6,
+						count = 5,
 					})
 				else
 					cmp.complete()

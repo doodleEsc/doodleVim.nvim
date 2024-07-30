@@ -50,14 +50,12 @@ local config = {
 			statusline = {
 				"alpha",
 				"Outline",
-				"NvimTree",
 				"packer",
 				"startuptime",
 			},
 			winbar = {
 				"alpha",
 				"Outline",
-				"NvimTree",
 				"packer",
 				"startuptime",
 			},
@@ -190,7 +188,7 @@ ins_c({
 
 ins_c({
 	"diagnostics",
-	sources = { "nvim_lsp" },
+	sources = { "nvim_workspace_diagnostic" },
 	symbols = { error = " ", warn = " ", info = " " },
 	diagnostics_color = {
 		color_error = { fg = colors.red },

@@ -4,10 +4,6 @@ local defer = require("doodleVim.utils.defer")
 M.workersMap = {}
 M.testDebugFns = {}
 
-function M.enable_debug_mode()
-	defer.emit_user_event("StartDebug")
-end
-
 function M.register_worker(ft, worker)
 	if M.workersMap[ft] == nil then
 		M.workersMap[ft] = { worker }
