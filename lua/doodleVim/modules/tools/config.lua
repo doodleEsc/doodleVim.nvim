@@ -769,34 +769,13 @@ end
 
 function config.which_key()
 	local wk = require("which-key")
-	-- wk.setup({
-	-- 	key_labels = {
-	-- 		["<space>"] = "SPC",
-	-- 		["<leader>"] = "SPC",
-	-- 		["<cr>"] = "ENT",
-	-- 		["<tab>"] = "TAB",
-	-- 		["<a>"] = "ALT",
-	-- 		["<s>"] = "SHI",
-	-- 		["<c>"] = "CTR",
-	-- 	},
-	-- 	operators = {},
-	-- 	window = {
-	-- 		border = "single", -- none, single, double, shadow
-	-- 		position = "bottom", -- bottom, top
-	-- 		margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-	-- 		padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-	-- 		winblend = 0,
-	-- 	},
-	-- 	ignore_missing = false,
-	-- })
-
 	wk.setup({
 		---@type false | "classic" | "modern" | "helix"
 		preset = "classic",
 		-- Delay before showing the popup. Can be a number or a function that returns a number.
 		---@type number | fun(ctx: { keys: string, mode: string, plugin?: string }):number
 		delay = function(ctx)
-			return ctx.plugin and 0 or 200
+			return ctx.plugin and 0 or 1000
 		end,
 		---@param mapping wk.Mapping
 		filter = function(mapping)
